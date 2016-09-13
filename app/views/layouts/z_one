@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+
+<title>Quist, Ned</title>
+
+
+
+<!-- vitro base styles (application-wide) -->
+<link rel="stylesheet" href="z_one_files/bootstrap.css">
+<link rel="stylesheet" href="z_one_files/bootstrap-theme.css">
+<link rel="stylesheet" href="z_one_files/theme.css">
+<link rel="stylesheet" href="z_one_files/homepage.css">
+<link rel="stylesheet" href="z_one_files/individual.css">
+
+
+<script src="z_one_files/analytics.js" async=""></script><script>
+var i18nStrings = {
+    allCapitalized: 'All',
+};
+</script>
+<!--<script type="text/javascript" src="/vivo/js/jquery.js"></script>-->
+<script src="z_one_files/jquery_003.js"></script>
+<script type="text/javascript" src="z_one_files/vitroUtils.js"></script>
+<script src="z_one_files/bootstrap.js"></script>
+<script src="z_one_files/publicationTableFilter.js"></script>
+<!--<script src="/vivo/themes/symplectic-bootstrap/js/stickynav.js"></script>-->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/vivo/js/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" src="z_one_files/amplify.js"></script>
+<script type="text/javascript" src="z_one_files/tiny_mce.js"></script>
+<script type="text/javascript" src="z_one_files/jquery.js"></script>
+<script type="text/javascript" src="z_one_files/jquery_002.js"></script>
+<script type="text/javascript" src="z_one_files/embed.js"></script><script src="z_one_files/altmetric_badges-8f271adb184c21cc5169a7f67f7fe5ab.js" id="altmetric-embed-js"></script> 
+
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script type="text/javascript" src="/vivo/js/selectivizr.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rdf+xml" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual/orcid0000-0003-0490-4990/orcid0000-0003-0490-4990.rdf"> 
+
+<link rel="shortcut icon" type="image/x-icon" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="z_one_files/imagesparkline.css"><link rel="stylesheet" type="text/css" href="z_one_files/developerPanel.css"><link rel="stylesheet" type="text/css" href="z_one_files/jquery-ui-1.css"></head>
+    
+    <body class="no-logo" onload="">
+
+
+<header id="branding" role="banner">
+	<div class="header">
+		<div class="hgroup">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 hidden-xs">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-xs-12  visible-xs-block">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-md-6 col-sm-6 hidden-xs logo-sm">
+						<img src="z_one_files/bootstrap-vivo-logo-beta.png" alt="Institution Logo-beta">
+					</div>
+					<div class="col-xs-12 visible-xs-block">
+						<img src="z_one_files/bootstrap-vivo-logo-beta.png" alt="Institution Logo">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+
+
+
+<div id="developerPanel">
+	</div>
+<script>
+    developerAjaxUrl = '/vivo/admin/developerAjax'
+    developerCssLinks = ["/vivo/css/developer/developerPanel.css", "/vivo/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css"]
+</script>
+   
+   
+
+<nav class="navbar navbar-default navbar-static-top navbar-inverse" id="sticky-nav" role="navigation">
+	<div class="container">
+
+
+		<form class="navbar-form navbar-left" role="search" action="/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple&amp;profile=_default_preview" method="get">
+			<div class="form-group">
+				<input class="form-control" name="query" placeholder="Find an expert..." type="text">
+			</div>
+                <input name="collection" value="vivo-lilliput" type="hidden">
+                <input name="form" value="lilliputsimple" type="hidden">
+		<button type="submit" class="btn btn-default sympl-search hidden-xs">
+			<span class="glyphicon glyphicon-search" role="submit"></span>
+		</button>
+
+		<button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-lg hidden-md">
+			<span class="glyphicon glyphicon-search" role="submit"></span>
+		</button>
+	</form>
+
+	<div id="navbar-browse" class="dropdown navbar-left">
+		
+		<button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown">
+			Browse
+			<span class="caret"></span>
+		</button>
+
+		<button id="xs-browse" class="btn btn-default navbar-btn btn-block hidden-sm hidden-lg hidden-md dropdown-toggle" type="button" data-toggle="dropdown">
+			Browse
+			<span class="caret"></span>
+		</button>
+
+		<ul id="main-nav" role="list" class="dropdown-menu">
+				<li class="dropdown" role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/" title="Home menu item">
+							Home
+					</a>
+				</li>
+				<li class="dropdown" role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/people" title="People menu item">
+							People
+					</a>
+				</li>
+				<li class="dropdown" role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/organizations" title="Organizations menu item">
+							Organizations
+					</a>
+				</li>
+				<li class="dropdown" role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" title="Research menu item">
+							Research
+					</a>
+				</li>
+				<li class="dropdown" role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/events" title="Events menu item">
+							Events
+					</a>
+				</li>
+		</ul>
+	</div>
+
+  </div>
+</nav>
+
+<!-- The below div was removed to make styles easy to apply on specific pages -->
+<div class="container">         
+	
+	<!--[if lte IE 8]>
+	<noscript>
+		<p class="ie-alert">This site uses HTML elements that are not recognized by Internet Explorer 8 and below in the absence of JavaScript. As a result, the site will not be rendered appropriately. To correct this, please either enable JavaScript, upgrade to Internet Explorer 9, or use another browser. Here are the <a href="http://www.enable-javascript.com"  title="java script instructions">instructions for enabling JavaScript in your web browser</a>.</p>
+	</noscript>
+	<![endif]-->
+
+        
+         
+
+    
+        
+
+	<div class="row search-basket">
+			<div class="container">
+				<div class="col-md-12">
+					<ul id="basket-controls">
+					<span style="display: inline;" id="previousB"></span><span style="display: inline;" id="basketB"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=SavedResults"><span class="glyphicon glyphicon glyphicon-tags"></span><span class="badge" id="basketNum">0</span></a></span><span style="display: none;" id="nextB"></span><span style="display: inline;" id="addB"><a id="addtobasket" href="#" title="add this Expert to your basket" class="add-basket"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></span></ul>
+				</div>
+			</div>
+	</div>
+
+	<div class="row person-content">
+		<div class="container">
+			<div class="col-md-3 col-sm-4 col-xs-12">
+				<section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+					<section class="share-contact" role="region"> 
+						<!-- Image -->           
+
+
+						<div id="photo-wrapper">
+							        <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/file/n10756/IMG_6125+%281%29.jpg" title="Individual photo">
+        	<img class="img-circle" src="z_one_files/thumbnail_IMG_61251.jpg" title="click to view larger image" alt="Quist, Ned" width="190">
+        </a>
+
+						</div>
+						<h2 class="hidden-sm hidden-md hidden-lg">
+							    Quist, Ned
+			
+						</h2>
+
+						<!-- Contact Info -->
+<div class="emailsContainer">
+    <h4>
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+    </h4>
+    
+    </div>
+  
+
+
+    
+ 
+    
+        
+            <h5>Visualizations</h5>
+            <div id="coauthorship_link_container" class="collaboratorship-link-container">
+                <div class="collaboratorship-link">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/vis/author-network/orcid0000-0003-0490-4990" title="Co-author Network" class="btn btn-default">
+                        <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                        Co-author Network
+                    </a>
+                </div>
+            </div>
+            
+  	      	<div id="mapofscience_link_container" class="collaboratorship-link-container">
+                <div class="collaboratorship-link">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/vis/map-of-science/orcid0000-0003-0490-4990" title="map of science" class="btn btn-default">
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                        Map of Science
+                    </a>
+                </div>
+            </div>
+            
+                       
+            
+            <script type="text/javascript">
+                var visualizationUrl = '/vivo/visualizationAjax?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Forcid0000-0003-0490-4990&template=foaf-person-wilma';
+                var infoIconSrc = '/vivo/images/iconInfo.png';
+            </script>
+            
+        
+						<!-- Websites -->
+					</section>
+				</section>
+			</div> 
+		<div class="col-md-9 col-sm-8 col-xs-12">
+			<section id="individual-info" role="region"> 
+
+				<header>
+							<h2 class="vcard foaf-person hidden-xs">
+								     Quist, Ned
+			
+							</h2>
+						<!-- Positions -->
+				</header>
+	
+			 
+			<!-- Overview -->
+			
+				<!-- Research Areas -->
+
+				<!-- Geographic Focus -->
+
+			</section>
+		
+
+<!-- Property group menu or tabs -->
+<!-- 2 -->
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs user-nav" role="tablist" id="individualNavTabs">
+					<li id="publicationsTab" role="presentation" class="active">
+					   <a href="#publications" aria-controls="Publications" role="tab" data-toggle="tab">
+						   Publications
+					   </a>
+					</li>
+					<li id="contactTab" role="presentation">
+					   <a href="#contact" aria-controls="Contact" role="tab" data-toggle="tab">
+						   Contact
+					   </a>
+					</li>
+		</ul>
+	</div>
+		<div class="col-md-12 person-container">
+			<div class="tab-content" id="individualNavTabsContent">
+				<div id="publications" class="tab-pane fade in active" role="tabpanel">
+							<h2 id="publications" pgroup="tabs" class="hidden">Publications</h2>
+					<div id="publicationsGroup">
+
+		 <div class="panel panel-default"> 
+			   <div class="panel-heading">
+					<h3 id="relatedBy-Authorship" title="" class="panel-title">Selected Publications   </h3>
+				</div>
+				<div class="panel-body">
+					<div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+     
+                 <h4>Academic Article</h4>
+                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#publicationFilterDiv">
+                 Filter
+                 </button>
+                <div class="collapse" id="publicationFilterDiv">
+                    <div class="form-group">
+                        <input id="publicationFilter" placeholder="Narrow results..." class="form-control" aria-label="Filter publications" type="text">
+                    </div>
+                </div>
+                   <table class="table table-hover">
+                       <tbody><tr><th>Year</th>
+                       <th>Title</th>
+                       <th>Altmetric</th>
+    </tr><tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2011</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2011.0185" title="resource name"><i>Gone to the Country: The New Lost City Ramblers &amp; the Folk Music Revival</i> (review)</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        68:385-387.
+             <span class="listDateTime">2011</span>
+
+<br>
+      <span>10.1353/not.2011.0185&nbsp;</span></td>
+     <td>                 <div data-uuid="285eecf8-f68a-26d0-0ea1-8bf2d4231d9b" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2011.0185" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2011</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2011.0142" title="resource name"><i>Oxford History of Western Music</i> (review)</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        68:431-433.
+             <span class="listDateTime">2011</span>
+
+<br>
+      <span>10.1353/not.2011.0142&nbsp;</span></td>
+     <td>                 <div data-uuid="ed943f23-db48-06ef-95e4-c898ea318ac9" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2011.0142" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2007</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2007.0127" title="resource name">Staging Tradition: John Lair and Sarah Gertrude Knott (review)</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        64:83-85.
+             <span class="listDateTime">2007</span>
+
+<br>
+      <span>10.1353/not.2007.0127&nbsp;</span></td>
+     <td>                 <div data-uuid="f2246c23-0f66-153e-52be-1e774da4c35d" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2007.0127" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2007</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2007.0093" title="resource name">Which Side Are You On: An Inside History of the Folk Music Revival in America (review)</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        63:879-881.
+             <span class="listDateTime">2007</span>
+
+<br>
+      <span>10.1353/not.2007.0093&nbsp;</span></td>
+     <td>                 <div data-uuid="eccd2628-1d5a-6ea8-28de-0b35415dca0b" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2007.0093" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2005</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2005.0029" title="resource name">The British Folk Revival, 1944-2002 (review)</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        61:734-737.
+             <span class="listDateTime">2005</span>
+
+<br>
+      <span>10.1353/not.2005.0029&nbsp;</span></td>
+     <td>                 <div data-uuid="ed93b7fd-a2b3-d233-d505-5dd6fef53b5d" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2005.0029" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2004</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2004.0071" title="resource name">Andante (review)</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        60:1006-1009.
+             <span class="listDateTime">2004</span>
+
+<br>
+      <span>10.1353/not.2004.0071&nbsp;</span></td>
+     <td>                 <div data-uuid="70aa20da-8961-bda7-f39e-0541692466f9" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2004.0071" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2004</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2004.0158" title="resource name">Naxos Music Library (review)</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        61:512-516.
+             <span class="listDateTime">2004</span>
+
+<br>
+      <span>10.1353/not.2004.0158&nbsp;</span></td>
+     <td>                 <div data-uuid="3719e05d-301f-19d6-4f68-b009d269919e" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2004.0158" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">2002</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2002.0092" title="resource name">Toward a Reconstruction of the Legacy of Joseph Schillinger</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        58:765-786.
+             <span class="listDateTime">2002</span>
+
+<br>
+      <span>10.1353/not.2002.0092&nbsp;</span></td>
+     <td>                 <div data-uuid="664e2adb-c187-fb62-debd-1714bbf4dba0" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2002.0092" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">1997</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.2307%2F899529" title="resource name">Festival Fever: The Ultimate Guide to Musical Celebrations in the Northeast</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        54:466.
+             <span class="listDateTime">1997</span>
+
+<br>
+      <span>10.2307/899529&nbsp;</span></td>
+     <td>                 <div data-uuid="ca07f2cd-228f-950e-e2ee-b1694879dce0" data-badge-popover="left" data-badge-type="donut" data-doi="10.2307/899529" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">1995</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.2307%2F899327" title="resource name">The Incompleat Folksinger</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        51:967.
+             <span class="listDateTime">1995</span>
+
+<br>
+      <span>10.2307/899327&nbsp;</span></td>
+     <td>                 <div data-uuid="413afd93-4271-c62b-3f71-ad1489cbc50d" data-badge-popover="left" data-badge-type="donut" data-doi="10.2307/899327" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">1991</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.2307%2F941902" title="resource name">Concert and Opera Conductors: A Bibliography of Biographical Materials</a>.&nbsp;
+                     <em>Notes</em>.&nbsp;
+                        47:780.
+             <span class="listDateTime">1991</span>
+
+<br>
+      <span>10.2307/941902&nbsp;</span></td>
+     <td>                 <div data-uuid="9c330854-4eac-7e1b-21d1-764a67433ec7" data-badge-popover="left" data-badge-type="donut" data-doi="10.2307/941902" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">1985</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.2307%2F3051644" title="resource name">American Composers: A Biographical Dictionary</a>.&nbsp;
+                     <em>American Music</em>.&nbsp;
+                        3:238.
+             <span class="listDateTime">1985</span>
+
+<br>
+      <span>10.2307/3051644&nbsp;</span></td>
+     <td>                 <div data-uuid="04a4303d-e06d-68f7-6cc8-0156789de5a6" data-badge-popover="left" data-badge-type="donut" data-doi="10.2307/3051644" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">1985</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.2307%2F3051842" title="resource name">Confederate Sheet-Music Imprints</a>.&nbsp;
+                     <em>American Music</em>.&nbsp;
+                        3:487.
+             <span class="listDateTime">1985</span>
+
+<br>
+      <span>10.2307/3051842&nbsp;</span></td>
+     <td>                 <div data-uuid="8393ef94-d7a7-31c0-96ba-048ea30ecfe5" data-badge-popover="left" data-badge-type="donut" data-doi="10.2307/3051842" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+    <tr class="publicationTableRow" role="listitem">    
+
+
+
+     <td>             <span class="listDateTime">1983</span>
+
+ </td>
+     <td class="citation-data">                 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.2307%2F3051513" title="resource name">The Musician's Guide</a>.&nbsp;
+                     <em>American Music</em>.&nbsp;
+                        1:92.
+             <span class="listDateTime">1983</span>
+
+<br>
+      <span>10.2307/3051513&nbsp;</span></td>
+     <td>                 <div data-uuid="4937c3c4-53db-bdf5-e166-e8c6ba04f52c" data-badge-popover="left" data-badge-type="donut" data-doi="10.2307/3051513" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+</td>
+
+    </tr>
+    
+                   </tbody></table>
+    					</div>
+				</div>
+		  </div>
+					</div>
+				</div> <!-- end property-group -->
+				<div id="contact" class="tab-pane fade in " role="tabpanel">
+							<h2 id="contact" pgroup="tabs" class="hidden">Contact</h2>
+					<div id="contactGroup">
+
+		 <div class="panel panel-default"> 
+			   <div class="panel-heading">
+					<h3 id="ARG_2000028" title="" class="panel-title">Full Name   </h3>
+				</div>
+				<div class="panel-body">
+					<div class="property-list" role="list" id="ARG_2000028-Name-List" displaylimit="5">
+         <li class="list-group-item" role="listitem">
+ 
+        
+        <span itemprop="givenName">Ned</span>
+        <span itemprop="additionalName"></span>
+        <span itemprop="familyName">Quist</span>
+          
+
+    </li>
+					</div>
+				</div>
+		  </div>
+					</div>
+				</div> <!-- end property-group -->
+			</div>
+		</div>
+</div>
+<script>
+	var individualLocalName = "orcid0000-0003-0490-4990";
+</script>
+
+
+
+
+
+
+
+
+		<script>
+				var individualRdfUrl = '/vivo/individual/orcid0000-0003-0490-4990/orcid0000-0003-0490-4990.rdf';
+		</script>
+<script>
+	var imagesPath = '/vivo/images';
+	var individualUri = 'http://openvivo.org/a/orcid0000-0003-0490-4990';
+	var individualPhoto = '';
+	var exportQrCodeUrl = '/vivo/qrcode?uri=http://openvivo.org/a/orcid0000-0003-0490-4990';
+	var baseUrl = '/vivo';
+	var i18nStrings = {
+			displayLess: 'less',
+			displayMoreEllipsis: '... more',
+			showMoreContent: 'show more content',
+			verboseTurnOff: 'Turn off',
+			researchAreaTooltipOne: 'Click an area to view others',
+			researchAreaTooltipTwo: 'with the same interest.'
+		};
+	var i18nStringsUriRdf = {
+			shareProfileUri: 'share the URI for this profile',
+			viewRDFProfile: 'view profile in RDF format',
+			closeString: 'close'
+		};
+</script>
+
+
+		 
+
+
+
+
+
+        </div></div>        
+	</div> 
+</div> 
+<!-- #wrapper-content -->
+
+<script type="text/javascript" src="z_one_files/jsapi.js"></script><link href="z_one_files/uien.css" type="text/css" rel="stylesheet"><script src="z_one_files/formatendefaultenuienimagechartenimagesparklineen_US.js" type="text/javascript"></script>
+<script type="text/javascript" src="z_one_files/visualization-helper-functions.js"></script>
+<script type="text/javascript" src="z_one_files/sparkline.js"></script>
+<script type="text/javascript" src="z_one_files/propertyGroupControls.js"></script>
+<script type="text/javascript" src="z_one_files/showcase.js" "=""></script>
+<script type="text/javascript" src="z_one_files/resultsNav.js" "=""></script>
+<script type="text/javascript" src="z_one_files/readshare.js" "=""></script>
+<script type="text/javascript" src="z_one_files/individualUtils.js"></script>
+<script type="text/javascript" src="z_one_files/individualQtipBubble.js"></script>
+<script type="text/javascript" src="z_one_files/individualUriRdf.js"></script>
+<script type="text/javascript" src="z_one_files/moreLessController.js"></script>
+<script type="text/javascript" src="z_one_files/jquery-ui-1.js"></script>
+<script type="text/javascript" src="z_one_files/imageUploadUtils.js"></script>
+<script type="text/javascript" src="z_one_files/developerPanel.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-294324-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<footer role="contentinfo" class="footer">
+	<div class="row">
+		<div class="container">
+			<div class="col-md-12">	
+				<nav role="navigation">
+					<ul id="footer-nav" role="list">
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/about" title="About">
+								About
+							</a>
+						</li>
+
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/services/open-profile-services/" target="blank" title="Support">
+								Support
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" target="_blank" title="Support">
+								Browse Research
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/" target="_blank" class="symplectic-contact">
+								Symplectic	
+							</a>
+					</li></ul>
+				</nav>
+				
+				<p class="copyright">
+
+
+						| <a class="terms" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/termsOfUse" title="Terms of Use">
+							Terms of Use
+						</a> | 
+
+					Powered by <a class="powered-by-vivo" href="http://vivoweb.org/" target="_blank" title="Powered by VIVO"><strong>VIVO</strong>
+					</a>
+						 | Designed by <a href="http://symplectic.co.uk/" title="Experts in Research Information">Symplectic</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+    
+
+<script src="z_one_files/not_005.txt" type="text/javascript"></script><script src="z_one_files/not_006.txt" type="text/javascript"></script><script src="z_one_files/not_002.txt" type="text/javascript"></script><script src="z_one_files/not_007.txt" type="text/javascript"></script><script src="z_one_files/not_003.txt" type="text/javascript"></script><script src="z_one_files/not_004.txt" type="text/javascript"></script><script src="z_one_files/not_008.txt" type="text/javascript"></script><script src="z_one_files/not.txt" type="text/javascript"></script><script src="z_one_files/899529.txt" type="text/javascript"></script><script src="z_one_files/899327.txt" type="text/javascript"></script><script src="z_one_files/941902.txt" type="text/javascript"></script><script src="z_one_files/3051644.txt" type="text/javascript"></script><script src="z_one_files/3051842.txt" type="text/javascript"></script><script src="z_one_files/3051513.txt" type="text/javascript"></script></body></html>

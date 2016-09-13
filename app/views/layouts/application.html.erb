@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Google Chrome Frame open source plug-in brings Google Chrome's open web
+  technologies and speedy JavaScript engine to Internet Explorer-->
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+<title>Symplectic VIVO</title>
+
+<!-- vitro base styles (application-wide) -->
+<!-- <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+<link rel="stylesheet" href="/stylesheets/bootstrapbootstrap-theme.css">
+<link rel="stylesheet" href="/stylesheets/bootstraptheme.css">
+<link rel="stylesheet" href="/homepage.css">
+<link rel="stylesheet" href="/individual.css"> -->
+
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+
+
+<!-- <script src="analytics.js" async=""></script> -->
+<script>
+var i18nStrings = {
+    allCapitalized: 'All',
+};
+</script>
+<!--<script type="text/javascript" src="/vivo/js/jquery.js"></script>-->
+<!-- <script src="/jquery.js"></script> -->
+<!-- <script type="text/javascript" src="/vitroUtils.js"></script> -->
+<!-- <script src="/bootstrap.js"></script> -->
+<!-- <script src="/publicationTableFilter.js"></script> -->
+<!--<script src="/vivo/themes/symplectic-bootstrap/js/stickynav.js"></script>-->
+
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/vivo/js/html5.js"></script>
+<![endif]-->
+<!-- <script type="text/javascript" src="/loginUtils.js"></script> -->
+
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script type="text/javascript" src="/vivo/js/selectivizr.js"></script>
+<![endif]-->
+
+<link rel="shortcut icon" type="image/x-icon" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/favicon.ico">
+<!-- <script type="text/javascript" src="/homePageUtils.js"></script> -->
+</head>
+
+<body class="no-logo fae">
+<script>var facultyMemberCount = 336;</script>
+
+<header id="branding" role="banner">
+	<div class="header">
+		<div class="hgroup">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 hidden-xs">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-xs-12  visible-xs-block">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-md-6 col-sm-6 hidden-xs logo-sm">
+            <%= image_tag( "bootstrap-vivo-logo-beta.png", alt: "Institution Logo-beta") %>
+					</div>
+					<div class="col-xs-12 visible-xs-block">
+            <%= image_tag( "bootstrap-vivo-logo-beta.png", alt: "Institution Logo-beta") %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<script>
+var academicDepartments = [];
+var urlsBase = "/vivo";
+</script>
+
+
+<%= yield %>
+
+<!-- #wrapper-content -->
+
+
+<script>
+// Google Analytics was here
+</script>
+
+<footer role="contentinfo" class="footer">
+	<div class="row">
+		<div class="container">
+			<div class="col-md-12">
+				<nav role="navigation">
+					<ul id="footer-nav" role="list">
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/about" title="About">
+								About
+							</a>
+						</li>
+
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/services/open-profile-services/" target="blank" title="Support">
+								Support
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" target="_blank" title="Support">
+								Browse Research
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/" target="_blank" class="symplectic-contact">
+								Symplectic
+							</a>
+					</li></ul>
+				</nav>
+
+				<p class="copyright">
+
+
+						| <a class="terms" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/termsOfUse" title="Terms of Use">
+							Terms of Use
+						</a> |
+
+					Powered by <a class="powered-by-vivo" href="http://vivoweb.org/" target="_blank" title="Powered by VIVO"><strong>VIVO</strong>
+					</a>
+						 | Designed by <a href="http://symplectic.co.uk/" title="Experts in Research Information">Symplectic</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+	<script>
+		var i18nStrings = {
+			researcherString: 'researcher',
+			researchersString: 'researchers',
+			currentlyNoResearchers: 'There are currently no researchers with a defined geographic focus.',
+			countriesAndRegions: 'countries and regions.',
+			countriesString: 'countries',
+			regionsString: 'regions',
+			statesString: 'states.',
+			stateString: 'state.',
+			statewideLocations: 'state-wide locations.',
+			researchersInString: 'researchers in',
+			inString: 'in',
+			noFacultyFound: 'No faculty members found.',
+			placeholderImage: 'placeholder image',
+			viewAllFaculty: 'view all faculty',
+			viewAllString: 'View all ...',
+			viewAllDepartments: 'view all academic departments',
+			noDepartmentsFound: 'No academic departments found.'
+		};
+		// set the 'limmit search' text and alignment
+		if	( $('input.search-homepage').css('text-align') == "right" ) {
+			 $('input.search-homepage').attr("value","limit search \u2192");
+		}
+	</script>
+
+
+</body>
+
+</html>

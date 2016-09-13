@@ -1,0 +1,943 @@
+<nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse" id="sticky-nav">
+    <div class="container">
+        <h1 class="sr-only">Search</h1>
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">VIVO Demo</a>
+        </div>
+
+        <form class="navbar-form navbar-left ng-pristine ng-valid" action="search.html" method="GET">
+            <input name="collection" value="vivo-lilliput" type="hidden">
+            <input name="form" value="lilliputsimple" type="hidden">
+            <div class="form-group">
+                <span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span><input
+                    autocomplete="off"
+                    required=""
+                    name="query"
+                    id="query_top"
+                    title="Search query"
+                    value="fellow"
+                    accesskey="q"
+                    placeholder="Find an Expert VIVOweb - Lilliput…"
+                    class="form-control query ui-autocomplete-input"
+                    data-ng-disabled="isDisplayed('cart') || isDisplayed('history')"
+                    type="text">
+            </div>
+
+            <button type="submit" class="btn btn-default sympl-search hidden-xs" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
+                <span class="glyphicon glyphicon-search" role="submit"></span>
+            </button>
+
+            <button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-md hidden-lg" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
+                <span class="glyphicon glyphicon-search" role="submit"></span>
+            </button>
+        </form>
+
+        <div class="nav navbar-left dropdown" id="navbar-browse">
+            <button type="submit" class="btn btn-primary hidden-xs" onclick="location.href = '/s/resources/vivo-lilliput/index.html#'+document.getElementById('query_top').value+'%7C20%7C1';">
+                <span role="submit"><img src="y_files/pub.png" width="20px"></span>
+            </button>
+            <button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Browse
+                <span class="caret"></span>
+            </button>
+            <button id="xs-browse" class="btn btn-default navbar-btn btn-block hidden-sm hidden-md hidden-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Browse
+                <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu">
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/" title="Home menu item">Home</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/people" title="People menu item">People</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/organizations" title="Organizations menu item">Organizations</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" title="Research menu item">Research</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/events" title="Events menu item" class="active">Events</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav navbar-right funnelsearch">
+            <div class="nav-button" data-ng-class="{active: isDisplayed('cart')}">
+                <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=SavedResults" title="0 item(s) in your selection">
+                    <span class="glyphicon glyphicon-tags"></span>
+                    <span class="badge ng-binding">0</span>
+                </a>
+            </div>
+            <div class="dropdown nav-button">
+                <a href="#" title="Advanced Settings" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="collapse" href="#search-advanced" title="Advanced search">Advanced search</a>
+                    </li>
+                    <li data-ng-class="{active: isDisplayed('history')}">
+                        <a href="#" data-ng-click="toggleHistory()" title="Search History">History</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown nav-button">
+                <a href="#" title="Tools" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="modal" href="#search-performance" title="Performance report">Performance</a>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" href="#search-syntaxtree" title="Query syntax tree">Query syntax tree</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="well collapse  " id="search-advanced">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="search.html" method="GET" class="form-horizontal ng-pristine ng-valid">
+                    <input name="collection" value="vivo-lilliput" type="hidden">
+                    <input name="from-advanced" value="true" type="hidden">
+                    <input name="facetScope" value="" type="hidden">
+
+                    <input name="form" value="lilliputsimple" type="hidden">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <fieldset>
+                                <legend>Contents</legend>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="query-advanced">Any</label>
+                                    <div class="col-md-8">
+                                        <input id="query-advanced" name="query" value="fellow" class="form-control input-sm" placeholder="e.g. juliet where thou love" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="query_and" class="col-md-4 control-label">All</label>
+                                    <div class="col-md-8">
+                                        <input id="query_and" name="query_and" class="form-control input-sm" placeholder="e.g. juliet where thou love" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="query_phrase" class="col-md-4 control-label">Phrase</label>
+                                    <div class="col-md-8">
+                                        <input id="query_phrase" name="query_phrase" class="form-control input-sm" placeholder="e.g. to be or not to be" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="query_not" class="col-md-4 control-label">Not</label>
+                                    <div class="col-md-8">
+                                        <input id="query_not" name="query_not" class="form-control input-sm" placeholder="e.g. brutus othello" type="text">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-4">
+                            <fieldset>
+                                <legend>Metadata</legend>
+                                <div class="form-group">
+                                    <label for="meta_t" class="col-md-4 control-label">Title</label>
+                                    <div class="col-md-8">
+                                        <input id="meta_t" name="meta_t" placeholder="e.g. A Midsummer Night's Dream" class="form-control input-sm" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meta_a" class="col-md-4 control-label">Author</label>
+                                    <div class="col-md-8">
+                                        <input id="meta_a" name="meta_a" placeholder="e.g. William Shakespeare" class="form-control input-sm" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meta_s" class="col-md-4 control-label">Subject</label>
+                                    <div class="col-md-8">
+                                        <input id="meta_s" name="meta_s" placeholder="e.g. comedy" class="form-control input-sm" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="meta_f_sand">Format</label>
+                                    <div class="col-md-8">
+                                        <select name="meta_f_sand" id="meta_f_sand" class="form-control input-sm">
+                                            <option value="" selected="selected">Any
+                                            </option>
+                                            <option value="pdf">PDF (.pdf)
+                                            </option>
+                                            <option value="xls">Excel (.xls)
+                                            </option>
+                                            <option value="ppt">Powerpoint (.ppt)
+                                            </option>
+                                            <option value="rtf">Rich Text (.rtf)
+                                            </option>
+                                            <option value="doc">Word (.doc)
+                                            </option>
+                                            <option value="docx">Word 2007+ (.docx)
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-4">
+                            <fieldset>
+                                <legend>published</legend>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">After</label>
+                                    <label class="sr-only" for="meta_d1year">Year</label>
+                                    <select name="meta_d1year" id="meta_d1year" class="input-sm">
+                                        <option value="" selected="selected">Year</option>
+                                        <option value="1996">1996</option>
+                                        <option value="1997">1997</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1999">1999</option>
+                                        <option value="2000">2000</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                    </select>
+                                    <label class="sr-only" for="meta_d1month">Month</label>
+                                    <select name="meta_d1month" id="meta_d1month" class="input-sm">
+                                        <option value="" selected="selected">Month</option>
+                                        <option value="Jan">Jan</option>
+                                        <option value="Feb">Feb</option>
+                                        <option value="Mar">Mar</option>
+                                        <option value="Apr">Apr</option>
+                                        <option value="May">May</option>
+                                        <option value="Jun">Jun</option>
+                                        <option value="Jul">Jul</option>
+                                        <option value="Aug">Aug</option>
+                                        <option value="Sep">Sep</option>
+                                        <option value="Oct">Oct</option>
+                                        <option value="Nov">Nov</option>
+                                        <option value="Dec">Dec</option>
+                                    </select>
+                                    <label class="sr-only" for="meta_d1day">Day</label>
+                                    <select name="meta_d1day" id="meta_d1day" class="input-sm">
+                                        <option value="" selected="selected">Day</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Before</label>
+                                    <label class="sr-only" for="meta_d2year">Year</label>
+                                    <select name="meta_d2year" id="meta_d2year" class="input-sm">
+                                        <option value="" selected="selected">Year</option>
+                                        <option value="1996">1996</option>
+                                        <option value="1997">1997</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1999">1999</option>
+                                        <option value="2000">2000</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                    </select>
+                                    <label class="sr-only" for="meta_d2month">Month</label>
+                                    <select name="meta_d2month" id="meta_d2month" class="input-sm">
+                                        <option value="" selected="selected">Month</option>
+                                        <option value="Jan">Jan</option>
+                                        <option value="Feb">Feb</option>
+                                        <option value="Mar">Mar</option>
+                                        <option value="Apr">Apr</option>
+                                        <option value="May">May</option>
+                                        <option value="Jun">Jun</option>
+                                        <option value="Jul">Jul</option>
+                                        <option value="Aug">Aug</option>
+                                        <option value="Sep">Sep</option>
+                                        <option value="Oct">Oct</option>
+                                        <option value="Nov">Nov</option>
+                                        <option value="Dec">Dec</option>
+                                    </select>
+                                    <label class="sr-only" for="meta_d2day">Day</label>
+                                    <select name="meta_d2day" id="meta_d2day" class="input-sm">
+                                        <option value="" selected="selected">Day</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <fieldset>
+                                <legend>Display</legend>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="sort">Sort</label>
+                                    <div class="col-md-8">
+                                        <select name="sort" id="sort" class="form-control">
+                                            <option value="" selected="selected">Relevance
+                                            </option>
+                                            <option value="date">Date (Newest first)</option>
+                                            <option value="adate">Date (Oldest first)</option>
+                                            <option value="title">Title (A-Z)</option>
+                                            <option value="dtitle">Title (Z-A)</option>
+                                            <option value="prox">Distance</option>
+                                            <option value="url">URL (A-Z)</option>
+                                            <option value="durl">URL (Z-A)</option>
+                                            <option value="shuffle">Shuffle</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="num_ranks">Results</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input min="1" id="num_ranks" name="num_ranks" placeholder="e.g. 10" value="10" class="form-control input-sm" type="number">
+                                            <span class="input-group-addon">per page</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-4">
+                            <fieldset>
+                                <legend>Located</legend>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="origin">Origin</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <a class="btn btn-info search-geolocation btn-sm" title="Locate me!">
+                                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                                </a>
+                                            </span>
+                                            <input id="origin" name="origin" pattern="-?[0-9\.]+,-?[0-9\.]+" title="Latitude,longitude" placeholder="Latitude, Longitude" class="form-control input-sm" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="maxdist">Distance</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input min="0" id="maxdist" name="maxdist" placeholder="e.g. 10" class="form-control input-sm" type="number">
+                                            <span class="input-group-addon">km</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-4">
+                            <fieldset>
+                                <legend>Within</legend>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="scope">Domain</label>
+                                    <div class="col-md-8">
+                                        <input id="scope" name="scope" placeholder="e.g. example.com" class="form-control input-sm" type="text">
+                                    </div>n
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="meta_v">Path</label>
+                                    <div class="col-md-8">
+                                        <input id="meta_v" name="meta_v" placeholder="e.g. /plays/romeo-juliet" class="form-control input-sm" type="text">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <button type="button" data-toggle="collapse" data-target="#search-advanced" class="btn btn-default">Close</button>
+                                <button class="btn btn-primary" type="submit">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                    Advanced Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" data-ng-show="isDisplayed('results')">
+
+        <div class="col-md-10 col-md-push-2">
+
+            <div id="search-result-count" class="text-muted">
+                <span id="search-page-start">1</span>
+                -
+                <span id="search-page-end">4</span>
+                of
+                <span id="search-total-matching">4</span>
+                search results for
+                <strong>fellow</strong>
+
+            </div>
+
+            <h2 class="visible-print">Results</h2>
+
+            <!-- <row> -->
+            <div class="row">
+                <!--added for single row approach -->
+                <h3 class="hidden">Fully-matching results</h3>
+
+                <div class="clearfix visible-md-block"></div>
+                <!-- <div class="row top-buffer"> -->
+                <div class="clearfix visible-lg-block"></div>
+
+                <% @researchers = [] %>
+                <% @researchers << {display_name: "a00", orcid_uri: "bbb", email: "cccc"} %>
+                <% @researchers << {display_name: "a11", orcid_uri: "bbb", email: "cccc"} %>
+                <% @researchers << {display_name: "a22", orcid_uri: "bbb", email: "cccc"} %>
+                <% @researchers << {display_name: "a33", orcid_uri: "bbb", email: "cccc"} %>
+                <% @faculty_list.each do |r| %>
+                  <div class="clearfix visible-sm-block"></div>
+                  <div class="clearfix visible-xs-block"></div>
+                  <%= render "index_researcher", researcher: r %>
+                <% end %>
+            </div>
+
+            <div class="text-center hidden-print">
+                <h2 class="sr-only">Pagination</h2>
+                <ul class="pagination pagination-lg">
+
+                    <li class="active">
+                        <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;start_rank=1">1</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-md-2 col-md-pull-10 hidden-print" id="search-facets">
+
+            <h2 class="sr-only">Refine</h2>
+            <div id="facet-4" class="facet">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="facetLabel">
+                            Organization
+
+                        </h3>
+                    </div>
+                    <!-- panel heading-->
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+
+                            <li class="category">
+                                <span class="">
+                                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;f.Organization%7Corganization=Virginia+Tech">Virginia Tech</a>
+                                </span>
+                                &nbsp;<span class="badge pull-right">
+                                    <span class="categoryCount">1</span>
+                                </span>
+                            </li>
+
+                            <li class="category">
+                                <span class="">
+                                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;f.Organization%7Corganization=Virginia+Polytechnic+Institute+and+State+University">Virginia Polytechnic Institute and State University</a>
+                                </span>
+                                &nbsp;<span class="badge pull-right">
+                                    <span class="categoryCount">1</span>
+                                </span>
+                            </li>
+
+                        </ul>
+                        <button type="button" class="btn btn-link btn-sm search-toggle-more-categories" style="display: none;" data-more="More…" data-less="Less…" data-state="more" title="Show more categories from this facet">
+                            <small class="glyphicon glyphicon-plus"></small>&nbsp;<span>More…</span>
+                        </button>
+                    </div>
+                    <!-- panel-body -->
+                </div>
+                <!-- panel -->
+            </div>
+
+        </div>
+    </div>
+    <!--close facited search-->
+</div>
+
+<div class="hidden-print">
+    <h2 class="sr-only">Tools</h2>
+    <div id="search-performance" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" data-target="#search-performance">×</button>
+                    <h3>Performance</h3>
+                </div>
+                <div class="modal-body">
+
+                    <script type="text/javascript">
+                        try {
+                            console.log("Query processing time: 87 ms");
+                        } catch (ex) {}
+                    </script>
+
+                    <table class="search-metrics table-striped table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Time</th>
+                                <th>Chart</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PassThroughParameters</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PassThroughEnvironmentVariables</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>LocaleOverride</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ContentAuditor</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Geolocation</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>GenericHookScriptRunner pre_process</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Session</td>
+                                <td>48 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 110px; margin-left: 0px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>UserKeys</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FacetScope</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FacetedNavigation</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MultiFacetedNavigation</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MetaParameters</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MetadataAliases</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MetaDates</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Curator</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CliveMapping</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>QuickLinks</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ExploreQuery</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hostname</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>UserIdInQueryLogs</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ExtraSearches</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>GenericHookScriptRunner extra_searches</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ExtraSearchesExecutor</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>GenericHookScriptRunner pre_datafetch</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info datafetch" style="width: 0px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>DefaultPadreForking</td>
+                                <td>16 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info datafetch" style="width: 37px; margin-left: 110.345px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>GenericHookScriptRunner post_datafetch</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info datafetch" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PadreReturnCode</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FixPseudoLiveLinks</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Curator</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FixCacheAndClickLinks</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FixDisplayUrls</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>HTMLEncodeSummaries</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FacetedNavigation</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FacetedNavigationWhiteBlackList</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>DateFacetSort</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ContextualNavigation</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>QuickLinks</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>QueryCleanOutputProcessor</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ExtraSearchesExecutor</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ContentOptimiser</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TextMiner</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>GetTranslations</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SearchHistory</td>
+                                <td>3 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 7px; margin-left: 147.126px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Metrics</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 154.023px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>GenericHookScriptRunner post_process</td>
+                                <td>0 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 154.023px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>render</td>
+                                <td>20 ms</td>
+                                <td>
+                                    <div class="metric progress-bar progress-bar-info output" style="width: 46px; margin-left: 154.023px;">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <th colspan="2">87 ms</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-syntaxtree" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" data-target="#search-syntaxtree">×</button>
+                    <h3>Query syntax tree</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">Query syntax tree unavailable. Make sure the
+                        <code>-show_qsyntax_tree=on</code>
+                        query processor option is set.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

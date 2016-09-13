@@ -1,0 +1,304 @@
+<script>
+    developerAjaxUrl = '/vivo/admin/developerAjax'
+    developerCssLinks = ["/vivo/css/developer/developerPanel.css", "/vivo/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css"]
+</script>
+
+<nav class="navbar navbar-default navbar-static-top navbar-inverse" id="sticky-nav" role="navigation">
+    <div class="container">
+        <form class="navbar-form navbar-left" role="search" action="/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple&amp;profile=_default_preview" method="get">
+            <div class="form-group">
+                <input class="form-control" name="query" placeholder="Find an expert..." type="text">
+            </div>
+            <input name="collection" value="vivo-lilliput" type="hidden">
+            <input name="form" value="lilliputsimple" type="hidden">
+            <button type="submit" class="btn btn-default sympl-search hidden-xs">
+                <span class="glyphicon glyphicon-search" role="submit"></span>
+            </button>
+            <button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-lg hidden-md">
+                <span class="glyphicon glyphicon-search" role="submit"></span>
+            </button>
+        </form>
+
+        <div id="navbar-browse" class="dropdown navbar-left">
+            <button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown">
+                Browse
+                <span class="caret"></span>
+            </button>
+
+            <button id="xs-browse" class="btn btn-default navbar-btn btn-block hidden-sm hidden-lg hidden-md dropdown-toggle" type="button" data-toggle="dropdown">
+                Browse
+                <span class="caret"></span>
+            </button>
+
+            <ul id="main-nav" role="list" class="dropdown-menu">
+                <li class="dropdown" role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/" title="Home menu item">
+                        Home
+                    </a>
+                </li>
+                <li class="dropdown" role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/people" title="People menu item">
+                        People
+                    </a>
+                </li>
+                <li class="dropdown" role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/organizations" title="Organizations menu item">
+                        Organizations
+                    </a>
+                </li>
+                <li class="dropdown" role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" title="Research menu item">
+                        Research
+                    </a>
+                </li>
+                <li class="dropdown" role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/events" title="Events menu item">
+                        Events
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row search-basket">
+        <div class="container">
+            <div class="col-md-12">
+                <ul id="basket-controls">
+                    <span style="display: inline;" id="previousB"></span>
+                    <span style="display: inline;" id="basketB">
+                        <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=SavedResults">
+                            <span class="glyphicon glyphicon glyphicon-tags"></span>
+                            <span class="badge" id="basketNum">0</span>
+                        </a>
+                    </span>
+                    <span style="display: none;" id="nextB"></span>
+                    <span style="display: inline;" id="addB">
+                        <a id="addtobasket" href="#" title="add this Expert to your basket" class="add-basket">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </span>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row person-content">
+        <div class="container">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+                    <section class="share-contact" role="region">
+                        <div id="photo-wrapper">
+                            <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/file/n10756/IMG_6125+%281%29.jpg" title="Individual photo">
+                                <img class="img-circle" src="<%= @faculty.thumbnail %>" title="click to view larger image" alt="<%= @faculty.label %>" width="190">
+                            </a>
+                        </div>
+                        <h2 class="hidden-sm hidden-md hidden-lg">
+                            <%= @faculty.label %>
+                        </h2>
+
+                        <!-- Contact Info -->
+                        <div class="emailsContainer">
+                            <h4>
+                                <a href="mailto:<%= @faculty.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                            </h4>
+
+                        </div>
+
+                        <h5>Visualizations</h5>
+                        <div id="coauthorship_link_container" class="collaboratorship-link-container">
+                            <div class="collaboratorship-link">
+                                <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/vis/author-network/orcid0000-0003-0490-4990" title="Co-author Network" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                                    Co-author Network
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="mapofscience_link_container" class="collaboratorship-link-container">
+                            <div class="collaboratorship-link">
+                                <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/vis/map-of-science/orcid0000-0003-0490-4990" title="map of science" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                                    Map of Science
+                                </a>
+                            </div>
+                        </div>
+
+                        <script type="text/javascript">
+                            var visualizationUrl = '/vivo/visualizationAjax?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Forcid0000-0003-0490-4990&template=foaf-person-wilma';
+                            var infoIconSrc = '/vivo/images/iconInfo.png';
+                        </script>
+
+                    </section>
+                </section>
+            </div>
+
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <section id="individual-info" role="region">
+
+                    <header>
+                        <h2 class="vcard foaf-person hidden-xs">
+                          <%= @faculty.label %>
+                        </h2>
+                        <h3><%= @faculty.title %></h3>
+                        <h4><%= @faculty.org_label %></h4>
+                        <p><%= @faculty.overview.html_safe %></p>
+                    </header>
+                </section>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs user-nav" role="tablist" id="individualNavTabs">
+                            <li id="publicationsTab" role="presentation" class="active">
+                                <a href="#publications" aria-controls="Publications" role="tab" data-toggle="tab">
+                                    Publications
+                                </a>
+                            </li>
+                            <li id="contactTab" role="presentation">
+                                <a href="#contact" aria-controls="Contact" role="tab" data-toggle="tab">
+                                    Contact
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12 person-container">
+                        <div class="tab-content" id="individualNavTabsContent">
+                            <div id="publications" class="tab-pane fade in active" role="tabpanel">
+                                <h2 id="publications" pgroup="tabs" class="hidden">Publications</h2>
+                                <div id="publicationsGroup">
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 id="relatedBy-Authorship" title="" class="panel-title">Selected Publications
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+
+                                                <h4>Academic Article</h4>
+                                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#publicationFilterDiv">
+                                                    Filter
+                                                </button>
+                                                <div class="collapse" id="publicationFilterDiv">
+                                                    <div class="form-group">
+                                                        <input id="publicationFilter" placeholder="Narrow results..." class="form-control" aria-label="Filter publications" type="text">
+                                                    </div>
+                                                </div>
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Year</th>
+                                                            <th>Title</th>
+                                                            <th>Altmetric</th>
+                                                        </tr>
+                                                        <tr class="publicationTableRow" role="listitem">
+
+                                                            <td>
+                                                                <span class="listDateTime">2011</span>
+
+                                                            </td>
+                                                            <td class="citation-data">
+                                                                <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.1353%2Fnot.2011.0185" title="resource name">
+                                                                    <i>Gone to the Country: The New Lost City Ramblers &amp; the Folk Music Revival</i>
+                                                                    (review)</a>.&nbsp;
+                                                                <em>Notes</em>.&nbsp; 68:385-387.
+                                                                <span class="listDateTime">2011</span>
+
+                                                                <br>
+                                                                <span>10.1353/not.2011.0185&nbsp;</span>
+                                                            </td>
+                                                            <td>
+                                                                <div data-uuid="285eecf8-f68a-26d0-0ea1-8bf2d4231d9b" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2011.0185" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- contributor to panel -->
+                            <div id="contributor_to" class="tab-pane fade in active" role="tabpanel">
+                                <h2 id="contributor_to" pgroup="tabs" class="hidden">Contributor To</h2>
+                                <div id="contributorToGroup">
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 id="relatedBy-Authorship" title="" class="panel-title">Selected Publications
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+
+                                                <h4>xxx</h4>
+                                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#publicationFilterDiv">
+                                                    Filter
+                                                </button>
+                                                <div class="collapse" id="publicationFilterDiv">
+                                                    <div class="form-group">
+                                                        <input id="publicationFilter" placeholder="Narrow results..." class="form-control" aria-label="Filter publications" type="text">
+                                                    </div>
+                                                </div>
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Year</th>
+                                                            <th>Title</th>
+                                                            <th>Altmetric</th>
+                                                        </tr>
+                                                        <% @faculty.contributor_to.each do |c| %>
+                                                            <tr class="publicationTableRow" role="listitem">
+                                                                <td>
+                                                                    <span class="listDateTime">2011</span>
+                                                                </td>
+                                                                <td class="citation-data">
+                                                                    <%= c %>
+                                                                </td>
+                                                                <td>
+                                                                    <div data-uuid="285eecf8-f68a-26d0-0ea1-8bf2d4231d9b" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2011.0185" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+                                                                </td>
+                                                            </tr>
+                                                        <% end %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end property-group -->
+                            <div id="contact" class="tab-pane fade in " role="tabpanel">
+                                <h2 id="contact" pgroup="tabs" class="hidden">Contact</h2>
+                                <div id="contactGroup">
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 id="ARG_2000028" title="" class="panel-title">Full Name
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="property-list" role="list" id="ARG_2000028-Name-List" displaylimit="5">
+                                            <li class="list-group-item" role="listitem">
+
+                                                <span itemprop="givenName">Ned</span>
+                                                <span itemprop="additionalName"></span>
+                                                <span itemprop="familyName">Quist</span>
+
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end property-group -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

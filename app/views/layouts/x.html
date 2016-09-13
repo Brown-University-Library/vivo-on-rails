@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+
+<title>Symplectic VIVO</title>
+
+
+
+<!-- vitro base styles (application-wide) -->
+<link rel="stylesheet" href="x_files/bootstrap.css">
+<link rel="stylesheet" href="x_files/bootstrap-theme.css">
+<link rel="stylesheet" href="x_files/theme.css">
+<link rel="stylesheet" href="x_files/homepage.css">
+<link rel="stylesheet" href="x_files/individual.css">
+
+
+<script src="x_files/analytics.js" async=""></script><script>
+var i18nStrings = {
+    allCapitalized: 'All',
+};
+</script>
+<!--<script type="text/javascript" src="/vivo/js/jquery.js"></script>-->
+<script src="x_files/jquery.js"></script>
+<script type="text/javascript" src="x_files/vitroUtils.js"></script>
+<script src="x_files/bootstrap.js"></script>
+<script src="x_files/publicationTableFilter.js"></script>
+<!--<script src="/vivo/themes/symplectic-bootstrap/js/stickynav.js"></script>-->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/vivo/js/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" src="x_files/loginUtils.js"></script> 
+
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script type="text/javascript" src="/vivo/js/selectivizr.js"></script>
+<![endif]-->
+
+
+
+<link rel="shortcut icon" type="image/x-icon" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/favicon.ico">
+		<script type="text/javascript" src="x_files/homePageUtils.js"></script>
+	</head>
+	
+	<body class="no-logo fae">
+                        <script>var facultyMemberCount = 336;</script>
+
+<header id="branding" role="banner">
+	<div class="header">
+		<div class="hgroup">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 hidden-xs">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-xs-12  visible-xs-block">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-md-6 col-sm-6 hidden-xs logo-sm">
+						<img src="x_files/bootstrap-vivo-logo-beta.png" alt="Institution Logo-beta">
+					</div>
+					<div class="col-xs-12 visible-xs-block">
+						<img src="x_files/bootstrap-vivo-logo-beta.png" alt="Institution Logo">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+		<div class="row hero">
+			<div class="theme-showcase">
+				<div class="col-md-12">
+					<div class="container" role="main">
+						
+						<div class="jumbotron">
+							<h1>Find Experts in OpenVIVO</h1>
+						</div>
+						
+						<form id="search-homepage" action="/s/search.html" name="search-home" role="search" method="get">
+							<div class="input-group input-group-lg">
+								<input class="form-control" name="query" placeholder="Search for an Expert..." type="text">
+								<input name="collection" value="vivo-lilliput" type="hidden">
+                                <input name="form" value="lilliputsimple" type="hidden">
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-default btn-lg sympl-search">
+										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<div class="container">
+						<div class="jumbotron">
+							<p>This demonstration portal showcases a new VIVO experience 
+based on Bootstrap. It was created by Symplectic in partnership with 
+Digital Science and Funnelback.</p>
+							<p>This portal uses data from <a href="http://openvivo.org/">OpenVIVO</a> Looking for experts in OpenVIVO? Why not search here?</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		   
+		<div class="row icons-home">
+			<div class="col-md-4">
+				<a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple#collaborator" id="icon1"> 
+					<span class="glyphicon glyphicon-user"></span>
+					<h3>Search for a collaborator</h3>
+				</a>
+			</div>
+			<div class="col-md-4">
+				<a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple#supervisor" id="icon2">
+					<span class="glyphicon glyphicon-pencil"></span>
+					<h3>Find a supervisor</h3>
+				</a>
+			</div>
+			<div class="col-md-4">
+			 <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple#consultancy" id="icon3">
+				<span class="glyphicon glyphicon-education"></span>
+				<h3>Locate expert opinion</h3>
+			 </a>
+			</div>
+		</div>
+
+		<div class="row explore">
+			<div class="container">
+
+				<div class="col-md-12">
+					<h2 class="h1">Explore our experts</h2>
+					<p> Explore OpenVIVO experts by Subject Area</p>
+				</div>
+
+				<div class="col-md-4">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=linked+data&amp;collection=vivo-lilliput&amp;form=lilliputsimple" class="explore-panel" id="ph1">
+						<span>Linked Data</span>
+					</a>
+				</div>
+				<div class="col-md-8">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=data+curation&amp;collection=vivo-lilliput&amp;form=lilliputsimple" class="explore-panel" id="ph2">
+						<span>Data Curation</span>
+					</a>
+				</div>
+
+				<div class="col-md-6">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=semantic+web&amp;collection=vivo-lilliput&amp;form=lilliputsimple" class="explore-panel" id="ph3">
+						<span>Semantic Web</span>
+					</a>
+				</div>
+				<div class="col-md-6">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=Ontology&amp;collection=vivo-lilliput&amp;form=lilliputsimple" class="explore-panel" id="ph4">
+						<span>Ontologies</span>
+					</a>
+				</div>
+				<div class="col-md-12">
+					<a class="btn btn-default pull-right" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research#http://www.w3.org/2004/02/skos/core#Concept">
+						View all...
+					</a>
+				</div>
+								
+			</div>
+		</div>
+
+		<div class="row faculty-home">
+			<div class="container">
+				<div class="col-md-12">
+					<h2 class="h1">Meet our experts</h2>
+					<div class="gap20"></div>
+					<p>The OpenVIVO community is dedicated to changing the nature of 
+scholarship, Meet some of our experts ready to share thier knowledge.</p>
+					<!-- Use bootstrap carousel to showcase faculty members, edited in lib-home-page.ftl and homePageUtils.js -->
+    <section id="faculty-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+        <div style="display: none;" id="tempSpacing">
+            <span>Loading faculty . . .&nbsp;&nbsp;&nbsp;
+                <img src="x_files/indicatorWhite.gif">
+            </span>
+        </div>
+        <div id="research-faculty-mbrs" class="carousel-inner" role="listbox">
+            <!-- populated via an ajax call -->
+            
+        <div class="item"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0001-5450-0180" class="faculty-mbrs" title="View Profile"><img class="img-circle" alt="placeholder image" src="x_files/person.jpg" width="160"><h3>Layne, Peggy</h3><h4 class="faculty-title"></h4></a></div><div class="item"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0001-6578-1766" class="faculty-mbrs" title="View Profile"><img class="img-circle" alt="placeholder image" src="x_files/person.jpg" width="160"><h3>Henderson, Margaret</h3><h4 class="faculty-title"></h4></a></div><div class="item"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-8553-1139" class="faculty-mbrs" title="View Profile"><img class="img-circle" alt="placeholder image" src="x_files/person.jpg" width="160"><h3>Mullin, Casey</h3><h4 class="faculty-title"></h4></a></div><div class="item"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0003-3952-8294" class="faculty-mbrs" title="View Profile"><img class="img-circle" alt="placeholder image" src="x_files/person.jpg" width="160"><h3>Laranjeira, Catia</h3><h4 class="faculty-title"></h4></a></div><div class="item"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-9695-5375" class="faculty-mbrs" title="View Profile"><img class="img-circle" alt="placeholder image" src="x_files/person.jpg" width="160"><h3>RAMEY, MATTHEW</h3><h4 class="faculty-title"></h4></a></div><div class="item"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-8978-2373" class="faculty-mbrs" title="View Profile"><img class="img-circle" alt="placeholder image" src="x_files/person.jpg" width="160"><h3>Newton, Mark</h3><h4 class="faculty-title"></h4></a></div><div class="item active"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-6132-3853" class="faculty-mbrs" title="View Profile"><img class="img-circle" alt="placeholder image" src="x_files/person.jpg" width="160"><h3>Bowley, Chealsye</h3><h4 class="faculty-title"></h4></a></div><div class="item"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-7583-0792" class="faculty-mbrs" title="View Profile"><img class="img-circle" src="x_files/thumbnail_alexandre.jpg" width="160"><h3>Rademaker, Alexandre</h3><h4 class="faculty-title"></h4></a></div><ul id="viewMoreFac" style="list-style:none;margin:0;padding:0;"><li><a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/people#http://xmlns.com/foaf/0.1/Person" alt="view all faculty">View all ...</a></li></ul></div>
+        <a class="left carousel-control" href="#faculty-carousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#faculty-carousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </section>
+				</div>
+			</div>
+		</div>
+
+		
+		<!-- List of research classes: e.g., articles, books, collections, conference papers -->
+		<div class="row research-count">
+			<div class="container">
+				<div class="col-md-6">
+					<h2 class="h1">About our data</h2>
+					<div class="gap20"></div>
+						<p>This expert database contains a copy of the <a href="http://openvivo.org/data/">OpenVIVO data set</a> under cc-by 4.0 license, snapshot as at 19 July 2016</p>
+						<div class="gap30"></div>
+						<button type="button" class="btn btn-default">
+						<a href="http://bootstrap-vivo-beta.symplectic.co.uk/vivo/individual?uri=http%3A%2F%2Fopenvivo.org%2Fa%2Fdoi10.6084%2Fm9.figshare.3175072">Read more about OpenVIVO</a>
+						</button>
+				</div>
+				<div class="col-md-6" id="research-classes">
+<section id="home-research" class="home-sections">
+    <h4>Research</h4>
+    <div id="home-sections-list" class="list-group">
+                            <a class="list-group-item" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individuallist?vclassId=http://purl.org/ontology/bibo/AcademicArticle">
+                                    Academic Articles 
+                                &nbsp;
+                                <span class="badge">954</span>
+                            </a>
+                            <a class="list-group-item" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individuallist?vclassId=http://purl.org/ontology/bibo/Book">
+                                    Books 
+                                &nbsp;
+                                <span class="badge">61</span>
+                            </a>
+                            <a class="list-group-item" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individuallist?vclassId=http://purl.org/ontology/bibo/Chapter">
+                                    Chapters 
+                                &nbsp;
+                                <span class="badge">71</span>
+                            </a>
+                            <a class="list-group-item" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individuallist?vclassId=http://vivoweb.org/ontology/core%23ConferencePaper">
+                                    Conference Papers 
+                                &nbsp;
+                                <span class="badge">91</span>
+                            </a>
+                            <a class="list-group-item" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/individuallist?vclassId=http://purl.org/ontology/bibo/Report">
+                                    Reports 
+                                &nbsp;
+                                <span class="badge">4</span>
+                            </a>
+                <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" alt="view all research">View all ...</a>
+    </div>
+</section>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row geo-home">
+			<div class="container-fluid">
+				<div class="col-md-12 hidden-xs hidden-sm" id="geo-map">
+				</div>
+			</div>
+		</div>
+		
+<script>
+var academicDepartments = [
+];
+var urlsBase = "/vivo";
+</script>
+		
+	 
+ 
+<!-- #wrapper-content -->
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-294324-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<footer role="contentinfo" class="footer">
+	<div class="row">
+		<div class="container">
+			<div class="col-md-12">	
+				<nav role="navigation">
+					<ul id="footer-nav" role="list">
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/about" title="About">
+								About
+							</a>
+						</li>
+
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/services/open-profile-services/" target="blank" title="Support">
+								Support
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" target="_blank" title="Support">
+								Browse Research
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/" target="_blank" class="symplectic-contact">
+								Symplectic	
+							</a>
+					</li></ul>
+				</nav>
+				
+				<p class="copyright">
+
+
+						| <a class="terms" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/termsOfUse" title="Terms of Use">
+							Terms of Use
+						</a> | 
+
+					Powered by <a class="powered-by-vivo" href="http://vivoweb.org/" target="_blank" title="Powered by VIVO"><strong>VIVO</strong>
+					</a>
+						 | Designed by <a href="http://symplectic.co.uk/" title="Experts in Research Information">Symplectic</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+	<script>	   
+		var i18nStrings = {
+			researcherString: 'researcher',
+			researchersString: 'researchers',
+			currentlyNoResearchers: 'There are currently no researchers with a defined geographic focus.',
+			countriesAndRegions: 'countries and regions.',
+			countriesString: 'countries',
+			regionsString: 'regions',
+			statesString: 'states.',
+			stateString: 'state.',
+			statewideLocations: 'state-wide locations.',
+			researchersInString: 'researchers in',
+			inString: 'in',
+			noFacultyFound: 'No faculty members found.',
+			placeholderImage: 'placeholder image',
+			viewAllFaculty: 'view all faculty',
+			viewAllString: 'View all ...',
+			viewAllDepartments: 'view all academic departments',
+			noDepartmentsFound: 'No academic departments found.'
+		};
+		// set the 'limmit search' text and alignment
+		if	( $('input.search-homepage').css('text-align') == "right" ) {		
+			 $('input.search-homepage').attr("value","limit search \u2192");
+		}  
+	</script>
+	
+
+</body></html>

@@ -1,0 +1,232 @@
+/* These are the colours used commonly throughout the site */
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: #1a3b58;
+}
+/*---------------------------------------------
+Styling identity.ftl header
+----------------------------------------------*/
+.header {
+  background: #1e73be;
+  padding: 20px 0;
+  border-bottom: 1px solid #185c98;
+}
+.header img {
+  width: 100%;
+  max-width: 150px;
+}
+.header h1 {
+  margin: 0;
+}
+.header h1 a {
+  color: #fff;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 28px;
+}
+.header .visible-xs-block {
+  text-align: center;
+}
+.header .visible-xs-block h1 {
+  margin: 0 0 15px 0;
+}
+.header .logo-sm {
+  text-align: right;
+}
+#sticky-nav .navbar-header {
+  display: none;
+}
+#sticky-nav .form-control {
+  height: 36px;
+}
+@media (min-width: 768px) {
+  #sticky-nav .navbar-form {
+    padding-left: 0;
+  }
+}
+button.btn.sympl-search {
+  background: #1e73be;
+  text-shadow: 0 0 0 transparent;
+  color: #fff;
+  border: 2px solid #c9c9c9;
+}
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+/******************************************
+Browse page styling across all categories
+******************************************/
+section#browse-by {
+  margin: 2em auto auto auto;
+}
+section#browse-by nav#side-filters {
+  margin-bottom: 1.2em;
+}
+section#browse-by ul#browse-classes {
+  list-style: none;
+  padding: 0;
+}
+section#browse-by nav#alpha-browse-container.panel {
+  margin-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  border-bottom: 0;
+}
+section#browse-by nav#alpha-browse-container.panel h3.selected-class {
+  margin: 0;
+  padding: 1em 0;
+}
+section#browse-by nav#alpha-browse-container.panel ul#alpha-browse-individuals {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+section#browse-by nav#alpha-browse-container.panel ul#alpha-browse-individuals li {
+  display: inline-block;
+  margin: auto 0.35em auto auto;
+}
+section#browse-by nav#alpha-browse-container.panel ul#alpha-browse-individuals li a.selected {
+  background: #c9c9c9;
+  padding: 2px;
+  border-radius: 4px;
+}
+section#browse-by section#individuals-in-class {
+  border: 1px solid #ececec;
+  border-width: 0 1px 1px 1px;
+  margin-bottom: 1em;
+}
+section#browse-by section#individuals-in-class .pagination {
+  padding: 0.8em 1em;
+  border-bottom: 1px solid #e3e3e3;
+  /* These two are just to normalize bootstrap css */
+  border-radius: 0;
+  margin: 0;
+  width: 100%;
+}
+section#browse-by section#individuals-in-class .pagination h3 {
+  display: inline-block;
+  margin: 0 5px 0 0;
+  font-size: 16px;
+}
+section#browse-by section#individuals-in-class .pagination ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+section#browse-by section#individuals-in-class .pagination ul li.round {
+  display: inline-block;
+  padding: 0 0.35em;
+  margin: 0;
+}
+section#browse-by section#individuals-in-class .pagination ul li.round.selected {
+  background: #c9c9c9;
+  border-radius: 4px;
+}
+section#browse-by section#individuals-in-class ul {
+  padding: 1em 0;
+  list-style: none;
+}
+section#browse-by section#individuals-in-class ul li.individual {
+  margin: 1.2em;
+}
+section#browse-by section#individuals-in-class ul li.individual h2 a {
+  font-size: 18px;
+}
+/********************************************************
+Styling for the RDF pages of data categories
+*********************************************************/
+section.individualList ul.pagination li,
+section.individualList ul.pagination li.selectedNavPage {
+  display: inline-block;
+  vertical-align: middle;
+}
+section.individualList ul.pagination li a,
+section.individualList ul.pagination li.selectedNavPage a {
+  border-radius: 4px;
+}
+section.individualList ul.pagination li.selectedNavPage {
+  padding: 6px 12px;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+section.individualList ul {
+  list-style: none;
+  padding: 0;
+}
+section.individualList ul li {
+  padding: 3px 0;
+}
+/********************************************************
+These are helper classes to add margin gaps where needed
+*********************************************************/
+.gap20 {
+  margin-top: 20px;
+}
+.gap30 {
+  margin-top: 30px;
+}
+.gap40 {
+  margin-top: 40px;
+}
+.gap50 {
+  margin-top: 50px;
+}
+/***********************************
+// Beginning of footer styling //
+***********************************/
+.footer {
+  padding: 35px 30px 36px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #1b1b1b;
+  text-align: center;
+}
+.footer #footer-nav {
+  display: inline-block;
+  margin: auto auto 25px  auto;
+  list-style: none;
+}
+.footer #footer-nav li {
+  display: inline-block;
+  margin-right: 2em;
+}
+.footer #footer-nav li a {
+  color: #ececec;
+  transition: all 0.7s;
+}
+.footer #footer-nav li a:hover {
+  text-decoration: underline;
+}
+.footer #footer-nav li a.symplectic-contact:hover {
+  color: white;
+  box-shadow: 0px 0px 10px 10px #dd3333;
+  border-radius: 3px;
+  background: #dd3333;
+  transition: all 0.7s ease;
+  text-decoration: none;
+}
+.footer #social-block {
+  margin: auto auto 25px auto;
+}
+.footer #social-block a {
+  margin: auto 10px auto auto;
+}
+.footer p.copyright {
+  color: #555;
+  font-size: 0.9em;
+  margin: 1em auto auto auto;
+}
+.footer-logo {
+  margin-bottom: 10px;
+}

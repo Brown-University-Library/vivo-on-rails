@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+
+<!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+    <link rel="search" type="application/opensearchdescription+xml" href="https://bootstrap-vivo-beta.symplectic.co.uk/s/open-search.xml?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple" title="Search VIVOweb - Lilliput">
+  <link rel="alternate" type="application/rss+xml" title="Search results for fellow,&nbsp;VIVOweb - Lilliput" href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;query=fellow&amp;form=rss&amp;sort=date">
+
+  <title>fellow,&nbsp;VIVOweb - Lilliput, Funnelback Search</title>
+
+	<link rel="stylesheet" href="y_files/bootstrap.css">
+	<link rel="stylesheet" href="y_files/bootstrap-theme.css">
+	<link rel="stylesheet" href="y_files/theme.css">
+	<link rel="stylesheet" href="y_files/individual.css">
+	<link rel="stylesheet" href="y_files/funnelback.css">
+  <!--[if lt IE 9]>
+    <script src="resources-global/thirdparty/html5shiv.js"></script>
+    <script src="resources-global/thirdparty/respond.min.js"></script>
+  <![endif]-->
+
+  <style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+    }
+
+    .search-initial { padding: 40px 15px; }
+
+    #search-advanced select.input-sm {
+        border-color: #ccc;
+    }
+
+    #search-result-count { margin-bottom: 10px; }
+
+    #search-results li h4,
+    #search-best-bets h4 {
+      margin-bottom: 0;
+    }
+    #search-results li h4 { margin-top: 24px; }
+
+    .facet h3 {
+      font-size: 14px;
+      margin: 0;
+    }
+    .share-contact { height:400px;  }
+    .search-collapsed { text-indent: 8px; }
+
+    .search-metrics td div.metric { border: solid 1px #ddd; } 
+
+    svg line,
+    svg rect { stroke: #777; }
+
+    svg rect.query   { fill: #f2dede; }
+    svg rect.literal { fill: #dff0d8; }
+    svg rect.logical { fill: #fcf8e3; }
+    svg rect.set     { fill: #d9edf7; }
+
+    .ui-helper-hidden-accessible,
+    .ui-help-hidden { display: none; }
+
+    .ui-menu { background-color: white; }
+
+    .ui-menu { width: 200px; border: solid 1px #e6e6e6;}
+    .ui-menu, .ui-menu li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    .ui-menu-item a, li.ui-autocomplete-category { display: block; padding: 2px; }
+    li.ui-autocomplete-category { background-color: #e6e6e6; font-weight: bold;}
+
+    .ui-state-focus {
+      background-color: #428bca;
+      color: white;
+    }
+    
+ </style>
+
+  <!-- Template uses <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="http://glyphicons.getbootstrap.com/">Glyphicons</a> -->
+
+
+
+
+
+ 
+
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script type="text/javascript" src="/vivo/js/selectivizr.js"></script>
+<![endif]-->
+
+
+
+<link rel="shortcut icon" type="image/x-icon" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/favicon.ico">
+
+<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\:form{display:block;}</style></head>
+
+<body class="ng-scope" data-ng-app="Funnelback" data-ng-controller="DefaultCtrl">
+
+<header id="branding" role="banner">
+    <div class="header">
+		<div class="hgroup">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 hidden-xs">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-xs-12  visible-xs-block">
+						<h1>
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">Find an Expert</a>
+						</h1>
+					</div>
+					<div class="col-md-6 col-sm-6 hidden-xs logo-sm">
+						<img src="y_files/bootstrap-vivo-logo-beta.png" alt="Institution Logo-beta">
+					</div>
+					<div class="col-xs-12 visible-xs-block">
+						<img src="y_files/bootstrap-vivo-logo-beta.png" alt="Institution Logo">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse" id="sticky-nav">
+    <div class="container">
+		<h1 class="sr-only">Search</h1>
+		
+		<div class="navbar-header">
+			  <a class="navbar-brand" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">VIVO Demo</a>
+		</div>
+		<form class="navbar-form navbar-left ng-pristine ng-valid" action="search.html" method="GET">
+			<input name="collection" value="vivo-lilliput" type="hidden">
+
+<input name="form" value="lilliputsimple" type="hidden">
+
+				
+
+			<div class="form-group">
+				<span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span><input autocomplete="off" required="" name="query" id="query_top" title="Search query" value="fellow" accesskey="q" placeholder="Find an Expert VIVOweb - Lilliput…" class="form-control query ui-autocomplete-input" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')" type="text">
+			</div>
+		
+			<button type="submit" class="btn btn-default sympl-search hidden-xs" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
+				<span class="glyphicon glyphicon-search" role="submit"></span>
+			</button>
+                	
+            
+			<button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-md hidden-lg" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
+				<span class="glyphicon glyphicon-search" role="submit"></span>
+			</button>
+
+		</form>
+      
+		<div class="nav navbar-left dropdown" id="navbar-browse">
+              <button type="submit" class="btn btn-primary hidden-xs" onclick="location.href = '/s/resources/vivo-lilliput/index.html#'+document.getElementById('query_top').value+'%7C20%7C1';">
+				<span role="submit"><img src="y_files/pub.png" width="20px"></span>
+	   </button>
+			<button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				Browse 
+				<span class="caret"></span>
+			</button>
+
+			<button id="xs-browse" class="btn btn-default navbar-btn btn-block hidden-sm hidden-md hidden-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				Browse 
+				<span class="caret"></span>
+			</button>
+
+			<ul class="dropdown-menu">
+				<li role="listitem">
+			  		<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/" title="Home menu item">Home</a>
+				</li>
+				<li role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/people" title="People menu item">People</a>
+				</li>
+				<li role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/organizations" title="Organizations menu item">Organizations</a>
+				</li>
+				<li role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" title="Research menu item">Research</a>
+				</li>
+				<li role="listitem">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/events" title="Events menu item" class="active">Events</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="nav navbar-right funnelsearch">
+				<div class="nav-button" data-ng-class="{active: isDisplayed('cart')}">
+					<a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=SavedResults" title="0 item(s) in your selection">
+						<span class="glyphicon glyphicon-tags"></span>
+						<span class="badge ng-binding">0</span>
+					</a>
+				</div>
+			<div class="dropdown nav-button">
+				<a href="#" title="Advanced Settings" class="dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-cog"></span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a data-toggle="collapse" href="#search-advanced" title="Advanced search">Advanced search</a>
+					</li>
+						<li data-ng-class="{active: isDisplayed('history')}">
+							<a href="#" data-ng-click="toggleHistory()" title="Search History">History</a>
+						</li>
+				</ul>
+			</div>
+			<div class="dropdown nav-button">
+				<a href="#" title="Tools" class="dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-question-sign"></span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a data-toggle="modal" href="#search-performance" title="Performance report">Performance</a>
+					</li>
+					<li>
+						<a data-toggle="modal" href="#search-syntaxtree" title="Query syntax tree">Query syntax tree</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+
+
+<div class="container-fluid">
+
+
+ <!--   <nav class="navbar navbar-default">
+      <h1 class="sr-only">Search</h1>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img src="resources-global/images/funnelback-logo-small.png" alt="Funnelback" style="height: 17px;"></a>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <form class="navbar-form navbar-left form-inline" action="search.html" method="GET">
+          <input type="hidden" name="collection" value="vivo-lilliput">
+          
+          <input type="hidden" name="form" value="lilliputsimple">
+          
+          
+          
+          <div class="form-group">
+            <input required name="query" id="query" title="Search query" type="text" value="fellow" accesskey="q" placeholder="Search VIVOweb - Lilliput&hellip;" class="form-control query" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
+          </div>
+          <button type="submit" class="btn btn-primary" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')"><span class="glyphicon glyphicon-search"></span> Search</button>
+          <div class="checkbox-inline">
+            
+          </div>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li data-ng-class="{active: isDisplayed('cart')}"><a href="#" data-ng-click="toggleCart()" title="{{cart.length}} item(s) in your selection"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge" data-ng-cloak>{{cart.length}}</ng-pluralize --> 
+        <!--    </span></a></li>
+          <li class="dropdown">
+            <a href="#" title="Advanced Settings" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a data-toggle="collapse" href="#search-advanced" title="Advanced search">Advanced search</a></li>
+              <li data-ng-class="{active: isDisplayed('history')}"><a href="#"  data-ng-click="toggleHistory()" title="Search History">History</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" title="Tools" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-question-sign"></span> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a data-toggle="modal" href="#search-performance" title="Performance report">Performance</a></li>
+              <li><a data-toggle="modal" href="#search-syntaxtree" title="Query syntax tree">Query syntax tree</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav> -->
+
+    <div class="well collapse  " id="search-advanced">
+      <div class="row">
+        <div class="col-md-12">
+          <form action="search.html" method="GET" class="form-horizontal ng-pristine ng-valid">
+            <input name="collection" value="vivo-lilliput" type="hidden">
+            <input name="from-advanced" value="true" type="hidden">
+            <input name="facetScope" value="" type="hidden">
+            
+            <input name="form" value="lilliputsimple" type="hidden">
+            
+                                
+
+            <div class="row">
+              <div class="col-md-4">
+                <fieldset>
+                  <legend>Contents</legend>	
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="query-advanced">Any</label>
+                    <div class="col-md-8">
+                      <input id="query-advanced" name="query" value="fellow" class="form-control input-sm" placeholder="e.g. juliet where thou love" type="text">
+                    </div>
+                  </div>                					
+
+                  <div class="form-group">
+                    <label for="query_and" class="col-md-4 control-label">All</label>
+                    <div class="col-md-8">
+                      <input id="query_and" name="query_and" class="form-control input-sm" placeholder="e.g. juliet where thou love" type="text">
+                    </div>
+                  </div>                					
+
+                  <div class="form-group">
+                    <label for="query_phrase" class="col-md-4 control-label">Phrase</label>					
+                    <div class="col-md-8">
+                      <input id="query_phrase" name="query_phrase" class="form-control input-sm" placeholder="e.g. to be or not to be" type="text">
+                    </div>
+                  </div>				                	
+
+                  <div class="form-group">
+                    <label for="query_not" class="col-md-4 control-label">Not</label>
+                    <div class="col-md-8">
+                      <input id="query_not" name="query_not" class="form-control input-sm" placeholder="e.g. brutus othello" type="text">
+                    </div>				
+                  </div>		
+                </fieldset>
+              </div>
+
+              <div class="col-md-4">
+                <fieldset>
+                  <legend>Metadata</legend>
+                  <div class="form-group">
+                    <label for="meta_t" class="col-md-4 control-label">Title</label>
+                    <div class="col-md-8">
+                      <input id="meta_t" name="meta_t" placeholder="e.g. A Midsummer Night's Dream" class="form-control input-sm" type="text">
+                    </div>				
+                  </div>                	
+
+                  <div class="form-group">
+                    <label for="meta_a" class="col-md-4 control-label">Author</label>
+                    <div class="col-md-8">
+                      <input id="meta_a" name="meta_a" placeholder="e.g. William Shakespeare" class="form-control input-sm" type="text">
+                    </div>				
+                  </div>				                	
+
+                  <div class="form-group">
+                    <label for="meta_s" class="col-md-4 control-label">Subject</label>
+                    <div class="col-md-8">
+                      <input id="meta_s" name="meta_s" placeholder="e.g. comedy" class="form-control input-sm" type="text">
+                    </div>				
+                  </div>					
+
+                  <div class="form-group">		
+                    <label class="control-label col-md-4" for="meta_f_sand">Format</label>
+                    <div class="col-md-8">
+    <select name="meta_f_sand" id="meta_f_sand" class="form-control input-sm">
+                    <option value="" selected="selected">Any </option>
+                    <option value="pdf">PDF  (.pdf) </option>
+                    <option value="xls">Excel (.xls) </option>
+                    <option value="ppt">Powerpoint (.ppt) </option>
+                    <option value="rtf">Rich Text (.rtf) </option>
+                    <option value="doc">Word (.doc) </option>
+                    <option value="docx">Word 2007+ (.docx) </option>
+    </select>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-4">
+                <fieldset>
+                  <legend>published</legend>                                
+                  <div class="form-group">
+                    <label class="control-label col-md-4">After</label>
+                    <label class="sr-only" for="meta_d1year">Year</label>
+    <select name="meta_d1year" id="meta_d1year" class="input-sm">
+                    <option value="" selected="selected">Year</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+    </select>
+                    <label class="sr-only" for="meta_d1month">Month</label>
+    <select name="meta_d1month" id="meta_d1month" class="input-sm">
+                    <option value="" selected="selected">Month</option>
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+    </select>
+                    <label class="sr-only" for="meta_d1day">Day</label>
+    <select name="meta_d1day" id="meta_d1day" class="input-sm">
+                    <option value="" selected="selected">Day</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+    </select>
+                  </div>
+                
+                  <div class="form-group">
+                    <label class="control-label col-md-4">Before</label>					
+                    <label class="sr-only" for="meta_d2year">Year</label>
+    <select name="meta_d2year" id="meta_d2year" class="input-sm">
+                    <option value="" selected="selected">Year</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+    </select>
+                    <label class="sr-only" for="meta_d2month">Month</label>
+    <select name="meta_d2month" id="meta_d2month" class="input-sm">
+                    <option value="" selected="selected">Month</option>
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+    </select>
+                    <label class="sr-only" for="meta_d2day">Day</label>
+    <select name="meta_d2day" id="meta_d2day" class="input-sm">
+                    <option value="" selected="selected">Day</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+    </select>
+                  </div>
+                </fieldset>                                    
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <fieldset>
+                  <legend>Display</legend>
+
+                  <div class="form-group">		
+                    <label class="control-label col-md-4" for="sort">Sort</label>
+                    <div class="col-md-8">
+    <select name="sort" id="sort" class="form-control">
+                    <option value="" selected="selected">Relevance </option>
+                    <option value="date">Date (Newest first)</option>
+                    <option value="adate">Date (Oldest first)</option>
+                    <option value="title">Title (A-Z)</option>
+                    <option value="dtitle">Title (Z-A)</option>
+                    <option value="prox">Distance</option>
+                    <option value="url">URL (A-Z)</option>
+                    <option value="durl">URL (Z-A)</option>
+                    <option value="shuffle">Shuffle</option>
+    </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">		
+                    <label class="control-label col-md-4" for="num_ranks">Results</label>
+                      <div class="col-md-8">
+                        <div class="input-group">
+                          <input min="1" id="num_ranks" name="num_ranks" placeholder="e.g. 10" value="10" class="form-control input-sm" type="number">
+                          <span class="input-group-addon">per page</span>
+                        </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="col-md-4">
+                <fieldset>
+                  <legend>Located</legend>
+                  <div class="form-group">
+                    <label class="control-label col-md-4" for="origin">Origin</label>
+                    <div class="col-md-8">
+                      <div class="input-group">
+                        <span class="input-group-btn"><a class="btn btn-info search-geolocation btn-sm" title="Locate me!"><span class="glyphicon glyphicon-map-marker"></span></a></span>
+                        <input id="origin" name="origin" pattern="-?[0-9\.]+,-?[0-9\.]+" title="Latitude,longitude" placeholder="Latitude, Longitude" class="form-control input-sm" type="text">
+                      </div>
+                    </div>
+                  </div>                                
+
+                  <div class="form-group">
+                    <label class="control-label col-md-4" for="maxdist">Distance</label>
+                    <div class="col-md-8">
+                      <div class="input-group">
+                        <input min="0" id="maxdist" name="maxdist" placeholder="e.g. 10" class="form-control input-sm" type="number">
+                        <span class="input-group-addon">km</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </fieldset>
+              </div>
+
+              <div class="col-md-4">
+                <fieldset>
+                  <legend>Within</legend>
+                  <div class="form-group">    			
+                    <label class="control-label col-md-4" for="scope">Domain</label>
+                    <div class="col-md-8">
+                      <input id="scope" name="scope" placeholder="e.g. example.com" class="form-control input-sm" type="text">
+                    </div>n
+                  </div>
+
+                  <div class="form-group">    			
+                    <label class="control-label col-md-4" for="meta_v">Path</label>
+                    <div class="col-md-8">
+                      <input id="meta_v" name="meta_v" placeholder="e.g. /plays/romeo-juliet" class="form-control input-sm" type="text">
+                    </div>
+                  </div>
+                </fieldset>
+                        
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-right">
+                  <button type="button" data-toggle="collapse" data-target="#search-advanced" class="btn btn-default">Close</button>
+                  <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-cog"></span> Advanced Search</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" data-ng-show="isDisplayed('results')">
+
+      <div class="col-md-10 col-md-push-2">
+
+
+
+        <div id="search-result-count" class="text-muted">
+            <span id="search-page-start">1</span> -
+            <span id="search-page-end">4</span> of
+            <span id="search-total-matching">4</span>
+            search results for <strong>fellow</strong>
+
+        </div>
+
+
+
+
+        <h2 class="visible-print">Results</h2>
+
+
+
+
+        <!-- <row> -->
+         <div class="row"> <!--added for single row approach -->
+                <h3 class="hidden">Fully-matching results</h3>
+             
+
+                 <div class="clearfix visible-md-block"></div>
+                 <!-- <div class="row top-buffer"> -->
+                <div class="clearfix visible-lg-block"></div>
+                <div class="clearfix visible-sm-block"></div>
+                
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0003-1440-5829">
+                <div class="gap30"></div>
+<script src="y_files/analytics.js" async=""></script><script src="y_files/analytics.js" async=""></script><script src="y_files/analytics.js" async=""></script><script src="y_files/analytics.js" async=""></script><script src="y_files/analytics.js" async=""></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-294324-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+     <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+        <section class="share-contact" role="region"> 
+           <div class="cart-button-container">
+                      <a href="" data-ng-click="toggle()" data-cart-link="" data-css="unchecked|check" title="Save">
+                  		<span class="glyphicon glyphicon-unchecked"></span>
+                  	</a>
+
+                  
+                </div>
+						<!-- Image -->           
+
+
+						<div id="photo-wrapper">
+                             <img class="img-circle" src="y_files/person.jpg" width="120">
+							        
+						</div>
+			<h4>
+				<span itemprop="name" class="fn">
+	                    <!--<a href="/s/redirect?collection=vivo-lilliput&url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0003-1440-5829&index_url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0003-1440-5829&auth=GzLXenHtJuW1kkvydSzZ5g&profile=_default&rank=1&query=fellow" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0003-1440-5829"> -->
+	                   <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0003-1440-5829" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0003-1440-5829">
+	                    Martínez García, Agustina
+	                  </a>
+				</span>
+			</h4>
+						
+
+
+ <div class="emailsContainer">
+    <h4>
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+    </h4>
+
+           
+                    
+                    
+                    <ul id="primary-email" class="individual-emails" role="list">
+                        <li role="listitem">
+                          <a itemprop="email" class="email" href="mailto:amgciadev@gmail.com" title="email">
+                            amgciadev@gmail.com
+                          </a>
+                        </li>
+                    </ul>
+
+                
+         
+    </div>
+
+ 
+     
+    <!--    <ul id="individual-phone" role="list">
+            <h4>
+                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+            </h4>
+                <li role="listitem">
+                    <span itemprop="telephone">0207 278 8446</span>
+                </li>
+        </ul> -->
+           
+                
+                    
+                    
+                   <button class="btn btn-default btn-xs" type="button">
+                       Publications 
+                       
+                      <span class="label label-default  label-as-badge">6</span>
+                   </button>
+                    
+                    
+
+					</section>
+				</section>
+    			
+			</div>
+                
+
+                
+                
+                
+                
+                
+                
+             
+             
+
+                
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0001-7382-6960">
+                <div class="gap30"></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-294324-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+     <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+        <section class="share-contact" role="region"> 
+           <div class="cart-button-container">
+                      <a href="" data-ng-click="toggle()" data-cart-link="" data-css="unchecked|check" title="Save">
+                  		<span class="glyphicon glyphicon-unchecked"></span>
+                  	</a>
+
+                  
+                </div>
+						<!-- Image -->           
+
+
+						<div id="photo-wrapper">
+                             <img class="img-circle" src="y_files/person.jpg" width="120">
+							        
+						</div>
+			<h4>
+				<span itemprop="name" class="fn">
+	                    <!--<a href="/s/redirect?collection=vivo-lilliput&url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0001-7382-6960&index_url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0001-7382-6960&auth=28UXRWh0zATtcChv27x39g&profile=_default&rank=2&query=fellow" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0001-7382-6960"> -->
+	                   <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0001-7382-6960" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0001-7382-6960">
+	                    Altman, Micah
+	                  </a>
+				</span>
+			</h4>
+						
+
+
+ <div class="emailsContainer">
+    <h4>
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+    </h4>
+
+           
+                    
+                    
+                    <ul id="primary-email" class="individual-emails" role="list">
+                        <li role="listitem">
+                          <a itemprop="email" class="email" href="mailto:escience@mit.edu" title="email">
+                            escience@mit.edu
+                          </a>
+                        </li>
+                    </ul>
+
+                
+         
+    </div>
+
+ 
+     
+    <!--    <ul id="individual-phone" role="list">
+            <h4>
+                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+            </h4>
+                <li role="listitem">
+                    <span itemprop="telephone">0207 278 8446</span>
+                </li>
+        </ul> -->
+           
+                
+                    
+                    
+                   <button class="btn btn-default btn-xs" type="button">
+                       Publications 
+                       
+                      <span class="label label-default  label-as-badge">22</span>
+                   </button>
+                    
+                    
+
+					</section>
+				</section>
+    			
+			</div>
+                
+
+                
+                
+                
+                
+                
+                
+             
+             
+
+                
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-1572-8059">
+                <div class="gap30"></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-294324-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+     <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+        <section class="share-contact" role="region"> 
+           <div class="cart-button-container">
+                      <a href="" data-ng-click="toggle()" data-cart-link="" data-css="unchecked|check" title="Save">
+                  		<span class="glyphicon glyphicon-unchecked"></span>
+                  	</a>
+
+                  
+                </div>
+						<!-- Image -->           
+
+
+						<div id="photo-wrapper">
+                             <img class="img-circle" src="y_files/IMG_0222.JPG" width="120">
+							        
+						</div>
+			<h4>
+				<span itemprop="name" class="fn">
+	                    <!--<a href="/s/redirect?collection=vivo-lilliput&url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0002-1572-8059&index_url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0002-1572-8059&auth=xMKne%2BOvFGLsKeDSrgslXw&profile=_default&rank=3&query=fellow" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-1572-8059"> -->
+	                   <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-1572-8059" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-1572-8059">
+	                    Emery, Jill
+	                  </a>
+				</span>
+			</h4>
+						
+
+
+ <div class="emailsContainer">
+    <h4>
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+    </h4>
+
+           
+                    
+                    
+                    <ul id="primary-email" class="individual-emails" role="list">
+                        <li role="listitem">
+                          <a itemprop="email" class="email" href="mailto:jill.emery@gmail.com" title="email">
+                            jill.emery@gmail.com
+                          </a>
+                        </li>
+                        <li role="listitem">
+                          <a itemprop="email" class="email" href="mailto:jemery@pdx.edu" title="email">
+                            jemery@pdx.edu
+                          </a>
+                        </li>
+                    </ul>
+
+                
+         
+    </div>
+
+ 
+     
+    <!--    <ul id="individual-phone" role="list">
+            <h4>
+                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+            </h4>
+                <li role="listitem">
+                    <span itemprop="telephone">0207 278 8446</span>
+                </li>
+        </ul> -->
+           
+                
+                    
+                    
+                           
+                   <button class="btn btn-default btn-xs" type="button">
+                       Publications 
+                        <span class="label  label-success label-as-badge">1</span>/
+                      <span class="label label-default  label-as-badge">33</span>
+                   </button>
+                    
+                    
+
+					</section>
+				</section>
+    			
+			</div>
+                
+
+                
+                
+                
+                
+                
+                
+             
+             
+
+                <div class="clearfix visible-sm-block"></div>
+                
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-9303-5530">
+                <div class="gap30"></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-294324-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+     <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+        <section class="share-contact" role="region"> 
+           <div class="cart-button-container">
+                      <a href="" data-ng-click="toggle()" data-cart-link="" data-css="unchecked|check" title="Save">
+                  		<span class="glyphicon glyphicon-unchecked"></span>
+                  	</a>
+
+                  
+                </div>
+						<!-- Image -->           
+
+
+						<div id="photo-wrapper">
+                             <img class="img-circle" src="y_files/Vivicaphoto_Jaleos_WDC_2009.jpg" width="120">
+							        
+						</div>
+			<h4>
+				<span itemprop="name" class="fn">
+	                    <!--<a href="/s/redirect?collection=vivo-lilliput&url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0002-9303-5530&index_url=https%3A%2F%2Fbootstrap-vivo-beta.symplectic.co.uk%2Fvivo%2Fdisplay%2Forcid0000-0002-9303-5530&auth=yJbrchd75MKC0MWLUbaSqg&profile=_default&rank=4&query=fellow" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-9303-5530"> -->
+	                   <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-9303-5530" title="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/display/orcid0000-0002-9303-5530">
+	                    Kraak, Vivica
+	                  </a>
+				</span>
+			</h4>
+						
+
+
+ <div class="emailsContainer">
+    <h4>
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+    </h4>
+
+           
+                    
+                    
+                    <ul id="primary-email" class="individual-emails" role="list">
+                        <li role="listitem">
+                          <a itemprop="email" class="email" href="mailto:vivica51@vt.edu" title="email">
+                            vivica51@vt.edu
+                          </a>
+                        </li>
+                        <li role="listitem">
+                          <a itemprop="email" class="email" href="mailto:vivica.kraak@gmail.com" title="email">
+                            vivica.kraak@gmail.com
+                          </a>
+                        </li>
+                    </ul>
+
+                
+         
+    </div>
+
+ 
+     
+    <!--    <ul id="individual-phone" role="list">
+            <h4>
+                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+            </h4>
+                <li role="listitem">
+                    <span itemprop="telephone">0207 278 8446</span>
+                </li>
+        </ul> -->
+           
+                
+                    
+                    
+                   <button class="btn btn-default btn-xs" type="button">
+                       Publications 
+                       
+                      <span class="label label-default  label-as-badge">32</span>
+                   </button>
+                    
+                    
+
+					</section>
+				</section>
+    			
+			</div>
+              <!-- </div class="row"> -->
+                
+
+                
+                
+                
+                
+                
+                
+             
+             </div>
+
+        <div class="text-center hidden-print">
+          <h2 class="sr-only">Pagination</h2>
+          <ul class="pagination pagination-lg">
+            
+            
+
+
+
+<li class="active"><a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;start_rank=1">1</a></li>
+
+            
+          </ul>
+        </div>
+
+      </div>
+      
+       <div class="col-md-2 col-md-pull-10 hidden-print" id="search-facets"> 
+      
+          <h2 class="sr-only">Refine</h2>
+                    <div id="facet-4" class="facet">
+            <div class="panel panel-default">
+              <div class="panel-heading">                <h3 class="facetLabel"> Organization
+
+                </h3>
+</div><!-- panel heading-->
+              <div class="panel-body">
+                <ul class="list-unstyled">
+
+
+
+                        
+                            <li class="category">
+                            <span class="">
+            <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;f.Organization%7Corganization=Virginia+Tech">Virginia Tech</a>
+        </span>
+&nbsp;<span class="badge pull-right"><span class="categoryCount">1</span></span>
+                            </li>
+                        
+                            <li class="category">
+                            <span class="">
+            <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;f.Organization%7Corganization=Virginia+Polytechnic+Institute+and+State+University">Virginia Polytechnic Institute and State University</a>
+        </span>
+&nbsp;<span class="badge pull-right"><span class="categoryCount">1</span></span>
+                            </li>
+
+                </ul>
+                <button type="button" class="btn btn-link btn-sm search-toggle-more-categories" style="display: none;" data-more="More…" data-less="Less…" data-state="more" title="Show more categories from this facet"><small class="glyphicon glyphicon-plus"></small>&nbsp;<span>More…</span></button>
+              </div><!-- panel-body -->
+            </div><!-- panel -->
+                    </div>
+      
+       
+          	</div>  
+     </div><!--close facited search-->    
+    </div>
+
+      <div style="display: none;" id="search-history" data-ng-show="isDisplayed('history')">
+        <div class="row">
+          <div class="col-md-12">
+            <a href="#" data-ng-click="hideHistory()"><span class="glyphicon glyphicon-arrow-left"></span> Back to results</a>
+            <h2><span class="glyphicon glyphicon-time"></span> History</h2>
+
+            <div class="row">
+              <div class="col-md-6 ng-scope" data-ng-controller="ClickHistoryCtrl">
+                <div style="display: none;" data-ng-show="!clickHistoryEmpty &amp;&amp; false">
+                  <h3><span class="glyphicon glyphicon-heart"></span> Recently clicked results
+                    <button class="btn btn-danger btn-xs" title="Clear click history" data-ng-click="clear('Your history will be cleared')"><span class="glyphicon glyphicon-remove"></span> Clear</button>
+                  </h3>
+                  <ul class="list-unstyled">
+                  </ul>
+                </div>
+                <div data-ng-show="clickHistoryEmpty || !false">
+                  <h3><span class="glyphicon glyphicon-heart"></span> Recently clicked results</h3>
+                  <p class="text-muted">Your click history is empty.</p>
+                </div>
+              </div>
+              <div class="col-md-6 ng-scope" data-ng-controller="SearchHistoryCtrl">
+                <div data-ng-show="!searchHistoryEmpty &amp;&amp; true">
+                  <h3><span class="glyphicon glyphicon-search"></span> Recent searches
+                    <button class="btn btn-danger btn-xs" title="Clear search history" data-ng-click="clear('Your history will be cleared')"><span class="glyphicon glyphicon-remove"></span> Clear</button>
+                  </h3>
+                  <ul class="list-unstyled">
+                      <li><a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=hello&amp;collection=vivo-lilliput&amp;form=lilliputsimple">hello <small>(0)</small></a> · <span class="text-warning">moments ago</span></li>
+                      <li><a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=correa&amp;collection=vivo-lilliput&amp;form=lilliputsimple">correa <small>(0)</small></a> · <span class="text-warning">2 hours ago</span></li>
+                      <li><a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=core&amp;collection=vivo-lilliput&amp;form=lilliputsimple">core <small>(5)</small></a> · <span class="text-warning">3 hours ago</span></li>
+                  </ul>
+                </div>
+                <div style="display: none;" data-ng-show="searchHistoryEmpty || !true">
+                  <h3><span class="glyphicon glyphicon-search"></span> Recent searches</h3>
+                  <p class="text-muted">Your search history is empty.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: none;" class="ng-scope" id="search-cart" data-ng-show="isDisplayed('cart')" data-ng-controller="CartCtrl">
+        <div class="row">
+          <div class="col-md-12">
+            <a href="#" data-ng-click="hideCart()"><span class="glyphicon glyphicon-arrow-left"></span> Back to results</a>
+            <h2><span class="glyphicon glyphicon-pushpin"></span> Saved RResults
+              <button class="btn btn-danger btn-xs" title="Clear selection" data-ng-click="clear('Your selection will be cleared')"><span class="glyphicon glyphicon-remove"></span> Clear</button>
+            </h2>
+            <div class="row">
+            </div>
+            <ul class="list-unstyled">
+              <!-- ngRepeat: item in cart -->
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+
+    <div class="hidden-print">
+      <h2 class="sr-only">Tools</h2>
+      <div id="search-performance" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button class="close" data-dismiss="modal" data-target="#search-performance">×</button>
+              <h3>Performance</h3>
+            </div>
+            <div class="modal-body">
+        
+        <script type="text/javascript">
+            try {
+                console.log("Query processing time: 87 ms");
+            } catch (ex) {
+            }
+        </script>
+
+            
+
+            <table class="search-metrics table-striped table table-condensed">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Time</th>
+                    <th>Chart</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PassThroughParameters</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>PassThroughEnvironmentVariables</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>LocaleOverride</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>ContentAuditor</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>Geolocation</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>GenericHookScriptRunner pre_process</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 0px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>Session</td>
+                    <td>48 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 110px; margin-left: 0px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>UserKeys</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>FacetScope</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>FacetedNavigation</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>MultiFacetedNavigation</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>MetaParameters</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>MetadataAliases</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>MetaDates</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>Curator</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>CliveMapping</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>QuickLinks</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>ExploreQuery</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>Hostname</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>UserIdInQueryLogs</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>ExtraSearches</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>GenericHookScriptRunner extra_searches</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>ExtraSearchesExecutor</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info input" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>GenericHookScriptRunner pre_datafetch</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info datafetch" style="width: 0px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>DefaultPadreForking</td>
+                    <td>16 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info datafetch" style="width: 37px; margin-left: 110.345px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>GenericHookScriptRunner post_datafetch</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info datafetch" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>PadreReturnCode</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>FixPseudoLiveLinks</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>Curator</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>FixCacheAndClickLinks</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>FixDisplayUrls</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>HTMLEncodeSummaries</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>FacetedNavigation</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>FacetedNavigationWhiteBlackList</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>DateFacetSort</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>ContextualNavigation</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>QuickLinks</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>QueryCleanOutputProcessor</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>ExtraSearchesExecutor</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>ContentOptimiser</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>TextMiner</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>GetTranslations</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>SearchHistory</td>
+                    <td>3 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 7px; margin-left: 147.126px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>Metrics</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 154.023px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>GenericHookScriptRunner post_process</td>
+                    <td>0 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 0px; margin-left: 154.023px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <td>render</td>
+                    <td>20 ms</td>
+                    <td><div class="metric progress-bar progress-bar-info output" style="width: 46px; margin-left: 154.023px;">&nbsp;</div></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <th colspan="2">87 ms</th>
+                </tr>
+            </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="search-syntaxtree" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button class="close" data-dismiss="modal" data-target="#search-syntaxtree">×</button>
+              <h3>Query syntax tree</h3>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">Query syntax tree unavailable. Make sure the <code>-show_qsyntax_tree=on</code> query processor option is set.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- #wrapper-content -->
+
+
+
+<footer role="contentinfo" class="footer">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-294324-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <div class="row">
+		<div class="container">
+			<div class="col-md-12">	
+				<nav role="navigation">
+					<ul id="footer-nav" role="list">
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/about" title="About">
+								About
+							</a>
+						</li>
+
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/services/open-profile-services/" target="blank" title="Support">
+								Support
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" target="_blank" title="Support">
+								Browse Research
+							</a>
+						</li>
+
+						<li role="listitem">
+							<a href="http://symplectic.co.uk/" target="_blank" class="symplectic-contact">
+								Symplectic	
+							</a>
+					</li></ul>
+				</nav>
+				
+				<p class="copyright">
+
+						| <a class="terms" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/termsOfUse" title="Terms of Use">
+							Terms of Use
+						</a> | 
+
+					Powered by <a class="powered-by-vivo" href="http://vivoweb.org/" target="_blank" title="Powered by VIVO"><strong>VIVO</strong>
+					</a>
+						 | Designed by <a href="http://symplectic.co.uk/" title="Experts in Research Information">Symplectic</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+<script src="y_files/jquery-1.js"></script>
+<script src="y_files/jquery-ui-1.js"></script>
+<script src="y_files/bootstrap.js"></script>
+<script src="y_files/jquery.js"></script>
+<script src="y_files/jquery_002.js"></script>
+
+      <script src="y_files/angular.js"></script>
+      <script src="y_files/angular-resource.js"></script>
+      <script src="y_files/funnelback-session.js"></script>
+
+<script>
+  jQuery(document).ready( function() {
+
+    // jQuery.widget.bridge('uitooltip', jQuery.ui.tooltip); 
+
+    jQuery('[data-toggle=tooltip]').tooltip({'html': true});
+
+    // Query completion setup.
+    jQuery("input.query").fbcompletion({
+      'enabled'    : 'enabled',
+      'standardCompletionEnabled': true,
+      'collection' : 'vivo-lilliput',
+      'program'    : '../s/suggest.json',
+      'format'     : 'extended',
+      'alpha'      : '.5',
+      'show'       : '10',
+      'sort'       : '0',
+      'length'     : '3',
+      'delay'      : '0',
+      'profile'    : '',
+      'query'      : 'query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple'//,
+      //Search based completion
+     // 'searchBasedCompletionEnabled': 'enabled',
+     // 'searchBasedCompletionProgram': '../s/search.json',
+    });
+
+    // Faceted Navigation more/less links
+    var displayedCategories = 8;
+
+    jQuery('div.facet ul').each( function() {
+        jQuery(this).children('li:gt('+(displayedCategories-1)+')').hide();
+    });
+
+    jQuery('.search-toggle-more-categories').each( function() {
+      var nbCategories = jQuery(this).parent().parent().find('li').size();
+      if ( nbCategories <= displayedCategories ) {
+        jQuery(this).hide();
+      } else {
+        jQuery(this).css('display', 'block');
+        jQuery(this).click( function() {
+          if (jQuery(this).attr('data-state') === 'less') {
+            jQuery(this).attr('data-state', 'more');
+            jQuery(this).parent().parent().find('li:gt('+(displayedCategories-1)+')').hide();
+            jQuery(this).find('span').text(jQuery(this).attr('data-more'));
+          } else {
+            jQuery(this).attr('data-state', 'less');
+            jQuery(this).parent().parent().find('li').css('display', 'block');
+            jQuery(this).find('span').text(jQuery(this).attr('data-less'));
+          }
+        });
+      }
+    });
+
+    jQuery('.search-geolocation').click( function() {
+      try {
+        navigator.geolocation.getCurrentPosition( function(position) {
+          // Success
+          var latitude  = Math.ceil(position.coords.latitude*10000) / 10000;
+          var longitude = Math.ceil(position.coords.longitude*10000) / 10000;
+          var origin = latitude+','+longitude;
+          jQuery('#origin').val(origin);
+        }, function (error) {
+          // Error
+        }, { enableHighAccuracy: true });
+      } catch (e) {
+        alert('Your web browser doesn\'t support this feature');
+      }
+    });
+  });
+</script>
+
+<script id="fb-completion-tmpl" type="text/x-jquery-tmpl">
+    ${name}
+   <img src="/vivo${imageUrl}?width=100&height=100&type=crop_center" class="img-circle" width="50px"/>
+</script>
+    
+
+
+<ul style="display: none;" tabindex="0" id="ui-id-1" class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all"></ul></body></html>
