@@ -38,6 +38,7 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     faculty = query.to_object(FacultyItem)
     faculty.thumbnail = get_image(id)
+    faculty.education = get_education(id)
     faculty
   end
 
@@ -53,4 +54,24 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     query.to_value
   end
+
+  def self.get_education(id)
+    sparql = <<-END_SPARQL.gsub(/\n/, '')
+      select ?school_uri ?date ?degree ?school_name
+      where
+      {
+        <#{URI_INDIVIDUAL}/#{id}> <http://vivoweb.org/ontology/core#educationalTraining> ?t .
+        ?t <http://vivoweb.org/ontology/core#trainingAtOrganization> ?school_uri .
+        ?t <http://vivo.brown.edu/ontology/vivo-brown/degreeDate> ?date .
+        ?t <http://www.w3.org/2000/01/rdf-schema#label> ?degree .
+        ?school_uri <http://www.w3.org/2000/01/rdf-schema#label> ?school_name .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map do |row|
+      TrainingItem.new(row[:school_uri], row[:date], row[:degree], row[:school_name])
+    end
+  end
+
 end

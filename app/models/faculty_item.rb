@@ -1,6 +1,6 @@
 class FacultyItem
   attr_accessor :uri, :overview, :email, :org_label, :label, :title,
-    :contributor_to, :thumbnail
+    :contributor_to, :thumbnail, :education
 
   URI_TITLE = "http://vivoweb.org/ontology/core#preferredTitle"
   URI_LABEL = "http://www.w3.org/2000/01/rdf-schema#label"
@@ -34,5 +34,6 @@ class FacultyItem
     @title = ""
     @contributor_to = []
     @thumbnail = ""
+    @education = []
   end
 end
