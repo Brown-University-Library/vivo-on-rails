@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'faculty/:id' => 'faculty#show'
+  get 'faculty/:id' => 'faculty#show', as: :faculty_show
   get 'faculty/' => 'faculty#index'
   get 'home/search' => 'home#search'
 

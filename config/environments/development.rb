@@ -38,4 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Default host for Rails' url_helpers.url_for.
+  Rails.application.routes.default_url_options[:host] = ENV["HOST_URL"] || "localhost:3000"
 end
