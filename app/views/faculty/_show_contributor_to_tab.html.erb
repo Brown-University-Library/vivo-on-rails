@@ -1,0 +1,50 @@
+<div id="contributor_to" class="tab-pane fade in active" role="tabpanel">
+  <h2 id="contributor_to" pgroup="tabs" class="hidden">Contributor To</h2>
+  <div id="contributorToGroup">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 id="relatedBy-Authorship" title="" class="panel-title">Contributor to
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+          <h4>xxx</h4>
+          <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#publicationFilterDiv">
+              Filter
+          </button>
+
+          <div class="collapse" id="publicationFilterDiv">
+            <div class="form-group">
+              <input id="publicationFilter" placeholder="Narrow results..." class="form-control" aria-label="Filter publications" type="text">
+            </div>
+          </div>
+
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th>Year</th>
+                <th>Title</th>
+                <th>Altmetric</th>
+              </tr>
+              <% @faculty.contributor_to.each do |c| %>
+                <tr class="publicationTableRow" role="listitem">
+                  <td>
+                    <span class="listDateTime">2011</span>
+                  </td>
+                  <td class="citation-data">
+                    <%= c %>
+                  </td>
+                  <td>
+                    <div data-uuid="285eecf8-f68a-26d0-0ea1-8bf2d4231d9b" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2011.0185" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

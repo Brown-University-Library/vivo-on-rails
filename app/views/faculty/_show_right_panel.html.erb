@@ -1,0 +1,37 @@
+<div class="col-md-9 col-sm-8 col-xs-12">
+  <section id="individual-info" role="region">
+    <header>
+      <h2 class="vcard foaf-person hidden-xs"><%= @faculty.label %></h2>
+      <h3><%= @faculty.title %></h3>
+      <h4><%= @faculty.org_label %></h4>
+      <p><%= @faculty.overview.html_safe %></p>
+    </header>
+  </section>
+
+  <div class="row">
+
+    <!-- tabs -->
+    <div class="col-md-12">
+      <ul class="nav nav-tabs user-nav" role="tablist" id="individualNavTabs">
+        <li id="publicationsTab" role="presentation" class="active">
+          <a href="#publications" aria-controls="Publications" role="tab" data-toggle="tab">
+              Publications
+          </a>
+        </li>
+        <li id="contactTab" role="presentation">
+          <a href="#contact" aria-controls="Contact" role="tab" data-toggle="tab">
+              Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- tabs content -->
+    <div class="col-md-12 person-container">
+      <div class="tab-content" id="individualNavTabsContent">
+        <%= render "show_pubs_tab" %>
+        <%= render "show_contributor_to_tab" %>
+      </div>
+    </div>
+  </div>
+</div>
