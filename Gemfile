@@ -33,8 +33,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem "byebug"                # debugger
+  gem "better_errors"         # web page for errors
+  gem "binding_of_caller"     # allows inspecting values in web error page
 end
 
 group :development do
@@ -45,3 +46,8 @@ group :development do
   gem 'spring'
 end
 
+# Needed on RedHat
+gem 'therubyracer', platforms: :ruby
+
+# Loads environment settings from .env file
+gem 'dotenv-rails'
