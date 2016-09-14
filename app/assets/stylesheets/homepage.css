@@ -4,8 +4,7 @@ Add a custom homepage background to hero class here
 ----------------------------------------------*/
 .hero {
   background-size: cover;
-  /* https://en.wikipedia.org/wiki/John_Hay_Library */
-  background-image: url('/assets/library.jpg');
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/8f/BrownUniversity-JohnHayLibrary.jpg');
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
