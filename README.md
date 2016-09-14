@@ -14,5 +14,6 @@ bootstrap template](https://www.digital-science.com/blog/news/introducing-bootst
 git clone this repo
 cd vivoview
 bundle install
-FUSEKI_URL=http://your/fuseki/end/point bundle exec rails server
+source .env_sample
+bundle exec rails server
 ```

@@ -1,0 +1,105 @@
+<nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse" id="sticky-nav">
+    <div class="container">
+        <h1 class="sr-only">Search</h1>
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo">VIVO Demo</a>
+        </div>
+
+        <form class="navbar-form navbar-left ng-pristine ng-valid" action="search.html" method="GET">
+            <input name="collection" value="vivo-lilliput" type="hidden">
+            <input name="form" value="lilliputsimple" type="hidden">
+            <div class="form-group">
+                <span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span><input
+                    autocomplete="off"
+                    required=""
+                    name="query"
+                    id="query_top"
+                    title="Search query"
+                    value="fellow"
+                    accesskey="q"
+                    placeholder="Find an Expert VIVOweb - Lilliput…"
+                    class="form-control query ui-autocomplete-input"
+                    data-ng-disabled="isDisplayed('cart') || isDisplayed('history')"
+                    type="text">
+            </div>
+
+            <button type="submit" class="btn btn-default sympl-search hidden-xs" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
+                <span class="glyphicon glyphicon-search" role="submit"></span>
+            </button>
+
+            <button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-md hidden-lg" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
+                <span class="glyphicon glyphicon-search" role="submit"></span>
+            </button>
+        </form>
+
+        <div class="nav navbar-left dropdown" id="navbar-browse">
+            <button type="submit" class="btn btn-primary hidden-xs" onclick="location.href = '/s/resources/vivo-lilliput/index.html#'+document.getElementById('query_top').value+'%7C20%7C1';">
+                <span role="submit"><img src="y_files/pub.png" width="20px"></span>
+            </button>
+            <button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Browse
+                <span class="caret"></span>
+            </button>
+            <button id="xs-browse" class="btn btn-default navbar-btn btn-block hidden-sm hidden-md hidden-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Browse
+                <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu">
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/" title="Home menu item">Home</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/people" title="People menu item">People</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/organizations" title="Organizations menu item">Organizations</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research" title="Research menu item">Research</a>
+                </li>
+                <li role="listitem">
+                    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/events" title="Events menu item" class="active">Events</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav navbar-right funnelsearch">
+            <div class="nav-button" data-ng-class="{active: isDisplayed('cart')}">
+                <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=SavedResults" title="0 item(s) in your selection">
+                    <span class="glyphicon glyphicon-tags"></span>
+                    <span class="badge ng-binding">0</span>
+                </a>
+            </div>
+            <div class="dropdown nav-button">
+                <a href="#" title="Advanced Settings" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="collapse" href="#search-advanced" title="Advanced search">Advanced search</a>
+                    </li>
+                    <li data-ng-class="{active: isDisplayed('history')}">
+                        <a href="#" data-ng-click="toggleHistory()" title="Search History">History</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown nav-button">
+                <a href="#" title="Tools" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="modal" href="#search-performance" title="Performance report">Performance</a>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" href="#search-syntaxtree" title="Query syntax tree">Query syntax tree</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

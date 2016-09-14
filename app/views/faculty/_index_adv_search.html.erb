@@ -1,0 +1,361 @@
+<div class="well collapse" id="search-advanced">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="search.html" method="GET" class="form-horizontal ng-pristine ng-valid">
+                <input name="collection" value="vivo-lilliput" type="hidden">
+                <input name="from-advanced" value="true" type="hidden">
+                <input name="facetScope" value="" type="hidden">
+
+                <input name="form" value="lilliputsimple" type="hidden">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <fieldset>
+                            <legend>Contents</legend>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="query-advanced">Any</label>
+                                <div class="col-md-8">
+                                    <input id="query-advanced" name="query" value="fellow" class="form-control input-sm" placeholder="e.g. juliet where thou love" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="query_and" class="col-md-4 control-label">All</label>
+                                <div class="col-md-8">
+                                    <input id="query_and" name="query_and" class="form-control input-sm" placeholder="e.g. juliet where thou love" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="query_phrase" class="col-md-4 control-label">Phrase</label>
+                                <div class="col-md-8">
+                                    <input id="query_phrase" name="query_phrase" class="form-control input-sm" placeholder="e.g. to be or not to be" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="query_not" class="col-md-4 control-label">Not</label>
+                                <div class="col-md-8">
+                                    <input id="query_not" name="query_not" class="form-control input-sm" placeholder="e.g. brutus othello" type="text">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-md-4">
+                        <fieldset>
+                            <legend>Metadata</legend>
+                            <div class="form-group">
+                                <label for="meta_t" class="col-md-4 control-label">Title</label>
+                                <div class="col-md-8">
+                                    <input id="meta_t" name="meta_t" placeholder="e.g. A Midsummer Night's Dream" class="form-control input-sm" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="meta_a" class="col-md-4 control-label">Author</label>
+                                <div class="col-md-8">
+                                    <input id="meta_a" name="meta_a" placeholder="e.g. William Shakespeare" class="form-control input-sm" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="meta_s" class="col-md-4 control-label">Subject</label>
+                                <div class="col-md-8">
+                                    <input id="meta_s" name="meta_s" placeholder="e.g. comedy" class="form-control input-sm" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="meta_f_sand">Format</label>
+                                <div class="col-md-8">
+                                    <select name="meta_f_sand" id="meta_f_sand" class="form-control input-sm">
+                                        <option value="" selected="selected">Any
+                                        </option>
+                                        <option value="pdf">PDF (.pdf)
+                                        </option>
+                                        <option value="xls">Excel (.xls)
+                                        </option>
+                                        <option value="ppt">Powerpoint (.ppt)
+                                        </option>
+                                        <option value="rtf">Rich Text (.rtf)
+                                        </option>
+                                        <option value="doc">Word (.doc)
+                                        </option>
+                                        <option value="docx">Word 2007+ (.docx)
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-md-4">
+                        <fieldset>
+                            <legend>published</legend>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">After</label>
+                                <label class="sr-only" for="meta_d1year">Year</label>
+                                <select name="meta_d1year" id="meta_d1year" class="input-sm">
+                                    <option value="" selected="selected">Year</option>
+                                    <option value="1996">1996</option>
+                                    <option value="1997">1997</option>
+                                    <option value="1998">1998</option>
+                                    <option value="1999">1999</option>
+                                    <option value="2000">2000</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2007">2007</option>
+                                    <option value="2008">2008</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                </select>
+                                <label class="sr-only" for="meta_d1month">Month</label>
+                                <select name="meta_d1month" id="meta_d1month" class="input-sm">
+                                    <option value="" selected="selected">Month</option>
+                                    <option value="Jan">Jan</option>
+                                    <option value="Feb">Feb</option>
+                                    <option value="Mar">Mar</option>
+                                    <option value="Apr">Apr</option>
+                                    <option value="May">May</option>
+                                    <option value="Jun">Jun</option>
+                                    <option value="Jul">Jul</option>
+                                    <option value="Aug">Aug</option>
+                                    <option value="Sep">Sep</option>
+                                    <option value="Oct">Oct</option>
+                                    <option value="Nov">Nov</option>
+                                    <option value="Dec">Dec</option>
+                                </select>
+                                <label class="sr-only" for="meta_d1day">Day</label>
+                                <select name="meta_d1day" id="meta_d1day" class="input-sm">
+                                    <option value="" selected="selected">Day</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Before</label>
+                                <label class="sr-only" for="meta_d2year">Year</label>
+                                <select name="meta_d2year" id="meta_d2year" class="input-sm">
+                                    <option value="" selected="selected">Year</option>
+                                    <option value="1996">1996</option>
+                                    <option value="1997">1997</option>
+                                    <option value="1998">1998</option>
+                                    <option value="1999">1999</option>
+                                    <option value="2000">2000</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2007">2007</option>
+                                    <option value="2008">2008</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                </select>
+                                <label class="sr-only" for="meta_d2month">Month</label>
+                                <select name="meta_d2month" id="meta_d2month" class="input-sm">
+                                    <option value="" selected="selected">Month</option>
+                                    <option value="Jan">Jan</option>
+                                    <option value="Feb">Feb</option>
+                                    <option value="Mar">Mar</option>
+                                    <option value="Apr">Apr</option>
+                                    <option value="May">May</option>
+                                    <option value="Jun">Jun</option>
+                                    <option value="Jul">Jul</option>
+                                    <option value="Aug">Aug</option>
+                                    <option value="Sep">Sep</option>
+                                    <option value="Oct">Oct</option>
+                                    <option value="Nov">Nov</option>
+                                    <option value="Dec">Dec</option>
+                                </select>
+                                <label class="sr-only" for="meta_d2day">Day</label>
+                                <select name="meta_d2day" id="meta_d2day" class="input-sm">
+                                    <option value="" selected="selected">Day</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <fieldset>
+                            <legend>Display</legend>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="sort">Sort</label>
+                                <div class="col-md-8">
+                                    <select name="sort" id="sort" class="form-control">
+                                        <option value="" selected="selected">Relevance
+                                        </option>
+                                        <option value="date">Date (Newest first)</option>
+                                        <option value="adate">Date (Oldest first)</option>
+                                        <option value="title">Title (A-Z)</option>
+                                        <option value="dtitle">Title (Z-A)</option>
+                                        <option value="prox">Distance</option>
+                                        <option value="url">URL (A-Z)</option>
+                                        <option value="durl">URL (Z-A)</option>
+                                        <option value="shuffle">Shuffle</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="num_ranks">Results</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input min="1" id="num_ranks" name="num_ranks" placeholder="e.g. 10" value="10" class="form-control input-sm" type="number">
+                                        <span class="input-group-addon">per page</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-md-4">
+                        <fieldset>
+                            <legend>Located</legend>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="origin">Origin</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-info search-geolocation btn-sm" title="Locate me!">
+                                                <span class="glyphicon glyphicon-map-marker"></span>
+                                            </a>
+                                        </span>
+                                        <input id="origin" name="origin" pattern="-?[0-9\.]+,-?[0-9\.]+" title="Latitude,longitude" placeholder="Latitude, Longitude" class="form-control input-sm" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="maxdist">Distance</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input min="0" id="maxdist" name="maxdist" placeholder="e.g. 10" class="form-control input-sm" type="number">
+                                        <span class="input-group-addon">km</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+
+                    <div class="col-md-4">
+                        <fieldset>
+                            <legend>Within</legend>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="scope">Domain</label>
+                                <div class="col-md-8">
+                                    <input id="scope" name="scope" placeholder="e.g. example.com" class="form-control input-sm" type="text">
+                                </div>n
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="meta_v">Path</label>
+                                <div class="col-md-8">
+                                    <input id="meta_v" name="meta_v" placeholder="e.g. /plays/romeo-juliet" class="form-control input-sm" type="text">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="button" data-toggle="collapse" data-target="#search-advanced" class="btn btn-default">Close</button>
+                            <button class="btn btn-primary" type="submit">
+                                <span class="glyphicon glyphicon-cog"></span>
+                                Advanced Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
