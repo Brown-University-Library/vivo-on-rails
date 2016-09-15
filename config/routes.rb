@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'sparql/query' => 'sparql#query'
+  # TODO: this should be post
+  get 'sparql/query_submit' => 'sparql#submit', as: :sparql_submit
+
   get 'faculty/:id' => 'faculty#show', as: :faculty_show
   get 'faculty/' => 'faculty#index'
   get 'home/search' => 'home#search'

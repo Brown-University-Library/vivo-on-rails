@@ -1,0 +1,27 @@
+<div id="teaching" class="tab-pane fade in active" role="tabpanel">
+  <h2 id="teaching" pgroup="tabs" class="hidden">Teaching</h2>
+  <div id="teachingGroup">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 id="relatedBy-Authorship" title="" class="panel-title">Teaching</h3>
+      </div>
+
+      <div class="panel-body">
+        <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+          <table class="table table-hover">
+            <tbody>
+              <% @faculty.teaching.each do |class_name| %>
+                <tr class="tableRow" role="listitem">
+                  <td class="citation-data">
+                    <span class="listDateTime"><%= class_name%></span>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,12 @@ where
 {
   <http://vivo.brown.edu/individual/cmacdonn> ?p ?o .
 }
+
+select ?p ?o
+where
+{
+  <http://vivo.brown.edu/individual/dbadre> <http://vivo.brown.edu/ontology/vivo-brown/teacherFor> ?o .
+}
 ```
 
 {
