@@ -34,7 +34,7 @@ class FacultyItem
       mappings << {uri: URI_FUNDED_RESEARCH, prop: "funded_research"}
       mappings << {uri: URI_TEACHING_OVERVIEW, prop: "teaching_overview"}
       mappings << {uri: URI_AFFILIATIONS, prop: "affiliations"}
-      mappings << {uri: URI_CONTRIBUTOR_TO, prop: "contributor_to", type: "a"}
+      # mappings << {uri: URI_CONTRIBUTOR_TO, prop: "contributor_to", type: "a"}
       mappings
     end
   end

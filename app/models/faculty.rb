@@ -12,6 +12,13 @@ class Faculty
   URI_DEGREE_DATE = "http://vivo.brown.edu/ontology/vivo-brown/degreeDate"
   URI_TEACHER_FOR = "http://vivo.brown.edu/ontology/vivo-brown/teacherFor"
   URI_HAS_COLLABORATOR = "http://vivoweb.org/ontology/core#hasCollaborator"
+  URI_CONTRIBUTOR_TO = "http://vivo.brown.edu/ontology/citation#contributorTo"
+  URI_CIT_VOLUME = "http://vivo.brown.edu/ontology/citation#volume"
+  URI_CIT_ISSUE = "http://vivo.brown.edu/ontology/citation#issue"
+  URI_CIT_DATE = "http://vivo.brown.edu/ontology/citation#date"
+  URI_CIT_PAGES = "http://vivo.brown.edu/ontology/citation#pages"
+  URI_CIT_AUTHOR_LIST = "http://vivo.brown.edu/ontology/citation#authorList"
+  URI_CIT_PUB_IN = "http://vivo.brown.edu/ontology/citation#publishedIn"
 
   def self.all
     sparql = <<-END_SPARQL.gsub(/\n/, '')
@@ -44,6 +51,7 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     faculty = query.to_object(FacultyItem)
     faculty.thumbnail = get_image(id)
+    faculty.contributor_to = get_contributor_to(id)
     faculty.education = get_education(id)
     faculty.teacher_for = get_teacher_for(id)
     faculty.collaborators = get_collaborators(id)
@@ -120,4 +128,24 @@ class Faculty
     end
   end
 
+  def self.get_contributor_to(id)
+    sparql = <<-END_SPARQL.gsub(/\n/, '')
+      select ?c ?volume ?issue ?date ?pages ?authorList ?publishedIn ?title
+      where {
+         <#{URI_INDIVIDUAL}/#{id}> <#{URI_CONTRIBUTOR_TO}> ?c .
+         ?c <#{URI_CIT_VOLUME}> ?volume .
+         ?c <#{URI_CIT_ISSUE}> ?issue .
+         ?c <#{URI_CIT_DATE}> ?date .
+         ?c <#{URI_CIT_PAGES}> ?pages .
+         ?c <#{URI_CIT_AUTHOR_LIST}> ?authorList .
+         ?c <#{URI_CIT_PUB_IN}> ?publishedIn .
+         ?c <#{URI_LABEL}> ?title .
+       }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map do |row|
+      ContributorToItem.new(row[:c], row[:authorList], row[:title])
+    end
+  end
 end

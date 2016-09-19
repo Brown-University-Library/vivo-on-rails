@@ -24,17 +24,16 @@
           <table class="table table-hover">
             <tbody>
               <tr>
-                <th>Year</th>
+                <th>Authors</th>
                 <th>Title</th>
-                <th>Altmetric</th>
               </tr>
               <% @faculty.contributor_to.each do |c| %>
                 <tr class="publicationTableRow" role="listitem">
                   <td>
-                    <span class="listDateTime">2011</span>
+                    <span class="listDateTime"><%= c.authors %></span>
                   </td>
                   <td class="citation-data">
-                    <%= c %>
+                    <a href="<%= c.uri %>"><%= c.title %></a>
                   </td>
                   <td>
                     <div data-uuid="285eecf8-f68a-26d0-0ea1-8bf2d4231d9b" data-badge-popover="left" data-badge-type="donut" data-doi="10.1353/not.2011.0185" data-hide-no-mentions="true" class="altmetric-embed altmetric-hidden"></div>
