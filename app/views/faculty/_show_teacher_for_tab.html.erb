@@ -1,6 +1,6 @@
-<div id="teaching" class="tab-pane fade in active" role="tabpanel">
-  <h2 id="teaching" pgroup="tabs" class="hidden">Teaching</h2>
-  <div id="teachingGroup">
+<div id="teacherFor" class="tab-pane fade in active" role="tabpanel">
+  <h2 id="teacherFor" pgroup="tabs" class="hidden">Teacher For</h2>
+  <div id="teacherForGroup">
 
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -11,7 +11,7 @@
         <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
           <table class="table table-hover">
             <tbody>
-              <% @faculty.teaching.each do |class_name| %>
+              <% @faculty.teacher_for.each do |class_name| %>
                 <tr class="tableRow" role="listitem">
                   <td class="citation-data">
                     <span class="listDateTime"><%= class_name%></span>

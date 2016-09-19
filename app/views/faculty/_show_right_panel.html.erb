@@ -29,12 +29,47 @@
     <!-- tabs content -->
     <div class="col-md-12 person-container">
       <div class="tab-content" id="individualNavTabsContent">
-        <%= render "show_research_overview_tab" %>
+        <%= render "show_text_tab", locals: {
+          divId: "researchOverview",
+          title: "Research Overview",
+          text: @faculty.research_overview} %>
+
+        <%= render "show_text_tab", locals: {
+          divId: "researchStatement",
+          title: "Research Statement",
+          text: @faculty.research_statement} %>
+
         <%= render "show_pubs_tab" %>
         <%= render "show_contributor_to_tab" %>
-        <%= render "show_teaching_tab" %>
+        <%= render "show_teacher_for_tab" %>
         <%= render "show_education_tab" %>
-        <%= render "show_awards_tab" %>
+
+        <%= render "show_collaborators_tab" %>
+
+        <%= render "show_text_tab", locals: {
+          divId: "honorsAwards",
+          title: "Honors and Awards",
+          text: @faculty.awards} %>
+
+        <%= render "show_text_tab", locals: {
+          divId: "fundedResearch",
+          title: "Funded Research",
+          text: @faculty.funded_research} %>
+
+        <%= render "show_text_tab", locals: {
+          divId: "scholarlyWork",
+          title: "Scholarly Work",
+          text: @faculty.scholarly_work} %>
+
+        <%= render "show_text_tab", locals: {
+          divId: "techingOverview",
+          title: "Teaching Overview",
+          text: @faculty.teaching_overview} %>
+
+        <%= render "show_text_tab", locals: {
+          divId: "affiliations",
+          title: "Affiliations",
+          text: @faculty.affiliations} %>
       </div>
     </div>
   </div>

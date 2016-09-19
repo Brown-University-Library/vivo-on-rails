@@ -1,4 +1,5 @@
 require "./lib/sparql/query.rb"
+
 class Faculty
   URI_FACULTY = "http://vivoweb.org/ontology/core#FacultyMember"
   URI_TITLE = "http://vivoweb.org/ontology/core#preferredTitle"
@@ -9,12 +10,12 @@ class Faculty
   URI_EDUCATION_TRAINING = "http://vivoweb.org/ontology/core#educationalTraining"
   URI_TRAINING_ORG = "http://vivoweb.org/ontology/core#trainingAtOrganization"
   URI_DEGREE_DATE = "http://vivo.brown.edu/ontology/vivo-brown/degreeDate"
-  URI_AWARDS_HONORS = "http://vivo.brown.edu/ontology/vivo-brown/awardsAndHonors"
   URI_TEACHER_FOR = "http://vivo.brown.edu/ontology/vivo-brown/teacherFor"
+  URI_HAS_COLLABORATOR = "http://vivoweb.org/ontology/core#hasCollaborator"
 
   def self.all
     sparql = <<-END_SPARQL.gsub(/\n/, '')
-      select distinct ?s ?label ?title ?image ?awards
+      select distinct ?s ?label ?title ?image
       where {
         ?s ?p <#{URI_FACULTY}> .
         ?s <#{URI_LABEL}> ?label .
@@ -44,8 +45,8 @@ class Faculty
     faculty = query.to_object(FacultyItem)
     faculty.thumbnail = get_image(id)
     faculty.education = get_education(id)
-    faculty.teaching = get_teaching(id)
-    faculty.awards = self.get_value("#{URI_INDIVIDUAL}/#{id}",URI_AWARDS_HONORS)
+    faculty.teacher_for = get_teacher_for(id)
+    faculty.collaborators = get_collaborators(id)
     faculty
   end
 
@@ -88,7 +89,7 @@ class Faculty
     end
   end
 
-  def self.get_teaching(id)
+  def self.get_teacher_for(id)
     sparql = <<-END_SPARQL.gsub(/\n/, '')
       select ?class_name
       where
@@ -101,4 +102,22 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map { |row| row[:class_name] }
   end
+
+  def self.get_collaborators(id)
+    sparql = <<-END_SPARQL.gsub(/\n/, '')
+      select ?c ?label ?title
+      where
+      {
+        <#{URI_INDIVIDUAL}/#{id}> <#{URI_HAS_COLLABORATOR}> ?c .
+        ?c <#{URI_TITLE}> ?title .
+        ?c <#{URI_LABEL}> ?label .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map do |row|
+      CollaboratorItem.new(row[:c], row[:label], row[:title])
+    end
+  end
+
 end
