@@ -1,6 +1,11 @@
 require "./lib/sparql/query.rb"
-
+require "./app/models/faculty_list_item.rb"
+require "./app/models/faculty_item.rb"
+require "./app/models/contributor_to_item.rb"
+require "./app/models/training_item.rb"
+require "./app/models/collaborator_item.rb"
 class Faculty
+
   URI_FACULTY = "http://vivoweb.org/ontology/core#FacultyMember"
   URI_TITLE = "http://vivoweb.org/ontology/core#preferredTitle"
   URI_LABEL = "http://www.w3.org/2000/01/rdf-schema#label"
@@ -25,11 +30,11 @@ class Faculty
     sparql = <<-END_SPARQL
       select distinct ?s ?label ?title ?image
       where {
-        ?s ?p <#{URI_FACULTY}> .
-        ?s <#{URI_LABEL}> ?label .
-        ?s <#{URI_TITLE}> ?title .
-        ?s <#{URI_THUMBNAIL}> ?thumbnail .
-        ?thumbnail <#{URI_THUMBNAIL_LOC}> ?image .
+        ?s ?p core:FacultyMember .
+        ?s rdf:label ?label .
+        ?s core:preferredTitle ?title .
+        ?s vitro:mainImage ?thumbnail .
+        ?thumbnail vitro:downloadLocation ?image .
       }
       limit 100
     END_SPARQL

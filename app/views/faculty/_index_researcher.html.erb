@@ -1,5 +1,5 @@
 <div class="clearfix visible-xs-block"></div>
-<div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="<%= researcher.url %>">
+<div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="<%= faculty_show_url(researcher.id) %>">
     <div class="gap30"></div>
 
     <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
@@ -16,7 +16,8 @@
             </div>
             <h4>
                 <span itemprop="name" class="fn">
-                    <a href="<%= researcher.url %>" title="<%= researcher.url %>">
+                    <a href="<%= faculty_show_url(researcher.id) %>"
+                      title="<%= faculty_show_url(researcher.id) %>">
                         <%= researcher.label %>
                     </a>
                 </span>

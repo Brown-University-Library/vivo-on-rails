@@ -49,5 +49,8 @@ end
 # Needed on RedHat
 gem 'therubyracer', platforms: :ruby
 
+# Needed for rails console in RedHat
+gem "rb-readline"
+
 # Loads environment settings from .env file
 gem 'dotenv-rails'

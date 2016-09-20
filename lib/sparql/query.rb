@@ -3,13 +3,41 @@ require "./lib/sparql/http_json.rb"
 
 module Sparql
   class Query
-    attr_reader :raw_response, :raw_results
-    def initialize(fuseki_url, query)
-      executed = false
-      query_escaped = CGI.escape(query.gsub(/\n/, ''))
-      url = "#{fuseki_url}?query=#{query_escaped}&output=json&stylesheet="
+
+    attr_reader :raw_response, :raw_results, :prefixes, :prefixes_ttl
+    def initialize(fuseki_url, query, prefixes = default_prefixes)
+      @fuseki_url = fuseki_url
+      @query = query
+      @prefixes = prefixes
+      @prefixes_ttl = prefixes_to_ttl(prefixes)
+      execute()
+    end
+
+    def execute()
+      query_with_prefixes = (@prefixes_ttl + @query).gsub(/\n/, ' ')
+      query_escaped = CGI.escape(query_with_prefixes)
+      url = "#{@fuseki_url}?query=#{query_escaped}&output=json&stylesheet="
       @raw_response = HttpJson.get(url)
       @raw_results = @raw_response["results"]["bindings"]
+    end
+
+    def default_prefixes
+      p = []
+      p << {prefix: "core", uri: "http://vivoweb.org/ontology/core#"}
+      p << {prefix: "rdf", uri: "http://www.w3.org/2000/01/rdf-schema#"}
+      p << {prefix: "vitro", uri: "http://vitro.mannlib.cornell.edu/ns/vitro/public#"}
+      p << {prefix: "individual", uri: "http://vivo.brown.edu/individual/"}
+      p << {prefix: "brown", uri: "http://vivo.brown.edu/ontology/vivo-brown/"}
+      p << {prefix: "citation", uri: "http://vivo.brown.edu/ontology/citation#"}
+      p
+    end
+
+    def prefixes_to_ttl(prefixes)
+      ttl = ""
+      prefixes.each do |p|
+        ttl += "prefix #{p[:prefix]}: <#{p[:uri]}> \n"
+      end
+      ttl
     end
 
     # Returns an array of hashes. Each hash has the results

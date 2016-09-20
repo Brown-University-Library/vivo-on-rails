@@ -12,7 +12,7 @@ bootstrap template](https://www.digital-science.com/blog/news/introducing-bootst
 # To get started
 ```
 git clone this repo
-cd vivoview
+cd vivo-on-rails
 bundle install
 source .env_sample
 bundle exec rails server

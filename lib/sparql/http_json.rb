@@ -1,3 +1,5 @@
+require "net/http"
+require "json"
 module Sparql
   class HttpJson
     def self.get(url)
