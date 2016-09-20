@@ -12,6 +12,7 @@ class Faculty
   URI_DEGREE_DATE = "http://vivo.brown.edu/ontology/vivo-brown/degreeDate"
   URI_TEACHER_FOR = "http://vivo.brown.edu/ontology/vivo-brown/teacherFor"
   URI_HAS_COLLABORATOR = "http://vivoweb.org/ontology/core#hasCollaborator"
+  URI_HAS_CONTRIBUTOR = "http://vivo.brown.edu/ontology/citation#hasContributor"
   URI_CONTRIBUTOR_TO = "http://vivo.brown.edu/ontology/citation#contributorTo"
   URI_CIT_VOLUME = "http://vivo.brown.edu/ontology/citation#volume"
   URI_CIT_ISSUE = "http://vivo.brown.edu/ontology/citation#issue"
@@ -21,7 +22,7 @@ class Faculty
   URI_CIT_PUB_IN = "http://vivo.brown.edu/ontology/citation#publishedIn"
 
   def self.all
-    sparql = <<-END_SPARQL.gsub(/\n/, '')
+    sparql = <<-END_SPARQL
       select distinct ?s ?label ?title ?image
       where {
         ?s ?p <#{URI_FACULTY}> .
@@ -40,7 +41,7 @@ class Faculty
   end
 
   def self.get_one(id)
-    sparql = <<-END_SPARQL.gsub(/\n/, '')
+    sparql = <<-END_SPARQL
       select ?p ?o
       where
       {
@@ -59,7 +60,7 @@ class Faculty
   end
 
   def self.get_image(id)
-    sparql = <<-END_SPARQL.gsub(/\n/, '')
+    sparql = <<-END_SPARQL
       select ?image
       where {
         <#{URI_INDIVIDUAL}/#{id}> <#{URI_THUMBNAIL}> ?thumbnail .
@@ -79,7 +80,7 @@ class Faculty
   end
 
   def self.get_education(id)
-    sparql = <<-END_SPARQL.gsub(/\n/, '')
+    sparql = <<-END_SPARQL
       select ?school_uri ?date ?degree ?school_name
       where
       {
@@ -98,7 +99,7 @@ class Faculty
   end
 
   def self.get_teacher_for(id)
-    sparql = <<-END_SPARQL.gsub(/\n/, '')
+    sparql = <<-END_SPARQL
       select ?class_name
       where
       {
@@ -112,7 +113,7 @@ class Faculty
   end
 
   def self.get_collaborators(id)
-    sparql = <<-END_SPARQL.gsub(/\n/, '')
+    sparql = <<-END_SPARQL
       select ?c ?label ?title
       where
       {
@@ -129,10 +130,11 @@ class Faculty
   end
 
   def self.get_contributor_to(id)
-    sparql = <<-END_SPARQL.gsub(/\n/, '')
+    sparql = <<-END_SPARQL
       select ?c ?volume ?issue ?date ?pages ?authorList ?publishedIn ?title
       where {
          <#{URI_INDIVIDUAL}/#{id}> <#{URI_CONTRIBUTOR_TO}> ?c .
+         ?c <#{URI_HAS_CONTRIBUTOR}> <#{URI_INDIVIDUAL}/#{id}> .
          ?c <#{URI_CIT_VOLUME}> ?volume .
          ?c <#{URI_CIT_ISSUE}> ?issue .
          ?c <#{URI_CIT_DATE}> ?date .
@@ -144,8 +146,12 @@ class Faculty
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
-    query.results.map do |row|
-      ContributorToItem.new(row[:c], row[:authorList], row[:title])
+    # TODO: figure out a better way to removing duplicates
+    #       (see what VIVO does to pick the contribuition)
+    uniq_contributions = query.results.uniq { |row| row[:c] }
+    uniq_contributions.map do |row|
+      ContributorToItem.new(row[:c], row[:authorList], row[:title],
+        row[:volume], row[:issue], row[:date], row[:pages], row[:published_in])
     end
   end
 end

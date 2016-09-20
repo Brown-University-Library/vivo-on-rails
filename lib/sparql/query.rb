@@ -6,7 +6,7 @@ module Sparql
     attr_reader :raw_response, :raw_results
     def initialize(fuseki_url, query)
       executed = false
-      query_escaped = CGI.escape(query)
+      query_escaped = CGI.escape(query.gsub(/\n/, ''))
       url = "#{fuseki_url}?query=#{query_escaped}&output=json&stylesheet="
       @raw_response = HttpJson.get(url)
       @raw_results = @raw_response["results"]["bindings"]
