@@ -17,3 +17,8 @@ bundle install
 source .env_sample
 bundle exec rails server
 ```
+
+# To run the tests
+```
+bundle exec rails vivo:tests
+```
