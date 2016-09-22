@@ -7,4 +7,13 @@ namespace :vivo do
     text = triples.join()
     File.write('./all.ttl', text)
   end
+
+  task :export_one do
+    # id = "jhogansc"
+    id = "gpalomak"
+    uri = "http://vivo.brown.edu/individual/#{id}"
+    triples = Export.faculty_one(uri)
+    text = triples.join()
+    File.write("./#{id}.ttl", text)
+  end
 end
