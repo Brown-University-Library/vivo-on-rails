@@ -34,7 +34,7 @@ class Faculty
         ?s rdf:label ?label .
         ?s core:preferredTitle ?title .
         ?s vitro:mainImage ?thumbnail .
-        ?thumbnail vitro:downloadLocation ?image .
+        optional { ?thumbnail vitro:downloadLocation ?image . }
       }
       limit 100
     END_SPARQL

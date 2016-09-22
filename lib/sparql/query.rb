@@ -14,9 +14,13 @@ module Sparql
     end
 
     def execute()
+      puts "-- QUERY"
+      puts @prefixes_ttl + @query
+      puts "--"
       query_with_prefixes = (@prefixes_ttl + @query).gsub(/\n/, ' ')
       query_escaped = CGI.escape(query_with_prefixes)
       url = "#{@fuseki_url}?query=#{query_escaped}&output=json&stylesheet="
+      # Do we need to use HTTP POST to support (very) large queries?
       @raw_response = HttpJson.get(url)
       @raw_results = @raw_response["results"]["bindings"]
     end
