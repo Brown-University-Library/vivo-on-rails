@@ -12,9 +12,10 @@ a:focus {
 }
 /*---------------------------------------------
 Styling identity.ftl header
+original #1e73be, redish #831b1b
 ----------------------------------------------*/
 .header {
-  background: #1e73be;
+  background: #831b1b;
   padding: 20px 0;
   border-bottom: 1px solid #185c98;
 }
@@ -52,7 +53,7 @@ Styling identity.ftl header
   }
 }
 button.btn.sympl-search {
-  background: #1e73be;
+  background: #831b1b;
   text-shadow: 0 0 0 transparent;
   color: #fff;
   border: 2px solid #c9c9c9;

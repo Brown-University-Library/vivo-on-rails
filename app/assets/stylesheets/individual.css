@@ -1,6 +1,6 @@
 /* These are the colours used commonly throughout the site */
 /* ###########################################################################
-Funnelback search results and basket control 
+Funnelback search results and basket control
 MUST BE REMOVED BEFORE COMMIT TO VIVO
 ###########################################################################*/
 .search-basket ul#basket-controls {
@@ -60,7 +60,7 @@ MUST BE REMOVED BEFORE COMMIT TO VIVO
 }
 .person-content .user-nav {
   margin: 20px 0 17px 0;
-  color: #1e73be;
+  color: #831b1b;
   /* Hide the contact button for demo purposes */
 }
 .person-content .user-nav > li + li {
@@ -74,7 +74,7 @@ MUST BE REMOVED BEFORE COMMIT TO VIVO
   text-align: center;
 }
 /*################################################################################
-Styling for the left hand side contact info column on the individual person page 
+Styling for the left hand side contact info column on the individual person page
 ################################################################################*/
 .share-contact {
   background: #ececec;
