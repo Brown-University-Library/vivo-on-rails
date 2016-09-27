@@ -19,3 +19,4 @@
 
 .env
 .byebug_history
+.DS_Store

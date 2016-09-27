@@ -13,7 +13,19 @@ class Export
     triples
   end
 
-  def self.faculty_one(uri)
+  def self.faculty_one(uri, depth_limit = 3)
+    triples = []
+    subjects = []
+    depth = 1
+    faculty_one_recursive(uri, subjects, triples, depth, depth_limit)
+    triples
+  end
+
+  def self.faculty_one_recursive(uri, subjects, triples, depth, depth_limit)
+    if depth > depth_limit
+      # puts "== bailing out at level #{depth_limit} =="
+      return
+    end
     sparql = <<-END_SPARQL
       select ?p ?o
       where {
@@ -22,17 +34,29 @@ class Export
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
-    triples = []
-    query.results.map do |row|
-      if row[:o].start_with?("http://")
-        # assumme is a URI
-        value = "<" + row[:o] + ">"
+    subjects << uri
+    raw = query.raw_results
+    raw.each do |row|
+      predicate = row["p"]["value"]
+      value = row["o"]["value"]
+      is_object_uri = row["o"]["type"] == "uri"
+      if is_object_uri
+        triple_value = "<" + value + ">"
       else
-        # assumme is a literal
-        value = '"' + clean(row[:o]) + '"'
+        triple_value = '"' + clean(value) + '"'
       end
-      triple = "<#{uri}> <#{row[:p]}> #{value} .\n"
-      triples << triple
+
+      triples << "<#{uri}> <#{predicate}> #{triple_value}"
+
+      if is_object_uri
+        object_uri = value
+        if subjects.include?(object_uri)
+          # nothing to do, we already visited this node
+        else
+          # visit the node recursively
+          faculty_one_recursive(object_uri, subjects, triples, depth + 1, depth_limit)
+        end
+      end
     end
     triples
   end
