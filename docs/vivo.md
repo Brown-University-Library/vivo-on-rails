@@ -24,10 +24,10 @@ where
 }
 ```
 
-for each triple
-  if value is literal
-    # display it
-  else
-    # follow recursively
-    # unless predicate is <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
-  end
+# To delete all data
+# Issue this against the /update endpoint
+
+```
+delete
+where { ?s ?p ?o .}
+```
