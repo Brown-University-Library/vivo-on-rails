@@ -31,7 +31,7 @@ class Faculty
       select distinct ?s ?label ?title ?image
       where {
         ?s ?p core:FacultyMember .
-        ?s rdf:label ?label .
+        ?s rdfs:label ?label .
         ?s core:preferredTitle ?title .
         ?s vitro:mainImage ?thumbnail .
         optional { ?thumbnail vitro:downloadLocation ?image . }

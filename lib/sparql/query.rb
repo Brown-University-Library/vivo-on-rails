@@ -28,7 +28,8 @@ module Sparql
     def default_prefixes
       p = []
       p << {prefix: "core", uri: "http://vivoweb.org/ontology/core#"}
-      p << {prefix: "rdf", uri: "http://www.w3.org/2000/01/rdf-schema#"}
+      p << {prefix: "rdf", uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+      p << {prefix: "rdfs", uri: "http://www.w3.org/2000/01/rdf-schema#"}
       p << {prefix: "vitro", uri: "http://vitro.mannlib.cornell.edu/ns/vitro/public#"}
       p << {prefix: "individual", uri: "http://vivo.brown.edu/individual/"}
       p << {prefix: "brown", uri: "http://vivo.brown.edu/ontology/vivo-brown/"}

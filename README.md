@@ -22,3 +22,9 @@ bundle exec rails server
 ```
 bundle exec rails vivo:tests
 ```
+
+# Solr 6
+```
+# Create core
+solr create_core -c vivo
+```
