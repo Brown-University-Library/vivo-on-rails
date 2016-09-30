@@ -1,5 +1,4 @@
 require "net/http"
-
 module Solr
   class Solr
     def initialize(solr_url)

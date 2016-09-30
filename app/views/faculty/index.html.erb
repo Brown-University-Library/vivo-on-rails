@@ -9,11 +9,11 @@
             <div id="search-result-count" class="text-muted">
                 <span id="search-page-start">1</span>
                 -
-                <span id="search-page-end">4</span>
+                <span id="search-page-end"><%= @num_found %></span>
                 of
-                <span id="search-total-matching">4</span>
+                <span id="search-total-matching"><%= @num_found %></span>
                 search results for
-                <strong>fellow</strong>
+                <strong><%= @query %></strong>
             </div>
 
             <h2 class="visible-print">Results</h2>

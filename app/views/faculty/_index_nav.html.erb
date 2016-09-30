@@ -7,20 +7,18 @@
         </div>
 
         <form class="navbar-form navbar-left ng-pristine ng-valid" action="search.html" method="GET">
-            <input name="collection" value="vivo-lilliput" type="hidden">
-            <input name="form" value="lilliputsimple" type="hidden">
             <div class="form-group">
-                <span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span><input
+                <span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span>
+                <input
                     autocomplete="off"
                     required=""
                     name="query"
                     id="query_top"
                     title="Search query"
-                    value="fellow"
+                    value="<%= @query %>"
                     accesskey="q"
                     placeholder="Find an Expert VIVOweb - Lilliput…"
                     class="form-control query ui-autocomplete-input"
-                    data-ng-disabled="isDisplayed('cart') || isDisplayed('history')"
                     type="text">
             </div>
 

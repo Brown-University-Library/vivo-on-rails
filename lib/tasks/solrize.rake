@@ -1,14 +1,14 @@
-require "./app/models/faculty_solr.rb"
+require "./app/models/faculty_solrize.rb"
 namespace :vivo do
   desc "Send to Solr information about all faculty members"
   task :solrize_all do
-    solr = FacultySolr.new(solr_url)
+    solr = FacultySolrize.new(solr_url)
     solr.add_all()
   end
 
   desc "Send to Solr information about one faculty member"
   task :solrize_one do
-    solr = FacultySolr.new(solr_url)
+    solr = FacultySolrize.new(solr_url)
     id = "cxbauer"
     solr.add_one(id)
   end

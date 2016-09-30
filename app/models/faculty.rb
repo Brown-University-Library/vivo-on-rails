@@ -58,6 +58,29 @@ class Faculty
     query.results.map { |faculty| faculty[:uri] }
   end
 
+  def self.get_batch(uris)
+    results = []
+    uris.each do |uri|
+      subject = "<#{uri}>"
+      sparql = <<-END_SPARQL
+        select distinct ?subject ?label ?title ?image
+        where {
+          #{subject} ?p core:FacultyMember .
+          #{subject} rdfs:label ?label .
+          #{subject} core:preferredTitle ?title .
+          #{subject} vitro:mainImage ?thumbnail .
+          optional { ?thumbnail vitro:downloadLocation ?image . }
+        }
+      END_SPARQL
+      fuseki_url = ENV["FUSEKI_URL"]
+      query = Sparql::Query.new(fuseki_url, sparql)
+      query.results.each do |row|
+        results << FacultyListItem.new(uri, row[:label], row[:title], row[:image])
+      end
+    end
+    results
+  end
+
   def self.get_one(id)
     uri = "#{URI_INDIVIDUAL}/#{id}"
     sparql = <<-END_SPARQL

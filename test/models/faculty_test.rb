@@ -17,6 +17,6 @@ class QueryTest < Minitest::Test
     id = "bgenberg"
     faculty = Faculty.get_one(id)
     json = JSON.pretty_generate(JSON.parse(faculty.to_json))
-    File.write(id+".json", json.to_s)
+    # File.write(id+".json", json.to_s)
   end
 end
