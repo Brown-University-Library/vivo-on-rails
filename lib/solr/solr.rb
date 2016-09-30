@@ -6,6 +6,12 @@ module Solr
       @solr_url = solr_url
     end
 
+    def search(search_term)
+      query_string = "?fl=uri&indent=on&q=#{search_term}&wt=json"
+      url = "#{@solr_url}/select?#{query_string}"
+      get(url)
+    end
+
     def update(json)
       url = @solr_url + "/update/json/docs"
       r1 = post(url, json)

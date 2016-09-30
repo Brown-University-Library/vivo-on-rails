@@ -5,6 +5,20 @@ class FacultySolr
     @solr_url = solr_url
   end
 
+  def search(search_term)
+    solr = Solr::Solr.new(@solr_url)
+    solr_response = solr.search(search_term)
+    docs = solr_response["response"]["docs"]
+    ids = []
+    docs.each do |doc|
+      if doc["uri"].count > 0
+        uri = doc["uri"].first
+        ids << uri.split("/").last
+      end
+    end
+    ids.map { |id| Faculty.get_one(id) }
+  end
+
   def add_all()
     uris = Faculty.all_uris
     uris.each do |uri|
