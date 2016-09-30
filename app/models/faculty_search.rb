@@ -4,7 +4,6 @@ require "./lib/solr/search_results.rb"
 class FacultySearch
   def initialize(solr_url)
     @solr = Solr::Solr.new(solr_url)
-    @solr_response = nil
   end
 
   def search(search_term)
