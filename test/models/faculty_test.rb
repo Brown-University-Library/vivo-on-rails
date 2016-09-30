@@ -11,4 +11,12 @@ class QueryTest < Minitest::Test
     faculty = Faculty.get_one(id)
     assert_equal "Joseph_Hogan@brown.edu", faculty.email
   end
+
+  def test_to_json
+    id = "jhogansc"
+    id = "bgenberg"
+    faculty = Faculty.get_one(id)
+    json = JSON.pretty_generate(JSON.parse(faculty.to_json))
+    File.write(id+".json", json.to_s)
+  end
 end

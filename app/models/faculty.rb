@@ -45,17 +45,32 @@ class Faculty
     end
   end
 
+  def self.all_uris
+    sparql = <<-END_SPARQL
+      select distinct ?uri
+      where {
+        ?uri ?p core:FacultyMember .
+      }
+      limit 100
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map { |faculty| faculty[:uri] }
+  end
+
   def self.get_one(id)
+    uri = "#{URI_INDIVIDUAL}/#{id}"
     sparql = <<-END_SPARQL
       select ?p ?o
       where
       {
-        <#{URI_INDIVIDUAL}/#{id}> ?p ?o .
+        <#{uri}> ?p ?o .
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     faculty = query.to_object(FacultyItem)
+    faculty.uri = uri
     faculty.thumbnail = get_image(id)
     faculty.contributor_to = get_contributor_to(id)
     faculty.education = get_education(id)

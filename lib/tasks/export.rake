@@ -1,3 +1,5 @@
+# These tasks are used to export data from our live Fuseki
+# endpoint to files that we can import in our test environments.
 require "./app/models/export.rb"
 namespace :vivo do
   desc "Export information about some faculty members"
@@ -14,6 +16,7 @@ namespace :vivo do
     file.close()
   end
 
+  desc "Export information about a particular faculty member"
   task :export_one do
     # id = "jhogansc"
     id = "gpalomak"
