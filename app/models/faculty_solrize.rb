@@ -14,9 +14,13 @@ class FacultySolrize
   end
 
   def add_one(id)
-    faculty = Faculty.get_one(id)
-    json = JSON.pretty_generate(JSON.parse(faculty.to_json))
+    json = get_json(id)
     solr = Solr::Solr.new(@solr_url)
     solr.update(json)
+  end
+
+  def get_json(id)
+    faculty = Faculty.get_one(id)
+    JSON.pretty_generate(JSON.parse(faculty.to_json))
   end
 end

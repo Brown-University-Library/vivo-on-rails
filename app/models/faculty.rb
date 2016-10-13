@@ -4,6 +4,7 @@ require "./app/models/faculty_item.rb"
 require "./app/models/contributor_to_item.rb"
 require "./app/models/training_item.rb"
 require "./app/models/collaborator_item.rb"
+require "./app/models/affiliation_item.rb"
 class Faculty
 
   URI_FACULTY = "http://vivoweb.org/ontology/core#FacultyMember"
@@ -99,6 +100,7 @@ class Faculty
     faculty.education = get_education(id)
     faculty.teacher_for = get_teacher_for(id)
     faculty.collaborators = get_collaborators(id)
+    faculty.affiliations = get_affiliations(id)
     faculty
   end
 
@@ -195,6 +197,22 @@ class Faculty
     uniq_contributions.map do |row|
       ContributorToItem.new(row[:c], row[:authorList], row[:title],
         row[:volume], row[:issue], row[:date], row[:pages], row[:published_in])
+    end
+  end
+
+  def self.get_affiliations(id)
+    sparql = <<-END_SPARQL
+      select ?a ?label
+      where
+      {
+        <#{URI_INDIVIDUAL}/#{id}> brown:hasAffiliation ?a .
+        ?a rdfs:label ?label .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map do |row|
+      AffiliationItem.new(row[:a], row[:label])
     end
   end
 end

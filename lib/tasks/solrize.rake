@@ -9,8 +9,16 @@ namespace :vivo do
   desc "Send to Solr information about one faculty member"
   task :solrize_one do
     solr = FacultySolrize.new(solr_url)
-    id = "cxbauer"
+    id = "lbestock"
     solr.add_one(id)
+  end
+
+  desc "Outputs the JSON that would be solrized"
+  task :solrize_get_json do
+    solr = FacultySolrize.new(solr_url)
+    id = "lbestock"
+    id = "tflaniga"
+    puts solr.get_json(id)
   end
 
   desc "Delete all data from Solr"
