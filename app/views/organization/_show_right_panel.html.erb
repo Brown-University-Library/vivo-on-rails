@@ -2,9 +2,8 @@
   <section id="individual-info" role="region">
     <header>
       <h2 class="vcard foaf-person hidden-xs"><% "xxx" %></h2>
-      <h3><%= "@faculty.title" %></h3>
-      <h4><%= "@faculty.org_label" %></h4>
-      <p><%= "@faculty.overview.html_safe" %></p>
+      <h3><%= @organization.name %></h3>
+      <p><%= @organization.overview.html_safe %></p>
     </header>
   </section>
 
@@ -24,7 +23,7 @@
     <!-- tabs content -->
     <div class="col-md-12 person-container">
       <div class="tab-content" id="individualNavTabsContent">
-        <h1>content goes here</h1>
+        <h1>...</h1>
       </div>
     </div>
   </div>
