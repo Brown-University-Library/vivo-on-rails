@@ -7,26 +7,6 @@ require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
 class Faculty
 
-  URI_FACULTY = "http://vivoweb.org/ontology/core#FacultyMember"
-  URI_TITLE = "http://vivoweb.org/ontology/core#preferredTitle"
-  URI_LABEL = "http://www.w3.org/2000/01/rdf-schema#label"
-  URI_THUMBNAIL = "http://vitro.mannlib.cornell.edu/ns/vitro/public#mainImage"
-  URI_THUMBNAIL_LOC = "http://vitro.mannlib.cornell.edu/ns/vitro/public#downloadLocation"
-  URI_INDIVIDUAL = "http://vivo.brown.edu/individual"
-  URI_EDUCATION_TRAINING = "http://vivoweb.org/ontology/core#educationalTraining"
-  URI_TRAINING_ORG = "http://vivoweb.org/ontology/core#trainingAtOrganization"
-  URI_DEGREE_DATE = "http://vivo.brown.edu/ontology/vivo-brown/degreeDate"
-  URI_TEACHER_FOR = "http://vivo.brown.edu/ontology/vivo-brown/teacherFor"
-  URI_HAS_COLLABORATOR = "http://vivoweb.org/ontology/core#hasCollaborator"
-  URI_HAS_CONTRIBUTOR = "http://vivo.brown.edu/ontology/citation#hasContributor"
-  URI_CONTRIBUTOR_TO = "http://vivo.brown.edu/ontology/citation#contributorTo"
-  URI_CIT_VOLUME = "http://vivo.brown.edu/ontology/citation#volume"
-  URI_CIT_ISSUE = "http://vivo.brown.edu/ontology/citation#issue"
-  URI_CIT_DATE = "http://vivo.brown.edu/ontology/citation#date"
-  URI_CIT_PAGES = "http://vivo.brown.edu/ontology/citation#pages"
-  URI_CIT_AUTHOR_LIST = "http://vivo.brown.edu/ontology/citation#authorList"
-  URI_CIT_PUB_IN = "http://vivo.brown.edu/ontology/citation#publishedIn"
-
   def self.all
     sparql = <<-END_SPARQL
       select distinct ?s ?label ?title ?image
@@ -83,18 +63,33 @@ class Faculty
   end
 
   def self.get_one(id)
-    uri = "#{URI_INDIVIDUAL}/#{id}"
     sparql = <<-END_SPARQL
-      select ?p ?o
+      select ?uri ?overview ?research_overview ?research_statement
+        ?scholarly_work ?email ?org_label ?label ?title ?awards
+        ?funded_research ?teaching_overview ?affiliations_text
       where
       {
-        <#{uri}> ?p ?o .
+        bind(individual:#{id} as ?uri) .
+        optional { ?uri core:overview ?overview . }
+        optional { ?uri core:researchOverview ?research_overview . }
+        optional { ?uri brown:researchStatement ?research_statement . }
+        optional { ?uri brown:scholarlyWork ?scholarly_work . }
+        optional { ?uri core:primaryEmail ?email . }
+        optional { ?uri brown:primaryOrgLabel ?org_label . }
+        optional { ?uri rdfs:label ?label . }
+        optional { ?uri core:preferredTitle ?title . }
+        optional { ?uri brown:awardsAndHonors ?awards . }
+        optional { ?uri brown:fundedResearch ?funded_research . }
+        optional { ?uri core:teachingOverview ?teaching_overview . }
+        optional { ?uri brown:affiliations ?affiliations_text . }
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
-    faculty = query.to_object(FacultyItem)
-    faculty.uri = uri
+    result = query.results.first
+    return nil if result == nil
+    # TODO: How to handle if we get more than one
+    faculty = FacultyItem.new(result)
     faculty.thumbnail = get_image(id)
     faculty.contributor_to = get_contributor_to(id)
     faculty.education = get_education(id)
@@ -108,8 +103,8 @@ class Faculty
     sparql = <<-END_SPARQL
       select ?image
       where {
-        <#{URI_INDIVIDUAL}/#{id}> <#{URI_THUMBNAIL}> ?thumbnail .
-        ?thumbnail <#{URI_THUMBNAIL_LOC}> ?image .
+        individual:#{id} vitro:mainImage ?thumbnail .
+        ?thumbnail vitro:downloadLocation ?image .
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -129,11 +124,11 @@ class Faculty
       select ?school_uri ?date ?degree ?school_name
       where
       {
-        <#{URI_INDIVIDUAL}/#{id}> <#{URI_EDUCATION_TRAINING}> ?t .
-        ?t <#{URI_TRAINING_ORG}> ?school_uri .
-        ?t <#{URI_DEGREE_DATE}> ?date .
-        ?t <#{URI_LABEL}> ?degree .
-        ?school_uri <#{URI_LABEL}> ?school_name .
+        individual:#{id} core:educationalTraining ?t .
+        ?t core:trainingAtOrganization ?school_uri .
+        ?t brown:degreeDate ?date .
+        ?t rdfs:label ?degree .
+        ?school_uri rdfs:label ?school_name .
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -148,8 +143,8 @@ class Faculty
       select ?class_name
       where
       {
-        <#{URI_INDIVIDUAL}/#{id}> <#{URI_TEACHER_FOR}> ?t .
-        ?t <#{URI_LABEL}> ?class_name .
+        individual:#{id} brown:teacherFor ?t .
+        ?t rdfs:label ?class_name .
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -162,9 +157,9 @@ class Faculty
       select ?c ?label ?title
       where
       {
-        <#{URI_INDIVIDUAL}/#{id}> <#{URI_HAS_COLLABORATOR}> ?c .
-        ?c <#{URI_TITLE}> ?title .
-        ?c <#{URI_LABEL}> ?label .
+        individual:#{id} core:hasCollaborator ?c .
+        ?c core:preferredTitle ?title .
+        ?c rdfs:label ?label .
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -178,15 +173,15 @@ class Faculty
     sparql = <<-END_SPARQL
       select ?c ?volume ?issue ?date ?pages ?authorList ?publishedIn ?title
       where {
-         <#{URI_INDIVIDUAL}/#{id}> <#{URI_CONTRIBUTOR_TO}> ?c .
-         ?c <#{URI_HAS_CONTRIBUTOR}> <#{URI_INDIVIDUAL}/#{id}> .
-         ?c <#{URI_CIT_VOLUME}> ?volume .
-         ?c <#{URI_CIT_ISSUE}> ?issue .
-         ?c <#{URI_CIT_DATE}> ?date .
-         ?c <#{URI_CIT_PAGES}> ?pages .
-         ?c <#{URI_CIT_AUTHOR_LIST}> ?authorList .
-         ?c <#{URI_CIT_PUB_IN}> ?publishedIn .
-         ?c <#{URI_LABEL}> ?title .
+         individual:#{id} citation:contributorTo ?c .
+         ?c citation:hasContributor individual:#{id} .
+         ?c citation:volume ?volume .
+         ?c citation:issue ?issue .
+         ?c citation:date ?date .
+         ?c citation:pages ?pages .
+         ?c citation:authorList ?authorList .
+         ?c citation:publishedIn ?publishedIn .
+         ?c rdfs:label ?title .
        }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -205,7 +200,7 @@ class Faculty
       select ?a ?label
       where
       {
-        <#{URI_INDIVIDUAL}/#{id}> brown:hasAffiliation ?a .
+        individual:#{id} brown:hasAffiliation ?a .
         ?a rdfs:label ?label .
       }
     END_SPARQL

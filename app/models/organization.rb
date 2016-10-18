@@ -11,8 +11,8 @@ class Organization
       where {
         bind(individual:#{id} as ?uri) .
         ?uri rdf:type foaf01:Organization .
-        optional{ ?uri rdfs:label ?name .}
-        optional{ ?uri core:overview ?overview .}
+        optional { ?uri rdfs:label ?name . }
+        optional { ?uri core:overview ?overview . }
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
