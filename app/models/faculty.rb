@@ -115,13 +115,6 @@ class Faculty
     query.to_value
   end
 
-  def self.get_value(s_uri, p_uri)
-    sparql = "select ?o where { <#{s_uri}> <#{p_uri}> ?o . }"
-    fuseki_url = ENV["FUSEKI_URL"]
-    query = Sparql::Query.new(fuseki_url, sparql)
-    query.to_value
-  end
-
   def self.get_education(id)
     sparql = <<-END_SPARQL
       select ?school_uri ?date ?degree ?school_name

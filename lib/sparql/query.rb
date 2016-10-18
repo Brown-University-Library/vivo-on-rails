@@ -14,13 +14,13 @@ module Sparql
     end
 
     def execute()
-      # puts "-- QUERY"
-      # puts @prefixes_ttl + @query
-      # puts "--"
+      puts "-- QUERY"
+      puts @prefixes_ttl + @query
+      puts "--"
       query_with_prefixes = (@prefixes_ttl + @query).gsub(/\n/, ' ')
       query_escaped = CGI.escape(query_with_prefixes)
       url = "#{@fuseki_url}?query=#{query_escaped}&output=json&stylesheet="
-      # Do we need to use HTTP POST to support (very) large queries?
+      # TODO: Do we need to use HTTP POST to support (very) large queries?
       @raw_response = HttpJson.get(url)
       @raw_results = @raw_response["results"]["bindings"]
     end
@@ -63,6 +63,8 @@ module Sparql
       end
     end
 
+    # Returns the first value in the first element.
+    # We assume the client expects a single value.
     def to_value
       return nil if results.count == 0
       results.first.values.first
@@ -90,6 +92,8 @@ module Sparql
     # that receives a string with the predicate and returns
     # the name of the attribute in klass that is associated
     # with it.
+    #
+    # THIS IS NOT USED ANY MORE.
     def to_object(klass)
       if klass.methods.include?(:field_for_predicate) == false
         raise "Klass must provide field_for_predicate() method"
