@@ -27,5 +27,8 @@ module Vivoview
       raise "No FUSEKI_URL was indicated in the environment"
     end
 
+    if !ENV["SOLR_URL"]
+      raise "No SOLR_URL was indicated in the environment"
+    end
   end
 end

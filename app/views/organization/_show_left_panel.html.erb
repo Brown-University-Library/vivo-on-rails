@@ -3,19 +3,11 @@
     <section class="share-contact" role="region">
       <div id="photo-wrapper">
           <a href="" title="Individual photo">
-              <img class="img-circle" src="path to image goes here %>" alt="name of org goes here" width="190">
+              <img class="xxx_img-circle"
+                src="<%= @organization.thumbnail %>"
+                alt="<%= @organization.name %>"
+                width="190">
           </a>
-      </div>
-      <h2 class="hidden-sm hidden-md hidden-lg">
-          <%= "Name of Org Goes Here" %>
-      </h2>
-
-      <div class="emailsContainer">
-        <h4>
-          <a href="mailto:xxx %>">
-            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-          </a>
-        </h4>
       </div>
     </section>
   </section>

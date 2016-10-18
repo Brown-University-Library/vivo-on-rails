@@ -5,6 +5,16 @@
       <h3><%= @faculty.title %></h3>
       <h4><%= @faculty.org_label %></h4>
       <p><%= @faculty.overview.html_safe %></p>
+      <% if @faculty.affiliations.count > 0 %>
+        <h4>Brown Affiliations</h4>
+        <% @faculty.affiliations.each do |a| %>
+          <a href="<%= organization_show_url(a.id) %>"
+            title="<%= organization_show_url(a.id) %>">
+              <%= a.name %>
+          </a>
+          &nbsp;|&nbsp;
+        <% end %>
+      <% end %>
     </header>
   </section>
 

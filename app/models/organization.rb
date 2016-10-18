@@ -21,5 +21,20 @@ class Organization
     return nil if result == nil
     # What should we do if we get more than one?
     organization = OrganizationItem.new(result[:uri], result[:name], result[:overview])
+    organization.thumbnail = get_image(id)
+    organization
+  end
+
+  def self.get_image(id)
+    sparql = <<-END_SPARQL
+      select ?image
+      where {
+        individual:#{id} vitro:mainImage ?thumbnail .
+        ?thumbnail vitro:downloadLocation ?image .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.to_value
   end
 end
