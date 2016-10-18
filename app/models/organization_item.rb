@@ -1,5 +1,5 @@
 class OrganizationItem
-  attr_accessor :uri, :name, :overview, :thumbnail
+  attr_accessor :uri, :name, :overview, :thumbnail, :people
   # TODO: :people, :parent
 
   def initialize(uri, name, overview)
@@ -7,5 +7,6 @@ class OrganizationItem
     @name = name || ""
     @overview = overview || ""
     @thumbnail = ""
+    @people = []
   end
 end

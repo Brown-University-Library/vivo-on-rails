@@ -19,7 +19,7 @@ namespace :vivo do
   desc "Export information about a particular faculty member"
   task :export_one do
     # id = "jhogansc"
-    id = "lbestock"
+    id = "ldepuydt"
     uri = "http://vivo.brown.edu/individual/#{id}"
     triples = Export.faculty_one(uri)
     text = triples.join(" . \n") + " . \n"

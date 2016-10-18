@@ -1,7 +1,8 @@
 require "minitest/autorun"
 require "byebug"
 require "./app/models/faculty.rb"
-class QueryTest < Minitest::Test
+
+class FacultyTest < Minitest::Test
   def test_all
     assert_equal 100, Faculty.all.count
   end
