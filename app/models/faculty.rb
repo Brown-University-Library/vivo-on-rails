@@ -9,12 +9,12 @@ class Faculty
 
   def self.all
     sparql = <<-END_SPARQL
-      select distinct ?s ?label ?title ?image
+      select distinct ?uri ?label ?title ?image
       where {
-        ?s ?p core:FacultyMember .
-        ?s rdfs:label ?label .
-        ?s core:preferredTitle ?title .
-        ?s vitro:mainImage ?thumbnail .
+        ?uri ?p core:FacultyMember .
+        ?uri rdfs:label ?label .
+        ?uri core:preferredTitle ?title .
+        ?uri vitro:mainImage ?thumbnail .
         optional { ?thumbnail vitro:downloadLocation ?image . }
       }
       limit 100
@@ -22,7 +22,7 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map do |row|
-      FacultyListItem.new(row[:s], row[:label], row[:title], row[:image])
+      FacultyListItem.new(row)
     end
   end
 
@@ -30,7 +30,7 @@ class Faculty
     sparql = <<-END_SPARQL
       select distinct ?uri
       where {
-        ?uri ?p core:FacultyMember .
+        ?uri rdf:type core:FacultyMember .
       }
       limit 100
     END_SPARQL
@@ -44,19 +44,22 @@ class Faculty
     uris.each do |uri|
       subject = "<#{uri}>"
       sparql = <<-END_SPARQL
-        select distinct ?subject ?label ?title ?image
+        select distinct ?uri ?label ?title ?image
         where {
-          #{subject} ?p core:FacultyMember .
-          #{subject} rdfs:label ?label .
-          #{subject} core:preferredTitle ?title .
-          #{subject} vitro:mainImage ?thumbnail .
-          optional { ?thumbnail vitro:downloadLocation ?image . }
+          bind(<#{uri}> as ?uri) .
+          ?uri ?p core:FacultyMember .
+          ?uri rdfs:label ?label .
+          optional { ?uri core:preferredTitle ?title . }
+          optional {
+            ?uri vitro:mainImage ?thumbnail .
+            ?thumbnail vitro:downloadLocation ?image .
+          }
         }
       END_SPARQL
       fuseki_url = ENV["FUSEKI_URL"]
       query = Sparql::Query.new(fuseki_url, sparql)
       query.results.each do |row|
-        results << FacultyListItem.new(uri, row[:label], row[:title], row[:image])
+        results << FacultyListItem.new(row)
       end
     end
     results

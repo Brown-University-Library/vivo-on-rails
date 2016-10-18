@@ -8,5 +8,6 @@ class FacultySearchTest < Minitest::Test
     searcher = FacultySearch.new(solr_url)
     search_results = searcher.search("bauer")
     assert_equal 5, search_results.items.count
+    assert_equal true, search_results.items.any? {|i| i.label == "Bauer, Cici"}
   end
 end
