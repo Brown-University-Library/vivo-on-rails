@@ -27,7 +27,8 @@
         <% @organization.people.each do |p| %>
           <p>
             <% if p.id != nil %>
-              <a href="<%= faculty_show_url(p.id) %>"><%= p.label %></a>, <%= p.title %>
+              <a href="<%= faculty_show_url(p.id) %>"><%= p.label %></a>,
+              <%= p.specific_position %>
             <% end %>
           </p>
         <% end %>

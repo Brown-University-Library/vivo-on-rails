@@ -1,7 +1,7 @@
-<%= render "index_nav" %>
+<%= render "results_nav" %>
 
 <div class="container-fluid">
-  <%= render "index_adv_search" %>
+  <%= render "results_adv_search" %>
 
     <div class="row">
         <div class="col-md-10 col-md-push-2">
@@ -30,7 +30,11 @@
                 <% @faculty_list.each do |r| %>
                   <div class="clearfix visible-sm-block"></div>
                   <div class="clearfix visible-xs-block"></div>
-                  <%= render "index_researcher", researcher: r %>
+                  <% if r.class.to_s == "FacultyListItem" %>
+                    <%= render "results_researcher", researcher: r %>
+                  <% else %>
+                    <%= render "results_org", researcher: r %>
+                  <% end %>
                 <% end %>
             </div>
 
@@ -44,6 +48,6 @@
                 </ul>
             </div>
         </div>
-        <%= render "index_facets" %>
+        <%= render "results_facets" %>
     </div>
 </div>
