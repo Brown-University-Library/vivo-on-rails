@@ -1,5 +1,5 @@
 class FacultyItem
-  attr_accessor :uri, :overview, :email, :org_label, :label,
+  attr_accessor :record_type, :uri, :overview, :email, :org_label, :label,
     :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
@@ -11,6 +11,7 @@ class FacultyItem
   end
 
   def init_defaults()
+    @record_type = "PEOPLE"
     @affiliations_text = ""
     @affiliations = []
     @awards = ""

@@ -6,7 +6,11 @@ module Solr
     end
 
     def search(search_term)
-      query_string = "?fl=uri&indent=on&q=#{search_term}&wt=json"
+      query_string = "fl=uri,record_type"
+      query_string += "&q=#{search_term}"
+      query_string += "&facet=on&facet.field=record_type&f.record_type.facet.mincount=1"
+      query_string += "&facet_field=affiliations.name&f.affiliations.name.mincount=1"
+      query_string += "&wt=json&indent=on"
       url = "#{@solr_url}/select?#{query_string}"
       get(url)
     end

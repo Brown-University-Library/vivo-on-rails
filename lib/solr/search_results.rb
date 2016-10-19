@@ -17,5 +17,9 @@ module Solr
     def solr_docs
       @solr_response["response"]["docs"]
     end
+
+    def facets
+      @solr_response["facet_counts"]["facet_fields"]
+    end
   end
 end

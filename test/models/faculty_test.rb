@@ -10,7 +10,7 @@ class FacultyTest < Minitest::Test
   def test_all_uris
     uris = Faculty.all_uris
     assert_equal 100, uris.count
-    assert_equal true, uris[0].start_with?("http://vivo.brown.edu/individual")
+    assert uris[0].start_with?("http://vivo.brown.edu/individual")
   end
 
   def test_get_batch
@@ -18,7 +18,7 @@ class FacultyTest < Minitest::Test
     batch = [uris[0], uris[1]]
     faculty = Faculty.get_batch(batch)
     assert_equal 2, faculty.count
-    assert_equal true, faculty.any? {|f| f.uri == uris[1]}
+    assert faculty.any? {|f| f.uri == uris[1]}
   end
 
   def test_one
