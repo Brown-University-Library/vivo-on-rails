@@ -20,3 +20,6 @@
 .env
 .byebug_history
 .DS_Store
+
+# A large file with triples
+some.ttl
