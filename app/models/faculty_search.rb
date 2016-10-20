@@ -7,7 +7,7 @@ class FacultySearch
   end
 
   def search(search_term)
-    search_term = "*" if search_term.empty?
+    search_term = "*" if search_term == nil || search_term.empty?
     solr_response = @solr.search(search_term)
     results = Solr::SearchResults.new(solr_response)
 

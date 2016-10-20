@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'faculty/:id' => 'faculty#show', as: :faculty_show
   get 'faculty/' => 'faculty#index'
 
-  post 'home/search' => 'home#search'
+  get 'home/search' => 'home#search'
   get 'home' => 'home#index'
 
   get 'about' => 'home#about'

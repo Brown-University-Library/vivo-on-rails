@@ -1,44 +1,30 @@
 <div class="col-md-2 col-md-pull-10 hidden-print" id="search-facets">
-
-    <h2 class="sr-only">Refine</h2>
-    <div id="facet-4" class="facet">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="facetLabel">
-                    Organization
-
-                </h3>
-            </div>
-            <!-- panel heading-->
-            <div class="panel-body">
-                <ul class="list-unstyled">
-
-                    <li class="category">
-                        <span class="">
-                            <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;f.Organization%7Corganization=Virginia+Tech">Virginia Tech</a>
-                        </span>
-                        &nbsp;<span class="badge pull-right">
-                            <span class="categoryCount">1</span>
-                        </span>
-                    </li>
-
-                    <li class="category">
-                        <span class="">
-                            <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;f.Organization%7Corganization=Virginia+Polytechnic+Institute+and+State+University">Virginia Polytechnic Institute and State University</a>
-                        </span>
-                        &nbsp;<span class="badge pull-right">
-                            <span class="categoryCount">1</span>
-                        </span>
-                    </li>
-
-                </ul>
-                <button type="button" class="btn btn-link btn-sm search-toggle-more-categories" style="display: none;" data-more="More…" data-less="Less…" data-state="more" title="Show more categories from this facet">
-                    <small class="glyphicon glyphicon-plus"></small>&nbsp;<span>More…</span>
-                </button>
-            </div>
-            <!-- panel-body -->
+  <h2 class="sr-only">Refine</h2>
+  <div id="facet-4" class="facet">
+    <div class="panel panel-default">
+      <% @facets.each do |facet| %>
+        <div class="panel-heading">
+          <h3 class="facetLabel"><%= facet.name %></h3>
         </div>
-        <!-- panel -->
-    </div>
 
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <% facet.values.each do |value| %>
+              <li class="category">
+                  <span class="">
+                  <a href="<%= home_search_url() %>?f.record_type=<%= value.text %>"><%= value.text %></a>
+                  </span>
+                  &nbsp;<span class="badge pull-right">
+                      <span class="categoryCount"><%= value.count %></span>
+                  </span>
+              </li>
+            <% end %>
+          </ul>
+          <button type="button" class="btn btn-link btn-sm search-toggle-more-categories" style="display: none;" data-more="More…" data-less="Less…" data-state="more" title="Show more categories from this facet">
+              <small class="glyphicon glyphicon-plus"></small>&nbsp;<span>More…</span>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
