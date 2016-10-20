@@ -2,18 +2,9 @@
 # endpoint to files that we can import in our test environments.
 require "./app/models/export.rb"
 namespace :vivo do
-  desc "Export information about some faculty members"
-  task :export_some do
-    file = File.new("./some.ttl", "w")
-    count = 100 # randomly pick the first N
-    uris = Export.faculty_uris(count)
-    uris.each do |uri|
-      triples = Export.faculty_one(uri)
-      puts "Wrote #{triples.count} triples for #{uri}"
-      text = triples.join(" . \n") + " . \n"
-      file.write(text)
-    end
-    file.close()
+  desc "Export information about all faculty members"
+  task :export_all do
+    Export.faculty_all("./all.ttl")
   end
 
   desc "Export information about a particular faculty member"

@@ -3,14 +3,29 @@ class Export
   URI_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
   URI_FACULTY = "http://vivoweb.org/ontology/core#FacultyMember"
 
-  def self.faculty(count=10)
-    triples = []
-    Faculty.all_uris.each do |uri|
-      faculty = faculty_one(uri)
-      triples << faculty.flat_map {|i| i}
+  def self.faculty_all(file_name)
+    puts "Fetching uris..."
+    uris = Faculty.all_uris
+    file = File.new(file_name, "w")
+    puts "Exporting triples for #{uris.count} uris..."
+    uris.each_with_index do |uri, i|
+      triples = faculty_one(uri)
+      puts "\t#{i+1}/#{uris.count}\t#{uri.split('/').last} (#{triples.count})"
+      text = triples.join(" . \n") + " . \n"
+      file.write(text)
     end
-    triples
+    file.close()
+    puts "Done"
   end
+
+  # def self.faculty_all()
+  #   triples = []
+  #   Faculty.all_uris.each do |uri|
+  #     faculty = faculty_one(uri)
+  #     triples << faculty.flat_map {|i| i}
+  #   end
+  #   triples
+  # end
 
   def self.faculty_one(uri, depth_limit = 3)
     triples = []

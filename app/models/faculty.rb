@@ -7,6 +7,8 @@ require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
 class Faculty
 
+  MAX_ROW_LIMIT = "limit 100"
+
   def self.all
     sparql = <<-END_SPARQL
       select distinct ?uri ?label ?title ?image
@@ -17,7 +19,7 @@ class Faculty
         ?uri vitro:mainImage ?thumbnail .
         optional { ?thumbnail vitro:downloadLocation ?image . }
       }
-      limit 100
+      #{MAX_ROW_LIMIT}
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
@@ -32,7 +34,7 @@ class Faculty
       where {
         ?uri rdf:type core:FacultyMember .
       }
-      limit 100
+      #{MAX_ROW_LIMIT}
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)

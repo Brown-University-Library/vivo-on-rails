@@ -7,6 +7,8 @@ require "./app/models/organization_item.rb"
 require "./app/models/organization_member_item.rb"
 class Organization
 
+  MAX_ROW_LIMIT = "limit 1000"
+
   def self.all_uris
     # other possible filters are:
     #   ?uri rdf:type brown:BrownThing .
@@ -17,7 +19,7 @@ class Organization
         ?uri rdf:type foaf01:Organization .
         ?uri rdf:type core:Department .
       }
-      limit 100
+      #{MAX_ROW_LIMIT}
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)

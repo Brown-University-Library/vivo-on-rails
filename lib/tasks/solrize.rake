@@ -44,6 +44,9 @@ namespace :vivo do
 
   desc "Delete all data from Solr (faculty and organization)"
   task :solrize_delete_all do
+    if !solr_url.start_with?("http://localhost")
+      abort "NOPE. You can only use this task with your localhost."
+    end
     solr = Solr::Solr.new(solr_url)
     solr.delete_all!()
   end
