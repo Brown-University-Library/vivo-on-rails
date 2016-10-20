@@ -9,19 +9,41 @@ module Solr
       @facets_cache = nil
     end
 
-    # total number documents found in solr
+    # Total number documents found in solr
     # usually larger than solr_docs.count
     def num_found
       @solr_response["response"]["numFound"]
+    rescue
+      0
     end
 
-    # raw solr_docs
+    def page_size
+      @solr_response["responseHeader"]["params"]["rows"].to_i
+    rescue
+      0
+    end
+
+    # Start position for retrieval (used for pagination)
+    def start
+      @solr_response["response"]["start"].to_i
+    rescue
+      0
+    end
+
+    def page
+      return 1 if page_size == 0 # fail safe
+      (start / page_size) + 1
+    end
+
+    # Raw solr_docs
     def solr_docs
       @solr_response["response"]["docs"]
     end
 
+    # Array of FacetFields
     def facets
       @facets_cache ||= begin
+        return [] if @solr_response["facet_counts"] == nil
         cache = []
         solr_facets = @solr_response["facet_counts"]["facet_fields"]
         solr_facets.each do |facet|

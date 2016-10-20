@@ -13,7 +13,7 @@ The CSS styles used on this web site were taken from
 
 
 # Pre-requisites
-You need to have [Solr]http://lucene.apache.org/solr/ and [Fuseki](https://jena.apache.org/index.html) installed and running.
+You need to have [Solr](http://lucene.apache.org/solr/) and [Fuseki](https://jena.apache.org/index.html) installed and running.
 
 ```
 fuseki start
@@ -50,5 +50,5 @@ This is a proof of concept at this point.
 The code at this point is hard-coded for very specific predicates
 that we use at Brown and might not work on your particular VIVO database.
 
-The unit tests (`bundle exec rails vivo:tests` are hard-coded to find very
+The unit tests (`bundle exec rails vivo:tests`) are hard-coded to find very
 specific people/departments so they will very likely fail on your installation.

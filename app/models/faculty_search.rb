@@ -6,9 +6,8 @@ class FacultySearch
     @solr = Solr::Solr.new(solr_url)
   end
 
-  def search(search_term)
-    search_term = "*" if search_term == nil || search_term.empty?
-    solr_response = @solr.search(search_term)
+  def search(params)
+    solr_response = @solr.search(params)
     results = Solr::SearchResults.new(solr_response)
 
     faculty_uris = []

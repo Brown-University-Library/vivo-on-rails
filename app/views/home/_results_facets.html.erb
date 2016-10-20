@@ -12,7 +12,7 @@
             <% facet.values.each do |value| %>
               <li class="category">
                   <span class="">
-                  <a href="<%= home_search_url() %>?f.record_type=<%= value.text %>"><%= value.text %></a>
+                  <a href="<%= home_search_url() + "?" + @search_qs + "&fq=" + facet.to_fq(value.text) %>"><%= value.text %></a>
                   </span>
                   &nbsp;<span class="badge pull-right">
                       <span class="categoryCount"><%= value.count %></span>

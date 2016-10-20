@@ -10,13 +10,16 @@ module Sparql
       @query = query
       @prefixes = prefixes
       @prefixes_ttl = prefixes_to_ttl(prefixes)
+      @verbose = false
       execute()
     end
 
     def execute()
-      puts "-- QUERY"
-      puts @prefixes_ttl + @query
-      puts "--"
+      if @verbose
+        puts "-- QUERY"
+        puts @prefixes_ttl + @query
+        puts "--"
+      end
       query_with_prefixes = (@prefixes_ttl + @query).gsub(/\n/, ' ')
       query_escaped = CGI.escape(query_with_prefixes)
       url = "#{@fuseki_url}?query=#{query_escaped}&output=json&stylesheet="

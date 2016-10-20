@@ -15,6 +15,10 @@ module Solr
       @values = []
     end
 
+    def to_fq(text)
+      "#{@name}:\"#{text}\""
+    end
+
     def add_value(text, count)
       @values << FacetValue.new(text, count)
     end

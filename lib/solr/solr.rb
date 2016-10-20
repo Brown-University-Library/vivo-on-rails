@@ -1,18 +1,29 @@
 require "net/http"
+require "./lib/solr/search_params.rb"
 module Solr
   class Solr
     def initialize(solr_url)
       @solr_url = solr_url
+      @versbose = true
     end
 
-    def search(search_term)
+    def search(params)
       query_string = "fl=uri,record_type"
-      query_string += "&q=#{search_term}"
-      query_string += "&facet=on&facet.field=record_type&f.record_type.facet.mincount=1"
-      query_string += "&facet_field=affiliations.name&f.affiliations.name.mincount=1"
       query_string += "&wt=json&indent=on"
+      query_string += "&" + params.to_solr_query_string()
       url = "#{@solr_url}/select?#{query_string}"
       get(url)
+    end
+
+    # shortcut for search
+    def search_text(terms)
+      facets = ["record_type", "affiliations.name"]
+      params = SearchParams.new(terms, facets)
+      search(params)
+    end
+
+    def start_row(page, page_size)
+      (page - 1) * page_size
     end
 
     def update(json)
@@ -33,9 +44,11 @@ module Solr
 
     private
       def post(url, payload)
-        puts "Solr HTTP POST #{url}"
-        # puts payload
-        # puts "--"
+        if @verbose
+          puts "Solr HTTP POST #{url}"
+          # puts payload
+          # puts "--"
+        end
         uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
         if url.start_with?("https://")
@@ -50,7 +63,9 @@ module Solr
       end
 
       def get(url)
-        puts "Solr HTTP GET #{url}"
+        if @verbose
+          puts "Solr HTTP GET #{url}"
+        end
         uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
         if url.start_with?("https://")
