@@ -1,11 +1,9 @@
 <nav class="navbar navbar-default navbar-static-top navbar-inverse" id="sticky-nav" role="navigation">
     <div class="container">
-        <form class="navbar-form navbar-left" role="search" action="/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple&amp;profile=_default_preview" method="get">
+        <form class="navbar-form navbar-left" role="search" action="<%= home_search_path() %>" method="get">
             <div class="form-group">
                 <input class="form-control" name="q" placeholder="Find an expert..." type="text">
             </div>
-            <input name="collection" value="vivo-lilliput" type="hidden">
-            <input name="form" value="lilliputsimple" type="hidden">
             <button type="submit" class="btn btn-default sympl-search hidden-xs">
                 <span class="glyphicon glyphicon-search" role="submit"></span>
             </button>

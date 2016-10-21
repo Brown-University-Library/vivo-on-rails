@@ -30,8 +30,9 @@ module Solr
       @fq.each do |filter|
         qs += "&fq=#{filter}"
       end
+      # TODO: omit if using defaults
       qs += "&rows=#{@page_size}"
-      qs += "&start=#{start_row()}"
+      qs += "&page=#{@page}"
       qs
     end
 
@@ -68,18 +69,18 @@ module Solr
           params.fq << value
         when "rows"
           params.page_size = value.to_i
-        when "start"
-          qs_start = value.to_i
-        # when "facet.field"
-        #   params.facets << value
+        when "page"
+          params.page = value.to_i
+        # when "start"
+        #   qs_start = value.to_i
         end
       end
-      if qs_start != nil
-        # Do this last to make sure we use the page_size (rows)
-        # indicated in the query string (even it it comes
-        # after the rows parameter within the query string.)
-        params.star_row = qs_start
-      end
+      # if qs_start != nil
+      #   # Do this last to make sure we use the page_size (rows)
+      #   # indicated in the query string (even it it comes
+      #   # after the rows parameter within the query string.)
+      #   params.star_row = qs_start
+      # end
       params
     end
   end

@@ -17,6 +17,12 @@ module Solr
       0
     end
 
+    def num_pages
+      pages = (num_found / page_size).to_i
+      pages +=1 if (num_found % page_size) != 0
+      pages
+    end
+
     def page_size
       @solr_response["responseHeader"]["params"]["rows"].to_i
     rescue
@@ -28,6 +34,10 @@ module Solr
       @solr_response["response"]["start"].to_i
     rescue
       0
+    end
+
+    def end
+      [start + page_size, num_found].min
     end
 
     def page

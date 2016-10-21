@@ -6,18 +6,22 @@
         <div class="col-md-10 col-md-push-2">
             <!-- 1/N results found -->
             <div id="search-result-count" class="text-muted">
-                <span id="search-page-start">1</span>
+                <span id="search-page-start"><%= @start + 1 %></span>
                 -
-                <span id="search-page-end"><%= @num_found %></span>
+                <span id="search-page-end"><%= @end %></span>
                 of
                 <span id="search-total-matching"><%= @num_found %></span>
-                search results for
-                <strong><%= @query %></strong>
+                search results
+                <% if !@query.empty? %>
+                  for <b><%= @query %></b>
+                <% end %>
+                <% @fq.each do |fq| %>
+                  (<%= fq %>)
+                <% end %>
             </div>
 
             <h2 class="visible-print">Results</h2>
-            <p><%= @search_qs %>
-            </p>
+
             <!-- search results -->
             <div class="row">
                 <!--added for single row approach -->
@@ -42,9 +46,12 @@
             <div class="text-center hidden-print">
                 <h2 class="sr-only">Pagination</h2>
                 <ul class="pagination pagination-lg">
-                    <li class="active">
-                        <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=fellow&amp;collection=vivo-lilliput&amp;form=lilliputsimple&amp;start_rank=1">1</a>
-                    </li>
+                    <% (1..@num_pages).each do |page| %>
+                      <% css_class = @page == page ? "active" : "" %>
+                        <li class="<%= css_class %>">
+                            <a href="<%= home_search_url() + "?" + @page_qs + "&page=" + page.to_s %>"><%= page %></a>
+                        </li>
+                    <% end %>
                 </ul>
             </div>
         </div>

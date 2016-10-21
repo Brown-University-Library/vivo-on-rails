@@ -46,15 +46,15 @@ class Faculty
     uris.each do |uri|
       subject = "<#{uri}>"
       sparql = <<-END_SPARQL
-        select distinct ?uri ?label ?title ?image
+        select distinct ?uri ?label ?title ?thumbnail
         where {
           bind(<#{uri}> as ?uri) .
           ?uri ?p core:FacultyMember .
           ?uri rdfs:label ?label .
           optional { ?uri core:preferredTitle ?title . }
           optional {
-            ?uri vitro:mainImage ?thumbnail .
-            ?thumbnail vitro:downloadLocation ?image .
+            ?uri vitro:mainImage ?image .
+            ?image vitro:downloadLocation ?thumbnail .
           }
         }
       END_SPARQL

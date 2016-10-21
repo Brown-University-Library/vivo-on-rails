@@ -44,6 +44,14 @@ bundle exec rake vivo:solrize_org_all
 bundle exec rake vivo:solrize_faculty_all
 ```
 
+# Creating a core in Solr 4.7.x
+cd solr-4.7.2/example/solr/
+mkdir vivo-on-rails
+cd vivo-on-rails
+cp -r ../collection1/conf/ conf/
+curl "http://localhost:8983/solr/admin/cores?action=CREATE&name=vivo-on-rails&instanceDir=vivo-on-rails"
+
+
 # Caveats
 This is a proof of concept at this point.
 
