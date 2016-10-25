@@ -4,7 +4,8 @@ module Solr
   class Solr
     def initialize(solr_url)
       @solr_url = solr_url
-      @versbose = true
+      @verbose = ENV["SOLR_VERBOSE"] == "true"
+      @logger = Rails::logger
     end
 
     def search(params)
@@ -56,11 +57,7 @@ module Solr
 
     private
       def post(url, payload)
-        if @verbose
-          puts "Solr HTTP POST #{url}"
-          # puts payload
-          # puts "--"
-        end
+        log_msg("Solr HTTP POST #{url}")
         uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
         if url.start_with?("https://")
@@ -75,9 +72,7 @@ module Solr
       end
 
       def get(url)
-        if @verbose
-          puts "Solr HTTP GET #{url}"
-        end
+        log_msg("Solr HTTP GET #{url}")
         uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
         if url.start_with?("https://")
@@ -88,6 +83,15 @@ module Solr
         request["Content-Type"] = "application/json"
         response = http.request(request)
         JSON.parse(response.body)
+      end
+
+      def log_msg(msg)
+        return if @verbose == false
+        if @logger
+          @logger.info msg
+        else
+          puts msg
+        end
       end
   end
 end
