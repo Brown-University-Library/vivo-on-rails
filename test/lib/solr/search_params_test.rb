@@ -19,7 +19,7 @@ class SearchParamsTest < Minitest::Test
     qs = params.to_user_query_string
     assert qs.include?("q=hello")
     assert qs.include?("rows=10")
-    assert qs.include?("start=0")
+    assert qs.include?("page=1")
 
     # From query string to params
     params2 = Solr::SearchParams.from_query_string(qs, facets)
@@ -35,7 +35,7 @@ class SearchParamsTest < Minitest::Test
     qs = params2.to_user_query_string
     assert qs.include?("q=hello")
     assert qs.include?("rows=3")
-    assert qs.include?("start=3")
+    assert qs.include?("page=2")
   end
 
   def test_to_solr_query_string
