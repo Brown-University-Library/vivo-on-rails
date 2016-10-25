@@ -3,20 +3,26 @@ require "./lib/solr/solr.rb"
 class OrganizationSolrize
   def initialize(solr_url)
     @solr_url = solr_url
+    @solr = Solr::Solr.new(@solr_url)
   end
 
   def add_all()
     uris = Organization.all_uris
-    uris.each do |uri|
+    uris.each_with_index do |uri, i|
       id = uri.split("/").last
-      add_one(id)
+      json = get_json(id)
+      @solr.update_fast(json)
+      if ((i+1) % 100) == 0
+        @solr.commit
+        puts "...#{i+1}"
+      end
     end
+    @solr.commit()
   end
 
   def add_one(id)
     json = get_json(id)
-    solr = Solr::Solr.new(@solr_url)
-    solr.update(json)
+    @solr.update(json)
   end
 
   def get_json(id)

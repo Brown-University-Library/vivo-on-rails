@@ -33,6 +33,13 @@ module Solr
       [r1, r2]
     end
 
+    def update_fast(json)
+      url = @solr_url + "/update/json/docs"
+      r1 = post(url, json)
+      # r2 = commit()
+      [r1, nil]
+    end
+
     def delete_all!()
       url = @solr_url + "/update"
       payload = "<delete><query>*:*</query></delete>"
@@ -40,6 +47,11 @@ module Solr
       r1 = post(url, payload)
       r2 = commit()
       [r1, r2]
+    end
+
+    def commit()
+      commit_url = @solr_url + "/update?commit=true"
+      get(commit_url)
     end
 
     private
@@ -76,11 +88,6 @@ module Solr
         request["Content-Type"] = "application/json"
         response = http.request(request)
         JSON.parse(response.body)
-      end
-
-      def commit()
-        commit_url = @solr_url + "/update?commit=true"
-        get(commit_url)
       end
   end
 end

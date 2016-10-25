@@ -1,4 +1,4 @@
-require "CGI"
+require "cgi"
 class HomeController < ApplicationController
   def index
   end
