@@ -7,7 +7,7 @@ require "./app/models/organization_item.rb"
 require "./app/models/organization_member_item.rb"
 class Organization
 
-  MAX_ROW_LIMIT = "limit 1000"
+  MAX_ROW_LIMIT = "limit 10000"
 
   def self.all_uris
     # other possible filters are:

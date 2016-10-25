@@ -7,7 +7,7 @@ require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
 class Faculty
 
-  MAX_ROW_LIMIT = "limit 1000"
+  MAX_ROW_LIMIT = "limit 10000"
 
   def self.all
     sparql = <<-END_SPARQL
