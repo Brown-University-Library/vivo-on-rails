@@ -1,9 +1,16 @@
 class OrganizationItem
   attr_accessor :record_type, :uri, :name, :overview, :thumbnail, :people
+  attr_reader :id
 
   def initialize(values)
     init_defaults()
     set_values(values)
+    @id = uri
+  end
+
+  def vivo_id
+    return "" if @id == nil
+    @id.split("/").last
   end
 
   def init_defaults()
@@ -15,10 +22,10 @@ class OrganizationItem
     @people = []
   end
 
-  def id
-    return "" if uri == nil
-    uri.split("/").last
-  end
+  # def id
+  #   return "" if uri == nil
+  #   uri.split("/").last
+  # end
 
   def set_values(hash)
     return if hash == nil

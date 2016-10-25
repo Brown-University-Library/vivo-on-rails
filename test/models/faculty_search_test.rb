@@ -60,6 +60,6 @@ class FacultySearchTest < Minitest::Test
     params = Solr::SearchParams.new("Bauer")
     search_results = searcher.search(params)
     assert_equal 5, search_results.items.count
-    assert search_results.items.any? {|i| i.label == "Bauer, Cici"}
+    assert search_results.items.any? {|i| i.name == "Bauer, Cici"}
   end
 end

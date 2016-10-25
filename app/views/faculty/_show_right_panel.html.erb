@@ -1,15 +1,15 @@
 <div class="col-md-9 col-sm-8 col-xs-12">
   <section id="individual-info" role="region">
     <header>
-      <h2 class="vcard foaf-person hidden-xs"><%= @faculty.label %></h2>
+      <h2 class="vcard foaf-person hidden-xs"><%= @faculty.name %></h2>
       <h3><%= @faculty.title %></h3>
       <h4><%= @faculty.org_label %></h4>
       <p><%= @faculty.overview.html_safe %></p>
       <% if @faculty.affiliations.count > 0 %>
         <h4>Brown Affiliations</h4>
         <% @faculty.affiliations.each do |a| %>
-          <a href="<%= organization_show_url(a.id) %>"
-            title="<%= organization_show_url(a.id) %>">
+          <a href="<%= organization_show_url(a.vivo_id) %>"
+            title="<%= organization_show_url(a.vivo_id) %>">
               <%= a.name %>
           </a>
           &nbsp;|&nbsp;

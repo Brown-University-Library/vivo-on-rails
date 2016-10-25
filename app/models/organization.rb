@@ -66,16 +66,16 @@ class Organization
     return nil if result == nil
     # What should we do if we get more than one?
     organization = OrganizationItem.new(result)
-    organization.thumbnail = get_image(id)
-    organization.people = get_people(id)
+    organization.thumbnail = get_image(result[:uri])
+    organization.people = get_people(result[:uri])
     organization
   end
 
-  def self.get_image(id)
+  def self.get_image(uri)
     sparql = <<-END_SPARQL
       select ?image
       where {
-        individual:#{id} vitro:mainImage ?thumbnail .
+        <#{uri}> vitro:mainImage ?thumbnail .
         ?thumbnail vitro:downloadLocation ?image .
       }
     END_SPARQL
@@ -84,15 +84,16 @@ class Organization
     query.to_value
   end
 
-  def self.get_people(id)
+  def self.get_people(uri)
     # `fis_label` is the very specific label for person in the department
     # (e.g. "Associate Professor of Pathology and Laboratory Medicine")
     # where as `pos_label` is the general categorization for the position
     # (e.g. "Faculty Position")
     sparql = <<-END_SPARQL
-      select ?fis_label ?pos_label ?person_label ?person ?pos ?fis
+      select ?uri ?fis_label ?pos_label ?person_label ?person ?pos ?fis
       where {
-        individual:#{id} core:organizationForPosition ?fis .
+        bind(<#{uri}> as ?uri) .
+        ?uri core:organizationForPosition ?fis .
         ?fis <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?pos .
         ?fis rdfs:label ?fis_label .
         ?pos rdfs:label ?pos_label .
@@ -107,9 +108,7 @@ class Organization
     people = query.results.map do |row|
       item = OrganizationMemberItem.new()
       item.uri = row[:person]
-      if item.uri
-        item.id = item.uri.split("/").last
-      end
+      item.id = item.uri
       item.label = row[:person_label] || ""
       item.specific_position = row[:fis_label]
       item.general_position = row[:pos_label]

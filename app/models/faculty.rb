@@ -7,14 +7,14 @@ require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
 class Faculty
 
-  MAX_ROW_LIMIT = "limit 100"
+  MAX_ROW_LIMIT = "limit 1000"
 
   def self.all
     sparql = <<-END_SPARQL
-      select distinct ?uri ?label ?title ?image
+      select distinct ?uri ?name ?title ?image
       where {
         ?uri ?p core:FacultyMember .
-        ?uri rdfs:label ?label .
+        ?uri rdfs:label ?name .
         ?uri core:preferredTitle ?title .
         ?uri vitro:mainImage ?thumbnail .
         optional { ?thumbnail vitro:downloadLocation ?image . }
@@ -46,11 +46,11 @@ class Faculty
     uris.each do |uri|
       subject = "<#{uri}>"
       sparql = <<-END_SPARQL
-        select distinct ?uri ?label ?title ?thumbnail
+        select distinct ?uri ?name ?title ?thumbnail
         where {
           bind(<#{uri}> as ?uri) .
           ?uri ?p core:FacultyMember .
-          ?uri rdfs:label ?label .
+          ?uri rdfs:label ?name .
           optional { ?uri core:preferredTitle ?title . }
           optional {
             ?uri vitro:mainImage ?image .
@@ -70,7 +70,7 @@ class Faculty
   def self.get_one(id)
     sparql = <<-END_SPARQL
       select ?uri ?overview ?research_overview ?research_statement
-        ?scholarly_work ?email ?org_label ?label ?title ?awards
+        ?scholarly_work ?email ?org_label ?name ?title ?awards
         ?funded_research ?teaching_overview ?affiliations_text
       where
       {
@@ -81,7 +81,7 @@ class Faculty
         optional { ?uri brown:scholarlyWork ?scholarly_work . }
         optional { ?uri core:primaryEmail ?email . }
         optional { ?uri brown:primaryOrgLabel ?org_label . }
-        optional { ?uri rdfs:label ?label . }
+        optional { ?uri rdfs:label ?name . }
         optional { ?uri core:preferredTitle ?title . }
         optional { ?uri brown:awardsAndHonors ?awards . }
         optional { ?uri brown:fundedResearch ?funded_research . }

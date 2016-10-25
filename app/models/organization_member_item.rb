@@ -2,10 +2,12 @@ class OrganizationMemberItem
   attr_accessor :id, :uri, :label, :general_position, :specific_position
   def initialize(values = nil)
     set_values(values)
-    @id = nil
-    if @uri != nil
-      @id = @uri.split("/").last
-    end
+    @id = @uri
+  end
+
+  def vivo_id
+    return "" if @id == nil
+    @id.split("/").last
   end
 
   def set_values(hash)

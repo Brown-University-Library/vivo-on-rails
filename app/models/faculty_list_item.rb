@@ -1,11 +1,13 @@
 class FacultyListItem
-  attr_accessor :id, :uri, :label, :title, :thumbnail
+  attr_accessor :id, :uri, :name, :title, :thumbnail
   def initialize(values = nil)
     set_values(values)
-    @id = nil 
-    if @uri != nil
-      @id = @uri.split("/").last
-    end
+    @id = @uri
+  end
+
+  def vivo_id
+    return "" if @id == nil
+    @id.split("/").last
   end
 
   def set_values(hash)

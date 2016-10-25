@@ -1,13 +1,15 @@
 class FacultyItem
-  attr_accessor :record_type, :uri, :overview, :email, :org_label, :label,
+  attr_accessor :record_type, :uri, :overview, :email, :org_label, :name,
     :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations
+  attr_reader :id
 
   def initialize(values = nil )
     init_defaults()
     set_values(values)
+    @id = uri
   end
 
   def init_defaults()
@@ -20,7 +22,7 @@ class FacultyItem
     @education = []
     @email = ""
     @funded_research = ""
-    @label = ""
+    @name = ""
     @org_label = ""
     @overview = ""
     @research_overview = ""
