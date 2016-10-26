@@ -74,7 +74,7 @@ module Solr
         request["Content-Type"] = "application/json"
         request.body = payload
         response = http.request(request)
-        log_elapsed(now, "Solr HTTP POST")
+        log_elapsed(start, "Solr HTTP POST")
         JSON.parse(response.body)
       end
 
