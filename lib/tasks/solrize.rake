@@ -1,13 +1,19 @@
 require "./app/models/faculty_solrize.rb"
 require "./app/models/organization_solrize.rb"
 namespace :vivo do
-  desc "Send to Solr information about all faculty members"
+  desc "Sends to Solr information about all faculty members"
   task :solrize_faculty_all do
     solr = FacultySolrize.new(solr_url)
     solr.add_all()
   end
 
-  desc "Send to Solr information about one faculty member"
+  desc "Sends to Solr information about faculty members not already in Solr"
+  task :solrize_faculty_new do
+    solr = FacultySolrize.new(solr_url)
+    solr.add_new()
+  end
+
+  desc "Sends to Solr information about one faculty member"
   task :solrize_faculty_one do
     solr = FacultySolrize.new(solr_url)
     id = "lbestock"
@@ -22,13 +28,13 @@ namespace :vivo do
     puts solr.get_json(id)
   end
 
-  desc "Send to Solr information about all organizations"
+  desc "Sends to Solr information about all organizations"
   task :solrize_org_all do
     solr = OrganizationSolrize.new(solr_url)
     solr.add_all()
   end
 
-  desc "Send to Solr information about one organization"
+  desc "Sends to Solr information about one organization"
   task :solrize_org_one do
     solr = OrganizationSolrize.new(solr_url)
     id = "org-brown-univ-dept57"
@@ -42,7 +48,7 @@ namespace :vivo do
     puts solr.get_json(id)
   end
 
-  desc "Delete all data from Solr (faculty and organization)"
+  desc "Deletes all data from Solr (faculty and organization)"
   task :solrize_delete_all do
     if !solr_url.start_with?("http://localhost")
       abort "NOPE. You can only use this task with your localhost."
