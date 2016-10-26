@@ -1,4 +1,5 @@
 require "cgi"
+require "time"
 require "./lib/sparql/http_json.rb"
 
 module Sparql
@@ -16,12 +17,14 @@ module Sparql
     end
 
     def execute()
-      log_msg "-- QUERY\r\n#{@prefixes_ttl}#{@query}\r\n--"
+      start = DateTime.now
+      log_msg("-- QUERY\r\n#{@prefixes_ttl}#{@query}\r\n--")
       query_with_prefixes = (@prefixes_ttl + @query).gsub(/\n/, ' ')
       query_escaped = CGI.escape(query_with_prefixes)
       url = "#{@fuseki_url}?query=#{query_escaped}&output=json&stylesheet="
       # TODO: Do we need to use HTTP POST to support (very) large queries?
       @raw_response = HttpJson.get(url)
+      log_elapsed(start, "-- QUERY")
       @raw_results = @raw_response["results"]["bindings"]
     end
 
@@ -71,6 +74,14 @@ module Sparql
     end
 
     private
+      def elapsed_ms(start)
+        ((Time.now - start) * 1000).to_i
+      end
+
+      def log_elapsed(start, msg)
+        log_msg("#{msg} took #{elapsed_ms(start)} ms")
+      end
+
       def log_msg(msg)
         return if @verbose == false
         if @logger

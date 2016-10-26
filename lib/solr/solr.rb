@@ -1,4 +1,5 @@
 require "net/http"
+require "time"
 require "./lib/solr/search_params.rb"
 module Solr
   class Solr
@@ -61,6 +62,7 @@ module Solr
 
     private
       def post(url, payload)
+        start = Time.now
         log_msg("Solr HTTP POST #{url}")
         uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
@@ -72,10 +74,12 @@ module Solr
         request["Content-Type"] = "application/json"
         request.body = payload
         response = http.request(request)
+        log_elapsed(now, "Solr HTTP POST")
         JSON.parse(response.body)
       end
 
       def get(url)
+        start = Time.now
         log_msg("Solr HTTP GET #{url}")
         uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
@@ -86,7 +90,16 @@ module Solr
         request = Net::HTTP::Get.new(uri.request_uri)
         request["Content-Type"] = "application/json"
         response = http.request(request)
+        log_elapsed(start, "Solr HTTP GET")
         JSON.parse(response.body)
+      end
+
+      def elapsed_ms(start)
+        ((Time.now - start) * 1000).to_i
+      end
+
+      def log_elapsed(start, msg)
+        log_msg("#{msg} took #{elapsed_ms(start)} ms")
       end
 
       def log_msg(msg)

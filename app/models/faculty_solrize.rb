@@ -1,3 +1,4 @@
+require "cgi"
 require "./app/models/faculty.rb"
 require "./lib/solr/solr.rb"
 require "./lib/solr/search_params.rb"
@@ -29,21 +30,20 @@ class FacultySolrize
     uris = Faculty.all_uris
     puts "Processing #{uris.count} faculty records..."
     uris.each_with_index do |uri, i|
-      params.q = "uri:\"#{uri}\""
+      params.q = "uri:" + CGI::escape('"') + uri + CGI::escape('"')
       solr_response = @solr.search(params)
       results = Solr::SearchResults.new(solr_response)
       if results.num_found == 0
-        # byebug
         id = uri.split("/").last
         json = get_json(id)
-        @solr.update(json)
-        puts "added #{uri}"
+        @solr.update_fast(json)
+        puts "added (#{i+1}) #{uri}"
         if ((i+1) % 100) == 0
           @solr.commit
-          puts "commit...#{i+1}"
+          puts "commit (#{i+1})"
         end
       else
-        puts "skipped #{uri}"
+        puts "skipped (#{i+1})#{uri}"
       end
     end
     @solr.commit()
