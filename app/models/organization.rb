@@ -29,20 +29,25 @@ class Organization
   def self.get_batch(uris)
     results = []
     uris.each do |uri|
+      # BIND(str(?label) as ?name) is to get a single
+      # ?name value even if the label is in more than
+      # one language.
       subject = "<#{uri}>"
       sparql = <<-END_SPARQL
         select distinct ?uri ?name ?overview
         where {
           bind(<#{uri}> as ?uri) .
           ?uri rdf:type core:Department .
-          optional { ?uri rdfs:label ?name . }
+          optional { ?uri rdfs:label ?label .
+              BIND(str(?label) as ?name) .}
           optional { ?uri core:overview ?overview . }
         }
       END_SPARQL
       fuseki_url = ENV["FUSEKI_URL"]
       query = Sparql::Query.new(fuseki_url, sparql)
-      query.results.each do |row|
-        item = OrganizationItem.new(row)
+      if query.results.count > 0
+        # TODO: WARN if more than one
+        item = OrganizationItem.new(query.results.first)
         item.thumbnail = get_image(item.id)
         results << item
       end
