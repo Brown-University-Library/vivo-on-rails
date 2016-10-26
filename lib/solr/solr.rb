@@ -9,7 +9,11 @@ module Solr
     end
 
     def search(params)
-      query_string = "fl=uri,record_type"
+      if params.fl != nil
+        query_string = "fl=#{params.fl.join(",")}"
+      else
+        query_string = ""
+      end
       query_string += "&wt=json&indent=on"
       query_string += "&" + params.to_solr_query_string()
       url = "#{@solr_url}/select?#{query_string}"

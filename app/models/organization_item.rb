@@ -1,10 +1,13 @@
+require "./app/models/model_utils.rb"
 class OrganizationItem
+  include ModelUtils
+
   attr_accessor :record_type, :uri, :name, :overview, :thumbnail, :people
   attr_reader :id
 
   def initialize(values)
     init_defaults()
-    set_values(values)
+    set_values_from_hash(values)
     @id = uri
   end
 
@@ -20,20 +23,5 @@ class OrganizationItem
     @overview = ""
     @thumbnail = ""
     @people = []
-  end
-
-  # def id
-  #   return "" if uri == nil
-  #   uri.split("/").last
-  # end
-
-  def set_values(hash)
-    return if hash == nil
-    hash.each do |key, value|
-      setter = key.to_s + "="
-      if self.respond_to?(setter)
-        self.send(setter, value)
-      end
-    end
   end
 end

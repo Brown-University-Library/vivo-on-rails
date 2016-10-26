@@ -1,7 +1,7 @@
 require "./lib/solr/facet_field.rb"
 module Solr
   class SearchParams
-    attr_accessor :q, :fq, :facets, :page, :page_size
+    attr_accessor :q, :fq, :facets, :page, :page_size, :fl
 
     def initialize(q = "", fq = [], facets = [], page = 1, page_size = 10)
       @q = q
@@ -9,6 +9,7 @@ module Solr
       @facets = facets
       @page = page
       @page_size = page_size
+      @fl = nil
     end
 
     def start_row
@@ -71,16 +72,8 @@ module Solr
           params.page_size = value.to_i
         when "page"
           params.page = value.to_i
-        # when "start"
-        #   qs_start = value.to_i
         end
       end
-      # if qs_start != nil
-      #   # Do this last to make sure we use the page_size (rows)
-      #   # indicated in the query string (even it it comes
-      #   # after the rows parameter within the query string.)
-      #   params.star_row = qs_start
-      # end
       params
     end
   end
