@@ -260,12 +260,15 @@ th {
     border: 1px solid #ddd !important;
   }
 }
-/* TODO: pick them up from https://library.brown.edu/common/fonts/ */
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('/assets/glyphicons-halflings-regular.eot');
-  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff2') format('woff2'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('/vivo/assets/glyphicons-halflings-regular.eot');
+  src: url('/vivo/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('/vivo/assets/glyphicons-halflings-regular.woff2') format('woff2'),
+    url('/vivo/assets/glyphicons-halflings-regular.woff') format('woff'),
+    url('/vivo/assets/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('/vivo/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
