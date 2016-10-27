@@ -11,7 +11,7 @@ module Solr
 
     # Fetches a Solr document by id. Returns the first document found.
     def get(id)
-      query_string = "q=id:\"#{id}\""
+      query_string = "q=id:%22#{id}%22"
       query_string += "&fl=id,text"
       query_string += "&wt=json&indent=on"
       url = "#{@solr_url}/select?#{query_string}"
