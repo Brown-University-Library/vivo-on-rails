@@ -82,4 +82,9 @@ Rails.application.configure do
 
   # Default host for Rails' url_helpers.url_for.
   Rails.application.routes.default_url_options[:host] = ENV["HOST_URL"] || "localhost:3000"
+
+  if ENV["RELATIVE_URL"]
+    # Used by font_url in SCSS files.
+    config.relative_url_root = ENV["RELATIVE_URL"]
+  end
 end
