@@ -1,14 +1,15 @@
+require "./app/models/model_utils.rb"
 class CollaboratorItem
+  include ModelUtils
   attr_accessor :uri, :name, :title
 
-  def initialize(uri, name, title)
-    @uri = uri
-    @name = name
-    @title = title
+  def initialize(values)
+    set_values_from_hash(values)
+    @id = @uri
   end
 
-  def id
-    return "" if @uri == nil
-    uri.split("/").last
+  def short_id
+    return "" if @id == nil
+    @id.split("/").last
   end
 end

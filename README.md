@@ -1,12 +1,6 @@
-# VIVO Viewer
+# VIVO on Rails
 
-This is a proof of concept at creating a Rails application to
-browse through the researcher information stored in a VIVO database
-and a SOLR index.
-
-The application works by querying the SPARQL endpoint that
-VIVO provides to fetch detailed information about people and
-organizations. Searches are performed through Solr.
+This is a proof of concept at creating a Rails application to browse through the researcher information stored in a VIVO database and a SOLR index.
 
 The CSS styles used on this web site were taken from
 [Symplectic's bootstrap template](https://www.digital-science.com/blog/news/introducing-bootstrapped-vivo-symplectic-reimagines-vivo-research-profile-design/)
@@ -35,9 +29,32 @@ You'll need to tweak the values in `.env_sample` to match the URLs where
 Solr and Fuseki are running in your environment.
 
 
+# General Architecture
+This is a Ruby on Rails web site that shows faculty information stored in Solr. All searches and retrieval of information are done against Solr.
+
+The information is assumed to come from a Fuseki
+instance with VIVO information but the site does not interface
+with Fuseki except in a few `rake` tasks to populate the Solr index.
+
+The site assumes that the Solr index has Faculty information stored in a structure like the following:
+
+````
+  {
+    record_type: "FACULTY",
+    uri: "http://vivo.brown.edu/individual/jane_researcher",
+    text: "{string with the JSON representation of the record}"
+    affiliations: ["dept1", "dept2", "deptN"]
+  }
+````
+Organization records follow a similar pattern.
+
+
+Access to Fuseki triple store will be used to perform linked
+data queries and other visualizations.
+
+
 # To populate Solr
-The following `rake` tasks will push to Solr the first 100 faculty
-and first 100 organizations in your VIVO triple store into Solr.
+There are a couple of `rake` tasks that can be used to push to Solr a set of faculty and organizations from your VIVO triple store into Solr.
 
 ```
 bundle exec rake vivo:solrize_org_all
@@ -58,5 +75,4 @@ This is a proof of concept at this point.
 The code at this point is hard-coded for very specific predicates
 that we use at Brown and might not work on your particular VIVO database.
 
-The unit tests (`bundle exec rails vivo:tests`) are hard-coded to find very
-specific people/departments so they will very likely fail on your installation.
+The unit tests (`bundle exec rails vivo:tests`) are hard-coded to find very specific people/departments so they will very likely fail on your installation.

@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     searcher = Search.new(solr_url)
     params = Solr::SearchParams.from_query_string(request.query_string)
     if params.facets.count == 0
-      params.facets = ["record_type", "affiliations.name"]
+      params.facets = ["record_type", "affiliations"]
     end
     search_results = searcher.search(params)
     @fq = pretty_fq(params.fq)

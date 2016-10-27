@@ -1,16 +1,12 @@
+require "./app/models/model_utils.rb"
 class ContributorToItem
+  include ModelUtils
+
   attr_accessor :uri, :authors, :title, :volume, :issue,
     :date, :pages, :published_in
 
-  def initialize(uri, authors, title, volume, issue, date, pages, published_in)
-    @uri = uri
-    @authors = authors
-    @title = title
-    @volume = volume
-    @issue = issue
-    @date = date
-    @pages = pages
-    @published_in = published_in
+  def initialize(values)
+    set_values_from_hash(values)
     @year = nil
     year = date.to_i
     if year >= 1900 && year <= 2200

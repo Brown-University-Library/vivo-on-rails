@@ -8,16 +8,18 @@ class Search
 
   def search(params)
     solr_response = @solr.search(params)
-    params.fl = ["uri", "record_type", "name", "thumbnail"]
+    params.fl = ["id", "record_type", "text"]
     results = Solr::SearchResults.new(solr_response)
     results.solr_docs.each do |doc|
       record_type = (doc["record_type"] || []).first
       case record_type
       when "ORGANIZATION"
-        item = OrganizationItem.new(doc)
+        json = JSON.parse(doc["text"].first)
+        item = OrganizationItem.new(json)
         results.items << item
       when "PEOPLE"
-        item = FacultyListItem.new(doc)
+        json = JSON.parse(doc["text"].first)
+        item = FacultyListItem.new(json)
         results.items << item
       else
         # WTF?

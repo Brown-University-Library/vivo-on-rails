@@ -9,6 +9,16 @@ module Solr
       @logger = Rails::logger
     end
 
+    # Fetches a Solr document by id. Returns the first document found.
+    def get(id)
+      query_string = "q=id:\"#{id}\""
+      query_string += "&fl=id,text"
+      query_string += "&wt=json&indent=on"
+      url = "#{@solr_url}/select?#{query_string}"
+      solr_response = http_get(url)
+      solr_response["response"]["docs"].first
+    end
+
     def search(params)
       if params.fl != nil
         query_string = "fl=#{params.fl.join(",")}"
@@ -18,7 +28,7 @@ module Solr
       query_string += "&wt=json&indent=on"
       query_string += "&" + params.to_solr_query_string()
       url = "#{@solr_url}/select?#{query_string}"
-      get(url)
+      http_get(url)
     end
 
     # shortcut for search
@@ -34,15 +44,16 @@ module Solr
 
     def update(json)
       url = @solr_url + "/update/json/docs"
-      r1 = post(url, json)
+      r1 = http_post(url, json)
       r2 = commit()
       [r1, r2]
     end
 
+    # Saves the document but does not commit it
+    # (it's up to the caller to call commit)
     def update_fast(json)
       url = @solr_url + "/update/json/docs"
-      r1 = post(url, json)
-      # r2 = commit()
+      r1 = http_post(url, json)
       [r1, nil]
     end
 
@@ -50,18 +61,18 @@ module Solr
       url = @solr_url + "/update"
       payload = "<delete><query>*:*</query></delete>"
       payload = '{ "delete" : { "query" : "*:*" } }'
-      r1 = post(url, payload)
+      r1 = http_post(url, payload)
       r2 = commit()
       [r1, r2]
     end
 
     def commit()
       commit_url = @solr_url + "/update?commit=true"
-      get(commit_url)
+      http_get(commit_url)
     end
 
     private
-      def post(url, payload)
+      def http_post(url, payload)
         start = Time.now
         log_msg("Solr HTTP POST #{url}")
         uri = URI.parse(url)
@@ -78,7 +89,7 @@ module Solr
         JSON.parse(response.body)
       end
 
-      def get(url)
+      def http_get(url)
         start = Time.now
         log_msg("Solr HTTP GET #{url}")
         uri = URI.parse(url)

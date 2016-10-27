@@ -2,8 +2,7 @@ require "./app/models/model_utils.rb"
 class OrganizationItem
   include ModelUtils
 
-  attr_accessor :record_type, :uri, :name, :overview, :thumbnail, :people
-  attr_reader :id
+  attr_accessor :id, :record_type, :uri, :name, :overview, :thumbnail, :people
 
   def initialize(values)
     init_defaults()
@@ -24,4 +23,20 @@ class OrganizationItem
     @thumbnail = ""
     @people = []
   end
+
+  def self.from_hash(hash)
+    org = OrganizationItem.new(nil)
+    hash.each do |key, value|
+      getter = key.to_s
+      case getter
+      when "people"
+        org.people = value.map {|v| OrganizationMemberItem.new(v)}
+      else
+        setter = key.to_s + "="
+        org.send(setter, value)
+      end
+    end
+    org
+  end
+
 end

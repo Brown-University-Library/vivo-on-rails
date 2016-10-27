@@ -56,6 +56,19 @@ class Organization
   end
 
   def self.get_one(id)
+    self.get_one_from_solr(id)
+  end
+
+  def self.get_one_from_solr(id)
+    solr_url = ENV["SOLR_URL"]
+    solr = Solr::Solr.new(solr_url)
+    solr_doc = solr.get("http://vivo.brown.edu/individual/#{id}")
+    solr_json = solr_doc["text"].first
+    hash = JSON.parse(solr_json)
+    OrganizationItem.from_hash(hash)
+  end
+
+  def self.get_one_from_fuseki(id)
     sparql = <<-END_SPARQL
       select ?uri ?name ?overview
       where {

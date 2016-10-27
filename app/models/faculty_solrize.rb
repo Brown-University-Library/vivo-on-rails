@@ -7,6 +7,8 @@ class FacultySolrize
   def initialize(solr_url)
     @solr_url = solr_url
     @solr = Solr::Solr.new(@solr_url)
+    #@format = "v1"
+    @format = "v2"
   end
 
   def add_all()
@@ -17,7 +19,7 @@ class FacultySolrize
       json = get_json(id)
       @solr.update(json)
       if ((i+1) % 100) == 0
-        @solr.commit
+        @solr.commit()
         puts "...#{i+1}"
       end
     end
@@ -39,7 +41,7 @@ class FacultySolrize
         @solr.update_fast(json)
         puts "added (#{i+1}) #{uri}"
         if ((i+1) % 100) == 0
-          @solr.commit
+          @solr.commit()
           puts "commit (#{i+1})"
         end
       else
@@ -55,7 +57,19 @@ class FacultySolrize
   end
 
   def get_json(id)
-    faculty = Faculty.get_one(id)
-    JSON.pretty_generate(JSON.parse(faculty.to_json))
+    faculty = Faculty.get_one_from_fuseki(id)
+    if @format == "v1"
+      # JSON for the PORO Faculty.
+      JSON.pretty_generate(JSON.parse(faculty.to_json))
+    else
+      # JSON with a few fields.
+      # Text has the JSON for PORO Faculty.
+      solr_obj = {
+        id: faculty.id,
+        record_type: faculty.record_type,
+        affiliations: faculty.affiliations.map { |a| a.name},
+        text: faculty.to_json}
+      solr_obj.to_json
+    end
   end
 end

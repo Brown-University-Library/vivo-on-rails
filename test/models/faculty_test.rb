@@ -31,10 +31,11 @@ class FacultyTest < Minitest::Test
   #   id = "jhogansc"
   #   id = "bgenberg"
   #   faculty = Faculty.get_one(id)
+  #   byebug
   #   json = JSON.pretty_generate(JSON.parse(faculty.to_json))
   #   # File.write(id+".json", json.to_s)
   # end
-  #
+
 
   # def test_to_json_for_solr4
   #   id = "bgenberg"

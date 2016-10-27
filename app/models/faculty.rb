@@ -1,4 +1,5 @@
 require "./lib/sparql/query.rb"
+require "./lib/solr/solr.rb"
 require "./app/models/faculty_list_item.rb"
 require "./app/models/faculty_item.rb"
 require "./app/models/contributor_to_item.rb"
@@ -68,6 +69,19 @@ class Faculty
   end
 
   def self.get_one(id)
+    self.get_one_from_solr(id)
+  end
+
+  def self.get_one_from_solr(id)
+    solr_url = ENV["SOLR_URL"]
+    solr = Solr::Solr.new(solr_url)
+    solr_doc = solr.get("http://vivo.brown.edu/individual/#{id}")
+    solr_json = solr_doc["text"].first
+    hash = JSON.parse(solr_json)
+    FacultyItem.from_hash(hash)
+  end
+
+  def self.get_one_from_fuseki(id)
     sparql = <<-END_SPARQL
       select ?uri ?overview ?research_overview ?research_statement
         ?scholarly_work ?email ?org_label ?name ?title ?awards
@@ -132,7 +146,7 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map do |row|
-      TrainingItem.new(row[:school_uri], row[:date], row[:degree], row[:school_name])
+      TrainingItem.new(row)
     end
   end
 
@@ -152,34 +166,34 @@ class Faculty
 
   def self.get_collaborators(id)
     sparql = <<-END_SPARQL
-      select ?c ?label ?title
+      select ?uri ?name ?title
       where
       {
-        individual:#{id} core:hasCollaborator ?c .
-        ?c core:preferredTitle ?title .
-        ?c rdfs:label ?label .
+        individual:#{id} core:hasCollaborator ?uri .
+        ?uri core:preferredTitle ?title .
+        ?uri rdfs:label ?name .
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map do |row|
-      CollaboratorItem.new(row[:c], row[:label], row[:title])
+      CollaboratorItem.new(row)
     end
   end
 
   def self.get_contributor_to(id)
     sparql = <<-END_SPARQL
-      select ?c ?volume ?issue ?date ?pages ?authorList ?publishedIn ?title
+      select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title
       where {
-         individual:#{id} citation:contributorTo ?c .
-         ?c citation:hasContributor individual:#{id} .
-         ?c citation:volume ?volume .
-         ?c citation:issue ?issue .
-         ?c citation:date ?date .
-         ?c citation:pages ?pages .
-         ?c citation:authorList ?authorList .
-         ?c citation:publishedIn ?publishedIn .
-         ?c rdfs:label ?title .
+         individual:#{id} citation:contributorTo ?uri .
+         ?uri citation:hasContributor individual:#{id} .
+         ?uri citation:volume ?volume .
+         ?uri citation:issue ?issue .
+         ?uri citation:date ?date .
+         ?uri citation:pages ?pages .
+         ?uri citation:authorList ?authors .
+         ?uri citation:publishedIn ?published_in .
+         ?uri rdfs:label ?title .
        }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -188,24 +202,23 @@ class Faculty
     #       (see what VIVO does to pick the contribuition)
     uniq_contributions = query.results.uniq { |row| row[:c] }
     uniq_contributions.map do |row|
-      ContributorToItem.new(row[:c], row[:authorList], row[:title],
-        row[:volume], row[:issue], row[:date], row[:pages], row[:published_in])
+      ContributorToItem.new(row)
     end
   end
 
   def self.get_affiliations(id)
     sparql = <<-END_SPARQL
-      select ?a ?label
+      select ?uri ?name
       where
       {
-        individual:#{id} brown:hasAffiliation ?a .
-        ?a rdfs:label ?label .
+        individual:#{id} brown:hasAffiliation ?uri .
+        ?uri rdfs:label ?name .
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map do |row|
-      AffiliationItem.new(row[:a], row[:label])
+      AffiliationItem.new(row)
     end
   end
 end
