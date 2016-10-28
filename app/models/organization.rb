@@ -63,7 +63,7 @@ class Organization
     solr_url = ENV["SOLR_URL"]
     solr = Solr::Solr.new(solr_url)
     solr_doc = solr.get("http://vivo.brown.edu/individual/#{id}")
-    solr_json = solr_doc["text"].first
+    solr_json = solr_doc["json_txt"].first
     hash = JSON.parse(solr_json)
     OrganizationItem.from_hash(hash)
   end

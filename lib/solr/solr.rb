@@ -1,6 +1,7 @@
 require "net/http"
 require "time"
 require "./lib/solr/search_params.rb"
+require "./lib/solr/search_results.rb"
 module Solr
   class Solr
     def initialize(solr_url)
@@ -12,11 +13,11 @@ module Solr
     # Fetches a Solr document by id. Returns the first document found.
     def get(id)
       query_string = "q=id:%22#{id}%22"
-      query_string += "&fl=id,text"
+      query_string += "&fl=id,json_txt"
       query_string += "&wt=json&indent=on"
       url = "#{@solr_url}/select?#{query_string}"
       solr_response = http_get(url)
-      solr_response["response"]["docs"].first
+      solr_response.solr_docs.first
     end
 
     def search(params)
@@ -42,28 +43,24 @@ module Solr
       (page - 1) * page_size
     end
 
-    def update(json)
+    def update(json, do_commit = true)
       url = @solr_url + "/update/json/docs"
-      r1 = http_post(url, json)
-      r2 = commit()
-      [r1, r2]
-    end
-
-    # Saves the document but does not commit it
-    # (it's up to the caller to call commit)
-    def update_fast(json)
-      url = @solr_url + "/update/json/docs"
-      r1 = http_post(url, json)
-      [r1, nil]
+      solr_response = http_post(url, json)
+      if solr_response.ok? && do_commit
+        solr_response = commit()
+      end
+      solr_response
     end
 
     def delete_all!()
       url = @solr_url + "/update"
       payload = "<delete><query>*:*</query></delete>"
       payload = '{ "delete" : { "query" : "*:*" } }'
-      r1 = http_post(url, payload)
-      r2 = commit()
-      [r1, r2]
+      solr_response = http_post(url, payload)
+      if solr_response.ok?
+        solr_response = commit()
+      end
+      solr_response
     end
 
     def commit()
@@ -86,7 +83,7 @@ module Solr
         request.body = payload
         response = http.request(request)
         log_elapsed(start, "Solr HTTP POST")
-        JSON.parse(response.body)
+        SearchResults.new(JSON.parse(response.body))
       end
 
       def http_get(url)
@@ -102,7 +99,7 @@ module Solr
         request["Content-Type"] = "application/json"
         response = http.request(request)
         log_elapsed(start, "Solr HTTP GET")
-        JSON.parse(response.body)
+        SearchResults.new(JSON.parse(response.body))
       end
 
       def elapsed_ms(start)

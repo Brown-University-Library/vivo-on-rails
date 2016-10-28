@@ -76,7 +76,7 @@ class Faculty
     solr_url = ENV["SOLR_URL"]
     solr = Solr::Solr.new(solr_url)
     solr_doc = solr.get("http://vivo.brown.edu/individual/#{id}")
-    solr_json = solr_doc["text"].first
+    solr_json = solr_doc["json_txt"].first
     hash = JSON.parse(solr_json)
     FacultyItem.from_hash(hash)
   end
@@ -89,6 +89,7 @@ class Faculty
       where
       {
         bind(individual:#{id} as ?uri) .
+        ?uri rdf:type core:FacultyMember .
         optional { ?uri core:overview ?overview . }
         optional { ?uri core:researchOverview ?research_overview . }
         optional { ?uri brown:researchStatement ?research_statement . }

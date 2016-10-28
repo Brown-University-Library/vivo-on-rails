@@ -1,5 +1,6 @@
 require "./lib/solr/facet_field.rb"
 module Solr
+  # TODO: this should be renamed to SolrResponse
   class SearchResults
     attr_accessor :items
     def initialize(solr_response)
@@ -7,6 +8,23 @@ module Solr
       # client to set this value with custom representation of solr_docs
       @items = []
       @facets_cache = nil
+    end
+
+    def ok?
+      return true if status == 0
+      return true if status >= 200 && status <= 299
+      false
+    end
+
+    def status
+      return -1 if @solr_response["responseHeader"] == nil
+      @solr_response["responseHeader"]["status"]
+    end
+
+    def error_msg
+      return "" if @solr_response["error"] == nil
+      return "" if @solr_response["error"]["msg"] == nil
+      @solr_response["error"]["msg"]
     end
 
     # Total number documents found in solr
