@@ -10,14 +10,18 @@ class Organization
   MAX_ROW_LIMIT = "limit 10000"
 
   def self.all_uris
-    # other possible filters are:
-    #   ?uri rdf:type brown:BrownThing .
-    #   ?uri rdf:type core:AcademicDepartment .
+    # Run the following query to find out other variations
+    # on how we represent organizations:
+    #   select distinct ?type
+    #   where {
+    #     ?uri rdf:type foaf01:Organization .
+    #     ?uri rdf:type ?type
+    #   }
     sparql = <<-END_SPARQL
       select distinct ?uri
       where {
         ?uri rdf:type foaf01:Organization .
-        ?uri rdf:type core:Department .
+        ?uri rdf:type brown:BrownThing .
       }
       #{MAX_ROW_LIMIT}
     END_SPARQL
@@ -37,7 +41,7 @@ class Organization
         select distinct ?uri ?name ?overview
         where {
           bind(<#{uri}> as ?uri) .
-          ?uri rdf:type core:Department .
+          ?uri rdf:type brown:BrownThing .
           optional { ?uri rdfs:label ?label .
               BIND(str(?label) as ?name) .}
           optional { ?uri core:overview ?overview . }
@@ -73,7 +77,7 @@ class Organization
       select ?uri ?name ?overview
       where {
         bind(individual:#{id} as ?uri) .
-        ?uri rdf:type core:Department .
+        ?uri rdf:type brown:BrownThing .
         optional { ?uri rdfs:label ?name . }
         optional { ?uri core:overview ?overview . }
       }
