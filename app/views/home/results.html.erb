@@ -1,4 +1,4 @@
-<%= render "results_nav" %>
+<%= render "search_box" %>
 
 <div class="container-fluid">
 
@@ -42,18 +42,8 @@
                 <% end %>
             </div>
 
-            <!-- pagination -->
-            <div class="text-center hidden-print">
-                <h2 class="sr-only">Pagination</h2>
-                <ul class="pagination pagination-lg">
-                    <% (1..@num_pages).each do |page| %>
-                      <% css_class = @page == page ? "active" : "" %>
-                        <li class="<%= css_class %>">
-                            <a href="<%= home_search_url() + "?" + @page_qs + "&page=" + page.to_s %>"><%= page %></a>
-                        </li>
-                    <% end %>
-                </ul>
-            </div>
+            <%= render "results_pagination" %>
+
         </div>
         <%= render "results_facets" %>
     </div>

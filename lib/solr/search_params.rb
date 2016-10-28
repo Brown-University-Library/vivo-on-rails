@@ -3,7 +3,7 @@ module Solr
   class SearchParams
     attr_accessor :q, :fq, :facets, :page, :page_size, :fl
 
-    def initialize(q = "", fq = [], facets = [], page = 1, page_size = 10)
+    def initialize(q = "", fq = [], facets = [], page = 1, page_size = 20)
       @q = q
       @fq = fq
       @facets = facets
