@@ -23,10 +23,10 @@
     <div class="col-md-12">
       <div class="container">
         <div class="jumbotron">
-          <p>This demonstration portal showcases a new VIVO experience
-based on Bootstrap. It was created by Symplectic in partnership with
-Digital Science and Funnelback.</p>
-          <p>This portal uses data from <a href="http://openvivo.org/">OpenVIVO</a> Looking for experts in OpenVIVO? Why not search here?</p>
+          <p>This site is a proof of concept to demonstrate a new way of
+            looking and finding Brown researchers and faculty members.
+            You can learn more about this site in the
+            <a href="<%= about_path() %>">about page. </p>
         </div>
       </div>
     </div>
@@ -35,19 +35,19 @@ Digital Science and Funnelback.</p>
 
 <div class="row icons-home">
   <div class="col-md-4">
-    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple#collaborator" id="icon1">
+    <a href="<%= home_search_path() %>" id="icon1">
       <span class="glyphicon glyphicon-user"></span>
       <h3>Search for a collaborator</h3>
     </a>
   </div>
   <div class="col-md-4">
-    <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple#supervisor" id="icon2">
+    <a href="<%= home_search_path() %>" id="icon2">
       <span class="glyphicon glyphicon-pencil"></span>
       <h3>Find a supervisor</h3>
     </a>
   </div>
   <div class="col-md-4">
-   <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?collection=vivo-lilliput&amp;form=lilliputsimple#consultancy" id="icon3">
+   <a href="<%= home_search_path() %>" id="icon3">
     <span class="glyphicon glyphicon-education"></span>
     <h3>Locate expert opinion</h3>
    </a>
@@ -74,17 +74,17 @@ Digital Science and Funnelback.</p>
     </div>
 
     <div class="col-md-6">
-      <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=semantic+web&amp;collection=vivo-lilliput&amp;form=lilliputsimple" class="explore-panel" id="ph3">
+      <a href="#" class="explore-panel" id="ph3">
         <span>Semantic Web</span>
       </a>
     </div>
     <div class="col-md-6">
-      <a href="https://bootstrap-vivo-beta.symplectic.co.uk/s/search.html?query=Ontology&amp;collection=vivo-lilliput&amp;form=lilliputsimple" class="explore-panel" id="ph4">
+      <a href="#" class="explore-panel" id="ph4">
         <span>Ontologies</span>
       </a>
     </div>
     <div class="col-md-12">
-      <a class="btn btn-default pull-right" href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/research#http://www.w3.org/2004/02/skos/core#Concept">
+      <a class="btn btn-default pull-right" href="#">
         View all...
       </a>
     </div>

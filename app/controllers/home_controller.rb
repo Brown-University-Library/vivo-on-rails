@@ -2,6 +2,11 @@ require "cgi"
 class HomeController < ApplicationController
   def index
   end
+
+  def about
+    render
+  end
+
   def search
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
