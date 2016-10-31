@@ -3,7 +3,7 @@ class FacultyItem
     :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
-    :collaborators, :affiliations_text, :affiliations
+    :collaborators, :affiliations_text, :affiliations, :research_areas
   # attr_reader :id
 
   def initialize(values = nil )
@@ -32,6 +32,7 @@ class FacultyItem
     @teaching_overview = ""
     @title = ""
     @thumbnail = ""
+    @research_areas = []
   end
 
   def set_values(hash)
@@ -72,6 +73,9 @@ class FacultyItem
       when "teacher_for"
         # string array, no special handling
         faculty.teacher_for = value
+      when "research_areas"
+        # string array, no special handling
+        faculty.research_areas = value
       else
         setter = key.to_s + "="
         faculty.send(setter, value)

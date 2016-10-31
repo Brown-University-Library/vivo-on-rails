@@ -116,6 +116,7 @@ class Faculty
     faculty.teacher_for = get_teacher_for(id)
     faculty.collaborators = get_collaborators(id)
     faculty.affiliations = get_affiliations(id)
+    faculty.research_areas = get_research_areas(id)
     faculty
   end
 
@@ -220,6 +221,22 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map do |row|
       AffiliationItem.new(row)
+    end
+  end
+
+  def self.get_research_areas(id)
+    sparql = <<-END_SPARQL
+      select distinct ?name
+      where
+      {
+        individual:#{id} core:hasResearchArea ?a .
+        ?a rdfs:label ?name .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map do |row|
+      row[:name]
     end
   end
 end

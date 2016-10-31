@@ -11,21 +11,21 @@ class SearchParamsTest < Minitest::Test
     assert params.q = "hello"
     assert params.fq = []
     assert params.page == 1
-    assert params.page_size == 10
+    assert params.page_size == 20
     assert params.facets.include?("fieldA")
     assert params.facets.include?("fieldB")
 
     # From params to query string
     qs = params.to_user_query_string
     assert qs.include?("q=hello")
-    assert qs.include?("rows=10")
+    assert qs.include?("rows=20")
     assert qs.include?("page=1")
 
     # From query string to params
     params2 = Solr::SearchParams.from_query_string(qs, facets)
     assert params2.q == "hello"
     assert params2.page == 1
-    assert params2.page_size == 10
+    assert params2.page_size == 20
     assert params2.facets.include?("fieldA")
     assert params2.facets.include?("fieldB")
 
@@ -45,7 +45,7 @@ class SearchParamsTest < Minitest::Test
     params = Solr::SearchParams.new(q, fq, facets)
     qs = params.to_solr_query_string
     assert qs.include?("q=hello")
-    assert qs.include?("rows=10")
+    assert qs.include?("rows=20")
     assert qs.include?("start=0")
     assert qs.include?("fq=F1:V1")
 
