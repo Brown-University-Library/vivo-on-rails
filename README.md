@@ -52,6 +52,8 @@ Organization records follow a similar pattern.
 Access to Fuseki triple store will be used to perform linked
 data queries and other visualizations.
 
+A few diagrams on how the project is structure can be found
+[here](https://docs.google.com/presentation/d/1envsRrRUw_1MXzHIqqvhhwILbTx7eH0inWG8MwTMFds/edit?usp=sharing)
 
 # To populate Solr
 There are a couple of `rake` tasks that can be used to push to Solr a set of faculty and organizations from your VIVO triple store into Solr.
