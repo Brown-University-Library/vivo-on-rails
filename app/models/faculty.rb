@@ -202,7 +202,7 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     # TODO: figure out a better way to removing duplicates
     #       (see what VIVO does to pick the contribuition)
-    uniq_contributions = query.results.uniq { |row| row[:c] }
+    uniq_contributions = query.results.uniq { |row| row[:uri] }
     uniq_contributions.map do |row|
       ContributorToItem.new(row)
     end

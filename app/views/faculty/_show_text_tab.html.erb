@@ -1,17 +1,19 @@
-<div id="<%= locals[:divId] %>" class="tab-pane fade in active" role="tabpanel">
-  <h2 id="<%= locals[:divId] %>" pgroup="tabs" class="hidden"><%= locals[:title] %></h2>
-  <div id="<%= locals[:divId] %>Group">
+<% if !locals[:text].empty? %>
+  <div id="<%= locals[:divId] %>" class="tab-pane fade in active" role="tabpanel">
+    <h2 id="<%= locals[:divId] %>" pgroup="tabs" class="hidden"><%= locals[:title] %></h2>
+    <div id="<%= locals[:divId] %>Group">
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 id="relatedBy-Authorship" title="" class="panel-title"><%= locals[:title] %></h3>
-      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 id="relatedBy-Authorship" title="" class="panel-title"><%= locals[:title] %></h3>
+        </div>
 
-      <div class="panel-body">
-        <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
-          <%= locals[:text].html_safe %>
+        <div class="panel-body">
+          <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+            <%= locals[:text].html_safe %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>

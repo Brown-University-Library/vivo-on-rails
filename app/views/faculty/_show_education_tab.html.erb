@@ -1,40 +1,42 @@
-<div id="education" class="tab-pane fade in active" role="tabpanel">
-  <h2 id="education" pgroup="tabs" class="hidden">Education and Training</h2>
-  <div id="educationGroup">
+<% if @faculty.education.count > 0 %>
+  <div id="education" class="tab-pane fade in active" role="tabpanel">
+    <h2 id="education" pgroup="tabs" class="hidden">Education and Training</h2>
+    <div id="educationGroup">
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 id="relatedBy-Authorship" title="" class="panel-title">Education and Training</h3>
-      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 id="relatedBy-Authorship" title="" class="panel-title">Education and Training</h3>
+        </div>
 
-      <div class="panel-body">
-        <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
-          <table class="table table-hover">
-            <tbody>
-              <tr>
-                <th>Year</th>
-                <th>Degree</th>
-                <th>Institution</th>
-              </tr>
-              <% @faculty.education.each do |ed| %>
-                <tr class="tableRow" role="listitem">
-                  <td class="citation-data">
-                    <span class="listDateTime"><%= ed.date%></span>
-                  </td>
-                  <td>
-                    <span class="listDateTime"><%= ed.degree %></span>
-                  </td>
-                  <td>
-                    <span class="listDateTime">
-                      <a href="<%= ed.school_uri %>"><%= ed.school_name%></a>
-                    </span>
-                  </td>
+        <div class="panel-body">
+          <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th>Year</th>
+                  <th>Degree</th>
+                  <th>Institution</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+                <% @faculty.education.each do |ed| %>
+                  <tr class="tableRow" role="listitem">
+                    <td class="citation-data">
+                      <span class="listDateTime"><%= ed.date%></span>
+                    </td>
+                    <td>
+                      <span class="listDateTime"><%= ed.degree %></span>
+                    </td>
+                    <td>
+                      <span class="listDateTime">
+                        <a href="<%= ed.school_uri %>"><%= ed.school_name%></a>
+                      </span>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% end %> 
