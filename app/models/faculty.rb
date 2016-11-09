@@ -229,7 +229,8 @@ class Faculty
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
-    query.results.map do |row|
+    uniq_affiliations = query.results.uniq! { |row| row[:uri] }
+    uniq_affiliations.map do |row|
       AffiliationItem.new(row)
     end
   end
