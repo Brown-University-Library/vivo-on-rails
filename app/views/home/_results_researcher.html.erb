@@ -1,47 +1,24 @@
 <div class="clearfix visible-xs-block"></div>
 <div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="<%= faculty_show_url(researcher.id) %>">
-    <div class="gap30"></div>
-
-    <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
-        <section class="share-contact" role="region">
-            <div class="cart-button-container">
-                <a href="" data-ng-click="toggle()" data-cart-link="" data-css="unchecked|check" title="Save">
-                    <span class="glyphicon glyphicon-unchecked"></span>
-                </a>
-
-            </div>
-
-            <div id="photo-wrapper">
-                <img class="img-circle" src="<%= researcher.thumbnail %>" width="120">
-            </div>
-            <h4>
-                <span itemprop="name" class="fn">
-                    <a href="<%= faculty_show_url(researcher.vivo_id) %>"
-                      title="<%= faculty_show_url(researcher.vivo_id) %>">
-                        <%= researcher.name %>
-                    </a>
-                </span>
-            </h4>
-
-            <div class="emailsContainer">
-                <h4>
-                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                </h4>
-                <ul id="primary-email" class="individual-emails" role="list">
-                    <li role="listitem">
-                        <a itemprop="email" class="email" href="mailto:<%= 'email' %>" title="email">
-                            <%= 'email' %>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <button class="btn btn-default btn-xs" type="button">
-                Publications
-                <span class="label label-default  label-as-badge">6</span>
-            </button>
-
-        </section>
+  <div class="gap30"></div>
+  <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+    <section class="share-contact" role="region">
+      <div id="photo-wrapper">
+        <%= image_tag(researcher.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "120", class: "img-circle") %>
+      </div>
+      <h4>
+        <span itemprop="name" class="fn">
+          <a href="<%= faculty_show_url(researcher.vivo_id) %>"
+            title="<%= faculty_show_url(researcher.vivo_id) %>">
+            <%= researcher.name %>
+          </a>
+        </span>
+      </h4>
+      <div class="emailsContainer">
+        <h4>
+          <a href="mailto:<%= researcher.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+        </h4>
+      </div>
     </section>
-
+  </section>
 </div>

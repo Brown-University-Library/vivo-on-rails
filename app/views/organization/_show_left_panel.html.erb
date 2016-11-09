@@ -2,12 +2,7 @@
   <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section class="share-contact" role="region">
       <div id="photo-wrapper">
-          <a href="" title="Individual photo">
-              <img class="xxx_img-circle"
-                src="<%= @organization.thumbnail %>"
-                alt="<%= @organization.name %>"
-                width="190">
-          </a>
+        <%= image_tag(@organization.thumbnail || "org_placeholder.jpg", alt: "Organization Picture", width: "190") %>
       </div>
     </section>
   </section>

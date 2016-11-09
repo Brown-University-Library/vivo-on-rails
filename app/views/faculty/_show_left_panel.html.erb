@@ -2,9 +2,7 @@
   <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section class="share-contact" role="region">
       <div id="photo-wrapper">
-          <a href="https://bootstrap-vivo-beta.symplectic.co.uk/vivo/file/n10756/IMG_6125+%281%29.jpg" title="Individual photo">
-              <img class="img-circle" src="<%= @faculty.thumbnail %>" title="click to view larger image" alt="<%= @faculty.name %>" width="190">
-          </a>
+        <%= image_tag(@faculty.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "190", class: "img-circle") %>
       </div>
       <h2 class="hidden-sm hidden-md hidden-lg">
           <%= @faculty.name %>
