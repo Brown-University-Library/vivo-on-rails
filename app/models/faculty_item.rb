@@ -3,8 +3,8 @@ class FacultyItem
     :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
-    :collaborators, :affiliations_text, :affiliations, :research_areas
-  # attr_reader :id
+    :collaborators, :affiliations_text, :affiliations, :research_areas,
+    :web_page_text, :web_page_uri
 
   def initialize(values = nil )
     init_defaults()
@@ -33,6 +33,8 @@ class FacultyItem
     @title = ""
     @thumbnail = ""
     @research_areas = []
+    @web_page_text = ""
+    @web_page_uri = ""
   end
 
   def set_values(hash)

@@ -5,6 +5,8 @@ class FacultyController < ApplicationController
 
   def show
     id = params[:id]
-    @faculty = Faculty.get_one(id)
+    from_solr = true
+    from_solr = false if params[:fuseki] == "true"
+    @faculty = Faculty.get_one(id, from_solr)
   end
 end

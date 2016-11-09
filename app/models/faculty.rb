@@ -68,8 +68,12 @@ class Faculty
     results
   end
 
-  def self.get_one(id)
-    self.get_one_from_solr(id)
+  def self.get_one(id, from_solr = true)
+    if from_solr
+      self.get_one_from_solr(id)
+    else
+      self.get_one_from_fuseki(id)
+    end
   end
 
   def self.get_one_from_solr(id)
@@ -86,6 +90,7 @@ class Faculty
       select ?uri ?overview ?research_overview ?research_statement
         ?scholarly_work ?email ?org_label ?name ?title ?awards
         ?funded_research ?teaching_overview ?affiliations_text
+        ?web_page_text ?web_page_uri
       where
       {
         bind(individual:#{id} as ?uri) .
@@ -102,6 +107,11 @@ class Faculty
         optional { ?uri brown:fundedResearch ?funded_research . }
         optional { ?uri core:teachingOverview ?teaching_overview . }
         optional { ?uri brown:affiliations ?affiliations_text . }
+        optional {
+          ?uri brown:drrbWebPage ?web .
+          ?web core:linkAnchorText ?web_page_text .
+          ?web core:linkURI ?web_page_uri .
+        }
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]

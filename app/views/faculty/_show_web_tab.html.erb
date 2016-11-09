@@ -1,0 +1,19 @@
+<% if @faculty.web_page_text %>
+  <div id="webPage" class="tab-pane fade in active" role="tabpanel">
+    <h2 id="webPage" pgroup="tabs" class="hidden">On the Web</h2>
+    <div id="webPageGroup">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 id="relatedBy-Authorship" title="" class="panel-title">On the Web</h3>
+        </div>
+
+        <div class="panel-body">
+          <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
+            <a href="<%= @faculty.web_page_uri %>"><%= @faculty.web_page_text %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
