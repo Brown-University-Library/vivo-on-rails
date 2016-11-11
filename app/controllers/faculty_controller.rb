@@ -8,5 +8,6 @@ class FacultyController < ApplicationController
     from_solr = true
     from_solr = false if params[:fuseki] == "true"
     @faculty = Faculty.get_one(id, from_solr)
+    @faculty
   end
 end

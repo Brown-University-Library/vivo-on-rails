@@ -32,66 +32,80 @@
 
     <!-- tabs -->
     <div class="col-md-12">
-      <ul class="nav nav-tabs user-nav" role="tablist" id="individualNavTabs">
-        <li id="publicationsTab" role="presentation" class="active">
-          <a href="#publications" aria-controls="Publications" role="tab" data-toggle="tab">
-              Publications
-          </a>
-        </li>
-        <li id="contactTab" role="presentation" class="active">
-          <a href="#contact" aria-controls="Contact" role="tab" data-toggle="tab">
-              Contact
-          </a>
-        </li>
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a data-toggle="tab" href="#publications">Publications</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#research">Research</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#background">Background</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#affiliation">Affiliation</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#teaching">Teaching</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#viewall">View Al</a></li>
       </ul>
     </div>
 
     <!-- tabs content -->
     <div class="col-md-12 person-container">
-      <div class="tab-content" id="individualNavTabsContent">
-        <%= render "show_text_tab", locals: {
-          divId: "researchOverview",
-          title: "Research Overview",
-          text: @faculty.research_overview} %>
-
-        <%= render "show_text_tab", locals: {
-          divId: "researchStatement",
-          title: "Research Statement",
-          text: @faculty.research_statement} %>
-
-        <%= render "show_contributor_to_tab" %>
-        <%= render "show_teacher_for_tab" %>
-        <%= render "show_education_tab" %>
-
-        <%= render "show_collaborators_tab" %>
-
-        <%= render "show_text_tab", locals: {
-          divId: "honorsAwards",
-          title: "Honors and Awards",
-          text: @faculty.awards} %>
-
-        <%= render "show_text_tab", locals: {
-          divId: "fundedResearch",
-          title: "Funded Research",
-          text: @faculty.funded_research} %>
-
-        <%= render "show_text_tab", locals: {
-          divId: "scholarlyWork",
-          title: "Scholarly Work",
-          text: @faculty.scholarly_work} %>
-
-        <%= render "show_text_tab", locals: {
-          divId: "techingOverview",
-          title: "Teaching Overview",
-          text: @faculty.teaching_overview} %>
-
-        <%= render "show_text_tab", locals: {
-          divId: "affiliations",
-          title: "Affiliations",
-          text: @faculty.affiliations_text} %>
-
-        <%= render "show_web_tab" %>
-      </div>
     </div>
+
+      <div class="tab-content">
+
+        <div id="publications" class="tab-pane fade in active">
+          <h3>&nbsp;</h3>
+          <%= render "show_contributor_to_tab" %>
+        </div>
+
+        <div id="research" class="tab-pane fade">
+          <h3>&nbsp;</h3>
+          <%= render "show_text_tab", locals: {
+            divId: "researchOverview",
+            title: "Research Overview",
+            text: @faculty.research_overview} %>
+          <%= render "show_text_tab", locals: {
+            divId: "researchStatement",
+            title: "Research Statement",
+            text: @faculty.research_statement} %>
+          <%= render "show_text_tab", locals: {
+            divId: "fundedResearch",
+            title: "Funded Research",
+            text: @faculty.funded_research} %>
+          <%= render "show_text_tab", locals: {
+            divId: "scholarlyWork",
+            title: "Scholarly Work",
+            text: @faculty.scholarly_work} %>
+        </div>
+
+        <div id="background" class="tab-pane fade">
+          <h3>&nbsp;</h3>
+          <%= render "show_education_tab" %>
+          <%= render "show_text_tab", locals: {
+            divId: "honorsAwards",
+            title: "Honors and Awards",
+            text: @faculty.awards} %>
+          <%= render "show_web_tab" %>
+        </div>
+
+        <div id="affiliation" class="tab-pane fade">
+          <h3>&nbsp;</h3>
+          <%= render "show_collaborators_tab" %>
+          <%= render "show_text_tab", locals: {
+            divId: "affiliations",
+            title: "Affiliations",
+            text: @faculty.affiliations_text} %>
+        </div>
+
+        <div id="teaching" class="tab-pane fade">
+          <h3>&nbsp;</h3>
+          <%= render "show_text_tab", locals: {
+            divId: "techingOverview",
+            title: "Teaching Overview",
+            text: @faculty.teaching_overview} %>
+          <%= render "show_teacher_for_tab" %>
+        </div>
+
+        <div id="viewall" class="tab-pane fade">
+          <h3>View All</h3>
+          <p>Some content in menu 2.</p>
+        </div>
+
+      </div>
   </div>
 </div>

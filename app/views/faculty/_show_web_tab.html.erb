@@ -1,4 +1,4 @@
-<% if @faculty.web_page_text %>
+<% if !@faculty.web_page_text.empty? %>
   <div id="webPage" class="tab-pane fade in active" role="tabpanel">
     <h2 id="webPage" pgroup="tabs" class="hidden">On the Web</h2>
     <div id="webPageGroup">
