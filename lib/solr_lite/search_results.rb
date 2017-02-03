@@ -1,5 +1,5 @@
-require "./lib/solr/facet_field.rb"
-module Solr
+require "./lib/solr_lite/facet_field.rb"
+module SolrLite
   # TODO: this should be renamed to SolrResponse
   class SearchResults
     attr_accessor :items

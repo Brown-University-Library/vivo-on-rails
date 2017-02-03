@@ -1,5 +1,5 @@
 require "./app/models/faculty.rb"
-require "./lib/solr/solr.rb"
+require "./lib/solr_lite/solr.rb"
 class FacultySolrize
   def initialize(solr_url)
     @solr_url = solr_url

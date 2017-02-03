@@ -1,6 +1,6 @@
 require "./app/models/faculty.rb"
-require "./lib/solr/solr.rb"
-require "./lib/solr/search_results.rb"
+require "./lib/solr_lite/solr.rb"
+require "./lib/solr_lite/search_results.rb"
 class Search
   def initialize(solr_url)
     @solr = Solr::Solr.new(solr_url)

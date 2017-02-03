@@ -1,4 +1,4 @@
-module Solr
+module SolrLite
   class FacetField
 
     class FacetValue

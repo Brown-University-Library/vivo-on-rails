@@ -1,5 +1,5 @@
 require "./app/models/organization.rb"
-require "./lib/solr/solr.rb"
+require "./lib/solr_lite/solr.rb"
 class OrganizationSolrize
   def initialize(solr_url)
     @solr_url = solr_url

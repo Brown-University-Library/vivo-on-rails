@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "byebug"
-require "./lib/solr/search_params.rb"
+require "./lib/solr_lite/search_params.rb"
 class SearchParamsTest < Minitest::Test
   def test_to_user_query_string
     # Search param defaults

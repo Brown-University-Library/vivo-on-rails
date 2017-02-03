@@ -1,7 +1,7 @@
-require "./lib/solr/facet_field.rb"
-module Solr
+require "./lib/solr_lite/facet_field.rb"
+module SolrLite
   class SearchParams
-    attr_accessor :q, :fq, :facets, :page, :page_size, :fl
+    attr_accessor :q, :fq, :facets, :page, :page_size, :fl, :sort
 
     def initialize(q = "", fq = [], facets = [], page = 1, page_size = 20)
       @q = q
@@ -10,6 +10,7 @@ module Solr
       @page = page
       @page_size = page_size
       @fl = nil
+      @sort = ""
     end
 
     def start_row
@@ -27,23 +28,41 @@ module Solr
     end
 
     def to_user_query_string
-      qs = "q=#{@q}"
-      @fq.each do |filter|
-        qs += "&fq=#{filter}"
+      if @fq.count > 0
+        # use fq
+        qs = ""
+        @fq.each do |filter|
+          qs += "&fq=#{filter}"
+        end
+      else
+        # use q
+        qs = "q=#{@q}"
       end
       # TODO: omit if using defaults
       qs += "&rows=#{@page_size}"
       qs += "&page=#{@page}"
+      if sort != ""
+        qs += "&sort=#{@sort}"
+      end
       qs
     end
 
     def to_solr_query_string
-      qs = if q == "" then "q=*" else "q=#{@q}" end
-      @fq.each do |filter|
-        qs += "&fq=#{filter}"
+      if @fq.count > 0
+        # use fq
+        qs = ""
+        @fq.each do |filter|
+          qs += "&fq=#{filter}"
+        end
+      else
+        # use q
+        qs = (q == "") ? "q=*" : "q=#{@q}"
       end
       qs += "&rows=#{@page_size}"
       qs += "&start=#{start_row()}"
+      if sort != ""
+        qs += "&sort=#{@sort}"
+      end
       if @facets.count > 0
         qs += "&facet=on"
         @facets.each do |f|
