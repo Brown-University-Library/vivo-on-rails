@@ -28,15 +28,14 @@ module SolrLite
     end
 
     def to_user_query_string
+      qs = ""
+      if @q != "" && @q != "*"
+        qs += "&q=#{@q}"
+      end
       if @fq.count > 0
-        # use fq
-        qs = ""
         @fq.each do |filter|
           qs += "&fq=#{filter}"
         end
-      else
-        # use q
-        qs = "q=#{@q}"
       end
       # TODO: omit if using defaults
       qs += "&rows=#{@page_size}"
@@ -48,15 +47,14 @@ module SolrLite
     end
 
     def to_solr_query_string
+      qs = ""
+      if @q != ""
+        qs += "&q=#{@q}"
+      end
       if @fq.count > 0
-        # use fq
-        qs = ""
         @fq.each do |filter|
           qs += "&fq=#{filter}"
         end
-      else
-        # use q
-        qs = (q == "") ? "q=*" : "q=#{@q}"
       end
       qs += "&rows=#{@page_size}"
       qs += "&start=#{start_row()}"
@@ -76,7 +74,6 @@ module SolrLite
       params = SearchParams.new
       params.facets = facets
       tokens = qs.split("&")
-      qs_start = nil
       tokens.each do |token|
         values = token.split("=")
         name = values[0]

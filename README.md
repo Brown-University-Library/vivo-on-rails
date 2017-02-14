@@ -77,4 +77,4 @@ This is a proof of concept at this point.
 The code at this point is hard-coded for very specific predicates
 that we use at Brown and might not work on your particular VIVO database.
 
-The unit tests (`bundle exec rails vivo:tests`) are hard-coded to find very specific people/departments so they will very likely fail on your installation.
+The unit tests (`bundle exec rake vivo:tests`) are hard-coded to find very specific people/departments so they will very likely fail on your installation.

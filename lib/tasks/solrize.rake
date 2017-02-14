@@ -52,7 +52,7 @@ namespace :vivo do
 
   desc "Deletes all data from Solr (faculty and organization)"
   task :solrize_delete_all => :environment  do
-    solr = Solr::Solr.new(solr_url)
+    solr = SolrLite::Solr.new(solr_url)
     solr.delete_all!()
   end
 

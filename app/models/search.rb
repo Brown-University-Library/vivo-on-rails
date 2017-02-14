@@ -3,7 +3,7 @@ require "./lib/solr_lite/solr.rb"
 require "./lib/solr_lite/search_results.rb"
 class Search
   def initialize(solr_url)
-    @solr = Solr::Solr.new(solr_url)
+    @solr = SolrLite::Solr.new(solr_url)
   end
 
   # TODO: consider using a search result item class

@@ -3,7 +3,7 @@ require "./lib/solr_lite/solr.rb"
 class OrganizationSolrize
   def initialize(solr_url)
     @solr_url = solr_url
-    @solr = Solr::Solr.new(@solr_url)
+    @solr = SolrLite::Solr.new(@solr_url)
   end
 
   def add_all()

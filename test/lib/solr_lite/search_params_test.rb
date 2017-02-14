@@ -7,7 +7,7 @@ class SearchParamsTest < Minitest::Test
     q = "hello"
     fq = []
     facets = ["fieldA", "fieldB"]
-    params = Solr::SearchParams.new(q, fq, facets)
+    params = SolrLite::SearchParams.new(q, fq, facets)
     assert params.q = "hello"
     assert params.fq = []
     assert params.page == 1
@@ -22,7 +22,7 @@ class SearchParamsTest < Minitest::Test
     assert qs.include?("page=1")
 
     # From query string to params
-    params2 = Solr::SearchParams.from_query_string(qs, facets)
+    params2 = SolrLite::SearchParams.from_query_string(qs, facets)
     assert params2.q == "hello"
     assert params2.page == 1
     assert params2.page_size == 20
@@ -42,15 +42,41 @@ class SearchParamsTest < Minitest::Test
     q = "hello"
     fq = ["F1:V1"]
     facets = ["fieldA", "fieldB"]
-    params = Solr::SearchParams.new(q, fq, facets)
+    params = SolrLite::SearchParams.new(q, fq, facets)
     qs = params.to_solr_query_string
-    assert qs.include?("q=hello")
-    assert qs.include?("rows=20")
-    assert qs.include?("start=0")
-    assert qs.include?("fq=F1:V1")
+    assert qs.include?("&q=hello")
+    assert qs.include?("&rows=20")
+    assert qs.include?("&start=0")
+    assert qs.include?("&fq=F1:V1")
 
     # Make sure the facets are included
-    assert qs.include?("facet.field=fieldA")
-    assert qs.include?("facet.field=fieldB")
+    assert qs.include?("&facet.field=fieldA")
+    assert qs.include?("&facet.field=fieldB")
+  end
+
+  def test_to_solr_query_string_q_vs_fq
+    # q and fq no q
+    params = SolrLite::SearchParams.new("hello", ["F1:V1"])
+    qs = params.to_solr_query_string
+    assert qs.include?("&q=hello")
+    assert qs.include?("&fq=F1:V1")
+
+    # no q
+    params = SolrLite::SearchParams.new("", ["F1:V1"])
+    qs = params.to_solr_query_string
+    assert !qs.include?("&q=")
+    assert qs.include?("&fq=F1:V1")
+
+    # no fq
+    params = SolrLite::SearchParams.new("hello")
+    qs = params.to_solr_query_string
+    assert qs.include?("&q=hello")
+    assert !qs.include?("&fq=")
+
+    # neither q not fq
+    params = SolrLite::SearchParams.new()
+    qs = params.to_solr_query_string
+    assert !qs.include?("&q=")
+    assert !qs.include?("&fq=")
   end
 end

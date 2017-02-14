@@ -7,7 +7,7 @@ class SearchTest < Minitest::Test
   def test_faculty_search
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
-    params = Solr::SearchParams.new("Bauer")
+    params = SolrLite::SearchParams.new("Bauer")
     search_results = searcher.search(params)
     assert_equal 5, search_results.items.count
     assert search_results.items.any? {|i| i.name == "Bauer, Cici"}
@@ -16,7 +16,7 @@ class SearchTest < Minitest::Test
   def test_organization_search
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
-    params = Solr::SearchParams.new('"subject matter grounding in medicine"')
+    params = SolrLite::SearchParams.new('"subject matter grounding in medicine"')
     search_results = searcher.search(params)
     assert search_results.items.count == 1
     assert search_results.items[0].name == "Biostatistics"
@@ -26,7 +26,7 @@ class SearchTest < Minitest::Test
     facets = ["record_type", "affiliations.name"]
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
-    params = Solr::SearchParams.new("medicine", [], facets)
+    params = SolrLite::SearchParams.new("medicine", [], facets)
     search_results = searcher.search(params)
     facet = search_results.facets.find {|f|f.name = "record_type"}
     assert facet.value_count("ORGANIZATION") > 0
@@ -39,7 +39,7 @@ class SearchTest < Minitest::Test
     custom_page_size = 3
 
     # run a first search (with a custom page size)
-    params = Solr::SearchParams.new("medicine")
+    params = SolrLite::SearchParams.new("medicine")
     params.page_size = custom_page_size
     search_results = searcher.search(params)
     total_matches = search_results.num_found
@@ -57,7 +57,7 @@ class SearchTest < Minitest::Test
   def test_faculty_search
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
-    params = Solr::SearchParams.new("Bauer")
+    params = SolrLite::SearchParams.new("Bauer")
     search_results = searcher.search(params)
     assert search_results.items.count > 4
     assert search_results.items.any? {|i| i.name == "Bauer, Cici"}
