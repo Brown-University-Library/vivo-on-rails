@@ -70,6 +70,24 @@ module SolrLite
       qs
     end
 
+    def to_form_values(include_q)
+      values = []
+      if include_q && @q != ""
+        values << {name: "q", value: @q}
+      end
+      @fq.each_with_index do |filter, i|
+        values << {name: "fq_#{i}", value: filter}
+      end
+      values << {name: "rows", value: @page_size}
+      values << {name: "start", value: start_row()}
+      values << {name: "sort", value: @sort}
+      values
+    end
+
+    def to_s
+      "q=#{@q}\nfq=#{@fq}"
+    end
+
     def self.from_query_string(qs, facets = [])
       params = SearchParams.new
       params.facets = facets
@@ -79,15 +97,24 @@ module SolrLite
         name = values[0]
         value = values[1]
         next if value == nil || value.empty?
-        case name
-        when "q"
+        case
+        when name == "q"
           params.q = value
-        when "fq"
-          params.fq << value
-        when "rows"
+        when name == "rows"
           params.page_size = value.to_i
-        when "page"
+        when name == "page"
           params.page = value.to_i
+        when name == "fq"
+          # Query string contains fq when we build the query string, for
+          # example as the user clicks on different facets on the UI.
+          # A query string can have multiple fq values.
+          params.fq << value
+        when name.start_with?("fq_")
+          # Query string contains fq_n when Rails pushes HTML FORM values to
+          # the query string. Rails does not like duplicate values in forms
+          # and therefore we force them to be different by appending a number
+          # to them (fq_1, f1_2, ...)
+          params.fq << CGI::unescape(value)
         end
       end
       params

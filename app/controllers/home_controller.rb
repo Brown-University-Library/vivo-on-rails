@@ -11,12 +11,17 @@ class HomeController < ApplicationController
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
     params = SolrLite::SearchParams.from_query_string(request.query_string)
+    puts "== Calculated params"
+    puts params
+    puts ""
     if params.facets.count == 0
       params.facets = ["record_type", "affiliations", "research_areas"]
     end
     params.q = "*" if params.q == ""
     search_results = searcher.search(params)
-    @fq = pretty_fq(params.fq)
+    @form_values = params.to_form_values(false)
+    @fq = params.fq
+    @pretty_fq = pretty_fq(params.fq)
     @facets = search_results.facets
     @faculty_list = search_results.items
     @page = search_results.page

@@ -15,7 +15,7 @@
                 <% if !@query.empty? %>
                   for <b><%= @query %></b>
                 <% end %>
-                <% @fq.each do |fq| %>
+                <% @pretty_fq.each do |fq| %>
                   (<%= fq %>)
                 <% end %>
             </div>
