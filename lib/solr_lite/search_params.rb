@@ -3,7 +3,10 @@ module SolrLite
   class SearchParams
     attr_accessor :q, :fq, :facets, :page, :page_size, :fl, :sort
 
-    def initialize(q = "", fq = [], facets = [], page = 1, page_size = 20)
+    DEFAULT_PAGE = 1
+    DEFAULT_PAGE_SIZE = 20
+
+    def initialize(q = "", fq = [], facets = [], page = DEFAULT_PAGE, page_size = DEFAULT_PAGE_SIZE)
       @q = q
       @fq = fq
       @facets = facets
@@ -13,7 +16,7 @@ module SolrLite
       @sort = ""
     end
 
-    def start_row
+    def start_row()
       (@page - 1) * @page_size
     end
 
@@ -27,57 +30,35 @@ module SolrLite
       nil
     end
 
-    def to_user_query_string
+    # Returns the string that we need render on the Browser to execute
+    # a search with the current parameters.
+    def to_user_query_string(facet_to_ignore = nil)
       qs = ""
       if @q != "" && @q != "*"
         qs += "&q=#{@q}"
       end
-      if @fq.count > 0
-        @fq.each do |filter|
+      @fq.each do |filter|
+        if facet_to_ignore == filter
+          # don't add this to the query string
+        else
           qs += "&fq=#{filter}"
         end
       end
-      # TODO: omit if using defaults
-      qs += "&rows=#{@page_size}"
-      qs += "&page=#{@page}"
-      if sort != ""
-        qs += "&sort=#{@sort}"
-      end
+      qs += "&rows=#{@page_size}" if @page_size != DEFAULT_PAGE_SIZE
+      qs += "&page=#{@page}" if @page != DEFAULT_PAGE
+      qs += "&sort=#{@sort}" if sort != ""
       qs
     end
 
-    def facet_remove_query_string(facet)
-      qs = ""
-      if @q != "" && @q != "*"
-        qs += "&q=#{@q}"
-      end
-      if @fq.count > 0
-        @fq.each do |filter|
-          if filter != facet
-            qs += "&fq=#{filter}"
-          else
-            # qs += "&removed=#{filter}"
-          end
-        end
-      end
-      # TODO: omit if using defaults
-      qs += "&rows=#{@page_size}"
-      qs += "&page=#{@page}"
-      if sort != ""
-        qs += "&sort=#{@sort}"
-      end
-      qs
-    end
-
-    def to_solr_query_string
+    # Returns the string that we need to pass Solr to execute a search
+    # with the current parameters.
+    def to_solr_query_string()
       qs = ""
       if @q != ""
         qs += "&q=#{@q}"
       end
-      if @fq.count > 0
-        @fq.each do |filter|
-          qs += "&fq=#{filter}"
-        end
+      @fq.each do |filter|
+        qs += "&fq=#{filter}"
       end
       qs += "&rows=#{@page_size}"
       qs += "&start=#{start_row()}"
@@ -98,16 +79,19 @@ module SolrLite
       if include_q && @q != ""
         values << {name: "q", value: @q}
       end
+      # Notice that we create an individual fq_n HTML form value for each
+      # fq value because Rails does not like the same value on the form.
       @fq.each_with_index do |filter, i|
         values << {name: "fq_#{i}", value: filter}
       end
-      values << {name: "rows", value: @page_size}
-      values << {name: "start", value: start_row()}
-      values << {name: "sort", value: @sort}
+
+      values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
+      values << {name: "start", value: start_row()} if start_row > 0
+      values << {name: "sort", value: @sort} if sort != ""
       values
     end
 
-    def to_s
+    def to_s()
       "q=#{@q}\nfq=#{@fq}"
     end
 
@@ -128,36 +112,18 @@ module SolrLite
         when name == "page"
           params.page = value.to_i
         when name == "fq"
-          # Query string contains fq when we build the query string, for
+          # Query string contains fq when _we_ build the query string, for
           # example as the user clicks on different facets on the UI.
           # A query string can have multiple fq values.
           params.fq << value
         when name.start_with?("fq_")
-          # Query string contains fq_n when Rails pushes HTML FORM values to
+          # Query string contains fq_n when _Rails_ pushes HTML FORM values to
           # the query string. Rails does not like duplicate values in forms
           # and therefore we force them to be different by appending a number
           # to them (fq_1, f1_2, ...)
           params.fq << CGI::unescape(value)
         end
       end
-
-      deleted_fq = []
-      tokens.each do |token|
-        values = token.split("=")
-        name = values[0]
-        value = values[1]
-        next if value == nil || value.empty?
-        if name == "fq" && value.first == "-"
-          deleted_fq << value[1..-1]
-          deleted_fq << value
-        end
-      end
-      # byebug
-      puts params.fq
-      puts deleted_fq
-      test_a = params.fq - deleted_fq
-      params.fq = test_a
-      puts params.fq
       params
     end
   end

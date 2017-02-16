@@ -18,8 +18,6 @@ class SearchParamsTest < Minitest::Test
     # From params to query string
     qs = params.to_user_query_string
     assert qs.include?("q=hello")
-    assert qs.include?("rows=20")
-    assert qs.include?("page=1")
 
     # From query string to params
     params2 = SolrLite::SearchParams.from_query_string(qs, facets)

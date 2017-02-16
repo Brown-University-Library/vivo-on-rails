@@ -11,9 +11,6 @@ class HomeController < ApplicationController
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
     params = SolrLite::SearchParams.from_query_string(request.query_string)
-    puts "== Calculated params"
-    puts params
-    puts ""
     if params.facets.count == 0
       params.facets = ["record_type", "affiliations", "research_areas"]
     end
@@ -40,7 +37,7 @@ class HomeController < ApplicationController
       {
         original: fq,
         pretty: CGI::unescape(fq).gsub('"', '').gsub(":", " > "),
-        remove_url: home_search_url() + '?' + params.facet_remove_query_string(fq)
+        remove_url: home_search_url() + '?' + params.to_user_query_string(fq)
       }
     end
   end
