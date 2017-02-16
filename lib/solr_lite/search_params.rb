@@ -46,6 +46,29 @@ module SolrLite
       qs
     end
 
+    def facet_remove_query_string(facet)
+      qs = ""
+      if @q != "" && @q != "*"
+        qs += "&q=#{@q}"
+      end
+      if @fq.count > 0
+        @fq.each do |filter|
+          if filter != facet
+            qs += "&fq=#{filter}"
+          else
+            # qs += "&removed=#{filter}"
+          end
+        end
+      end
+      # TODO: omit if using defaults
+      qs += "&rows=#{@page_size}"
+      qs += "&page=#{@page}"
+      if sort != ""
+        qs += "&sort=#{@sort}"
+      end
+      qs
+    end
+
     def to_solr_query_string
       qs = ""
       if @q != ""
@@ -117,6 +140,24 @@ module SolrLite
           params.fq << CGI::unescape(value)
         end
       end
+
+      deleted_fq = []
+      tokens.each do |token|
+        values = token.split("=")
+        name = values[0]
+        value = values[1]
+        next if value == nil || value.empty?
+        if name == "fq" && value.first == "-"
+          deleted_fq << value[1..-1]
+          deleted_fq << value
+        end
+      end
+      # byebug
+      puts params.fq
+      puts deleted_fq
+      test_a = params.fq - deleted_fq
+      params.fq = test_a
+      puts params.fq
       params
     end
   end

@@ -15,8 +15,11 @@
                 <% if !@query.empty? %>
                   for <b><%= @query %></b>
                 <% end %>
-                <% @pretty_fq.each do |fq| %>
-                  (<%= fq %>)
+                <% @pretty_fqs.each do |fq| %>
+                  (
+                  <%= fq[:pretty] %>
+                  <a href="<%= fq[:remove_url] %>">XXX</a>
+                  )
                 <% end %>
             </div>
 

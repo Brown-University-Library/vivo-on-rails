@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     search_results = searcher.search(params)
     @form_values = params.to_form_values(false)
     @fq = params.fq
-    @pretty_fq = pretty_fq(params.fq)
+    @pretty_fqs = pretty_fqs(params)
     @facets = search_results.facets
     @faculty_list = search_results.items
     @page = search_results.page
@@ -35,9 +35,13 @@ class HomeController < ApplicationController
     render "results"
   end
 
-  def pretty_fq(fq)
-    fq.map do |x|
-      CGI::unescape(x).gsub('"', '').gsub(":", " > ")
+  def pretty_fqs(params)
+    params.fq.map do |fq|
+      {
+        original: fq,
+        pretty: CGI::unescape(fq).gsub('"', '').gsub(":", " > "),
+        remove_url: home_search_url() + '?' + params.facet_remove_query_string(fq)
+      }
     end
   end
 end
