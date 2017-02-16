@@ -1,14 +1,17 @@
+require "cgi"
+
 class SearchResultsPresenter
-  attr_accessor :form_values, :fq, :pretty_fqs, :facets,
-    :faculty_list, :page, :start, :end, :num_found, :num_pages,
+  attr_accessor :form_values, :fq, :facets,
+    :results, :page, :start, :end, :num_found, :num_pages,
     :query, :search_qs
 
-  def initialize()
+  def initialize(base_url, search_params)
+    @base_url = base_url
+    @params = search_params
     @form_values = []
     @fq = []
-    @pretty_fqs = []
     @facets = []
-    @faculty_list = []
+    @results = []
     @page = 0
     @start = 0
     @end = 0
@@ -18,27 +21,37 @@ class SearchResultsPresenter
     @search_qs = ""
   end
 
-  def page_qs()
-    @search_qs.gsub(/page=[0-9]*/,"").chomp("&")
+  def pages_urls()
+    @pages_urls ||= begin
+      urls = []
+      qs = @search_qs.gsub(/page=[0-9]*/,"").chomp("&")
+      (1..@num_pages).each do |p|
+        urls << "#{@base_url}?#{qs}&page=#{p}"
+      end
+      puts "calculated pages urls #{urls.count}"
+      urls
+    end
   end
 
-  def self.pretty_fqs(params, base_url)
-    params.fq.map do |fq|
-      {
-        original: fq,
-        pretty: CGI::unescape(fq).gsub('"', '').gsub(":", " > "),
-        remove_url: base_url + '?' + params.to_user_query_string(fq)
-      }
+  def pretty_fqs()
+    # TODO: remove dependency on params.to_user_querystring()
+    @pretty_fqs ||= begin
+      @fq.map do |fq|
+        {
+          original: fq,
+          pretty: CGI::unescape(fq).gsub('"', '').gsub(":", " > "),
+          remove_url: @base_url + '?' + @params.to_user_query_string(fq)
+        }
+      end
     end
   end
 
   def self.from_results(results, params, base_url)
-    p = SearchResultsPresenter.new
+    p = SearchResultsPresenter.new(base_url, params)
     p.form_values = params.to_form_values(false)
     p.fq = params.fq
-    p.pretty_fqs = pretty_fqs(params, base_url)
     p.facets = results.facets
-    p.faculty_list = results.items
+    p.results = results.items
     p.page = results.page
     p.start = results.start
     p.end = results.end
@@ -48,5 +61,4 @@ class SearchResultsPresenter
     p.search_qs = params.to_user_query_string
     p
   end
-
 end

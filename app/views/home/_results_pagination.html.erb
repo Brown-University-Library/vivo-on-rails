@@ -4,7 +4,7 @@
         <% (1..@presenter.num_pages).each do |page| %>
           <% css_class = @presenter.page == page ? "active" : "" %>
             <li class="<%= css_class %>">
-                <a href="<%= home_search_url() + "?" + @presenter.page_qs + "&page=" + page.to_s %>"><%= page %></a>
+                <a href="<%= @presenter.pages_urls[page-1] %>"><%= page %></a>
             </li>
         <% end %>
     </ul>

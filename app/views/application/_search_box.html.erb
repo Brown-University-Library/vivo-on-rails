@@ -13,7 +13,7 @@
                     name="q"
                     id="query_top"
                     title="Search query"
-                    value="<%= @query %>"
+                    value="<%= @presenter.query %>"
                     accesskey="q"
                     placeholder="Find an Expert..."
                     class="form-control query ui-autocomplete-input"
@@ -28,7 +28,7 @@
                 <span class="glyphicon glyphicon-search" role="submit"></span>
             </button>
 
-            <% (@form_values || []).each do |form_value| %>
+            <% (@presenter.form_values || []).each do |form_value| %>
               <input name="<%= form_value[:name] %>" id="<%= form_value[:name] %>"
                   value="<%= form_value[:value] %>"
                   type="text" class="hidden">

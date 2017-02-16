@@ -86,7 +86,8 @@ module SolrLite
       end
 
       values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
-      values << {name: "start", value: start_row()} if start_row > 0
+      values << {name: "page", value: @page} if @page != DEFAULT_PAGE
+      # values << {name: "start", value: start_row()} if start_row > 0
       values << {name: "sort", value: @sort} if sort != ""
       values
     end
