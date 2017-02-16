@@ -6,16 +6,16 @@
         <div class="col-md-10 col-md-push-2">
             <!-- 1/N results found -->
             <div id="search-result-count" class="text-muted">
-                <span id="search-page-start"><%= @start + 1 %></span>
+                <span id="search-page-start"><%= @presenter.start + 1 %></span>
                 -
-                <span id="search-page-end"><%= @end %></span>
+                <span id="search-page-end"><%= @presenter.end %></span>
                 of
-                <span id="search-total-matching"><%= @num_found %></span>
+                <span id="search-total-matching"><%= @presenter.num_found %></span>
                 search results
-                <% if !@query.empty? %>
-                  for <b><%= @query %></b>
+                <% if !@presenter.query.empty? %>
+                  for <b><%= @presenter.query %></b>
                 <% end %>
-                <% @pretty_fqs.each do |fq| %>
+                <% @presenter.pretty_fqs.each do |fq| %>
                   (
                   <%= fq[:pretty] %>
                   <a href="<%= fq[:remove_url] %>">XXX</a>
@@ -34,7 +34,7 @@
                 <!-- <div class="row top-buffer"> -->
                 <div class="clearfix visible-lg-block"></div>
 
-                <% @faculty_list.each do |r| %>
+                <% @presenter.faculty_list.each do |r| %>
                   <div class="clearfix visible-sm-block"></div>
                   <div class="clearfix visible-xs-block"></div>
                   <% if r.class.to_s == "FacultyListItem" %>

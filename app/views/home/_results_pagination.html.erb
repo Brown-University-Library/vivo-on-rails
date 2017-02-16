@@ -1,10 +1,10 @@
 <div class="text-center hidden-print">
     <h2 class="sr-only">Pagination</h2>
     <ul class="pagination pagination-lg">
-        <% (1..@num_pages).each do |page| %>
-          <% css_class = @page == page ? "active" : "" %>
+        <% (1..@presenter.num_pages).each do |page| %>
+          <% css_class = @presenter.page == page ? "active" : "" %>
             <li class="<%= css_class %>">
-                <a href="<%= home_search_url() + "?" + @page_qs + "&page=" + page.to_s %>"><%= page %></a>
+                <a href="<%= home_search_url() + "?" + @presenter.page_qs + "&page=" + page.to_s %>"><%= page %></a>
             </li>
         <% end %>
     </ul>

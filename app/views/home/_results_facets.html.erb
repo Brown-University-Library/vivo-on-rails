@@ -2,7 +2,7 @@
   <h2 class="sr-only">Refine</h2>
   <div id="facet-4" class="facet">
     <div class="panel panel-default">
-      <% @facets.each do |facet| %>
+      <% @presenter.facets.each do |facet| %>
         <div class="panel-heading">
           <h3 class="facetLabel"><%= facet.name %></h3>
         </div>
@@ -12,7 +12,7 @@
             <% facet.values.each do |value| %>
               <li class="category">
                   <span class="">
-                  <a href="<%= home_search_url() + "?" + @search_qs + "&fq=" + facet.to_fq(value.text) %>"><%= value.text %></a>
+                  <a href="<%= home_search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_fq(value.text) %>"><%= value.text %></a>
                   </span>
                   &nbsp;<span class="badge pull-right">
                       <span class="categoryCount"><%= value.count %></span>
