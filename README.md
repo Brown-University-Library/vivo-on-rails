@@ -60,6 +60,56 @@ structure like the following:
   }
 ````
 
+Below is a sample of the data stored in `json_txt` for a sample PEOPLE document.
+Notice that the field is a string with the JSON of the data for the given
+document.
+
+```
+"{
+  \"record_type\":\"PEOPLE\",
+  \"affiliations_text\":\"\",
+  \"affiliations\":[
+    {
+      \"uri\":\"http://vivo.brown.edu/individual/org-brown-univ-dept57\",
+      \"name\":\"Pathology and Laboratory Medicine\",
+      \"id\":\"http://vivo.brown.edu/individual/org-brown-univ-dept57\"
+    }
+  ],
+  \"awards\":\"\",
+  \"collaborators\":[],
+  \"contributor_to\":[],
+  \"education\":[
+    {
+      \"school_uri\":\"http://vivo.brown.edu/individual/n37819\",
+      \"date\":\"1980\",
+      \"degree\":\"BA\",
+      \"school_name\":\"Mount Holyoke College\"
+    },
+    {
+      \"school_uri\":\"http://vivo.brown.edu/individual/n67738\",
+      \"date\":\"1985\",
+      \"degree\":\"MD\",
+      \"school_name\":\"State University of New York\"
+    }
+  ],
+  \"email\":\"H_Katrine_Hansen@brown.edu\",
+  \"funded_research\":\"\",
+  \"name\":\"Hansen, Katrine\",
+  \"org_label\":\"Pathology and Laboratory Medicine\",
+  \"overview\":\"\",
+  \"research_overview\":\"\",
+  \"research_statement\":\"\",
+  \"scholarly_work\":\"\",
+  \"teacher_for\":[],
+  \"teaching_overview\":\"\",
+  \"title\":\"Associate Professor of Pathology and Laboratory Medicine\",
+  \"thumbnail\":null,
+  \"research_areas\":[],
+  \"uri\":\"http://vivo.brown.edu/individual/khansenm\",
+  \"id\":\"http://vivo.brown.edu/individual/khansenm\"
+}"
+```
+
 *Organization* records follow a similar pattern.
 
 ````
@@ -100,11 +150,12 @@ document.
 ```
 
 We use `json_txt` to reconstruct the data that will be displayed when the user
-wants to view the detail for a specific individual or organization.
+wants to view the detail for a specific individual or organization. This is what
+allows us to run the system without interfacing with the Fuseki endpoint.
 
-We still need to create individual fields in Solr to allow for a better search
-experience, for example, a separate field for name to give it a higher boost
-on search results.
+**TODO:** We still need to create individual fields in Solr to allow for a better
+search experience, for example, a separate field for name to give it a higher
+boost on search results and the ability to facet the data by other fields.
 
 
 # To populate Solr
@@ -115,7 +166,6 @@ faculty and organizations from your VIVO triple store into Solr.
 bundle exec rake vivo:solrize_org_all
 bundle exec rake vivo:solrize_faculty_all
 ```
-
 
 # Caveats
 This is a proof of concept at this point.
