@@ -7,6 +7,7 @@ class FacultyController < ApplicationController
     id = params[:id]
     from_solr = true
     from_solr = false if params[:fuseki] == "true"
+    @presenter = DefaultPresenter.new()
     @faculty = Faculty.get_one(id, from_solr)
     @faculty
   end
