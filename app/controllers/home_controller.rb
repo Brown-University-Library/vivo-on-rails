@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     end
     params.q = "*" if params.q == ""
     search_results = searcher.search(params)
-    @presenter = SearchResultsPresenter.from_results(search_results, params, home_search_url())
+    @presenter = SearchResultsPresenter.new(search_results, params, home_search_url())
     render "results"
   end
 end

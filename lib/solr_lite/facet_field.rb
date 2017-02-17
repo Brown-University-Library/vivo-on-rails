@@ -2,10 +2,11 @@ module SolrLite
   class FacetField
 
     class FacetValue
-      attr_accessor :text, :count
-      def initialize(text = "", count = 0)
+      attr_accessor :text, :count, :remove_url
+      def initialize(text = "", count = 0, remove_url = nil)
         @text = text
         @count = count
+        @remove_url = remove_url
       end
     end
 

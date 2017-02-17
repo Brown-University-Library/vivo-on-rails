@@ -1,24 +1,49 @@
 require "cgi"
 
 class SearchResultsPresenter
-  attr_accessor :form_values, :fq, :facets,
-    :results, :page, :start, :end, :num_found, :num_pages,
-    :query, :search_qs
+  attr_accessor :form_values, :fq, :query, :search_qs,
+    :facets, :results, :page, :start, :end, :num_found, :num_pages
 
-  def initialize(base_url, search_params)
+  def initialize(results, params, base_url)
     @base_url = base_url
-    @params = search_params
-    @form_values = []
-    @fq = []
-    @facets = []
-    @results = []
-    @page = 0
-    @start = 0
-    @end = 0
-    @num_found = 0
-    @num_pages = 0
-    @query = ""
-    @search_qs = ""
+
+    # from params
+    @params = params
+    @form_values = params.to_form_values(false)
+    @fq = params.fq
+    @query = params.q == "*" ? "" : CGI.unescape(params.q)
+    @search_qs = params.to_user_query_string
+
+    # from results
+    @facets = facets_with_remove_urls(results.facets)
+    @results = results.items
+    @page = results.page
+    @start = results.start
+    @end = results.end
+    @num_found = results.num_found
+    @num_pages = results.num_pages
+  end
+
+  def facets_with_remove_urls(facets)
+    # pretty_fqs has the list of active filter queries which amounts to
+    # the selected facets. We loop through all these pretty_fqs and find
+    # the matching facet/value in the list of facets and set the link
+    # that can be used to unselect that facet/value.
+    pretty_fqs.each do |pretty_fq|
+      # facets for this field
+      ff = facets.select { |f| f.name == pretty_fq[:field] }
+      ff.each do |f|
+        # values for this facet
+        f.values.each do |v|
+          if v.text == pretty_fq[:value]
+            # this is the facet/value that we have selected,
+            # set the proper URL to remove it.
+            v.remove_url = pretty_fq[:remove_url]
+          end
+        end
+      end
+    end
+    facets
   end
 
   def pages_urls()
@@ -28,37 +53,28 @@ class SearchResultsPresenter
       (1..@num_pages).each do |p|
         urls << "#{@base_url}?#{qs}&page=#{p}"
       end
-      puts "calculated pages urls #{urls.count}"
       urls
     end
   end
 
   def pretty_fqs()
-    # TODO: remove dependency on params.to_user_querystring()
     @pretty_fqs ||= begin
-      @fq.map do |fq|
-        {
+      pretty = []
+      @fq.each do |fq|
+        tokens = fq.split(":")
+        field = tokens.first
+        value = CGI.unescape(tokens.last)[1..-2]   # remove surrounding quotes
+        pretty << {
           original: fq,
-          pretty: CGI::unescape(fq).gsub('"', '').gsub(":", " > "),
+          field: field,
+          value: value,
+          pretty: field + " > " + value,
           remove_url: @base_url + '?' + @params.to_user_query_string(fq)
         }
       end
+      pretty
+    rescue
+      []
     end
-  end
-
-  def self.from_results(results, params, base_url)
-    p = SearchResultsPresenter.new(base_url, params)
-    p.form_values = params.to_form_values(false)
-    p.fq = params.fq
-    p.facets = results.facets
-    p.results = results.items
-    p.page = results.page
-    p.start = results.start
-    p.end = results.end
-    p.num_found = results.num_found
-    p.num_pages = results.num_pages
-    p.query = params.q == "*" ? "" : CGI.unescape(params.q)
-    p.search_qs = params.to_user_query_string
-    p
   end
 end
