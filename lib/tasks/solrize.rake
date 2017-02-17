@@ -36,7 +36,7 @@ namespace :vivo do
   end
 
   desc "Sends to Solr information about one organization"
-  task :solrize_org_one do
+  task :solrize_org_one => :environment do |cmd, args|
     solr = OrganizationSolrize.new(solr_url)
     id = "org-brown-univ-dept57"
     solr.add_one(id)
