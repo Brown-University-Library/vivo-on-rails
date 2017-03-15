@@ -756,6 +756,17 @@
       <str name="echoParams">explicit</str>
       <int name="rows">10</int>
       <!-- <str name="df">name_t</str> -->
+      <!-- hector was here -->
+      <str name="defType">edismax</str>
+      <!-- hector was here -->
+      <str name="qf">
+        name_t^1000
+        title_t^600
+        department_t^500
+        affiliations^450
+        research_areas^400
+        _text_
+      </str>
     </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of

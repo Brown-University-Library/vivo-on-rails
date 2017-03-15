@@ -26,7 +26,7 @@ namespace :vivo do
     vivo_id = args[:vivo_id]
     abort "No vivo_id was provided" if vivo_id == nil
     solr = FacultySolrize.new(solr_url)
-    puts solr.get_json(vivo_id)
+    puts solr.get_one(vivo_id)
   end
 
   desc "Sends to Solr information about all organizations"

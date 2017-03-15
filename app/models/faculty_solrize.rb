@@ -37,6 +37,10 @@ class FacultySolrize
     return if faculty == nil
     solr_obj = {
       id: faculty.id,
+      name_t: faculty.name,
+      title_t: faculty.title,
+      department_t: faculty.org_label,
+      overview_t: faculty.overview,
       record_type: faculty.record_type,
       affiliations: faculty.affiliations.map { |a| a.name},
       research_areas: faculty.research_areas,
