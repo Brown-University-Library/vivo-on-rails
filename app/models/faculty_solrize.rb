@@ -41,6 +41,8 @@ class FacultySolrize
       title_t: faculty.title,
       department_t: faculty.org_label,
       overview_t: faculty.overview,
+      email_s: faculty.email,
+      short_id_s: faculty.id.split("/").last,
       record_type: faculty.record_type,
       affiliations: faculty.affiliations.map { |a| a.name},
       research_areas: faculty.research_areas,

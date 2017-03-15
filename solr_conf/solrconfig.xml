@@ -760,6 +760,8 @@
       <str name="defType">edismax</str>
       <!-- hector was here -->
       <str name="qf">
+        short_id_s^2000
+        email_s^2000
         name_t^1000
         title_t^600
         department_t^500
