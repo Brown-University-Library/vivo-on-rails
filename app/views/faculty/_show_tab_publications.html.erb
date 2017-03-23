@@ -1,0 +1,36 @@
+<% if @presenter.has_publications %>
+
+  <% if locals[:add_tab] == true %>
+    <div id="publications" class="tab-pane">
+      <h3>&nbsp;</h3>
+  <% else %>
+    <h3>Publications</h3>
+  <% end %>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 id="relatedBy-Authorship" title="" class="panel-title">Contributor to </h3>
+        </div>
+
+        <div class="panel-body">
+          <table class="table table-hover">
+            <tbody>
+              <% @presenter.faculty.contributor_to.each do |c| %>
+                <tr class="publicationTableRow" role="listitem">
+                  <td class="citation-data">
+                    <span class="listDateTime"><%= c.authors %></span>
+                    <a href="<%= c.uri %>"><%= c.title %></a>
+                    <%= c.pub_info %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  <% if locals[:add_tab] == true %>
+    </div>
+  <% end %>
+
+<% end %>

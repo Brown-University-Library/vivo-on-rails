@@ -2,16 +2,16 @@
   <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section class="share-contact" role="region">
       <div id="photo-wrapper">
-        <%= image_tag(@faculty.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "190", class: "img-circle") %>
+        <%= image_tag(@presenter.faculty.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "190", class: "img-circle") %>
       </div>
       <h2 class="hidden-sm hidden-md hidden-lg">
-          <%= @faculty.name %>
+          <%= @presenter.faculty.name %>
       </h2>
 
       <!-- Contact Info -->
       <div class="emailsContainer">
         <h4>
-          <a href="mailto:<%= @faculty.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+          <a href="mailto:<%= @presenter.faculty.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
         </h4>
       </div>
 

@@ -1,0 +1,48 @@
+<% if @presenter.has_affiliations %>
+  <% if locals[:add_tab] == true %>
+    <div id="affiliation" class="tab-pane fade">
+      <h3>&nbsp;</h3>
+  <% else %>
+    <h3>Affiliation</h3>
+  <% end %>
+
+      <% if @presenter.faculty.collaborators.count > 0 %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 id="relatedBy-Authorship" title="" class="panel-title">Collaborators</h3>
+          </div>
+
+          <div class="panel-body">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>Title</th>
+                </tr>
+                <% @presenter.faculty.collaborators.each do |c| %>
+                  <tr class="tableRow" role="listitem">
+                    <td>
+                      <span class="listDateTime">
+                        <a href="<%= faculty_show_url(c.short_id) %>"><%= c.name %></a>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="listDateTime"><%= c.title %></span>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render "show_text_tab", locals: {
+        divId: "affiliations",
+        title: "Affiliations",
+        text: @presenter.faculty.affiliations_text} %>
+
+  <% if locals[:add_tab] == true %>
+    </div>
+  <% end %>
+<% end %>
