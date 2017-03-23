@@ -1,0 +1,21 @@
+<div class="clearfix visible-xs-block"></div>
+<div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
+  <div class="gap30"></div>
+  <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+    <section class="share-contact" role="region">
+      <div id="photo-wrapper">
+        <%= image_tag(item.thumbnail, width: "120", class: "img-circle") %>
+      </div>
+      <h4>
+        <span itemprop="name" class="fn">
+          <a href="<%= item.uri %>"><%= item.name %></a>
+        </span>
+      </h4>
+      <div class="emailsContainer">
+        <h4>
+          <a href="mailto:<%= item.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+        </h4>
+      </div>
+    </section>
+  </section>
+</div>

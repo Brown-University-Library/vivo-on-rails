@@ -6,8 +6,6 @@ class Search
     @solr = SolrLite::Solr.new(solr_url)
   end
 
-  # TODO: consider using a search result item class
-  # rather than mixing and matching Faculty/Org object
   def search(params)
     params.fl = ["id", "record_type", "json_txt"]
     results = @solr.search(params)
@@ -17,11 +15,11 @@ class Search
       when "ORGANIZATION"
         json = JSON.parse(doc["json_txt"].first)
         item = OrganizationItem.new(json)
-        results.items << item
+        results.items << SearchItem.from_organization(item)
       when "PEOPLE"
         json = JSON.parse(doc["json_txt"].first)
         item = FacultyListItem.new(json)
-        results.items << item
+        results.items << SearchItem.from_person(item)
       else
         # WTF?
       end

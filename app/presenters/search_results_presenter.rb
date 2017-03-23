@@ -1,6 +1,10 @@
 require "cgi"
 
 class SearchResultsPresenter
+
+  # needed for *_show_url methods
+  include Rails.application.routes.url_helpers
+
   attr_accessor :form_values, :fq, :query, :search_qs,
     :results, :page, :start, :end, :num_found, :num_pages
 
@@ -17,6 +21,17 @@ class SearchResultsPresenter
     # from results
     @facets = results.facets
     @results = results.items
+
+    @results.each do |item|
+      if item.type == "PEOPLE"
+        item.uri = faculty_show_url(item.vivo_id)
+        item.thumbnail = "person_placeholder.jpg" if item.thumbnail == nil
+      else
+        item.uri = organization_show_url(item.vivo_id)
+        item.thumbnail = "org_placeholder.jpg" if item.thumbnail == nil
+      end
+    end
+
     @page = results.page
     @start = results.start
     @end = results.end

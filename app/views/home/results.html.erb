@@ -34,14 +34,10 @@
                 <!-- <div class="row top-buffer"> -->
                 <div class="clearfix visible-lg-block"></div>
 
-                <% @presenter.results.each do |r| %>
+                <% @presenter.results.each do |item| %>
                   <div class="clearfix visible-sm-block"></div>
                   <div class="clearfix visible-xs-block"></div>
-                  <% if r.class.to_s == "FacultyListItem" %>
-                    <%= render "results_researcher", researcher: r %>
-                  <% else %>
-                    <%= render "results_org", researcher: r %>
-                  <% end %>
+                  <%= render "results_item", item: item %>
                 <% end %>
             </div>
 
