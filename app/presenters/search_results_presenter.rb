@@ -30,6 +30,9 @@ class SearchResultsPresenter
         item.uri = organization_show_url(item.vivo_id)
         item.thumbnail = "org_placeholder.jpg" if item.thumbnail == nil
       end
+      if item.title != nil && item.title.length > 50
+        item.title = item.title[0..47] + "..."
+      end
     end
 
     @page = results.page
