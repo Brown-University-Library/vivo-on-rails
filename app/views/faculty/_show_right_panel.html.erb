@@ -29,8 +29,6 @@
   </section>
 
   <div class="row">
-
-    <!-- tabs -->
     <div class="col-md-12">
       <ul class="nav nav-tabs" role="tablist">
         <!-- mark one as active -->
@@ -58,25 +56,24 @@
           <li role="presentation"><a data-toggle="tab" href="#viewall">View All</a></li>
         <% end %>
       </ul>
-    </div>
+    </div> <!-- col-md-12 -->
 
-    <!-- tabs content -->
-      <div class="tab-content">
-        <!-- TODO: use fade in active in the first one -->
-        <%= render "show_tab_publications", locals: {add_tab: true } %>
-        <%= render "show_tab_research", locals: {add_tab: true } %>
-        <%= render "show_tab_background", locals: {add_tab: true } %>
-        <%= render "show_tab_affiliations", locals: {add_tab: true }  %>
-        <%= render "show_tab_teaching", locals: {add_tab: true }  %>
-        <% if @presenter.has_details %>
-          <div id="viewall" class="tab-pane">
-            <%= render "show_tab_publications", locals: {add_tab: false } %>
-            <%= render "show_tab_research", locals: {add_tab: false } %>
-            <%= render "show_tab_background", locals: {add_tab: false } %>
-            <%= render "show_tab_affiliations", locals: {add_tab: false } %>
-            <%= render "show_tab_teaching", locals: {add_tab: false } %>
-        <% end %>
-
-      </div>
-  </div>
-</div>
+    <div class="tab-content">
+      <!-- TODO: use fade in active in the first one -->
+      <%= render "show_tab_publications", locals: {add_tab: true } %>
+      <%= render "show_tab_research", locals: {add_tab: true } %>
+      <%= render "show_tab_background", locals: {add_tab: true } %>
+      <%= render "show_tab_affiliations", locals: {add_tab: true }  %>
+      <%= render "show_tab_teaching", locals: {add_tab: true }  %>
+      <% if @presenter.has_details %>
+        <div id="viewall" class="tab-pane">
+          <%= render "show_tab_publications", locals: {add_tab: false } %>
+          <%= render "show_tab_research", locals: {add_tab: false } %>
+          <%= render "show_tab_background", locals: {add_tab: false } %>
+          <%= render "show_tab_affiliations", locals: {add_tab: false } %>
+          <%= render "show_tab_teaching", locals: {add_tab: false } %>
+        </div>
+      <% end %>
+    </div> <!-- tabs content -->
+  </div> <!-- row -->
+</div> <!-- col-md-9 -->
