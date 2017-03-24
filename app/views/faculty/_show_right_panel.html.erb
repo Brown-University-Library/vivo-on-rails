@@ -33,27 +33,27 @@
       <ul class="nav nav-tabs" role="tablist">
         <!-- mark one as active -->
         <% if @presenter.has_publications %>
-          <li role="presentation"><a data-toggle="tab" href="#publications">Publications</a></li>
+          <li role="presentation" id="publicationsTab" class="tabFinder"><a data-toggle="tab" href="#publications">Publications</a></li>
         <% end %>
 
         <% if @presenter.has_research %>
-          <li role="presentation"><a data-toggle="tab" href="#research">Research</a></li>
+          <li role="presentation" id="researchTab" class="tabFinder"><a data-toggle="tab" href="#research">Research</a></li>
         <% end %>
 
         <% if @presenter.has_background %>
-          <li role="presentation"><a data-toggle="tab" href="#background">Background</a></li>
+          <li role="presentation" id="backgroundTab" class="tabFinder"><a data-toggle="tab" href="#background">Background</a></li>
         <% end %>
 
         <% if @presenter.has_affiliations %>
-          <li role="presentation"><a data-toggle="tab" href="#affiliation">Affiliation</a></li>
+          <li role="presentation" id="affiliationTab" class="tabFinder"><a data-toggle="tab" href="#affiliation">Affiliation</a></li>
         <% end %>
 
         <% if @presenter.has_teaching %>
-          <li role="presentation"><a data-toggle="tab" href="#teaching">Teaching</a></li>
+          <li role="presentation" id="teachingTab" class="tabFinder"><a data-toggle="tab" href="#teaching">Teaching</a></li>
         <% end %>
 
         <% if @presenter.has_details %>
-          <li role="presentation"><a data-toggle="tab" href="#viewall">View All</a></li>
+          <li role="presentation" id="viewallTab" class="tabFinder"><a data-toggle="tab" href="#viewall">View All</a></li>
         <% end %>
       </ul>
     </div> <!-- col-md-12 -->
@@ -66,7 +66,7 @@
       <%= render "show_tab_affiliations", locals: {add_tab: true }  %>
       <%= render "show_tab_teaching", locals: {add_tab: true }  %>
       <% if @presenter.has_details %>
-        <div id="viewall" class="tab-pane">
+        <div id="viewall" class="tab-pane tabContentFinder">
           <%= render "show_tab_publications", locals: {add_tab: false } %>
           <%= render "show_tab_research", locals: {add_tab: false } %>
           <%= render "show_tab_background", locals: {add_tab: false } %>
@@ -77,3 +77,21 @@
     </div> <!-- tabs content -->
   </div> <!-- row -->
 </div> <!-- col-md-9 -->
+
+<script>
+$(document).ready(function() {
+  var tabId, contentId;
+  if(window.location.hash) {
+    // use the tab indicated in the URL
+    // TODO: handle if the tab is invalid
+    tabId = window.location.hash + "Tab";
+    contentId = window.location.hash;
+  } else {
+    // default to the first tab rendered
+    tabId = ".tabFinder";
+    contentId = ".tabContentFinder";
+  }
+  $(tabId).first().addClass("active");
+  $(contentId).first().addClass("tab-pane fade active in");
+});
+</script>
