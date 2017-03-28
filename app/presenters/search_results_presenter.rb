@@ -11,9 +11,14 @@ class SearchResultsPresenter
   def initialize(results, params, base_url)
     @base_url = base_url
 
+    # Force all links to reset to page 1 so that if the user selects
+    # a new facet or searches for a new term we show results starting
+    # from page 1.
+    params.page = 1
+
     # from params
     @params = params
-    @form_values = params.to_form_values(false)
+    @form_values = @params.to_form_values(false)
     @fq = params.fq
     @query = params.q == "*" ? "" : CGI.unescape(params.q)
     @search_qs = params.to_user_query_string
