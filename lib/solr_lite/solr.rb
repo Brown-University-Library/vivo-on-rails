@@ -34,6 +34,7 @@ module SolrLite
       end
       query_string += "&wt=json&indent=on"
       query_string += "&" + params.to_solr_query_string()
+      query_string += "&q.op=AND"
       url = "#{@solr_url}/select?#{query_string}"
       http_get(url)
     end
