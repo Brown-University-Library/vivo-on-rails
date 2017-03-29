@@ -1,6 +1,5 @@
 class SearchController < ApplicationController
   def index
-    byebug
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
     params = SolrLite::SearchParams.from_query_string(request.query_string)
