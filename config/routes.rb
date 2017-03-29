@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   get 'faculty/:id' => 'faculty#show', as: :faculty_show
   get 'faculty/' => 'faculty#index'
 
-  get 'home/search' => 'home#search'
-  get 'home' => 'home#index'
+  get 'search' => 'search#index'
 
+  get 'home' => 'home#index'
   get 'about' => 'home#about'
 
   get 'organization/:id' => 'organization#show', as: :organization_show

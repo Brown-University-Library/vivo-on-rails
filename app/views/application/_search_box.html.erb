@@ -5,7 +5,7 @@
         <div class="navbar-header">
         </div>
 
-        <form class="navbar-form navbar-left " action="<%= home_search_path() %>" method="GET">
+        <form class="navbar-form navbar-left " action="<%= search_path() %>" method="GET">
             <div class="form-group">
                 <span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span>
                 <input
@@ -47,16 +47,16 @@
 
             <ul class="dropdown-menu">
                 <li role="listitem">
-                    <a href="<%= home_search_url() %>" title="Home menu item">Home</a>
+                    <a href="<%= search_url() %>" title="Home menu item">Home</a>
                 </li>
                 <li role="listitem">
-                    <a href="<%= home_search_url() + '?&fq=record_type:"PEOPLE"' %>" title="People menu item">People</a>
+                    <a href="<%= search_url() + '?&fq=record_type:"PEOPLE"' %>" title="People menu item">People</a>
                 </li>
                 <li role="listitem">
-                    <a href="<%= home_search_url() + '?&fq=record_type:"ORGANIZATION"' %>" title="Organizations menu item">Organizations</a>
+                    <a href="<%= search_url() + '?&fq=record_type:"ORGANIZATION"' %>" title="Organizations menu item">Organizations</a>
                 </li>
                 <li role="listitem">
-                    <a href="<%= home_search_url() + '?' %>" title="Research areas menu item">Research (pending)</a>
+                    <a href="<%= search_url() + '?' %>" title="Research areas menu item">Research (pending)</a>
                 </li>
             </ul>
         </div>

@@ -7,7 +7,7 @@
           <h1>Researchers at Brown</h1>
         </div>
 
-        <form id="search-homepage" action="<%= home_search_path() %>" name="search-home" role="search" method="GET">
+        <form id="search-homepage" action="<%= search_path() %>" name="search-home" role="search" method="GET">
           <div class="input-group input-group-lg">
             <input class="form-control" name="q" placeholder="Search for an Expert..." type="text">
             <div class="input-group-btn">
@@ -35,19 +35,19 @@
 
 <div class="row icons-home">
   <div class="col-md-4">
-    <a href="<%= home_search_path() %>" id="icon1">
+    <a href="<%= search_path() %>" id="icon1">
       <span class="glyphicon glyphicon-user"></span>
       <h3>Search for a collaborator</h3>
     </a>
   </div>
   <div class="col-md-4">
-    <a href="<%= home_search_path() %>" id="icon2">
+    <a href="<%= search_path() %>" id="icon2">
       <span class="glyphicon glyphicon-pencil"></span>
       <h3>Find a supervisor</h3>
     </a>
   </div>
   <div class="col-md-4">
-   <a href="<%= home_search_path() %>" id="icon3">
+   <a href="<%= search_path() %>" id="icon3">
     <span class="glyphicon glyphicon-education"></span>
     <h3>Locate expert opinion</h3>
    </a>

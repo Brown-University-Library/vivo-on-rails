@@ -13,7 +13,7 @@
               <li class="category">
                   <span class="">
                     <% if value.remove_url == nil %>
-                      <a href="<%= home_search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_fq(value.text) %>"><%= value.text %></a>
+                      <a href="<%= search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_fq(value.text) %>"><%= value.text %></a>
                     <% else %>
                       <%= value.text %>
                       <a href="<%= value.remove_url %>">XXX</a>
