@@ -198,14 +198,14 @@ class Faculty
       select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title
       where {
          individual:#{id} citation:contributorTo ?uri .
-         ?uri citation:hasContributor individual:#{id} .
-         ?uri citation:volume ?volume .
-         ?uri citation:issue ?issue .
-         ?uri citation:date ?date .
-         ?uri citation:pages ?pages .
-         ?uri citation:authorList ?authors .
-         ?uri citation:publishedIn ?published_in .
-         ?uri rdfs:label ?title .
+         optional { ?uri citation:hasContributor individual:#{id} . }
+         optional { ?uri citation:volume ?volume . }
+         optional { ?uri citation:issue ?issue . }
+         optional { ?uri citation:date ?date . }
+         optional { ?uri citation:pages ?pages . }
+         optional { ?uri citation:authorList ?authors . }
+         optional { ?uri citation:publishedIn ?published_in . }
+         optional { ?uri rdfs:label ?title . }
        }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
