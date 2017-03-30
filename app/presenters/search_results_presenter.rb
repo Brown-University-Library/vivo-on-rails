@@ -6,7 +6,8 @@ class SearchResultsPresenter
   include Rails.application.routes.url_helpers
 
   attr_accessor :form_values, :fq, :query, :search_qs,
-    :results, :page, :start, :end, :num_found, :num_pages
+    :results, :pretty_facets,
+    :page, :start, :end, :num_found, :num_pages
 
   def initialize(results, params, base_url)
     @base_url = base_url
@@ -25,6 +26,7 @@ class SearchResultsPresenter
 
     # from results
     @facets = results.facets
+    @pretty_facets = set_remove_url_in_facets()
     @results = results.items
 
     @results.each do |item|
@@ -68,38 +70,6 @@ class SearchResultsPresenter
     end
   end
 
-  def pretty_facets()
-    # Note: This is a strange approach.
-    #
-    # @pretty_facets will be nil initially to indicate that we haven't
-    # calculated them. But when set, @pretty_facets is not a new value, it
-    # is just a reference to @facets (except that it only points to @facets
-    # when we have set the remove_uri value on these @facets.)
-    @pretty_facets ||= begin
-      # pretty_fqs has the list of active filter queries which amounts to
-      # the selected facets. We loop through all these pretty_fqs and find
-      # the matching facet/value in the list of facets and set the link
-      # that can be used to unselect that facet/value.
-      pretty_fqs().each do |pretty_fq|
-        # facets for this field
-        ff = @facets.select { |f| f.name == pretty_fq[:field] }
-        ff.each do |f|
-          # values for this facet
-          f.values.each do |v|
-            if v.text == pretty_fq[:value]
-              # this is the facet/value that we have selected,
-              # set the proper URL to remove it.
-              v.remove_url = pretty_fq[:remove_url]
-            end
-          end
-        end
-      end
-      @facets
-    rescue
-      []
-    end
-  end
-
   def pages_urls()
     @pages_urls ||= begin
       urls = []
@@ -110,4 +80,28 @@ class SearchResultsPresenter
       urls
     end
   end
+
+  private
+    def set_remove_url_in_facets()
+      # Each of the pretty_fqs represents a facet selected.
+      # Find the corresponding facet/value and set the remove_url for it.
+      pretty_fqs().each do |pretty_fq|
+        field = pretty_fq[:field]
+        value = pretty_fq[:value]
+        url = pretty_fq[:remove_url]
+        set_facet_remove_url(field, value, url)
+      end
+      @facets
+    end
+
+    def set_facet_remove_url(field, value, url)
+      facet = @facets.select { |f| f.name == field }
+      facet.each do |f|
+        f.values.each do |v|
+          if v.text == value
+            v.remove_url = url
+          end
+        end
+      end
+    end
 end
