@@ -195,10 +195,10 @@ class Faculty
 
   def self.get_contributor_to(id)
     sparql = <<-END_SPARQL
-      select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title
+      select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title ?venue_name
       where {
          individual:#{id} citation:contributorTo ?uri .
-         optional { ?uri citation:hasContributor individual:#{id} . }
+         ?uri citation:hasContributor individual:#{id} .
          optional { ?uri citation:volume ?volume . }
          optional { ?uri citation:issue ?issue . }
          optional { ?uri citation:date ?date . }
@@ -206,6 +206,10 @@ class Faculty
          optional { ?uri citation:authorList ?authors . }
          optional { ?uri citation:publishedIn ?published_in . }
          optional { ?uri rdfs:label ?title . }
+         optional {
+           ?uri citation:hasVenue ?venue .
+           ?venue rdfs:label ?venue_name . 
+         }
        }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]

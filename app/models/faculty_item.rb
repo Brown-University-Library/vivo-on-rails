@@ -1,14 +1,16 @@
 class FacultyItem
+  include ModelUtils # needed for set_values_from_hash
+
   attr_accessor :record_type, :id, :uri, :overview, :email, :org_label, :name,
     :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
-    :web_page_text, :web_page_uri
+    :web_page_text, :web_page_uri, :published_in
 
-  def initialize(values = nil )
+  def initialize(values = nil)
     init_defaults()
-    set_values(values)
+    set_values_from_hash(values)
     @id = uri
   end
 
@@ -19,6 +21,7 @@ class FacultyItem
     @awards = ""
     @collaborators = []
     @contributor_to = []
+    @published_in = []
     @education = []
     @email = ""
     @funded_research = ""
@@ -37,26 +40,18 @@ class FacultyItem
     @web_page_uri = ""
   end
 
-  def set_values(hash)
-    return if hash == nil
-    hash.each do |key, value|
-      getter = key.to_s
-      setter = key.to_s + "="
-      if self.respond_to?(setter)
-        if value.class == Array
-          if self.send(getter).class == Array
-            self.send(setter, value)
-          else
-            # If we got an array but we were not expecting one
-            # just get the first value (this is useful when
-            # handling values from Solr)
-            self.send(setter, value.first)
-          end
-        else
-          self.send(setter, value)
-        end
-      end
+  def contributor_to=(value)
+    @contributor_to = value
+
+    # Merge both contribution[:published_in] and
+    # contribution[:venue_name] into faculty.published_in
+    @published_in = []
+    @contributor_to.each do |c|
+      @published_in << c.published_in if c.published_in
+      @published_in << c.venue_name if c.venue_name
     end
+
+    @contributor_to
   end
 
   def self.from_hash(hash)

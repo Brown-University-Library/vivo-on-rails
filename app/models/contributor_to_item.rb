@@ -1,9 +1,9 @@
 require "./app/models/model_utils.rb"
 class ContributorToItem
-  include ModelUtils
+  include ModelUtils # needed for set_values_from_hash
 
   attr_accessor :uri, :authors, :title, :volume, :issue,
-    :date, :pages, :published_in
+    :date, :pages, :published_in, :venue_name
 
   def initialize(values)
     set_values_from_hash(values)
