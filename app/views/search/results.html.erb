@@ -29,6 +29,7 @@
       <div>
         <% if !@presenter.query.empty? %>
           for <b><%= @presenter.query %></b>
+          (<a href="<%= @presenter.remove_q_url %>">XXX</a>)
         <% end %>
         <% @presenter.pretty_fqs.each do |fq| %>
           (

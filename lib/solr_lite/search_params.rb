@@ -32,9 +32,10 @@ module SolrLite
 
     # Returns the string that we need render on the Browser to execute
     # a search with the current parameters.
-    def to_user_query_string(facet_to_ignore = nil)
+    def to_user_query_string(facet_to_ignore = nil, q_override = nil)
       qs = ""
-      if @q != "" && @q != "*"
+      q_value = q_override != nil ? q_override : @q
+      if q_value != "" && @q != "*"
         qs += "&q=#{@q}"
       end
       @fq.each do |filter|
