@@ -23,12 +23,12 @@ class SearchTest < Minitest::Test
   end
 
   def test_facets
-    facets = ["record_type", "affiliations.name"]
+    facets = ["record_type", "affiliations"]
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
     params = SolrLite::SearchParams.new("medicine", [], facets)
     search_results = searcher.search(params)
-    facet = search_results.facets.find {|f|f.name = "record_type"}
+    facet = search_results.facets.find {|f| f.name = "record_type"}
     assert facet.value_count("ORGANIZATION") > 0
     assert facet.value_count("PEOPLE") > 0
   end

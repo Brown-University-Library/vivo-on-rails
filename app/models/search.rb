@@ -1,3 +1,4 @@
+require "./app/models/search_item.rb"
 require "./app/models/faculty.rb"
 require "./lib/solr_lite/solr.rb"
 require "./lib/solr_lite/search_results.rb"
