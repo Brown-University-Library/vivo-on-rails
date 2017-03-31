@@ -1,11 +1,12 @@
 <div class="text-center hidden-print">
     <h2 class="sr-only">Pagination</h2>
     <ul class="pagination pagination-lg">
-        <% (1..@presenter.num_pages).each do |page| %>
+        <% (1..@presenter.num_pages).each_with_index do |page, index| %>
           <% css_class = @presenter.page == page ? "active" : "" %>
             <li class="<%= css_class %>">
                 <a href="<%= @presenter.pages_urls[page-1] %>"><%= page %></a>
             </li>
+            <% break if index == 10 %>
         <% end %>
     </ul>
 </div>

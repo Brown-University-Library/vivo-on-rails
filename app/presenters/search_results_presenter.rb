@@ -7,7 +7,8 @@ class SearchResultsPresenter
 
   attr_accessor :form_values, :fq, :query, :search_qs,
     :results, :pretty_facets,
-    :page, :start, :end, :num_found, :num_pages
+    :page, :start, :end, :num_found, :num_pages,
+    :previous_url, :next_url
 
   def initialize(results, params, base_url)
     @base_url = base_url
@@ -47,6 +48,9 @@ class SearchResultsPresenter
     @end = results.end
     @num_found = results.num_found
     @num_pages = results.num_pages
+
+    @previous_url = page_url(@page-1)
+    @next_url = page_url(@page+1)
   end
 
   def pretty_fqs()
@@ -73,12 +77,16 @@ class SearchResultsPresenter
   def pages_urls()
     @pages_urls ||= begin
       urls = []
-      qs = @search_qs.gsub(/page=[0-9]*/,"").chomp("&")
       (1..@num_pages).each do |p|
-        urls << "#{@base_url}?#{qs}&page=#{p}"
+        urls << page_url(p)
       end
       urls
     end
+  end
+
+  def page_url(page_number)
+    qs = @search_qs.gsub(/page=[0-9]*/,"").chomp("&")
+    "#{@base_url}?#{qs}&page=#{page_number}"
   end
 
   private

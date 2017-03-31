@@ -1,49 +1,64 @@
 <%= render "search_box" %>
 
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10 col-md-push-2">
+      <!-- 1/N results found -->
+      <div id="search-result-count" class="text-muted">
+          <% if @presenter.page == 1 %>
+            « Previous |
+          <% else %>
+            <a href="<%= @presenter.previous_url %>" >« Previous | </a>
+          <% end %>
 
-    <div class="row">
-        <div class="col-md-10 col-md-push-2">
-            <!-- 1/N results found -->
-            <div id="search-result-count" class="text-muted">
-                <span id="search-page-start"><%= @presenter.start + 1 %></span>
-                -
-                <span id="search-page-end"><%= @presenter.end %></span>
-                of
-                <span id="search-total-matching"><%= @presenter.num_found %></span>
-                search results
-                <% if !@presenter.query.empty? %>
-                  for <b><%= @presenter.query %></b>
-                <% end %>
-                <% @presenter.pretty_fqs.each do |fq| %>
-                  (
-                  <%= fq[:pretty] %>
-                  <a href="<%= fq[:remove_url] %>">XXX</a>
-                  )
-                <% end %>
-            </div>
+          <span id="search-page-start"><%= @presenter.start + 1 %></span>
+          -
+          <span id="search-page-end"><%= @presenter.end %></span>
+          of
+          <span id="search-total-matching"><%= @presenter.num_found %></span>
+          search results
 
-            <h2 class="visible-print">Results</h2>
+          <% if @presenter.page >= (@presenter.num_pages) %>
+            | Next »
+          <% else %>
+            <a href="<%= @presenter.next_url %>" >| Next »</a>
+          <% end %>
+      </div>
 
-            <!-- search results -->
-            <div class="row">
-                <!--added for single row approach -->
-                <h3 class="hidden">Fully-matching results</h3>
+      <!-- search terms used -->
+      <div>
+        <% if !@presenter.query.empty? %>
+          for <b><%= @presenter.query %></b>
+        <% end %>
+        <% @presenter.pretty_fqs.each do |fq| %>
+          (
+          <%= fq[:pretty] %>
+          <a href="<%= fq[:remove_url] %>">XXX</a>
+          )
+        <% end %>
+      </div>
 
-                <div class="clearfix visible-md-block"></div>
-                <!-- <div class="row top-buffer"> -->
-                <div class="clearfix visible-lg-block"></div>
+      <h2 class="visible-print">Results</h2>
 
-                <% @presenter.results.each do |item| %>
-                  <div class="clearfix visible-sm-block"></div>
-                  <div class="clearfix visible-xs-block"></div>
-                  <%= render "results_item", item: item %>
-                <% end %>
-            </div>
+      <!-- search results -->
+      <div class="row">
+          <!--added for single row approach -->
+          <h3 class="hidden">Fully-matching results</h3>
 
-            <%= render "results_pagination" %>
+          <div class="clearfix visible-md-block"></div>
+          <!-- <div class="row top-buffer"> -->
+          <div class="clearfix visible-lg-block"></div>
 
-        </div>
-        <%= render "results_facets" %>
+          <% @presenter.results.each do |item| %>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-xs-block"></div>
+            <%= render "results_item", item: item %>
+          <% end %>
+      </div>
+
+      <%= render "results_pagination" %>
+
     </div>
+  <%= render "results_facets" %>
+  </div>
 </div>
