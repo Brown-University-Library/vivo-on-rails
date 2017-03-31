@@ -16,8 +16,9 @@ class ContributorToItem
 
   def pub_info
     info = ""
-    if @published_in != nil
-      info += "#{@published_in}. "
+    publisher_info = publisher()
+    if publisher_info != nil
+      info += "#{publisher_info}. "
     end
     if @year != nil
       info += "#{@year}; "
@@ -33,4 +34,18 @@ class ContributorToItem
     end
     info
   end
+
+  private
+    def publisher
+      case
+      when @published_in == nil && @venue_name == nil
+        nil
+      when @published_in == nil && @venue_name != nil
+        @venue_name
+      when @published_in != nil && @venue_name == nil
+        @published_in
+      else
+        @published_in + "/" +  @venue_name
+      end
+    end
 end
