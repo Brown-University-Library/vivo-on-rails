@@ -10,9 +10,9 @@
         <div class="panel-body">
           <ul class="list-unstyled">
             <% facet.values.each_with_index do |value, i| %>
-              <% li_class = "category facet_" + facet.name + " " + (i > 10 ? "hidden" : "") %>
-                <li class="<%= li_class %>" >
-                  <span class="">
+              <% if i < 10 || value.remove_url != nil %>
+                <li>
+                  <span>
                     <% if value.remove_url == nil %>
                       <a href="<%= search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_fq(value.text) %>"><%= value.text %></a>
                     <% else %>
@@ -23,14 +23,12 @@
                   &nbsp;<span class="badge pull-right">
                       <span class="categoryCount"><%= value.count %></span>
                   </span>
-              </li>
+              <% end %>
             <% end %>
           </ul>
 
           <% if facet.values.count > 10 %>
-            <button type="button" class="btn btn-link btn-sm search-toggle-more-categories" data-more="More…" data-less="Less…" data-state="more" title="Show more categories from this facet">
-                <small class="glyphicon glyphicon-plus"></small>&nbsp;<span>More…</span>
-            </button>
+            <%= render "facets_more", facet: facet %>
           <% end %>
         </div>
       <% end %>
