@@ -8,6 +8,7 @@ class SearchResultsPresenter
   attr_accessor :form_values, :fq, :query, :search_qs,
     :results, :pretty_facets,
     :page, :start, :end, :num_found, :num_pages,
+    :page_start, :page_end,
     :previous_url, :next_url, :remove_q_url
 
   def initialize(results, params, base_url)
@@ -50,6 +51,20 @@ class SearchResultsPresenter
     @end = results.end
     @num_found = results.num_found
     @num_pages = results.num_pages
+
+    pages_to_display = 10
+    if @num_pages < pages_to_display
+      @page_start = 1
+      @page_end = @num_pages
+    else
+      if @page + pages_to_display <= @num_pages
+        @page_start = @page
+        @page_end = @page + pages_to_display - 1
+      else
+        @page_start = @num_pages - pages_to_display + 1
+        @page_end = @num_pages
+      end
+    end
 
     @previous_url = page_url(@page-1)
     @next_url = page_url(@page+1)
