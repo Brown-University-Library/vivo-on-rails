@@ -23,7 +23,9 @@ class SearchTest < Minitest::Test
   end
 
   def test_facets
-    facets = ["record_type", "affiliations"]
+    facet_A = SolrLite::FacetField.new("record_type", "Record Type")
+    facet_B = SolrLite::FacetField.new("affiliations", "Affiliations")
+    facets = [facet_A, facet_B]
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url)
     params = SolrLite::SearchParams.new("medicine", [], facets)

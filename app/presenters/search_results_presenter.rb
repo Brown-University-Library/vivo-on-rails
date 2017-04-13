@@ -77,11 +77,13 @@ class SearchResultsPresenter
         tokens = fq.split(":")
         field = tokens.first
         value = CGI.unescape(tokens.last)[1..-2]   # remove surrounding quotes
+        facet = @params.facet_for_field(field)
         pretty << {
           original: fq,
-          field: field,
+          field: facet.name,
           value: value,
-          pretty: field + " > " + value,
+          title: facet.title,
+          pretty: facet.title + " > " + value,
           remove_url: @base_url + '?' + @params.to_user_query_string(fq)
         }
       end
@@ -114,19 +116,8 @@ class SearchResultsPresenter
         field = pretty_fq[:field]
         value = pretty_fq[:value]
         url = pretty_fq[:remove_url]
-        set_facet_remove_url(field, value, url)
+        @params.set_facet_remove_url(field, value, url)
       end
       @facets
-    end
-
-    def set_facet_remove_url(field, value, url)
-      facet = @facets.select { |f| f.name == field }
-      facet.each do |f|
-        f.values.each do |v|
-          if v.text == value
-            v.remove_url = url
-          end
-        end
-      end
     end
 end

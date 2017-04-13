@@ -16,6 +16,17 @@ module SolrLite
       @sort = ""
     end
 
+    def facet_for_field(field)
+      @facets.find {|f| f.name == field}
+    end
+
+    def set_facet_remove_url(field, value, url)
+      facet = facet_for_field(field)
+      if facet != nil
+        facet.set_remove_url_for(value, url)
+      end
+    end
+
     def start_row()
       (@page - 1) * @page_size
     end
@@ -69,7 +80,7 @@ module SolrLite
       if @facets.count > 0
         qs += "&facet=on"
         @facets.each do |f|
-          qs += "&facet.field=#{f}&f.#{f}.facet.mincount=1"
+          qs += "&facet.field=#{f.name}&f.#{f.name}.facet.mincount=1"
         end
       end
       qs
@@ -97,9 +108,9 @@ module SolrLite
       "q=#{@q}\nfq=#{@fq}"
     end
 
-    def self.from_query_string(qs, facets = [])
+    def self.from_query_string(qs, facet_fields = [])
       params = SearchParams.new
-      params.facets = facets
+      params.facets = facet_fields
       tokens = qs.split("&")
       tokens.each do |token|
         values = token.split("=")

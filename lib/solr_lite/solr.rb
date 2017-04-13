@@ -14,12 +14,12 @@ module SolrLite
     # Fetches a Solr document by id.
     # Returns the document found (or nil if nothing was found)
     # Raises an exception if more than one doc was found.
-    def get(id, q_field = "q", fl = "id,json_txt")
+    def get(id, q_field = "q", fl = "*")
       query_string = "#{q_field}=id:#{id_encode(id)}"
       query_string += "&fl=#{fl}"
       query_string += "&wt=json&indent=on"
       url = URI.encode("#{@solr_url}/select?#{query_string}")
-      solr_response = http_get(url)
+      solr_response = SearchResults.new(http_get(url), nil)
       if solr_response.num_found > 1
         raise "More than one record found for id #{id}"
       end
@@ -36,12 +36,12 @@ module SolrLite
       query_string += "&" + params.to_solr_query_string()
       query_string += "&q.op=AND"
       url = "#{@solr_url}/select?#{query_string}"
-      http_get(url)
+      SearchResults.new(http_get(url), params)
     end
 
     # shortcut for search
-    def search_text(terms, facets = ["record_type", "affiliations.name"])
-      params = SearchParams.new(terms, facets)
+    def search_text(terms)
+      params = SearchParams.new(terms)
       search(params)
     end
 
@@ -116,7 +116,7 @@ module SolrLite
         request["Content-Type"] = "application/json"
         response = http.request(request)
         log_elapsed(start, "Solr HTTP GET")
-        SearchResults.new(JSON.parse(response.body))
+        JSON.parse(response.body)
       end
 
       def id_encode(id)

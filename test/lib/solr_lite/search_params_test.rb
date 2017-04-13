@@ -2,30 +2,36 @@ require "minitest/autorun"
 require "byebug"
 require "./lib/solr_lite/search_params.rb"
 class SearchParamsTest < Minitest::Test
+
+  def default_facets
+    facet_A = SolrLite::FacetField.new("fieldA", "Field A")
+    facet_B = SolrLite::FacetField.new("fieldB", "Field B")
+    [facet_A, facet_B]
+  end
+
   def test_to_user_query_string
     # Search param defaults
     q = "hello"
     fq = []
-    facets = ["fieldA", "fieldB"]
-    params = SolrLite::SearchParams.new(q, fq, facets)
+    params = SolrLite::SearchParams.new(q, fq, default_facets())
     assert params.q = "hello"
     assert params.fq = []
     assert params.page == 1
     assert params.page_size == 20
-    assert params.facets.include?("fieldA")
-    assert params.facets.include?("fieldB")
+    assert params.facet_for_field("fieldA") != nil
+    assert params.facet_for_field("fieldB") != nil
 
     # From params to query string
     qs = params.to_user_query_string
     assert qs.include?("q=hello")
 
     # From query string to params
-    params2 = SolrLite::SearchParams.from_query_string(qs, facets)
+    params2 = SolrLite::SearchParams.from_query_string(qs, default_facets())
     assert params2.q == "hello"
     assert params2.page == 1
     assert params2.page_size == 20
-    assert params2.facets.include?("fieldA")
-    assert params2.facets.include?("fieldB")
+    assert params2.facet_for_field("fieldA") != nil
+    assert params2.facet_for_field("fieldB") != nil
 
     # With different page size and page numbers
     params2.page = 2
@@ -39,8 +45,7 @@ class SearchParamsTest < Minitest::Test
   def test_to_solr_query_string
     q = "hello"
     fq = ["F1:V1"]
-    facets = ["fieldA", "fieldB"]
-    params = SolrLite::SearchParams.new(q, fq, facets)
+    params = SolrLite::SearchParams.new(q, fq, default_facets())
     qs = params.to_solr_query_string
     assert qs.include?("&q=hello")
     assert qs.include?("&rows=20")

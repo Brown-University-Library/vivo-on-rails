@@ -3,11 +3,12 @@ module SolrLite
   # TODO: this should be renamed to SolrResponse
   class SearchResults
     attr_accessor :items
-    def initialize(solr_response)
+    def initialize(solr_response, params)
       @solr_response = solr_response
       # client to set this value with custom representation of solr_docs
       @items = []
       @facets_cache = nil
+      @params = params
     end
 
     def ok?
@@ -74,9 +75,9 @@ module SolrLite
         return [] if @solr_response["facet_counts"] == nil
         cache = []
         solr_facets = @solr_response["facet_counts"]["facet_fields"]
-        solr_facets.each do |facet|
-          field = FacetField.new(facet[0])
-          values = facet[1]
+        solr_facets.each do |solr_facet|
+          field = @params.facet_for_field(solr_facet[0])
+          values = solr_facet[1]
           pairs = values.count/2
           for pair in (1..pairs)
             index = (pair-1) * 2

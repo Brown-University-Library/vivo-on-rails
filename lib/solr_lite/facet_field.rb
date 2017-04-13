@@ -10,9 +10,10 @@ module SolrLite
       end
     end
 
-    attr_accessor :name, :values
-    def initialize(name)
-      @name = name
+    attr_accessor :name, :title, :values
+    def initialize(name, display_value)
+      @name = name # field name in Solr
+      @title = display_value
       @values = []
     end
 
@@ -29,6 +30,13 @@ module SolrLite
       return 0 if v == nil
       v.count
     end
-  end
 
+    def set_remove_url_for(value, url)
+      @values.each do |v|
+        if v.text == value
+          v.remove_url = url
+        end
+      end
+    end
+  end
 end
