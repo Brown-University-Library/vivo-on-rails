@@ -3,6 +3,9 @@
   <div id="facet-4" class="facet">
     <div class="panel panel-default">
       <% @presenter.facets.each do |facet| %>
+
+        <% next if facet.values.count == 0 %>
+
         <div class="panel-heading">
           <h3 class="facetLabel"><%= facet.title %></h3>
         </div>
@@ -17,7 +20,10 @@
                       <a href="<%= search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_fq(value.text) %>"><%= value.text %></a>
                     <% else %>
                       <%= value.text %>
-                      <a href="<%= value.remove_url %>">XXX</a>
+                      <a href="<%= value.remove_url %>">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="sr-only">Remove facet <%= value.text %></span>
+                      </a>
                     <% end %>
                   </span>
                   &nbsp;<span class="badge pull-right">

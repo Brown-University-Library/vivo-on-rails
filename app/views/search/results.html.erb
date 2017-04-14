@@ -29,10 +29,17 @@
       <div>
         <% if !@presenter.query.empty? %>
           for <b><%= @presenter.query %></b>
-          (<a href="<%= @presenter.remove_q_url %>">XXX</a>)
+          <a href="<%= @presenter.remove_q_url %>">
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="sr-only">Remove search term <%= @presenter.query %></span>
+          </a>
         <% end %>
         <% @presenter.fq.each do |fq| %>
-          (<%= fq.title %> > <%= fq.value %> <a href="<%= fq.remove_url %>">XXX</a>)
+          (<%= fq.title %> > <%= fq.value %>
+            <a href="<%= fq.remove_url %>">
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class="sr-only">Remove facet <%= fq.value %></span>
+            </a>)
         <% end %>
       </div>
 
