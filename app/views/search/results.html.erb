@@ -31,11 +31,8 @@
           for <b><%= @presenter.query %></b>
           (<a href="<%= @presenter.remove_q_url %>">XXX</a>)
         <% end %>
-        <% @presenter.pretty_fqs.each do |fq| %>
-          (
-          <%= fq[:pretty] %>
-          <a href="<%= fq[:remove_url] %>">XXX</a>
-          )
+        <% @presenter.fq.each do |fq| %>
+          (<%= fq.title %> > <%= fq.value %> <a href="<%= fq.remove_url %>">XXX</a>)
         <% end %>
       </div>
 

@@ -1,3 +1,4 @@
+require "./lib/solr_lite/filter_query.rb"
 require "./lib/solr_lite/facet_field.rb"
 module SolrLite
   class SearchParams
@@ -8,8 +9,8 @@ module SolrLite
 
     def initialize(q = "", fq = [], facets = [], page = DEFAULT_PAGE, page_size = DEFAULT_PAGE_SIZE)
       @q = q
-      @fq = fq
-      @facets = facets   # array of FacetField
+      @fq = fq          # array of FilterQuery
+      @facets = facets  # array of FacetField
       @page = page
       @page_size = page_size
       @fl = nil
@@ -43,6 +44,10 @@ module SolrLite
 
     # Returns the string that we need render on the Browser to execute
     # a search with the current parameters.
+    #
+    # facet_to_ignore: a FilterQuery object with a value to ignore when
+    #   creating the query string.
+    # q_override: a string with a Solr query to use instead of the current q value
     def to_user_query_string(facet_to_ignore = nil, q_override = nil)
       qs = ""
       q_value = q_override != nil ? q_override : @q
@@ -50,10 +55,10 @@ module SolrLite
         qs += "&q=#{@q}"
       end
       @fq.each do |filter|
-        if facet_to_ignore == filter
+        if facet_to_ignore != nil && filter.solr_value == facet_to_ignore.solr_value
           # don't add this to the query string
         else
-          qs += "&fq=#{filter}"
+          qs += "&fq=#{filter.solr_value}"
         end
       end
       qs += "&rows=#{@page_size}" if @page_size != DEFAULT_PAGE_SIZE
@@ -70,7 +75,7 @@ module SolrLite
         qs += "&q=#{@q}"
       end
       @fq.each do |filter|
-        qs += "&fq=#{filter}"
+        qs += "&fq=#{filter.solr_value}"
       end
       qs += "&rows=#{@page_size}"
       qs += "&start=#{start_row()}"
@@ -94,7 +99,7 @@ module SolrLite
       # Notice that we create an individual fq_n HTML form value for each
       # fq value because Rails does not like the same value on the form.
       @fq.each_with_index do |filter, i|
-        values << {name: "fq_#{i}", value: filter}
+        values << {name: "fq_#{i}", value: filter.solr_value}
       end
 
       values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
@@ -128,13 +133,13 @@ module SolrLite
           # Query string contains fq when _we_ build the query string, for
           # example as the user clicks on different facets on the UI.
           # A query string can have multiple fq values.
-          params.fq << value
+          params.fq << FilterQuery.from_query_string(value)
         when name.start_with?("fq_")
           # Query string contains fq_n when _Rails_ pushes HTML FORM values to
           # the query string. Rails does not like duplicate values in forms
           # and therefore we force them to be different by appending a number
           # to them (fq_1, f1_2, ...)
-          params.fq << CGI::unescape(value)
+          params.fq << FilterQuery.from_query_string(value)
         end
       end
       params

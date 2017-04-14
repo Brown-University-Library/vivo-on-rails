@@ -5,11 +5,10 @@ class SearchResultsPresenter
   # needed for *_show_url methods
   include Rails.application.routes.url_helpers
 
-  attr_accessor :form_values, :fq, :query, :search_qs,
-    :results, :pretty_facets,
-    :page, :start, :end, :num_found, :num_pages,
-    :page_start, :page_end,
-    :previous_url, :next_url, :remove_q_url
+  attr_accessor :form_values, :fq, :facets, :query, :search_qs, :results,
+    :page, :start, :end, :num_found, :num_pages, :page_start, :page_end,
+    :previous_url, :next_url,
+    :remove_q_url
 
   def initialize(results, params, base_url)
     @base_url = base_url
@@ -29,8 +28,8 @@ class SearchResultsPresenter
     @remove_q_url = "#{@base_url}?#{remove_q_qs}"
 
     # from results
+    set_remove_url_in_facets()
     @facets = results.facets
-    @pretty_facets = set_remove_url_in_facets()
     @results = results.items
 
     @results.each do |item|
@@ -70,29 +69,6 @@ class SearchResultsPresenter
     @next_url = page_url(@page+1)
   end
 
-  def pretty_fqs()
-    @pretty_fqs ||= begin
-      pretty = []
-      @fq.each do |fq|
-        tokens = fq.split(":")
-        field = tokens.first
-        value = CGI.unescape(tokens.last)[1..-2]   # remove surrounding quotes
-        facet = @params.facet_for_field(field)
-        pretty << {
-          original: fq,
-          field: facet.name,
-          value: value,
-          title: facet.title,
-          pretty: facet.title + " > " + value,
-          remove_url: @base_url + '?' + @params.to_user_query_string(fq)
-        }
-      end
-      pretty
-    rescue
-      []
-    end
-  end
-
   def pages_urls()
     @pages_urls ||= begin
       urls = []
@@ -110,14 +86,16 @@ class SearchResultsPresenter
 
   private
     def set_remove_url_in_facets()
-      # Each of the pretty_fqs represents a facet selected.
-      # Find the corresponding facet/value and set the remove_url for it.
-      pretty_fqs().each do |pretty_fq|
-        field = pretty_fq[:field]
-        value = pretty_fq[:value]
-        url = pretty_fq[:remove_url]
-        @params.set_facet_remove_url(field, value, url)
+      @fq.each do |fq|
+        remove_url = @base_url + '?' + @params.to_user_query_string(fq)
+
+        # set the remove URL in the facet/value
+        facet = @params.facet_for_field(fq.field)
+        facet.set_remove_url_for(fq.value, remove_url)
+
+        # ...and in the fq
+        fq.title = facet.title
+        fq.remove_url = remove_url
       end
-      @facets
     end
 end
