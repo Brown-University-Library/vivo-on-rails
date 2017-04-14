@@ -90,6 +90,7 @@ class SearchResultsPresenter
 
         # set the remove URL in the facet/value
         facet = @params.facet_for_field(fq.field)
+        next if facet == nil
         facet.set_remove_url_for(fq.value, remove_url)
 
         # ...and in the fq

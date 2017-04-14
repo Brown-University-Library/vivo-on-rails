@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
     params.q = "*" if params.q == ""
 
-    if request.params["h"] != nil
+    if request.params["home"] != nil
       # default to people if coming from the home page
       params.fq << SolrLite::FilterQuery.new("record_type", "PEOPLE")
     end

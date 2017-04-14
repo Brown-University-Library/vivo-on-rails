@@ -21,6 +21,10 @@ module SolrLite
       "#{@name}:\"#{text}\""
     end
 
+    def to_qs(text)
+      "#{@name}|#{text}"
+    end
+
     def add_value(text, count)
       @values << FacetValue.new(text, count)
     end

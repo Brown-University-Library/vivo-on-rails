@@ -58,7 +58,7 @@ module SolrLite
         if facet_to_ignore != nil && filter.solr_value == facet_to_ignore.solr_value
           # don't add this to the query string
         else
-          qs += "&fq=#{filter.solr_value}"
+          qs += "&fq=#{filter.qs_value}"
         end
       end
       qs += "&rows=#{@page_size}" if @page_size != DEFAULT_PAGE_SIZE
@@ -105,7 +105,7 @@ module SolrLite
       # We create an individual fq_n HTML form value for each
       # fq value because Rails does not like the same value on the form.
       @fq.each_with_index do |filter, i|
-        values << {name: "fq_#{i}", value: filter.solr_value}
+        values << {name: "fq_#{i}", value: filter.qs_value}
       end
 
       values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
@@ -126,6 +126,7 @@ module SolrLite
         values = token.split("=")
         name = values[0]
         value = values[1]
+        fq = nil
         next if value == nil || value.empty?
         case
         when name == "q"
@@ -134,17 +135,19 @@ module SolrLite
           params.page_size = value.to_i
         when name == "page"
           params.page = value.to_i
-        when name == "fq"
+        when name == "fq" || name.start_with?("fq_")
           # Query string contains fq when _we_ build the query string, for
           # example as the user clicks on different facets on the UI.
           # A query string can have multiple fq values.
-          params.fq << FilterQuery.from_query_string(value)
-        when name.start_with?("fq_")
+          #
           # Query string contains fq_n when _Rails_ pushes HTML FORM values to
           # the query string. Rails does not like duplicate values in forms
           # and therefore we force them to be different by appending a number
           # to them (fq_1, f1_2, ...)
-          params.fq << FilterQuery.from_query_string(value)
+          fq = FilterQuery.from_query_string(value)
+          if fq != nil
+            params.fq << fq
+          end
         end
       end
       params
