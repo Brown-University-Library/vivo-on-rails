@@ -106,7 +106,7 @@ module SolrLite
       def http_get(url)
         start = Time.now
         log_msg("Solr HTTP GET #{url}")
-        uri = URI.parse(url)
+        uri = URI.parse(URI.encode(url))
         http = Net::HTTP.new(uri.host, uri.port)
         if url.start_with?("https://")
           http.use_ssl = true
