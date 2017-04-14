@@ -18,7 +18,7 @@ module SolrLite
       query_string = "#{q_field}=id:#{id_encode(id)}"
       query_string += "&fl=#{fl}"
       query_string += "&wt=json&indent=on"
-      url = URI.encode("#{@solr_url}/select?#{query_string}")
+      url = "#{@solr_url}/select?#{query_string}"
       solr_response = SearchResults.new(http_get(url), nil)
       if solr_response.num_found > 1
         raise "More than one record found for id #{id}"
