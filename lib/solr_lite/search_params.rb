@@ -9,7 +9,7 @@ module SolrLite
     def initialize(q = "", fq = [], facets = [], page = DEFAULT_PAGE, page_size = DEFAULT_PAGE_SIZE)
       @q = q
       @fq = fq
-      @facets = facets
+      @facets = facets   # array of FacetField
       @page = page
       @page_size = page_size
       @fl = nil

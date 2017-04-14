@@ -5,10 +5,12 @@ module SolrLite
     attr_accessor :items
     def initialize(solr_response, params)
       @solr_response = solr_response
-      # client to set this value with custom representation of solr_docs
-      @items = []
-      @facets_cache = nil
       @params = params
+      set_facet_values()
+
+      # This value can be set by the client if we want to use a custom
+      # representation of solr_docs
+      @items = []
     end
 
     def ok?
@@ -37,8 +39,9 @@ module SolrLite
     end
 
     def num_pages
+      return 0 if page_size == 0
       pages = (num_found / page_size).to_i
-      pages +=1 if (num_found % page_size) != 0
+      pages += 1 if (num_found % page_size) != 0
       pages
     end
 
@@ -69,26 +72,30 @@ module SolrLite
       @solr_response["response"]["docs"]
     end
 
-    # Array of FacetFields
     def facets
-      @facets_cache ||= begin
-        return [] if @solr_response["facet_counts"] == nil
-        cache = []
-        solr_facets = @solr_response["facet_counts"]["facet_fields"]
-        solr_facets.each do |solr_facet|
-          field = @params.facet_for_field(solr_facet[0])
-          values = solr_facet[1]
-          pairs = values.count/2
-          for pair in (1..pairs)
-            index = (pair-1) * 2
-            text = values[index]
-            count = values[index+1]
-            field.add_value(text, count)
-          end
-          cache << field
+      @params.facets
+    end
+
+    def set_facet_values()
+      return if @solr_response["facet_counts"] == nil
+      solr_facets = @solr_response["facet_counts"]["facet_fields"]
+      solr_facets.each do |solr_facet|
+        # solr_facet is an array with two elements, e.g.
+        # ["record_type", ["PEOPLE", 32, "ORGANIZATION", 4]]
+        #
+        # the first element has the field for the facet (record_type)
+        # the second element is an array with of value/count pairs (PEOPLE/32, ORG/4)
+        field_name = solr_facet[0]
+        facet_field = @params.facet_for_field(field_name)
+        values = solr_facet[1]
+        pairs = values.count/2
+        for pair in (1..pairs)
+          index = (pair-1) * 2
+          text = values[index]
+          count = values[index+1]
+          facet_field.add_value(text, count)
         end
-        cache
       end
     end
-  end
-end
+  end # class
+end # module
