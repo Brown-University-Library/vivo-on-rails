@@ -208,7 +208,7 @@ class Faculty
          optional { ?uri rdfs:label ?title . }
          optional {
            ?uri citation:hasVenue ?venue .
-           ?venue rdfs:label ?venue_name . 
+           ?venue rdfs:label ?venue_name .
          }
        }
     END_SPARQL

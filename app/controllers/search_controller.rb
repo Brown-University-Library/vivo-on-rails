@@ -4,6 +4,12 @@ class SearchController < ApplicationController
     searcher = Search.new(solr_url)
     params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
     params.q = "*" if params.q == ""
+
+    if request.params["h"] != nil
+      # default to people if coming from the home page
+      params.fq << SolrLite::FilterQuery.new("record_type", "PEOPLE")
+    end
+
     search_results = searcher.search(params)
     @presenter = SearchResultsPresenter.new(search_results, params, search_url())
     render "results"

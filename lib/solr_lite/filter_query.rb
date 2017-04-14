@@ -3,11 +3,12 @@ module SolrLite
   # and value the value to filter by. In a Solr query are represented
   # as "fq=field:value"
   class FilterQuery
-    attr_accessor :solr_value, :field, :value, :title, :remove_url
-    def initialize(solr_value, field, value)
-      @solr_value = solr_value
+    attr_reader :solr_value, :field, :value
+    attr_accessor :title, :remove_url
+    def initialize(field, value)
       @field = field
       @value = value
+      @solr_value = "#{field}:\"#{value}\""
       @title = field      # default to field
       @remove_url = nil
     end
@@ -23,8 +24,7 @@ module SolrLite
       return nil if tokens.count != 2
       field = tokens[0]
       value = strip_quotes(tokens[1])
-      solr_value = "#{field}:\"#{value}\""
-      FilterQuery.new(solr_value, field, value)
+      FilterQuery.new(field, value)
     end
 
     private
