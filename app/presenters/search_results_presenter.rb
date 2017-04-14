@@ -20,12 +20,11 @@ class SearchResultsPresenter
 
     # from params
     @params = params
-    @form_values = @params.to_form_values(false)
+    @form_values = @params.to_form_values()
     @fq = params.fq
     @query = params.q == "*" ? "" : CGI.unescape(params.q)
-    @search_qs = params.to_user_query_string
-    remove_q_qs = params.to_user_query_string(nil, '')
-    @remove_q_url = "#{@base_url}?#{remove_q_qs}"
+    @search_qs = params.to_user_query_string()
+    @remove_q_url = "#{@base_url}?#{params.to_user_query_string_no_q()}"
 
     # from results
     set_remove_url_in_facets()

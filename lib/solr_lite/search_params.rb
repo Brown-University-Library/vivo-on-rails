@@ -67,6 +67,10 @@ module SolrLite
       qs
     end
 
+    def to_user_query_string_no_q()
+      to_user_query_string(nil, '')
+    end
+
     # Returns the string that we need to pass Solr to execute a search
     # with the current parameters.
     def to_solr_query_string()
@@ -91,12 +95,14 @@ module SolrLite
       qs
     end
 
-    def to_form_values(include_q)
+    # Returns an array of values that can be added to an HTML form
+    # to represent the current search parameters. Notice that we do
+    # NOT include the `q` parameter there is typically an explicit
+    # HTML form value for it on the form.
+    def to_form_values()
       values = []
-      if include_q && @q != ""
-        values << {name: "q", value: @q}
-      end
-      # Notice that we create an individual fq_n HTML form value for each
+
+      # We create an individual fq_n HTML form value for each
       # fq value because Rails does not like the same value on the form.
       @fq.each_with_index do |filter, i|
         values << {name: "fq_#{i}", value: filter.solr_value}
@@ -104,7 +110,6 @@ module SolrLite
 
       values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
       values << {name: "page", value: @page} if @page != DEFAULT_PAGE
-      # values << {name: "start", value: start_row()} if start_row > 0
       values << {name: "sort", value: @sort} if sort != ""
       values
     end
