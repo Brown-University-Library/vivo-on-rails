@@ -9,16 +9,33 @@
     facetsData[facetName].push(item);
   }
 
+  function ConsolePage(facetName, text) {
+    console.log(text);
+    for(i = 0; i < 5; i++) {
+      console.log(facetsData[facetName][i].value + ", " + facetsData[facetName][i].count);
+    }
+  }
+
   function SortFacetByValue(facetName) {
-    facetsData[facetName].sort(function(a,b) {
-      return a.value - b.value;
+    ConsolePage(facetName, "before sort by value");
+    facetsData[facetName] = facetsData[facetName].sort(function(a,b) {
+      if (a.value < b.value) return -1;
+      if (a.value > b.value) return 1;
+      return 0;
     });
+    ConsolePage(facetName, "after sort by value");
+    GoFirstPage(facetName);
   }
 
   function SortFacetByCount(facetName) {
-    facetsData[facetName].sort(function(a,b) {
-      return a.count - b.count;
+    ConsolePage(facetName, "before sort by count");
+    facetsData[facetName] = facetsData[facetName].sort(function(a,b) {
+      if (a.count < b.count) return 1;
+      if (a.count > b.count) return -1;
+      return 0;
     });
+    ConsolePage(facetName, "after sort by count");
+    GoFirstPage(facetName);
   }
 
   function RenderFacet(facetName) {
@@ -96,6 +113,12 @@
       $(pageNumId).val(number + 1);
       RenderFacet(facetName);
     }
+  }
+
+  function GoFirstPage(facetName) {
+    var pageNumId = "#modal_form_" + facetName + "_page_num";
+    $(pageNumId).val(1);
+    RenderFacet(facetName);
   }
 </script>
 

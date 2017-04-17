@@ -25,6 +25,10 @@
         <a id="<%= id_prefix %>_next_link" href="javascript:GoNextPage('<%= facet.name %>');">
           <span id="<%= id_prefix %>_next_text">Next »</span>
         </a>
+        &nbsp;&nbsp;
+        <a id="<%= id_prefix %>_sort_az" href="javascript:SortFacetByValue('<%= facet.name %>');">A-Z</a>
+        &nbsp;&nbsp;
+        <a id="<%= id_prefix %>_sort_num" href="javascript:SortFacetByCount('<%= facet.name %>');">9-0</a>
         <input id="<%= id_prefix %>_page_num" value="1">
         <input id="<%= id_prefix %>_page_count" value="<%= page_count %>">
         <p>&nbsp;&nbsp;</p>
