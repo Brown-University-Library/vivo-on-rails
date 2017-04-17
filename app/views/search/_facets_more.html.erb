@@ -18,39 +18,20 @@
         <% id_prefix = "modal_form_" + facet.name %>
         <% page_size = 20 %>
         <% page_count = (facet.values.count / page_size).to_i + ((facet.values.count % page_size) == 0 ? 0 : 1) %>
-        <a id="<%= id_prefix %>_prev_link" href="javascript:GoPrevPage('<%= facet.name %>');">
-          <span id="<%= id_prefix %>_prev_text">« Previous</span>
-        </a>
-        &nbsp;&nbsp;
-        <a id="<%= id_prefix %>_next_link" href="javascript:GoNextPage('<%= facet.name %>');">
-          <span id="<%= id_prefix %>_next_text">Next »</span>
-        </a>
-        &nbsp;&nbsp;
-        <a id="<%= id_prefix %>_sort_az" href="javascript:SortFacetByValue('<%= facet.name %>');">A-Z</a>
-        &nbsp;&nbsp;
-        <a id="<%= id_prefix %>_sort_num" href="javascript:SortFacetByCount('<%= facet.name %>');">9-0</a>
-        <input id="<%= id_prefix %>_page_num" value="1">
-        <input id="<%= id_prefix %>_page_count" value="<%= page_count %>">
-        <p>&nbsp;&nbsp;</p>
-
+        <!-- use these input boxes to preserve state -->
+        <input id="<%= id_prefix %>_page_num" value="1" class="hidden">
+        <input id="<%= id_prefix %>_page_count" value="<%= page_count %>" class="hidden">
         <!-- items added via RenderFacet() JavaScript call (see below)-->
         <div>
           <ul id="<%= id_prefix %>_items">
           </ul>
         </div>
-
-        <script>
-          <% facet.values.each_with_index do |value, index| %>
-            <% addUrl = search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_qs(value.text) %>
-            <% removeUrl = value.remove_url %>
-            AddFacetValue("<%= facet.name %>", "<%= value.text %>", <%= value.count %>, "<%= addUrl %>", "<%= removeUrl %>");
-          <% end %>
-          RenderFacet("<%= facet.name %>");
-        </script>
-
       </div> <!-- modal body -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a id="<%= id_prefix %>_prev_link" href="javascript:GoPrevPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See previous group of facets">« Previous</a>
+        <a id="<%= id_prefix %>_next_link" href="javascript:GoNextPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See next group of facets">Next »</a>
+        <a id="<%= id_prefix %>_sort_az" href="javascript:SortFacetByValue('<%= facet.name %>');" class="btn btn-default pull-right" role="button" title="Sort facets alphabetically (ascending)">A-Z</a>
+        <a id="<%= id_prefix %>_sort_num" href="javascript:SortFacetByCount('<%= facet.name %>');" class="btn btn-default pull-right active" role="button" title="Sort facets by count (descending)">9-0</a>
       </div>
     </div> <!-- modal content -->
 
@@ -58,5 +39,10 @@
 </div> <!-- modal_form -->
 
 <script>
-  TooglePrevNextPage("<%= facet.name %>");
+  <% facet.values.each_with_index do |value, index| %>
+    <% addUrl = search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_qs(value.text) %>
+    <% removeUrl = value.remove_url %>
+    AddFacetValue("<%= facet.name %>", "<%= value.text %>", <%= value.count %>, "<%= addUrl %>", "<%= removeUrl %>");
+  <% end %>
+  RenderFacet("<%= facet.name %>");
 </script>
