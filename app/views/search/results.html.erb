@@ -15,8 +15,8 @@
   function SortFacetByValue(facetName) {
     facetsData[facetName] = facetsData[facetName].sort(function(a,b) {
       // sort ascending
-      if (a.value < b.value) return -1;
-      if (a.value > b.value) return 1;
+      if (a.value.toUpperCase() < b.value.toUpperCase()) return -1;
+      if (a.value.toUpperCase() > b.value.toUpperCase()) return 1;
       return 0;
     });
 
