@@ -1,15 +1,16 @@
 <script>
-  // This must be rendered before result_facets partial
-  // so that when rendering the partial the JS  is available.
+  // These functions must be rendered before result_facets
+  // partial that they are available by the time they are
+  // called.
   function TooglePrevNextPage(facetName) {
     var pageNumId = "#modal_form_" + facetName + "_page_num";
-    var number = parseInt($(pageNumId).val(), 10);
     var pageCountId = "#modal_form_" + facetName + "_page_count";
-    var pageCount = parseInt($(pageCountId).val(), 10);
     var prevLinkId = "#modal_form_" + facetName + "_prev_link";
     var prevTextId = "#modal_form_" + facetName + "_prev_text";
     var nextLinkId = "#modal_form_" + facetName + "_next_link";
     var nextTextId = "#modal_form_" + facetName + "_next_text";
+    var number = parseInt($(pageNumId).val(), 10);
+    var pageCount = parseInt($(pageCountId).val(), 10);
 
     if (number == 1) {
       $(prevLinkId).unbind("click");
@@ -34,36 +35,34 @@
     // get the current page number
     var pageNumId = "#modal_form_" + facetName + "_page_num";
     var number = parseInt($(pageNumId).val(), 10);
+    var thisId = "#modal_form_" + facetName + "_page_" + number;
+    var prevId = "#modal_form_" + facetName + "_page_" + (number - 1);
     if (number > 1) {
       // hide the current page
-      var thisId = "#modal_form_" + facetName + "_page_" + number;
       $(thisId).addClass("hidden");
 
       // show the previous page
-      var prevId = "#modal_form_" + facetName + "_page_" + (number - 1);
       $(prevId).removeClass("hidden");
 
       // update the page number
       $(pageNumId).val(number - 1);
-
       TooglePrevNextPage(facetName);
     }
-
   }
+
   function GoNextPage(facetName) {
     // get the current page number and total number of pages
     var pageNumId = "#modal_form_" + facetName + "_page_num";
-    var number = parseInt($(pageNumId).val(), 10);
-
     var pageCountId = "#modal_form_" + facetName + "_page_count";
+    var number = parseInt($(pageNumId).val(), 10);
     var pageCount = parseInt($(pageCountId).val(), 10);
+    var thisId = "#modal_form_" + facetName + "_page_" + number;
+    var nextId = "#modal_form_" + facetName + "_page_" + (number + 1);
     if (number < pageCount) {
       // hide the current page
-      var thisId = "#modal_form_" + facetName + "_page_" + number;
       $(thisId).addClass("hidden");
 
       // show the next page
-      var nextId = "#modal_form_" + facetName + "_page_" + (number + 1);
       $(nextId).removeClass("hidden");
 
       // update the page number
@@ -72,7 +71,6 @@
     }
   }
 </script>
-
 
 <%= render "search_box" %>
 
