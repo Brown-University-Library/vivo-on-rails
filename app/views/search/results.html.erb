@@ -2,7 +2,7 @@
   // This must be rendered before result_facets partial
   // so that when rendering the partial the JS  is available.
   function TooglePrevNextPage(facetName) {
-    var pageNumId = "#modal_form_" + facetName + "_page";
+    var pageNumId = "#modal_form_" + facetName + "_page_num";
     var number = parseInt($(pageNumId).val(), 10);
     var pageCountId = "#modal_form_" + facetName + "_page_count";
     var pageCount = parseInt($(pageCountId).val(), 10);
