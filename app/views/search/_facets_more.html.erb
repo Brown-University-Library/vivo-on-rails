@@ -15,10 +15,9 @@
         <h4 class="modal-title"><%= facet.title %></h4>
       </div>
       <div class="modal-body">
-        <% page_num = 0 %>
+        <% id_prefix = "modal_form_" + facet.name %>
         <% page_size = 20 %>
         <% page_count = (facet.values.count / page_size).to_i + ((facet.values.count % page_size) == 0 ? 0 : 1) %>
-        <% id_prefix = "modal_form_" + facet.name %>
         <a id="<%= id_prefix %>_prev_link" href="javascript:GoPrevPage('<%= facet.name %>');">
           <span id="<%= id_prefix %>_prev_text">« Previous</span>
         </a>
@@ -26,35 +25,24 @@
         <a id="<%= id_prefix %>_next_link" href="javascript:GoNextPage('<%= facet.name %>');">
           <span id="<%= id_prefix %>_next_text">Next »</span>
         </a>
-        <input id="<%= id_prefix %>_page_num" value="1" class="hidden">
-        <input id="<%= id_prefix %>_page_count" value="<%= page_count %>" class="hidden">
+        <input id="<%= id_prefix %>_page_num" value="1">
+        <input id="<%= id_prefix %>_page_count" value="<%= page_count %>">
         <p>&nbsp;&nbsp;</p>
 
-        <% facet.values.each_with_index do |value, index| %>
-          <% if (index % page_size) == 0 %>
-            <% page_num += 1 %>
-            <% div_class = page_num == 1 ? "" : "hidden" %>
-            <div id="<%= id_prefix %>_page_<%= page_num.to_s %>" class="<%= div_class %>">
-              <ul>
+        <!-- items added via RenderFacet() JavaScript call (see below)-->
+        <div>
+          <ul id="<%= id_prefix %>_items">
+          </ul>
+        </div>
+
+        <script>
+          <% facet.values.each_with_index do |value, index| %>
+            <% addUrl = search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_qs(value.text) %>
+            <% removeUrl = value.remove_url %>
+            AddFacetValue("<%= facet.name %>", "<%= value.text %>", <%= value.count %>, "<%= addUrl %>", "<%= removeUrl %>");
           <% end %>
-            <li>
-              <span>
-                <% if value.remove_url == nil %>
-                  <a href="<%= search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_qs(value.text) %>"><%= value.text %></a>
-                <% else %>
-                  <%= value.text %>
-                  <a href="<%= value.remove_url %>"><span class="glyphicon glyphicon-remove"></span><span class="sr-only">Remove facet <%= value.text %></span></a>
-                <% end %>
-              </span>
-              <span class="categoryCount"><%= value.count %></span>
-
-            <% if ((index+1) % page_size) == 0 || (index+1) == facet.values.count%>
-                <!-- close the list for the last item in page (or last item in facets) -->
-                </ul>
-              </div><!-- page_facet.name -->
-            <% end %>
-        <% end %>
-
+          RenderFacet("<%= facet.name %>");
+        </script>
 
       </div> <!-- modal body -->
       <div class="modal-footer">

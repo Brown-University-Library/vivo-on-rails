@@ -1,4 +1,51 @@
 <script>
+  var facetsData = {};
+
+  function AddFacetValue(facetName, value, count, addUrl, removeUrl) {
+    if (facetsData[facetName] === undefined) {
+      facetsData[facetName] = [];
+    }
+    item = {value: value, count: count, addUrl: addUrl, removeUrl: removeUrl};
+    facetsData[facetName].push(item);
+  }
+
+  function SortFacetByValue(facetName) {
+    facetsData[facetName].sort(function(a,b) {
+      return a.value - b.value;
+    });
+  }
+
+  function SortFacetByCount(facetName) {
+    facetsData[facetName].sort(function(a,b) {
+      return a.count - b.count;
+    });
+  }
+
+  function RenderFacet(facetName) {
+    var pageNumId = "#modal_form_" + facetName + "_page_num";
+    var pageNum = parseInt($(pageNumId).val(), 10);
+    var ulId = "#modal_form_" + facetName + "_items";
+    var ul = $(ulId);
+    var start = (pageNum - 1) * 20;
+    var stop = Math.min(facetsData[facetName].length, start + 20);
+    $(ul).children().remove();
+    var i, item, text, href, html;
+    for(i = start ; i < stop; i++) {
+      item = facetsData[facetName][i];
+      if (item.removeUrl == "") {
+          href = "<a href='" + item.addUrl + "'>" + item.value + "</a>";
+          text = "(" + item.count + ")";
+          html = "<li>" + href + " " + text
+      } else {
+          text = item.value + " (" + item.count + ")";
+          href = "<a href='" + item.removeUrl + "'><span class='glyphicon glyphicon-remove'></span></a>";
+          html = "<li>" + text + " " + href;
+      }
+      $(ul).append(html);
+    }
+    TooglePrevNextPage(facetName);
+  }
+
   // These functions must be rendered before result_facets
   // partial that they are available by the time they are
   // called.
@@ -23,51 +70,31 @@
     if (number == pageCount) {
       $(nextLinkId).unbind("click");
       $(nextTextId).addClass("text-muted");
-      console.log("unbind: " + nextLinkId + ", mute: " + nextTextId);
     } else {
       $(nextLinkId).bind("click");
       $(nextTextId).removeClass("text-muted");
-      console.log("bind: " + nextLinkId + ", unmute: " + nextTextId);
     }
   }
 
   function GoPrevPage(facetName) {
-    // get the current page number
     var pageNumId = "#modal_form_" + facetName + "_page_num";
     var number = parseInt($(pageNumId).val(), 10);
-    var thisId = "#modal_form_" + facetName + "_page_" + number;
-    var prevId = "#modal_form_" + facetName + "_page_" + (number - 1);
     if (number > 1) {
-      // hide the current page
-      $(thisId).addClass("hidden");
-
-      // show the previous page
-      $(prevId).removeClass("hidden");
-
-      // update the page number
+      // update the page number, refresh the data and prev/next
       $(pageNumId).val(number - 1);
-      TooglePrevNextPage(facetName);
+      RenderFacet(facetName);
     }
   }
 
   function GoNextPage(facetName) {
-    // get the current page number and total number of pages
     var pageNumId = "#modal_form_" + facetName + "_page_num";
     var pageCountId = "#modal_form_" + facetName + "_page_count";
     var number = parseInt($(pageNumId).val(), 10);
     var pageCount = parseInt($(pageCountId).val(), 10);
-    var thisId = "#modal_form_" + facetName + "_page_" + number;
-    var nextId = "#modal_form_" + facetName + "_page_" + (number + 1);
     if (number < pageCount) {
-      // hide the current page
-      $(thisId).addClass("hidden");
-
-      // show the next page
-      $(nextId).removeClass("hidden");
-
-      // update the page number
+      // update the page number, refresh the data and prev/next
       $(pageNumId).val(number + 1);
-      TooglePrevNextPage(facetName);
+      RenderFacet(facetName);
     }
   }
 </script>
