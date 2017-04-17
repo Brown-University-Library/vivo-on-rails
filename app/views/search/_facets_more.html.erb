@@ -30,8 +30,9 @@
       <div class="modal-footer">
         <a id="<%= id_prefix %>_prev_link" href="javascript:GoPrevPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See previous group of facets">« Previous</a>
         <a id="<%= id_prefix %>_next_link" href="javascript:GoNextPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See next group of facets">Next »</a>
-        <a id="<%= id_prefix %>_sort_az" href="javascript:SortFacetByValue('<%= facet.name %>');" class="btn btn-default pull-right" role="button" title="Sort facets alphabetically (ascending)">A-Z</a>
-        <a id="<%= id_prefix %>_sort_num" href="javascript:SortFacetByCount('<%= facet.name %>');" class="btn btn-default pull-right active" role="button" title="Sort facets by count (descending)">9-0</a>
+        <a id="<%= id_prefix %>_sort_az" href="javascript:SortFacetByValue('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="Sort facets alphabetically (ascending)">A-Z</a>
+        <a id="<%= id_prefix %>_sort_num" href="javascript:SortFacetByCount('<%= facet.name %>');" class="btn btn-default pull-left active" role="button" title="Sort facets by count (descending)">9-0</a>
+        <input id="<%= id_prefix %>_filter" placeholder="narrow your search" value="" class="pull right">
       </div>
     </div> <!-- modal content -->
 
@@ -45,4 +46,11 @@
     AddFacetValue("<%= facet.name %>", "<%= value.text %>", <%= value.count %>, "<%= addUrl %>", "<%= removeUrl %>");
   <% end %>
   RenderFacet("<%= facet.name %>");
+
+  $(function() {
+    $("#<%= id_prefix %>_filter").on("input", function() {
+      RenderFacet("<%= facet.name %>");
+    });
+  });
+
 </script>

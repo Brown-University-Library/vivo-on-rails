@@ -46,12 +46,35 @@
     var pageNum = parseInt($(pageNumId).val(), 10);
     var ulId = "#modal_form_" + facetName + "_items";
     var ul = $(ulId);
-    var start = (pageNum - 1) * 20;
-    var stop = Math.min(facetsData[facetName].length, start + 20);
+    var items = [];
+    var filterId = "#modal_form_" + facetName + "_filter";
+    var filter = $(filterId).val();
+    var start, stop, i, item, text, href, html, pageCount;
+
     $(ul).children().remove();
-    var i, item, text, href, html;
-    for(i = start ; i < stop; i++) {
-      item = facetsData[facetName][i];
+
+    if (filter == "") {
+      items = facetsData[facetName];
+    }
+    else {
+      for(i = 0; i < facetsData[facetName].length; i++) {
+        item = facetsData[facetName][i];
+        if (item.value.toUpperCase().includes(filter.toUpperCase())) {
+          items.push(item);
+        }
+      }
+    }
+
+    start = (pageNum - 1) * 20;
+    stop = Math.min(items.length, start + 20);
+    pageCount = parseInt(items.length / 20) + ((items.length % 20) == 0 ? 0 : 1);
+
+    // TODO: Got the filter on facets to work. Yay!
+    // I think I can remove the pageCount textbox from the HTML
+    // and have the page_size defined only in JavaScript.
+
+    for(i = start; i < stop; i++) {
+      item = items[i];
       if (item.removeUrl == "") {
           href = "<a href='" + item.addUrl + "'>" + item.value + "</a>";
           text = "(" + item.count + ")";
@@ -63,16 +86,16 @@
       }
       $(ul).append(html);
     }
-    TooglePrevNextPage(facetName);
+    TooglePrevNextPage(facetName, pageCount);
   }
 
-  function TooglePrevNextPage(facetName) {
+  function TooglePrevNextPage(facetName, pageCount) {
     var pageNumId = "#modal_form_" + facetName + "_page_num";
-    var pageCountId = "#modal_form_" + facetName + "_page_count";
+    // var pageCountId = "#modal_form_" + facetName + "_page_count";
     var prevLinkId = "#modal_form_" + facetName + "_prev_link";
     var nextLinkId = "#modal_form_" + facetName + "_next_link";
     var number = parseInt($(pageNumId).val(), 10);
-    var pageCount = parseInt($(pageCountId).val(), 10);
+    // var pageCount = parseInt($(pageCountId).val(), 10);
 
     if (number == 1) {
       $(prevLinkId).unbind("click");
