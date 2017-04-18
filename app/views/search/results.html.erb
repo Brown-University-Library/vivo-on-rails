@@ -1,19 +1,29 @@
-<script>
-// These functions must be rendered before the result_facets
-// partial view is rendered so that they are available by
-// the time they are called.
-  var facetsData = {};
+<script type="text/javascript">
+  // This object must be rendered before the `result_facets`
+  // partial view is rendered so that it is available by
+  // the time the facet data is rendered.
+  var facetsMoreObj = {};
 
-  function AddFacetValue(facetName, value, count, addUrl, removeUrl) {
-    if (facetsData[facetName] === undefined) {
-      facetsData[facetName] = [];
+  // An object with the data for all facets. Each facet is kept in
+  // a separate key, for example:
+  //    {
+  //      facet1: [values...],
+  //      facet2: [values...]
+  //    }
+  //
+  // See AddFacetValue() below.
+  facetsMoreObj.data = {};
+
+  facetsMoreObj.AddFacetValue = function(facetName, value, count, addUrl, removeUrl) {
+    if (facetsMoreObj.data[facetName] === undefined) {
+      facetsMoreObj.data[facetName] = [];
     }
     item = {value: value, count: count, addUrl: addUrl, removeUrl: removeUrl};
-    facetsData[facetName].push(item);
-  }
+    facetsMoreObj.data[facetName].push(item);
+  };
 
-  function SortFacetByValue(facetName) {
-    facetsData[facetName] = facetsData[facetName].sort(function(a,b) {
+  facetsMoreObj.SortFacetByValue = function(facetName) {
+    facetsMoreObj.data[facetName] = facetsMoreObj.data[facetName].sort(function(a,b) {
       // sort ascending
       if (a.value.toUpperCase() < b.value.toUpperCase()) return -1;
       if (a.value.toUpperCase() > b.value.toUpperCase()) return 1;
@@ -24,11 +34,11 @@
     var sortNumId = "#modal_form_" + facetName + "_sort_num";
     $(sortAzId).addClass("active");
     $(sortNumId).removeClass("active");
-    GoFirstPage(facetName);
-  }
+    facetsMoreObj.GoFirstPage(facetName);
+  };
 
-  function SortFacetByCount(facetName) {
-    facetsData[facetName] = facetsData[facetName].sort(function(a,b) {
+  facetsMoreObj.SortFacetByCount = function(facetName) {
+    facetsMoreObj.data[facetName] = facetsMoreObj.data[facetName].sort(function(a,b) {
       // sort descending
       if (a.count < b.count) return 1;
       if (a.count > b.count) return -1;
@@ -38,16 +48,16 @@
     var sortNumId = "#modal_form_" + facetName + "_sort_num";
     $(sortAzId).removeClass("active");
     $(sortNumId).addClass("active");
-    GoFirstPage(facetName);
-  }
+    facetsMoreObj.GoFirstPage(facetName);
+  };
 
-  function PageNum(facetName) {
+  facetsMoreObj.PageNum = function(facetName) {
     var pageNumId = "#modal_form_" + facetName + "_page_num";
     return parseInt($(pageNumId).text(), 10);
-  }
+  };
 
-  function RenderFacet(facetName) {
-    var pageNum = PageNum(facetName)
+  facetsMoreObj.RenderFacet = function(facetName) {
+    var pageNum = facetsMoreObj.PageNum(facetName);
     var ulId = "#modal_form_" + facetName + "_items";
     var ul = $(ulId);
     var items = [];
@@ -56,11 +66,11 @@
     var pageSize, start, stop, i, item, text, href, html, pageCount;
 
     if (filter == "") {
-      items = facetsData[facetName];
+      items = facetsMoreObj.data[facetName];
     }
     else {
-      for(i = 0; i < facetsData[facetName].length; i++) {
-        item = facetsData[facetName][i];
+      for(i = 0; i < facetsMoreObj.data[facetName].length; i++) {
+        item = facetsMoreObj.data[facetName][i];
         if (item.value.toUpperCase().includes(filter.toUpperCase())) {
           items.push(item);
         }
@@ -86,13 +96,13 @@
       }
       $(ul).append(html);
     }
-    TooglePrevNextPage(facetName, pageCount);
-  }
+    facetsMoreObj.TooglePrevNextPage(facetName, pageCount);
+  };
 
-  function TooglePrevNextPage(facetName, pageCount) {
+  facetsMoreObj.TooglePrevNextPage = function(facetName, pageCount) {
     var prevLinkId = "#modal_form_" + facetName + "_prev_link";
     var nextLinkId = "#modal_form_" + facetName + "_next_link";
-    var pageNum = PageNum(facetName)
+    var pageNum = facetsMoreObj.PageNum(facetName)
 
     if (pageNum == 1) {
       $(prevLinkId).unbind("click");
@@ -109,26 +119,26 @@
       $(nextLinkId).bind("click");
       $(nextLinkId).removeClass("disabled");
     }
-  }
+  };
 
-  function GoPrevPage(facetName) {
-    var pageNum = PageNum(facetName)
+  facetsMoreObj.GoPrevPage = function(facetName) {
+    var pageNum = facetsMoreObj.PageNum(facetName)
     var pageNumId = "#modal_form_" + facetName + "_page_num";
     $(pageNumId).text(pageNum - 1);
-    RenderFacet(facetName);
-  }
+    facetsMoreObj.RenderFacet(facetName);
+  };
 
-  function GoNextPage(facetName) {
-    var pageNum = PageNum(facetName)
+  facetsMoreObj.GoNextPage = function(facetName) {
+    var pageNum = facetsMoreObj.PageNum(facetName)
     var pageNumId = "#modal_form_" + facetName + "_page_num";
     $(pageNumId).text(pageNum + 1);
-    RenderFacet(facetName);
+    facetsMoreObj.RenderFacet(facetName);
   }
 
-  function GoFirstPage(facetName) {
+  facetsMoreObj.GoFirstPage = function(facetName) {
     var pageNumId = "#modal_form_" + facetName + "_page_num";
     $(pageNumId).text(1);
-    RenderFacet(facetName);
+    facetsMoreObj.RenderFacet(facetName);
   }
 </script>
 

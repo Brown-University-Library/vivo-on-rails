@@ -1,10 +1,11 @@
+<!-- Button to open the modal form -->
 <button type="button" class="btn btn-link btn-sm search-toggle-more-categories"
   data-toggle="modal" data-target="#modal_form_<%= facet.name %>"
   title="Show more categories from this facet">
     <small class="glyphicon glyphicon-plus"></small>&nbsp;<span>More…</span>
 </button>
 
-<!-- Modal -->
+<!-- Modal form -->
 <div id="modal_form_<%= facet.name %>" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -26,29 +27,28 @@
         </div>
       </div> <!-- modal body -->
       <div class="modal-footer">
-        <a id="<%= id_prefix %>_prev_link" href="javascript:GoPrevPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See previous group of facets">« Previous</a>
-        <a id="<%= id_prefix %>_next_link" href="javascript:GoNextPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See next group of facets">Next »</a>
-        <a id="<%= id_prefix %>_sort_az" href="javascript:SortFacetByValue('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="Sort facets alphabetically (ascending)">A-Z</a>
-        <a id="<%= id_prefix %>_sort_num" href="javascript:SortFacetByCount('<%= facet.name %>');" class="btn btn-default pull-left active" role="button" title="Sort facets by count (descending)">9-0</a>
+        <a id="<%= id_prefix %>_prev_link" href="javascript:facetsMoreObj.GoPrevPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See previous group of facets">« Previous</a>
+        <a id="<%= id_prefix %>_next_link" href="javascript:facetsMoreObj.GoNextPage('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="See next group of facets">Next »</a>
+        <a id="<%= id_prefix %>_sort_az" href="javascript:facetsMoreObj.SortFacetByValue('<%= facet.name %>');" class="btn btn-default pull-left" role="button" title="Sort facets alphabetically (ascending)">A-Z</a>
+        <a id="<%= id_prefix %>_sort_num" href="javascript:facetsMoreObj.SortFacetByCount('<%= facet.name %>');" class="btn btn-default pull-left active" role="button" title="Sort facets by count (descending)">9-0</a>
         <input id="<%= id_prefix %>_filter" placeholder="narrow your search" value="" class="pull right">
       </div>
     </div> <!-- modal content -->
   </div> <!-- modal-dialog -->
 </div> <!-- modal_form -->
 
-<script>
+<script type="text/javascript">
   <% facet.values.each_with_index do |value, index| %>
     <% addUrl = search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_qs(value.text) %>
     <% removeUrl = value.remove_url %>
-    AddFacetValue("<%= facet.name %>", "<%= value.text %>", <%= value.count %>, "<%= addUrl %>", "<%= removeUrl %>");
+    facetsMoreObj.AddFacetValue("<%= facet.name %>", "<%= value.text %>", <%= value.count %>, "<%= addUrl %>", "<%= removeUrl %>");
   <% end %>
-  RenderFacet("<%= facet.name %>");
+  facetsMoreObj.RenderFacet("<%= facet.name %>");
 
   $(function() {
     $("#<%= id_prefix %>_filter").on("input", function() {
-      GoFirstPage("<%= facet.name %>");
-      RenderFacet("<%= facet.name %>");
+      facetsMoreObj.GoFirstPage("<%= facet.name %>");
+      facetsMoreObj.RenderFacet("<%= facet.name %>");
     });
   });
-
 </script>
