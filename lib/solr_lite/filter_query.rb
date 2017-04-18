@@ -12,6 +12,7 @@ module SolrLite
       @qs_value = "#{field}|#{value}"         # URL friendly (no : or quotes)
       @title = field                          # default to field name
       @remove_url = nil
+      # TODO: Add property for add_url
     end
 
     # qs is assumed to be value taken from the query string

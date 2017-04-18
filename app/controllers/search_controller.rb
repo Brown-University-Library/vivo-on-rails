@@ -1,27 +1,47 @@
 class SearchController < ApplicationController
+  # Normal search. Returns search results as HTML.
   def index
-    solr_url = ENV["SOLR_URL"]
-    searcher = Search.new(solr_url)
-    params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
-    params.q = "*" if params.q == ""
-
-    if request.params["home"] != nil
-      # default to people if coming from the home page
-      params.fq << SolrLite::FilterQuery.new("record_type", "PEOPLE")
-    end
-
-    search_results = searcher.search(params)
-    @presenter = SearchResultsPresenter.new(search_results, params, search_url())
+    execute_search()
     render "results"
   end
 
-  def facets_fields
-    # TODO: should this be configurable?
-    f = []
-    f << SolrLite::FacetField.new("record_type", "Type")
-    f << SolrLite::FacetField.new("affiliations", "Affiliations")
-    f << SolrLite::FacetField.new("research_areas", "Research Areas")
-    f << SolrLite::FacetField.new("published_in", "Published In")
-    f
+  # Returns the facet values (as JSON) for a search.
+  # Use by the modals forms that show all values for a facet.
+  def facets
+    facet_name = request.params["f_name"]
+    if facet_name == nil
+      render :json => nil
+      return
+    end
+    execute_search(-1)
+    facet_data = @presenter.facets.find {|f| f.name == facet_name }
+    render :json => facet_data.values
   end
+
+  private
+    def execute_search(facet_limit = nil)
+      solr_url = ENV["SOLR_URL"]
+      searcher = Search.new(solr_url)
+      params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
+      params.q = "*" if params.q == ""
+      params.facet_limit = facet_limit if facet_limit != nil
+
+      if request.params["home"] != nil
+        # default to people if coming from the home page
+        params.fq << SolrLite::FilterQuery.new("record_type", "PEOPLE")
+      end
+
+      search_results = searcher.search(params)
+      @presenter = SearchResultsPresenter.new(search_results, params, search_url())
+    end
+
+    def facets_fields
+      # TODO: should this be configurable?
+      f = []
+      f << SolrLite::FacetField.new("record_type", "Type")
+      f << SolrLite::FacetField.new("affiliations", "Affiliations")
+      f << SolrLite::FacetField.new("research_areas", "Research Areas")
+      f << SolrLite::FacetField.new("published_in", "Published In")
+      f
+    end
 end

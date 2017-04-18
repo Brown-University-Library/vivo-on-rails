@@ -96,6 +96,7 @@ module SolrLite
           facet_field.add_value(text, count)
         end
       end
+      # TODO: make sure we sort the FacetField.VALUES descending by count
     end
   end # class
 end # module

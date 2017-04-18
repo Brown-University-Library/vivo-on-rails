@@ -6,7 +6,8 @@
 </button>
 
 <!-- Modal form -->
-<div id="modal_form_<%= facet.name %>" class="modal fade" role="dialog">
+<% id_prefix = "modal_form_" + facet.name %>
+<div id="<%= id_prefix %>" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -15,12 +16,17 @@
         <h4 class="modal-title"><%= facet.title %></h4>
       </div>
       <div class="modal-body">
-        <% id_prefix = "modal_form_" + facet.name %>
         <!-- Use a SPAN to preserve state while the page is loaded.
              Don't use an INPUT because I don't want to preserve the value
              if the page is refreshed. -->
         <span id="<%= id_prefix %>_page_num" class="hidden">1</span>
+        <span id="<%= id_prefix %>_loaded" class="hidden">false</span>
+
         <!-- items added via RenderFacet() JavaScript call (see below)-->
+        <span id="<%= id_prefix %>_loading">
+          <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+          Loading...
+        </span>
         <div>
           <ul id="<%= id_prefix %>_items">
           </ul>
@@ -38,17 +44,44 @@
 </div> <!-- modal_form -->
 
 <script type="text/javascript">
-  <% facet.values.each_with_index do |value, index| %>
-    <% addUrl = search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_qs(value.text) %>
-    <% removeUrl = value.remove_url %>
-    facetsMoreObj.AddFacetValue("<%= facet.name %>", "<%= value.text %>", <%= value.count %>, "<%= addUrl %>", "<%= removeUrl %>");
-  <% end %>
-  facetsMoreObj.RenderFacet("<%= facet.name %>");
-
   $(function() {
+    // wire the filter textbox
     $("#<%= id_prefix %>_filter").on("input", function() {
       facetsMoreObj.GoFirstPage("<%= facet.name %>");
       facetsMoreObj.RenderFacet("<%= facet.name %>");
+    });
+
+    $("#<%= id_prefix %>").on("shown.bs.modal", function() {
+
+      // give focus to the filter textbox.
+      $("#<%= id_prefix %>_filter").focus();
+
+      // if we haven't already, fetch the data.
+      var loadedId = "#<%= id_prefix %>_loaded";
+      if ($(loadedId).text() == "false") {
+        $(loadedId).text("true");
+
+        // TODO: Make this value part of the presenter so that we don't
+        //       have to calculate it here.
+        
+        // Base it of the original Rails URL to preserve all the search parameters
+        var fetchDataUrl = '<%= request.original_url.sub("/search", "/search_facets").html_safe %>';
+        if (fetchDataUrl.indexOf("?") == -1) {
+          fetchDataUrl += "?"
+        }
+        fetchDataUrl += '<%= ("&f_name=" + facet.name).html_safe %>';
+        $.getJSON(fetchDataUrl, function(values) {
+
+          $.each(values, function(key, value) {
+            facetsMoreObj.AddFacetValue("<%= facet.name %>", value.text, value.count, value.add_url, value.remove_url);
+          });
+          facetsMoreObj.SortFacetByCount("<%= facet.name %>");
+          facetsMoreObj.RenderFacet("<%= facet.name %>");
+          var loadingId = "#<%= id_prefix %>_loading";
+          $(loadingId).addClass("hidden");
+
+        });
+      }
     });
   });
 </script>

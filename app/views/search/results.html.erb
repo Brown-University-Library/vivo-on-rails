@@ -85,7 +85,7 @@
     $(ul).children().remove();
     for(i = start; i < stop; i++) {
       item = items[i];
-      if (item.removeUrl == "") {
+      if (item.removeUrl == null) {
           href = "<a href='" + item.addUrl + "'>" + item.value + "</a>";
           text = "(" + item.count + ")";
           html = "<li>" + href + " " + text

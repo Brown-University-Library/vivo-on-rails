@@ -27,9 +27,10 @@ class SearchResultsPresenter
     @remove_q_url = "#{@base_url}?#{params.to_user_query_string_no_q()}"
 
     # from results
-    set_remove_url_in_facets()
     @facets = results.facets
     @results = results.items
+    set_urls_in_facets()
+    set_remove_url_in_facets()
 
     @results.each do |item|
       if item.type == "PEOPLE"
@@ -84,7 +85,17 @@ class SearchResultsPresenter
   end
 
   private
+    def set_urls_in_facets()
+      # this loops through _all_ the facet/values
+      @facets.each do |f|
+        f.values.each do |v|
+          v.add_url = @base_url + "?" + @search_qs + "&fq=" + f.to_qs(v.text)
+        end
+      end
+    end
+
     def set_remove_url_in_facets()
+      # this loops _only_ through the active filters
       @fq.each do |fq|
         remove_url = @base_url + '?' + @params.to_user_query_string(fq)
 

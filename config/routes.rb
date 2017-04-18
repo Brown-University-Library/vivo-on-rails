@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'faculty/:id' => 'faculty#show', as: :faculty_show
   get 'faculty/' => 'faculty#index'
 
+  get 'search_facets' => 'search#facets'
   get 'search' => 'search#index'
 
   get 'home' => 'home#index'

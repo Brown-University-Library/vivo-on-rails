@@ -2,19 +2,19 @@ require "./lib/solr_lite/filter_query.rb"
 require "./lib/solr_lite/facet_field.rb"
 module SolrLite
   class SearchParams
-    attr_accessor :q, :fq, :facets, :page, :page_size, :fl, :sort
+    attr_accessor :q, :fq, :facets, :page, :page_size, :fl, :sort, :facet_limit
 
-    DEFAULT_PAGE = 1
     DEFAULT_PAGE_SIZE = 20
 
-    def initialize(q = "", fq = [], facets = [], page = DEFAULT_PAGE, page_size = DEFAULT_PAGE_SIZE)
+    def initialize(q = "", fq = [], facets = [])
       @q = q
       @fq = fq          # array of FilterQuery
       @facets = facets  # array of FacetField
-      @page = page
-      @page_size = page_size
+      @page = 1
+      @page_size = DEFAULT_PAGE_SIZE
       @fl = nil
       @sort = ""
+      @facet_limit = nil
     end
 
     def facet_for_field(field)
@@ -62,7 +62,7 @@ module SolrLite
         end
       end
       qs += "&rows=#{@page_size}" if @page_size != DEFAULT_PAGE_SIZE
-      qs += "&page=#{@page}" if @page != DEFAULT_PAGE
+      qs += "&page=#{@page}" if @page != 1
       qs += "&sort=#{@sort}" if sort != ""
       qs
     end
@@ -89,7 +89,11 @@ module SolrLite
       if @facets.count > 0
         qs += "&facet=on"
         @facets.each do |f|
-          qs += "&facet.field=#{f.name}&f.#{f.name}.facet.mincount=1"
+          qs += "&facet.field=#{f.name}"
+          qs += "&f.#{f.name}.facet.mincount=1"
+          if @facet_limit != nil
+            qs += "&f.#{f.name}.facet.limit=#{@facet_limit}"
+          end
         end
       end
       qs
@@ -109,7 +113,7 @@ module SolrLite
       end
 
       values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
-      values << {name: "page", value: @page} if @page != DEFAULT_PAGE
+      values << {name: "page", value: @page} if @page != 1
       values << {name: "sort", value: @sort} if sort != ""
       values
     end

@@ -17,6 +17,7 @@
                 <li>
                   <span>
                     <% if value.remove_url == nil %>
+                      <!-- TODO: use new add_url value -->
                       <a href="<%= search_url() + "?" + @presenter.search_qs + "&fq=" + facet.to_qs(value.text) %>"><%= value.text %></a>
                     <% else %>
                       <%= value.text %>
