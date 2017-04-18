@@ -29,3 +29,30 @@
   from { transform: scale(1) rotate(0deg);}
   to { transform: scale(1) rotate(360deg);}
 }
+
+/* MAKE YOUR CSS CHANGES HERE */
+
+/* Results Page */
+.results-wrapper {
+	padding-right: 0;
+}
+.results-row {
+	margin: 0;
+	padding: 0;
+}
+.expert-results {
+	border: 1px solid red;
+	min-height: 40rem;
+}
+.vcard {
+	border: 1px solid blue;
+}
+.share-contact {
+	background-color: #F5F2EC;
+	min-height: 38rem;
+}
+.share-contact--bottom {
+	background-color: orange;
+	min-height: 19rem;
+}
+/* End of Results Page */

@@ -146,7 +146,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-10 col-md-push-2">
+    <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3">
       <!-- 1/N results found -->
       <div id="search-result-count" class="text-muted">
           <% if @presenter.page == 1 %>
@@ -190,7 +190,7 @@
       <h2 class="visible-print">Results</h2>
 
       <!-- search results -->
-      <div class="row">
+      <div class="row results-row col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <!--added for single row approach -->
           <h3 class="hidden">Fully-matching results</h3>
 
@@ -203,8 +203,9 @@
             <div class="clearfix visible-xs-block"></div>
             <!-- render "results_item", item: item -->
 
+<!-- RESULTS ITEM BEGINS -->
             <div class="clearfix visible-xs-block"></div>
-            <div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
               <div class="gap30"></div>
               <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
                 <section class="share-contact" role="region">
@@ -226,6 +227,7 @@
                 </section>
               </section>
             </div>
+<!-- RESULTS ITEM ENDS -->
 
           <% end %>
       </div>
