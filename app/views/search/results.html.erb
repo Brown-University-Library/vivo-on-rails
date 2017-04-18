@@ -198,10 +198,35 @@
           <!-- <div class="row top-buffer"> -->
           <div class="clearfix visible-lg-block"></div>
 
-          <% @presenter.results.each do |item| %>
+          <% @presenter.results.each_with_index do |item, index| %>
             <div class="clearfix visible-sm-block"></div>
             <div class="clearfix visible-xs-block"></div>
-            <%= render "results_item", item: item %>
+            <!-- render "results_item", item: item -->
+
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-lg-3 col-sm-4 col-md-3 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
+              <div class="gap30"></div>
+              <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+                <section class="share-contact" role="region">
+                  <div id="photo-wrapper">
+                    <%= image_tag(item.thumbnail, width: "120", class: "img-circle") %>
+                  </div>
+                  <h4>
+                    <span itemprop="name" class="fn">
+                      <a href="<%= item.uri %>"><%= item.name %></a>
+                    </span>
+                    <span><%= index %></span>
+                  </h4>
+                  <%= item.title %>
+                  <div class="emailsContainer">
+                    <h4>
+                      <a href="mailto:<%= item.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                    </h4>
+                  </div>
+                </section>
+              </section>
+            </div>
+
           <% end %>
       </div>
 
