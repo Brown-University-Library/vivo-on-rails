@@ -41,18 +41,42 @@
 	padding: 0;
 }
 .expert-results {
-	border: 1px solid red;
+/*	border: 1px solid red;*/
 	min-height: 40rem;
 }
 .vcard {
-	border: 1px solid blue;
+/*	border: 1px solid blue;*/
 }
 .share-contact {
 	background-color: #F5F2EC;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	min-height: 38rem;
 }
+#photo-wrapper {
+	z-index: 10;
+}
+.contact-content {
+/*	border: 1px solid pink;*/
+	color: #fff;
+	z-index: 10;
+}
+.contact-content a{
+	color: #fff;
+	font-weight: bolder;
+}
 .share-contact--bottom {
-	background-color: orange;
-	min-height: 19rem;
+/*	border: 1px solid green;*/
+	background-color: #594036;
+	min-height: 24rem;
+	margin: 0 15px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 20px;
+	z-index: 5;
+
 }
 /* End of Results Page */

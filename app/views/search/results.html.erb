@@ -209,20 +209,23 @@
               <div class="gap30"></div>
               <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
                 <section class="share-contact" role="region">
+                  <div class="share-contact--bottom"></div>
                   <div id="photo-wrapper">
                     <%= image_tag(item.thumbnail, width: "120", class: "img-circle") %>
                   </div>
-                  <h4>
-                    <span itemprop="name" class="fn">
-                      <a href="<%= item.uri %>"><%= item.name %></a>
-                    </span>
-                    <span><%= index %></span>
-                  </h4>
-                  <%= item.title %>
-                  <div class="emailsContainer">
+                  <div class="contact-content">
                     <h4>
-                      <a href="mailto:<%= item.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                      <span itemprop="name" class="fn">
+                        <a href="<%= item.uri %>"><%= item.name %></a>
+                      </span>
+                      <span><%= index %></span>
                     </h4>
+                    <%= item.title %>
+                    <div class="emailsContainer">
+                      <h4>
+                        <a href="mailto:<%= item.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                      </h4>
+                    </div>
                   </div>
                 </section>
               </section>
