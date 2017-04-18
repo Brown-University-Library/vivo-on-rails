@@ -41,17 +41,19 @@
     GoFirstPage(facetName);
   }
 
-  function RenderFacet(facetName) {
+  function PageNum(facetName) {
     var pageNumId = "#modal_form_" + facetName + "_page_num";
-    var pageNum = parseInt($(pageNumId).val(), 10);
+    return parseInt($(pageNumId).text(), 10);
+  }
+
+  function RenderFacet(facetName) {
+    var pageNum = PageNum(facetName)
     var ulId = "#modal_form_" + facetName + "_items";
     var ul = $(ulId);
     var items = [];
     var filterId = "#modal_form_" + facetName + "_filter";
     var filter = $(filterId).val();
-    var start, stop, i, item, text, href, html, pageCount;
-
-    $(ul).children().remove();
+    var pageSize, start, stop, i, item, text, href, html, pageCount;
 
     if (filter == "") {
       items = facetsData[facetName];
@@ -65,14 +67,12 @@
       }
     }
 
-    start = (pageNum - 1) * 20;
-    stop = Math.min(items.length, start + 20);
-    pageCount = parseInt(items.length / 20) + ((items.length % 20) == 0 ? 0 : 1);
+    pageSize = 20;
+    start = (pageNum - 1) * pageSize;
+    stop = Math.min(items.length, start + pageSize);
+    pageCount = parseInt(items.length / pageSize) + ((items.length % pageSize) == 0 ? 0 : 1);
 
-    // TODO: Got the filter on facets to work. Yay!
-    // I think I can remove the pageCount textbox from the HTML
-    // and have the page_size defined only in JavaScript.
-
+    $(ul).children().remove();
     for(i = start; i < stop; i++) {
       item = items[i];
       if (item.removeUrl == "") {
@@ -90,14 +90,11 @@
   }
 
   function TooglePrevNextPage(facetName, pageCount) {
-    var pageNumId = "#modal_form_" + facetName + "_page_num";
-    // var pageCountId = "#modal_form_" + facetName + "_page_count";
     var prevLinkId = "#modal_form_" + facetName + "_prev_link";
     var nextLinkId = "#modal_form_" + facetName + "_next_link";
-    var number = parseInt($(pageNumId).val(), 10);
-    // var pageCount = parseInt($(pageCountId).val(), 10);
+    var pageNum = PageNum(facetName)
 
-    if (number == 1) {
+    if (pageNum == 1) {
       $(prevLinkId).unbind("click");
       $(prevLinkId).addClass("disabled");
     } else {
@@ -105,7 +102,7 @@
       $(prevLinkId).removeClass("disabled");
     }
 
-    if (number == pageCount) {
+    if (pageNum >= pageCount) {
       $(nextLinkId).unbind("click");
       $(nextLinkId).addClass("disabled");
     } else {
@@ -115,30 +112,22 @@
   }
 
   function GoPrevPage(facetName) {
+    var pageNum = PageNum(facetName)
     var pageNumId = "#modal_form_" + facetName + "_page_num";
-    var number = parseInt($(pageNumId).val(), 10);
-    if (number > 1) {
-      // update the page number, refresh the data and prev/next
-      $(pageNumId).val(number - 1);
-      RenderFacet(facetName);
-    }
+    $(pageNumId).text(pageNum - 1);
+    RenderFacet(facetName);
   }
 
   function GoNextPage(facetName) {
+    var pageNum = PageNum(facetName)
     var pageNumId = "#modal_form_" + facetName + "_page_num";
-    var pageCountId = "#modal_form_" + facetName + "_page_count";
-    var number = parseInt($(pageNumId).val(), 10);
-    var pageCount = parseInt($(pageCountId).val(), 10);
-    if (number < pageCount) {
-      // update the page number, refresh the data and prev/next
-      $(pageNumId).val(number + 1);
-      RenderFacet(facetName);
-    }
+    $(pageNumId).text(pageNum + 1);
+    RenderFacet(facetName);
   }
 
   function GoFirstPage(facetName) {
     var pageNumId = "#modal_form_" + facetName + "_page_num";
-    $(pageNumId).val(1);
+    $(pageNumId).text(1);
     RenderFacet(facetName);
   }
 </script>
