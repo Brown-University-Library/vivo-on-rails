@@ -32,6 +32,15 @@
 
 /* MAKE YOUR CSS CHANGES HERE */
 
+/* COLORS */
+/*
+#594036	  brown
+#C00404	  red
+#831B1B	  dark red
+#F5F2EC	  warm gray
+*/
+
+
 /* Results Page */
 .results-wrapper {
 	padding-right: 0;
@@ -77,7 +86,7 @@
 	top: 65%;
 	z-index: 10;
 }
-.contact-content a{
+.contact-content a {
 	color: #fff;
 	font-weight: bolder;
 }
@@ -90,5 +99,20 @@
 	left: 0;
 	right: 0;
 	bottom: 20px;
+}
+.pagination > li > a {
+	color: #333;
+}
+.pagination > li > a:hover {
+	background-color: #F5F2EC;
+	color: #C00404;
+}
+.pagination > .active > a {
+	background-color: #C00404;
+	border-color: #C00404;
+}
+.pagination > .active > a:hover {
+	background-color: #C00404;
+	border-color: #C00404;
 }
 /* End of Results Page */
