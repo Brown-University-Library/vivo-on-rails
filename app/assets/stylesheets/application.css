@@ -47,6 +47,14 @@
 .vcard {
 /*	border: 1px solid blue;*/
 }
+.emailsContainer {
+		display: flex;
+		justify-content: flex-end;
+		padding: 0 30px;
+		position: absolute;
+		left: 0;
+		right: 0;
+}
 .share-contact {
 	background-color: #F5F2EC;
 	display: flex;
