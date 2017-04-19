@@ -42,7 +42,7 @@
 }
 .expert-results {
 /*	border: 1px solid red;*/
-	min-height: 40rem;
+	min-height: 32rem;
 }
 .vcard {
 /*	border: 1px solid blue;*/
@@ -57,18 +57,24 @@
 }
 .share-contact {
 	background-color: #F5F2EC;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	min-height: 38rem;
+	min-height: 32rem;
 }
 #photo-wrapper {
+/*	border: 1px solid pink;*/
+	position: absolute;
+	bottom: 32%;
+	left: 0;
+	right: 0;
 	z-index: 10;
 }
 .contact-content {
 /*	border: 1px solid pink;*/
 	color: #fff;
+	margin: 0 30px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 65%;
 	z-index: 10;
 }
 .contact-content a{
@@ -78,7 +84,7 @@
 .share-contact--bottom {
 /*	border: 1px solid green;*/
 	background-color: #594036;
-	min-height: 24rem;
+	min-height: 18rem;
 	margin: 0 15px;
 	position: absolute;
 	left: 0;
