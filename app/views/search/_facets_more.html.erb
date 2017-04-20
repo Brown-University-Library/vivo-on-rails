@@ -60,16 +60,7 @@
       var loadedId = "#<%= id_prefix %>_loaded";
       if ($(loadedId).text() == "false") {
         $(loadedId).text("true");
-
-        // TODO: Make this value part of the presenter so that we don't
-        //       have to calculate it here.
-        
-        // Base it of the original Rails URL to preserve all the search parameters
-        var fetchDataUrl = '<%= request.original_url.sub("/search", "/search_facets").html_safe %>';
-        if (fetchDataUrl.indexOf("?") == -1) {
-          fetchDataUrl += "?"
-        }
-        fetchDataUrl += '<%= ("&f_name=" + facet.name).html_safe %>';
+        var fetchDataUrl = '<%= (@presenter.facetSearchBaseUrl + "&f_name=" + facet.name).html_safe %>';
         $.getJSON(fetchDataUrl, function(values) {
 
           $.each(values, function(key, value) {

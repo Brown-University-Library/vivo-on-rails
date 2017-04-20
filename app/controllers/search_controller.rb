@@ -32,16 +32,27 @@ class SearchController < ApplicationController
       end
 
       search_results = searcher.search(params)
-      @presenter = SearchResultsPresenter.new(search_results, params, search_url())
+      @presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
     end
 
-    def facets_fields
-      # TODO: should this be configurable?
+    def facets_fields()
       f = []
       f << SolrLite::FacetField.new("record_type", "Type")
       f << SolrLite::FacetField.new("affiliations", "Affiliations")
       f << SolrLite::FacetField.new("research_areas", "Research Areas")
       f << SolrLite::FacetField.new("published_in", "Published In")
       f
+    end
+
+    def base_facet_search_url()
+      # Base this value of the original search URL so that we preserve all
+      # the search parameters.
+      url = request.original_url.sub("/search", "/search_facets")
+      if !url.include?("?")
+        # This is to make sure we can safely add a query string parameter
+        # (in the JavaScript used in the view) by just appending "&a=b".
+        url += "?"
+      end
+      url
     end
 end

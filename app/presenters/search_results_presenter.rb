@@ -8,10 +8,11 @@ class SearchResultsPresenter
   attr_accessor :form_values, :fq, :facets, :query, :search_qs, :results,
     :page, :start, :end, :num_found, :num_pages, :page_start, :page_end,
     :previous_url, :next_url,
-    :remove_q_url
+    :remove_q_url, :facetSearchBaseUrl
 
-  def initialize(results, params, base_url)
+  def initialize(results, params, base_url, base_facet_search_url)
     @base_url = base_url
+    @facetSearchBaseUrl = base_facet_search_url
 
     # Force all links to reset to page 1 so that if the user selects
     # a new facet or searches for a new term we show results starting
@@ -97,11 +98,11 @@ class SearchResultsPresenter
     def set_remove_url_in_facets()
       # this loops _only_ through the active filters
       @fq.each do |fq|
-        remove_url = @base_url + '?' + @params.to_user_query_string(fq)
-
-        # set the remove URL in the facet/value
         facet = @params.facet_for_field(fq.field)
         next if facet == nil
+
+        # set the remove URL in the facet/value
+        remove_url = @base_url + '?' + @params.to_user_query_string(fq)
         facet.set_remove_url_for(fq.value, remove_url)
 
         # ...and in the fq
