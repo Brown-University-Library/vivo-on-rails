@@ -135,6 +135,12 @@
 	background-color: #333;
 	background-image: none;
 	background-repeat: no-repeat;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.panel-heading:nth-of-type(1) {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 }
 .facetLabel {
 	color: #fff;
