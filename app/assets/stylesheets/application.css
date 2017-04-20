@@ -34,6 +34,7 @@
 
 /* COLORS */
 /*
+#333	  soft black
 #594036	  brown
 #C00404	  red
 #831B1B	  dark red
@@ -42,19 +43,25 @@
 
 
 /* Results Page */
+/* results */
 .results-wrapper {
+	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	padding-right: 0;
 }
 .results-row {
 	margin: 0;
 	padding: 0;
 }
+<<<<<<< HEAD
 .expert-results {
 /*	border: 1px solid red;*/
 	min-height: 32rem;
+=======
+.expert-results {
+	min-height: 32rem;
+>>>>>>> facet panel: changed text, border, bkg colors and font-family + removed number badges
 }
 .vcard {
-/*	border: 1px solid blue;*/
 }
 .emailsContainer {
 		display: flex;
@@ -69,7 +76,6 @@
 	min-height: 32rem;
 }
 #photo-wrapper {
-/*	border: 1px solid pink;*/
 	position: absolute;
 	bottom: 32%;
 	left: 0;
@@ -77,7 +83,6 @@
 	z-index: 10;
 }
 .contact-content {
-/*	border: 1px solid pink;*/
 	color: #fff;
 	margin: 0 30px;
 	position: absolute;
@@ -89,9 +94,9 @@
 .contact-content a {
 	color: #fff;
 	font-weight: bolder;
+	line-height: 2rem;
 }
 .share-contact--bottom {
-/*	border: 1px solid green;*/
 	background-color: #594036;
 	min-height: 18rem;
 	margin: 0 15px;
@@ -100,6 +105,8 @@
 	right: 0;
 	bottom: 20px;
 }
+
+/* pagination */
 .pagination > li > a {
 	color: #333;
 }
@@ -114,5 +121,42 @@
 .pagination > .active > a:hover {
 	background-color: #C00404;
 	border-color: #C00404;
+}
+
+/* facet column */
+#search-facets {
+	padding: 0 0 0 15px;
+}
+.facet {
+	border-color: #777;
+	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+.panel-default > .panel-heading {
+	background-color: #333;
+	background-image: none;
+	background-repeat: no-repeat;
+}
+.facetLabel {
+	color: #fff;
+	margin: 0;
+	padding: 1rem 0;
+}
+.panel-body a {
+	color: #000;
+	line-height: 2.5rem;
+}
+.panel-body a:hover {
+	color: #C00404;
+}
+.categoryCount {
+	color: #000;
+	margin: 0 -2px;
+}
+.badge {
+	background-color: #F5F2EC;
+}
+.glyphicon-remove {
+	top: 3px;
+	padding-right: 2px;
 }
 /* End of Results Page */
