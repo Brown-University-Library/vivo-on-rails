@@ -23,7 +23,7 @@ module SolrLite
     end
 
     def to_qs(text)
-      "#{@name}|#{text}"
+      "#{@name}|#{CGI.escape(text)}"
     end
 
     def add_value(text, count)

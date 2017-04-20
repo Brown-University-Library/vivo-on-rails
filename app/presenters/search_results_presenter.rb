@@ -90,7 +90,8 @@ class SearchResultsPresenter
       # this loops through _all_ the facet/values
       @facets.each do |f|
         f.values.each do |v|
-          v.add_url = @base_url + "?" + @search_qs + "&fq=" + f.to_qs(v.text)
+          qs = @search_qs + "&fq=" + f.to_qs(v.text)
+          v.add_url = @base_url + "?" + qs
         end
       end
     end
