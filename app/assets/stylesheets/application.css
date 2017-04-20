@@ -89,6 +89,10 @@
 	font-weight: bolder;
 	line-height: 2rem;
 }
+.contact-content a:hover {
+/*	color: hsl(40, 60%, 100%);*/ /* hsl isn't working on hover anymore??? */
+	border-bottom: 2px solid #fff;
+}
 .share-contact--bottom {
 	background-color: #594036;
 	min-height: 16rem;
