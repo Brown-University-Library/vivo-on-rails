@@ -26,11 +26,11 @@
                       </a>
                     <% end %>
                   </span>
-                  &#40;
-                  <span>
-                      <span class="categoryCount"><%= value.count %></span>
-                  </span>
-                  &#41;
+                  <div class="no-orphans">
+                    &#40;<span>
+                        <span class="categoryCount"><%= value.count %></span>
+                    </span>&#41;
+                  </div>
               <% end %>
             <% end %>
           </ul>

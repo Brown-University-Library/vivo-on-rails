@@ -37,6 +37,7 @@
 #333	  soft black
 #594036	  brown
 #C00404	  red
+#FF5252	  bright red
 #831B1B	  dark red
 #F5F2EC	  warm gray
 */
@@ -52,16 +53,8 @@
 	margin: 0;
 	padding: 0;
 }
-<<<<<<< HEAD
-.expert-results {
-/*	border: 1px solid red;*/
-	min-height: 32rem;
-=======
 .expert-results {
 	min-height: 32rem;
->>>>>>> facet panel: changed text, border, bkg colors and font-family + removed number badges
-}
-.vcard {
 }
 .emailsContainer {
 		display: flex;
@@ -125,11 +118,16 @@
 
 /* facet column */
 #search-facets {
+<<<<<<< HEAD
 	padding: 0 0 0 15px;
 }
 .facet {
+=======
+>>>>>>> gave homes to categoryCount orphans
 	border-color: #777;
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	padding: 0 0 0 15px;
 }
 .panel-default > .panel-heading {
 	background-color: #333;
@@ -147,6 +145,9 @@
 	margin: 0;
 	padding: 1rem 0;
 }
+.panel-body {
+	padding-right: 11px;
+}
 .panel-body a {
 	color: #000;
 	line-height: 2.5rem;
@@ -158,11 +159,19 @@
 	color: #000;
 	margin: 0 -2px;
 }
-.badge {
-	background-color: #F5F2EC;
+.no-orphans {
+	display: inline-block;
+	white-space: nowrap;
 }
 .glyphicon-remove {
 	top: 3px;
 	padding-right: 2px;
+}
+.search-toggle-more-categories {
+	color: #C00404;
+	font-size: 14px;
+}
+.search-toggle-more-categories:hover {
+	color: #FF5252;
 }
 /* End of Results Page */
