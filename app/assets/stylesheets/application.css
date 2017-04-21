@@ -36,10 +36,11 @@
 /*
 #333	  soft black
 #594036	  brown
+#7E7E7E	  gray
+#F5F2EC	  warm gray
 #C00404	  red
 #FF5252	  bright red
 #831B1B	  dark red
-#F5F2EC	  warm gray
 */
 
 
@@ -57,12 +58,19 @@
 	min-height: 32rem;
 }
 .emailsContainer {
-		display: flex;
-		justify-content: flex-end;
-		padding: 0 30px;
-		position: absolute;
-		left: 0;
-		right: 0;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 30px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+.emailsContainer .glyphicon-envelope {
+	color: #7E7E7E;
+	transform: scaleX(1.3);
+}
+.emailsContainer .glyphicon-envelope:hover {
+	color: #333;
 }
 .share-contact {
 	background-color: #F5F2EC;
@@ -94,6 +102,8 @@
 }
 .share-contact--bottom {
 	background-color: #594036;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 	min-height: 16rem;
 	margin: 0 15px;
 	position: absolute;
@@ -176,5 +186,12 @@
 }
 .search-toggle-more-categories:hover {
 	color: #FF5252;
+}
+.btn-link:focus {
+	color: #831B1B;
+	text-decoration: dashed;
+}
+.modal-body li {
+	color: #831B1B;
 }
 /* End of Results Page */
