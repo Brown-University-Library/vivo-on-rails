@@ -50,6 +50,12 @@
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	padding-right: 0;
 }
+#search-result-count {
+	padding-left: 15px;
+}
+.text-muted {
+	color: #555555;
+}
 .results-row {
 	margin: 0;
 	padding: 0;
@@ -131,12 +137,6 @@
 
 /* facet column */
 #search-facets {
-<<<<<<< HEAD
-	padding: 0 0 0 15px;
-}
-.facet {
-=======
->>>>>>> gave homes to categoryCount orphans
 	border-color: #777;
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	font-size: 15px;
@@ -195,3 +195,53 @@
 	color: #831B1B;
 }
 /* End of Results Page */
+<<<<<<< HEAD
+=======
+
+
+
+/* Footer */
+.footer p.copyright {
+	color: #ddd;
+}
+.footer p.copyright a{
+	color: #FF5252;
+}
+.footer p.copyright a:hover {
+	color: #C00404;
+}
+/* End of Footer */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> fixed some low contrast issues
