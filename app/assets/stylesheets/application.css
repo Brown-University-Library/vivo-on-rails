@@ -50,11 +50,23 @@
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	padding-right: 0;
 }
-#search-result-count {
+#search-result-count, .facet-breadcrumbs {
 	padding-left: 15px;
 }
-.text-muted {
+#search-result-count a, .text-muted {
 	color: #555555;
+}
+#search-result-count a {
+	font-weight: bold;
+}
+#search-result-count a:hover {
+	color: #C00404;
+}
+.facet-breadcrumbs a {
+	color: #333;
+}
+.facet-breadcrumbs a:hover {
+	color: #C00404;
 }
 .results-row {
 	margin: 0;
