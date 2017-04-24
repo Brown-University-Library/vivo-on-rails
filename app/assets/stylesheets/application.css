@@ -44,6 +44,7 @@
 */
 
 /* Header */
+/* red header */
 .header {
 	background-color: #C00404;
 	height: 5rem;
@@ -53,29 +54,62 @@
 	text-align: left;
 }
 .header img {
-/*	border: 1px solid yellow;*/
 	max-width: 110px;
 }
 .hgroup .container .row {
-/*	border: 1px solid blue;*/
 	display: flex;
 	align-items: center;
 	height: 5rem;
-	position: relative;
 }
 .site-title {
-	position: absolute;
 	text-align: center;
 }
 .site-title h1 {
 	font-size: 2rem;
 }
 .site-logo {
-	position: absolute;
 	padding-top: .5rem;
+	text-align: left;
 }
+/* navbar */
+.navbar-inverse {
+	background-color: transparent;
+	border-color: transparent;
+	box-shadow: none;
+}
+#sticky-nav {
+	background-image: none;
+	margin-bottom: 3rem;
+	padding: 0 0 0 1.5rem;
+	position: absolute;
+	top: 0;
+}
+#sticky-nav .container {
+	padding-left: 0 1.5rem;
+	width: 100%;
+}
+#sticky-nav .navbar-btn {
+	padding: 8px 12px;
+}
+@media (max-width: 1054px) {
+	#sticky-nav .navbar-btn {
+		display: none;
+	}
+}
+.form-group {
+	margin-left: .625rem;
+}
+#sticky-nav button.btn.sympl-search {
+	background-color: #232323;
+	border: none;
+	padding: 8px 12px;
+}
+/* End of Header */
 
 /* Results Page */
+.container-fluid {
+	padding-top: 3rem;
+}
 /* results */
 .results-wrapper {
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;

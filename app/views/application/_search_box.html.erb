@@ -1,11 +1,11 @@
-<nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse" id="sticky-nav">
+<nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse col-lg-4 col-lg-push-8 col-md-4 col-md-push-8 col-sm-4 col-sm-push-8" id="sticky-nav">
     <div class="container">
         <h1 class="sr-only">Search</h1>
 
         <div class="navbar-header">
         </div>
 
-        <form class="navbar-form navbar-left " action="<%= search_path() %>" method="GET">
+        <form class="navbar-form navbar-right " action="<%= search_path() %>" method="GET">
             <div class="form-group">
                 <span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span>
                 <input
@@ -35,7 +35,7 @@
             <% end %>
         </form>
 
-        <div class="nav navbar-left dropdown" id="navbar-browse">
+        <div class="nav navbar-right dropdown" id="navbar-browse">
             <button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Browse
                 <span class="caret"></span>

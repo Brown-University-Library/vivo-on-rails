@@ -56,7 +56,13 @@ var i18nStrings = {
 		<div class="hgroup">
 			<div class="container">
 				<div class="row">
-					<div class="site-title col-lg-12 col-md-12 col-sm-12 hidden-xs">
+					<div class="site-logo col-lg-3 col-md-3 col-sm-3 hidden-xs logo-sm">
+            <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
+					</div>
+					<div class="col-xs-12 visible-xs-block">
+            <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
+					</div>
+					<div class="site-title col-lg-6 col-md-6 col-sm-6 hidden-xs">
 						<h1>
 							<a href="<%= root_path %>">Researchers@Brown</a>
 						</h1>
@@ -65,12 +71,6 @@ var i18nStrings = {
 						<h1>
 							<a href="<%= root_path %>">Researchers @ Brown</a>
 						</h1>
-					</div>
-					<div class="site-logo col-lg-12 col-md-12 col-sm-12 hidden-xs logo-sm">
-            <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
-					</div>
-					<div class="col-xs-12 visible-xs-block">
-            <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
 					</div>
 				</div>
 			</div>
