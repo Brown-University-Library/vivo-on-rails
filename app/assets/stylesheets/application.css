@@ -46,7 +46,7 @@
 /* Header */
 /* red header */
 .header {
-	background-color: #C00404;
+	background-color: hsl(0, 80%, 30%);
 	height: 5rem;
 	padding: 0;
 }
@@ -109,6 +109,11 @@
 /* Results Page */
 .container-fluid {
 	padding-top: 3rem;
+}
+@media (min-width: 1700px) {
+	.container-fluid {
+		max-width: 1700px;
+	}
 }
 /* results */
 .results-wrapper {
