@@ -43,6 +43,37 @@
 #831B1B	  dark red
 */
 
+/* Header */
+.header {
+	background-color: #C00404;
+	height: 5rem;
+	padding: 0;
+}
+.header .logo-sm {
+	text-align: left;
+}
+.header img {
+/*	border: 1px solid yellow;*/
+	max-width: 110px;
+}
+.hgroup .container .row {
+/*	border: 1px solid blue;*/
+	display: flex;
+	align-items: center;
+	height: 5rem;
+	position: relative;
+}
+.site-title {
+	position: absolute;
+	text-align: center;
+}
+.site-title h1 {
+	font-size: 2rem;
+}
+.site-logo {
+	position: absolute;
+	padding-top: .5rem;
+}
 
 /* Results Page */
 /* results */
