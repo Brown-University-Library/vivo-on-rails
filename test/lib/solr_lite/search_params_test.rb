@@ -44,9 +44,9 @@ class SearchParamsTest < Minitest::Test
 
   def test_to_solr_query_string
     q = "hello"
-    fq = [SolrLite::FilterQuery.from_query_string('F1:"V1"')]
+    fq = [SolrLite::FilterQuery.from_query_string('F1|V1')]
     params = SolrLite::SearchParams.new(q, fq, default_facets())
-    qs = params.to_solr_query_string
+    qs = params.to_solr_query_string()
     assert qs.include?("&q=hello")
     assert qs.include?("&rows=20")
     assert qs.include?("&start=0")
@@ -59,7 +59,7 @@ class SearchParamsTest < Minitest::Test
 
   def test_to_solr_query_string_q_vs_fq
     # q and fq
-    fq = [SolrLite::FilterQuery.from_query_string('F1:"V1"')]
+    fq = [SolrLite::FilterQuery.from_query_string('F1|V1')]
     params = SolrLite::SearchParams.new("hello", fq)
     qs = params.to_solr_query_string
     assert qs.include?("&q=hello")
