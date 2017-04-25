@@ -18,10 +18,6 @@ module SolrLite
       @values = []
     end
 
-    def to_fq(text)
-      "#{@name}:\"#{text}\""
-    end
-
     def to_qs(text)
       "#{@name}|#{CGI.escape(text)}"
     end

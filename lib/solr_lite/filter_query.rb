@@ -8,9 +8,9 @@ module SolrLite
     def initialize(field, value)
       @field = field
       @value = value
-      @solr_value = "#{field}:\"#{value}\""   # as needed by Solr
-      @qs_value = "#{field}|#{value}"         # URL friendly (no : or quotes)
-      @title = field                          # default to field name
+      @solr_value = field + ':"' + CGI.escape(value) + '"'  # as needed by Solr
+      @qs_value = "#{field}|#{value}"                       # URL friendly (no : or quotes)
+      @title = field                                        # default to field name
       @remove_url = nil
     end
 

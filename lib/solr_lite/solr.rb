@@ -36,7 +36,9 @@ module SolrLite
       query_string += "&" + params.to_solr_query_string()
       query_string += "&q.op=AND"
       url = "#{@solr_url}/select?#{query_string}"
-      SearchResults.new(http_get(url), params)
+      http_response = http_get(url)
+      results = SearchResults.new(http_response, params)
+      results
     end
 
     # shortcut for search
@@ -106,7 +108,7 @@ module SolrLite
       def http_get(url)
         start = Time.now
         log_msg("Solr HTTP GET #{url}")
-        uri = URI.parse(URI.encode(url))
+        uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
         if url.start_with?("https://")
           http.use_ssl = true
