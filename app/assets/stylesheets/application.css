@@ -305,12 +305,11 @@
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 }
 /* left panel */
-#individual-intro #photo-wrapper {
+.person-content #individual-intro #photo-wrapper {
 	margin-bottom: 0;
 }
-#individual-intro .emailsContainer {
-/*	border: 1px solid red;*/
-color: black;
+.person-content #individual-intro .emailsContainer {
+	color: black;
 	justify-content: center;
 	position: relative;
 }
