@@ -106,6 +106,8 @@
 }
 /* End of Header */
 
+
+
 /* Results Page */
 .container-fluid {
 	padding-top: 3rem;
@@ -163,6 +165,7 @@
 .share-contact {
 	background-color: #F5F2EC;
 	min-height: 32rem;
+	padding: 1rem;
 }
 .results-photo {
 	position: absolute;
@@ -295,6 +298,24 @@
 /* End of Footer */
 
 
+
+/* Individual Page */
+.person-content {
+/*	border: 1px solid blue;*/
+	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+h2.vcard {
+	font-weight: bold;
+}
+/*tr.publicationTableRow {
+	background-color: blue;
+}*/
+/*.pub-title {
+	font-weight: 600;
+}*/
+
+
+/* End of Individual Page */
 
 
 
