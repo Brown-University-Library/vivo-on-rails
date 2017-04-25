@@ -58,9 +58,11 @@ class SearchParamsTest < Minitest::Test
   end
 
   def test_to_solr_query_string_q_vs_fq
-    # q and fq
+    q = "hello"
     fq = [SolrLite::FilterQuery.from_query_string('F1|V1')]
-    params = SolrLite::SearchParams.new("hello", fq)
+
+    # q and fq
+    params = SolrLite::SearchParams.new(q, fq)
     qs = params.to_solr_query_string
     assert qs.include?("&q=hello")
     assert qs.include?('&fq=F1:"V1"')
@@ -72,7 +74,7 @@ class SearchParamsTest < Minitest::Test
     assert qs.include?('&fq=F1:"V1"')
 
     # no fq
-    params = SolrLite::SearchParams.new("hello")
+    params = SolrLite::SearchParams.new(q)
     qs = params.to_solr_query_string
     assert qs.include?("&q=hello")
     assert !qs.include?("&fq=")
@@ -82,5 +84,18 @@ class SearchParamsTest < Minitest::Test
     qs = params.to_solr_query_string
     assert !qs.include?("&q=")
     assert !qs.include?("&fq=")
+  end
+
+  def test_to_solr_query_string_encoding
+    # use `q` and `fq` values that must be encoded before sending to Solr
+    q = CGI.escape("B & W")
+    journal_name = "Signs: Journal of Women's in Culture & Society"
+    qs = "published_in|" + CGI.escape(journal_name)
+    fq = [SolrLite::FilterQuery.from_query_string(qs)]
+
+    params = SolrLite::SearchParams.new(q, fq)
+    solr_qs = params.to_solr_query_string
+    assert solr_qs.include?('q=B+%26+W')
+    assert solr_qs.include?('fq=published_in:"Signs%3A+Journal+of+Women%27s+in+Culture+%26+Society"')
   end
 end
