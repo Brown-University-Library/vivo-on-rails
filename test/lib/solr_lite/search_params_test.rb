@@ -12,13 +12,13 @@ class SearchParamsTest < Minitest::Test
   def test_to_user_query_string
     # Search param defaults
     q = "hello"
-    fq = [SolrLite::FilterQuery.from_query_string('F1|V1')]
+    fq = [SolrLite::FilterQuery.from_query_string('F1|V1 b&w')]
     params = SolrLite::SearchParams.new(q, fq, default_facets())
     assert params.q == "hello"
 
     assert params.fq.count == 1
     assert params.fq[0].field == "F1"
-    assert params.fq[0].value == "V1" 
+    assert params.fq[0].value == "V1 b&w"
 
     assert params.page == 1
     assert params.page_size == 20
@@ -28,7 +28,7 @@ class SearchParamsTest < Minitest::Test
     # From params to query string
     qs = params.to_user_query_string
     assert qs.include?("q=hello")
-    assert qs.include?("fq=F1|V1")
+    assert qs.include?("fq=F1|V1+b%26w")
 
     # From query string to params
     params2 = SolrLite::SearchParams.from_query_string(qs, default_facets())
