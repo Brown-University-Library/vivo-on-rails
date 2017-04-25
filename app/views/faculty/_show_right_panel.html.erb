@@ -18,7 +18,7 @@
       <% if @presenter.faculty.research_areas.count > 0 %>
         <h4>Research Areas</h4>
         <% @presenter.faculty.research_areas.each do |area| %>
-          <% qs = "?fq=research_areas:\"" + area + "\""%>
+          <% qs = "?fq=research_areas|#{area}" %>
           <a href="<%= search_url() + qs %>">
             <%= area %>
           </a>
