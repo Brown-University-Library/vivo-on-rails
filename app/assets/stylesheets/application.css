@@ -304,15 +304,71 @@
 /*	border: 1px solid blue;*/
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 }
+/* left panel */
+#individual-intro #photo-wrapper {
+	margin-bottom: 0;
+}
+#individual-intro .emailsContainer {
+/*	border: 1px solid red;*/
+color: black;
+	justify-content: center;
+	position: relative;
+}
+#individual-intro .emailsContainer .glyphicon-envelope {
+	color: #333;
+	font-size: 2rem;
+	transform: scaleX(1.5);
+}
+#individual-intro .emailsContainer .glyphicon-envelope:hover {
+	color: #C00404;
+}
+.collaboratorship-link .btn {
+	color: #fff;
+	background-color: #333;
+}
+.collaboratorship-link .btn:hover {
+	color: #fff;
+	background-color: #C00404;;
+}
+.share-contact span.glyphicon {
+	color: #fff;
+}
+.share-contact h5 {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	margin-top: 1rem;
+	padding: 2rem 0;
+}
+/* right panel */
 h2.vcard {
 	font-weight: bold;
+	margin-bottom: 0;
+}
+#individual-info header {
+	margin-bottom: 5rem;
+}
+#individual-info h3 {
+	margin-top: 1rem;
+	margin-bottom: 0;
+}
+#individual-info h4 {
+	font-weight: 600;
+}
+#individual-info a {
+	border-bottom: 1px dashed #831B1B;
+	color: #831B1B;
+	text-decoration: none;
+}
+#individual-info a:hover {
+	border-bottom: 1px dashed #C00404;
+	color: #C00404;
 }
 /*tr.publicationTableRow {
 	background-color: blue;
 }*/
-/*.pub-title {
+.pub-title {
 	font-weight: 600;
-}*/
+}
 
 
 /* End of Individual Page */
