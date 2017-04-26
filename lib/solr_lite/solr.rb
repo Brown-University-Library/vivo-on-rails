@@ -15,7 +15,7 @@ module SolrLite
     # Returns the document found (or nil if nothing was found)
     # Raises an exception if more than one doc was found.
     def get(id, q_field = "q", fl = "*")
-      query_string = "#{q_field}=id:#{id_encode(id)}"
+      query_string = "#{q_field}=id%3A#{id}"     # %3A => :
       query_string += "&fl=#{fl}"
       query_string += "&wt=json&indent=on"
       url = "#{@solr_url}/select?#{query_string}"
@@ -119,10 +119,6 @@ module SolrLite
         response = http.request(request)
         log_elapsed(start, "Solr HTTP GET")
         JSON.parse(response.body)
-      end
-
-      def id_encode(id)
-        id.gsub(':', '\:')
       end
 
       def elapsed_ms(start)

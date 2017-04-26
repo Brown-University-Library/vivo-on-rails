@@ -66,7 +66,7 @@ class Organization
   def self.get_one_from_solr(id)
     solr_url = ENV["SOLR_URL"]
     solr = SolrLite::Solr.new(solr_url)
-    solr_doc = solr.get("http://vivo.brown.edu/individual/#{id}")
+    solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
     solr_json = solr_doc["json_txt"].first
     hash = JSON.parse(solr_json)
     OrganizationItem.from_hash(hash)
