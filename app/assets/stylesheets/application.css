@@ -229,6 +229,7 @@
 }
 .panel-default > .panel-heading {
 	background-color: #333;
+  color: #fff;
 	background-image: none;
 	background-repeat: no-repeat;
 	border-top-left-radius: 0;
