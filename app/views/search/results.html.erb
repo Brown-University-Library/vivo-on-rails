@@ -147,27 +147,40 @@
 <div class="container-fluid">
   <div class="row">
     <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
-      <!-- 1/N results found -->
-      <div id="search-result-count" class="text-muted">
-          <% if @presenter.page == 1 %>
-            « Previous |
-          <% else %>
-            <a href="<%= @presenter.previous_url %>" >« Previous | </a>
-          <% end %>
 
-          <span id="search-page-start"><%= @presenter.start + 1 %></span>
-          -
-          <span id="search-page-end"><%= @presenter.end %></span>
-          of
-          <span id="search-total-matching"><%= @presenter.num_found %></span>
-          search results
+      <% if @presenter.num_found == 0 %>
+        <div id="search-result-none">
+          <p>No results were found for <b><%= @presenter.query %></b>.
 
-          <% if @presenter.page >= (@presenter.num_pages) %>
-            | Next »
-          <% else %>
-            <a href="<%= @presenter.next_url %>" >| Next »</a>
-          <% end %>
-      </div>
+          <% if @presenter.suggest_url != nil %>
+            <p>Would you like to search for
+              <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
+              instead?</p>
+            <% end %>
+        </div>
+      <% else %>
+        <!-- 1/N results found -->
+        <div id="search-result-count" class="text-muted">
+            <% if @presenter.page == 1 %>
+              « Previous |
+            <% else %>
+              <a href="<%= @presenter.previous_url %>" >« Previous | </a>
+            <% end %>
+
+            <span id="search-page-start"><%= @presenter.start + 1 %></span>
+            -
+            <span id="search-page-end"><%= @presenter.end %></span>
+            of
+            <span id="search-total-matching"><%= @presenter.num_found %></span>
+            search results
+
+            <% if @presenter.page >= (@presenter.num_pages) %>
+              | Next »
+            <% else %>
+              <a href="<%= @presenter.next_url %>" >| Next »</a>
+            <% end %>
+        </div>
+      <% end %>
 
       <!-- search terms used -->
       <div class="facet-breadcrumbs">
@@ -184,6 +197,12 @@
               <span class="glyphicon glyphicon-remove"></span>
               <span class="sr-only">Remove facet <%= fq.value %></span>
             </a>)
+        <% end %>
+
+        <% if @presenter.num_found > 0 && @presenter.suggest_url != nil %>
+          <p>Would you like to see additional results for
+            <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
+            instead?</p>
         <% end %>
       </div>
 

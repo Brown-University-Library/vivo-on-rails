@@ -8,7 +8,8 @@ class SearchResultsPresenter
   attr_accessor :form_values, :fq, :facets, :query, :search_qs, :results,
     :page, :start, :end, :num_found, :num_pages, :page_start, :page_end,
     :previous_url, :next_url,
-    :remove_q_url, :facetSearchBaseUrl
+    :remove_q_url, :facetSearchBaseUrl,
+    :suggest_q, :suggest_url
 
   def initialize(results, params, base_url, base_facet_search_url)
     @base_url = base_url
@@ -26,6 +27,11 @@ class SearchResultsPresenter
     @query = params.q == "*" ? "" : CGI.unescape(params.q)
     @search_qs = params.to_user_query_string()
     @remove_q_url = "#{@base_url}?#{params.to_user_query_string_no_q()}"
+
+    @suggest_q = results.spellcheck_top_collation_query
+    if results.spellcheck_top_collation_query != nil
+      @suggest_url = @remove_q_url + "&q=#{CGI.escape(suggest_q)}"
+    end
 
     # from results
     @facets = results.facets

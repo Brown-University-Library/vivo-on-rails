@@ -76,6 +76,28 @@ module SolrLite
       @params.facets
     end
 
+    def spellcheck
+      @solr_response.fetch("spellcheck",{})
+    end
+
+    def spellcheck_suggestions
+      spellcheck.fetch("suggestions",[])
+    end
+
+    def spellcheck_collations
+      spellcheck().fetch("collations",[])
+    end
+
+    def spellcheck_correctly_spelled
+      spellcheck().fetch("correctlySpelled", true)
+    end
+
+    def spellcheck_top_collation_query
+      return nil if spellcheck_collations.length < 2
+      collation = spellcheck_collations[1] || {}
+      collation.fetch("collationQuery", nil)
+    end
+
     def set_facet_values()
       return if @solr_response["facet_counts"] == nil
       solr_facets = @solr_response["facet_counts"]["facet_fields"]
