@@ -3,7 +3,7 @@ module SolrLite
   # and value the value to filter by. In a Solr query are represented
   # as "fq=field:value"
   class FilterQuery
-    attr_reader :field, :value, :solr_value, :qs_value
+    attr_reader :field, :value, :solr_value, :qs_value, :form_value
     attr_accessor :title, :remove_url
     def initialize(field, value)
       @field = field
@@ -11,6 +11,7 @@ module SolrLite
       # Very important to escape the : otherwise URL.parse throws an error in Linux
       @solr_value = CGI.escape(field + ':"' + value + '"')  # as needed by Solr
       @qs_value = "#{field}|#{CGI.escape(value)}"           # URL friendly (no : or quotes)
+      @form_value = "#{field}|#{value}"                     # HTML Form friendly (no encoding, the form auto-encodes on POST)
       @title = field                                        # default to field name
       @remove_url = nil
     end

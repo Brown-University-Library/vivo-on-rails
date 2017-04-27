@@ -109,7 +109,7 @@ module SolrLite
       # We create an individual fq_n HTML form value for each
       # fq value because Rails does not like the same value on the form.
       @fq.each_with_index do |filter, i|
-        values << {name: "fq_#{i}", value: filter.qs_value}
+        values << {name: "fq_#{i}", value: filter.form_value}
       end
 
       values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
