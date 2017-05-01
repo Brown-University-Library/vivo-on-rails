@@ -4,7 +4,7 @@ Add a custom homepage background to hero class here
 ----------------------------------------------*/
 .hero {
   background-size: cover;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/8f/BrownUniversity-JohnHayLibrary.jpg');
+  background-image: url('new-backgrounds/20131022-PAUR-Aerials-0033.jpg');
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
