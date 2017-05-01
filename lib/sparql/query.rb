@@ -38,6 +38,7 @@ module Sparql
       p << {prefix: "brown", uri: "http://vivo.brown.edu/ontology/vivo-brown/"}
       p << {prefix: "citation", uri: "http://vivo.brown.edu/ontology/citation#"}
       p << {prefix: "foaf01", uri: "http://xmlns.com/foaf/0.1/"}
+      p << {prefix: "bdisplay", uri: "http://vivo.brown.edu/ontology/display#"}
       p
     end
 

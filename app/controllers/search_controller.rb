@@ -31,7 +31,8 @@ class SearchController < ApplicationController
         params.fq << SolrLite::FilterQuery.new("record_type", "PEOPLE")
       end
 
-      search_results = searcher.search(params)
+      not_hidden_fq = SolrLite::FilterQuery.new("hidden_b", "false")
+      search_results = searcher.search(params, [not_hidden_fq])
       @presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
     end
 

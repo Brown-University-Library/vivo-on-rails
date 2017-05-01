@@ -1,7 +1,7 @@
 <div class="col-md-9 col-sm-8 col-xs-12">
   <section id="individual-info" role="region">
     <header>
-      <h2 class="vcard foaf-person hidden-xs"><%= @presenter.faculty.name %></h2>
+      <h2 class="vcard foaf-person hidden-xs"><%= @presenter.faculty.name + (@presenter.faculty.hidden ? " [Inactive]" : "")%></h2>
       <h3><%= @presenter.faculty.title %></h3>
       <h4><%= @presenter.faculty.org_label %></h4>
       <p><%= @presenter.faculty.overview.html_safe %></p>

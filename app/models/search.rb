@@ -7,9 +7,9 @@ class Search
     @solr = SolrLite::Solr.new(solr_url)
   end
 
-  def search(params)
+  def search(params, extra_fqs)
     params.fl = ["id", "record_type", "json_txt"]
-    results = @solr.search(params)
+    results = @solr.search(params, extra_fqs)
     results.solr_docs.each do |doc|
       record_type = (doc["record_type"] || []).first
       case record_type

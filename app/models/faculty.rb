@@ -120,6 +120,7 @@ class Faculty
     return nil if result == nil
     # TODO: How to handle if we get more than one
     faculty = FacultyItem.new(result)
+    faculty.hidden = get_is_hidden?(id)
     faculty.thumbnail = get_image(id)
     faculty.contributor_to = get_contributor_to(id)
     faculty.education = get_education(id)
@@ -128,6 +129,18 @@ class Faculty
     faculty.affiliations = get_affiliations(id)
     faculty.research_areas = get_research_areas(id)
     faculty
+  end
+
+  def self.get_is_hidden?(id)
+    sparql = <<-END_SPARQL
+      select (count(*) as ?count)
+      where {
+        individual:#{id} a bdisplay:Hidden .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.first[:count].to_i > 0
   end
 
   def self.get_image(id)

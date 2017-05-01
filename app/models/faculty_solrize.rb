@@ -47,6 +47,7 @@ class FacultySolrize
       affiliations: faculty.affiliations.map { |a| a.name},
       research_areas: faculty.research_areas,
       published_in: faculty.published_in,
+      hidden_b: faculty.hidden,
       json_txt: faculty.to_json
     }
     solr_obj

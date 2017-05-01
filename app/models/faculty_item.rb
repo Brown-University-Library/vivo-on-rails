@@ -6,7 +6,7 @@ class FacultyItem
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
-    :web_page_text, :web_page_uri, :published_in
+    :web_page_text, :web_page_uri, :published_in, :hidden
 
   def initialize(values = nil)
     init_defaults()
@@ -38,6 +38,7 @@ class FacultyItem
     @research_areas = []
     @web_page_text = ""
     @web_page_uri = ""
+    @hidden = false
   end
 
   def contributor_to=(value)
