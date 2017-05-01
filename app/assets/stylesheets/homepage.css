@@ -8,6 +8,11 @@ Add a custom homepage background to hero class here
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
+
+.site-title {
+  display: none;
+}
+
 .theme-showcase {
   width: 100%;
   height: 100%;
