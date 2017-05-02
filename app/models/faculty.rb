@@ -6,6 +6,7 @@ require "./app/models/contributor_to_item.rb"
 require "./app/models/training_item.rb"
 require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
+require "./app/models/on_the_web_item.rb"
 class Faculty
 
   MAX_ROW_LIMIT = "limit 10000"
@@ -107,11 +108,6 @@ class Faculty
         optional { ?uri brown:fundedResearch ?funded_research . }
         optional { ?uri core:teachingOverview ?teaching_overview . }
         optional { ?uri brown:affiliations ?affiliations_text . }
-        optional {
-          ?uri brown:drrbWebPage ?web .
-          ?web core:linkAnchorText ?web_page_text .
-          ?web core:linkURI ?web_page_uri .
-        }
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -128,7 +124,24 @@ class Faculty
     faculty.collaborators = get_collaborators(id)
     faculty.affiliations = get_affiliations(id)
     faculty.research_areas = get_research_areas(id)
+    faculty.on_the_web = get_on_the_web(id)
     faculty
+  end
+
+  def self.get_on_the_web(id)
+    sparql = <<-END_SPARQL
+      select ?uri ?rank ?url ?text
+      where {
+        individual:#{id} brown:drrbWebPage ?uri .
+        ?uri core:linkURI ?url .
+        optional { ?uri core:linkAnchorText ?text . }
+        optional { ?uri core:rank ?rank . }
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    on_the_web = query.results.map { |row| OnTheWebItem.new(row) }
+    on_the_web.sort_by { |x| x.rank }
   end
 
   def self.get_is_hidden?(id)

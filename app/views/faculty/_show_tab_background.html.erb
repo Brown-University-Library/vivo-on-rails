@@ -46,23 +46,26 @@
         title: "Honors and Awards",
         text: @presenter.faculty.awards} %>
 
-      <% if !@presenter.faculty.web_page_text.empty? %>
-          <div id="webPage" class="tab-pane fade in active" role="tabpanel">
-            <h2 id="webPage" pgroup="tabs" class="hidden">On the Web</h2>
-            <div id="webPageGroup">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 id="relatedBy-Authorship" title="" class="panel-title">On the Web</h3>
-                </div>
-                <div class="panel-body">
-                  <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
-                    <a href="<%= @presenter.faculty.web_page_uri %>"><%= @presenter.faculty.web_page_text %></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <% if @presenter.faculty.on_the_web.count > 0 %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 id="relatedBy-Authorship" title="" class="panel-title">On the Web</h3>
           </div>
-      <% end %>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <tbody>
+                <% @presenter.faculty.on_the_web.each do |web| %>
+                  <tr class="tableRow" role="listitem">
+                    <td class="citation-data">
+                      <span class="listDateTime"><a target="_blank" href="<%= web.url %>"><%= web.text %></a></span>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %> <!-- on_the_web.count -->
 
   <% if locals[:add_tab] == true %>
     </div>
