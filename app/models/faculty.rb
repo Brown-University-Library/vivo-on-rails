@@ -286,7 +286,7 @@ class Faculty
     sparql = <<-END_SPARQL
     select ?uri ?name ?department ?org_name ?start_date ?end_date
     where {
-      individual:hjcook profile:hasAppointment ?uri .
+      individual:#{id} profile:hasAppointment ?uri .
       ?uri profile:hasOrganization ?org .
       ?uri rdfs:label ?name .
       ?uri profile:department ?department .
