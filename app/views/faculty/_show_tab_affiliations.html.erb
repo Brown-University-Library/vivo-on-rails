@@ -56,7 +56,7 @@
                     <td>
                       <span class="listDateTime"><%= a.name %></span>.
                       <span>
-                        <% qs = '?&q=appointment_at:"' + a.org_name + '"' %>
+                        <% qs = '?q=appointment_at:"' + CGI.escape(a.org_name) + '"' %>
                         <a href="<%= search_url() + qs %>"
                           title="Find researchers that had appointments at this institution">
                           <%= a.org_name %></a>,
