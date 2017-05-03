@@ -63,6 +63,11 @@ class ContributorToItem
     return @type.gsub(citationPrefix,"")
   end
 
+  def pub_type_id
+    return nil if pub_type == nil
+    pub_type.downcase.gsub(" ","_")
+  end
+
   private
     def publisher
       case

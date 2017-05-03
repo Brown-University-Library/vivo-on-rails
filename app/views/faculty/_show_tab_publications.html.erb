@@ -13,11 +13,21 @@
         </div>
 
         <div class="panel-body">
+
+          <% if @presenter.publication_filters.count > 1 %>
+            <div>
+              View: <a href="javascript:PublicationsShowAll()">All</a>
+              <% @presenter.publication_filters.each do |filter| %>
+                | <a href="javascript:PublicationsShowOnly('pub-type_<%= filter[:id] %>')"><%= filter[:text] %></a>
+              <% end %>
+            </div>
+          <% end %>
+
           <table class="table table-hover">
             <tbody>
               <% @presenter.faculty.contributor_to.each do |c| %>
                 <tr class="publicationTableRow" role="listitem">
-                  <td class="citation-data">
+                  <td class="citation-data pub-item pub-type_<%= c.pub_type_id %>">
                     <span class="listDateTime"><%= c.authors %></span>
                     <a href="<%= c.uri %>"><%= c.title %></a>
                     <%= c.pub_info %>
@@ -25,7 +35,7 @@
                       <a class="full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
                     <% end %>
                     <% if c.pub_type %>
-                      <span class="pub-type-label"><%= c.pub_type %></span>
+                      <span class="pub-type-label"><%= c.pub_type.downcase %></span>
                     <% end %>
                   </td>
                 </tr>

@@ -1,12 +1,14 @@
 class FacultyPresenter
   attr_accessor :query, :form_values
   attr_accessor :faculty, :has_publications, :has_research, :has_background,
-    :has_affiliations, :has_teaching, :has_details
+    :has_affiliations, :has_teaching, :has_details,
+    :publication_filters
 
   def initialize(faculty)
     @faculty = faculty
 
     @has_publications = faculty.contributor_to.count > 0
+    @publication_filters = get_publication_filters()
 
     @has_research = !faculty.research_overview.empty? ||
       !faculty.research_statement.empty? ||
@@ -27,4 +29,13 @@ class FacultyPresenter
     @has_details = @has_publications || @has_research ||
       @has_background || @has_affiliations || @has_teaching
   end
+
+
+  def get_publication_filters()
+    pub_types = faculty.contributor_to.map do |c|
+      {text: c.pub_type, id: c.pub_type_id}
+    end
+    pub_types.uniq
+  end
+
 end

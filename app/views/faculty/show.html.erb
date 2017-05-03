@@ -14,6 +14,22 @@ span.pub-type-label {
 }
 </style>
 
+<script>
+function PublicationsHideAll() {
+  $(".pub-item").addClass("hidden");
+}
+
+function PublicationsShowAll() {
+  $(".pub-item").removeClass("hidden");
+}
+
+function PublicationsShowOnly(type) {
+  $(".pub-item").addClass("hidden");
+  $("." + type).removeClass("hidden");
+}
+
+</script>
+
 <%= render "search_box" %>
 
 <div class="container">
