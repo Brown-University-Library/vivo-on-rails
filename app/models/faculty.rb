@@ -222,7 +222,8 @@ class Faculty
 
   def self.get_contributor_to(id)
     sparql = <<-END_SPARQL
-      select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title ?venue_name
+      select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title
+        ?type ?doi ?venue_name
       where {
          individual:#{id} citation:contributorTo ?uri .
          ?uri citation:hasContributor individual:#{id} .
@@ -233,6 +234,8 @@ class Faculty
          optional { ?uri citation:authorList ?authors . }
          optional { ?uri citation:publishedIn ?published_in . }
          optional { ?uri rdfs:label ?title . }
+         optional { ?uri vitro0_7:mostSpecificType ?type . }
+         optional { ?uri citation:doi ?doi . }
          optional {
            ?uri citation:hasVenue ?venue .
            ?venue rdfs:label ?venue_name .
@@ -244,9 +247,7 @@ class Faculty
     # TODO: figure out a better way to removing duplicates
     #       (see what VIVO does to pick the contribuition)
     uniq_contributions = query.results.uniq { |row| row[:uri] }
-    uniq_contributions.map do |row|
-      ContributorToItem.new(row)
-    end
+    uniq_contributions.map { |row| ContributorToItem.new(row) }
   end
 
   def self.get_affiliations(id)
