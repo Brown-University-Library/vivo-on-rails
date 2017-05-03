@@ -15,7 +15,7 @@ class FacultyPresenter
 
     @has_background = faculty.education.count > 0 ||
       !faculty.awards.empty? ||
-      !faculty.on_the_web.count > 0
+      faculty.on_the_web.count > 0
 
     @has_affiliations = faculty.collaborators.count > 0 ||
       !faculty.affiliations_text.empty? ||
