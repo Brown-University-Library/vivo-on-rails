@@ -30,15 +30,16 @@ module Sparql
 
     def default_prefixes
       p = []
-      p << {prefix: "core", uri: "http://vivoweb.org/ontology/core#"}
-      p << {prefix: "rdf", uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
-      p << {prefix: "rdfs", uri: "http://www.w3.org/2000/01/rdf-schema#"}
-      p << {prefix: "vitro", uri: "http://vitro.mannlib.cornell.edu/ns/vitro/public#"}
+      p << {prefix: "foaf01",     uri: "http://xmlns.com/foaf/0.1/"}
+      p << {prefix: "rdf",        uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+      p << {prefix: "rdfs",       uri: "http://www.w3.org/2000/01/rdf-schema#"}
+      p << {prefix: "vitro",      uri: "http://vitro.mannlib.cornell.edu/ns/vitro/public#"}
+      p << {prefix: "core",       uri: "http://vivoweb.org/ontology/core#"}
       p << {prefix: "individual", uri: "http://vivo.brown.edu/individual/"}
-      p << {prefix: "brown", uri: "http://vivo.brown.edu/ontology/vivo-brown/"}
-      p << {prefix: "citation", uri: "http://vivo.brown.edu/ontology/citation#"}
-      p << {prefix: "foaf01", uri: "http://xmlns.com/foaf/0.1/"}
-      p << {prefix: "bdisplay", uri: "http://vivo.brown.edu/ontology/display#"}
+      p << {prefix: "brown",      uri: "http://vivo.brown.edu/ontology/vivo-brown/"}
+      p << {prefix: "citation",   uri: "http://vivo.brown.edu/ontology/citation#"}
+      p << {prefix: "bdisplay",   uri: "http://vivo.brown.edu/ontology/display#"}
+      p << {prefix: "profile",    uri: "http://vivo.brown.edu/ontology/profile#"}
       p
     end
 

@@ -125,6 +125,7 @@ class Faculty
     faculty.affiliations = get_affiliations(id)
     faculty.research_areas = get_research_areas(id)
     faculty.on_the_web = get_on_the_web(id)
+    faculty.appointments = get_appointments(id)
     faculty
   end
 
@@ -279,5 +280,24 @@ class Faculty
     query.results.map do |row|
       row[:name]
     end
+  end
+
+  def self.get_appointments(id)
+    sparql = <<-END_SPARQL
+    select ?uri ?name ?department ?org_name ?start_date ?end_date
+    where {
+      individual:hjcook profile:hasAppointment ?uri .
+      ?uri profile:hasOrganization ?org .
+      ?uri rdfs:label ?name .
+      ?uri profile:department ?department .
+      ?uri profile:endDate ?end_date .
+      ?uri profile:startDate ?start_date .
+      ?org rdfs:label ?org_name .
+    }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    appointments = query.results.map { |row| AppointmentItem.new(row) }
+    appointments.sort_by { |x| x.start_date }.reverse
   end
 end

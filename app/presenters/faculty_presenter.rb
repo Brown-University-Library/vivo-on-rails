@@ -15,10 +15,11 @@ class FacultyPresenter
 
     @has_background = faculty.education.count > 0 ||
       !faculty.awards.empty? ||
-      !faculty.web_page_text.empty?
+      !faculty.on_the_web.count > 0
 
     @has_affiliations = faculty.collaborators.count > 0 ||
-      !faculty.affiliations_text.empty?
+      !faculty.affiliations_text.empty? ||
+      faculty.appointments.count > 0
 
     @has_teaching = !faculty.teaching_overview.empty? ||
       faculty.teacher_for.count > 0
