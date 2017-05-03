@@ -287,12 +287,18 @@ class Faculty
     select ?uri ?name ?department ?org_name ?start_date ?end_date
     where {
       individual:#{id} profile:hasAppointment ?uri .
-      ?uri profile:hasOrganization ?org .
       ?uri rdfs:label ?name .
       ?uri profile:department ?department .
       ?uri profile:endDate ?end_date .
       ?uri profile:startDate ?start_date .
-      ?org rdfs:label ?org_name .
+      optional {
+        ?uri profile:hasOrganization ?org .
+        ?org rdfs:label ?org_name .
+      }
+      optional {
+        ?uri profile:hasHospital ?hospital .
+        ?hospital rdfs:label ?org_name .
+      }
     }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]

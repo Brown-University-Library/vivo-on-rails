@@ -32,9 +32,9 @@ class AppointmentItem
     @id.split("/").last
   end
 
-  def year_range
-    y1 = @start_date ? @start_date.year.to_s : ""
-    y2 = @end_date ? @end_date.year.to_s : ""
+  def year_range_str
+    y1 = year_str(@start_date)
+    y2 = year_str(@end_date)
     case
     when y1 && y2
       "#{y1}-#{y2}"
@@ -55,4 +55,11 @@ class AppointmentItem
       nil
     end
   end
+
+  private
+    def year_str(date)
+      return "" if date == nil
+      return "Present" if date.year == 9999
+      return date.year.to_s
+    end
 end
