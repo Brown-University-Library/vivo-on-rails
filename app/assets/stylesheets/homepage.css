@@ -2,12 +2,15 @@
 /*---------------------------------------------
 Add a custom homepage background to hero class here
 ----------------------------------------------*/
+
+/* moved to index.html.erb as inline style, to randomize homepage image background
 .hero {
   background-size: cover;
   background-image: url('new-backgrounds/20131022-PAUR-Aerials-0033.jpg');
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
+*/
 
 .theme-showcase {
   width: 100%;
