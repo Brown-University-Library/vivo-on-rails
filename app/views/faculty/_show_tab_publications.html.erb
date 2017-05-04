@@ -35,11 +35,11 @@
                     <span class="listDateTime"><%= c.authors %></span>
                     <i><a href="<%= c.uri %>"><%= c.title %></a></i>
                     <%= c.pub_info %>
+                    <% if c.pub_type %>
+                      <span class="label label-default"><%= c.pub_type.downcase %></span>
+                    <% end %>
                     <% if c.doi_url %>
                       <a class="full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
-                    <% end %>
-                    <% if c.pub_type %>
-                      <span class="pub-type-label"><%= c.pub_type.downcase %></span>
                     <% end %>
                   </td>
                 </tr>
