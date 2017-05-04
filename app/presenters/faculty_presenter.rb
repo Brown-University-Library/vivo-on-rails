@@ -32,10 +32,16 @@ class FacultyPresenter
 
 
   def get_publication_filters()
-    pub_types = faculty.contributor_to.map do |c|
-      {text: c.pub_type, id: c.pub_type_id}
+    pub_types = []
+    faculty.contributor_to.each do |c|
+      type = pub_types.find {|t| t[:id] == c.pub_type_id}
+      if type == nil
+        type = {id: c.pub_type_id, text: c.pub_type, count: 1}
+        pub_types << type
+      else
+        type[:count] += 1
+      end
     end
-    pub_types.uniq
+    pub_types
   end
-
 end

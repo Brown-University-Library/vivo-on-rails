@@ -15,17 +15,19 @@ span.pub-type-label {
 </style>
 
 <script>
-function PublicationsHideAll() {
-  $(".pub-item").addClass("hidden");
-}
-
 function PublicationsShowAll() {
+  // show all publications
   $(".pub-item").removeClass("hidden");
+  $(".btn-filter-pub").removeClass("active");
+  $("#btn-for_all").addClass("active");
 }
 
-function PublicationsShowOnly(type) {
+function PublicationsShowOnly(filter) {
+  // hide all publications except the ones that we want to filter
   $(".pub-item").addClass("hidden");
-  $("." + type).removeClass("hidden");
+  $(".pub-type_" + filter).removeClass("hidden");
+  $(".btn-filter-pub").removeClass("active");
+  $("#btn-for_" + filter).addClass("active");
 }
 
 </script>
