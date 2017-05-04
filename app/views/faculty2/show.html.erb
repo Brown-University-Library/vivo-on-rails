@@ -9,17 +9,17 @@ a.full-text-link {
 </style>
 
 <script>
-var tabs = ["tabOverview", "tabPublications", "tabResearch",
+var researcherTabs = ["tabOverview", "tabPublications", "tabResearch",
   "tabBackground", "tabAffiliations", "tabTeaching"];
 
-function PublicationsShowAll() {
+function publicationsShowAll() {
   // show all publications
   $(".pub-item").removeClass("hidden");
   $(".btn-filter-pub").removeClass("active");
   $("#btn-for_all").addClass("active");
 }
 
-function PublicationsShowOnly(filter) {
+function publicationsShowOnly(filter) {
   // hide all publications except the ones that we want to filter
   $(".pub-item").addClass("hidden");
   $(".pub-type_" + filter).removeClass("hidden");
@@ -27,28 +27,53 @@ function PublicationsShowOnly(filter) {
   $("#btn-for_" + filter).addClass("active");
 }
 
-function ShowTab(name) {
+function isValidTab(name) {
   var i;
-  debugger;
-  if (name == "all") {
-    for(i = 0; i < tabs.length; i++) {
-      $("#" + tabs[i]).removeClass("hidden");
-      $("#" + tabs[i] + "Btn").removeClass("active");
+  for(i = 0; i < researcherTabs.length; i++) {
+    if (name == researcherTabs[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function showTab(name) {
+  var i;
+  if (name == "tabAll") {
+    // show all tabs
+    for(i = 0; i < researcherTabs.length; i++) {
+      $("#" + researcherTabs[i]).removeClass("hidden");
+      $("#" + researcherTabs[i] + "Btn").removeClass("active");
     }
     $("#tabAllBtn").addClass("active");
-    console.log("Showing all");
   } else {
-    for(i = 0; i < tabs.length; i++) {
-      $("#" + tabs[i]).addClass("hidden");
-      $("#" + tabs[i] + "Btn").removeClass("active");
+    if (isValidTab(name)) {
+      // hide all tabs
+      for(i = 0; i < researcherTabs.length; i++) {
+        $("#" + researcherTabs[i]).addClass("hidden");
+        $("#" + researcherTabs[i] + "Btn").removeClass("active");
+      }
+      // show the indicated tab
+      $("#" + name).removeClass("hidden");
+      $("#tabAllBtn").removeClass("active");
+      $("#" + name + "Btn").addClass("active");
+    } else {
+      // invalid tab, do nothing.
     }
-    $("#" + name).removeClass("hidden");
-    $("#tabAllBtn").removeClass("active");
-    $("#" + name + "Btn").addClass("active");
-    console.log("Showing tab: " + name);
   }
 }
+
+$(document).ready(function() {
+  var tabId;
+  if(window.location.hash) {
+    // use the tab indicated in the URL
+    tabId = "tab" + window.location.hash.substring(1);
+    showTab(tabId);
+  }
+});
 </script>
+
+<% @page_title = @presenter.faculty.name %>
 
 <%= render "search_box" %>
 

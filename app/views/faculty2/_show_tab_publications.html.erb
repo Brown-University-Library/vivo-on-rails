@@ -10,11 +10,11 @@
               <div class="btn-group" role="group" aria-label="filter contributor to by">
                 <button type="button" class="btn btn-default active btn-filter-pub"
                   id="btn-for_all"
-                  onclick="javascript:PublicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)</button>
+                  onclick="javascript:publicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)</button>
                 <% @presenter.publication_filters.each do |filter| %>
                   <button type="button" class="btn btn-default btn-filter-pub"
                     id="btn-for_<%= filter[:id] %>"
-                    onclick="javascript:PublicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
+                    onclick="javascript:publicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
                 <% end %>
               </div>
           <% end %>
