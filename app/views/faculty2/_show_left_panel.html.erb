@@ -1,0 +1,76 @@
+<div class="col-md-3 col-sm-4 col-xs-12">
+  <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+    <section class="share-contact" role="region">
+      <div id="photo-wrapper">
+        <%= image_tag(@presenter.faculty.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "175", class: "img-circle") %>
+      </div>
+      <h2 class="hidden-sm hidden-md hidden-lg">
+          <%= @presenter.faculty.name %>
+      </h2>
+
+      <!-- Contact Info -->
+      <div class="emailsContainer">
+        <h4>
+          <a href="mailto:<%= @presenter.faculty.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+        </h4>
+      </div>
+
+      <div id="tabButtons" class="btn-group-vertical">
+          <a id="tabOverviewBtn"
+            class="btn btn-default active"
+            href="javascript:ShowTab('tabOverview')"
+            title="Overview">
+              <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+              Overview
+          </a>
+          <% if @presenter.has_publications %>
+            <a id="tabPublicationsBtn"
+              href="javascript:ShowTab('tabPublications')" title="Publications" class="btn btn-default">
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                Publications
+            </a>
+          <% end %>
+
+          <% if @presenter.has_research %>
+            <a id="tabResearchBtn"
+              href="javascript:ShowTab('tabResearch')" title="Research" class="btn btn-default">
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                Research
+            </a>
+          <% end %>
+
+          <% if @presenter.has_background %>
+            <a id="tabBackgroundBtn"
+              href="javascript:ShowTab('tabBackground')" title="Background" class="btn btn-default">
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                Background
+            </a>
+          <% end %>
+
+          <% if @presenter.has_affiliations %>
+            <a id="tabAffiliationsBtn"
+              href="javascript:ShowTab('tabAffiliations')" title="Affiliations" class="btn btn-default">
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                Affiliations
+            </a>
+          <% end %>
+
+          <% if @presenter.has_teaching %>
+            <a id="tabTeachingBtn"
+              href="javascript:ShowTab('tabTeaching')" title="Teaching" class="btn btn-default">
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                Teaching
+            </a>
+          <% end %>
+
+          <% if @presenter.has_details %>
+            <a id="tabAllBtn"
+              href="javascript:ShowTab('all')" title="View All" class="btn btn-default">
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                View All
+            </a>
+          <% end %>
+      </div>
+    </section>
+  </section>
+</div>

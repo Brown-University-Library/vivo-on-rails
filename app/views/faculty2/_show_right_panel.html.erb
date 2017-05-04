@@ -1,0 +1,56 @@
+<div class="col-md-9 col-sm-8 col-xs-12" id="section_overview">
+    <div id="data">
+      <h2 class="vcard foaf-person hidden-xs"><%= @presenter.faculty.name + (@presenter.faculty.hidden ? " [Inactive]" : "")%></h2>
+      <h3><%= @presenter.faculty.title %></h3>
+      <h4><%= @presenter.faculty.org_label %></h4>
+
+      <div class="tabFinder" id="tabOverview">
+          <p><%= @presenter.faculty.overview.html_safe %></p>
+          <% if @presenter.faculty.affiliations.count > 0 %>
+            <h4>Brown Affiliations</h4>
+            <% @presenter.faculty.affiliations.each do |a| %>
+              <% qs = "?fq=affiliations|#{CGI.escape(a.name)}" %>
+              <a href="<%= search_url() + qs %>">
+                <%= a.name %>
+              </a>
+              &nbsp;|&nbsp;
+            <% end %>
+          <% end %>
+          <% if @presenter.faculty.research_areas.count > 0 %>
+            <h4>Research Areas</h4>
+            <% @presenter.faculty.research_areas.each do |area| %>
+              <% qs = "?fq=research_areas|#{CGI.escape(area)}" %>
+              <a href="<%= search_url() + qs %>">
+                <%= area %>
+              </a>
+              &nbsp;|&nbsp;
+            <% end %>
+          <% end %>
+      </div> <!-- panel -->
+
+      <%= render "show_tab_publications", locals: {add_tab: true } %>
+      <%= render "show_tab_research", locals: {add_tab: true } %>
+      <%= render "show_tab_background", locals: {add_tab: true } %>
+      <%= render "show_tab_affiliations", locals: {add_tab: true }  %>
+      <%= render "show_tab_teaching", locals: {add_tab: true }  %>
+    </div> <!-- data -->
+
+</div> <!-- col-md-9 -->
+
+<script>
+$(document).ready(function() {
+  var tabId, contentId;
+  if(window.location.hash) {
+    // use the tab indicated in the URL
+    // TODO: handle if the tab is invalid
+    tabId = window.location.hash + "Tab";
+    contentId = window.location.hash;
+  } else {
+    // default to the first tab rendered
+    tabId = ".tabFinder";
+    contentId = ".tabContentFinder";
+  }
+  $(tabId).first().addClass("active");
+  $(contentId).first().addClass("tab-pane fade active in");
+});
+</script>

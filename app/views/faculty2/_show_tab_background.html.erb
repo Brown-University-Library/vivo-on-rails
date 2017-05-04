@@ -1,0 +1,62 @@
+<% if @presenter.has_background %>
+  <div id="tabBackground" class="panel panel-default hidden">
+    <h3>Background</h3>
+
+      <% if @presenter.faculty.education.count > 0 %>
+          <div class="panel-heading">
+            <h3 id="relatedBy-Authorship" title="" class="panel-title">Education and Training</h3>
+          </div>
+
+          <div class="panel-body">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th>Year</th>
+                  <th>Degree</th>
+                  <th>Institution</th>
+                </tr>
+                <% @presenter.faculty.education.each do |ed| %>
+                  <tr class="tableRow" role="listitem">
+                    <td class="citation-data">
+                      <span class="listDateTime"><%= ed.date%></span>
+                    </td>
+                    <td>
+                      <span class="listDateTime"><%= ed.degree %></span>
+                    </td>
+                    <td>
+                      <span class="listDateTime">
+                        <a href="<%= ed.school_uri %>"><%= ed.school_name%></a>
+                      </span>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% end %> <!-- education.count -->
+
+      <%= render "show_text_tab", locals: {
+        divId: "honorsAwards",
+        title: "Honors and Awards",
+        text: @presenter.faculty.awards} %>
+
+      <% if @presenter.faculty.on_the_web.count > 0 %>
+          <div class="panel-heading">
+            <h3 id="relatedBy-Authorship" title="" class="panel-title">On the Web</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <tbody>
+                <% @presenter.faculty.on_the_web.each do |web| %>
+                  <tr class="tableRow" role="listitem">
+                    <td class="citation-data">
+                      <span class="listDateTime"><a target="_blank" href="<%= web.url %>"><%= web.text %></a></span>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% end %> <!-- on_the_web.count -->
+  </div> <!-- panel -->
+<% end %>
