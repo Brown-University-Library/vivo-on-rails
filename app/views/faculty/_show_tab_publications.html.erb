@@ -22,7 +22,7 @@
                 <% @presenter.publication_filters.each do |filter| %>
                   <button type="button" class="btn btn-default btn-filter-pub"
                     id="btn-for_<%= filter[:id] %>"
-                    onclick="javascript:PublicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %>(<%= filter[:count] %>)</button>
+                    onclick="javascript:PublicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
                 <% end %>
               </div>
           <% end %>

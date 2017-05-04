@@ -61,7 +61,7 @@ class FacultyItem
       getter = key.to_s
       case getter
       when "affiliations"
-        faculty.affiliations = value.map {|v| AffiliationItem.new(v)}
+        faculty.affiliations = value.map {|v| AffiliationItem.new(v)}.sort_by {|v| v.name.downcase}
       when "collaborators"
         faculty.collaborators = value.map {|v| CollaboratorItem.new(v)}
       when "contributor_to"
@@ -77,10 +77,14 @@ class FacultyItem
         faculty.teacher_for = value
       when "research_areas"
         # string array, no special handling
-        faculty.research_areas = value
+        faculty.research_areas = value.sort_by {|a| a.downcase}
       else
         setter = key.to_s + "="
-        faculty.send(setter, value)
+        if faculty.respond_to?(setter)
+          faculty.send(setter, value)
+        else
+          # we've got a value in Solr that we don't expect/want.
+        end
       end
     end
     faculty
