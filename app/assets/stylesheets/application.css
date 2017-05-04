@@ -49,6 +49,7 @@
 	background-color: hsl(0, 80%, 30%);
 	height: 5rem;
 	padding: 0;
+	border-bottom: none;
 }
 .header .logo-sm {
 	text-align: left;
