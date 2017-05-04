@@ -33,7 +33,7 @@
                 <tr class="publicationTableRow" role="listitem">
                   <td class="citation-data pub-item pub-type_<%= c.pub_type_id %>">
                     <span class="listDateTime"><%= c.authors %></span>
-                    <a href="<%= c.uri %>"><%= c.title %></a>
+                    <i><a href="<%= c.uri %>"><%= c.title %></a></i>
                     <%= c.pub_info %>
                     <% if c.doi_url %>
                       <a class="full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
