@@ -43,6 +43,11 @@
 #831B1B	  dark red
 */
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 /* Header */
 /* red header */
 .header {
