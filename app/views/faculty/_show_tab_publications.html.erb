@@ -1,32 +1,23 @@
 <% if @presenter.has_publications %>
-
-  <% if locals[:add_tab] == true %>
-    <div id="publications" class="tab-pane tabContentFinder">
-      <h3>&nbsp;</h3>
-  <% else %>
-    <h3>Publications</h3>
-  <% end %>
-
-      <div class="panel panel-default">
+      <div id="tabPublications" class="panel panel-default hidden">
+        <h3>Publications</h3>
         <div class="panel-heading">
           <h3 id="relatedBy-Authorship" title="" class="panel-title">Contributor to </h3>
         </div>
 
         <div class="panel-body">
-
           <% if @presenter.publication_filters.count > 1 %>
               <div class="btn-group" role="group" aria-label="filter contributor to by">
                 <button type="button" class="btn btn-default active btn-filter-pub"
                   id="btn-for_all"
-                  onclick="javascript:PublicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)</button>
+                  onclick="javascript:publicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)</button>
                 <% @presenter.publication_filters.each do |filter| %>
                   <button type="button" class="btn btn-default btn-filter-pub"
                     id="btn-for_<%= filter[:id] %>"
-                    onclick="javascript:PublicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
+                    onclick="javascript:publicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
                 <% end %>
               </div>
           <% end %>
-
           <table class="table table-hover">
             <tbody>
               <% @presenter.faculty.contributor_to.each do |c| %>
@@ -41,16 +32,14 @@
                     <% if c.doi_url %>
                       <a class="full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
                     <% end %>
+                    <% if c.pub_med_url %>
+                      <a class="full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>
             </tbody>
           </table>
-        </div>
-      </div>
-
-  <% if locals[:add_tab] == true %>
-    </div>
-  <% end %>
-
+        </div> <!-- panel-body -->
+      </div> <!-- panel -->
 <% end %>

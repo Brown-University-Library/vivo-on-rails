@@ -81,6 +81,7 @@ class Faculty
     solr_url = ENV["SOLR_URL"]
     solr = SolrLite::Solr.new(solr_url)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
+    return nil if solr_doc == nil
     solr_json = solr_doc["json_txt"].first
     hash = JSON.parse(solr_json)
     FacultyItem.from_hash(hash)

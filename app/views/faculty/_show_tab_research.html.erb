@@ -1,11 +1,6 @@
 <% if @presenter.has_research %>
-
-  <% if locals[:add_tab] == true %>
-    <div id="research" class="tab-pane tabContentFinder">
-      <h3>&nbsp;</h3>
-  <% else %>
+  <div id="tabResearch" class="panel panel-default hidden">
     <h3>Research</h3>
-  <% end %>
 
       <%= render "show_text_tab", locals: {
         divId: "researchOverview",
@@ -24,8 +19,5 @@
         title: "Scholarly Work",
         text: @presenter.faculty.scholarly_work} %>
 
-  <% if locals[:add_tab] == true %>
-    </div>
-  <% end %>
-
+  </div>
 <% end %>

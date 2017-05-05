@@ -1,13 +1,8 @@
 <% if @presenter.has_background %>
-  <% if locals[:add_tab] == true %>
-    <div id="background" class="tab-pane tabContentFinder">
-      <h3>&nbsp;</h3>
-  <% else %>
+  <div id="tabBackground" class="panel panel-default hidden">
     <h3>Background</h3>
-  <% end %>
 
       <% if @presenter.faculty.education.count > 0 %>
-        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 id="relatedBy-Authorship" title="" class="panel-title">Education and Training</h3>
           </div>
@@ -38,7 +33,6 @@
               </tbody>
             </table>
           </div>
-        </div>
       <% end %> <!-- education.count -->
 
       <%= render "show_text_tab", locals: {
@@ -47,7 +41,6 @@
         text: @presenter.faculty.awards} %>
 
       <% if @presenter.faculty.on_the_web.count > 0 %>
-        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 id="relatedBy-Authorship" title="" class="panel-title">On the Web</h3>
           </div>
@@ -64,10 +57,6 @@
               </tbody>
             </table>
           </div>
-        </div>
       <% end %> <!-- on_the_web.count -->
-
-  <% if locals[:add_tab] == true %>
-    </div>
-  <% end %>
+  </div> <!-- panel -->
 <% end %>

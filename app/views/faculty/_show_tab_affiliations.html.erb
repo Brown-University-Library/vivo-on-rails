@@ -1,13 +1,8 @@
 <% if @presenter.has_affiliations %>
-  <% if locals[:add_tab] == true %>
-    <div id="affiliation" class="tab-pane tabContentFinder">
-      <h3>&nbsp;</h3>
-  <% else %>
-    <h3>Affiliation</h3>
-  <% end %>
+  <div id="tabAffiliations" class="panel panel-default hidden">
+    <h3>Affiliations</h3>
 
       <% if @presenter.faculty.collaborators.count > 0 %>
-        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 id="relatedBy-Authorship" title="" class="panel-title">Collaborators</h3>
           </div>
@@ -34,7 +29,6 @@
               </tbody>
             </table>
           </div>
-        </div>
       <% end %>
 
       <%= render "show_text_tab", locals: {
@@ -43,7 +37,6 @@
         text: @presenter.faculty.affiliations_text} %>
 
       <% if @presenter.faculty.appointments.count > 0 %>
-        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 id="relatedBy-Authorship" title="" class="panel-title">Appointments</h3>
           </div>
@@ -69,10 +62,6 @@
               </tbody>
             </table>
           </div>
-        </div>
       <% end %>
-
-  <% if locals[:add_tab] == true %>
-    </div>
-  <% end %>
+  </div> <!-- panel -->
 <% end %>
