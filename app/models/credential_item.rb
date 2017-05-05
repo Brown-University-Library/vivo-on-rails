@@ -17,9 +17,6 @@ class CredentialItem
     @id = @uri
     @start_date = DateUtils.str_to_date(@start_date)
     @end_date = DateUtils.str_to_date(@end_date)
-    if !@number.empty?
-      @number = "#" + @number
-    end
   end
 
   def init_defaults()
@@ -31,6 +28,11 @@ class CredentialItem
     @end_date = nil
     @grantor_name = ""
     @specialty_name = ""
+  end
+
+  def number_display
+    return "" if @number.empty?
+    "#" + @number
   end
 
   def grantor_display

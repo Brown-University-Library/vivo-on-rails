@@ -47,9 +47,10 @@
                 <% @presenter.faculty.credentials.each do |c| %>
                   <tr class="tableRow" role="listitem">
                     <td><%= c.name %></td>
+                    <!-- TODO: should the grantor info be a hyperlink? -->
                     <td><%= c.grantor_display %></td>
                     <td><%= c.year_range_str %></td>
-                    <td><%= c.number %></td>
+                    <td><%= c.number_display %></td>
                   </tr>
                 <% end %>
               </tbody>
