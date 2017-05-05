@@ -24,12 +24,18 @@ class FacultySolrize
   end
 
   def add_one(id)
-    faculty = get_one(id)
-    if faculty == nil
-      Rails.logger.warn("ID #{id} was not found in Fuseki")
-      return
+    result = false
+    if id == nil
+      Rails.logger.warn("No ID was provided")
+    else
+      faculty = get_one(id)
+      if faculty == nil
+        Rails.logger.warn("ID #{id} was not found in Fuseki")
+      else
+        result = save_batch([faculty], true)
+      end
     end
-    save_batch([faculty], true)
+    result
   end
 
   def get_one(id)

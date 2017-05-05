@@ -223,7 +223,7 @@ class Faculty
   def self.get_contributor_to(id)
     sparql = <<-END_SPARQL
       select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title
-        ?type ?doi ?venue_name
+        ?type ?doi ?venue_name ?pub_med_id
       where {
          individual:#{id} citation:contributorTo ?uri .
          ?uri citation:hasContributor individual:#{id} .
@@ -236,6 +236,7 @@ class Faculty
          optional { ?uri rdfs:label ?title . }
          optional { ?uri vitro0_7:mostSpecificType ?type . }
          optional { ?uri citation:doi ?doi . }
+         optional { ?uri citation:pmid ?pub_med_id .}
          optional {
            ?uri citation:hasVenue ?venue .
            ?venue rdfs:label ?venue_name .

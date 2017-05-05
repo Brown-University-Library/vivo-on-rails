@@ -32,6 +32,9 @@
                     <% if c.doi_url %>
                       <a class="full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
                     <% end %>
+                    <% if c.pub_med_url %>
+                      <a class="full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>
