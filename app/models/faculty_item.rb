@@ -6,7 +6,8 @@ class FacultyItem
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
-    :on_the_web, :appointments, :published_in, :hidden
+    :on_the_web, :appointments, :published_in, :hidden,
+    :cv_link, :cv_link_text
 
   def initialize(values = nil)
     init_defaults()

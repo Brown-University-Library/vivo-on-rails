@@ -92,7 +92,7 @@ class Faculty
       select ?uri ?overview ?research_overview ?research_statement
         ?scholarly_work ?email ?org_label ?name ?title ?awards
         ?funded_research ?teaching_overview ?affiliations_text
-        ?web_page_text ?web_page_uri
+        ?cv_link ?cv_link_text
       where
       {
         bind(individual:#{id} as ?uri) .
@@ -109,6 +109,11 @@ class Faculty
         optional { ?uri brown:fundedResearch ?funded_research . }
         optional { ?uri core:teachingOverview ?teaching_overview . }
         optional { ?uri brown:affiliations ?affiliations_text . }
+        optional {
+          ?uri brown:cv ?cv .
+          ?cv core:linkURI ?cv_link .
+          ?cv core:linkAnchorText ?cv_link_text .
+        }
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
