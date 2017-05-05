@@ -30,6 +30,8 @@ Add a custom homepage background to hero class here
   color: #ffffff;
   text-align: center;
   text-shadow: 1px 1px 4px #000;
+  padding-top: 96px;
+  padding-bottom: 0px;
 }
 #search-homepage input.form-control {
   opacity: 0.9;
