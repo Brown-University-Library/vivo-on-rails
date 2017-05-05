@@ -54,6 +54,7 @@ class FacultySolrize
       research_areas: faculty.research_areas,
       published_in: faculty.published_in,
       appointment_at: faculty.appointments.map { |a| a.org_name }.uniq,
+      alumni_of: faculty.education.map { |a| a.school_name }.uniq,
       hidden_b: faculty.hidden,
       json_txt: faculty.to_json
     }

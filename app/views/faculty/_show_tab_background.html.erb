@@ -25,7 +25,10 @@
                     </td>
                     <td>
                       <span class="listDateTime">
-                        <a href="<%= ed.school_uri %>"><%= ed.school_name%></a>
+                        <% qs = '?q=alumni_of:"' + CGI.escape(ed.school_name) + '"' %>
+                        <a href="<%= search_url() + qs %>"
+                          title="Find researchers that also graduated from this institution">
+                          <%= ed.school_name %></a>
                       </span>
                     </td>
                   </tr>
