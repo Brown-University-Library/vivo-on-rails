@@ -7,7 +7,8 @@ class FacultyItem
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
     :on_the_web, :appointments, :published_in, :hidden,
-    :cv_link, :cv_link_text
+    :cv_link, :cv_link_text,
+    :credentials
 
   def initialize(values = nil)
     init_defaults()
@@ -40,6 +41,7 @@ class FacultyItem
     @on_the_web = []
     @appointments = []
     @hidden = false
+    @credentials = []
   end
 
   def contributor_to=(value)
@@ -71,6 +73,8 @@ class FacultyItem
         faculty.education = value.map {|v| TrainingItem.new(v)}
       when "appointments"
         faculty.appointments = value.map {|v| AppointmentItem.new(v)}
+      when "credentials"
+        faculty.credentials = value.map {|v| CredentialItem.new(v)}
       when "on_the_web"
         faculty.on_the_web = value.map {|v| OnTheWebItem.new(v)}
       when "teacher_for"

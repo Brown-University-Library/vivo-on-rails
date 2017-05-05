@@ -132,6 +132,7 @@ class Faculty
     faculty.research_areas = get_research_areas(id)
     faculty.on_the_web = get_on_the_web(id)
     faculty.appointments = get_appointments(id)
+    faculty.credentials = get_credentials(id)
     faculty
   end
 
@@ -313,5 +314,30 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     appointments = query.results.map { |row| AppointmentItem.new(row) }
     appointments.sort_by { |x| x.start_date }.reverse
+  end
+
+  def self.get_credentials(id)
+    sparql = <<-END_SPARQL
+    select ?uri ?start_date ?name ?end_date ?number ?grantor_name ?specialty_name
+    where {
+      individual:#{id} profile:hasCredential ?uri .
+      ?uri profile:startDate ?start_date .
+      ?uri rdfs:label ?name .
+      optional { ?uri profile:endDate ?end_date . }
+      optional { ?uri profile:credentialNumber ?number . }
+      optional {
+        ?uri profile:credentialGrantedBy ?grantor .
+        ?grantor rdfs:label ?grantor_name
+      }
+      optional {
+        ?uri profile:hasSpecialty ?specialty .
+        ?specialty rdfs:label ?specialty_name
+      }
+    }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    credentials = query.results.map { |row| CredentialItem.new(row) }
+    credentials.sort_by { |x| x.start_date }.reverse
   end
 end
