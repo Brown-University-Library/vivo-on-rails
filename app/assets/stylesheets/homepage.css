@@ -24,8 +24,10 @@ p a:link {
   width: 100%;
   height: 100%;
   padding: 5% 0 10% 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: table;
+  margin-top: 12em;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  background-color: rgba(60, 22, 5, 0.6);
+  display: block;
 }
 .theme-showcase > p > .btn {
   margin: 5px 0;
@@ -40,6 +42,11 @@ p a:link {
   text-shadow: 1px 1px 4px #000;
   padding-top: 96px;
   padding-bottom: 0px;
+  margin-top: -10em;
+}
+.jumbotron p {
+  padding-top: 7em;
+  padding-bottom: 7em;
 }
 #search-homepage input.form-control {
   opacity: 0.9;
