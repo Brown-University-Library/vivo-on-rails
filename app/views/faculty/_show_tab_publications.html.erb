@@ -6,13 +6,17 @@
         </div>
 
         <div class="panel-body">
-          <% if @presenter.publication_filters.count > 1 %>
+          <% if @presenter.publication_filters.count > 0 %>
               <div class="btn-group" role="group" aria-label="filter contributor to by">
-                <button type="button" class="btn btn-default active btn-filter-pub"
-                  id="btn-for_all"
-                  onclick="javascript:publicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)</button>
-                <% @presenter.publication_filters.each do |filter| %>
-                  <button type="button" class="btn btn-default btn-filter-pub"
+                <% if @presenter.publication_filters.count > 1 %>
+                  <button type="button" class="btn btn-default active btn-filter-pub"
+                    id="btn-for_all"
+                    onclick="javascript:publicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)
+                  </button>
+                <% end %>
+                <% @presenter.publication_filters.each_with_index do |filter, index| %>
+                  <% active_class = (@presenter.publication_filters.count == 1 && index == 0) ? "active" : "" %>
+                  <button type="button" class="btn btn-default btn-filter-pub <%= active_class %>"
                     id="btn-for_<%= filter[:id] %>"
                     onclick="javascript:publicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
                 <% end %>
