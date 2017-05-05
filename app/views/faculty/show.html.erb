@@ -46,6 +46,7 @@ function showTab(name) {
       $("#" + researcherTabs[i] + "Btn").removeClass("active");
     }
     $("#tabAllBtn").addClass("active");
+    window.location.hash = "#All"
   } else {
     if (isValidTab(name)) {
       // hide all tabs
@@ -57,8 +58,14 @@ function showTab(name) {
       $("#" + name).removeClass("hidden");
       $("#tabAllBtn").removeClass("active");
       $("#" + name + "Btn").addClass("active");
+      if (name == "tabOverview") {
+        window.location.hash = "";
+      } else {
+        window.location.hash = "#" + name.substring(3);
+      }
     } else {
-      // invalid tab, do nothing.
+      // invalid tab, blow it away.
+      window.location.hash = "";
     }
   }
 }
