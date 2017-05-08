@@ -153,12 +153,13 @@ Homepage explore rectangular links with images for background
 /*---------------------------------------------
 Customise the meet faculty/expert section
 ----------------------------------------------*/
-.faculty-home {
+/* faculty-home repurposed for recent books carousel */
+.recent-books {
   text-align: center;
   padding: 45px 0;
-  background: #ececec;
-  border: 1px solid #c9c9c9;
-  border-width: 1px 0 1px 0;
+  background: #aba698;
+  border: none;
+  border-width: 0;
 }
 #faculty-carousel {
   margin: 40px 0;
