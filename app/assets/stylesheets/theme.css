@@ -190,7 +190,7 @@ These are helper classes to add margin gaps where needed
 .footer {
   padding: 35px 30px 36px;
   border-top: none;
-  background-color: #1b1b1b;
+  background-color: rgba(60, 22, 5, 1);
   text-align: center;
 }
 .footer #footer-nav {
