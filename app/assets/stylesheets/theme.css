@@ -189,7 +189,7 @@ These are helper classes to add margin gaps where needed
 ***********************************/
 .footer {
   padding: 35px 30px 36px;
-  border-top: 1px solid #e5e5e5;
+  border-top: none;
   background-color: #1b1b1b;
   text-align: center;
 }
