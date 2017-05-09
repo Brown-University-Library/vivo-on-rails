@@ -37,6 +37,13 @@ function isValidTab(name) {
   return false;
 }
 
+function updateUrl(hash) {
+  if(history.replaceState) {
+    // reference http://stackoverflow.com/a/14690177/446681
+    history.replaceState(null, null, hash);
+  }
+}
+
 function showTab(name) {
   var i;
   if (name == "tabAll") {
@@ -46,7 +53,7 @@ function showTab(name) {
       $("#" + researcherTabs[i] + "Btn").removeClass("active");
     }
     $("#tabAllBtn").addClass("active");
-    window.location.hash = "#All"
+    updateUrl("#All")
   } else {
     if (isValidTab(name)) {
       // hide all tabs
@@ -59,13 +66,12 @@ function showTab(name) {
       $("#tabAllBtn").removeClass("active");
       $("#" + name + "Btn").addClass("active");
       if (name == "tabOverview") {
-        window.location.hash = "";
+        updateUrl("#");
       } else {
-        window.location.hash = "#" + name.substring(3);
+        updateUrl("#" + name.substring(3));
       }
     } else {
-      // invalid tab, blow it away.
-      window.location.hash = "";
+      // invalid tab, do nothing.
     }
   }
 }
