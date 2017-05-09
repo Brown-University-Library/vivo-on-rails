@@ -130,7 +130,7 @@ class Faculty
     faculty.teacher_for = get_teacher_for(id)
     faculty.collaborators = get_collaborators(id)
     faculty.affiliations = get_affiliations(id)
-    faculty.research_areas = get_research_areas(id)
+    faculty.research_areas = (get_research_areas(id) + get_geo_research_areas(id)).uniq
     faculty.on_the_web = get_on_the_web(id)
     faculty.appointments = get_appointments(id)
     faculty.credentials = get_credentials(id)
@@ -293,6 +293,21 @@ class Faculty
     end
   end
 
+  def self.get_geo_research_areas(id)
+    sparql = <<-END_SPARQL
+      select distinct ?name
+      where
+      {
+        individual:#{id} brown:hasGeographicResearchArea ?a .
+        ?a rdfs:label ?name .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map { |row| row[:name] }
+  end
+
+
   def self.get_appointments(id)
     sparql = <<-END_SPARQL
     select ?uri ?name ?department ?org_name ?start_date ?end_date
@@ -315,7 +330,7 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     appointments = query.results.map { |row| AppointmentItem.new(row) }
-    appointments.sort_by { |x| x.start_date }.reverse
+    appointments.sort_by { |x| x.start_date || DateTime.new }.reverse
   end
 
   def self.get_credentials(id)
@@ -340,7 +355,7 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     credentials = query.results.map { |row| CredentialItem.new(row) }
-    credentials.sort_by { |x| x.start_date }.reverse
+    credentials.sort_by { |x| x.start_date || DateTime.new }.reverse
   end
 
   def self.get_training(id)
@@ -372,6 +387,7 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     training = query.results.map { |row| TrainingItem.new(row) }
+    # training.sort_by { |x| x.start_date || DateTime.new }.reverse
     training.sort_by { |x| x.start_date }.reverse
   end
 end
