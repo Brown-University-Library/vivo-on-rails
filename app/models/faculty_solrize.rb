@@ -29,9 +29,7 @@ class FacultySolrize
       Rails.logger.warn("No ID was provided")
     else
       faculty = get_one(id)
-      if faculty == nil
-        Rails.logger.warn("ID #{id} was not found in Fuseki")
-      else
+      if faculty != nil
         result = save_batch([faculty], true)
       end
     end
@@ -39,25 +37,30 @@ class FacultySolrize
   end
 
   def get_one(id)
-    faculty = Faculty.get_one_from_fuseki(id)
-    return if faculty == nil
-    solr_obj = {
-      id: faculty.id,
-      name_t: faculty.name,
-      title_t: faculty.title,
-      department_t: faculty.org_label,
-      overview_t: faculty.overview,
-      email_s: faculty.email,
-      short_id_s: faculty.id.split("/").last,
-      record_type: faculty.record_type,
-      affiliations: faculty.affiliations.map { |a| a.name }.uniq,
-      research_areas: faculty.research_areas,
-      published_in: faculty.published_in,
-      appointment_at: faculty.appointments.map { |a| a.org_name }.uniq,
-      alumni_of: faculty.education.map { |a| a.school_name }.uniq,
-      hidden_b: faculty.hidden,
-      json_txt: faculty.to_json
-    }
+    begin
+      faculty = Faculty.get_one_from_fuseki(id)
+      return if faculty == nil
+      solr_obj = {
+        id: faculty.id,
+        name_t: faculty.name,
+        title_t: faculty.title,
+        department_t: faculty.org_label,
+        overview_t: faculty.overview,
+        email_s: faculty.email,
+        short_id_s: faculty.id.split("/").last,
+        record_type: faculty.record_type,
+        affiliations: faculty.affiliations.map { |a| a.name }.uniq,
+        research_areas: faculty.research_areas,
+        published_in: faculty.published_in,
+        appointment_at: faculty.appointments.map { |a| a.org_name }.uniq,
+        alumni_of: faculty.education.map { |a| a.school_name }.uniq,
+        hidden_b: faculty.hidden,
+        json_txt: faculty.to_json
+      }
+    rescue => e
+      solr_obj = nil
+      Rails.logger.warn("Could not fetch faculty (#{id}). Error: #{e.message} at #{e.backtrace}")
+    end
     solr_obj
   end
 
