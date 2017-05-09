@@ -387,7 +387,6 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     training = query.results.map { |row| TrainingItem.new(row) }
-    # training.sort_by { |x| x.start_date || DateTime.new }.reverse
-    training.sort_by { |x| x.start_date }.reverse
+    training.sort_by { |x| x.start_date || DateTime.new }.reverse
   end
 end
