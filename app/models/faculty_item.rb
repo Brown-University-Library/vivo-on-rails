@@ -70,7 +70,7 @@ class FacultyItem
       when "contributor_to"
         faculty.contributor_to = value.map {|v| ContributorToItem.new(v)}
       when "education"
-        faculty.education = value.map {|v| TrainingItem.new(v)}
+        faculty.education = value.map {|v| EducationItem.new(v)}
       when "appointments"
         faculty.appointments = value.map {|v| AppointmentItem.new(v)}
       when "credentials"

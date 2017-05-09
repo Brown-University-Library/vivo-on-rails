@@ -3,7 +3,7 @@ require "./lib/solr_lite/solr.rb"
 require "./app/models/faculty_list_item.rb"
 require "./app/models/faculty_item.rb"
 require "./app/models/contributor_to_item.rb"
-require "./app/models/training_item.rb"
+require "./app/models/education_item.rb"
 require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
 require "./app/models/on_the_web_item.rb"
@@ -192,7 +192,7 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map do |row|
-      TrainingItem.new(row)
+      EducationItem.new(row)
     end
   end
 
