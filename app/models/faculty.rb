@@ -7,6 +7,7 @@ require "./app/models/education_item.rb"
 require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
 require "./app/models/on_the_web_item.rb"
+require "./app/models/training_item.rb"
 class Faculty
 
   MAX_ROW_LIMIT = "limit 10000"
@@ -133,6 +134,7 @@ class Faculty
     faculty.on_the_web = get_on_the_web(id)
     faculty.appointments = get_appointments(id)
     faculty.credentials = get_credentials(id)
+    faculty.training = get_training(id)
     faculty
   end
 
@@ -339,5 +341,37 @@ class Faculty
     query = Sparql::Query.new(fuseki_url, sparql)
     credentials = query.results.map { |row| CredentialItem.new(row) }
     credentials.sort_by { |x| x.start_date }.reverse
+  end
+
+  def self.get_training(id)
+    sparql = <<-END_SPARQL
+      select ?name ?start_date ?end_date ?city ?state ?country
+        ?org_name ?hospital_name ?specialty_name
+      where {
+        individual:#{id} profile:hasTraining ?uri .
+        ?uri rdfs:label ?name .
+        optional { ?uri profile:city ?city . }
+        optional { ?uri profile:state ?state . }
+        optional { ?uri profile:country ?country . }
+        optional { ?uri profile:startDate ?start_date . }
+        optional { ?uri profile:endDate ?end_date . }
+        optional {
+          ?uri profile:hasOrganization ?org .
+          ?org rdfs:label ?org_name .
+        }
+        optional {
+          ?uri profile:hasHospital ?hospital .
+          ?hospital rdfs:label ?hospital_name .
+        }
+        optional {
+          ?uri profile:hasSpecialty ?specialty .
+          ?specialty rdfs:label ?specialty_name .
+        }
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    training = query.results.map { |row| TrainingItem.new(row) }
+    training.sort_by { |x| x.start_date }.reverse
   end
 end
