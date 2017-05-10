@@ -28,7 +28,7 @@
                 <tr class="publicationTableRow" role="listitem">
                   <td class="citation-data pub-item pub-type_<%= c.pub_type_id %>">
                     <span class="listDateTime"><%= c.authors %></span>
-                    <i><a href="<%= c.uri %>"><%= c.title %></a></i>
+                    <i><%= c.title %></i>
                     <%= c.pub_info %>
                     <% if c.pub_type %>
                       <span class="label label-default"><%= c.pub_type.downcase %></span>
