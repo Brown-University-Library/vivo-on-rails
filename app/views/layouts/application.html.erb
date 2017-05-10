@@ -1,52 +1,22 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Google Chrome Frame open source plug-in brings Google Chrome's open web
-  technologies and speedy JavaScript engine to Internet Explorer-->
-<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
-<title><%= @page_title || "Researchers @ Brown" %></title>
+  <!-- Google Chrome Frame open source plug-in brings Google Chrome's open web
+    technologies and speedy JavaScript engine to Internet Explorer-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title><%= @page_title || "Researchers @ Brown" %></title>
 
-<!-- vitro base styles (application-wide) -->
-<!-- <link rel="stylesheet" href="/stylesheets/bootstrap.css">
-<link rel="stylesheet" href="/stylesheets/bootstrapbootstrap-theme.css">
-<link rel="stylesheet" href="/stylesheets/bootstraptheme.css">
-<link rel="stylesheet" href="/homepage.css">
-<link rel="stylesheet" href="/individual.css"> -->
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
 
-<%= stylesheet_link_tag    'application', media: 'all' %>
-<%= javascript_include_tag 'application' %>
-<%= csrf_meta_tags %>
-
-
-<!-- <script src="analytics.js" async=""></script> -->
-<script>
-var i18nStrings = {
-    allCapitalized: 'All',
-};
-</script>
-<!--<script type="text/javascript" src="/vivo/js/jquery.js"></script>-->
-<!-- <script src="/jquery.js"></script> -->
-<!-- <script type="text/javascript" src="/vitroUtils.js"></script> -->
-<!-- <script src="/bootstrap.js"></script> -->
-<!-- <script src="/publicationTableFilter.js"></script> -->
-<!--<script src="/vivo/themes/symplectic-bootstrap/js/stickynav.js"></script>-->
-
-<!--[if lt IE 9]>
-<script type="text/javascript" src="/vivo/js/html5.js"></script>
-<![endif]-->
-<!-- <script type="text/javascript" src="/loginUtils.js"></script> -->
-
-<!--[if (gte IE 6)&(lte IE 8)]>
-<script type="text/javascript" src="/vivo/js/selectivizr.js"></script>
-<![endif]-->
-
-<link rel="shortcut icon" type="image/x-icon" href="<%= root_path %>">
-<!-- <script type="text/javascript" src="/homePageUtils.js"></script> -->
+  <link rel="shortcut icon" type="image/x-icon" href="<%= root_path %>">
 </head>
 
 <body class="no-logo fae">
@@ -92,10 +62,6 @@ var i18nStrings = {
 <!-- #wrapper-content -->
 
 
-<script>
-// Google Analytics was here
-</script>
-
 <footer role="contentinfo" class="footer">
 	<div class="row">
 		<div class="container">
@@ -137,32 +103,6 @@ var i18nStrings = {
 		</div>
 	</div>
 </footer>
-
-	<script>
-		var i18nStrings = {
-			researcherString: 'researcher',
-			researchersString: 'researchers',
-			currentlyNoResearchers: 'There are currently no researchers with a defined geographic focus.',
-			countriesAndRegions: 'countries and regions.',
-			countriesString: 'countries',
-			regionsString: 'regions',
-			statesString: 'states.',
-			stateString: 'state.',
-			statewideLocations: 'state-wide locations.',
-			researchersInString: 'researchers in',
-			inString: 'in',
-			noFacultyFound: 'No faculty members found.',
-			placeholderImage: 'placeholder image',
-			viewAllFaculty: 'view all faculty',
-			viewAllString: 'View all ...',
-			viewAllDepartments: 'view all academic departments',
-			noDepartmentsFound: 'No academic departments found.'
-		};
-		// set the 'limmit search' text and alignment
-		if	( $('input.search-homepage').css('text-align') == "right" ) {
-			 $('input.search-homepage').attr("value","limit search \u2192");
-		}
-	</script>
 
 </body>
 
