@@ -38,7 +38,7 @@ class FacultyPresenter
     faculty.contributor_to.each do |c|
       type = pub_types.find {|t| t[:id] == c.pub_type_id}
       if type == nil
-        type = {id: c.pub_type_id, text: c.pub_type, count: 1}
+        type = {id: c.pub_type_id, text: c.pub_type || "Other", count: 1}
         pub_types << type
       else
         type[:count] += 1
