@@ -248,11 +248,11 @@
 	padding-right: 11px;
 }
 .panel-body a {
-	color: #000;
+	/*color: #000;*/
 	line-height: 2.5rem;
 }
 .panel-body a:hover {
-	color: #C00404;
+	/*color: #C00404;*/
 }
 .categoryCount {
 	color: #000;
