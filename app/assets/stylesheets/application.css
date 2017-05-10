@@ -267,11 +267,11 @@
 	padding-right: 2px;
 }
 .search-toggle-more-categories {
-	color: #C00404;
+	/*color: #C00404;*/
 	font-size: 14px;
 }
 .search-toggle-more-categories:hover {
-	color: #FF5252;
+	/*color: #FF5252;*/
 }
 .btn-link:focus {
 	color: #831B1B;
