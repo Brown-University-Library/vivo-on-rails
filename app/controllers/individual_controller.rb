@@ -1,6 +1,43 @@
+require "./lib/solr_lite/solr.rb"
 class IndividualController < ApplicationController
   APPLICATION_JSON = "application/json"
   TEXT_TURTLE = "text/turtle"
+  SEE_OTHER = 303
+
+  # This method replaces the original `/individual:id` endpoint in VIVO.
+  # In this version we redirect the user to the more specific URL
+  # (/faculty/:id or /organization/:id).
+  #
+  # Long teram I am not sure whether I want to do what VIVO does
+  # (everbody is under /individual/) or use specific URLs for faculty
+  # vs organizations. 
+  def display
+    id = params["id"]
+    if id == nil
+      render body: "No individual requested", status: 404
+    else
+      type = get_type_for_id(id)
+      if type == "PEOPLE"
+        url = faculty_show_url(id)
+        redirect_to url, status: SEE_OTHER
+      elsif type == "ORGANIZATION"
+        url = organization_show_url(id)
+        redirect_to url, status: SEE_OTHER
+      else
+        if type == nil
+          err_msg = "Individual ID #{id} was not found"
+          Rails.logger.warn(err_msg)
+          render body: err_msg, status: 404
+        else
+          # Render the JSON-LD representation in case somebody relies on the
+          # original `/display/id` URL for other VIVO types that are neither
+          # PEOPLE nor ORGANIZATION.
+          Rails.logger.warn("ID #{id} is of type #{type}, returning JSON-LD representation")
+          render_raw_data_from_vivo(id, APPLICATION_JSON)
+        end
+      end
+    end
+  end
 
   # This method mimics the `/individual/:id` endpoint in VIVO in that it
   # just redirects the user to the appropriate URL for the given ID. In
@@ -9,7 +46,7 @@ class IndividualController < ApplicationController
   def redirect
     id = params["id"]
     if id == nil
-      render "No individual requested", status: 404
+      render body: "No individual requested", status: 404
     else
       content_type = request.headers.env["HTTP_ACCEPT"]
       if content_type == APPLICATION_JSON
@@ -20,8 +57,7 @@ class IndividualController < ApplicationController
         # default to the HTML representation
         url = faculty_show_url(id)
       end
-      see_other = 303
-      redirect_to url, status: see_other
+      redirect_to url, status: SEE_OTHER
     end
   end
 
@@ -31,7 +67,7 @@ class IndividualController < ApplicationController
   def export
     id = params["id"]
     if id == nil
-      render "No individual requested", status: 404
+      render body: "No individual requested", status: 404
     else
       format = params["format"]
       case
@@ -47,11 +83,12 @@ class IndividualController < ApplicationController
 
   private
     def render_raw_data_from_vivo(id, content_type)
+      vivo_url = ENV["VIVO_BACKEND_URL"]
       case
         when content_type == APPLICATION_JSON
-          url = "#{vivo_url()}/individual/#{id}/#{id}.jsonld"
+          url = "#{vivo_url}/individual/#{id}/#{id}.jsonld"
         when content_type == TEXT_TURTLE
-          url = "#{vivo_url()}/individual/#{id}/#{id}.ttl"
+          url = "#{vivo_url}/individual/#{id}/#{id}.ttl"
         else
           url = nil
       end
@@ -69,10 +106,6 @@ class IndividualController < ApplicationController
       end
     end
 
-    def vivo_url
-      ENV["VIVO_BACKEND_URL"]
-    end
-
     def http_get(url, content_type)
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
@@ -85,5 +118,13 @@ class IndividualController < ApplicationController
         request["Content-Type"] = content_type
       end
       response = http.request(request)
+    end
+
+    def get_type_for_id(id)
+      solr_url = ENV["SOLR_URL"]
+      solr = SolrLite::Solr.new(solr_url)
+      solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
+      return nil if solr_doc == nil
+      (solr_doc["record_type"] || []).first
     end
 end
