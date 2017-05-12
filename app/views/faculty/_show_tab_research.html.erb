@@ -2,19 +2,19 @@
   <div id="tabResearch" class="panel panel-default hidden">
     <h3>Research</h3>
 
-      <%= render "show_text_tab", locals: {
+      <%= render "faculty/show_text_tab", locals: {
         divId: "researchOverview",
         title: "Research Overview",
         text: @presenter.faculty.research_overview} %>
-      <%= render "show_text_tab", locals: {
+      <%= render "faculty/show_text_tab", locals: {
         divId: "researchStatement",
         title: "Research Statement",
         text: @presenter.faculty.research_statement} %>
-      <%= render "show_text_tab", locals: {
+      <%= render "faculty/show_text_tab", locals: {
         divId: "fundedResearch",
         title: "Funded Research",
         text: @presenter.faculty.funded_research} %>
-      <%= render "show_text_tab", locals: {
+      <%= render "faculty/show_text_tab", locals: {
         divId: "scholarlyWork",
         title: "Scholarly Work",
         text: @presenter.faculty.scholarly_work} %>

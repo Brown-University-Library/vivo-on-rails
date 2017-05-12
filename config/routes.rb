@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   # Support for original VIVO URLs
   get 'individual/:id/:id.:format' => 'individual#export'
   get 'individual/:id' => 'individual#redirect'
-  get 'display/:id' => 'individual#display'
+  get 'display/:id' => 'display#show', as: :display_show
+  get 'display/' => 'display#index'
 
   get 'faculty/:id/resolr' => 'faculty#resolr', as: :faculty_resolr
   get 'faculty/:id' => 'faculty#show', as: :faculty_show
