@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   # Use specific URLs (people/org) for links that don't exist in VIVO.
   get 'people/:id/resolr' => 'faculty#resolr', as: :faculty_resolr
+  get 'organization/:id/resolr' => 'organization#resolr', as: :organization_resolr
 
   get 'search_facets' => 'search#facets'
   get 'search' => 'search#index'
