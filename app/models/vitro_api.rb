@@ -1,4 +1,3 @@
-require "./app/models/model_utils.rb"
 class VitroAPI
   APPLICATION_JSON = "application/json"
   TEXT_TURTLE = "text/turtle"

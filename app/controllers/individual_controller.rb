@@ -1,4 +1,3 @@
-require "./lib/solr_lite/solr.rb"
 class IndividualController < ApplicationController
   APPLICATION_JSON = "application/json"
   TEXT_TURTLE = "text/turtle"
@@ -43,8 +42,8 @@ class IndividualController < ApplicationController
   private
     def render_vitro_data(id, content_type)
       vivo_url = ENV["VIVO_BACKEND_URL"]
-      vitro = VitroApi.new(vivo_url)
-      data = vivo.get_one(id, content_type)
+      vitro = VitroAPI.new(vivo_url)
+      data = vitro.get_one(id, content_type)
       render body: data[:body], status: data[:code], content_type: data[:content_type]
     end
 end

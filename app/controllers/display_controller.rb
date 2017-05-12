@@ -1,9 +1,15 @@
+require "./lib/solr_lite/solr.rb"
 class DisplayController < ApplicationController
   def index
     redirect_to search_url()
   end
 
   # This method replaces the original `/display/:id` endpoint in VIVO.
+  #
+  # Notice that if the client passes an HTTP Header with "Accept: application/json"
+  # or "Accept: text/turtle" Rails will try to find an appropriate view for
+  # the format requested and blow up because we only support HTML. VIVO ignores
+  # the "Accept" header and always return HTML.
   def show
     id = params["id"]
     type = type_for_id(id)
