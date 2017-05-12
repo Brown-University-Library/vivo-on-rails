@@ -1,17 +1,4 @@
 class FacultyController < ApplicationController
-  def show
-    id = params[:id]
-    from_solr = true
-    from_solr = false if params[:fuseki] == "true"
-    faculty = Faculty.get_one(id, from_solr)
-    if faculty == nil
-      flash[:alert] = "Researcher with ID #{id} was not found"
-      render "error", status: 404
-    else
-      @presenter = FacultyPresenter.new(faculty)
-    end
-  end
-
   def resolr
     solr_url = ENV["SOLR_URL"]
     solr = FacultySolrize.new(solr_url)

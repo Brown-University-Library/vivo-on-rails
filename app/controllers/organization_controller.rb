@@ -1,10 +1,4 @@
 class OrganizationController < ApplicationController
-  def show
-    id = params[:id]
-    @presenter = DefaultPresenter.new()
-    @organization = Organization.get_one(id)
-  end
-
   def resolr
     solr_url = ENV["SOLR_URL"]
     solr = OrganizationSolrize.new(solr_url)
