@@ -2,10 +2,14 @@ class FacultyPresenter
   attr_accessor :query, :form_values
   attr_accessor :faculty, :has_publications, :has_research, :has_background,
     :has_affiliations, :has_teaching, :has_details,
-    :publication_filters
+    :publication_filters,
+    :show_back_to_search
 
-  def initialize(faculty)
+  def initialize(faculty, search_url, referer)
     @faculty = faculty
+
+    # Show it only if we are coming to the faculty page from a search
+    @show_back_to_search = referer && referer.start_with?(search_url)
 
     @has_publications = faculty.contributor_to.count > 0
     @publication_filters = get_publication_filters()
