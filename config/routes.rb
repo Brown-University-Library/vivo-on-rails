@@ -10,19 +10,12 @@ Rails.application.routes.draw do
   get 'display/:id' => 'display#show', as: :display_show
   get 'display/' => 'display#index'
 
-  get 'faculty/:id/resolr' => 'faculty#resolr', as: :faculty_resolr
-  get 'faculty/:id' => 'faculty#show', as: :faculty_show
-  get 'faculty/' => 'faculty#index'
+  # Use specific URLs (people/org) for links that don't exist in VIVO.
+  get 'people/:id/resolr' => 'faculty#resolr', as: :faculty_resolr
 
   get 'search_facets' => 'search#facets'
   get 'search' => 'search#index'
 
-  get 'home' => 'home#index'
   get 'about' => 'home#about'
-
-  get 'organization/:id' => 'organization#show', as: :organization_show
-  get 'organization/' => 'organization#index'
-
-  # You can have the root of your site routed with "root"
   root 'home#index'
 end

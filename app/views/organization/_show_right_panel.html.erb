@@ -27,7 +27,7 @@
         <% @organization.people.each do |p| %>
           <p>
             <% if p.vivo_id != "" %>
-              <a href="<%= faculty_show_url(p.vivo_id) %>"><%= p.label %></a>,
+              <a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>,
               <%= p.specific_position %>
             <% end %>
           </p>
