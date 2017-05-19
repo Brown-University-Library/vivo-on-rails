@@ -1,8 +1,44 @@
-<form id="sparql-query" name="sparql-query"
-  action="<%= sparql_submit_path() %>" method="get">
-  <b>Query</b></br>
-  <textarea id="query" rows="15" cols="90"></textarea>
+<style>
+  table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
+</style>
+
+<form id="sparql-query" name="sparql-query" method="get">
+  <b>SPARQL </b></br>
+  <div>
+  <% @presenter.prefixes.each do |p| %>
+    prefix <%= p[:prefix] %>: &lt;<%= p[:uri] %>&gt;<br/>
+  <% end %>
+  </div>
+  <div>
+    <textarea id="sparql" name="sparql"
+      rows="8" cols="90"
+      placerholder="Enter SPARQL query here"><%= @presenter.sparql %></textarea>
+  </div>
+  <div>
+    limit <input id="limit" name="limit" value="<%= @presenter.limit %>">
+  </div>
+  <div>
+    <select name="output">
+      <option value="html" <%= @presenter.output == "html" ? "selected" : "" %> >html</option>
+      <option value="text" <%= @presenter.output == "text" ? "selected" : "" %> >text</option>
+    </select>
+  </div>
   <div>
     <button type="submit" class="btn btn-default btn-lg sympl-search">Submit</button>
   </div>
 </form
+
+<div>
+  <% if @presenter.results.count > 0 %>
+    <% if @presenter.output == "html" %>
+      <%= render "table" %>
+    <% else %>
+      <%= render "text" %>
+    <% end %>
+  <% else %>
+    <b>No results were found</b>
+  <% end %>
+</div>
