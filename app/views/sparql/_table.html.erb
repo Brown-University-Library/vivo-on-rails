@@ -1,18 +1,19 @@
-<p>TABLE</p>
-<table >
-  <!-- headers-->
-  <tr>
-  <% @presenter.results[0].keys.each do |key| %>
-    <th><%= key %></th>
-  <% end %>
-  </tr>
-
-  <!-- data -->
-  <% @presenter.results.each do |result| %>
+<pre>
+  <table >
+    <!-- headers-->
     <tr>
-      <% @presenter.keys.each do |key| %>
-        <td><%= result[key] %></td>
-      <% end %>
+    <% @presenter.results[0].keys.each do |key| %>
+      <th><%= key %></th>
+    <% end %>
     </tr>
-  <% end %>
-</table>
+
+    <!-- data -->
+    <% @presenter.results.each do |result| %>
+      <tr>
+        <% @presenter.keys.each do |key| %>
+          <td><%= result[key] %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</pre>

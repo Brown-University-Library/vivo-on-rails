@@ -13,4 +13,19 @@ class SparqlPresenter
       @keys = @results.first.keys
     end
   end
+
+  def text_results()
+    text = ""
+    @results[0].keys.each do |key|
+      text << key.to_s + "\t"
+    end
+    text << "\n"
+    @results.each do |result|
+      @keys.each do |key|
+        text << result[key] + "\t"
+      end
+      text << "\n"
+    end
+    text
+  end
 end

@@ -5,7 +5,11 @@ class SparqlController < ApplicationController
 
   def query
     @presenter = execute_from_request()
-    render "query", layout: false
+    if params["TextExport"] == "1"
+      render plain: @presenter.text_results()
+    else
+      render "query"
+    end
   end
 
   def execute_from_request

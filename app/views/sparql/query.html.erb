@@ -21,23 +21,17 @@
     limit <input id="limit" name="limit" value="<%= @presenter.limit %>">
   </div>
   <div>
-    <select name="output">
-      <option value="html" <%= @presenter.output == "html" ? "selected" : "" %> >html</option>
-      <option value="text" <%= @presenter.output == "text" ? "selected" : "" %> >text</option>
-    </select>
-  </div>
-  <div>
-    <button type="submit" class="btn btn-default btn-lg sympl-search">Submit</button>
+    <button type="submit" class="btn btn-primary">Run Query</button>
+    <button type="submit"
+      id="TextExport" name="TextExport" value="1"
+      formtarget="_blank"
+      class="btn">Run (Export)</button>
   </div>
 </form
 
 <div>
   <% if @presenter.results.count > 0 %>
-    <% if @presenter.output == "html" %>
-      <%= render "table" %>
-    <% else %>
-      <%= render "text" %>
-    <% end %>
+    <%= render "table" %>
   <% else %>
     <b>No results were found</b>
   <% end %>
