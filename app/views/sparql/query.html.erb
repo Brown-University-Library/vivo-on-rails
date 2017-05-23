@@ -3,12 +3,15 @@
       border: 1px solid black;
       border-collapse: collapse;
   }
+  .monospace {
+    font-family: "Courier New";
+  }
 </style>
 
 <form id="sparql-query" name="sparql-query" method="get">
   <b>SPARQL </b>
   <button id="showPrefixes" type="button" class="btn btn-info btn-xs">Show Prefixes</button>
-  <div id = "prefixes" class="small hidden">
+  <div id = "prefixes" class="small hidden monospace">
   <% @presenter.prefixes.each do |p| %>
     prefix <%= p[:prefix] %>: &lt;<%= p[:uri] %>&gt;<br/>
   <% end %>
@@ -16,9 +19,10 @@
   <div>
     <textarea id="sparql" name="sparql"
       rows="8" cols="90"
-      placerholder="Enter SPARQL query here"><%= @presenter.sparql %></textarea>
+      placerholder="Enter SPARQL query here"
+      class="monospace"><%= @presenter.sparql %></textarea>
   </div>
-  <div>
+  <div class="monospace">
     limit <input id="limit" name="limit" value="<%= @presenter.limit %>">
   </div>
   <div>
