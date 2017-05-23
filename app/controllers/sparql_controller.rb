@@ -13,17 +13,23 @@ class SparqlController < ApplicationController
   end
 
   def execute_from_request
-    sparql = params[:sparql] || default_sparql()
+    sparql = params[:sparql] || ""
     limit = (params[:limit] || "100").to_i
     output = params[:output] || "html"
+    empty_search = true
 
     sparql_exec = sparql
-    if limit > 0
+    if sparql_exec != "" && limit > 0
       sparql_exec += " limit #{limit}"
+      empty_search = false
     end
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql_exec)
-    SparqlPresenter.new(sparql, query, limit, output)
+
+    if empty_search
+      sparql = default_sparql()
+    end
+    presenter = SparqlPresenter.new(sparql, query, limit, output, empty_search)
   end
 
   def default_sparql()

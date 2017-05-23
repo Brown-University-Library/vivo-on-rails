@@ -80,6 +80,11 @@ class Organization
         ?uri rdf:type brown:BrownThing .
         optional { ?uri rdfs:label ?name . }
         optional { ?uri core:overview ?overview . }
+        optional { 
+          ?uri core:webpage ?web .
+          ?web core:rank ?rank .
+          ?web core:linkURI ?url .
+        }
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
