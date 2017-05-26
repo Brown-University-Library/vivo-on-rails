@@ -5,6 +5,7 @@
 require "./lib/sparql/query.rb"
 require "./app/models/organization_item.rb"
 require "./app/models/organization_member_item.rb"
+require "./app/models/on_the_web_item.rb"
 class Organization
 
   MAX_ROW_LIMIT = "limit 10000"
@@ -42,8 +43,10 @@ class Organization
         where {
           bind(<#{uri}> as ?uri) .
           ?uri rdf:type brown:BrownThing .
-          optional { ?uri rdfs:label ?label .
-              BIND(str(?label) as ?name) .}
+          optional {
+            ?uri rdfs:label ?label .
+            BIND(str(?label) as ?name) .
+          }
           optional { ?uri core:overview ?overview . }
         }
       END_SPARQL
@@ -80,11 +83,6 @@ class Organization
         ?uri rdf:type brown:BrownThing .
         optional { ?uri rdfs:label ?name . }
         optional { ?uri core:overview ?overview . }
-        optional { 
-          ?uri core:webpage ?web .
-          ?web core:rank ?rank .
-          ?web core:linkURI ?url .
-        }
       }
     END_SPARQL
     fuseki_url = ENV["FUSEKI_URL"]
@@ -95,6 +93,7 @@ class Organization
     organization = OrganizationItem.new(result)
     organization.thumbnail = get_image(result[:uri])
     organization.people = get_people(result[:uri])
+    organization.web_pages = get_web_pages(id)
     organization
   end
 
@@ -141,5 +140,21 @@ class Organization
       item.general_position = row[:pos_label]
       item
     end
+  end
+
+  def self.get_web_pages(id)
+    sparql = <<-END_SPARQL
+    SELECT ?uri ?rank ?url ?text
+    WHERE {
+      individual:#{id} core:webpage ?uri .
+      ?uri core:linkURI ?url .
+      optional { ?uri core:linkAnchorText ?text . }
+      optional { ?uri core:rank ?rank . }
+    }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    web_pages = query.results.map { |row| OnTheWebItem.new(row) }
+    web_pages.sort_by { |x| x.rank }
   end
 end
