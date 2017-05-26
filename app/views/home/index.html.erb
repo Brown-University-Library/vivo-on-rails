@@ -4,8 +4,10 @@
       <div class="container" role="main">
 
         <div class="jumbotron">
-          <img src="assets/RaB-type.svg" style="width: 64%;y: 2em;padding-bottom: 0;margin-bottom: 0;" alt="Researchers at Brown">
-          <!-- <h1>Researchers at Brown</h1> -->
+          <!-- Researchers @ BROWN -->
+          <img src="<%= image_url('RaB-type.svg') %>"
+            style="width: 64%;y: 2em;padding-bottom: 0;margin-bottom: 0;"
+            alt="Researchers at Brown">
         </div>
 
         <form id="search-homepage" action="<%= search_path() %>" name="search-home" role="search" method="GET">
@@ -110,7 +112,7 @@ scholarship, Meet some of our experts ready to share thier knowledge.</p> -->
       <section id="faculty-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
         <div style="display: none;" id="tempSpacing">
           <span>Loading faculty . . .&nbsp;&nbsp;&nbsp;
-            <img src="images/indicatorWhite.gif">
+            <%= image_tag("indicatorWhite.gif") %>
           </span>
         </div>
 
@@ -118,32 +120,25 @@ scholarship, Meet some of our experts ready to share thier knowledge.</p> -->
         <!-- populated via an ajax call -->
           <div class="item">
             <a href="" class="faculty-mbrs" title="View Profile">
-              <img class="img-circle" alt="placeholder image" src="images/person.jpg" width="160">
+              <img class="img-circle" alt="placeholder image" src="<%= image_url('person.jpg') %>" width="160">
               <h3>Layne, Peggy</h3>
               <h4 class="faculty-title"></h4>
             </a>
           </div>
           <div class="item">
             <a href="" class="faculty-mbrs" title="View Profile">
-              <img class="img-circle" alt="placeholder image" src="images/person.jpg" width="160">
+              <img class="img-circle" alt="placeholder image" src="<%= image_url('person.jpg') %>" width="160">
               <h3>Henderson, Margaret</h3>
               <h4 class="faculty-title"></h4>
             </a>
           </div>
           <div class="item">
             <a href="" class="faculty-mbrs" title="View Profile">
-              <img class="img-circle" alt="placeholder image" src="images/person.jpg" width="160">
+              <img class="img-circle" alt="placeholder image" src="<%= image_url('person.jpg') %>" width="160">
               <h3>Mullin, Casey</h3>
               <h4 class="faculty-title"></h4>
             </a>
           </div>
-          <!--
-          <ul id="viewMoreFac" style="list-style:none;margin:0;padding:0;">
-            <li>
-              <a href="" alt="view all faculty">View all ...</a>
-            </li>
-          </ul>
-          -->
         </div>
 
         <a class="left carousel-control" href="#faculty-carousel" role="button" data-slide="prev">
@@ -158,65 +153,6 @@ scholarship, Meet some of our experts ready to share thier knowledge.</p> -->
     </div>
   </div>
 </div>
-
-
-<!-- hide list of research classes: e.g., articles, books, collections, conference papers
-<div class="row research-count">
-  <div class="container">
-    <div class="col-md-6">
-      <h2 class="h1">About our data</h2>
-      <div class="gap20"></div>
-      <p>This expert database contains a copy of the <a href="http://openvivo.org/data/">OpenVIVO data set</a> under cc-by 4.0 license, snapshot as at 19 July 2016</p>
-      <div class="gap30"></div>
-      <button type="button" class="btn btn-default">
-        <a href="">Read more about OpenVIVO</a>
-      </button>
-    </div>
-    <div class="col-md-6" id="research-classes">
-      <section id="home-research" class="home-sections">
-        <h4>Research</h4>
-        <div id="home-sections-list" class="list-group">
-          <a class="list-group-item" href="">
-            Academic Articles
-            &nbsp;
-            <span class="badge">954</span>
-          </a>
-          <a class="list-group-item" href="">
-            Books
-            &nbsp;
-            <span class="badge">61</span>
-          </a>
-          <a class="list-group-item" href="">
-            Chapters
-            &nbsp;
-            <span class="badge">71</span>
-          </a>
-          <a class="list-group-item" href="">
-            Conference Papers
-            &nbsp;
-            <span class="badge">91</span>
-          </a>
-          <a class="list-group-item" href="">
-            Reports
-            &nbsp;
-            <span class="badge">4</span>
-          </a>
-          <a href="" alt="view all research">View all ...</a>
-        </div>
-      </section>
-    </div>
-  </div>
-</div>
--->
-
-<!-- hide geo-home row
-<div class="row geo-home">
-  <div class="container-fluid">
-    <div class="col-md-12 hidden-xs hidden-sm" id="geo-map">
-    </div>
-  </div>
-</div>
--->
 
 <script>
 $(function() {
