@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # post 'sparql/query' => 'sparql#submit'
 
   # Support for original VIVO URLs
-  get 'individual/:id/:id.:format' => 'individual#export'
+  get 'individual/:id/:id.:format' => 'individual#export', as: :individual_export
   get 'individual/:id' => 'individual#redirect'
   get 'display/:id' => 'display#show', as: :display_show
   get 'display/' => 'display#index'

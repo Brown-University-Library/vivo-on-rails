@@ -11,9 +11,9 @@ class IndividualController < ApplicationController
     id = params["id"]
     content_type = request.headers.env["HTTP_ACCEPT"]
     if content_type == APPLICATION_JSON
-      url = "/individual/#{id}/#{id}.jsonld"
+      url = individual_export_url(id: id, format: "jsonld")
     elsif content_type == TEXT_TURTLE
-      url = "/individual/#{id}/#{id}.ttl"
+      url = individual_export_url(id: id, format: "ttl")
     else
       # default to the HTML representation
       url = display_show_url(id)
