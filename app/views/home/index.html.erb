@@ -1,10 +1,11 @@
-<div class="row hero">
+<div class="row hero" style="background-image: url(<%= randomized_background_image %>); background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;">
   <div class="theme-showcase">
     <div class="col-md-12">
       <div class="container" role="main">
 
         <div class="jumbotron">
-          <h1>Researchers at Brown</h1>
+          <img src="assets/RaB-type.svg" style="width: 64%;y: 2em;padding-bottom: 0;margin-bottom: 0;" alt="Researchers at Brown">
+          <!-- <h1>Researchers at Brown</h1> -->
         </div>
 
         <form id="search-homepage" action="<%= search_path() %>" name="search-home" role="search" method="GET">
@@ -34,6 +35,7 @@
   </div>
 </div>
 
+<!-- hide collaborator, supervisor, expert opinion boxes
 <div class="row icons-home">
   <div class="col-md-4">
     <a href="<%= search_path() %>" id="icon1">
@@ -54,7 +56,9 @@
    </a>
   </div>
 </div>
+-->
 
+<!-- hide exlpore-our-experts section
 <div class="row explore">
   <div class="container">
 
@@ -92,14 +96,15 @@
 
   </div>
 </div>
+-->
 
-<div class="row faculty-home">
+<div class="row recent-books">
   <div class="container">
     <div class="col-md-12">
-      <h2 class="h1">Meet our experts</h2>
+      <h2 class="h1">Recent faculty books</h2>
       <div class="gap20"></div>
-      <p>The OpenVIVO community is dedicated to changing the nature of
-scholarship, Meet some of our experts ready to share thier knowledge.</p>
+      <!-- <p>The OpenVIVO community is dedicated to changing the nature of
+scholarship, Meet some of our experts ready to share thier knowledge.</p> -->
       <!-- Use bootstrap carousel to showcase faculty members, edited in lib-home-page.ftl and homePageUtils.js -->
 
       <section id="faculty-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
@@ -132,11 +137,13 @@ scholarship, Meet some of our experts ready to share thier knowledge.</p>
               <h4 class="faculty-title"></h4>
             </a>
           </div>
+          <!--
           <ul id="viewMoreFac" style="list-style:none;margin:0;padding:0;">
             <li>
               <a href="" alt="view all faculty">View all ...</a>
             </li>
           </ul>
+          -->
         </div>
 
         <a class="left carousel-control" href="#faculty-carousel" role="button" data-slide="prev">
@@ -153,7 +160,7 @@ scholarship, Meet some of our experts ready to share thier knowledge.</p>
 </div>
 
 
-<!-- List of research classes: e.g., articles, books, collections, conference papers -->
+<!-- hide list of research classes: e.g., articles, books, collections, conference papers
 <div class="row research-count">
   <div class="container">
     <div class="col-md-6">
@@ -200,13 +207,16 @@ scholarship, Meet some of our experts ready to share thier knowledge.</p>
     </div>
   </div>
 </div>
+-->
 
+<!-- hide geo-home row
 <div class="row geo-home">
   <div class="container-fluid">
     <div class="col-md-12 hidden-xs hidden-sm" id="geo-map">
     </div>
   </div>
 </div>
+-->
 
 <script>
 $(function() {

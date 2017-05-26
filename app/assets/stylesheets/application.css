@@ -43,12 +43,18 @@
 #831B1B	  dark red
 */
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 /* Header */
 /* red header */
 .header {
 	background-color: hsl(0, 80%, 30%);
 	height: 5rem;
 	padding: 0;
+	border-bottom: none;
 }
 .header .logo-sm {
 	text-align: left;
