@@ -38,6 +38,7 @@ class OrganizationSolrize
     solr_obj = {
       id: org.id,
       record_type: org.record_type,
+      hidden_b: false,
       json_txt: org.to_json
     }
     solr_obj

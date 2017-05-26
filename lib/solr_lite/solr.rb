@@ -26,14 +26,18 @@ module SolrLite
       solr_response.solr_docs.first
     end
 
-    def search(params)
+    # params is an instance of SolrParams.
+    # extra_fqs is an array of FilterQuery objects. This is used to
+    #   add filters to the search that we don't want to allow the
+    #   user to override.
+    def search(params, extra_fqs = [])
       if params.fl != nil
         query_string = "fl=#{params.fl.join(",")}"
       else
         query_string = "" # use Solr defaults
       end
       query_string += "&wt=json&indent=on"
-      query_string += "&" + params.to_solr_query_string()
+      query_string += "&" + params.to_solr_query_string(extra_fqs)
       query_string += "&q.op=AND"
       url = "#{@solr_url}/select?#{query_string}"
       http_response = http_get(url)
@@ -66,7 +70,7 @@ module SolrLite
       url = @solr_url + "/update?commit=true&wt=json"
       payload = "<delete><id>#{id}</id></delete>"
       http_response = http_post(url, payload, "text/xml")
-      solr_response = SearchResults.new(JSON.parse(http_response))
+      solr_response = SearchResults.new(JSON.parse(http_response), nil)
       solr_response
     end
 
@@ -85,7 +89,7 @@ module SolrLite
       def http_post_json(url, payload)
         content_type = "application/json"
         http_response = http_post(url, payload, content_type)
-        SearchResults.new(JSON.parse(http_response))
+        SearchResults.new(JSON.parse(http_response), nil)
       end
 
       def http_post(url, payload, content_type)

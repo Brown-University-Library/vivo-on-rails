@@ -254,11 +254,11 @@ html, body {
 	padding-right: 11px;
 }
 .panel-body a {
-	color: #000;
+	/*color: #000;*/
 	line-height: 2.5rem;
 }
 .panel-body a:hover {
-	color: #C00404;
+	/*color: #C00404;*/
 }
 .categoryCount {
 	color: #000;
@@ -273,11 +273,11 @@ html, body {
 	padding-right: 2px;
 }
 .search-toggle-more-categories {
-	color: #C00404;
+	/*color: #C00404;*/
 	font-size: 14px;
 }
 .search-toggle-more-categories:hover {
-	color: #FF5252;
+	/*color: #FF5252;*/
 }
 .btn-link:focus {
 	color: #831B1B;

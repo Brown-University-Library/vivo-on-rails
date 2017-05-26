@@ -1,13 +1,14 @@
 class FacultyController < ApplicationController
-  def index
-    @faculty_list = Faculty.all()
-  end
-
-  def show
+  def resolr
+    solr_url = ENV["SOLR_URL"]
+    solr = FacultySolrize.new(solr_url)
     id = params[:id]
-    from_solr = true
-    from_solr = false if params[:fuseki] == "true"
-    faculty = Faculty.get_one(id, from_solr)
-    @presenter = FacultyPresenter.new(faculty)
+    if solr.add_one(id)
+      flash[:notice] = "Information for this researcher has been updated"
+      redirect_to display_show_url(id)
+    else
+      flash[:alert] = "Oops! could not refresh information for this researcher (ID #{id})"
+      redirect_to display_show_url(id), status: 500
+    end
   end
 end

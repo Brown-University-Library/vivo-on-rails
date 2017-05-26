@@ -1,18 +1,13 @@
 <% if @presenter.has_teaching %>
-  <% if locals[:add_tab] == true %>
-    <div id="teaching" class="tab-pane tabContentFinder">
-      <h3>&nbsp;</h3>
-  <% else %>
+  <div id="tabTeaching" class="panel panel-default hidden">
     <h3>Teaching</h3>
-  <% end %>
 
-    <%= render "show_text_tab", locals: {
+    <%= render "faculty/show_text_tab", locals: {
       divId: "techingOverview",
       title: "Teaching Overview",
       text: @presenter.faculty.teaching_overview} %>
 
     <% if @presenter.faculty.teacher_for.count > 0 %>
-      <div class="panel panel-default">
         <div class="panel-heading">
           <h3 id="relatedBy-Authorship" title="" class="panel-title">Teaching</h3>
         </div>
@@ -30,10 +25,7 @@
             </tbody>
           </table>
         </div>
-      </div>
     <% end %>
 
-  <% if locals[:add_tab] == true %>
-    </div>
-  <% end %>
+  </div> <!-- tabTeaching panel -->
 <% end %>

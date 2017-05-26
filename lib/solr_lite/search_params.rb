@@ -73,12 +73,15 @@ module SolrLite
 
     # Returns the string that we need to pass Solr to execute a search
     # with the current parameters.
-    def to_solr_query_string()
+    def to_solr_query_string(extra_fqs = [])
       qs = ""
       if @q != ""
         qs += "&q=#{@q}"
       end
       @fq.each do |filter|
+        qs += "&fq=#{filter.solr_value}"
+      end
+      extra_fqs.each do |filter|
         qs += "&fq=#{filter.solr_value}"
       end
       qs += "&rows=#{@page_size}"

@@ -1,10 +1,100 @@
+<style>
+a.full-text-link {
+    background-color:#a33646;
+    color:white!important;
+    text-decoration:none;
+    font-size:smaller;
+    padding: 0px 2px 0px 2px;
+}
+</style>
+
+<script>
+var researcherTabs = ["tabOverview", "tabPublications", "tabResearch",
+  "tabBackground", "tabAffiliations", "tabTeaching"];
+
+function publicationsShowAll() {
+  // show all publications
+  $(".pub-item").removeClass("hidden");
+  $(".btn-filter-pub").removeClass("active");
+  $("#btn-for_all").addClass("active");
+}
+
+function publicationsShowOnly(filter) {
+  // hide all publications except the ones that we want to filter
+  $(".pub-item").addClass("hidden");
+  $(".pub-type_" + filter).removeClass("hidden");
+  $(".btn-filter-pub").removeClass("active");
+  $("#btn-for_" + filter).addClass("active");
+}
+
+function isValidTab(name) {
+  var i;
+  for(i = 0; i < researcherTabs.length; i++) {
+    if (name == researcherTabs[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function updateUrl(hash) {
+  if(history.replaceState) {
+    // reference http://stackoverflow.com/a/14690177/446681
+    history.replaceState(null, null, hash);
+  }
+}
+
+function showTab(name) {
+  var i;
+  if (name == "tabAll") {
+    // show all tabs
+    for(i = 0; i < researcherTabs.length; i++) {
+      $("#" + researcherTabs[i]).removeClass("hidden");
+      $("#" + researcherTabs[i] + "Btn").removeClass("active");
+    }
+    $("#tabAllBtn").addClass("active");
+    updateUrl("#All")
+  } else {
+    if (isValidTab(name)) {
+      // hide all tabs
+      for(i = 0; i < researcherTabs.length; i++) {
+        $("#" + researcherTabs[i]).addClass("hidden");
+        $("#" + researcherTabs[i] + "Btn").removeClass("active");
+      }
+      // show the indicated tab
+      $("#" + name).removeClass("hidden");
+      $("#tabAllBtn").removeClass("active");
+      $("#" + name + "Btn").addClass("active");
+      if (name == "tabOverview") {
+        updateUrl("#");
+      } else {
+        updateUrl("#" + name.substring(3));
+      }
+    } else {
+      // invalid tab, do nothing.
+    }
+  }
+}
+
+$(document).ready(function() {
+  var tabId;
+  if(window.location.hash) {
+    // use the tab indicated in the URL
+    tabId = "tab" + window.location.hash.substring(1);
+    showTab(tabId);
+  }
+});
+</script>
+
+<% @page_title = @presenter.faculty.name %>
+
 <%= render "search_box" %>
 
 <div class="container">
   <div class="row person-content">
     <div class="container">
-      <%= render "show_left_panel" %>
-      <%= render "show_right_panel" %>
+      <%= render "faculty/show_left_panel" %>
+      <%= render "faculty/show_right_panel" %>
     </div>
   </div>
 </div>

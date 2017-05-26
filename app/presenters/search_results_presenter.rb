@@ -40,11 +40,10 @@ class SearchResultsPresenter
     set_remove_url_in_facets()
 
     @results.each do |item|
+      item.uri = display_show_url(item.vivo_id)
       if item.type == "PEOPLE"
-        item.uri = faculty_show_url(item.vivo_id)
         item.thumbnail = "person_placeholder.jpg" if item.thumbnail == nil
       else
-        item.uri = organization_show_url(item.vivo_id)
         item.thumbnail = "org_placeholder.jpg" if item.thumbnail == nil
       end
       if item.title != nil && item.title.length > 50

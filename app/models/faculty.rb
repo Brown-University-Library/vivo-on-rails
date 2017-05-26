@@ -3,9 +3,11 @@ require "./lib/solr_lite/solr.rb"
 require "./app/models/faculty_list_item.rb"
 require "./app/models/faculty_item.rb"
 require "./app/models/contributor_to_item.rb"
-require "./app/models/training_item.rb"
+require "./app/models/education_item.rb"
 require "./app/models/collaborator_item.rb"
 require "./app/models/affiliation_item.rb"
+require "./app/models/on_the_web_item.rb"
+require "./app/models/training_item.rb"
 class Faculty
 
   MAX_ROW_LIMIT = "limit 10000"
@@ -80,6 +82,7 @@ class Faculty
     solr_url = ENV["SOLR_URL"]
     solr = SolrLite::Solr.new(solr_url)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
+    return nil if solr_doc == nil
     solr_json = solr_doc["json_txt"].first
     hash = JSON.parse(solr_json)
     FacultyItem.from_hash(hash)
@@ -90,7 +93,7 @@ class Faculty
       select ?uri ?overview ?research_overview ?research_statement
         ?scholarly_work ?email ?org_label ?name ?title ?awards
         ?funded_research ?teaching_overview ?affiliations_text
-        ?web_page_text ?web_page_uri
+        ?cv_link ?cv_link_text
       where
       {
         bind(individual:#{id} as ?uri) .
@@ -108,9 +111,9 @@ class Faculty
         optional { ?uri core:teachingOverview ?teaching_overview . }
         optional { ?uri brown:affiliations ?affiliations_text . }
         optional {
-          ?uri brown:drrbWebPage ?web .
-          ?web core:linkAnchorText ?web_page_text .
-          ?web core:linkURI ?web_page_uri .
+          ?uri brown:cv ?cv .
+          ?cv core:linkURI ?cv_link .
+          ?cv core:linkAnchorText ?cv_link_text .
         }
       }
     END_SPARQL
@@ -120,14 +123,47 @@ class Faculty
     return nil if result == nil
     # TODO: How to handle if we get more than one
     faculty = FacultyItem.new(result)
+    faculty.hidden = get_is_hidden?(id)
     faculty.thumbnail = get_image(id)
     faculty.contributor_to = get_contributor_to(id)
     faculty.education = get_education(id)
     faculty.teacher_for = get_teacher_for(id)
     faculty.collaborators = get_collaborators(id)
     faculty.affiliations = get_affiliations(id)
-    faculty.research_areas = get_research_areas(id)
+    faculty.research_areas = (get_research_areas(id) + get_geo_research_areas(id)).uniq
+    faculty.on_the_web = get_on_the_web(id)
+    faculty.appointments = get_appointments(id)
+    faculty.credentials = get_credentials(id)
+    faculty.training = get_training(id)
     faculty
+  end
+
+  def self.get_on_the_web(id)
+    sparql = <<-END_SPARQL
+      select ?uri ?rank ?url ?text
+      where {
+        individual:#{id} brown:drrbWebPage ?uri .
+        ?uri core:linkURI ?url .
+        optional { ?uri core:linkAnchorText ?text . }
+        optional { ?uri core:rank ?rank . }
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    on_the_web = query.results.map { |row| OnTheWebItem.new(row) }
+    on_the_web.sort_by { |x| x.rank }
+  end
+
+  def self.get_is_hidden?(id)
+    sparql = <<-END_SPARQL
+      select (count(*) as ?count)
+      where {
+        individual:#{id} a bdisplay:Hidden .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.first[:count].to_i > 0
   end
 
   def self.get_image(id)
@@ -158,7 +194,7 @@ class Faculty
     fuseki_url = ENV["FUSEKI_URL"]
     query = Sparql::Query.new(fuseki_url, sparql)
     query.results.map do |row|
-      TrainingItem.new(row)
+      EducationItem.new(row)
     end
   end
 
@@ -195,7 +231,8 @@ class Faculty
 
   def self.get_contributor_to(id)
     sparql = <<-END_SPARQL
-      select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title ?venue_name
+      select ?uri ?volume ?issue ?date ?pages ?authors ?published_in ?title
+        ?type ?doi ?venue_name ?pub_med_id
       where {
          individual:#{id} citation:contributorTo ?uri .
          ?uri citation:hasContributor individual:#{id} .
@@ -206,6 +243,9 @@ class Faculty
          optional { ?uri citation:authorList ?authors . }
          optional { ?uri citation:publishedIn ?published_in . }
          optional { ?uri rdfs:label ?title . }
+         optional { ?uri vitro0_7:mostSpecificType ?type . }
+         optional { ?uri citation:doi ?doi . }
+         optional { ?uri citation:pmid ?pub_med_id .}
          optional {
            ?uri citation:hasVenue ?venue .
            ?venue rdfs:label ?venue_name .
@@ -217,9 +257,7 @@ class Faculty
     # TODO: figure out a better way to removing duplicates
     #       (see what VIVO does to pick the contribuition)
     uniq_contributions = query.results.uniq { |row| row[:uri] }
-    uniq_contributions.map do |row|
-      ContributorToItem.new(row)
-    end
+    uniq_contributions.map { |row| ContributorToItem.new(row) }
   end
 
   def self.get_affiliations(id)
@@ -253,5 +291,102 @@ class Faculty
     query.results.map do |row|
       row[:name]
     end
+  end
+
+  def self.get_geo_research_areas(id)
+    sparql = <<-END_SPARQL
+      select distinct ?name
+      where
+      {
+        individual:#{id} brown:hasGeographicResearchArea ?a .
+        ?a rdfs:label ?name .
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    query.results.map { |row| row[:name] }
+  end
+
+
+  def self.get_appointments(id)
+    sparql = <<-END_SPARQL
+    select ?uri ?name ?department ?org_name ?start_date ?end_date
+    where {
+      individual:#{id} profile:hasAppointment ?uri .
+      ?uri rdfs:label ?name .
+      ?uri profile:department ?department .
+      ?uri profile:endDate ?end_date .
+      ?uri profile:startDate ?start_date .
+      optional {
+        ?uri profile:hasOrganization ?org .
+        ?org rdfs:label ?org_name .
+      }
+      optional {
+        ?uri profile:hasHospital ?hospital .
+        ?hospital rdfs:label ?org_name .
+      }
+    }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    appointments = query.results.map { |row| AppointmentItem.new(row) }
+    appointments.sort_by { |x| x.start_date || DateTime.new }.reverse
+  end
+
+  def self.get_credentials(id)
+    sparql = <<-END_SPARQL
+    select ?uri ?start_date ?name ?end_date ?number ?grantor_name ?specialty_name
+    where {
+      individual:#{id} profile:hasCredential ?uri .
+      ?uri profile:startDate ?start_date .
+      ?uri rdfs:label ?name .
+      optional { ?uri profile:endDate ?end_date . }
+      optional { ?uri profile:credentialNumber ?number . }
+      optional {
+        ?uri profile:credentialGrantedBy ?grantor .
+        ?grantor rdfs:label ?grantor_name
+      }
+      optional {
+        ?uri profile:hasSpecialty ?specialty .
+        ?specialty rdfs:label ?specialty_name
+      }
+    }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    credentials = query.results.map { |row| CredentialItem.new(row) }
+    credentials.sort_by { |x| x.start_date || DateTime.new }.reverse
+  end
+
+  def self.get_training(id)
+    sparql = <<-END_SPARQL
+      select ?name ?start_date ?end_date ?city ?state ?country
+        ?org_name ?hospital_name ?specialty_name
+      where {
+        individual:#{id} profile:hasTraining ?uri .
+        ?uri rdfs:label ?name .
+        optional { ?uri profile:city ?city . }
+        optional { ?uri profile:state ?state . }
+        optional { ?uri profile:country ?country . }
+        optional { ?uri profile:startDate ?start_date . }
+        optional { ?uri profile:endDate ?end_date . }
+        optional {
+          ?uri profile:hasOrganization ?org .
+          ?org rdfs:label ?org_name .
+        }
+        optional {
+          ?uri profile:hasHospital ?hospital .
+          ?hospital rdfs:label ?hospital_name .
+        }
+        optional {
+          ?uri profile:hasSpecialty ?specialty .
+          ?specialty rdfs:label ?specialty_name .
+        }
+      }
+    END_SPARQL
+    fuseki_url = ENV["FUSEKI_URL"]
+    query = Sparql::Query.new(fuseki_url, sparql)
+    training = query.results.map { |row| TrainingItem.new(row) }
+    training.sort_by { |x| x.start_date || DateTime.new }.reverse
   end
 end

@@ -1,21 +1,22 @@
 Rails.application.routes.draw do
 
   get 'sparql/query' => 'sparql#query'
-  # TODO: this should be post
-  get 'sparql/query_submit' => 'sparql#submit', as: :sparql_submit
+  # TODO: use POST for submit
+  # post 'sparql/query' => 'sparql#submit'
 
-  get 'faculty/:id' => 'faculty#show', as: :faculty_show
-  get 'faculty/' => 'faculty#index'
+  # Support for original VIVO URLs
+  get 'individual/:id/:id.:format' => 'individual#export', as: :individual_export
+  get 'individual/:id' => 'individual#redirect'
+  get 'display/:id' => 'display#show', as: :display_show
+  get 'display/' => 'display#index'
+
+  # Use specific URLs (people/org) for links that don't exist in VIVO.
+  get 'people/:id/resolr' => 'faculty#resolr', as: :faculty_resolr
+  get 'organization/:id/resolr' => 'organization#resolr', as: :organization_resolr
 
   get 'search_facets' => 'search#facets'
   get 'search' => 'search#index'
 
-  get 'home' => 'home#index'
   get 'about' => 'home#about'
-
-  get 'organization/:id' => 'organization#show', as: :organization_show
-  get 'organization/' => 'organization#index'
-
-  # You can have the root of your site routed with "root"
   root 'home#index'
 end

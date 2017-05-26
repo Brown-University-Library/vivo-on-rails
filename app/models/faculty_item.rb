@@ -6,7 +6,9 @@ class FacultyItem
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
-    :web_page_text, :web_page_uri, :published_in
+    :on_the_web, :appointments, :published_in, :hidden,
+    :cv_link, :cv_link_text,
+    :credentials, :training
 
   def initialize(values = nil)
     init_defaults()
@@ -36,8 +38,11 @@ class FacultyItem
     @title = ""
     @thumbnail = ""
     @research_areas = []
-    @web_page_text = ""
-    @web_page_uri = ""
+    @on_the_web = []
+    @appointments = []
+    @hidden = false
+    @credentials = []
+    @training = []
   end
 
   def contributor_to=(value)
@@ -60,22 +65,34 @@ class FacultyItem
       getter = key.to_s
       case getter
       when "affiliations"
-        faculty.affiliations = value.map {|v| AffiliationItem.new(v)}
+        faculty.affiliations = value.map {|v| AffiliationItem.new(v)}.sort_by {|v| v.name.downcase}
       when "collaborators"
         faculty.collaborators = value.map {|v| CollaboratorItem.new(v)}
       when "contributor_to"
         faculty.contributor_to = value.map {|v| ContributorToItem.new(v)}
       when "education"
-        faculty.education = value.map {|v| TrainingItem.new(v)}
+        faculty.education = value.map {|v| EducationItem.new(v)}
+      when "appointments"
+        faculty.appointments = value.map {|v| AppointmentItem.new(v)}
+      when "credentials"
+        faculty.credentials = value.map {|v| CredentialItem.new(v)}
+      when "on_the_web"
+        faculty.on_the_web = value.map {|v| OnTheWebItem.new(v)}
+      when "training"
+        faculty.training = value.map {|v| TrainingItem.new(v)}
       when "teacher_for"
         # string array, no special handling
         faculty.teacher_for = value
       when "research_areas"
         # string array, no special handling
-        faculty.research_areas = value
+        faculty.research_areas = value.sort_by {|a| a.downcase}
       else
         setter = key.to_s + "="
-        faculty.send(setter, value)
+        if faculty.respond_to?(setter)
+          faculty.send(setter, value)
+        else
+          # we've got a value in Solr that we don't expect/want.
+        end
       end
     end
     faculty
