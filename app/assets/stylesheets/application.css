@@ -37,16 +37,19 @@
 #333	  soft black
 #594036	  brown
 #7E7E7E	  gray
+#B9B9B8	  cool gray
 #F5F2EC	  warm gray
 #C00404	  red
 #FF5252	  bright red
 #831B1B	  dark red
+#F4E84E	  yellow
 */
 
 /* Header */
 /* red header */
 .header {
-	background-color: hsl(0, 80%, 30%);
+/*	background-color: hsl(0, 80%, 30%);*/
+	background-color: #594036;
 	height: 5rem;
 	padding: 0;
 }
@@ -309,7 +312,9 @@
 .person-content #individual-intro .emailsContainer {
 	color: black;
 	justify-content: center;
+	margin-bottom: 2rem;
 	position: relative;
+
 }
 #individual-intro .emailsContainer .glyphicon-envelope {
 	color: #333;
@@ -327,6 +332,10 @@
 	color: #fff;
 	background-color: #C00404;;
 }
+.share-contact {
+	background-color: #222;
+	height: 100%;
+}
 .share-contact span.glyphicon {
 	color: #fff;
 }
@@ -335,6 +344,33 @@
 	border-bottom: 1px solid black;
 	margin-top: 1rem;
 	padding: 2rem 0;
+}
+.btn-group-vertical {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+.btn-group-vertical .btn {
+	background-color: #222;
+	border: none;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+	height: 4rem;
+	text-shadow: none;
+}
+.btn-group-vertical a:hover {
+	background-color: #333;
+	color: #FF5252;
+}
+
+.btn-group-vertical .btn span {
+
+}
+.btn-group-vertical .btn span.glyphicon {
+	display: none;
 }
 /* right panel */
 h2.vcard {
