@@ -334,18 +334,17 @@ html {
 	margin-bottom: 0;
 }
 .person-content #individual-intro .emailsContainer {
-	color: black;
 	justify-content: center;
-	margin-bottom: 2rem;
+	margin: 1rem 0;
 	position: relative;
 
 }
-#individual-intro .emailsContainer .glyphicon-envelope {
+.person-content #individual-intro .emailsContainer .glyphicon-envelope {
 	color: #fff;
 	font-size: 2rem;
 	transform: scaleX(1.5);
 }
-#individual-intro .emailsContainer .glyphicon-envelope:hover {
+.person-content #individual-intro .emailsContainer .glyphicon-envelope:hover {
 	color:  #E8D98B;
 }
 .collaboratorship-link .btn {
@@ -360,7 +359,7 @@ html {
 	background-color: #222;
 	border: none;
 	height: 100%;
-	padding-top: 4rem;
+	padding: 4rem 0;
 }
 .share-contact span.glyphicon {
 	color: #fff;
@@ -370,6 +369,9 @@ html {
 	border-bottom: 1px solid black;
 	margin-top: 1rem;
 	padding: 2rem 0;
+}
+.btn-default {
+	box-shadow: none;
 }
 .btn-group-vertical {
 	display: flex;
@@ -387,16 +389,43 @@ html {
 	height: 4rem;
 	text-shadow: none;
 }
+/*.btn-group-vertical a {
+		border: 1px solid red;
+}*/
 .btn-group-vertical a:hover {
 	background-color: #333;
-	color: #FF5252;
+	border-right: solid 6px #E8D98B;
+	font-weight: bold;
 }
-
+.btn-default.active {
+	background-color: #fff;
+	border-right: solid 6px #E8D98B;
+	color: #000;
+	font-weight: bold;
+}
+.btn-default.active:hover {
+	background-color: #fff;
+	border-right: solid 6px #E8D98B;
+	color: #000;
+	font-weight: bold;
+}
+.btn-group-vertical > .btn:focus {
+	background-color: #fff;
+	border-right: solid 6px #E8D98B;
+	color: #000;
+	font-weight: bold;
+}
 .btn-group-vertical .btn span {
 
 }
 .btn-group-vertical .btn span.glyphicon {
 	display: none;
+}
+.btn-group-vertical > .btn:first-child:not(:last-child) { 
+	border-radius: 0;
+}
+.btn-group-vertical > .btn:last-child:not(:first-child) { 
+	border-radius: 0;
 }
 /* right panel */
 #section_overview {
