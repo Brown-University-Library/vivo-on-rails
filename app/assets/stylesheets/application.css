@@ -333,11 +333,23 @@ html {
 .person-content #individual-intro #photo-wrapper {
 	margin-bottom: 0;
 }
+.share-contact > h4 {
+	margin: 3rem 0 2rem 0;
+}
+.share-contact > h4 a {
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	color: #fff;
+	padding: 1rem;	
+}
+.share-contact > h4 a:hover {
+	border-top: 2px solid #E8D98B;
+	border-bottom: 2px solid #E8D98B;
+}
 .person-content #individual-intro .emailsContainer {
 	justify-content: center;
-	margin: 1rem 0;
+	margin-bottom: 1rem;
 	position: relative;
-
 }
 .person-content #individual-intro .emailsContainer .glyphicon-envelope {
 	color: #fff;
@@ -361,15 +373,6 @@ html {
 	height: 100%;
 	padding: 4rem 0;
 }
-.share-contact span.glyphicon {
-	color: #fff;
-}
-.share-contact h5 {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	margin-top: 1rem;
-	padding: 2rem 0;
-}
 .btn-default {
 	box-shadow: none;
 }
@@ -389,9 +392,6 @@ html {
 	height: 4rem;
 	text-shadow: none;
 }
-/*.btn-group-vertical a {
-		border: 1px solid red;
-}*/
 .btn-group-vertical a:hover {
 	background-color: #333;
 	border-right: solid 6px #E8D98B;
