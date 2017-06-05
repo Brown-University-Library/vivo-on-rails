@@ -7,7 +7,7 @@
     <h3>Overview</h3>
     <p><%= @presenter.faculty.overview.html_safe %></p>
     <% if @presenter.faculty.affiliations.count > 0 %>
-      <h4>Brown Affiliations</h4>
+      <h4 class="brown-affiliations">Brown Affiliations</h4>
       <% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
         <% if i != 0 %>
           &nbsp;|&nbsp;
@@ -19,7 +19,7 @@
       <% end %>
     <% end %>
     <% if @presenter.faculty.research_areas.count > 0 %>
-      <h4>Research Areas</h4>
+      <h4 class="research-areas">Research Areas</h4>
       <% @presenter.faculty.research_areas.each_with_index do |area, i| %>
         <% if i != 0 %>
           &nbsp;|&nbsp;

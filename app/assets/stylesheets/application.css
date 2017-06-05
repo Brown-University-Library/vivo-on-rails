@@ -332,6 +332,9 @@ html {
 .person-content #individual-intro #photo-wrapper {
 	margin-bottom: 0;
 }
+.share-contact {
+	border-radius: 0;
+}
 .share-contact > h4 {
 	margin: 3rem 0 2rem 0;
 }
@@ -468,8 +471,30 @@ h2.vcard {
 	border-left: solid 6px #E8D98B;
 	color: #fff;
 	font-size: 2rem;
-	margin: 0 -1rem;
+	margin: 0 -1rem 0 -1rem;
 	padding: 1rem;
+}
+.tabFinder h4 {
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	font-size: 1.6rem;
+	margin: 0 -1rem .4rem -.5rem;
+	padding: .6rem;
+}
+h4.research-areas {
+	margin-top: 3rem;
+}
+.tabFinder > p {
+	margin-top: 1.2rem;
+	padding-left: 1rem;
+}
+.tabFinder a {
+	border-bottom: dotted 1px #333;
+	color: #000;
+}
+.tabFinder a:hover {
+	border-bottom: solid 4px #E8D98B;
+	color: #000;
 }
 #section_overview > .panel {
 	border: none;
@@ -492,12 +517,34 @@ h2.vcard {
 	border-top-left-radius: 0;
     border-top-right-radius: 0;
 	color: #000;
+	margin-bottom: 1rem;
 	padding: .6rem;
 }
 #section_overview > .panel .panel-body {
-	padding-bottom: 4rem;
+	padding: 0 0 4rem 0;
 }
-
+#section_overview table a {
+	color: #000;
+	cursor: pointer;
+	font-weight: bold;
+}
+#section_overview table a:hover {
+	border-bottom: 3px solid #333;
+}
+#section_overview tr:hover {
+	background-color: #F5F2EC;
+}
+#section_overview th {
+	border: none;
+	padding-top: 0;
+}
+#section_overview tr:nth-child(1) td {
+	border: none;
+	padding-top: 0;
+}
+.background__education tr:nth-child(1):hover {
+	background-color: #fff !important;
+}
 /*tr.publicationTableRow {
 	background-color: blue;
 }*/
