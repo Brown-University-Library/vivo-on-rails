@@ -317,7 +317,6 @@ html {
 	padding: 0;
 }
 .person-content {
-/*	border: 1px solid blue;*/
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	margin: 0;
 }
@@ -394,38 +393,37 @@ html {
 }
 .btn-group-vertical a:hover {
 	background-color: #333;
-	border-right: solid 6px #E8D98B;
+	border-left: solid 6px #E8D98B;
 	font-weight: bold;
 }
-.btn-default.active {
+.btn-group-vertical .btn-default.active {
 	background-color: #fff;
-	border-right: solid 6px #E8D98B;
+	border-left: solid 6px #E8D98B;
+	box-shadow: none;
 	color: #000;
 	font-weight: bold;
 }
-.btn-default.active:hover {
+.btn-group-vertical .btn-default.active:hover {
 	background-color: #fff;
-	border-right: solid 6px #E8D98B;
+	border-left: solid 6px #E8D98B;
 	color: #000;
 	font-weight: bold;
 }
 .btn-group-vertical > .btn:focus {
 	background-color: #fff;
-	border-right: solid 6px #E8D98B;
+	border-left: solid 6px #E8D98B;
+	box-shadow: none;
 	color: #000;
 	font-weight: bold;
-}
-.btn-group-vertical .btn span {
-
-}
-.btn-group-vertical .btn span.glyphicon {
-	display: none;
 }
 .btn-group-vertical > .btn:first-child:not(:last-child) { 
 	border-radius: 0;
 }
 .btn-group-vertical > .btn:last-child:not(:first-child) { 
 	border-radius: 0;
+}
+.btn-group-vertical .btn span.glyphicon {
+	display: none;
 }
 /* right panel */
 #section_overview {
@@ -435,7 +433,13 @@ html {
 }
 h2.vcard {
 	font-weight: bold;
-	margin-bottom: 0;
+	margin: 4rem 0 0 0;
+}
+#section_overview > h3 {
+	margin: .5rem 0;
+}
+#section_overview > h4 {
+	margin-top: 0;
 }
 #individual-info header {
 	margin-bottom: 5rem;
@@ -456,6 +460,44 @@ h2.vcard {
 	border-bottom: 1px dashed #C00404;
 	color: #C00404;
 }
+.tabFinder {
+	padding-top: 1rem;
+}
+.tabFinder > h3 {
+	background-color: #333;
+	border-left: solid 6px #E8D98B;
+	color: #fff;
+	font-size: 2rem;
+	margin: 0 -1rem;
+	padding: 1rem;
+}
+#section_overview > .panel {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+#section_overview > .panel > h3 {
+	background-color: #333;
+	border-left: solid 6px #E8D98B;
+	color: #fff;
+	font-size: 2rem;
+	margin-bottom: .4rem;
+	margin-left: -1rem;
+	padding: 1rem;	
+}
+#section_overview > .panel div.panel-heading {
+	background-color: #fff;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	border-top-left-radius: 0;
+    border-top-right-radius: 0;
+	color: #000;
+	padding: .6rem;
+}
+#section_overview > .panel .panel-body {
+	padding-bottom: 4rem;
+}
+
 /*tr.publicationTableRow {
 	background-color: blue;
 }*/
