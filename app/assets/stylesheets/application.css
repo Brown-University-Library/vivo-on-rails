@@ -47,8 +47,8 @@
 */
 
 html, body {
- 	  box-sizing: border-box;
-	  height: 100%;
+ 	box-sizing: border-box;
+	height: 100%;
     max-width: 100%;
     overflow-x: hidden;
 }
