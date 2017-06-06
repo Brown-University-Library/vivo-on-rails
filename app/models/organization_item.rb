@@ -2,7 +2,8 @@ require "./app/models/model_utils.rb"
 class OrganizationItem
   include ModelUtils
 
-  attr_accessor :id, :record_type, :uri, :name, :overview, :thumbnail, :people
+  attr_accessor :id, :record_type, :uri, :name, :overview,
+    :thumbnail, :people, :web_pages
 
   def initialize(values)
     init_defaults()
@@ -22,6 +23,7 @@ class OrganizationItem
     @overview = ""
     @thumbnail = ""
     @people = []
+    @web_pages = []
   end
 
   def self.from_hash(hash)
@@ -29,8 +31,10 @@ class OrganizationItem
     hash.each do |key, value|
       getter = key.to_s
       case getter
+      when "web_pages"
+        org.web_pages = value.map { |v| OnTheWebItem.new(v) }
       when "people"
-        org.people = value.map {|v| OrganizationMemberItem.new(v)}
+        org.people = value.map { |v| OrganizationMemberItem.new(v)}
       else
         setter = key.to_s + "="
         org.send(setter, value)

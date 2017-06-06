@@ -1,5 +1,8 @@
 <div class="col-md-3 col-sm-4 col-xs-12">
   <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+    <% if @presenter.show_back_to_search %>
+      <a href="javascript: history.go(-1)">Back to search</a>
+    <% end %>
     <section class="share-contact" role="region">
       <div id="photo-wrapper">
         <%= image_tag(@presenter.faculty.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "175", class: "img-circle") %>

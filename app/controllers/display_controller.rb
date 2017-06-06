@@ -42,7 +42,8 @@ class DisplayController < ApplicationController
       from_solr = true
       from_solr = false if params[:fuseki] == "true"
       faculty = Faculty.get_one(id, from_solr)
-      @presenter = FacultyPresenter.new(faculty)
+      referer = request.headers.env["HTTP_REFERER"]
+      @presenter = FacultyPresenter.new(faculty, search_url(), referer)
       render "faculty/show"
     end
 

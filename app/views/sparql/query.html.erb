@@ -1,8 +1,56 @@
-<form id="sparql-query" name="sparql-query"
-  action="<%= sparql_submit_path() %>" method="get">
-  <b>Query</b></br>
-  <textarea id="query" rows="15" cols="90"></textarea>
+<style>
+  table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
+  .monospace {
+    font-family: "Courier New";
+  }
+</style>
+
+<form id="sparql-query" name="sparql-query" method="get">
+  <b>SPARQL </b>
+  <button id="showPrefixes" type="button" class="btn btn-info btn-xs">Show Prefixes</button>
+  <div id = "prefixes" class="small hidden monospace">
+  <% @presenter.prefixes.each do |p| %>
+    prefix <%= p[:prefix] %>: &lt;<%= p[:uri] %>&gt;<br/>
+  <% end %>
+  </div>
   <div>
-    <button type="submit" class="btn btn-default btn-lg sympl-search">Submit</button>
+    <textarea id="sparql" name="sparql"
+      rows="8" cols="90"
+      placerholder="Enter SPARQL query here"
+      class="monospace"><%= @presenter.sparql %></textarea>
+  </div>
+  <div class="monospace">
+    limit <input id="limit" name="limit" value="<%= @presenter.limit %>">
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Run Query</button>
+    <button type="submit"
+      id="TextExport" name="TextExport" value="1"
+      formtarget="_blank"
+      class="btn">Run (Export)</button>
   </div>
 </form
+
+<div>
+  <p>&nbsp;</p>
+  <% if @presenter.results.count > 0 %>
+    <%= render "table" %>
+  <% end %>
+
+  <% if @presenter.message != "" %>
+    <b><%= @presenter.message %></b>
+  <% end %>
+</div>
+
+
+<script>
+$(document).ready(function() {
+   $("#showPrefixes").click(function() {
+     $("#prefixes").removeClass("hidden");
+     $("#showPrefixes").addClass("hidden");
+   });
+});
+</script>

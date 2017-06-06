@@ -46,9 +46,11 @@
 #E8D98B	  pale gold	
 */
 
-html {
-	box-sizing: border-box;
-	height: 100%;
+html, body {
+ 	  box-sizing: border-box;
+	  height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* Header */
@@ -59,6 +61,7 @@ html {
 	border: none;
 	height: 5rem;
 	padding: 0;
+	border-bottom: none;
 }
 .header .logo-sm {
 	text-align: left;
