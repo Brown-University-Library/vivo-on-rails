@@ -332,6 +332,18 @@ html, body {
 	padding: 0;
 }
 /* left panel */
+#individual-intro {
+	display: flex;
+	flex-direction: column;
+}
+.person-content #individual-intro > a {
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	color: #333;
+	font-weight: bold;
+	margin: .8rem 0 .5rem 0;
+	padding: .5rem 0 .5rem .8rem;
+}
 .person-content #individual-intro #photo-wrapper {
 	margin-bottom: 0;
 }
