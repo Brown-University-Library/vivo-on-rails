@@ -36,10 +36,7 @@
             <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
 					</div>
 
-				<!-- TODO: Make sure this is working in the development server
-			       I think it should use root_path instead -->
-				<% unless current_page?('/') %>
-
+				<% unless current_page?(root_path) %>
 					<div class="site-title col-lg-6 col-md-6 col-sm-6 hidden-xs">
 						<h1>
 							<a href="<%= root_path %>">Researchers@Brown</a>
@@ -50,7 +47,6 @@
 							<a href="<%= root_path %>">Researchers @ Brown</a>
 						</h1>
 					</div>
-
 				<% end %>
 
 				</div>
