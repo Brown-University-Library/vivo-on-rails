@@ -37,13 +37,18 @@
 #333	  soft black
 #594036	  brown
 #7E7E7E	  gray
+#B9B9B8	  cool gray
 #F5F2EC	  warm gray
 #C00404	  red
 #FF5252	  bright red
 #831B1B	  dark red
+#F4E84E	  yellow
+#E8D98B	  pale gold	
 */
 
 html, body {
+ 	  box-sizing: border-box;
+	  height: 100%;
     max-width: 100%;
     overflow-x: hidden;
 }
@@ -51,7 +56,9 @@ html, body {
 /* Header */
 /* red header */
 .header {
-	background-color: hsl(0, 80%, 30%);
+/*	background-color: hsl(0, 80%, 30%);*/
+	background-color: #594036;
+	border: none;
 	height: 5rem;
 	padding: 0;
 	border-bottom: none;
@@ -290,6 +297,7 @@ html, body {
 
 
 /* Footer */
+
 .footer p.copyright {
 	color: #ddd;
 }
@@ -304,26 +312,57 @@ html, body {
 
 
 /* Individual Page */
+.profile {
+	background-color: #F5F2EC;
+	min-height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
 .person-content {
-/*	border: 1px solid blue;*/
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+	margin: 0;
+}
+.person-content > .container {
+	background-color: #fff;
+	max-width: 76%;
+	padding: 0;
+}
+.person-content > .container > div {
+	padding: 0;
 }
 /* left panel */
 .person-content #individual-intro #photo-wrapper {
 	margin-bottom: 0;
 }
+.share-contact {
+	border-radius: 0;
+}
+.share-contact > h4 {
+	margin: 3rem 0 2rem 0;
+}
+.share-contact > h4 a {
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	color: #fff;
+	padding: 1rem;	
+}
+.share-contact > h4 a:hover {
+	border-top: 2px solid #E8D98B;
+	border-bottom: 2px solid #E8D98B;
+}
 .person-content #individual-intro .emailsContainer {
-	color: black;
 	justify-content: center;
+	margin-bottom: 1rem;
 	position: relative;
 }
-#individual-intro .emailsContainer .glyphicon-envelope {
-	color: #333;
+.person-content #individual-intro .emailsContainer .glyphicon-envelope {
+	color: #fff;
 	font-size: 2rem;
 	transform: scaleX(1.5);
 }
-#individual-intro .emailsContainer .glyphicon-envelope:hover {
-	color: #C00404;
+.person-content #individual-intro .emailsContainer .glyphicon-envelope:hover {
+	color:  #E8D98B;
 }
 .collaboratorship-link .btn {
 	color: #fff;
@@ -333,19 +372,80 @@ html, body {
 	color: #fff;
 	background-color: #C00404;;
 }
-.share-contact span.glyphicon {
-	color: #fff;
+.profile .share-contact {
+	background-color: #222;
+	border: none;
+	height: 100%;
+	padding: 4rem 0;
 }
-.share-contact h5 {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	margin-top: 1rem;
-	padding: 2rem 0;
+.btn-default {
+	box-shadow: none;
+}
+.btn-group-vertical {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+.btn-group-vertical .btn {
+	background-color: #222;
+	border: none;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+	height: 4rem;
+	text-shadow: none;
+}
+.btn-group-vertical a:hover {
+	background-color: #333;
+	border-left: solid 6px #E8D98B;
+	font-weight: bold;
+}
+.btn-group-vertical .btn-default.active {
+	background-color: #fff;
+	border-left: solid 6px #E8D98B;
+	box-shadow: none;
+	color: #000;
+	font-weight: bold;
+}
+.btn-group-vertical .btn-default.active:hover {
+	background-color: #fff;
+	border-left: solid 6px #E8D98B;
+	color: #000;
+	font-weight: bold;
+}
+.btn-group-vertical > .btn:focus {
+	background-color: #fff;
+	border-left: solid 6px #E8D98B;
+	box-shadow: none;
+	color: #000;
+	font-weight: bold;
+}
+.btn-group-vertical > .btn:first-child:not(:last-child) { 
+	border-radius: 0;
+}
+.btn-group-vertical > .btn:last-child:not(:first-child) { 
+	border-radius: 0;
+}
+.btn-group-vertical .btn span.glyphicon {
+	display: none;
 }
 /* right panel */
+#section_overview {
+	font-size: 1.75rem;
+	line-height: 2.5rem;
+	padding: 0 4rem;
+}
 h2.vcard {
 	font-weight: bold;
-	margin-bottom: 0;
+	margin: 4rem 0 0 0;
+}
+#section_overview > h3 {
+	margin: .5rem 0;
+}
+#section_overview > h4 {
+	margin-top: 0;
 }
 #individual-info header {
 	margin-bottom: 5rem;
@@ -366,6 +466,88 @@ h2.vcard {
 	border-bottom: 1px dashed #C00404;
 	color: #C00404;
 }
+.tabFinder {
+	padding-top: 1rem;
+}
+.tabFinder > h3 {
+	background-color: #333;
+	border-left: solid 6px #E8D98B;
+	color: #fff;
+	font-size: 2rem;
+	margin: 0 -1rem 0 -1rem;
+	padding: 1rem;
+}
+.tabFinder h4 {
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	font-size: 1.6rem;
+	margin: 0 -1rem .4rem -.5rem;
+	padding: .6rem;
+}
+h4.research-areas {
+	margin-top: 3rem;
+}
+.tabFinder > p {
+	margin-top: 1.2rem;
+	padding-left: 1rem;
+}
+.tabFinder a {
+	border-bottom: dotted 1px #333;
+	color: #000;
+}
+.tabFinder a:hover {
+	border-bottom: solid 4px #E8D98B;
+	color: #000;
+}
+#section_overview > .panel {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+#section_overview > .panel > h3 {
+	background-color: #333;
+	border-left: solid 6px #E8D98B;
+	color: #fff;
+	font-size: 2rem;
+	margin-bottom: .4rem;
+	margin-left: -1rem;
+	padding: 1rem;	
+}
+#section_overview > .panel div.panel-heading {
+	background-color: #fff;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	border-top-left-radius: 0;
+    border-top-right-radius: 0;
+	color: #000;
+	margin-bottom: 1rem;
+	padding: .6rem;
+}
+#section_overview > .panel .panel-body {
+	padding: 0 0 4rem 0;
+}
+#section_overview table a {
+	color: #000;
+	cursor: pointer;
+	font-weight: bold;
+}
+#section_overview table a:hover {
+	border-bottom: 3px solid #333;
+}
+#section_overview tr:hover {
+	background-color: #F5F2EC;
+}
+#section_overview th {
+	border: none;
+	padding-top: 0;
+}
+#section_overview tr:nth-child(1) td {
+	border: none;
+	padding-top: 0;
+}
+.background__education tr:nth-child(1):hover {
+	background-color: #fff !important;
+}
 /*tr.publicationTableRow {
 	background-color: blue;
 }*/
@@ -373,3 +555,39 @@ h2.vcard {
 	font-weight: 600;
 }
 /* End of Individual Page */
+
+
+
+/*** Breakpoints ***/
+@media screen and (min-width: 1380px) and (max-width: 1560px) { 
+	.person-content > .container {
+		max-width: 62%;	
+	}
+}
+@media screen and (min-width: 1200px) and (max-width: 1379px) { 
+	.person-content > .container {
+		max-width: 70%;	
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
