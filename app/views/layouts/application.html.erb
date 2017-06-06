@@ -35,7 +35,9 @@
 					<div class="col-xs-12 visible-xs-block">
             <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
 					</div>
-					
+
+				<!-- TODO: Make sure this is working in the development server
+			       I think it should use root_path instead -->
 				<% unless current_page?('/') %>
 
 					<div class="site-title col-lg-6 col-md-6 col-sm-6 hidden-xs">
