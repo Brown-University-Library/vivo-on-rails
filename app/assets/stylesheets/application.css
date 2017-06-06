@@ -447,6 +447,14 @@ h2.vcard {
 #section_overview > h4 {
 	margin-top: 0;
 }
+#section_overview p a:link {
+	color: #333;
+	font-size: 1.6rem;
+	font-weight: bold;
+}
+#section_overview p a:link:hover {
+	border-bottom: solid 3px #E8D98B;
+}
 #individual-info header {
 	margin-bottom: 5rem;
 }
