@@ -552,6 +552,43 @@ h4.research-areas {
 .background__education tr:nth-child(1):hover {
 	background-color: #fff !important;
 }
+#tabPublications .btn-group {
+	border: 1px solid #666;
+	border-radius: 5px;
+	box-shadow: none;
+	display: flex;
+	justify-content: space-between;
+	margin: 1rem 0;
+	padding: .1rem;
+	width: 100%;
+}
+#tabPublications .btn-group .btn {
+	background-color: white;
+	border: none;
+	box-shadow: none;
+	color: #444;
+	font-size: 1.6rem;
+	font-weight: bold;
+	margin: .2rem;
+	padding: 1rem 0;
+	text-shadow: none;
+	width: 100%;
+}
+#tabPublications .btn-group .btn.active {
+	background-color: #594036;
+	border: none;
+	outline: 0;
+	appearance: none;
+	color: #fff;
+}
+#tabPublications .btn-group .btn.active:hover {
+	background-color: #594036;
+	color: #fff;
+}
+#tabPublications .btn-group .btn:hover {
+	background-color: #594036;
+	color: #fff;
+}
 .citation-data .label {
 	background-color: #fff;
 	border: 2px solid #888;
