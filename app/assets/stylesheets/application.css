@@ -492,13 +492,16 @@ h4.research-areas {
 	padding-left: 1rem;
 }
 .tabFinder a {
-	border-bottom: dotted 1px #333;
+/*	border-bottom: dotted 1px #333;*/
 	color: #000;
+	font-size: 1.5rem;
+	font-weight: bold;
 }
 .tabFinder a:hover {
 	border-bottom: solid 4px #E8D98B;
 	color: #000;
 }
+/* table */
 #section_overview > .panel {
 	border: none;
 	border-radius: 0;
@@ -515,8 +518,8 @@ h4.research-areas {
 }
 #section_overview > .panel div.panel-heading {
 	background-color: #fff;
-	border-top: 1px solid #333;
-	border-bottom: 1px solid #333;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
 	border-top-left-radius: 0;
     border-top-right-radius: 0;
 	color: #000;
@@ -529,6 +532,7 @@ h4.research-areas {
 #section_overview table a {
 	color: #000;
 	cursor: pointer;
+	font-size: 1.5rem;
 	font-weight: bold;
 }
 #section_overview table a:hover {
@@ -543,14 +547,39 @@ h4.research-areas {
 }
 #section_overview tr:nth-child(1) td {
 	border: none;
-	padding-top: 0;
+	padding-top: 1rem;
 }
 .background__education tr:nth-child(1):hover {
 	background-color: #fff !important;
 }
-/*tr.publicationTableRow {
-	background-color: blue;
+.citation-data .label {
+	background-color: #fff;
+	border: 2px solid #888;
+	color: #666;
+	padding: .6rem .9rem;
+}
+/*I have to dive into the Bootstrap CSS to see what is causing the need for all the !importants below
+.table .citation-data.pub-item.pub-type_article a.full-text-link.no-orphans {
+	background-color: white;
+	border: 2px solid #594036;
+	border-radius: 3px;
+	color: #594036;
+	font-size: 1.3rem !important;
+	padding: 0 1rem;
 }*/
+.citation-data a.full-text-link {
+	background-color: white;
+	border: 2px solid #594036;
+	border-radius: 3px;
+	color: #594036 !important;
+	font-size: 1.3rem !important;
+	padding: 0 1rem;
+}
+.citation-data a.full-text-link:hover {
+	background-color: #594036;
+	border-bottom: 2px solid #594036 !important;
+	color: white !important;
+}
 .pub-title {
 	font-weight: 600;
 }

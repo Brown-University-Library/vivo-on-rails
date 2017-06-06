@@ -31,13 +31,20 @@
                     <i><%= c.title %></i>
                     <%= c.pub_info %>
                     <% if c.pub_type %>
-                      <span class="label label-default"><%= c.pub_type.downcase %></span>
+                      <span class="label label-default no-orphans"><%= c.pub_type.downcase %></span>
+<!--                       <span class="label label-default no-orphans">
+                        I'm exploring using a tag shape to differentiate b/w pub labels and links
+                        <svg width="60" height="30">
+                          <rect x="1" y="1" width="60" height="30" fill="green" />
+                          <text x="10" y="10" font-family="sans-serif" font-size="13px" fill="white"><%= c.pub_type.downcase %></text>
+                        </svg>
+                      </span> -->
                     <% end %>
                     <% if c.doi_url %>
-                      <a class="full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
+                      <a class="full-text-link no-orphans" target = "_blank" href="<%= c.doi_url %>">full text</a>
                     <% end %>
                     <% if c.pub_med_url %>
-                      <a class="full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
+                      <a class="full-text-link no-orphans" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
                     <% end %>
                   </td>
                 </tr>
