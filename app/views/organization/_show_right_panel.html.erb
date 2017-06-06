@@ -3,6 +3,11 @@
     <header>
       <h2 class="vcard foaf-person hidden-xs"><% "xxx" %></h2>
       <h3><%= @organization.name %></h3>
+      <ul>
+      <% @organization.web_pages.each do |page| %>
+        <li><a href="<%= page.url %>"><%= page.text %></a>
+      <% end %>
+      </ul>
       <p><%= @organization.overview.html_safe %></p>
     </header>
   </section>

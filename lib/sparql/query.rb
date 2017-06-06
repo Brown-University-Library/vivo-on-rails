@@ -13,7 +13,11 @@ module Sparql
       @prefixes_ttl = prefixes_to_ttl(prefixes)
       @verbose = ENV["FUSEKI_VERBOSE"] == "true"
       @logger = Rails::logger
-      execute()
+      @raw_response = {}
+      @raw_results = []
+      if @query && !@query.empty?
+        execute()
+      end
     end
 
     def execute()
@@ -58,11 +62,12 @@ module Sparql
     # or a URI, since we treat them all as literals here.
     def results
       @hashes ||= begin
-        rows = @raw_response["results"]["bindings"]
-        rows.map do |row|
+        @raw_results.map do |row|
           hash = {}
           row.keys.each do |key|
             hash[key.to_sym] = row[key]["value"]
+            lang = row[key].fetch("xml:lang", nil)
+            hash[:xml_lang] = "@#{lang}" if lang != nil
           end
           hash
         end
