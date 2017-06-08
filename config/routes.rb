@@ -18,5 +18,10 @@ Rails.application.routes.draw do
   get 'search' => 'search#index'
 
   get 'about' => 'home#about'
+  get 'faq' => 'home#faq'
+  get 'help' => 'home#help'
+  get 'publications' => 'home#publications'
+  get 'roadmap' => 'home#roadmap'
+  get 'termsOfUse' => 'home#termsofuse'
   root 'home#index'
 end

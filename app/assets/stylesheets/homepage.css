@@ -16,10 +16,6 @@ body {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 }
 
-p a:link {
-  color: #bdfcbd;
-}
-
 @media (min-width: 0px) and (max-width: 768px) {
   .theme-showcase {
   width: 100%;
