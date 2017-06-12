@@ -1,3 +1,4 @@
+require "./app/models/json_utils.rb"
 require "./app/models/search_item.rb"
 require "./app/models/faculty.rb"
 require "./lib/solr_lite/solr.rb"
@@ -14,15 +15,17 @@ class Search
       record_type = (doc["record_type"] || []).first
       case record_type
       when "ORGANIZATION"
-        json = JSON.parse(doc["json_txt"].first)
+        json = JsonUtils.safe_parse(doc["json_txt"].first)
         item = OrganizationItem.new(json)
         results.items << SearchItem.from_organization(item)
       when "PEOPLE"
-        json = JSON.parse(doc["json_txt"].first)
+        json = JsonUtils.safe_parse(doc["json_txt"].first)
         item = FacultyListItem.new(json)
         results.items << SearchItem.from_person(item)
       else
-        # WTF?
+        # A VIVO type not supported on our new front-end.
+        # TODO: we should either filter them our in our `q` parameter
+        # so that they are not returned at all.
       end
     end
     results
