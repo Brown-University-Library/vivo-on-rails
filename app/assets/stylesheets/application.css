@@ -109,44 +109,13 @@ html, body {
 	top: -5rem;
 /*	display: inline-block;*/
 }
-
 header {
 	position: relative;
 	z-index: 1000;
 }
 .footer {
-	position: relative;
-	z-index: 1000;
-}
-.profile {
-	border: 1px solid purple;
-	display: block;
-	position: relative;
-	top: 0;
-	height: 100% !important;
-
-}
-.container .person-content {
-	position: relative;
-	border: 1px solid red;
-		display: flex;
-		min-height: 100% !important;
-		min-width: 100% !important;
-/*		top: 10rem !important;*/
-/*		z-index: 1 !important;*/
-/*		align-self: stretch;
-		align-items: stretch;
-		justify-content: flex-start;*/
-/*	display: flex;
-	justify-content: center;
-	width: 100%;*/
-	top: -5.5rem;
-}
-.container .row .container {
-	border: 1px solid green;
-	width: 100% !important;
-
-/*	display: inline-block !important;*/
+/*	position: relative;
+	z-index: 1000;*/
 }
 #sticky-nav .container {
 	padding-left: 0 1.5rem;
@@ -362,6 +331,38 @@ header {
 
 
 /* Individual Page */
+.profile {
+	border: 1px solid purple;
+	display: block;
+	position: relative;
+	top: 0;
+}
+.container .person-content {
+	position: relative;
+	border: 1px solid red;
+		display: flex;
+		min-height: 100% !important;
+		min-width: 100% !important;
+/*		top: 10rem !important;*/
+/*		z-index: 1 !important;*/
+/*		align-self: stretch;
+		align-items: stretch;
+		justify-content: flex-start;*/
+/*	display: flex;
+	justify-content: center;
+	width: 100%;*/
+	top: -5.5rem;
+}
+.container .row .container {
+	border: 1px solid green;
+	width: 100% !important;
+
+/*	display: inline-block !important;*/
+}
+
+
+
+
 .profile {
 	background-color: #F5F2EC;
 	min-height: 100%;
