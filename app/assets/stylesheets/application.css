@@ -69,18 +69,21 @@ html, body {
 .header img {
 	max-width: 110px;
 }
-/*.hgroup .container {
+.hgroup .container {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-}*/
+}
 .hgroup .container .row {
 	display: flex;
 	align-items: center;
 	height: 5rem;
-/*	width: 100%
+	width: 100%
 	margin: 0;
-	padding: 0;*/
+	padding: 0;
+}
+#branding div.row { /* I need this to override a bootstrap style that adds 15px to the right/left margins and pushes the logo off of page left */
+	margin: 0;
 }
 .site-title {
 	text-align: center;
@@ -100,13 +103,13 @@ html, body {
 }
 #sticky-nav { /* same? */
 	background-image: none;
-/*	margin-bottom: 0;*/
+	margin-bottom: 0;
 	padding: 0 0 0 1.5rem;
-/*	position: relative;
+	position: relative;
 	top: -5rem;
-	border: 5px solid black;
-	display: inline-block !important;*/
+/*	display: inline-block;*/
 }
+
 header {
 	position: relative;
 	z-index: 1000;
@@ -137,7 +140,7 @@ header {
 /*	display: flex;
 	justify-content: center;
 	width: 100%;*/
-	top: -7.5rem;
+	top: -5.5rem;
 }
 .container .row .container {
 	border: 1px solid green;
@@ -171,7 +174,7 @@ header {
 
 /* Results Page */
 .container-fluid {
-	padding-top: 3rem;
+	padding-top: 1.5rem;
 }
 @media (min-width: 1700px) {
 	.container-fluid {
