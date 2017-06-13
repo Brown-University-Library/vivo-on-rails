@@ -69,10 +69,18 @@ html, body {
 .header img {
 	max-width: 110px;
 }
+/*.hgroup .container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}*/
 .hgroup .container .row {
 	display: flex;
 	align-items: center;
 	height: 5rem;
+/*	width: 100%
+	margin: 0;
+	padding: 0;*/
 }
 .site-title {
 	text-align: center;
@@ -80,22 +88,62 @@ html, body {
 .site-title h1 {
 	font-size: 2rem;
 }
-.site-logo {
+.site-logo { /* this doesn't seem to be used anywhere */
 	padding-top: .5rem;
 	text-align: left;
 }
 /* navbar */
-.navbar-inverse {
+.navbar-inverse { /* same? */
 	background-color: transparent;
 	border-color: transparent;
 	box-shadow: none;
 }
-#sticky-nav {
+#sticky-nav { /* same? */
 	background-image: none;
-	margin-bottom: 3rem;
+/*	margin-bottom: 0;*/
 	padding: 0 0 0 1.5rem;
-	position: absolute;
+/*	position: relative;
+	top: -5rem;
+	border: 5px solid black;
+	display: inline-block !important;*/
+}
+header {
+	position: relative;
+	z-index: 1000;
+}
+.footer {
+	position: relative;
+	z-index: 1000;
+}
+.profile {
+	border: 1px solid purple;
+	display: block;
+	position: relative;
 	top: 0;
+	height: 100% !important;
+
+}
+.container .person-content {
+	position: relative;
+	border: 1px solid red;
+		display: flex;
+		min-height: 100% !important;
+		min-width: 100% !important;
+/*		top: 10rem !important;*/
+/*		z-index: 1 !important;*/
+/*		align-self: stretch;
+		align-items: stretch;
+		justify-content: flex-start;*/
+/*	display: flex;
+	justify-content: center;
+	width: 100%;*/
+	top: -7.5rem;
+}
+.container .row .container {
+	border: 1px solid green;
+	width: 100% !important;
+
+/*	display: inline-block !important;*/
 }
 #sticky-nav .container {
 	padding-left: 0 1.5rem;
@@ -297,7 +345,6 @@ html, body {
 
 
 /* Footer */
-
 .footer p.copyright {
 	color: #ddd;
 }
