@@ -262,7 +262,7 @@ header {
 }
 .panel-default > .panel-heading {
 	background-color: #333;
-  color: #fff;
+  	color: #fff;
 	background-image: none;
 	background-repeat: no-repeat;
 	border-top-left-radius: 0;
@@ -504,11 +504,11 @@ h2.vcard {
 	font-weight: bold;
 	margin: 4rem 0 0 0;
 }
-#section_overview > h3 {
+h3.individual_overview {
 	margin: .5rem 0;
 }
-#section_overview > h4 {
-	margin-top: 0;
+h4.individual_overview {
+	margin-top: 0;	
 }
 #section_overview p a:link {
 	color: #333;
@@ -518,7 +518,29 @@ h2.vcard {
 #section_overview p a:link:hover {
 	border-bottom: solid 3px #E8D98B;
 }
-#individual-info header {
+#section_overview h3:not(:nth-child(2)) {
+	background-color: #333;
+	border-left: solid 6px #E8D98B;
+	color: #fff;
+	font-size: 2rem;
+	margin-bottom: .4rem;
+	margin-left: -1rem;
+	padding: 1rem .6rem;	
+}
+#section_overview h4 {
+	font-size: 1.8rem;
+}
+#section_overview .panel-heading {
+	background-color: #fff;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-top-left-radius: 0;
+    border-top-right-radius: 0;
+	color: #000;
+	margin: 0 0 1rem -1rem;
+	padding: .6rem 1rem;
+}
+/*#individual-info header {
 	margin-bottom: 5rem;
 }
 #individual-info h3 {
@@ -526,6 +548,7 @@ h2.vcard {
 	margin-bottom: 0;
 }
 #individual-info h4 {
+	border: 5px solid pink;
 	font-weight: 600;
 }
 #individual-info a {
@@ -536,31 +559,18 @@ h2.vcard {
 #individual-info a:hover {
 	border-bottom: 1px dashed #C00404;
 	color: #C00404;
-}
+}*/
 .tabFinder {
 	padding-top: 1rem;
 }
-.tabFinder > h3 {
-	background-color: #333;
-	border-left: solid 6px #E8D98B;
-	color: #fff;
-	font-size: 2rem;
-	margin: 0 -1rem 0 -1rem;
-	padding: 1rem;
+#tabOverview h4.brown-affiliations.panel-heading {
+	margin-top: 3rem;
 }
-.tabFinder h4 {
-	border-top: 1px solid #aaa;
-	border-bottom: 1px solid #aaa;
-	font-size: 1.6rem;
-	margin: 0 -1rem .4rem -.5rem;
-	padding: .6rem;
-}
-h4.research-areas {
+#tabOverview h4.research-areas.panel-heading {
 	margin-top: 3rem;
 }
 .tabFinder > p {
-	margin-top: 1.2rem;
-	padding-left: 1rem;
+	margin: 1.2rem 1.2rem 0 1.2rem;
 }
 .tabFinder a {
 /*	border-bottom: dotted 1px #333;*/
@@ -577,25 +587,6 @@ h4.research-areas {
 	border: none;
 	border-radius: 0;
 	box-shadow: none;
-}
-#section_overview > .panel > h3 {
-	background-color: #333;
-	border-left: solid 6px #E8D98B;
-	color: #fff;
-	font-size: 2rem;
-	margin-bottom: .4rem;
-	margin-left: -1rem;
-	padding: 1rem;	
-}
-#section_overview > .panel div.panel-heading {
-	background-color: #fff;
-	border-top: 1px solid #aaa;
-	border-bottom: 1px solid #aaa;
-	border-top-left-radius: 0;
-    border-top-right-radius: 0;
-	color: #000;
-	margin-bottom: 1rem;
-	padding: .6rem;
 }
 #section_overview > .panel .panel-body {
 	padding: 0 0 4rem 0;
