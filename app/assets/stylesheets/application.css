@@ -660,33 +660,28 @@ h4.research-areas {
 	background-color: #594036;
 	color: #fff;
 }
-.citation-data .label {
+td.citation-data.pub-item {
+	padding: 2rem 0;
+}
+.pub-item-tag {
 	background-color: #fff;
-	border: 2px solid #888;
-	color: #666;
+	border-radius: .3rem;
+	display: inline-block;
+	font-size: 1.3rem !important;
+	line-height: 1.3rem !important;
 	padding: .6rem .9rem;
 }
-/*I have to dive into the Bootstrap CSS to see what is causing the need for all the !importants below
-.table .citation-data.pub-item.pub-type_article a.full-text-link.no-orphans {
-	background-color: white;
-	border: 2px solid #594036;
-	border-radius: 3px;
-	color: #594036;
-	font-size: 1.3rem !important;
-	padding: 0 1rem;
-}*/
-.citation-data a.full-text-link {
-	background-color: white;
-	border: 2px solid #594036;
-	border-radius: 3px;
-	color: #594036 !important;
-	font-size: 1.3rem !important;
-	padding: 0 1rem;
+.pub-item-tag.label {
+	border: .2rem solid #888;
+	color: #666;
 }
-.citation-data a.full-text-link:hover {
+#section_overview table a.pub-item-tag.full-text-link {
+	border: .2rem solid #594036;
+	color: #594036;
+}
+#section_overview table a.pub-item-tag.full-text-link:hover {
 	background-color: #594036;
-	border-bottom: 2px solid #594036 !important;
-	color: white !important;
+	color: #fff;
 }
 .pub-title {
 	font-weight: 600;
