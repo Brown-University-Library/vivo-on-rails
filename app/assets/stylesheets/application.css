@@ -58,8 +58,8 @@ html, body {
 
 /* Header */
 /* red header */
+/*	background-color: hsl(0, 80%, 30%); */
 .header {
-/*	background-color: hsl(0, 80%, 30%);*/
 	background-color: #594036;
 	border: none;
 	height: 5rem;
@@ -111,10 +111,6 @@ header {
 	position: relative;
 	z-index: 1000;
 }
-.footer {
-/*	position: relative;
-	z-index: 1000;*/
-}
 #sticky-nav .container {
 	padding-left: 0 1.5rem;
 	width: 100%;
@@ -162,7 +158,6 @@ header {
 		width: 4rem;
 	}
 }
-
 /* End of Header */
 
 
@@ -382,7 +377,7 @@ header {
 }
 .container .row .container {
 /*	border: 1px solid green;*/
-	width: 100% !important;
+/*	width: 100% !important;*/
 
 /*	display: inline-block !important;*/
 }
@@ -401,10 +396,17 @@ header {
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	margin: 0;
 }
-.person-content > .container {
+.person-content .container {
 	background-color: #fff;
 	max-width: 76%;
 	padding: 0;
+}
+@media (max-width: 1199px) {
+	.person-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 3rem 0 7rem;
+	}
 }
 .person-content > .container > div {
 	padding: 0;
@@ -655,7 +657,7 @@ h4.individual_overview {
 	padding-top: 1rem;
 }
 #tabPublications .btn-group {
-	border: 1px solid #666;
+	border: 1px solid #ccc;
 	border-radius: 5px;
 	box-shadow: none;
 	display: flex;
@@ -750,6 +752,10 @@ td.citation-data.pub-item {
 }
 /* End of Individual Page */
 
+
+/* Organization Page */
+
+/* End of Organization Page */
 
 
 /*** Breakpoints ***/
