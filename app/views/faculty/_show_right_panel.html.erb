@@ -8,7 +8,7 @@
     <p><%= @presenter.faculty.overview.html_safe %></p>
     <% if @presenter.faculty.affiliations.count > 0 %>
       <h4 class="brown-affiliations panel-heading">Brown Affiliations</h4>
-      <% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
+      <div class="brown-affiliations-list"><% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
         <% if i != 0 %>
           &nbsp;|&nbsp;
         <% end %>
@@ -16,11 +16,11 @@
         <a href="<%= search_url() + qs %>">
           <%= aff.name %>
         </a>
-      <% end %>
+      <% end %></div>
     <% end %>
     <% if @presenter.faculty.research_areas.count > 0 %>
       <h4 class="research-areas panel-heading">Research Areas</h4>
-      <% @presenter.faculty.research_areas.each_with_index do |area, i| %>
+      <div class="brown-research-areas-list"><% @presenter.faculty.research_areas.each_with_index do |area, i| %>
         <% if i != 0 %>
           &nbsp;|&nbsp;
         <% end %>
@@ -28,7 +28,7 @@
         <a href="<%= search_url() + qs %>">
           <%= area %>
         </a>
-      <% end %>
+      <% end %></div>
     <% end %>
     <br/><br/>
   </div> <!-- panel -->

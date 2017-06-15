@@ -357,15 +357,16 @@ header {
 
 
 /* Individual Page */
+/* I messed up the alignment of the profile page wrapper while fixing the search bar. Working on a fix below */
 .profile {
-	border: 1px solid purple;
+/*	border: 1px solid purple;*/
 	display: block;
 	position: relative;
 	top: 0;
 }
 .container .person-content {
 	position: relative;
-	border: 1px solid red;
+/*	border: 1px solid red;*/
 		display: flex;
 		min-height: 100% !important;
 		min-width: 100% !important;
@@ -380,12 +381,12 @@ header {
 	top: -5.5rem;
 }
 .container .row .container {
-	border: 1px solid green;
+/*	border: 1px solid green;*/
 	width: 100% !important;
 
 /*	display: inline-block !important;*/
 }
-
+/* end testing the profile page wrapper */
 
 
 
@@ -538,12 +539,12 @@ h4.individual_overview {
 	padding-bottom: 1rem;	
 }
 #section_overview p a:link {
-	color: #333;
+	color: #594036;
 	font-size: 1.6rem;
 	font-weight: bold;
 }
 #section_overview p a:link:hover {
-	border-bottom: solid 3px #E8D98B;
+	border-bottom: solid 3px #594036;
 }
 #section_overview h3:not(:nth-child(2)) {
 	background-color: #333;
@@ -586,24 +587,22 @@ h4.individual_overview {
 	border-bottom: 1px dashed #C00404;
 	color: #C00404;
 }*/
-#tabOverview h4.brown-affiliations.panel-heading {
-	margin-top: 3rem;
-}
-#tabOverview h4.research-areas.panel-heading {
-	margin-top: 3rem;
-}
 .tabFinder > p {
 	margin: 1.2rem 1.2rem 0 1.2rem;
 }
 .tabFinder a {
-/*	border-bottom: dotted 1px #333;*/
-	color: #000;
+	color: #594036;
 	font-size: 1.5rem;
 	font-weight: bold;
 }
 .tabFinder a:hover {
-	border-bottom: solid 4px #E8D98B;
-	color: #000;
+	border-bottom: solid 3px #594036;
+}
+.brown-affiliations-list {
+	padding: 0 1rem;
+}
+.brown-research-areas-list {
+	padding: 0 1rem;
 }
 /* table */
 #section_overview > .panel {
@@ -617,17 +616,17 @@ h4.individual_overview {
 #section_overview .panel-body .property-list {
 	padding: 0 1rem;
 }
+#section_overview table tr {
+	vertical-align: baseline;
+}
 #section_overview table a {
-	color: #000;
+	color: #594036;
 	cursor: pointer;
-	font-size: 1.5rem;
+	font-size: 1.6rem;
 	font-weight: bold;
 }
 #section_overview table a:hover {
-	border-bottom: 3px solid #333;
-}
-#section_overview tr:hover {
-	background-color: #F5F2EC;
+	border-bottom: 3px solid #594036;
 }
 #section_overview th {
 	border: none;
@@ -640,9 +639,6 @@ h4.individual_overview {
 #section_overview tr:nth-child(1) td {
 	border: none;
 	padding-top: 1rem;
-}
-.background__education tr:nth-child(1):hover {
-	background-color: #fff !important;
 }
 #tabPublications .btn-group {
 	border: 1px solid #666;
@@ -706,6 +702,37 @@ td.citation-data.pub-item {
 }
 .pub-title {
 	font-weight: 600;
+}
+#tabOverview h4.research-areas.panel-heading {
+	margin-top: 3rem;
+}
+#tabBackground tr:not(:nth-child(2)) td {
+	border: none;
+}
+#tabBackground .background__education tr:nth-child(1):hover {
+	background-color: #fff;
+}
+#tabOverview h4.brown-affiliations.panel-heading {
+	margin-top: 3rem;
+}
+#tabAffiliations .panel-body-collaborators tr:nth-child(1):hover {
+	background-color: #fff;
+}
+#tabAffiliations th:nth-child(1) {
+	padding-left: 1.2rem;
+}
+#tabAffiliations .panel-body-collaborators td:nth-child(1) {
+	width: 16rem;
+	padding-left: 1.2rem;
+}
+#tabAffiliations .panel-body-postdoc td:nth-child(2) {
+	width: 27rem;
+}
+#tabAffiliations .panel-body-postdoc td:nth-child(3) {
+	width: 11rem;
+}
+#tabAffiliations .panel-body-credentials td:nth-child(3) {
+	width: 11rem;
 }
 /* End of Individual Page */
 

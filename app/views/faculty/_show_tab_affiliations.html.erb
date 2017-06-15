@@ -7,7 +7,7 @@
             <h4 id="relatedBy-Authorship" title="" class="panel-title">Collaborators</h4>
           </div>
 
-          <div class="panel-body">
+          <div class="panel-body panel-body-collaborators">
             <table class="table table-hover">
               <tbody>
                 <tr>
@@ -40,7 +40,7 @@
           <div class="panel-heading">
             <h4 id="relatedBy-Authorship" title="" class="panel-title">Postdoctoral/Other Training</h4>
           </div>
-          <div class="panel-body">
+          <div class="panel-body panel-body-postdoc">
             <table class="table table-hover">
               <tbody>
                 <% @presenter.faculty.training.each do |t| %>
@@ -62,7 +62,7 @@
             <h4 id="relatedBy-Authorship" title="" class="panel-title">Credentials/Licenses</h4>
           </div>
 
-          <div class="panel-body">
+          <div class="panel-body panel-body-credentials">
             <table class="table table-hover">
               <tbody>
                 <% @presenter.faculty.credentials.each do |c| %>
