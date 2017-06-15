@@ -410,6 +410,14 @@ header {
 	padding: 0;
 }
 /* left panel */
+.glyphicon-chevron-left {
+	color: #333;
+	margin-right: .5rem;
+	transform: scale(1.5);
+}
+a.back-to-search:hover .glyphicon-chevron-left {
+	color: #232323;
+}	
 #individual-intro {
 	display: flex;
 	flex-direction: column;
@@ -537,6 +545,12 @@ h3.individual_overview {
 h4.individual_overview {
 	margin-top: 0;
 	padding-bottom: 1rem;	
+}
+#section_overview p {
+	vertical-align: baseline;
+}
+#section_overview p em {
+	vertical-align: baseline;
 }
 #section_overview p a:link {
 	color: #594036;
