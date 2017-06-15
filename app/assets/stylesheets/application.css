@@ -304,7 +304,7 @@ header {
 	padding: 1rem 0;
 }
 .panel-body {
-	padding-right: 11px;
+	padding-right: 1.1rem;
 }
 .panel-body a {
 	/*color: #000;*/
@@ -551,7 +551,6 @@ h4.individual_overview {
 	color: #fff;
 	font-size: 2rem;
 	margin-bottom: .4rem;
-	margin-left: -1rem;
 	padding: 1rem .6rem;	
 }
 #section_overview h4 {
@@ -564,7 +563,7 @@ h4.individual_overview {
 	border-top-left-radius: 0;
     border-top-right-radius: 0;
 	color: #000;
-	margin: 0 0 1rem -1rem;
+	margin-bottom: 1rem;
 	padding: .6rem 1rem;
 }
 /*#individual-info header {
@@ -615,6 +614,9 @@ h4.individual_overview {
 #section_overview > .panel .panel-body {
 	padding: 0 0 4rem 0;
 }
+#section_overview .panel-body .property-list {
+	padding: 0 1rem;
+}
 #section_overview table a {
 	color: #000;
 	cursor: pointer;
@@ -630,6 +632,10 @@ h4.individual_overview {
 #section_overview th {
 	border: none;
 	padding-top: 0;
+}
+#section_overview td {
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 #section_overview tr:nth-child(1) td {
 	border: none;
