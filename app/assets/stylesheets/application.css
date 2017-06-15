@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ .testClass {
+ 	border: 2px solid purple;
+ }
 
 /* source http://www.bootply.com/128062 */
 .glyphicon-refresh-animate {
@@ -63,7 +66,8 @@ html, body {
 	padding: 0;
 	border-bottom: none;
 }
-.header .logo-sm {
+.header .site-logo { 
+	padding-top: .5rem;
 	text-align: left;
 }
 .header img {
@@ -85,29 +89,23 @@ html, body {
 #branding div.row { /* I need this to override a bootstrap style that adds 15px to the right/left margins and pushes the logo off of page left */
 	margin: 0;
 }
-.site-title {
-	text-align: center;
-}
 .site-title h1 {
 	font-size: 2rem;
+	text-align: center;
 }
-.site-logo { /* this doesn't seem to be used anywhere */
-	padding-top: .5rem;
-	text-align: left;
+.site-title h1 a:hover {
+	color: #eee;
 }
-/* navbar */
-.navbar-inverse { /* same? */
+/* search bar */
+#sticky-nav {
 	background-color: transparent;
+	background-image: none;
 	border-color: transparent;
 	box-shadow: none;
-}
-#sticky-nav { /* same? */
-	background-image: none;
 	margin-bottom: 0;
 	padding: 0 0 0 1.5rem;
 	position: relative;
 	top: -5rem;
-/*	display: inline-block;*/
 }
 header {
 	position: relative;
@@ -123,20 +121,48 @@ header {
 }
 #sticky-nav .navbar-btn {
 	padding: 8px 12px;
-}
-@media (max-width: 1054px) {
-	#sticky-nav .navbar-btn {
-		display: none;
-	}
+	border: none;
 }
 .form-group {
 	margin-left: .625rem;
+}
+.form-control {
+	border: none;
 }
 #sticky-nav button.btn.sympl-search {
 	background-color: #232323;
 	border: none;
 	padding: 8px 12px;
 }
+@media (max-width: 1054px) {
+	#sticky-nav .navbar-btn {
+		display: none;
+	}
+}
+@media (max-width: 767px) {
+	div.site-title.col-xs-6.visible-xs-block h1 {
+		margin-bottom: 0;
+	}
+	.navbar-form {
+		border: none;
+		box-shadow: none;
+	}
+	#sticky-nav {
+		float: right;
+		height: 5rem;
+		width: 25%;
+	}
+	.form-group {
+		display: none;
+	}
+	#sticky-nav button.btn.sympl-search {
+		float: right;
+		position: relative;
+		top: -1rem;
+		width: 4rem;
+	}
+}
+
 /* End of Header */
 
 
@@ -508,7 +534,8 @@ h3.individual_overview {
 	margin: .5rem 0;
 }
 h4.individual_overview {
-	margin-top: 0;	
+	margin-top: 0;
+	padding-bottom: 1rem;	
 }
 #section_overview p a:link {
 	color: #333;
@@ -560,9 +587,6 @@ h4.individual_overview {
 	border-bottom: 1px dashed #C00404;
 	color: #C00404;
 }*/
-.tabFinder {
-	padding-top: 1rem;
-}
 #tabOverview h4.brown-affiliations.panel-heading {
 	margin-top: 3rem;
 }
