@@ -341,14 +341,28 @@ header {
 .footer {
 	height: 180px;
 }
+.footer #footer-nav li a {
+	color: #ddd;
+	font-weight: bold;
+}
+.footer #footer-nav li a {
+	transition: none;
+}
+.footer #footer-nav li a:hover {
+	border-bottom: 2px solid #aaa;
+	color: #bbb;
+	text-decoration: none;
+}
 .footer p.copyright {
 	color: #ddd;
 }
 .footer p.copyright a{
-	color: #FF5252;
+	color: #ddd;
+	font-weight: bold;
 }
 .footer p.copyright a:hover {
-	color: #C00404;
+	color: #bbb;
+	border-bottom: 2px solid #aaa;
 }
 /* End of Footer */
 
