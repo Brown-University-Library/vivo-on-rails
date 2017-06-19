@@ -338,6 +338,9 @@ header {
 
 
 /* Footer */
+.footer {
+	height: 180px;
+}
 .footer p.copyright {
 	color: #ddd;
 }
@@ -352,52 +355,24 @@ header {
 
 
 /* Individual Page */
-/* I messed up the alignment of the profile page wrapper while fixing the search bar. Working on a fix below */
-.profile {
-/*	border: 1px solid purple;*/
-	display: block;
+.container.profile {
+	background-color: #F5F2EC;
+	display: inline-block;
+	min-height: calc(100vh - 230px);
+	width: 100%;
+	margin-bottom: -70px;
+	padding: 0;
 	position: relative;
-	top: 0;
+	top: -70px;
 }
 .container .person-content {
-	position: relative;
-/*	border: 1px solid red;*/
-		display: flex;
-		min-height: 100% !important;
-		min-width: 100% !important;
-/*		top: 10rem !important;*/
-/*		z-index: 1 !important;*/
-/*		align-self: stretch;
-		align-items: stretch;
-		justify-content: flex-start;*/
-/*	display: flex;
-	justify-content: center;
-	width: 100%;*/
-	top: -5.5rem;
-}
-.container .row .container {
-/*	border: 1px solid green;*/
-/*	width: 100% !important;*/
-
-/*	display: inline-block !important;*/
-}
-/* end testing the profile page wrapper */
-
-
-
-.profile {
-	background-color: #F5F2EC;
-	min-height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-.person-content {
+	display: flex;
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	margin: 0;
 }
 .person-content .container {
 	background-color: #fff;
+	min-height: calc(100vh - 230px);
 	max-width: 76%;
 	padding: 0;
 }
