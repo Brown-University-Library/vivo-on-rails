@@ -750,8 +750,122 @@ td.citation-data.pub-item {
 /* End of Individual Page */
 
 
+/*.container.profile.org-profile {
+	border: 5px solid pink;
+}
+.person-content {
+	border: 5px solid purple;
+}
+.container.organization-page {
+	border: 5px solid orange;
+}
+.organization-photo-panel {
+	border: 5px solid red;
+}
+.organization-photo-panel header {
+	border: 5px solid black;
+}
+.organization-photo-panel #individual-intro {
+	border: 5px solid green;
+}
+.organization-photo-panel #photo-wrapper {
+	border: 2px solid pink;
+}
+.organization-photo-panel img {
+	border: 5px solid blue;
+}
+#organization-header {
+	border: 5px solid purple;
+}
+.person-content .container div.organization-description {
+	border: 5px solid red;
+}
+*/
 /* Organization Page */
-.container.profile.org-profile {
+
+.container.organization-page {
+	padding: 5rem 3rem 5rem 0;
+}
+.org-profile p a {
+	color: #594036;
+	font-weight: bold;
+}
+.organization-photo-panel img {
+	width: 250px;
+}
+.person-content .container div.organization-description {
+	padding-left: 0;
+}
+.org-profile #individual-info h2.vcard.foaf-person.hidden-xs {
+	margin-top: 0;
+}
+.org-profile #individual-info header h3 {
+	font-size: 6rem;
+	font-weight: bold;
+	line-height: 6rem;
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+.org-profile #individual-info header ul {
+	padding-left: 0;
+}
+.org-profile #individual-info header ul li {
+	list-style-type: none;
+}
+.org-profile #individual-info header ul li a {
+	color: #594036;
+	font-weight: bold;
+}
+.org-profile #individual-info p {
+	font-size: 1.75rem;
+	line-height: 2.5rem;
+	margin: 2rem 0;
+	vertical-align: baseline;
+}
+.org-profile #individual-info p em {
+	vertical-align: baseline;
+}
+.org-profile #individual-info p a:link {
+	color: #594036;
+	font-size: 1.6rem;
+	font-weight: bold;
+}
+.org-profile #individual-info p a:hover {
+	border-bottom: solid 3px #594036;
+}
+.organization-description .row {
+	margin-right: 0;
+}
+.organization-description .tab-heading {
+	background-color: #333;
+	border-left: solid 6px #E8D98B;
+	color: #fff;
+	font-size: 2rem;
+	margin-top: 2rem;
+	padding: 0;
+}
+.organization-description .tab-heading ul {
+	border-bottom: none;
+	margin: 0;
+}
+.organization-description .tab-heading ul li {
+	margin: 0;
+}
+.organization-description .tab-heading ul li a {
+	background-color: #333;
+	border: none;
+	border-radius: 0;
+	color: #fff;
+	margin: 0;
+}
+.organization-description .tab-heading ul li a:hover {
+	background-color: #333;
+	border: none;
+	color: #fff;
+	margin: 0;
+}
+/* test design */
+/*.container.profile.org-profile {
 	border: 5px solid pink;
 }
 .org-profile p a {
@@ -842,10 +956,6 @@ td.citation-data.pub-item {
 	font-size: 1.7rem;
 	line-height: 3rem;
 }
-/* End of Organization Page */
-
-
-/*** Breakpoints ***/
 @media (max-width: 1199px) {
 	.organization-photo-panel img {
 		margin-bottom: -25rem;
@@ -854,6 +964,12 @@ td.citation-data.pub-item {
 		padding: 25rem 20rem 10rem 22rem;
 	}
 }
+*/
+/* End of Organization Page */
+
+
+/*** Breakpoints ***/
+
 
 
 

@@ -1,20 +1,9 @@
-<div class="organization-photo-panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="organization-photo-panel col-xs-12 col-sm-12 col-md-4 col-lg-4">
   <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section role="region">
-	    <header>
-	      <h2 class="vcard foaf-person hidden-xs"><% "xxx" %></h2>
-	      <div id="photo-wrapper" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	        <%= image_tag(@organization.thumbnail || "org_placeholder.jpg", alt: "Organization Picture") %>
-	      </div>
-	      <div id="organization-header" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		      <h3><%= @organization.name %></h3>
-		      <ul>
-		      <% @organization.web_pages.each do |page| %>
-		        <li><a href="<%= page.url %>"><%= page.text %></a>
-		      <% end %>
-		      </ul>
-	      </div>
-	    </header>
+      <div id="photo-wrapper">
+        <%= image_tag(@organization.thumbnail || "org_placeholder.jpg", alt: "Organization Picture") %>
+      </div>
     </section>
   </section>
 </div>
