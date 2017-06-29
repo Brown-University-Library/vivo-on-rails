@@ -366,8 +366,70 @@ header {
 	color: #594036;
 	text-decoration: dashed;
 }
-.modal-body li {
-	color: #831B1B;
+.modal-header {
+	background-color: #222;
+	color: #fff;
+}
+.modal-header button.close {
+	color: #fff;
+	margin-top: -.6rem;
+	padding: .5rem;
+	opacity: 1;
+}
+.modal-header button.close:hover {
+	opacity: .8;
+}
+.modal-header h4 {
+	font-size: 2rem;
+	padding-left: 1.7rem;
+}
+.modal-body ul {
+	list-style-type: none;
+	padding: 0;
+}
+.modal-body ul li {
+	color: #000;
+	margin-left: 1.5rem;
+	padding-left: 0;
+}
+.modal-body ul li:hover {
+	color: #000;
+	border-left: 5px solid #E8D98B;
+	margin-left: -.3rem;
+}
+.modal-body ul li:hover a {
+	color: #000;
+}
+.modal-footer {
+	background-color: #B9B9B8;
+}
+.modal-footer a {
+	border: none;
+	border-radius: 0;
+	font-weight: bold;
+	text-shadow: none;
+}
+.modal-footer .btn:hover {
+	background-color: #E8D98B;
+}
+.modal-footer .btn.active {
+	background-color: #E8D98B;
+	border: none;
+	cursor: default;
+}
+.modal-footer .btn.active:hover {
+	background-color: #B9B9B8;
+	box-shadow: none;
+}
+.modal-footer .btn.disabled {
+	background-color: #B9B9B8;
+	border: none;
+}
+.modal-footer input {
+	border: none;
+	margin-right: 1.2rem;
+	padding: .6rem .5rem;
+	outline: none;
 }
 /* End of Results Page */
 
@@ -900,107 +962,6 @@ td.citation-data.pub-item {
 	color: #fff;
 	margin: 0;
 }
-/* test design */
-/*.container.profile.org-profile {
-	border: 5px solid pink;
-}
-.org-profile p a {
-	color: #594036;
-	font-weight: bold;
-}
-.org-profile p a:hover {
-	color: gray;
-	border-bottom: 3px solid gray;
-}
-.person-content {
-	border: 5px solid purple;
-}
-.container.organization-page {
-	border: 5px solid orange;
-	display: flex;
-	flex-direction: column;
-	padding: 0;
-}
-.organization-photo-panel {
-	border: 5px solid red;
-}
-.organization-photo-panel header {
-	border: 5px solid black;
-	background-color: gray;
-	border-bottom: 2rem solid yellow;
-	display: flex;
-	flex-direction: column-reverse;
-	padding: 8rem 2rem 0 2rem;
-}
-.organization-photo-panel #individual-intro {
-	border: 5px solid green;
-	margin-bottom: 0;
-}
-.organization-photo-panel #photo-wrapper {
-	border: 2px solid pink;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 0;
-	padding: 0;
-	width: 100%;
-}
-.organization-photo-panel img {
-	border: 5px solid blue;
-	width: 35%;
-	margin-bottom: -15rem;
-}
-#organization-header {
-	border: 5px solid purple;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 0 2rem 3rem 2rem;
-	text-align: center;
-	text-decoration: none;
-}
-#organization-header h3 {
-	color: #fff;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 5rem;
-	font-weight: bold;
-	line-height: 5.5rem;
-	margin-top: 0;
-	width: 100%;
-}
-#organization-header ul {
-	margin: 0;
-	padding: 0;
-}
-#organization-header li {
-	list-style-type: none;
-}
-#organization-header li:nth-child(n+2) {
-	margin-top: 1rem;
-}
-#organization-header a {
-	color: #fff;
-	font-weight: bold;
-	text-decoration: none;
-}
-.person-content .container div.organization-description {
-	border: 5px solid red;
-	padding: 10rem 13rem;
-}
-.organization-description p {
-	font-size: 1.7rem;
-	line-height: 3rem;
-}
-@media (max-width: 1199px) {
-	.organization-photo-panel img {
-		margin-bottom: -25rem;
-	}
-	.person-content .container div.organization-description {
-		padding: 25rem 20rem 10rem 22rem;
-	}
-}
-*/
 /* End of Organization Page */
 
 
