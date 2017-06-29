@@ -239,9 +239,11 @@ header {
 	color: #fff;
 	font-weight: bolder;
 	line-height: 2rem;
+	padding: 0 .8rem;
 }
 .contact-content a:hover {
-	border-bottom: 1px dashed #fff;
+	border-left: .3rem solid #fff;
+	padding-left: .5rem;
 }
 .share-contact--bottom {
 	background-color: #594036;
@@ -279,17 +281,23 @@ header {
 	font-size: 15px;
 	padding: 0 0 0 15px;
 }
+.panel-default {
+	border: 1px solid #333;
+}
 .panel-default > .panel-heading {
 	background-color: #333;
-  	color: #fff;
 	background-image: none;
 	background-repeat: no-repeat;
+	border-bottom: none;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+	color: #fff;
+	margin: 0 -.1rem;
 }
 .panel-heading:nth-of-type(1) {
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
+	margin-top: -.1rem;
 }
 .facetLabel {
 	color: #fff;
@@ -297,18 +305,41 @@ header {
 	padding: 1rem 0;
 }
 .panel-body {
-	padding-right: 1.1rem;
+	padding: 1.5rem 0;
+}
+.panel-body ul li {
+	line-height: 1.8rem;
+	padding: .5rem 1.5rem;
+}
+.panel-body ul li:hover {
+	border-left: 5px solid #B9B9B8;
+	color: #594036;
+	padding-left: 1.3rem;
+	margin-left: -.3rem;
+}
+.panel-body ul li:hover span {
+	color: #594036;
+	cursor: default;
+}
+.panel-body ul li span a .glyphicon-remove {
+	cursor: pointer;
 }
 .panel-body a {
-	/*color: #000;*/
-	line-height: 2.5rem;
+	color: #000;
 }
 .panel-body a:hover {
-	/*color: #C00404;*/
+	cursor: pointer;
+}
+.panel-body ul li:hover a {
+	color: #594036;
+	font-weight: bold;
 }
 .categoryCount {
 	color: #000;
 	margin: 0 -2px;
+}
+.panel-body ul li:hover .categoryCount {
+	color: #594036;
 }
 .no-orphans {
 	display: inline-block;
@@ -319,14 +350,20 @@ header {
 	padding-right: 2px;
 }
 .search-toggle-more-categories {
-	/*color: #C00404;*/
+	color: #333;
 	font-size: 14px;
+	padding-left: 1.5rem;
 }
 .search-toggle-more-categories:hover {
-	/*color: #FF5252;*/
+	border-left: 5px solid #B9B9B8;
+	color: #594036;
+	font-weight: bold;
+	margin-left: -.3rem;
+	padding-left: 1.4rem;
+	text-decoration: none;
 }
 .btn-link:focus {
-	color: #831B1B;
+	color: #594036;
 	text-decoration: dashed;
 }
 .modal-body li {
@@ -481,7 +518,6 @@ a.back-to-search:hover .glyphicon-chevron-left {
 .btn-group-vertical {
 	display: flex;
 	flex-direction: column;
-	align-items: stretch;
 }
 .btn-group-vertical .btn {
 	background-color: #222;
