@@ -73,6 +73,25 @@ body {
   margin-left: 5px;
   border-radius: 5px;
 }
+
+a.manage-profile-link {
+  margin-left: -7em;
+  margin-top:.33em;
+  /* display: inline-block;
+  text-align: left;
+  float: left;
+  width: auto; */
+  color: white;
+  opacity: .67;
+}
+a.manage-profile-link:hover {
+  color: white;
+  opacity: .5;
+}
+a.manage-profile-link:visited {
+  color: white;
+  opacity: .67;
+}
 /*---------------------------------------------
 Create large linked icon sections below hero search
 ----------------------------------------------*/
