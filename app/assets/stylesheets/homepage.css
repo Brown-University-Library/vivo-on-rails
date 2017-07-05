@@ -75,7 +75,7 @@ body {
 }
 
 a.manage-profile-link {
-  margin-left: -7em;
+  margin-left: 0em;
   margin-top:.33em;
   /* display: inline-block;
   text-align: left;
