@@ -39,6 +39,7 @@
     <div class="col-md-12">
       <h2 class="h1">Recent faculty books</h2>
       <div class="gap20"></div>
+      <!-- Use bootstrap carousel to showcase faculty members, edited in lib-home-page.ftl and homePageUtils.js -->
 
       <section id="faculty-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
         <div style="display: none;" id="tempSpacing">
@@ -82,6 +83,28 @@
         </a>
       </section>
     </div>
+  </div>
+</div>
+
+<div class="row recent-books">
+<div class="row icons-home">
+  <div class="col-md-4">
+    <a href="<%= search_path() %>" id="icon1">
+      <span class="glyphicon glyphicon-user"></span>
+      <h3>Search for a collaborator</h3>
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="<%= search_path() %>" id="icon2">
+      <span class="glyphicon glyphicon-pencil"></span>
+      <h3>Find a supervisor</h3>
+    </a>
+  </div>
+  <div class="col-md-4">
+   <a href="<%= search_path() %>" id="icon3">
+    <span class="glyphicon glyphicon-education"></span>
+    <h3>Locate expert opinion</h3>
+   </a>
   </div>
 </div>
 
