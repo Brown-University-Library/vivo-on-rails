@@ -3,7 +3,7 @@
     <ul class="pagination pagination-lg">
 
       <% if @presenter.page > 1 %>
-        <li><a href="<%= @presenter.previous_url %>" > « </a>
+        <li><a href="<%= @presenter.previous_url %>" ><span class="glyphicon glyphicon-chevron-left"></span></a>
       <% end %>
 
       <% (@presenter.page_start..@presenter.page_end).each do |page| %>
@@ -13,7 +13,7 @@
       <% end %>
 
       <% if @presenter.page < @presenter.num_pages %>
-        <li><a href="<%= @presenter.next_url %>" > » </a>
+        <li><a href="<%= @presenter.next_url %>" ><span class="glyphicon glyphicon-chevron-right"></span></a>
       <% end %>
     </ul>
 </div>

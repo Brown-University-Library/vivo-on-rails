@@ -459,7 +459,12 @@ header {
 .pagination .glyphicon-chevron-left {
 	color: #333;
 	margin-right: .5rem;
-	transform: scale(1);
+	transform: scale(.8);
+}
+.pagination .glyphicon-chevron-right {
+	color: #333;
+	margin-right: .5rem;
+	transform: scale(.8);
 }
 
 /*a.back-to-search:hover .glyphicon-chevron-left {
