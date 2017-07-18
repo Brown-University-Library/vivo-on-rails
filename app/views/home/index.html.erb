@@ -38,37 +38,38 @@
   <div class="container">
     <div class="col-md-12">
       <h2 class="h1">Recent faculty books</h2>
+      <h5><em>Click book jacket to view faculty profile</em></h4>
       <div class="gap20"></div>
       <!-- Use bootstrap carousel to showcase faculty members, edited in lib-home-page.ftl and homePageUtils.js -->
 
-      <section id="faculty-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+      <section id="faculty-books-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
         <div style="display: none;" id="tempSpacing">
-          <span>Loading faculty . . .&nbsp;&nbsp;&nbsp;
+          <span>Loading books . . .&nbsp;&nbsp;&nbsp;
             <%= image_tag("indicatorWhite.gif") %>
           </span>
         </div>
 
-        <div id="research-faculty-mbrs" class="carousel-inner" role="listbox">
+        <!-- <div id="research-faculty-mbrs" class="carousel-inner" role="listbox"> -->
+        <div class="carousel-inner">
         <!-- populated via an ajax call -->
-          <div class="item">
-            <a href="" class="faculty-mbrs" title="View Profile">
-              <img class="img-circle" alt="placeholder image" src="<%= image_url('book-covers/mgutmann.jpg') %>" width="160">
-              <h3>Layne, Peggy</h3>
-              <h4 class="faculty-title"></h4>
+          <div class="item-active">
+            <a href="" class="book-cover">
+              <img src="<%= image_url('book-covers/mgutmann.jpg') %>" width="160">
             </a>
           </div>
           <div class="item">
-            <a href="" class="faculty-mbrs" title="View Profile">
-              <img class="img-circle" alt="placeholder image" src="<%= image_url('book-covers/stobin.jpg') %>" width="160">
-              <h3>Henderson, Margaret</h3>
-              <h4 class="faculty-title"></h4>
+            <a href="" class="book-cover">
+              <img src="<%= image_url('book-covers/stobin.jpg') %>" width="160">
             </a>
           </div>
           <div class="item">
-            <a href="" class="faculty-mbrs" title="View Profile">
-              <img class="img-circle" alt="placeholder image" src="<%= image_url('book-covers/gwood.jpg') %>" width="160">
-              <h3>Mullin, Casey</h3>
-              <h4 class="faculty-title"></h4>
+            <a href="" class="book-cover">
+              <img src="<%= image_url('book-covers/gwood.jpg') %>" width="160">
+            </a>
+          </div>
+          <div class="item">
+            <a href="" class="book-cover">
+              <img src="<%= image_url('book-covers/miwhite.jpg') %>" width="160">
             </a>
           </div>
         </div>

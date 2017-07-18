@@ -197,26 +197,26 @@ Customise the meet faculty/expert section
   border: none;
   border-width: 0;
 }
-#faculty-carousel {
+#faculty-books-carousel {
   margin: 40px 0;
 }
-#faculty-carousel .carousel-inner > .item {
+#faculty-books-carousel .carousel-inner > .item {
   text-align: center;
 }
-#faculty-carousel .carousel-inner > .item > img,
-#faculty-carousel .carousel-inner > .item > a > img {
+#faculty-books-carousel .carousel-inner > .item > img,
+#faculty-books-carousel .carousel-inner > .item > a > img {
   margin: auto;
   text-align: center;
 }
-#faculty-carousel .carousel-control.left {
+#faculty-books-carousel .carousel-control.left {
   background: transparent;
   color: #222;
 }
-#faculty-carousel .carousel-control.right {
+#faculty-books-carousel .carousel-control.right {
   background: transparent;
   color: #222;
 }
-#faculty-carousel p.biog {
+#faculty-books-carousel p.biog {
   font-size: 14px;
   padding: 0 60px;
 }
@@ -226,6 +226,9 @@ Customise the meet faculty/expert section
 .faculty-mbrs:hover {
   text-decoration: none;
   color: #000;
+}
+.book-cover {
+  text-align: center;
 }
 /*---------------------------------------------
 Customise the about our research section
