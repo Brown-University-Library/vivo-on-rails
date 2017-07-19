@@ -40,7 +40,7 @@
       <h2 class="h1">Recent faculty books</h2>
       <h5><em>Click book jacket to view faculty profile</em></h4>
       <div class="gap20"></div>
-      <!-- Use bootstrap carousel to showcase faculty members, edited in lib-home-page.ftl and homePageUtils.js -->
+      <!-- Use bootstrap carousel to showcase faculty members' books, edited in lib-home-page.ftl and homePageUtils.js -->
 
       <section id="faculty-books-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
         <div style="display: none;" id="tempSpacing">
@@ -50,9 +50,9 @@
         </div>
 
         <!-- <div id="research-faculty-mbrs" class="carousel-inner" role="listbox"> -->
-        <div class="carousel-inner">
-        <!-- populated via an ajax call -->
-          <div class="item-active">
+        <div class="carousel-inner" role="listbox">
+
+          <div class="item">
             <a href="" class="book-cover">
               <img src="<%= image_url('book-covers/mgutmann.jpg') %>" width="160">
             </a>
