@@ -60,9 +60,9 @@ html, body {
 .header {
 	background-color: #594036;
 	border: none;
+	border-bottom: none;
 	height: 5rem;
 	padding: 0;
-	border-bottom: none;
 }
 .header .site-logo { 
 	padding-top: .5rem;
@@ -101,9 +101,9 @@ html, body {
 	border-color: transparent;
 	box-shadow: none;
 	margin-bottom: 0;
-	padding: 0 0 0 1.5rem;
+	padding: 0;
 	position: relative;
-	top: -5rem;
+	top: -5.1rem;
 }
 header {
 	position: relative;
