@@ -623,6 +623,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 .btn-group-vertical .btn {
 	background-color: #222;
 	border: none;
+	border-radius: 0;
 	color: #fff;
 	display: flex;
 	align-items: center;
