@@ -128,14 +128,12 @@ header {
 	border: none;
 	padding: 8px 12px;
 }
-@media (max-width: 1054px) {
-	#sticky-nav .navbar-btn {
-		display: none;
-	}
-}
 @media (max-width: 767px) {
-	div.site-title.col-xs-6.visible-xs-block h1 {
-		margin-bottom: 0;
+	.site-title {
+		margin-top: 1.5rem;
+	}
+	.site-title h1 a {
+		font-size: 2.4rem;
 	}
 	.navbar-form {
 		border: none;
@@ -154,6 +152,11 @@ header {
 		position: relative;
 		top: -1rem;
 		width: 4rem;
+	}
+}
+@media (max-width: 1054px) {
+	#sticky-nav .navbar-btn {
+		display: none;
 	}
 }
 /* End of Header */
@@ -529,23 +532,6 @@ header {
 .person-content > .container > div {
 	padding: 0;
 }
-@media (max-width: 1199px) {
-	.person-content .container {
-		width: 100%;
-		max-width: 100%;
-		padding: 0 3rem 0 7rem;
-	}
-}
-@media screen and (min-width: 1200px) and (max-width: 1379px) { 
-	.person-content > .container {
-		max-width: 70%;	
-	}
-}
-@media screen and (min-width: 1380px) and (max-width: 1560px) { 
-	.person-content > .container {
-		max-width: 62%;	
-	}
-}
 /* left panel */
 .glyphicon-chevron-left {
 	color: #333;
@@ -885,40 +871,38 @@ td.citation-data.pub-item {
 #tabAffiliations .panel-body-credentials td:nth-child(3) {
 	width: 11rem;
 }
+@media (max-width: 767px) {
+	.person-content .container {
+		max-width: 100%;
+	}
+	.share-contact h2 {
+		color: #fff;
+	}
+	.btn-group-vertical .btn {
+		font-size: 2.4rem;
+		padding: 3rem 1.5rem;
+	}
+}
+@media screen (min-width: 768px) and (max-width: 1199px) {
+	.person-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 2.5rem 0 7rem;
+	}
+}
+@media screen and (min-width: 1200px) and (max-width: 1379px) { 
+	.person-content > .container {
+		max-width: 70%;	
+	}
+}
+@media screen and (min-width: 1380px) and (max-width: 1560px) { 
+	.person-content > .container {
+		max-width: 62%;	
+	}
+}
 /* End of Individual Page */
 
 
-/*.container.profile.org-profile {
-	border: 5px solid pink;
-}
-.person-content {
-	border: 5px solid purple;
-}
-.container.organization-page {
-	border: 5px solid orange;
-}
-.organization-photo-panel {
-	border: 5px solid red;
-}
-.organization-photo-panel header {
-	border: 5px solid black;
-}
-.organization-photo-panel #individual-intro {
-	border: 5px solid green;
-}
-.organization-photo-panel #photo-wrapper {
-	border: 2px solid pink;
-}
-.organization-photo-panel img {
-	border: 5px solid blue;
-}
-#organization-header {
-	border: 5px solid purple;
-}
-.person-content .container div.organization-description {
-	border: 5px solid red;
-}
-*/
 /* Organization Page */
 
 .container.organization-page {
