@@ -403,9 +403,12 @@ header {
 	min-height: 32rem;
 	padding: 1rem;
 }
-.results-photo {
+#photo-wrapper {
+	margin-bottom: 0;
+}
+.results__photo {
 	position: absolute;
-	bottom: 32%;
+	bottom: 35%;
 	left: 0;
 	right: 0;
 	z-index: 10;
@@ -416,14 +419,16 @@ header {
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 65%;
+	top: 66%;
 	z-index: 10;
+}
+.contact-content h4 {
+	margin-bottom: 1.1rem;
 }
 .contact-content a {
 	color: #fff;
 	font-size: 1.9rem;
 	font-weight: bold;
-	line-height: 2rem;
 	opacity: .9;
 	padding: 0 .8rem;
 }
