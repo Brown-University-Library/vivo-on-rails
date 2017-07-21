@@ -120,11 +120,14 @@ Create large linked icon sections below hero search
   color: #831b1b;
 }
 .icons-home a#icon2 {
-  background: #FFCA00;
+  color: #645E50;
+}
+.icons-home a#icon2 {
+  background: #E8D98B;
 }
 .icons-home a#icon2:hover {
   background: transparent;
-  color: #FFCA00;
+  color: #645E50;
 }
 .icons-home a#icon3 {
   background: #831b1b;
