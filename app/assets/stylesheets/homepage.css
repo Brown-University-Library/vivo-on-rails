@@ -149,6 +149,39 @@ Create large linked icon sections below hero search
 .explore .btn-default {
   margin-top: 8px;
 }
+/* styling for news/alerts/announcements list section */
+.icons-home ul {
+  list-style-type: none;
+  position: relative;
+  margin-left: .1em;
+  padding-left: 0;
+}
+.icons-home li:before {
+  content: "\2022";
+  position: absolute;
+  left: 20px;
+  color: #ACA698;
+  margin-right: 0px;
+}
+.news-link a {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 1em;
+  color: black;
+  text-decoration: none;
+  border: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+.news-link a:hover, a:visited, a:link, a:active {
+  text-decoration: none;
+  border: none;
+  border-bottom: none;
+  box-shadow: none !important;
+}
+.news-link li {
+  padding-right: 1.5em;
+}
 /*---------------------------------------------
 Homepage explore rectangular links with images for background
 ----------------------------------------------*/
