@@ -113,18 +113,18 @@ Create large linked icon sections below hero search
   box-shadow: inset 0px -3px;
 }
 .icons-home a#icon1 {
-  background: #5cb85c;
+  background: #831b1b;
 }
 .icons-home a#icon1:hover {
   background: transparent;
-  color: #5cb85c;
+  color: #831b1b;
 }
 .icons-home a#icon2 {
-  background: #1b998b;
+  background: #FFCA00;
 }
 .icons-home a#icon2:hover {
   background: transparent;
-  color: #1b998b;
+  color: #FFCA00;
 }
 .icons-home a#icon3 {
   background: #831b1b;
