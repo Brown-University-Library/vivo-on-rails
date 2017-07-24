@@ -1,7 +1,7 @@
 module ApplicationHelper
   def randomized_background_image
     # TODO: Fetch this from a database
-    images = ["20110620-PAUR-0006.jpg",
+    images = ["20110620-PAUR-0004.jpg",
       "20131022-PAUR-Aerials-0033.jpg",
       "20140308-PAUR-OpenLabsAndDoors-0007.jpg",
       "20160822_COMM_TessCasswell07.jpg",
