@@ -2,7 +2,7 @@
       <div id="tabPublications" class="panel panel-default hidden">
         <h3>Publications</h3>
         <div class="panel-heading">
-          <h3 id="relatedBy-Authorship" title="" class="panel-title">Contributor to </h3>
+          <h4 id="relatedBy-Authorship" title="" class="panel-title">Contributor to </h4>
         </div>
 
         <div class="panel-body">
@@ -30,15 +30,17 @@
                     <span class="listDateTime"><%= c.authors %></span>
                     <i><%= c.title %></i>
                     <%= c.pub_info %>
-                    <% if c.pub_type %>
-                      <span class="label label-default"><%= c.pub_type.downcase %></span>
-                    <% end %>
-                    <% if c.doi_url %>
-                      <a class="full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
-                    <% end %>
-                    <% if c.pub_med_url %>
-                      <a class="full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
-                    <% end %>
+                    <div class="no-orphans">
+                      <% if c.pub_type %>
+                        <span class="pub-item-tag label label-default"><%= c.pub_type.downcase %></span>
+                      <% end %>
+                      <% if c.doi_url %>
+                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
+                      <% end %>
+                      <% if c.pub_med_url %>
+                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
+                      <% end %>
+                    </div>
                   </td>
                 </tr>
               <% end %>

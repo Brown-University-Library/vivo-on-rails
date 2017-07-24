@@ -35,7 +35,7 @@
 					<div class="site-logo col-lg-3 col-md-3 col-sm-3 hidden-xs logo-sm">
             <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
 					</div>
-					<div class="col-xs-12 visible-xs-block">
+					<div class="site-logo col-xs-3 visible-xs-block">
             <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
 					</div>
 
@@ -47,9 +47,9 @@
 							<a href="<%= root_path %>">Researchers@Brown</a>
 						</h1>
 					</div>
-					<div class="col-xs-12  visible-xs-block">
+					<div class="site-title col-xs-6  visible-xs-block">
 						<h1>
-							<a href="<%= root_path %>">Researchers @ Brown</a>
+							<a href="<%= root_path %>">Researchers@Brown</a>
 						</h1>
 					</div>
 				<% end %>
@@ -74,7 +74,7 @@
 <!-- #wrapper-content -->
 
 
-<footer role="contentinfo" class="footer">
+<footer role="contentinfo" class="footer col-sm-12">
 	<div class="row">
 		<div class="container">
 			<div class="col-md-12">
@@ -84,6 +84,8 @@
 							<a href="<%= home_about_path() %>" title="About Researchers@Brown">About</a>
 						<li role="listitem">
 							<a href="<%= home_help_path() %>" title="Help and Frequently Asked Questions">Help</a>
+						<li role="listitem">
+							<a href="http://brown.edu/" target="_blank">Brown University</a>
 						<li role="listitem">
 							<a href="https://docs.google.com/a/brown.edu/forms/d/1H_LzEHRzpxv3OY266RjSwpAMwVuTEUFyNEgMPcZ4NiA/viewform" title="Submit feedback">Contact Us</a>
 					</ul>

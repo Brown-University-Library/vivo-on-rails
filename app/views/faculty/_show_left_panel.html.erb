@@ -1,7 +1,7 @@
 <div class="col-md-3 col-sm-4 col-xs-12">
   <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <% if @presenter.show_back_to_search %>
-      <a href="javascript: history.go(-1)">Back to search</a>
+      <a href="javascript: history.go(-1)" class="back-to-search"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search</a>
     <% end %>
     <section class="share-contact" role="region">
       <div id="photo-wrapper">
@@ -12,14 +12,9 @@
       </h2>
 
       <!-- Contact Info -->
-      <% if @presenter.faculty.cv_link %>
-        <h4>
-          <a href="<%= @presenter.faculty.cv_link %>" target="_blank"><%= @presenter.faculty.cv_link_text %></a>
-        </h4>
-      <% end %>
       <div class="emailsContainer">
         <h4>
-          <a href="mailto:<%= @presenter.faculty.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+          <a href="mailto:<%= @presenter.faculty.email %>" title="Email <%= @presenter.faculty.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
         </h4>
       </div>
 
@@ -98,6 +93,14 @@
               title="View All">
                 <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
                 View All
+            </a>
+          <% end %>
+
+          <% if @presenter.faculty.cv_link %>
+            <a class="btn btn-default"
+              href="<%= @presenter.faculty.cv_link %>" 
+              target="_blank"
+              title="Curriculum Vitae"><%= @presenter.faculty.cv_link_text %> [PDF]
             </a>
           <% end %>
       </div>

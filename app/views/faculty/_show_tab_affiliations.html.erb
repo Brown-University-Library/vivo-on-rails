@@ -4,10 +4,10 @@
 
       <% if @presenter.faculty.collaborators.count > 0 %>
           <div class="panel-heading">
-            <h3 id="relatedBy-Authorship" title="" class="panel-title">Collaborators</h3>
+            <h4 id="relatedBy-Authorship" title="" class="panel-title">Collaborators</h4>
           </div>
 
-          <div class="panel-body">
+          <div class="panel-body panel-body-collaborators">
             <table class="table table-hover">
               <tbody>
                 <tr>
@@ -38,9 +38,9 @@
 
       <% if @presenter.faculty.training.count > 0 %>
           <div class="panel-heading">
-            <h3 id="relatedBy-Authorship" title="" class="panel-title">Postdoctoral/Other Training</h3>
+            <h4 id="relatedBy-Authorship" title="" class="panel-title">Postdoctoral/Other Training</h4>
           </div>
-          <div class="panel-body">
+          <div class="panel-body panel-body-postdoc">
             <table class="table table-hover">
               <tbody>
                 <% @presenter.faculty.training.each do |t| %>
@@ -59,10 +59,10 @@
 
       <% if @presenter.faculty.credentials.count > 0 %>
           <div class="panel-heading">
-            <h3 id="relatedBy-Authorship" title="" class="panel-title">Credentials/Licenses</h3>
+            <h4 id="relatedBy-Authorship" title="" class="panel-title">Credentials/Licenses</h4>
           </div>
 
-          <div class="panel-body">
+          <div class="panel-body panel-body-credentials">
             <table class="table table-hover">
               <tbody>
                 <% @presenter.faculty.credentials.each do |c| %>
@@ -81,7 +81,7 @@
 
       <% if @presenter.faculty.appointments.count > 0 %>
           <div class="panel-heading">
-            <h3 id="relatedBy-Authorship" title="" class="panel-title">Appointments</h3>
+            <h4 id="relatedBy-Authorship" title="" class="panel-title">Appointments</h4>
           </div>
 
           <div class="panel-body">
