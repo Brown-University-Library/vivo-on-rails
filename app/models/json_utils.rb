@@ -1,10 +1,14 @@
 class JsonUtils
   def self.safe_parse(json_str)
-    if !json_str.start_with?("{")
-      json_str = "{" + json_str + "}"
+    if ENV["USE_VIVO_SOLR"] == "true"
+      if !json_str.start_with?("{")
+        json_str = "{" + json_str + "}"
+      end
+      clean_str = JsonUtils.clean_json_string(json_str)
+      JSON.parse(clean_str)
+    else
+      JSON.parse(json_str)
     end
-    clean_str = JsonUtils.clean_json_string(json_str)
-    JSON.parse(clean_str)
   rescue => ex
     # TODO: Better exception handling
     puts "=============================="
