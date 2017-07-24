@@ -8,7 +8,8 @@ module ApplicationHelper
       "20150422_MayaLinTEST-PAUR-0026.jpg",
       "20131118-PAUR-0005.jpg",
       "20150512-BMED.jpg",
-      "20110322-COMM-0004.jpg"]
+      "20110322-COMM-0004.jpg",
+      "20130419_WICLACS_0004.jpg"]
     "new-backgrounds/" + images[rand(images.size)]
   end
 end
