@@ -1,29 +1,267 @@
-<div class="row hero">
-  <div class="theme-showcase">
-    <div class="col-md-12">
-      <div class="container" role="main">
+<style>
+th,td {
+  border: solid 1px;
+}
+</style>
 
-        <div class="jumbotron">
-          <p>This site presents a new way of looking at Brown's researchers
-            and faculty members. The style is a bit more modern that our
-            <a href="http://vivo.brown.edu" title="current VIVO site">current site</a>
-            and should be considerably faster. </p>
-            <p>We are still in the process of building this new version and
-              adding functionality to it, but feel free to play with it
-              and let us know what you think.</p>
-        </div>
+<div class="container">
+  <div class="row">
+    <h2>About Researchers@Brown</h2>
 
-        <form id="search-homepage" action="<%= search_path() %>" name="search-home" role="search" method="GET">
-          <div class="input-group input-group-lg">
-            <input class="form-control" name="q" placeholder="Search for an Expert..." type="text">
-            <div class="input-group-btn">
-              <button type="submit" class="btn btn-default btn-lg sympl-search">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+    <p>Researchers@Brown brings together, in one site, publicly available
+      information on the people, departments, and activities that collectively
+      make up research and scholarship in all disciplines at Brown.
+      Researchers@Brown is an implementation of
+      <a href="https://wiki.duraspace.org/display/VIVO/VIVO+Main+Page">VIVO</a>,
+      an open-source, linked open data, research networking tool developed at
+      Cornell University and currently in use at a growing number of institutions
+      worldwide.</p>
+
+    <p>All information in the initial release of Researchers@Brown comes from
+      institutional sources (Workday, FIS, Banner) and from faculty profiles in
+      the Directory of Research and Researchers at Brown (DRR-B). As the
+      infrastructure of the DRR-B is outdated and no longer sustainable,
+      Researchers@Brown provides a more functional and sustainable environment
+      than the DRR-B.</p>
+
+    <p>An external interface for managing Researchers@Brown profiles has been built
+      to avoid the inflexibilities and difficulties of use found in the native
+      VIVO editor.</p>
+
+    <p>DRR-B profiles have been automatically redirected to the new
+      Researchers@Brown profiles.</p>
+
+    <p>&#187;  <a href="#implementation">Implementation Plan</a></p>
+    <p>&#187;  <a href="#who">Who is included?</a></p>
+    <p>&#187;  <a href="#what">What content is included?</a></p>
+    <p>&#187;  <a href="#whatisnot">What content is not included?</a></p>
+    <p>&#187;  <a href="#roadmap">Roadmap for Future Development</a></p>
+    <p>&#187;  <a href="#help">What help is available?</a></p>
+    <hr />
+
+    <a name="implementation"></a><h3>Implementation Plan</h3>
+    <p>
+    To ensure as smooth a transition as possible from the DRR-B, Reseachers@Brown has been rolled
+    out in phases. With each phase, training and support are available to faculty and their deputies. All faculty are encouraged to use the new system to its full potential.
+    </p>
+    <ul style="list-style:disc;margin-left:25px;">
+    <li> <span style="color:black">Phase 1 (November 2013 - April 2014): Migration of DRR-B Data and User Testing</span><br />
+
+    Data from DRR-B profiles was migrated to Researchers@Brown by March 1, 2014. In addition to the
+    information carried over from the DRR-B, these new profiles include
+    teaching information from Banner and name, title, department, degree, and contact information from
+    the Faculty Information System (FIS). An attached PDF file of the faculty
+    member’s CV (from the DRR-B) was included as well.
+    <br /><br />
+
+    In December, 2013 and January 2014, we conducted extensive testing of Researchers@Brown with participation by 57 faculty members across 44 academic departments, receiving overall positive feedback from those who reviewed their data and tested the functionality of R@B.  While faculty offered a number of good suggestions for future enhancements, most indicated that it is a clear improvement over DRR-B and significantly better than the earlier implementation of VIVO.<br /><br />
+
+    During a soft launch in March and April 2014, faculty were able to review and edit their new profiles while their DRR-B profiles remained visible but not editable.  On May 1, 2014, Researchers@Brown went live, the DRR-B was decommissioned, and DRR-B profiles were automatically
+    redirected to the new Researchers@Brown profiles. <br /><br />
+
+    The information displayed in the newly-created public profiles is read-only.
+    Faculty and their deputies edit profiles in an external, user-friendly interface by clicking "Manage your profile" on the top right of every page. <br /><br /></li>
+
+    <li><span style="color:black">Phase 2 (May - July 2014): Structured Publication Data</span><br />
+    A user-friendly editor for publications was launched on July 1, 2014 in conjunction with harvesting of publications for Biology and Public Health.  This editor allows all faculty to easily add and edit structured publication data by entering a citation or simply a DOI or PubMed ID.  This publications data will include links to <a href="http://vivo.brown.edu/themes/brown/images/full_text2.htm">full text</a> if a DOI is available.<br /><br />
+
+    For Biology and Public Health faculty, publication data from vendor-parsed CVs was used to seed harvesting of additional publications using Harvard's Catalyst API.    Structured publication data
+    is intended to replace plain text citations in the "Scholarly Work" section of Researchers@Brown.<br /><br />
+    </li>
+
+    <li><span style="color:black">Phase 3 (Summer - October 2014): Hospital-based Faculty Data and and Governance Structure</span><br />
+    Select publication data from vendor-parsed CVs will be loaded into profiles for hospital-based faculty. Publication data from vendor-parsed CVs will be used to seed harvesting of additional publications using Harvard's Catalyst API.  <br /><br />
+
+    Plans will be developed for harvesting from sources other than PubMed (Web of Science, etc) and on behalf of other faculty groups and disciplines.<br /><br />
+
+    A governance structure will be established to set policies and priorities for the maintenance and further development of Researchers@Brown.
+    <br /><br /></li>
+
+    </ul>
+
+
+    <a name="who"></a><h3>Who is included in Researchers@Brown?</h3>
+    <p>Faculty affairs offices in the Dean of the Faculty, the Division of Biology and Medicine, and the School of Public Health have
+    created a set of simple rules for inclusion in Researchers@Brown. While the rules will determine the automated creation of
+    profiles, any Brown faculty member can request a Researchers@Brown profile by contacting the appropriate
+    faculty affairs office:
+    <ul>
+    <li>Dean of the Faculty: email <a href="mailto:Edward_Goll@brown.edu">Edward_Goll@brown.edu</a></li>
+    <li>Division of Biology and Medicine: email <a href="mailto:bmfa@brown.edu">bmfa@brown.edu</a></li>
+    <li>School of Public Health: email <a href="mailto:Pamela_Colardo@Brown.EDU">Pamela_Colardo@brown.edu</a></li>
+    </ul>
+    </p>
+
+    <p>Automatically included in Researchers@Brown:
+    <ul>
+    <li>All regular faculty</li>
+    <li>All (research) faculty</li>
+    <li>All faculty who have created DRRB profiles</li>
+    <li>All adjunct faculty in the Division of Biology and Medicine</li>
+    <li>Emeriti faculty</li>
+    </ul>
+    </p>
+
+    <p>Automatically excluded from Researchers@Brown initial launch (but can request a profile):
+    <ul>
+    <li>Adjuncts and Visitors in Public Health and E&G</li>
+    <li>Postdoctoral Fellows and Postdoctoral Associates</li>
+    <li>Affiliates and Visiting Scholars, Scientists, and Investigators</li>
+    <li>House Staff</li>
+    <li>Fellows</li>
+    </ul>
+    </p>
+
+    <a name="what"></a><h3>What content is included in Researchers@Brown?</h3>
+    <p>Faculty profiles include the data below.  For details about editing your profile
+    see the <a href="http://library.brown.edu/vivo/UserGuide.pdf">Researchers@Brown User's Guide <img src="http://library.brown.edu/vivo/images/pdficon_small.png" alt="pdf" /></a>.
+
+    <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Data Source</th>
+          <th>Editable?</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Name (Preferred name)</td>
+          <td>Workday via FIS</td>
+          <td>yes, in <a href="https://wd5.myworkday.com/brown/login.flex">Workday</a> -->Personal Data -->Preferred Name</td>
+        </tr>
+        <tr>
+          <td>Title, Position, Degrees, Dept</td>
+          <td>FIS</td>
+          <td>no, contact <a href="https://vivo.brown.edu/faq/">Faculty Affairs office</a> to correct errors</td>
+        </tr>
+        <tr>
+          <td>Contact Information</td>
+          <td>Workday via FIS</td>
+          <td>yes, in <a href="https://wd5.myworkday.com/brown/login.flex">Workday</a> -->Personal Data</td>
+        </tr>
+        <tr>
+          <td>CV (uploaded Photo)</td>
+          <td>DRRB, PAUR</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>CV (uploaded PDF)</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Bio</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Keywords</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Research Summary</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Research Description</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Funded Research</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Scholarly Work<span style="color:red">*</span>
+          </td><td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Publications (structured data)<span style="color:red">**</span></td>
+          <td>Harvard Catalyst seeded by CV data</td>
+          <td>yes, all faculty can add manually add and edit citation data or enter a DOI or PMID; Additional publications are harvested for Biology and Public Health.  See <a href="/publications">Managing Publications</a>.</td>
+        </tr>
+        <tr>
+          <td>Teaching Description</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Courses</td>
+          <td>Banner</td>
+          <td>no, contact department administrator to correct errors</td>
+        </tr>
+        <tr>
+          <td>Affiliations</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Websites</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Awards and Honors</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Brown Collaborators</td>
+          <td>DRRB</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Other Collaborators</td>
+          <td>DRRB</td>
+          <td>not yet</td>
+        </tr>
+      </tbody>
+    </table>
     </div>
+    </p>
+
+    <p><span style="color:red">*</span>
+      If you entered publication information in the DRR-B as free text or a text
+      file, that data has been carried over to Researchers@Brown under the heading
+      "Scholarly Work".  PDF lists of publications have not been carried over from
+      the DRR-B. These publications are available on your uploaded CV and can also
+      be entered in the "Scholarly Work" text box.</p>
+
+    <p><span style="color:red">**</span>
+      The "Publications" section in Researchers@Brown offers a sophisticated
+      approach to publication data. This publication data is highly structured and
+      allows for automatic links to library-licensed or freely available FULL TEXT.
+      In addition, the editing interface allows the automated retrieval of full
+      citation data upon entry of a DOI or PMID.  A harvesting service allows
+      Biology and Public Health faculty to approve a list of their recent publications
+      for automatic entry into their profiles. You can learn more about this in
+      <a href="<%= home_publications_path() %>">the publications page</a>.</p>
+
+    <a name="whatisnot"></a><h3>What content is not included?</h3>
+    <p>
+      <ul style="list-style:disc;margin-left:25px;">
+        <li>No content parsed from CVs is included at this time.  For Biology and Public Health faculty, publications from CVs were used to seed a harvest of additional publications using the Harvard Catalyst APA.</li>
+        <li>Data from DRR-B "Projects" is not included at this time.  The content and timeliness of this data vary widely.  It will be stored and reviewed for possible future use.</li>
+        <li>DRR-B publication lists in PDF format are not included.  This data is not searchable in PDF format and is already available on the full CV. Faculty have the option of providing links to publication lists stored elsewhere.</li>
+        <li>Non-Brown collaborators have not been carried over from the DRR-B.  We will provide a way to include this information in a structured format.</li>
+      </ul>
+    </p>
+
+    <a name="roadmap"></a><h3>Roadmap for Future Development</h3>
+    <p>Visit the <a href="<%= home_roadmap_path() %>">the roadmap</a> to learn about recent improvements to the project and our plans for future development</p>
+
+    <a name="help"></a><h3>What help is available?</h3>
+    <p>General help and a list of frequently asked questions is available in the
+      <a href="<%= home_help_path() %>">help page</a>.</p>
+    <p>You can also contact <a href="mailto:researchers@brown.edu">researchers@brown.edu</a>.
+      Staff are available to work with faculty or deputies in groups or one-on-one.
+      Drop-in training sessions will be scheduled periodically.</p>
   </div>
 </div>

@@ -1,5 +1,6 @@
 require "./lib/sparql/query.rb"
 require "./lib/solr_lite/solr.rb"
+require "./app/models/json_utils.rb"
 require "./app/models/faculty_list_item.rb"
 require "./app/models/faculty_item.rb"
 require "./app/models/contributor_to_item.rb"
@@ -84,7 +85,7 @@ class Faculty
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
     return nil if solr_doc == nil
     solr_json = solr_doc["json_txt"].first
-    hash = JSON.parse(solr_json)
+    hash = JsonUtils.safe_parse(solr_json)
     FacultyItem.from_hash(hash)
   end
 

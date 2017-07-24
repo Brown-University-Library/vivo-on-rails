@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   get 'search_facets' => 'search#facets'
   get 'search' => 'search#index'
 
-  get 'about' => 'home#about'
+  get 'about' => 'home#about', as: :home_about
+  get 'faq' => 'home#faq', as: :home_faq
+  get 'help' => 'home#help', as: :home_help
+  get 'publications' => 'home#publications', as: :home_publications
+  get 'roadmap' => 'home#roadmap', as: :home_roadmap
+  get 'termsOfUse' => 'home#termsofuse', as: :home_terms
   root 'home#index'
 end

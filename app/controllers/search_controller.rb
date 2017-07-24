@@ -33,6 +33,9 @@ class SearchController < ApplicationController
 
       not_hidden_fq = SolrLite::FilterQuery.new("hidden_b", "false")
       search_results = searcher.search(params, [not_hidden_fq])
+      if ENV["USE_VIVO_SOLR"] == "true"
+        search_results = searcher.search(params, [])
+      end
       @presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
     end
 

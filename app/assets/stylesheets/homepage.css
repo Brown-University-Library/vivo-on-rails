@@ -16,10 +16,6 @@ body {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 }
 
-p a:link {
-  color: #bdfcbd;
-}
-
 @media (min-width: 0px) and (max-width: 768px) {
   .theme-showcase {
   width: 100%;
@@ -77,6 +73,25 @@ p a:link {
   margin-left: 5px;
   border-radius: 5px;
 }
+
+a.manage-profile-link {
+  margin-left: 0em;
+  margin-top:.33em;
+  /* display: inline-block;
+  text-align: left;
+  float: left;
+  width: auto; */
+  color: white;
+  opacity: .67;
+}
+a.manage-profile-link:hover {
+  color: white;
+  opacity: .5;
+}
+a.manage-profile-link:visited {
+  color: white;
+  opacity: .67;
+}
 /*---------------------------------------------
 Create large linked icon sections below hero search
 ----------------------------------------------*/
@@ -98,18 +113,21 @@ Create large linked icon sections below hero search
   box-shadow: inset 0px -3px;
 }
 .icons-home a#icon1 {
-  background: #5cb85c;
+  background: #831b1b;
 }
 .icons-home a#icon1:hover {
   background: transparent;
-  color: #5cb85c;
+  color: #831b1b;
 }
 .icons-home a#icon2 {
-  background: #1b998b;
+  color: #645E50;
+}
+.icons-home a#icon2 {
+  background: #E8D98B;
 }
 .icons-home a#icon2:hover {
   background: transparent;
-  color: #1b998b;
+  color: #645E50;
 }
 .icons-home a#icon3 {
   background: #831b1b;
@@ -130,6 +148,39 @@ Create large linked icon sections below hero search
 }
 .explore .btn-default {
   margin-top: 8px;
+}
+/* styling for news/alerts/announcements list section */
+.icons-home ul {
+  list-style-type: none;
+  position: relative;
+  margin-left: .1em;
+  padding-left: 0;
+}
+.icons-home li:before {
+  content: "\2022";
+  position: absolute;
+  left: 20px;
+  color: #ACA698;
+  margin-right: 0px;
+}
+.news-link a {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 1em;
+  color: black;
+  text-decoration: none;
+  border: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+.news-link a:hover, a:visited, a:link, a:active {
+  text-decoration: none;
+  border: none;
+  border-bottom: none;
+  box-shadow: none !important;
+}
+.news-link li {
+  padding-right: 1.5em;
 }
 /*---------------------------------------------
 Homepage explore rectangular links with images for background
@@ -175,33 +226,33 @@ Homepage explore rectangular links with images for background
 Customise the meet faculty/expert section
 ----------------------------------------------*/
 /* faculty-home repurposed for recent books carousel */
-.recent-books {
+.faculty-home {
   text-align: center;
   padding: 45px 0;
-  background: #aba698;
+  background: #CCC6B8;
   border: none;
   border-width: 0;
 }
-#faculty-carousel {
+#faculty-books-carousel {
   margin: 40px 0;
 }
-#faculty-carousel .carousel-inner > .item {
+#faculty-books-carousel .carousel-inner > .item {
   text-align: center;
 }
-#faculty-carousel .carousel-inner > .item > img,
-#faculty-carousel .carousel-inner > .item > a > img {
+#faculty-books-carousel .carousel-inner > .item > img,
+#faculty-books-carousel .carousel-inner > .item > a > img {
   margin: auto;
   text-align: center;
 }
-#faculty-carousel .carousel-control.left {
+#faculty-books-carousel .carousel-control.left {
   background: transparent;
   color: #222;
 }
-#faculty-carousel .carousel-control.right {
+#faculty-books-carousel .carousel-control.right {
   background: transparent;
   color: #222;
 }
-#faculty-carousel p.biog {
+#faculty-books-carousel p.biog {
   font-size: 14px;
   padding: 0 60px;
 }
@@ -211,6 +262,9 @@ Customise the meet faculty/expert section
 .faculty-mbrs:hover {
   text-decoration: none;
   color: #000;
+}
+.book-cover {
+  text-align: center;
 }
 /*---------------------------------------------
 Customise the about our research section

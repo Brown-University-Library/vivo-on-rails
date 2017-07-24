@@ -15,6 +15,9 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
 <%= stylesheet_link_tag    'application', media: 'all' %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <%= javascript_include_tag 'application' %>
 <%= csrf_meta_tags %>
 
@@ -36,10 +39,9 @@
             <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
 					</div>
 
-				<!-- TODO: Make sure this is working in the development server
-			       I think it should use root_path instead -->
-				<% unless current_page?('/') %>
+					<a href="https://vivo.brown.edu/manager" target="_blank" class="manage-profile-link">Manage your profile</a>
 
+				<% unless current_page?(root_path) %>
 					<div class="site-title col-lg-6 col-md-6 col-sm-6 hidden-xs">
 						<h1>
 							<a href="<%= root_path %>">Researchers@Brown</a>
@@ -50,7 +52,6 @@
 							<a href="<%= root_path %>">Researchers@Brown</a>
 						</h1>
 					</div>
-
 				<% end %>
 
 				</div>
@@ -80,35 +81,20 @@
 				<nav role="navigation">
 					<ul id="footer-nav" role="list">
 						<li role="listitem">
-							<a href="/about" title="About">
-								About
-							</a>
-						</li>
-
-
+							<a href="<%= home_about_path() %>" title="About Researchers@Brown">About</a>
 						<li role="listitem">
-							<a href="/" target="blank" title="Support">
-								Support
-							</a>
-						</li>
-
+							<a href="<%= home_help_path() %>" title="Help and Frequently Asked Questions">Help</a>
 						<li role="listitem">
-							<a href="http://brown.edu/" target="_blank">
-								Brown University
-							</a>
-					</li></ul>
+							<a href="http://brown.edu/" target="_blank">Brown University</a>
+						<li role="listitem">
+							<a href="https://docs.google.com/a/brown.edu/forms/d/1H_LzEHRzpxv3OY266RjSwpAMwVuTEUFyNEgMPcZ4NiA/viewform" title="Submit feedback">Contact Us</a>
+					</ul>
 				</nav>
-
 				<p class="copyright">
-
-						<a class="terms" href="/termsOfUse" title="Terms of Use">
-							Terms of Use
-						</a> |
-
-					Powered by <a class="powered-by-vivo" href="http://vivoweb.org/" target="_blank" title="Powered by VIVO"><strong>VIVO</strong>
-					</a>
-						 | Designed by <a href="http://symplectic.co.uk/" title="Experts in Research Information">Symplectic</a> and Brown University Library
-				</p>
+					&copy;2017 <a href="http://brown.edu/" target="_blank">Brown University</a> |
+					<a class="terms" href="<%= home_terms_path() %>" title="Terms of Use">Terms of Use</a> |
+					Powered by <a href="http://vivoweb.org/" target="_blank" title="Powered by VIVO"><strong>VIVO</strong></a>
+			 	</p>
 			</div>
 		</div>
 	</div>
