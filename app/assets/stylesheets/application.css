@@ -128,6 +128,20 @@ header {
 	border: none;
 	padding: 8px 12px;
 }
+a.manage-profile-link {
+  margin-left: 0em;
+  margin-top:.33em;
+  color: white;
+  opacity: .67;
+}
+a.manage-profile-link:hover {
+  color: white;
+  opacity: .5;
+}
+a.manage-profile-link:visited {
+  color: white;
+  opacity: .67;
+}
 @media (max-width: 767px) {
 	.site-title {
 		margin-top: 1.5rem;
@@ -158,19 +172,6 @@ header {
 	#sticky-nav .navbar-btn {
 		display: none;
 	}
-a.manage-profile-link {
-  margin-left: 0em;
-  margin-top:.33em;
-  color: white;
-  opacity: .67;
-}
-a.manage-profile-link:hover {
-  color: white;
-  opacity: .5;
-}
-a.manage-profile-link:visited {
-  color: white;
-  opacity: .67;
 }
 /* End of Header */
 
