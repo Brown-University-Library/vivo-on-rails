@@ -46,7 +46,7 @@
 #FF5252	  bright red
 #831B1B	  dark red
 #F4E84E	  yellow
-#E8D98B	  pale gold	
+#E8D98B	  pale gold
 */
 
 html, body {
@@ -64,7 +64,7 @@ html, body {
 	height: 5rem;
 	padding: 0;
 }
-.header .site-logo { 
+.header .site-logo {
 	padding-top: .5rem;
 	text-align: left;
 }
@@ -80,7 +80,7 @@ html, body {
 	display: flex;
 	align-items: center;
 	height: 5rem;
-	width: 100%
+	width: 100%;
 	margin: 0;
 	padding: 0;
 }
@@ -559,7 +559,7 @@ a.manage-profile-link:visited {
 }
 a.back-to-search:hover .glyphicon-chevron-left {
 	color: #232323;
-}	
+}
 #individual-intro {
 	display: flex;
 	flex-direction: column;
@@ -585,7 +585,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #fff;
 	color: #fff;
-	padding: 1rem;	
+	padding: 1rem;
 }
 .share-contact > h4 a:hover {
 	border-top: 2px solid #E8D98B;
@@ -662,10 +662,10 @@ a.back-to-search:hover .glyphicon-chevron-left {
 	color: #000;
 	font-weight: bold;
 }
-.btn-group-vertical > .btn:first-child:not(:last-child) { 
+.btn-group-vertical > .btn:first-child:not(:last-child) {
 	border-radius: 0;
 }
-.btn-group-vertical > .btn:last-child:not(:first-child) { 
+.btn-group-vertical > .btn:last-child:not(:first-child) {
 	border-radius: 0;
 }
 .btn-group-vertical .btn span.glyphicon {
@@ -686,7 +686,7 @@ h3.individual_overview {
 }
 h4.individual_overview {
 	margin-top: 0;
-	padding-bottom: 1rem;	
+	padding-bottom: 1rem;
 }
 #section_overview p {
 	vertical-align: baseline;
@@ -708,7 +708,7 @@ h4.individual_overview {
 	color: #fff;
 	font-size: 2rem;
 	margin-bottom: .4rem;
-	padding: 1rem .6rem;	
+	padding: 1rem .6rem;
 }
 #section_overview h4 {
 	font-size: 1.8rem;
@@ -902,21 +902,21 @@ td.citation-data.pub-item {
 		padding: 3rem 1.5rem;
 	}
 }
-@media screen (min-width: 768px) and (max-width: 1199px) {
+@media screen and (min-width: 768px) and (max-width: 1199px) {
 	.person-content .container {
 		width: 100%;
 		max-width: 100%;
 		padding: 0 2.5rem 0 7rem;
 	}
 }
-@media screen and (min-width: 1200px) and (max-width: 1379px) { 
+@media screen and (min-width: 1200px) and (max-width: 1379px) {
 	.person-content > .container {
-		max-width: 70%;	
+		max-width: 70%;
 	}
 }
-@media screen and (min-width: 1380px) and (max-width: 1560px) { 
+@media screen and (min-width: 1380px) and (max-width: 1560px) {
 	.person-content > .container {
-		max-width: 62%;	
+		max-width: 62%;
 	}
 }
 /* End of Individual Page */
@@ -1009,24 +1009,3 @@ td.citation-data.pub-item {
 
 
 /*** Breakpoints ***/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
