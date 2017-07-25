@@ -74,13 +74,17 @@ body {
   border-radius: 5px;
 }
 
+#homepage-link-row {
+  text-align: center;
+  margin-top: 1em;
+  color: #B9B9B8;
+}
+#homepage-link-row a {
+  color: white;
+  opacity: .67;
+}
+
 a.manage-profile-link {
-  margin-left: 0em;
-  margin-top:.33em;
-  /* display: inline-block;
-  text-align: left;
-  float: left;
-  width: auto; */
   color: white;
   opacity: .67;
 }
