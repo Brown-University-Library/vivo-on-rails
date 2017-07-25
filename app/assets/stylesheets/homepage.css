@@ -73,7 +73,6 @@ body {
   margin-left: 5px;
   border-radius: 5px;
 }
-
 #homepage-link-row {
   text-align: center;
   margin-top: 1em;
@@ -81,9 +80,16 @@ body {
 }
 #homepage-link-row a {
   color: white;
-  opacity: .67;
+  font-weight: bold;
 }
-
+#homepage-link-row a {
+  transition: none;
+}
+#homepage-link-row a:hover {
+  border-bottom: 2px solid #aaa;
+  color: #bbb;
+  text-decoration: none;
+}
 a.manage-profile-link {
   color: white;
   opacity: .67;
