@@ -90,15 +90,16 @@ body {
   color: #bbb;
   text-decoration: none;
 }
-a.manage-profile-link {
+p a.manage-profile-link {
   color: white;
   opacity: .67;
+  float: left;
 }
-a.manage-profile-link:hover {
+p a.manage-profile-link:hover {
   color: white;
   opacity: .5;
 }
-a.manage-profile-link:visited {
+p a.manage-profile-link:visited {
   color: white;
   opacity: .67;
 }
