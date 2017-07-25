@@ -62,3 +62,9 @@
         </div>
     </div>
 </nav>
+
+<% unless current_page?(root_path) %>
+    <div class="below-nav-links col-lg-3 col-lg-push-6 col-md-4 col-md-push-4 col-sm-4 col-sm-push-3">
+        <p><a href="">Advanced search&hellip;</a><a href="https://vivo.brown.edu/manager">Manage your Profile</a></p>
+    </div>
+<% end %>
