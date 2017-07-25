@@ -96,12 +96,17 @@ p a.manage-profile-link {
   float: left;
 }
 p a.manage-profile-link:hover {
-  color: white;
-  opacity: .5;
+  border-bottom: 2px solid #aaa;
+  color: #bbb;
+  opacity: .67;
+  text-decoration: none;
 }
 p a.manage-profile-link:visited {
   color: white;
   opacity: .67;
+}
+p a.manage-profile-link {
+  transition: none;
 }
 /*---------------------------------------------
 Create large linked icon sections below hero search
