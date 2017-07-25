@@ -144,7 +144,34 @@ a.manage-profile-link:visited {
 }
 /* End of Header */
 
-
+.below-nav-links {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+.below-nav-links p {
+	float:right;
+	margin-top:.5em;
+	font-size: 90%;
+}
+.below-nav-links a {
+  color: #594036;
+  opacity: .67;
+  float: left;
+}
+.below-nav-links a:hover {
+  border-bottom: 2px solid #594036;
+  color: #594036;
+  opacity: .67;
+  text-decoration: none;
+}
+.below-nav-links a:visited {
+  color: 594036;
+  opacity: .67;
+}
+.below-nav-links a {
+  transition: none;
+  margin-right: 1.25em;
+}
 
 /* Results Page */
 .container-fluid {
