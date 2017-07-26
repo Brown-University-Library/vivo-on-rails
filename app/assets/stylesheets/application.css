@@ -997,6 +997,52 @@ td.citation-data.pub-item {
 }
 
 /* results page */
+@media (max-width: 991px) {
+	.expert-results {
+		min-height: 10rem;
+		max-height: 24rem;
+		margin-bottom: 1.5rem;
+	}
+	.expert-results .gap30 {
+		display: none;
+	}
+	.expert-results #individual-intro {
+/*		min-height: 10rem;
+		max-height: 20rem;*/
+		margin: 0;
+	}
+	.share-contact {
+		background-color: #594036;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		min-height: 20rem;
+		max-height: 24rem;
+
+	}
+	.share-contact--bottom {
+		display: none;
+	}
+	.results__photo {
+/*		border: 1px solid purple;*/
+		margin: 0;
+		margin-right: 4rem;
+		position: relative;
+	}
+	.contact-content {
+/*		border: 1px solid orange;*/
+		margin: 0;
+		position: relative;
+		text-align: left;
+	}
+	.contact-content a {
+		padding: 0;
+	}
+	.contact-content a:hover {
+		border-left: none;
+	}
+}
 @media (min-width: 1700px) {
 	.container-fluid {
 		max-width: 1700px;
