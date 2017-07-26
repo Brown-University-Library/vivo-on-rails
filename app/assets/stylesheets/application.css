@@ -990,7 +990,7 @@ td.citation-data.pub-item {
 
 /*** Specific Breakpoints ***/
 /* header */
-@media (max-width: 1054px) {
+@media (max-width: 1245px) {
 	#sticky-nav .navbar-btn {
 		display: none;
 	}
