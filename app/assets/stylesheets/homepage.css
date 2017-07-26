@@ -73,24 +73,40 @@ body {
   margin-left: 5px;
   border-radius: 5px;
 }
-
-a.manage-profile-link {
-  margin-left: 0em;
-  margin-top:.33em;
-  /* display: inline-block;
-  text-align: left;
+#homepage-link-row {
+  text-align: center;
+  margin-top: 1em;
+  color: #B9B9B8;
+}
+#homepage-link-row a {
+  color: white;
+  font-weight: bold;
+}
+#homepage-link-row a {
+  transition: none;
+}
+#homepage-link-row a:hover {
+  border-bottom: 2px solid #aaa;
+  color: #bbb;
+  text-decoration: none;
+}
+p a.manage-profile-link {
+  color: white;
+  opacity: .67;
   float: left;
-  width: auto; */
+}
+p a.manage-profile-link:hover {
+  border-bottom: 2px solid #aaa;
+  color: #bbb;
+  opacity: .67;
+  text-decoration: none;
+}
+p a.manage-profile-link:visited {
   color: white;
   opacity: .67;
 }
-a.manage-profile-link:hover {
-  color: white;
-  opacity: .5;
-}
-a.manage-profile-link:visited {
-  color: white;
-  opacity: .67;
+p a.manage-profile-link {
+  transition: none;
 }
 /*---------------------------------------------
 Create large linked icon sections below hero search

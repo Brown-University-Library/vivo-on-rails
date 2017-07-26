@@ -39,8 +39,6 @@
             <%= image_tag( "brown_logo_small.png", alt: "Brown University") %>
 					</div>
 
-					<a href="https://vivo.brown.edu/manager" target="_blank" class="manage-profile-link">Manage your profile</a>
-
 				<% unless current_page?(root_path) %>
 					<div class="site-title col-lg-6 col-md-6 col-sm-6 hidden-xs">
 						<h1>
@@ -51,6 +49,19 @@
 						<h1>
 							<a href="<%= root_path %>">Researchers@Brown</a>
 						</h1>
+					</div>
+				<% end %>
+
+				<% if current_page?(root_path) %>
+					<div class="col-lg-3 col-lg-push-7 col-md-3 col-md-push-7 col-sm-3 col-sm-push-6 hidden-xs">
+						<p>
+							<a href="https://vivo.brown.edu/manager" class="manage-profile-link">Manage your profile</a>
+						</p>
+					</div>
+					<div class="col-xs-12 visible-xs-block">
+						<p>
+							<a href="https://vivo.brown.edu/manager" class="manage-profile-link">Manage your profile</a>
+						</p>
 					</div>
 				<% end %>
 
