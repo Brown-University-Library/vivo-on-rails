@@ -998,9 +998,16 @@ td.citation-data.pub-item {
 	.expert-results {
 		min-width: 27rem;
 	}
+	.expert-results .results__photo {
+		margin-right: 2rem;
+		/* !!! I need to sort out the general and specific breakpoints because of cascading conflicts*/
+	}
+	.expert-results .results__photo img {
+		width: 100px;
+	}
 }
 
-@media screen (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
+@media (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
 
 }
 
@@ -1013,6 +1020,17 @@ td.citation-data.pub-item {
 }
 
 /* results page */
+@media (min-width: 768px) and (max-width: 1024px) {
+	ul.pagination.pagination-lg li:nth-child(1) a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li:nth-last-child(1) a {
+		padding: 1rem 1.2rem;
+	}
+}
 @media (max-width: 991px) {
 	.result-nums-breadcrumbs-wrapper {
 		margin-bottom: 1.5rem;
@@ -1036,7 +1054,6 @@ td.citation-data.pub-item {
 		justify-content: flex-start;
 		min-height: 20rem;
 		max-height: 24rem;
-
 	}
 	.expert-results .share-contact--bottom {
 		display: none;
