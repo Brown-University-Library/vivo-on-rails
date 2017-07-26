@@ -879,7 +879,6 @@ td.citation-data.pub-item {
 
 
 /* Organization Page */
-
 .container.organization-page {
 	padding: 5rem 3rem 5rem 0;
 }
@@ -990,15 +989,25 @@ td.citation-data.pub-item {
 		top: -1rem;
 		width: 4rem;
 	}
+	.subnavbar {
+		min-height: 3rem;
+	}
 	.results-wrapper {
 		padding-left: 0;
 	}
 	.expert-results {
 		min-width: 27rem;
 	}
+	.expert-results .results__photo {
+		margin-right: 2rem;
+		/* !!! I need to sort out the general and specific breakpoints because of cascading conflicts*/
+	}
+	.expert-results .results__photo img {
+		width: 100px;
+	}
 }
 
-@media screen (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
+@media (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
 
 }
 
@@ -1011,7 +1020,21 @@ td.citation-data.pub-item {
 }
 
 /* results page */
+@media (min-width: 768px) and (max-width: 1024px) {
+	ul.pagination.pagination-lg li:nth-child(1) a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li:nth-last-child(1) a {
+		padding: 1rem 1.2rem;
+	}
+}
 @media (max-width: 991px) {
+	.result-nums-breadcrumbs-wrapper {
+		margin-bottom: 1.5rem;
+	}
 	.expert-results {
 		min-height: 10rem;
 		max-height: 24rem;
@@ -1021,11 +1044,9 @@ td.citation-data.pub-item {
 		display: none;
 	}
 	.expert-results #individual-intro {
-/*		min-height: 10rem;
-		max-height: 20rem;*/
 		margin: 0;
 	}
-	.share-contact {
+	.expert-results .share-contact {
 		background-color: #594036;
 		display: flex;
 		flex-direction: row;
@@ -1033,28 +1054,41 @@ td.citation-data.pub-item {
 		justify-content: flex-start;
 		min-height: 20rem;
 		max-height: 24rem;
-
 	}
-	.share-contact--bottom {
+	.expert-results .share-contact--bottom {
 		display: none;
 	}
-	.results__photo {
-/*		border: 1px solid purple;*/
+	.expert-results .results__photo {
 		margin: 0;
 		margin-right: 4rem;
 		position: relative;
 	}
 	.contact-content {
-/*		border: 1px solid orange;*/
 		margin: 0;
 		position: relative;
 		text-align: left;
 	}
 	.contact-content a {
 		padding: 0;
+		font-size: 2.4rem;
 	}
 	.contact-content a:hover {
 		border-left: none;
+		color: #ddd;
+		padding-left: 0;
+		transition-property: color;
+		transition-delay: 0s;
+		transition-duration: .3s;
+		transition-timing-function: ease;
+	}
+	.contact-content .results-title {
+		font-size: 1.8rem;
+	}
+	.emailsContainer .glyphicon-envelope {
+		color: #fff;
+	}
+	.emailsContainer .glyphicon-envelope:hover {
+		color: #ddd;
 	}
 }
 @media (min-width: 1700px) {
@@ -1064,6 +1098,12 @@ td.citation-data.pub-item {
 }
 
 /* profile page */
+@media (max-width: 438px) {
+	.subnavbar {
+		min-height: 5rem;
+		max-height: 15rem;
+	}
+}
 @media (max-width: 767px) {
 	.person-content .container {
 		max-width: 100%;
