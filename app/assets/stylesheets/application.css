@@ -38,10 +38,12 @@
 /* COLORS */
 /*
 #333	  soft black
+#2F2A20	  brown black*
 #594036	  brown
 #7E7E7E	  gray
 #B9B9B8	  cool gray
 #F5F2EC	  warm gray
+#EFECE5	  brown warm gray 1*
 #C00404	  red
 #FF5252	  bright red
 #831B1B	  dark red
@@ -369,13 +371,13 @@ a.manage-profile-link:visited {
 	font-weight: bold;
 }
 #search-result-count a:hover {
-	color: #C00404;
+	color: #594036;
 }
 .facet-breadcrumbs a {
 	color: #333;
 }
 .facet-breadcrumbs a:hover {
-	color: #C00404;
+	color: #594036;
 }
 .results-row {
 	margin: 0;
@@ -459,15 +461,19 @@ a.manage-profile-link:visited {
 }
 .pagination > li > a:hover {
 	background-color: #F5F2EC;
-	color: #C00404;
+	color: #333;
+	font-weight: bold;
 }
 .pagination > .active > a {
-	background-color: #C00404;
-	border-color: #C00404;
+	background-color: #E8D98B;
+	border-color: #E8D98B;
+	color: #333;
+	font-weight: bold;
 }
 .pagination > .active > a:hover {
-	background-color: #C00404;
-	border-color: #C00404;
+	background-color: #E8D98B;
+	border-color: #E8D98B;
+	color: #333;
 }
 .pagination .glyphicon-chevron-left {
 	color: #333;
@@ -479,15 +485,12 @@ a.manage-profile-link:visited {
 	margin-right: .5rem;
 	transform: scale(.8);
 }
-
-/*a.back-to-search:hover .glyphicon-chevron-left {
-	color: #232323;
-}*/
 /* End of Results Page */
 
 
 /* Footer */
 .footer {
+	background-color: #2F2A20;
 	height: 180px;
 }
 .footer #footer-nav li a {
@@ -548,8 +551,19 @@ a.manage-profile-link:visited {
 	margin-right: .5rem;
 	transform: scale(1.5);
 }
+/*a.back-to-search:hover {
+	background-color: #eee;
+	transition-property: background-color;
+	transition-delay: 0s;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}*/
 a.back-to-search:hover .glyphicon-chevron-left {
-	color: #232323;
+	color: #E8D98B;
+	transition-property: color;
+	transition-delay: 0s;
+	transition-duration: .3s;
+	transition-timing-function: ease;
 }
 #individual-intro {
 	display: flex;
