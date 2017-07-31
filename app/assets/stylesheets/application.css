@@ -525,7 +525,7 @@ a.manage-profile-link:visited {
 	background-color: #F5F2EC;
 	display: inline-block;
 	float: left;
-	min-height: calc(100vh - 230px);
+	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	width: 100%;
 	margin-bottom: -70px;
 	padding: 0 0 6rem 0;
@@ -537,7 +537,7 @@ a.manage-profile-link:visited {
 }
 .person-content .container {
 	background-color: #fff;
-	min-height: calc(100vh - 230px);
+	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	max-width: 76%;
 	padding: 0;
 }
@@ -1004,6 +1004,10 @@ td.citation-data.pub-item {
 	}
 	.expert-results .results__photo img {
 		width: 100px;
+	}
+	.footer {
+		float: left;
+		width: 100%;
 	}
 }
 
