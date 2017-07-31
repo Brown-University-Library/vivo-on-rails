@@ -1062,10 +1062,14 @@ td.citation-data.pub-item {
 		margin: 0;
 		margin-right: 4rem;
 		position: relative;
+		top: auto;
+		bottom: auto;
 	}
 	.contact-content {
 		margin: 0;
 		position: relative;
+		top: auto;
+		bottom: auto;
 		text-align: left;
 	}
 	.contact-content a {
@@ -1115,6 +1119,12 @@ td.citation-data.pub-item {
 		font-size: 2.4rem;
 		padding: 3rem 1.5rem;
 	}
+	/* org profile page */
+/*	.container.profile.org-profile .person-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 7rem 4rem 7rem;
+	}*/
 }
 @media screen and (min-width: 768px) and (max-width: 1199px) {
 	.person-content .container {
