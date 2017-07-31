@@ -597,7 +597,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 }
 .person-content #individual-intro .emailsContainer {
 	justify-content: center;
-	margin-bottom: 1rem;
+	padding-bottom: 1rem;
 	position: relative;
 }
 .person-content #individual-intro .emailsContainer .glyphicon-envelope {
@@ -619,7 +619,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 .profile .share-contact {
 	background-color: #222;
 	border: none;
-	height: 100%;
+	height: auto;
 	padding: 4rem 0;
 }
 .btn-default {
@@ -657,6 +657,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 	background-color: #fff;
 	border-left: solid 6px #E8D98B;
 	color: #000;
+	cursor: default;
 	font-weight: bold;
 }
 .btn-group-vertical > .btn:focus {
