@@ -524,12 +524,11 @@ a.manage-profile-link:visited {
 .container.profile {
 	background-color: #F5F2EC;
 	display: inline-block;
+	float: left;
 	min-height: calc(100vh - 230px);
 	width: 100%;
 	margin-bottom: -70px;
-	padding: 0;
-	position: relative;
-	top: -70px;
+	padding: 0 0 6rem 0;
 }
 .container .person-content {
 	display: flex;
