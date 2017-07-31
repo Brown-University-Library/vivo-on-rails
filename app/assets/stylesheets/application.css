@@ -144,49 +144,40 @@ a.manage-profile-link:visited {
   color: white;
   opacity: .67;
 }
-@media (max-width: 767px) {
-	.site-title {
-		margin-top: 1.5rem;
-	}
-	.site-title h1 a {
-		font-size: 2.4rem;
-	}
-	.navbar-form {
-		border: none;
-		box-shadow: none;
-	}
-	#sticky-nav {
-		float: right;
-		height: 5rem;
-		width: 25%;
-	}
-	.form-group {
-		display: none;
-	}
-	#sticky-nav button.btn.sympl-search {
-		float: right;
-		position: relative;
-		top: -1rem;
-		width: 4rem;
-	}
-}
-@media (max-width: 1054px) {
-	#sticky-nav .navbar-btn {
-		display: none;
-	}
-}
 /* End of Header */
 
-
+.below-nav-links {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+.below-nav-links p {
+	float:right;
+	margin-top:.5em;
+	font-size: 90%;
+}
+.below-nav-links a {
+  color: #594036;
+  opacity: .67;
+  float: left;
+}
+.below-nav-links a:hover {
+  border-bottom: 2px solid #594036;
+  color: #594036;
+  opacity: .67;
+  text-decoration: none;
+}
+.below-nav-links a:visited {
+  color: 594036;
+  opacity: .67;
+}
+.below-nav-links a {
+  transition: none;
+  margin-right: 1.25em;
+}
 
 /* Results Page */
 .container-fluid {
 	padding-top: 1.5rem;
-}
-@media (min-width: 1700px) {
-	.container-fluid {
-		max-width: 1700px;
-	}
 }
 /* facet panel */
 #search-facets {
@@ -737,26 +728,6 @@ h4.individual_overview {
 	margin-bottom: 1rem;
 	padding: .6rem 1rem;
 }
-/*#individual-info header {
-	margin-bottom: 5rem;
-}
-#individual-info h3 {
-	margin-top: 1rem;
-	margin-bottom: 0;
-}
-#individual-info h4 {
-	border: 5px solid pink;
-	font-weight: 600;
-}
-#individual-info a {
-	border-bottom: 1px dashed #831B1B;
-	color: #831B1B;
-	text-decoration: none;
-}
-#individual-info a:hover {
-	border-bottom: 1px dashed #C00404;
-	color: #C00404;
-}*/
 .tabFinder > p {
 	margin: 1.2rem 1.2rem 0 1.2rem;
 }
@@ -904,40 +875,10 @@ td.citation-data.pub-item {
 #tabAffiliations .panel-body-credentials td:nth-child(3) {
 	width: 11rem;
 }
-@media (max-width: 767px) {
-	.person-content .container {
-		max-width: 100%;
-	}
-	.share-contact h2 {
-		color: #fff;
-	}
-	.btn-group-vertical .btn {
-		font-size: 2.4rem;
-		padding: 3rem 1.5rem;
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-	.person-content .container {
-		width: 100%;
-		max-width: 100%;
-		padding: 0 2.5rem 0 7rem;
-	}
-}
-@media screen and (min-width: 1200px) and (max-width: 1379px) {
-	.person-content > .container {
-		max-width: 70%;
-	}
-}
-@media screen and (min-width: 1380px) and (max-width: 1560px) {
-	.person-content > .container {
-		max-width: 62%;
-	}
-}
 /* End of Individual Page */
 
 
 /* Organization Page */
-
 .container.organization-page {
 	padding: 5rem 3rem 5rem 0;
 }
@@ -1022,4 +963,173 @@ td.citation-data.pub-item {
 /* End of Organization Page */
 
 
-/*** Breakpoints ***/
+/*** General Breakpoints ***/
+@media (max-width: 767px) { /* mobile phone */
+	.site-title {
+		margin-top: 1.5rem;
+	}
+	.site-title h1 a {
+		font-size: 2.4rem;
+	}
+	.navbar-form {
+		border: none;
+		box-shadow: none;
+	}
+	#sticky-nav {
+		float: right;
+		height: 5rem;
+		width: 25%;
+	}
+	.form-group {
+		display: none;
+	}
+	#sticky-nav button.btn.sympl-search {
+		float: right;
+		position: relative;
+		top: -1rem;
+		width: 4rem;
+	}
+	.subnavbar {
+		min-height: 3rem;
+	}
+	.results-wrapper {
+		padding-left: 0;
+	}
+	.expert-results {
+		min-width: 27rem;
+	}
+	.expert-results .results__photo {
+		margin-right: 2rem;
+		/* !!! I need to sort out the general and specific breakpoints because of cascading conflicts*/
+	}
+	.expert-results .results__photo img {
+		width: 100px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
+
+}
+
+/*** Specific Breakpoints ***/
+/* header */
+@media (max-width: 1245px) {
+	#sticky-nav .navbar-btn {
+		display: none;
+	}
+}
+
+/* results page */
+@media (min-width: 768px) and (max-width: 1024px) {
+	ul.pagination.pagination-lg li:nth-child(1) a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li:nth-last-child(1) a {
+		padding: 1rem 1.2rem;
+	}
+}
+@media (max-width: 991px) {
+	.result-nums-breadcrumbs-wrapper {
+		margin-bottom: 1.5rem;
+	}
+	.expert-results {
+		min-height: 10rem;
+		max-height: 24rem;
+		margin-bottom: 1.5rem;
+	}
+	.expert-results .gap30 {
+		display: none;
+	}
+	.expert-results #individual-intro {
+		margin: 0;
+	}
+	.expert-results .share-contact {
+		background-color: #594036;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		min-height: 20rem;
+		max-height: 24rem;
+	}
+	.expert-results .share-contact--bottom {
+		display: none;
+	}
+	.expert-results .results__photo {
+		margin: 0;
+		margin-right: 4rem;
+		position: relative;
+	}
+	.contact-content {
+		margin: 0;
+		position: relative;
+		text-align: left;
+	}
+	.contact-content a {
+		padding: 0;
+		font-size: 2.4rem;
+	}
+	.contact-content a:hover {
+		border-left: none;
+		color: #ddd;
+		padding-left: 0;
+		transition-property: color;
+		transition-delay: 0s;
+		transition-duration: .3s;
+		transition-timing-function: ease;
+	}
+	.contact-content .results-title {
+		font-size: 1.8rem;
+	}
+	.emailsContainer .glyphicon-envelope {
+		color: #fff;
+	}
+	.emailsContainer .glyphicon-envelope:hover {
+		color: #ddd;
+	}
+}
+@media (min-width: 1700px) {
+	.container-fluid {
+		max-width: 1700px;
+	}
+}
+
+/* profile page */
+@media (max-width: 438px) {
+	.subnavbar {
+		min-height: 5rem;
+		max-height: 15rem;
+	}
+}
+@media (max-width: 767px) {
+	.person-content .container {
+		max-width: 100%;
+	}
+	.share-contact h2 {
+		color: #fff;
+	}
+	.btn-group-vertical .btn {
+		font-size: 2.4rem;
+		padding: 3rem 1.5rem;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+	.person-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 2.5rem 0 7rem;
+	}
+}
+@media screen and (min-width: 1200px) and (max-width: 1379px) {
+	.person-content > .container {
+		max-width: 70%;
+	}
+}
+@media screen and (min-width: 1380px) and (max-width: 1560px) {
+	.person-content > .container {
+		max-width: 62%;
+	}
+}

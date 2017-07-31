@@ -147,63 +147,64 @@
 <div class="container-fluid col-sm-12">
   <div class="row">
     <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
+    <div class="result-nums-breadcrumbs-wrapper">
+        <% if @presenter.num_found == 0 %>
+          <div id="search-result-none">
+            <p>No results were found for <b><%= @presenter.query %></b>.
 
-      <% if @presenter.num_found == 0 %>
-        <div id="search-result-none">
-          <p>No results were found for <b><%= @presenter.query %></b>.
+            <% if @presenter.suggest_url != nil %>
+              <p>Would you like to search for
+                <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
+                instead?</p>
+              <% end %>
+          </div>
+        <% else %>
+          <!-- 1/N results found -->
+          <div id="search-result-count" class="text-muted">
+              <% if @presenter.page == 1 %>
+                « Previous |
+              <% else %>
+                <a href="<%= @presenter.previous_url %>" >« Previous | </a>
+              <% end %>
 
-          <% if @presenter.suggest_url != nil %>
-            <p>Would you like to search for
+              <span id="search-page-start"><%= @presenter.start + 1 %></span>
+              -
+              <span id="search-page-end"><%= @presenter.end %></span>
+              of
+              <span id="search-total-matching"><%= @presenter.num_found %></span>
+              search results
+
+              <% if @presenter.page >= (@presenter.num_pages) %>
+                | Next »
+              <% else %>
+                <a href="<%= @presenter.next_url %>" >| Next »</a>
+              <% end %>
+          </div>
+        <% end %>
+
+        <!-- search terms used -->
+        <div class="facet-breadcrumbs">
+          <% if !@presenter.query.empty? %>
+            for <b><%= @presenter.query %></b>
+            <a href="<%= @presenter.remove_q_url %>">
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class="sr-only">Remove search term <%= @presenter.query %></span>
+            </a>
+          <% end %>
+          <% @presenter.fq.each do |fq| %>
+            (<%= fq.title %> > <%= fq.value %>
+              <a href="<%= fq.remove_url %>">
+                <span class="glyphicon glyphicon-remove"></span>
+                <span class="sr-only">Remove facet <%= fq.value %></span>
+              </a>)
+          <% end %>
+
+          <% if @presenter.num_found > 0 && @presenter.suggest_url != nil %>
+            <p>Would you like to see additional results for
               <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
               instead?</p>
-            <% end %>
+          <% end %>
         </div>
-      <% else %>
-        <!-- 1/N results found -->
-        <div id="search-result-count" class="text-muted">
-            <% if @presenter.page == 1 %>
-              « Previous |
-            <% else %>
-              <a href="<%= @presenter.previous_url %>" >« Previous | </a>
-            <% end %>
-
-            <span id="search-page-start"><%= @presenter.start + 1 %></span>
-            -
-            <span id="search-page-end"><%= @presenter.end %></span>
-            of
-            <span id="search-total-matching"><%= @presenter.num_found %></span>
-            search results
-
-            <% if @presenter.page >= (@presenter.num_pages) %>
-              | Next »
-            <% else %>
-              <a href="<%= @presenter.next_url %>" >| Next »</a>
-            <% end %>
-        </div>
-      <% end %>
-
-      <!-- search terms used -->
-      <div class="facet-breadcrumbs">
-        <% if !@presenter.query.empty? %>
-          for <b><%= @presenter.query %></b>
-          <a href="<%= @presenter.remove_q_url %>">
-            <span class="glyphicon glyphicon-remove"></span>
-            <span class="sr-only">Remove search term <%= @presenter.query %></span>
-          </a>
-        <% end %>
-        <% @presenter.fq.each do |fq| %>
-          (<%= fq.title %> > <%= fq.value %>
-            <a href="<%= fq.remove_url %>">
-              <span class="glyphicon glyphicon-remove"></span>
-              <span class="sr-only">Remove facet <%= fq.value %></span>
-            </a>)
-        <% end %>
-
-        <% if @presenter.num_found > 0 && @presenter.suggest_url != nil %>
-          <p>Would you like to see additional results for
-            <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
-            instead?</p>
-        <% end %>
       </div>
 
       <h2 class="visible-print">Results</h2>
@@ -224,7 +225,7 @@
 
 <!-- RESULTS ITEM BEGINS -->
             <div class="clearfix visible-xs-block"></div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
               <div class="gap30"></div>
               <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
                 <div class="emailsContainer">
@@ -243,7 +244,7 @@
                         <a href="<%= item.uri %>"><%= item.name %></a>
                       </span>
                     </h4>
-                    <%= item.title %>
+                    <span class="results-title"><%= item.title %></span>
                   </div>
                 </section>
               </section>
