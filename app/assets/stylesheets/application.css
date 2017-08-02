@@ -184,7 +184,8 @@ a.manage-profile-link:visited {
 
 /* Results Page */
 .container-fluid {
-	padding-top: 1.5rem;
+	padding-top: 0rem;
+	margin-top: -2rem;
 }
 /* facet panel */
 #search-facets {
