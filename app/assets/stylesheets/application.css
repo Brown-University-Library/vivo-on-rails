@@ -146,6 +146,12 @@ a.manage-profile-link:visited {
 }
 /* End of Header */
 
+.subnavbar { /* a quick fix to add some styles to the advanced search / login links */
+/*	background-color: #B9B9B8;*/
+	background-color: rgba(0, 0, 0, .15);
+	height: 3.75rem;
+	position: relative;
+}
 .below-nav-links {
 	margin-bottom: 0;
 	padding-bottom: 0;
@@ -154,6 +160,7 @@ a.manage-profile-link:visited {
 	float:right;
 	margin-top:.5em;
 	font-size: 90%;
+	font-weight: bold; /* a quick fix to add some styles to the advanced search / login links */
 }
 .below-nav-links a {
   color: #594036;
@@ -524,12 +531,13 @@ a.manage-profile-link:visited {
 .container.profile {
 	background-color: #F5F2EC;
 	display: inline-block;
-	min-height: calc(100vh - 230px);
+	float: left;
+	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	width: 100%;
 	margin-bottom: -70px;
-	padding: 0;
-	position: relative;
-	top: -70px;
+	padding: 0 0 6rem 0;
+	position: relative; /* a quick fix to add some styles to the advanced search / login links */
+	top: -16px; /* a quick fix to add some styles to the advanced search / login links */
 }
 .container .person-content {
 	display: flex;
@@ -538,7 +546,7 @@ a.manage-profile-link:visited {
 }
 .person-content .container {
 	background-color: #fff;
-	min-height: calc(100vh - 230px);
+	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	max-width: 76%;
 	padding: 0;
 }
@@ -598,7 +606,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 }
 .person-content #individual-intro .emailsContainer {
 	justify-content: center;
-	margin-bottom: 1rem;
+	padding-bottom: 1rem;
 	position: relative;
 }
 .person-content #individual-intro .emailsContainer .glyphicon-envelope {
@@ -620,7 +628,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 .profile .share-contact {
 	background-color: #222;
 	border: none;
-	height: 100%;
+	height: auto;
 	padding: 4rem 0;
 }
 .btn-default {
@@ -658,6 +666,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 	background-color: #fff;
 	border-left: solid 6px #E8D98B;
 	color: #000;
+	cursor: default;
 	font-weight: bold;
 }
 .btn-group-vertical > .btn:focus {
@@ -1005,6 +1014,10 @@ td.citation-data.pub-item {
 	.expert-results .results__photo img {
 		width: 100px;
 	}
+	.footer {
+		float: left;
+		width: 100%;
+	}
 }
 
 @media (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
@@ -1013,7 +1026,7 @@ td.citation-data.pub-item {
 
 /*** Specific Breakpoints ***/
 /* header */
-@media (max-width: 1245px) {
+@media (max-width: 1270px) {
 	#sticky-nav .navbar-btn {
 		display: none;
 	}
@@ -1062,10 +1075,14 @@ td.citation-data.pub-item {
 		margin: 0;
 		margin-right: 4rem;
 		position: relative;
+		top: auto;
+		bottom: auto;
 	}
 	.contact-content {
 		margin: 0;
 		position: relative;
+		top: auto;
+		bottom: auto;
 		text-align: left;
 	}
 	.contact-content a {
@@ -1100,8 +1117,11 @@ td.citation-data.pub-item {
 /* profile page */
 @media (max-width: 438px) {
 	.subnavbar {
-		min-height: 5rem;
+		min-height: 5.5rem;  /* a quick fix to add some styles to the advanced search / login links */
 		max-height: 15rem;
+	}
+	.container.profile {  /* a quick fix to add some styles to the advanced search / login links */
+		top: 0;
 	}
 }
 @media (max-width: 767px) {
