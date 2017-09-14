@@ -162,22 +162,31 @@
           <!-- 1/N results found -->
           <div id="search-result-count" class="text-muted">
               <% if @presenter.page == 1 %>
-                « Previous |
+                <span class="search-result-previous">
+<!--                 « Previous | --><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous 
+                </span>
               <% else %>
-                <a href="<%= @presenter.previous_url %>" >« Previous | </a>
+                <span class="search-result-previous">
+                  <a href="<%= @presenter.previous_url %>" ><!-- « Previous |  --><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous </a>
+                </span>
               <% end %>
-
-              <span id="search-page-start"><%= @presenter.start + 1 %></span>
-              -
-              <span id="search-page-end"><%= @presenter.end %></span>
-              of
-              <span id="search-total-matching"><%= @presenter.num_found %></span>
-              search results
+              <span class="search-result-numbers">
+                <span id="search-page-start"><%= @presenter.start + 1 %></span>
+                -
+                <span id="search-page-end"><%= @presenter.end %></span>
+                of
+                <span id="search-total-matching"><%= @presenter.num_found %></span>
+                search results
+              </span>
 
               <% if @presenter.page >= (@presenter.num_pages) %>
-                | Next »
+                <span class="search-result-next">
+<!--                 | Next » --> Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </span>
               <% else %>
-                <a href="<%= @presenter.next_url %>" >| Next »</a>
+                <span class="search-result-next">
+                  <a href="<%= @presenter.next_url %>" ><!-- | Next » --> Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                </span>
               <% end %>
           </div>
         <% end %>
@@ -192,11 +201,13 @@
             </a>
           <% end %>
           <% @presenter.fq.each do |fq| %>
-            (<%= fq.title %> > <%= fq.value %>
-              <a href="<%= fq.remove_url %>">
-                <span class="glyphicon glyphicon-remove"></span>
-                <span class="sr-only">Remove facet <%= fq.value %></span>
-              </a>)
+            <span class="search-result-facets">
+              (<%= fq.title %> > <%= fq.value %>
+                <a href="<%= fq.remove_url %>">
+                  <span class="glyphicon glyphicon-remove"></span>
+                  <span class="sr-only">Remove facet <%= fq.value %></span>
+                </a>)
+            </span>
           <% end %>
 
           <% if @presenter.num_found > 0 && @presenter.suggest_url != nil %>

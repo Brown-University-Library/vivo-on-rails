@@ -229,7 +229,7 @@ a.manage-profile-link:visited {
 	padding-left: 1.3rem;
 	margin-left: -.3rem;
 }
-.panel-body ul li:hover span {
+.panel-body ul li:hover span { /* this overrides some default Bootstrap styles once the panel links are clicked */
 	color: #594036;
 	cursor: default;
 	transition-property: color;
@@ -305,7 +305,7 @@ a.manage-profile-link:visited {
 	opacity: .8;
 	transition-property: opacity;
 	transition-delay: 0s;
-	transition-duration: .5s;
+	transition-duration: .2s;
 	transition-timing-function: ease;
 }
 .modal-header h4 {
@@ -318,6 +318,7 @@ a.manage-profile-link:visited {
 }
 .modal-body ul li {
 	color: #000;
+	cursor: default;
 	margin-left: 1.5rem;
 	padding-left: 0;
 }
@@ -325,10 +326,6 @@ a.manage-profile-link:visited {
 	color: #000;
 	border-left: 5px solid #E8D98B;
 	margin-left: -.3rem;
-	transition-property: color;
-	transition-delay: 0s;
-	transition-duration: .1s;
-	transition-timing-function: ease;
 }
 .modal-body ul li:hover a {
 	color: #000;
@@ -351,7 +348,7 @@ a.manage-profile-link:visited {
 	cursor: default;
 }
 .modal-footer .btn.active:hover {
-	background-color: #B9B9B8;
+	background-color: #E8D98B;
 	box-shadow: none;
 }
 .modal-footer .btn.disabled {
@@ -368,6 +365,53 @@ a.manage-profile-link:visited {
 .results-wrapper {
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	padding-right: 0;
+}
+#search-result-count {
+	cursor: default;
+	margin: 1rem 0 1.5rem 0;
+}
+#search-result-count .search-result-previous {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	position: relative;
+	padding: 1rem;
+}
+#search-result-count .search-result-previous:after {
+	content: "";
+	position: absolute;
+	top: 5%;
+	right: 0;
+	width: 1px;
+	height: 90%;
+	background: black;
+}
+#search-result-count .search-result-next {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	position: relative;
+	padding: 1rem;
+}
+#search-result-count .search-result-next:before {
+	content: "";
+	position: absolute;
+	top: 5%;
+	left: 0;
+	width: 1px;
+	height: 90%;
+	background: black;
+}
+#search-result-count .search-result-numbers {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	position: relative;
+	padding: 1rem;
+}
+.facet-breadcrumbs .search-result-facets {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	display: inline-block;
+	margin: 0 -.4rem .5rem 0; /* negative margin to remove white space between inline-block span elements */
+	padding: 1rem;
 }
 #search-result-count, .facet-breadcrumbs {
 	padding-left: 15px;
