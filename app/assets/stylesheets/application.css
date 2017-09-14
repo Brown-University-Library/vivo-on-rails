@@ -840,8 +840,10 @@ td.citation-data.pub-item {
 	padding: .6rem .9rem;
 }
 .pub-item-tag.label {
-	border: .2rem solid #888;
-	color: #666;
+	background-color: #594036;
+	border-radius: 0;
+	color: #fff;
+	cursor: default;
 }
 #section_overview table a.pub-item-tag.full-text-link {
 	border: .2rem solid #594036;
