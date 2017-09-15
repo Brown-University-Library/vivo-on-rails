@@ -202,11 +202,11 @@
           <% end %>
           <% @presenter.fq.each do |fq| %>
             <span class="search-result-facets no-orphans">
-              (<%= fq.title %> > <%= fq.value %>
                 <a href="<%= fq.remove_url %>">
+                  <span><%= fq.title %> | <%= fq.value %></span>
                   <span class="glyphicon glyphicon-remove"></span>
                   <span class="sr-only">Remove facet <%= fq.value %></span>
-                </a>)
+                </a>
             </span>
           <% end %>
 

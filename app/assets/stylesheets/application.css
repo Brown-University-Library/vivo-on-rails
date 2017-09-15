@@ -176,7 +176,7 @@ a.manage-profile-link:visited {
   	align-items: center;
   	justify-content: center;
   	height: 100%;
-  	width: 49%;
+  	width: 49.85%;
 }
 .below-nav-links a:hover {
   background-color: #594036;
@@ -209,6 +209,7 @@ a.manage-profile-link:visited {
 }
 .panel-default {
 	border: 1px solid #333;
+	background-color: #F5F2EC;
 }
 .panel-default > .panel-heading {
 	background-color: #333;
@@ -381,9 +382,10 @@ a.manage-profile-link:visited {
 }
 #search-result-count {
 	cursor: default;
-	margin: 1rem 0 1.5rem 0;
+	margin: 1rem 0 1.8rem 0;
 }
 #search-result-count .search-result-previous {
+/*	background-color: #F5F2EC;*/
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	position: relative;
@@ -399,6 +401,7 @@ a.manage-profile-link:visited {
 	background: black;
 }
 #search-result-count .search-result-next {
+/*	background-color: #F5F2EC;*/
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	position: relative;
@@ -414,17 +417,18 @@ a.manage-profile-link:visited {
 	background: black;
 }
 #search-result-count .search-result-numbers {
+/*	background-color: #F5F2EC;*/
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	position: relative;
 	padding: 1rem;
 }
-.facet-breadcrumbs .search-result-facets {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
+.facet-breadcrumbs .search-result-facets a {
+	border: 1px solid gray;
+	border-radius: 5px;
 	display: inline-block;
-	margin: 0 -.4rem .5rem 0; /* negative margin to remove white space between inline-block span elements */
-	padding: 1rem;
+	margin: 0 0 .5rem 0; /* negative margin to remove white space between inline-block span elements */
+	padding: .5rem .8rem;
 }
 #search-result-count .glyphicon {
 	color: #333;
