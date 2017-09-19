@@ -154,45 +154,58 @@ a.manage-profile-link:visited {
 	position: relative;
 }
 .below-nav-links {
-	background-color: #594036;
-	border-bottom-left-radius: 25px;
-	border-bottom-right-radius: 25px;
-	box-shadow: 0 1px 5px 1px #E4E4E4;
 	padding: 0;
+	position: absolute;
+	top: 3.5rem;
+	z-index: 10;
 }
 .below-nav-links p {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	font-size: 90%;
 	font-weight: bold; /* a quick fix to add some styles to the advanced search / login links */
 	height: 3rem;
 	margin: 0;
+	position: relative;
+}
+.below-nav-links p span {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 50%;
+}
+.advanced-search {
+	left: 0;
+}
+.advanced-search:after {
+	content: "";
+	position: absolute;
+	top: 5%;
+	right: 0;
+	width: 1px;
+	height: 90%;
+	background: #000b;
+}
+.profile-login {
+	right: 0;
 }
 .below-nav-links a {
-	background-color: #F5F2EC;
   	color: #594036;
   	display: flex;
   	align-items: center;
   	justify-content: center;
   	height: 100%;
-  	width: 49.85%;
+  	width: 100%;
+  	padding: 1rem 0;
 }
 .below-nav-links a:hover {
   background-color: #594036;
-  color: white;
+  color: #fff;
   text-decoration: none;
 }
 .below-nav-links a:visited {
   color: 594036;
   opacity: .67;
 }
-.below-nav-links a:nth-child(1) {
-	border-bottom-left-radius: 20px;
-}
-.below-nav-links a:nth-child(2) {
-	border-bottom-right-radius: 20px;
-}
+
 
 
 /* Results Page */
@@ -381,13 +394,13 @@ a.manage-profile-link:visited {
 	padding-right: 0;
 }
 #search-result-count {
-	cursor: default;
-	margin: 1rem 0 1.8rem 0;
-}
-#search-result-count .search-result-previous {
-/*	background-color: #F5F2EC;*/
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
+	cursor: default;
+	margin: 0 1.5rem 1.8rem 1.5rem;
+	padding: 1rem 0;
+}
+#search-result-count .search-result-previous {
 	position: relative;
 	padding: 1rem;
 }
@@ -401,9 +414,6 @@ a.manage-profile-link:visited {
 	background: black;
 }
 #search-result-count .search-result-next {
-/*	background-color: #F5F2EC;*/
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
 	position: relative;
 	padding: 1rem;
 }
@@ -417,11 +427,11 @@ a.manage-profile-link:visited {
 	background: black;
 }
 #search-result-count .search-result-numbers {
-/*	background-color: #F5F2EC;*/
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
 	position: relative;
 	padding: 1rem;
+}
+.facet-breadcrumbs {
+	padding-left: 1.5rem;
 }
 .facet-breadcrumbs .search-result-facets a {
 	border: 1px solid gray;
@@ -443,9 +453,6 @@ a.manage-profile-link:visited {
 }
 #search-result-count .is-inactive {
 	color: #aaa;
-}
-#search-result-count, .facet-breadcrumbs {
-	padding-left: 15px;
 }
 #search-result-count a, .text-muted {
 	color: #555;
@@ -1104,7 +1111,97 @@ td.citation-data.pub-item {
 }
 
 /* results page */
+@media (max-width: 320px) {
+	#search-result-count .search-result-numbers { /* this needs a better solution/a wrapper. breaks at 1000+ */
+		padding: 1rem;
+	}
+}
+@media (min-width: 321px) and (max-width: 438px) { /* this needs a better solution/a wrapper. breaks at 1000+ */
+	#search-result-count .search-result-numbers {
+		padding: 1rem 2rem;
+	}
+}
+@media (max-width: 438px) {
+	.site-title h1 a {
+		font-size: 2rem;
+	}
+	.subnavbar {
+		display: none;
+	}
+	.container-fluid {
+		margin: 0;
+	}
+	#search-facets {
+		display: none; /* temporary while getting the results-wrapper positioning right */
+		position: absolute;
+		top: 0;
+	}
+	.results-wrapper {
+		top: -5rem;
+	}
+	.result-nums-breadcrumbs-wrapper {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: .5rem;
+		width: 100%;
+	}
+	#search-result-count {
+		display: flex;
+		margin: 1rem .5rem 1.5rem .5rem;
+		padding: 0;
+		height: 4rem;
+		width: 97%;
+	}
+	#search-result-count a {
+		padding: 1rem;
+	}
+	.search-result-previous {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 15%;
+	}
+	.search-result-numbers {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 70%;
+	}
+	.search-result-next {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 15%;
+	}
+	.chevron-nav-title {
+		display: none;
+	}
+	#search-result-count .glyphicon-chevron-right {
+		margin: 0;
+	}
+	#search-result-count .glyphicon-chevron-left {
+		margin: 0;
+	}
+	.facet-category {
+		display: none;
+	}
+}
 @media (min-width: 768px) and (max-width: 1024px) {
+	.chevron-nav-title {
+		display: none;
+	}
+	.below-nav-links {
+		right: 3rem;
+	}
+	.below-nav-links p span {
+		width: 70%;
+	}
+	.advanced-search {
+		display: none;
+	}
+	.results-wrapper {
+		padding: 0;
+	}
 	ul.pagination.pagination-lg li:nth-child(1) a {
 		padding: 1rem 1.2rem;
 	}
@@ -1115,10 +1212,12 @@ td.citation-data.pub-item {
 		padding: 1rem 1.2rem;
 	}
 }
-@media (max-width: 991px) {
+@media (min-width: 439px) and (max-width: 991px) {
 	.result-nums-breadcrumbs-wrapper {
 		margin-bottom: 1.5rem;
 	}
+}
+@media (max-width: 991px) {
 	.expert-results {
 		min-height: 10rem;
 		max-height: 24rem;
@@ -1180,17 +1279,20 @@ td.citation-data.pub-item {
 	}
 }
 @media (min-width: 1700px) {
-	.container-fluid {
-		max-width: 1700px;
+	.results-row {
+		max-width: 1600px;
+	}
+	.pagination {
+		max-width: 1600px;
 	}
 }
 
 /* profile page */
 @media (max-width: 438px) {
-	.subnavbar {
-		min-height: 5.5rem;  /* a quick fix to add some styles to the advanced search / login links */
+/*	.subnavbar {
+		min-height: 5.5rem;
 		max-height: 15rem;
-	}
+	}*/
 	.container.profile {  /* a quick fix to add some styles to the advanced search / login links */
 		top: 0;
 	}

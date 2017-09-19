@@ -163,11 +163,11 @@
           <div id="search-result-count" class="text-muted">
               <% if @presenter.page == 1 %>
                 <span class="search-result-previous">
-<!--                 « Previous | --><span class="glyphicon glyphicon-chevron-left is-inactive" aria-hidden="true"></span>Previous 
+                  <span class="glyphicon glyphicon-chevron-left is-inactive" aria-hidden="true"></span><span class="chevron-nav-title"> Previous</span>
                 </span>
               <% else %>
                 <span class="search-result-previous">
-                  <a href="<%= @presenter.previous_url %>" ><!-- « Previous |  --><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous </a>
+                  <a href="<%= @presenter.previous_url %>" ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="chevron-nav-title"> Previous </span></a>
                 </span>
               <% end %>
               <span class="search-result-numbers">
@@ -180,12 +180,11 @@
               </span>
 
               <% if @presenter.page >= (@presenter.num_pages) %>
-                <span class="search-result-next">
-<!--                 | Next » --> Next<span class="glyphicon glyphicon-chevron-right is-inactive" aria-hidden="true"></span>
+                <span class="search-result-next"><span class="chevron-nav-title">Next </span><span class="glyphicon glyphicon-chevron-right is-inactive" aria-hidden="true"></span>
                 </span>
               <% else %>
                 <span class="search-result-next">
-                  <a href="<%= @presenter.next_url %>" ><!-- | Next » --> Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                  <a href="<%= @presenter.next_url %>" ><span class="chevron-nav-title">Next </span><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
                 </span>
               <% end %>
           </div>
@@ -203,7 +202,7 @@
           <% @presenter.fq.each do |fq| %>
             <span class="search-result-facets no-orphans">
                 <a href="<%= fq.remove_url %>">
-                  <span><%= fq.title %> | <%= fq.value %></span>
+                  <span><span class="facet-category"><%= fq.title %> | </span><%= fq.value %></span>
                   <span class="glyphicon glyphicon-remove"></span>
                   <span class="sr-only">Remove facet <%= fq.value %></span>
                 </a>
