@@ -220,7 +220,7 @@ a.manage-profile-link:visited {
 }
 .panel-default {
 	border: 1px solid #333;
-	background-color: #F5F2EC;
+/*	background-color: #F5F2EC;*/
 }
 .panel-default > .panel-heading {
 	background-color: #333;
@@ -615,6 +615,7 @@ a.manage-profile-link:visited {
 	float: left;
 	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	width: 100%;
+	margin-top: -3.9rem;
 	margin-bottom: -70px;
 	padding: 0 0 6rem 0;
 	position: relative; /* a quick fix to add some styles to the advanced search / login links */
