@@ -146,17 +146,15 @@ a.manage-profile-link:visited {
 }
 /* End of Header */
 
-.subnavbar { /* a quick fix to add some styles to the advanced search / login links */
-/*	background-color: #B9B9B8;*/
-	height: 3rem;
-	width: 100%;
-	padding-right: 20px;
+.subnavbar {
 	position: relative;
 }
 .below-nav-links {
 	padding: 0;
 	position: absolute;
-	top: 3.5rem;
+	top: 2.5rem;
+	right: 3rem;
+	width: 300px;
 	z-index: 10;
 }
 .below-nav-links p {
@@ -167,22 +165,22 @@ a.manage-profile-link:visited {
 	position: relative;
 }
 .below-nav-links p span {
-	position: absolute;
 	margin: 0;
 	padding: 0;
+	position: absolute;
 	width: 50%;
 }
 .advanced-search {
 	left: 0;
 }
 .advanced-search:after {
+	background: #000;
 	content: "";
+	height: 90%;
+	width: 1px;
 	position: absolute;
 	top: 5%;
 	right: 0;
-	width: 1px;
-	height: 90%;
-	background: #000b;
 }
 .profile-login {
 	right: 0;
@@ -211,7 +209,7 @@ a.manage-profile-link:visited {
 /* Results Page */
 .container-fluid {
 	padding-top: 0rem;
-	margin-top: -2rem;
+	margin-top: -3rem;
 }
 /* facet panel */
 #search-facets {
@@ -1051,14 +1049,39 @@ td.citation-data.pub-item {
 
 
 /*** General Breakpoints ***/
-@media (max-width: 767px) { /* mobile phone */
+@media (max-width: 600px) {
+	.site-title h1 a {
+		font-size: 2rem;
+	}
+	#search-facets {
+		display: none; /* temporary while getting the results-wrapper positioning right */
+		position: absolute;
+		top: 0;
+	}
+}
+@media (max-width: 767px) {
 	.site-title {
 		margin-top: 1.5rem;
 	}
 	.site-title h1 a {
 		font-size: 2.4rem;
 	}
+	#sticky-nav	{
+		background-color: red;
+		float: right;
+		height: 3rem !important;
+		width: calc(50% - 1.5rem);
+		top: 1.5rem;
+		right: 1.5rem;
+	}
 	.navbar-form {
+		background-color: green;
+		border: none;
+		box-shadow: none;
+		min-height: 2rem;
+		max-height: 3rem;
+	}
+	/*.navbar-form {
 		border: none;
 		box-shadow: none;
 	}
@@ -1075,12 +1098,47 @@ td.citation-data.pub-item {
 		position: relative;
 		top: -1rem;
 		width: 4rem;
-	}
+	}*/
 	.subnavbar {
-		min-height: 3rem;
+		border-top: 1px solid #000;
+		border-bottom: 1px solid #000;
+		height: 4.5rem;
+		margin: 0 1.5rem;
+		top: 1.5rem;
+	}
+	.below-nav-links { /* create hamburger menu */
+		display: none;
+	}
+	.container-fluid {
+		margin: 0;
+		top: 2rem;
 	}
 	.results-wrapper {
 		padding-left: 0;
+	}
+	#search-result-count {
+		height: 4.5rem;
+		width: calc(100% - 3rem);
+	}
+	#search-result-count {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.search-result-previous {
+		text-align: left;
+		width: 20%;
+	}
+	.search-result-numbers {
+		text-align: center;
+		width: 60%;
+	}
+	.search-result-next {
+		text-align: right;
+		width: 20%;
+	}
+	.facet-category {
+		display: none;
 	}
 	.expert-results {
 		min-width: 27rem;
@@ -1097,12 +1155,51 @@ td.citation-data.pub-item {
 		width: 100%;
 	}
 }
-
 @media (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
-
+	.container-fluid {
+		margin-top: -3.5rem;
+	}
+	.below-nav-links {
+		top: 2rem;
+	}
+	.results-wrapper {
+/*		border: 5px solid blue;*/
+	}
 }
 
 /*** Specific Breakpoints ***/
+@media (max-width: 440px) { /* search result numbers */
+	.search-result-previous {
+		width: 12%;
+	}
+	.search-result-numbers {
+		width: 76%;
+	}
+	.search-result-next {
+		width: 12%;
+	}
+	.chevron-nav-title {
+		display: none;
+	}
+	#search-result-count .glyphicon-chevron-left {
+		margin: 0;
+		padding-right: 4px;
+	}
+	#search-result-count .glyphicon-chevron-right {
+		margin: 0;
+	}
+}
+@media (min-width: 441px) and (max-width: 540px) {
+	.search-result-previous {
+		width: 25%;
+	}
+	.search-result-numbers {
+		width: 50%;
+	}
+	.search-result-next {
+		width: 25%;
+	}
+}
 /* header */
 @media (max-width: 1270px) {
 	#sticky-nav .navbar-btn {
@@ -1111,6 +1208,16 @@ td.citation-data.pub-item {
 }
 
 /* results page */
+@media (min-width: 768px) and (max-width: 991px) { /* subnavbar */
+	.advanced-search {
+		display: none;
+	}
+}
+@media (min-width: 768px) and (max-width: 1000px) { /* result nums and nav */
+	.chevron-nav-title {
+		display: none;
+	}
+}
 @media (max-width: 320px) {
 	#search-result-count .search-result-numbers { /* this needs a better solution/a wrapper. breaks at 1000+ */
 		padding: 1rem;
@@ -1121,84 +1228,7 @@ td.citation-data.pub-item {
 		padding: 1rem 2rem;
 	}
 }
-@media (max-width: 438px) {
-	.site-title h1 a {
-		font-size: 2rem;
-	}
-	.subnavbar {
-		display: none;
-	}
-	.container-fluid {
-		margin: 0;
-	}
-	#search-facets {
-		display: none; /* temporary while getting the results-wrapper positioning right */
-		position: absolute;
-		top: 0;
-	}
-	.results-wrapper {
-		top: -5rem;
-	}
-	.result-nums-breadcrumbs-wrapper {
-		display: flex;
-		flex-direction: column;
-		margin-bottom: .5rem;
-		width: 100%;
-	}
-	#search-result-count {
-		display: flex;
-		margin: 1rem .5rem 1.5rem .5rem;
-		padding: 0;
-		height: 4rem;
-		width: 97%;
-	}
-	#search-result-count a {
-		padding: 1rem;
-	}
-	.search-result-previous {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 15%;
-	}
-	.search-result-numbers {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 70%;
-	}
-	.search-result-next {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 15%;
-	}
-	.chevron-nav-title {
-		display: none;
-	}
-	#search-result-count .glyphicon-chevron-right {
-		margin: 0;
-	}
-	#search-result-count .glyphicon-chevron-left {
-		margin: 0;
-	}
-	.facet-category {
-		display: none;
-	}
-}
 @media (min-width: 768px) and (max-width: 1024px) {
-	.chevron-nav-title {
-		display: none;
-	}
-	.below-nav-links {
-		right: 3rem;
-	}
-	.below-nav-links p span {
-		width: 70%;
-	}
-	.advanced-search {
-		display: none;
-	}
 	.results-wrapper {
 		padding: 0;
 	}
