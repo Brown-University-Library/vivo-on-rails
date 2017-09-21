@@ -10,7 +10,8 @@ class HomeController < ApplicationController
   end
 
   def index
-    @bookCovers = BookCoverModel.get_all()
+    base_author_url = display_show_url("")
+    @bookCovers = BookCoverModel.get_all(base_author_url)
   end
 
   def publications

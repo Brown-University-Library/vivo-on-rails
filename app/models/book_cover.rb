@@ -1,9 +1,9 @@
 class BookCoverModel
-  attr_accessor :author_first, :author_last, :author_id,
+  attr_accessor :author_first, :author_last, :author_id, :author_url,
     :title, :pub_date, :image
   BASE_PATH = "https://vivo.brown.edu/themes/rab/images/books"
 
-  def self.get_all()
+  def self.get_all(author_base_url)
     all = []
 
     item = BookCoverModel.new()
@@ -41,6 +41,11 @@ class BookCoverModel
     item.pub_date = "2017"
     item.image = "#{BASE_PATH}/Hanink_ClassicalDebt.jpg"
     all << item
+
+    # Calculate the author URL
+    all.each do |item|
+      item.author_url = author_base_url + item.author_id
+    end
 
     all
   end

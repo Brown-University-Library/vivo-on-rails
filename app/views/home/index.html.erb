@@ -96,35 +96,34 @@
 </div>
 
 <script>
-  var bookCoverImages = [];
-  <% @bookCovers.each do |cover| %>
-    <%= raw 'bookCoverImages.push("' + cover.image + '");' %>
-  <% end %>
+  var bookCovers = <%= raw @bookCovers.to_json() %>;
 
   $(function() {
     $("#q").focus(); // Force focus to the search textbox
-    loadBookCarousel(bookCoverImages);
+    loadBookCarousel(bookCovers);
   });
 
-  function loadBookCarousel(images) {
+  function loadBookCarousel(bookCovers) {
     var template, itemHtml, html, i, link, image, active;
 
     template = '' +
       '<div class="item {active}">' +
       '  <a href="{link}" class="book-cover">' +
-      '    <img src="{image}" width="160">' +
+      '    <img src="{image}" alt="{alt}" title="{title}" width="160">' +
       '  </a>' +
       '</div>';
 
     // Insert the images into the carousel
     html = "";
-    for(i = 0; i < images.length; i++) {
-      link = "http://vivo.brown.edu";
-      image = images[i];
+    for(i = 0; i < bookCovers.length; i++) {
+      cover = bookCovers[i];
+      alt = cover.title + " by " + cover.author_first + " " + cover.author_last;
       active = (i == 0) ? "active" : "";
-      itemHtml = template.replace("{link}", link);
-      itemHtml = itemHtml.replace("{image}", image);
+      itemHtml = template.replace("{link}", cover.author_url);
+      itemHtml = itemHtml.replace("{image}", cover.image);
       itemHtml = itemHtml.replace("{active}", active);
+      itemHtml = itemHtml.replace("{alt}", alt);
+      itemHtml = itemHtml.replace("{title}", cover.title);
       html += itemHtml;
     }
     $("#books-carousel-inner").html(html);
@@ -132,7 +131,7 @@
     // Insert the indicators for the carousel
     template = '<li data-target="#books-carousel" data-slide-to="{i}" class="{active}"></li>';
     html = "";
-    for(i = 0; i < images.length; i++) {
+    for(i = 0; i < bookCovers.length; i++) {
       active = (i == 0) ? "active" : "";
       itemHtml = template.replace("{i}", i);
       itemHtml = itemHtml.replace("{active}", active);
