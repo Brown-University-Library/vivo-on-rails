@@ -26,11 +26,6 @@ class SearchController < ApplicationController
       params.q = "*" if params.q == ""
       params.facet_limit = facet_limit if facet_limit != nil
 
-      if request.params["home"] != nil
-        # default to people if coming from the home page
-        params.fq << SolrLite::FilterQuery.new("record_type", "PEOPLE")
-      end
-
       if ENV["USE_VIVO_SOLR"] == "true"
         search_results = searcher.search(params, [])
       else
