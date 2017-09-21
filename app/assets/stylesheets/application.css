@@ -152,7 +152,7 @@ a.manage-profile-link:visited {
 .below-nav-links {
 	padding: 0;
 	position: absolute;
-	top: 2.5rem;
+	top: 0.2rem;
 	right: 3rem;
 	width: 300px;
 	z-index: 10;
@@ -621,6 +621,32 @@ a.manage-profile-link:visited {
 	position: relative; /* a quick fix to add some styles to the advanced search / login links */
 	top: -16px; /* a quick fix to add some styles to the advanced search / login links */
 }
+.container.profile .subnavbar {
+	height: 0;
+}
+.container.profile .below-nav-links {
+	height: 4.5rem;
+	width: 200px;
+	margin-right: 1.5rem;
+	top: .8rem;
+	right: 0;
+}
+.container.profile .advanced-search {
+	display: none;
+}
+.container.profile .profile-login {
+	margin-top: .3rem;
+	width: 100%;
+}
+.container.profile .profile-login:before {
+	background: #000;
+	content: "";
+	height: 95%;
+	width: 1px;
+	position: absolute;
+	top: 2%;
+	left: 0;
+}
 .container .person-content {
 	display: flex;
 	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -636,6 +662,32 @@ a.manage-profile-link:visited {
 	padding: 0;
 }
 /* left panel */
+.wrapper__back-to-search {
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	height: 4.5rem;
+	margin: .8rem 0 .5rem 0;	
+}
+a.back-to-search {
+	color: #333;
+	display: flex;
+	align-items: center;
+	height: 4rem;
+	margin-right: 2rem;
+	padding: 0 1rem;
+}
+a.back-to-search:after {
+	background: #000;
+	content: "";
+	height: 90%;
+	width: 1px;
+	position: absolute;
+	top: 5%;
+	left: 15rem;
+}
 a.back-to-search .glyphicon-chevron-left {
 	color: #333;
 	margin-right: .5rem;
@@ -651,14 +703,6 @@ a.back-to-search:hover .glyphicon-chevron-left {
 #individual-intro {
 	display: flex;
 	flex-direction: column;
-}
-.person-content #individual-intro > a {
-	border-top: 1px solid #333;
-	border-bottom: 1px solid #333;
-	color: #333;
-	font-weight: bold;
-	margin: .8rem 0 .5rem 0;
-	padding: .5rem 0 .5rem .8rem;
 }
 .person-content #individual-intro #photo-wrapper {
 	margin-bottom: 0;
@@ -967,6 +1011,17 @@ td.citation-data.pub-item {
 /* Organization Page */
 .container.organization-page {
 	padding: 5rem 3rem 5rem 0;
+}
+.container.profile.org-profile .subnavbar {
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	height: 4.5rem;
+}
+.container.profile.org-profile .below-nav-links {
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	margin: .8rem 0 .5rem 0;	
 }
 .org-profile p a {
 	color: #594036;
