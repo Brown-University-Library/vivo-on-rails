@@ -6,30 +6,45 @@
   <div class="tabFinder" id="tabOverview">
     <h3>Overview</h3>
     <p><%= @presenter.faculty.overview.html_safe %></p>
+
     <% if @presenter.faculty.affiliations.count > 0 %>
       <h4 class="brown-affiliations panel-heading">Brown Affiliations</h4>
-      <div class="brown-affiliations-list"><% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
-        <% if i != 0 %>
-          &nbsp;|&nbsp;
+      <div class="brown-affiliations-list">
+        <% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
+          <% if i != 0 %>
+            &nbsp;|&nbsp;
+          <% end %>
+          <% qs = "?fq=affiliations|#{CGI.escape(aff.name)}" %>
+          <a href="<%= search_url() + qs %>">
+            <%= aff.name %>
+          </a>
         <% end %>
-        <% qs = "?fq=affiliations|#{CGI.escape(aff.name)}" %>
-        <a href="<%= search_url() + qs %>">
-          <%= aff.name %>
-        </a>
-      <% end %></div>
+      </div>
     <% end %>
+
     <% if @presenter.faculty.research_areas.count > 0 %>
       <h4 class="research-areas panel-heading">Research Areas</h4>
-      <div class="brown-research-areas-list"><% @presenter.faculty.research_areas.each_with_index do |area, i| %>
-        <% if i != 0 %>
-          &nbsp;|&nbsp;
+      <div class="brown-research-areas-list">
+        <% @presenter.faculty.research_areas.each_with_index do |area, i| %>
+          <% if i != 0 %>
+            &nbsp;|&nbsp;
+          <% end %>
+          <% qs = "?fq=research_areas|#{CGI.escape(area)}" %>
+          <a href="<%= search_url() + qs %>">
+            <%= area %>
+          </a>
         <% end %>
-        <% qs = "?fq=research_areas|#{CGI.escape(area)}" %>
-        <a href="<%= search_url() + qs %>">
-          <%= area %>
-        </a>
-      <% end %></div>
+      </div>
     <% end %>
+
+    <% if @presenter.faculty.on_the_web.count > 0 %>
+      <h4 class="research-areas panel-heading">On the Web</h4>
+      <div class="brown-research-areas-list">
+        <% @presenter.faculty.on_the_web.each do |web| %>
+          <a href="<%= web.url %>" target="_blank"><%= web.text %></a><br/>
+        <% end %>
+      </div>
+    <% end %> <!-- on_the_web.count -->
     <br/><br/>
   </div> <!-- panel -->
 
