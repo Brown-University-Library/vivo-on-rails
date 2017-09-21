@@ -46,50 +46,25 @@
       <div class="gap20"></div>
       <!-- Use bootstrap carousel to showcase faculty members' books, edited in lib-home-page.ftl and homePageUtils.js -->
 
-      <section id="faculty-books-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
-        <div style="display: none;" id="tempSpacing">
-          <span>Loading books . . .&nbsp;&nbsp;&nbsp;
-            <%= image_tag("indicatorWhite.gif") %>
-          </span>
+      <div id="books-carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+        </ol>
+
+        <div id="books-carousel-inner" class="carousel-inner">
         </div>
 
-        <!-- <div id="research-faculty-mbrs" class="carousel-inner" role="listbox"> -->
-        <div class="carousel-inner" role="listbox">
-
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/mgutmann.jpg') %>" width="160">
-            </a>
-          </div>
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/stobin.jpg') %>" width="160">
-            </a>
-          </div>
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/gwood.jpg') %>" width="160">
-            </a>
-          </div>
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/miwhite.jpg') %>" width="160">
-            </a>
-          </div>
-        </div>
-
-        <a class="left carousel-control" href="#faculty-carousel" role="button" data-slide="prev">
+        <a class="left carousel-control" href="#books-carousel" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="right carousel-control" href="#faculty-carousel" role="button" data-slide="next">
+        <a class="right carousel-control" href="#books-carousel" role="button" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-      </section>
-    </div>
-  </div>
-</div>
+      </div> <!-- books-carousel -->
+    </div> <!-- col-md-12 -->
+  </div> <!-- container -->
+</div> <!-- row faculty-home -->
 
 <div class="row recent-books">
 <div class="row icons-home">
@@ -121,8 +96,48 @@
 </div>
 
 <script>
-$(function() {
-  // Force focus to the search textbox
-  $("#q").focus();
-});
+  var bookCoverImages = [];
+  <% @bookCovers.each do |cover| %>
+    <%= raw 'bookCoverImages.push("' + cover.image + '");' %>
+  <% end %>
+
+  $(function() {
+    $("#q").focus(); // Force focus to the search textbox
+    loadBookCarousel(bookCoverImages);
+  });
+
+  function loadBookCarousel(images) {
+    var template, itemHtml, html, i, link, image, active;
+
+    template = '' +
+      '<div class="item {active}">' +
+      '  <a href="{link}" class="book-cover">' +
+      '    <img src="{image}" width="160">' +
+      '  </a>' +
+      '</div>';
+
+    // Insert the images into the carousel
+    html = "";
+    for(i = 0; i < images.length; i++) {
+      link = "http://vivo.brown.edu";
+      image = images[i];
+      active = (i == 0) ? "active" : "";
+      itemHtml = template.replace("{link}", link);
+      itemHtml = itemHtml.replace("{image}", image);
+      itemHtml = itemHtml.replace("{active}", active);
+      html += itemHtml;
+    }
+    $("#books-carousel-inner").html(html);
+
+    // Insert the indicators for the carousel
+    template = '<li data-target="#books-carousel" data-slide-to="{i}" class="{active}"></li>';
+    html = "";
+    for(i = 0; i < images.length; i++) {
+      active = (i == 0) ? "active" : "";
+      itemHtml = template.replace("{i}", i);
+      itemHtml = itemHtml.replace("{active}", active);
+      html += itemHtml;
+    }
+    $(".carousel-indicators").html(html);
+  }
 </script>

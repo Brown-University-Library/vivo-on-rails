@@ -1,3 +1,4 @@
+require "./app/models/book_cover.rb"
 class HomeController < ApplicationController
   def about
   end
@@ -9,6 +10,7 @@ class HomeController < ApplicationController
   end
 
   def index
+    @bookCovers = BookCoverModel.get_all()
   end
 
   def publications
