@@ -44,13 +44,22 @@
       <h2 class="h1">Recent faculty books</h2>
       <h5><em>Click book jacket to view faculty profile</em></h4>
       <div class="gap20"></div>
-      <!-- Use bootstrap carousel to showcase faculty members' books, edited in lib-home-page.ftl and homePageUtils.js -->
 
       <div id="books-carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
+          <% @bookCovers.each_with_index do |cover, i| %>
+            <li data-target="#books-carousel" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>">
+          <% end %>
         </ol>
 
         <div id="books-carousel-inner" class="carousel-inner">
+          <% @bookCovers.each_with_index do |cover, i| %>
+            <div class="item <%= i == 0 ? "active" : "" %>">
+              <a href="<%= cover.author_url %>" class="book-cover">
+                <img src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
+              </a>
+            </div>
+          <% end %>
         </div>
 
         <a class="left carousel-control" href="#books-carousel" role="button" data-slide="prev">
@@ -62,6 +71,7 @@
             <span class="sr-only">Next</span>
         </a>
       </div> <!-- books-carousel -->
+
     </div> <!-- col-md-12 -->
   </div> <!-- container -->
 </div> <!-- row faculty-home -->
@@ -96,48 +106,7 @@
 </div>
 
 <script>
-  var bookCovers = <%= raw @bookCovers.to_json() %>;
-
   $(function() {
     $("#q").focus(); // Force focus to the search textbox
-    loadBookCarousel(bookCovers);
   });
-
-  function loadBookCarousel(bookCovers) {
-    // TODO: Make the call for book cover data via AJAX
-    var template, itemHtml, html, i, link, image, active;
-
-    template = '' +
-      '<div class="item {active}">' +
-      '  <a href="{link}" class="book-cover">' +
-      '    <img src="{image}" alt="{alt}" title="{title}" width="160">' +
-      '  </a>' +
-      '</div>';
-
-    // Insert the images into the carousel
-    html = "";
-    for(i = 0; i < bookCovers.length; i++) {
-      cover = bookCovers[i];
-      alt = cover.title + " by " + cover.author_first + " " + cover.author_last;
-      active = (i == 0) ? "active" : "";
-      itemHtml = template.replace("{link}", cover.author_url);
-      itemHtml = itemHtml.replace("{image}", cover.image);
-      itemHtml = itemHtml.replace("{active}", active);
-      itemHtml = itemHtml.replace("{alt}", alt);
-      itemHtml = itemHtml.replace("{title}", cover.title);
-      html += itemHtml;
-    }
-    $("#books-carousel-inner").html(html);
-
-    // Insert the indicators for the carousel
-    template = '<li data-target="#books-carousel" data-slide-to="{i}" class="{active}"></li>';
-    html = "";
-    for(i = 0; i < bookCovers.length; i++) {
-      active = (i == 0) ? "active" : "";
-      itemHtml = template.replace("{i}", i);
-      itemHtml = itemHtml.replace("{active}", active);
-      html += itemHtml;
-    }
-    $(".carousel-indicators").html(html);
-  }
 </script>
