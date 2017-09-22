@@ -282,6 +282,8 @@ Customise the meet faculty/expert section
 }
 .book-cover {
   text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 /*---------------------------------------------
 Customise the about our research section

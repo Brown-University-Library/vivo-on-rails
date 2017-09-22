@@ -8,7 +8,7 @@ class BookCoverModel
 
   def self.get_all_paginated(author_base_url, page_size)
     @@covers_paginated ||= begin
-      puts "Calculating paginated covers..."
+      logger.info "Calculating paginated covers..."
       covers = get_all(author_base_url)
       pages = []
       page = []
@@ -40,7 +40,7 @@ class BookCoverModel
     @@covers ||= begin
       covers = []
       if ENV["BOOK_COVER_HOST"] != nil
-        puts "Fetching covers from DB..."
+        logger.info "Fetching covers from the database..."
         sql = <<-END_SQL.gsub(/\n/, '')
           SELECT jacket_id, firstname, lastname, shortID, title, pub_date,
           image, dept, dept2, dept3, active
