@@ -29,7 +29,7 @@ class BookCoverModel
   def self.db_pool()
     pool = ActiveRecord::Base.establish_connection(
       :adapter  => "mysql2",
-      :host     => ENV["BOOK_COVER_SERVER"],
+      :host     => ENV["BOOK_COVER_HOST"],
       :database => ENV["BOOK_COVER_DB"],
       :username => ENV["BOOK_COVER_USER"],
       :password => ENV["BOOK_COVER_PASSWORD"]
@@ -39,7 +39,7 @@ class BookCoverModel
   def self.get_all(author_base_url)
     @@covers ||= begin
       covers = []
-      if ENV["BOOK_COVER_SERVER"] != nil
+      if ENV["BOOK_COVER_HOST"] != nil
         puts "Fetching covers from DB..."
         sql = <<-END_SQL.gsub(/\n/, '')
           SELECT jacket_id, firstname, lastname, shortID, title, pub_date,
@@ -49,7 +49,7 @@ class BookCoverModel
         END_SQL
         pool = db_pool()
         rows = pool.connection.exec_query(sql)
-        rows.each do |r|
+        rows.each do |row|
           cover = BookCoverModel.new()
           cover.author_first = row['firstname']
           cover.author_last = row['lastname']
