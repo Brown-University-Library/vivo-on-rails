@@ -3,10 +3,10 @@ class BookCoverModel
     :title, :pub_date, :image
   BASE_PATH = "https://vivo.brown.edu/themes/rab/images/books"
 
-  @@covers = nil
   @@covers_paginated = nil
 
   def self.get_all_paginated(author_base_url, page_size)
+    # TODO: Use the Rails cache for this
     @@covers_paginated ||= begin
       Rails.logger.info "Calculating paginated covers..."
       covers = get_all(author_base_url)
@@ -37,32 +37,33 @@ class BookCoverModel
   end
 
   def self.get_all(author_base_url)
-    @@covers ||= begin
-      covers = []
-      if ENV["BOOK_COVER_HOST"] != nil
-        Rails.logger.info "Fetching covers from the database..."
-        sql = <<-END_SQL.gsub(/\n/, '')
-          SELECT jacket_id, firstname, lastname, shortID, title, pub_date,
-          image, dept, dept2, dept3, active
-          FROM book_jackets
-          ORDER BY pub_date DESC
-        END_SQL
-        pool = db_pool()
-        rows = pool.connection.exec_query(sql)
-        rows.each do |row|
-          cover = BookCoverModel.new()
-          cover.author_first = row['firstname']
-          cover.author_last = row['lastname']
-          cover.author_id = row['shortID']
-          cover.author_url = "#{author_base_url}#{row['shortID']}"
-          cover.title = row['title']
-          cover.pub_date = row['pub_date']
-          cover.image = "#{BASE_PATH}/#{row['image']}"
-          covers << cover
-        end
-        pool.disconnect!
+    covers = []
+    if ENV["BOOK_COVER_HOST"] != nil
+      Rails.logger.info "Fetching covers from the database..."
+      sql = <<-END_SQL.gsub(/\n/, '')
+        SELECT jacket_id, firstname, lastname, shortID, title, pub_date,
+        image, dept, dept2, dept3, active
+        FROM book_jackets
+        ORDER BY pub_date DESC
+      END_SQL
+      pool = db_pool()
+      rows = pool.connection.exec_query(sql)
+      rows.each do |row|
+        cover = BookCoverModel.new()
+        cover.author_first = row['firstname']
+        cover.author_last = row['lastname']
+        cover.author_id = row['shortID']
+        cover.author_url = "#{author_base_url}#{row['shortID']}"
+        cover.title = row['title']
+        cover.pub_date = row['pub_date']
+        cover.image = "#{BASE_PATH}/#{row['image']}"
+        covers << cover
       end
-      covers
+      pool.disconnect!
     end
+    covers
+  rescue => ex
+    Rails.logger.error "#{ex.message}"
+    []
   end
 end
