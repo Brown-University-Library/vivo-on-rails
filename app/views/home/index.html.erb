@@ -34,42 +34,44 @@
   </div>
 </div>
 
-<!-- Book carousel -->
-<div class="row faculty-home">
-  <div class="container">
-    <div class="col-md-12">
+<% if @bookCoversPaginated.count > 0 %>
+  <!-- Book carousel -->
+  <div class="row faculty-home">
+    <div class="container">
+      <div class="col-md-12">
 
-      <h2 class="h1">Recent faculty books</h2>
-      <h5><em>Click book jacket to view faculty profile</em></h4>
-      <div class="gap20"></div>
+        <h2 class="h1">Recent faculty books</h2>
+        <h5><em>Click book jacket to view faculty profile</em></h4>
+        <div class="gap20"></div>
 
-      <div class="carousel slide multi-item-carousel" id="books-carousel">
-        <div class="carousel-inner">
-          <% @bookCoversPaginated.each_with_index do |page, i| %>
-            <div class="item <%= i == 0 ? "active" : "" %>">
-              <ul>
-                <% page.each do |cover| %>
-                  <a href="<%= cover.author_url %>" class="book-cover">
-                    <img src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
-                  </a>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        </div>
+        <div class="carousel slide multi-item-carousel" id="books-carousel">
+          <div class="carousel-inner">
+            <% @bookCoversPaginated.each_with_index do |page, i| %>
+              <div class="item <%= i == 0 ? "active" : "" %>">
+                <ul>
+                  <% page.each do |cover| %>
+                    <a href="<%= cover.author_url %>" class="book-cover">
+                      <img src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
+                    </a>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
 
-        <a class="left carousel-control" href="#books-carousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#books-carousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-      </div> <!-- books-carousel -->
-    </div> <!-- col-md-12 -->
+          <a class="left carousel-control" href="#books-carousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#books-carousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+          </a>
+        </div> <!-- books-carousel -->
+      </div> <!-- col-md-12 -->
+    </div> <!-- container -->
   </div> <!-- row faculty-home -->
-</div> <!-- container -->
+<% end %>
 
 <!-- Bottom three big blocks -->
 <div class="row icons-home">
