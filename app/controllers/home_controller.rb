@@ -10,6 +10,9 @@ class HomeController < ApplicationController
   end
 
   def index
+    m = BookCoverModel.new()
+    m.test_db()
+    
     page_size = 4 # Must be divisible by 12 to line up with Bootstrap's column layout
     @carouselColumn = "col-xs-#{12/page_size}"
     base_author_url = display_show_url("")

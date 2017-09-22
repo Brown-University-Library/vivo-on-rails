@@ -49,6 +49,9 @@
             <div class="item <%= i == 0 ? "active" : "" %>">
               <ul>
                 <% page.each do |cover| %>
+                  <!-- @carouselColumn = "col-xs-NN" where NN depends on the
+                  number of items per page that we want to show.
+                  See app/controllers/home_controller.rb -->
                   <div class="<%= @carouselColumn %>">
                     <a href="<%= cover.author_url %>" class="not-book-cover">
                       <img src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
@@ -100,6 +103,5 @@
 <script>
   $(function() {
     $("#q").focus(); // Force focus to the search textbox
-    // setupMultiItemCarousel();
   });
 </script>

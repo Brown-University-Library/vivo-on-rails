@@ -3,94 +3,66 @@ class BookCoverModel
     :title, :pub_date, :image
   BASE_PATH = "https://vivo.brown.edu/themes/rab/images/books"
 
+  @@covers = nil
+  @@covers_paginated = nil
+
   def self.get_all_paginated(author_base_url, page_size)
-    book_covers = get_all(author_base_url)
-    pages = []
-    page = []
-    book_covers.each do |cover|
-      page << cover
-      if page.count == page_size
-        pages << page
-        page = []
+    @@covers_paginated ||= begin
+      puts "Calculating paginated covers..."
+      covers = get_all(author_base_url)
+      pages = []
+      page = []
+      covers.each do |cover|
+        page << cover
+        if page.count == page_size
+          pages << page
+          page = []
+        end
       end
+      if page.count > 0
+        pages << page
+      end
+      pages
     end
-    if page.count > 0
-      pages << page
-    end
-    pages
+  end
+
+  def self.db_pool()
+    pool = ActiveRecord::Base.establish_connection(
+      :adapter  => "mysql2",
+      :host     => ENV["BOOK_COVER_SERVER"],
+      :database => ENV["BOOK_COVER_DB"],
+      :username => ENV["BOOK_COVER_USER"],
+      :password => ENV["BOOK_COVER_PASSWORD"]
+    )
   end
 
   def self.get_all(author_base_url)
-    all = []
-    ## TODO: Get this from the book_covers table
-    item = BookCoverModel.new()
-    item.author_first = "James"
-    item.author_last = "Allen"
-    item.author_id = "jallen"
-    item.title = "Middle Egyptian Literature: Eight Literary Works of the Middle Kingdom"
-    item.pub_date = "2015"
-    item.image = "#{BASE_PATH}/Allen_MiddleEgyptianLiterature.jpg"
-    all << item
-
-    item = BookCoverModel.new()
-    item.author_first = "Peter"
-    item.author_last = "Andreas"
-    item.author_id = "pandreas"
-    item.title = "Rebel Mother: My Childhood Chasing the Revolution"
-    item.pub_date = "2017"
-    item.image = "#{BASE_PATH}/Andreas_RebelMother.jpg"
-    all << item
-
-    item = BookCoverModel.new()
-    item.author_first = "Richard"
-    item.author_last = "Arenber"
-    item.author_id = "rarenber"
-    item.title = "Defending the Filibuster: The Soul of the Senate, Revised and Updated"
-    item.pub_date = "2014"
-    item.image = "#{BASE_PATH}/Arenberg_DefendingTheFilibuster.jpg"
-    all << item
-
-    item = BookCoverModel.new()
-    item.author_first = "Johanna"
-    item.author_last = "Hanink"
-    item.author_id = "jhanink"
-    item.title = "The Classical Debt: Greek Antiquity in an Era of Austerity"
-    item.pub_date = "2017"
-    item.image = "#{BASE_PATH}/Hanink_ClassicalDebt.jpg"
-    all << item
-
-    item = BookCoverModel.new()
-    item.author_first = "Nomy"
-    item.author_last = "Arpaly"
-    item.author_id = "narpaly"
-    item.title = "In Praise of Desire by Nomy Arpaly"
-    item.pub_date = "2013"
-    item.image = "#{BASE_PATH}/arpaly.jpg"
-    all << item
-
-    item = BookCoverModel.new()
-    item.author_first = "Omer"
-    item.author_last = "Bartov"
-    item.author_id = "obartov"
-    item.title = "The Holocaust: Origins, Implementation, Aftermath, 2nd Edition"
-    item.pub_date = "2015"
-    item.image = "#{BASE_PATH}/Bartov_Holocaust.jpg"
-    all << item
-
-    item = BookCoverModel.new()
-    item.author_first = "Hannah"
-    item.author_last = "Freed-Thall"
-    item.author_id = "hfreedth"
-    item.title = "Spoiled Distinctions: Aesthetics and the Ordinary in French Modernism"
-    item.pub_date = "2015"
-    item.image = "#{BASE_PATH}/Freed-Thall_SpoiledDistinctions.jpg"
-    all << item
-
-    # Calculate the author URL
-    all.each do |item|
-      item.author_url = author_base_url + item.author_id
+    @@covers ||= begin
+      covers = []
+      if ENV["BOOK_COVER_SERVER"] != nil
+        puts "Fetching covers from DB..."
+        sql = <<-END_SQL.gsub(/\n/, '')
+          SELECT jacket_id, firstname, lastname, shortID, title, pub_date,
+          image, dept, dept2, dept3, active
+          FROM book_jackets
+          ORDER BY pub_date DESC
+        END_SQL
+        pool = db_pool()
+        rows = pool.connection.exec_query(sql)
+        rows.each do |r|
+          cover = BookCoverModel.new()
+          cover.author_first = row['firstname']
+          cover.author_last = row['lastname']
+          cover.author_id = row['shortID']
+          cover.author_url = "#{author_base_url}#{row['shortID']}"
+          cover.title = row['title']
+          cover.pub_date = row['pub_date']
+          cover.image = "#{BASE_PATH}/#{row['image']}"
+          covers << cover
+        end
+        pool.disconnect!
+      end
+      covers
     end
-
-    all
   end
 end
