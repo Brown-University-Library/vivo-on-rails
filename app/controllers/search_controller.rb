@@ -39,7 +39,7 @@ class SearchController < ApplicationController
     def facets_fields()
       f = []
       f << SolrLite::FacetField.new("record_type", "Type")
-      f << SolrLite::FacetField.new("affiliations", "Affiliations")
+      f << SolrLite::FacetField.new("affiliations", "Brown Affiliations")
       f << SolrLite::FacetField.new("research_areas", "Research Areas")
       f << SolrLite::FacetField.new("published_in", "Published In")
       f
