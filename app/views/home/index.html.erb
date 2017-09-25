@@ -45,6 +45,13 @@
         <div class="gap20"></div>
 
         <div class="carousel slide multi-item-carousel" id="books-carousel">
+          <!-- Crystal/Ben -- how can we get the indicators not to overlay
+          with the book covers? -->
+          <ol class="carousel-indicators">
+            <% @bookCoversPaginated.each_with_index do |page, i| %>
+              <li data-target="#books-carousel" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>">
+            <% end %>
+          </ol>
           <div class="carousel-inner">
             <% @bookCoversPaginated.each_with_index do |page, i| %>
               <div class="item <%= i == 0 ? "active" : "" %>">
@@ -58,7 +65,6 @@
               </div>
             <% end %>
           </div>
-
           <a class="left carousel-control" href="#books-carousel" role="button" data-slide="prev">
               <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
