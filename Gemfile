@@ -52,4 +52,5 @@ gem 'therubyracer', platforms: :ruby
 gem "rb-readline"
 
 # Loads environment settings from .env file
+# See https://github.com/bkeepers/dotenv
 gem 'dotenv-rails'

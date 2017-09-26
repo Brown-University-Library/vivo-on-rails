@@ -86,6 +86,7 @@ class Faculty
     return nil if solr_doc == nil
     solr_json = solr_doc["json_txt"].first
     hash = JsonUtils.safe_parse(solr_json)
+    return nil if hash == nil
     FacultyItem.from_hash(hash)
   end
 

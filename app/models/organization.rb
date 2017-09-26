@@ -3,6 +3,7 @@
 # external organizations (e.g. universities that our faculty graduated
 # from).
 require "./lib/sparql/query.rb"
+require "./app/models/json_utils.rb"
 require "./app/models/organization_item.rb"
 require "./app/models/organization_member_item.rb"
 require "./app/models/on_the_web_item.rb"
@@ -71,7 +72,8 @@ class Organization
     solr = SolrLite::Solr.new(solr_url)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
     solr_json = solr_doc["json_txt"].first
-    hash = JSON.parse(solr_json)
+    hash = JsonUtils.safe_parse(solr_json)
+    return nil if hash == nil
     OrganizationItem.from_hash(hash)
   end
 
