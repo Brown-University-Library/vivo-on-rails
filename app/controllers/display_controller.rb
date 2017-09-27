@@ -29,7 +29,7 @@ class DisplayController < ApplicationController
   rescue => ex
     backtrace = ex.backtrace.join("\r\n")
     Rails.logger.error("Could not render record #{id}, type #{type}. Exception: #{ex} \r\n #{backtrace}")
-    render "error"
+    render "error", status: 500
   end
 
   private
@@ -48,7 +48,7 @@ class DisplayController < ApplicationController
       faculty = Faculty.get_one(id, from_solr)
       if faculty == nil
         Rails.logger.error("Could not render faculty #{id}.")
-        render "error"
+        render "error", status: 500
         return
       end
       referer = request.headers.env["HTTP_REFERER"]
@@ -61,7 +61,7 @@ class DisplayController < ApplicationController
       @organization = Organization.get_one(id)
       if @organization == nil
         Rails.logger.error("Could not render organization #{id}.")
-        render "error"
+        render "error", status: 500
         return
       end
       render "organization/show"
