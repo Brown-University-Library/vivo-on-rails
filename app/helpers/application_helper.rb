@@ -11,4 +11,8 @@ module ApplicationHelper
       "20160822_COMM_TessCasswell07.jpg"]
     "new-backgrounds/" + images[rand(images.size)]
   end
+
+  def contact_us_url
+    "https://docs.google.com/a/brown.edu/forms/d/1H_LzEHRzpxv3OY266RjSwpAMwVuTEUFyNEgMPcZ4NiA/viewform"
+  end
 end
