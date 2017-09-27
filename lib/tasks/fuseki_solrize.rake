@@ -1,5 +1,13 @@
-require "./app/models/faculty_solrize.rb"
-require "./app/models/organization_solrize.rb"
+# These tasks are used to populate a Solr index with data coming
+# from VIVO's Fuseki endpoint.
+#
+# We are not using these Rake task anymore now that we are using the
+# native Solr index that comes with VIVO.
+#
+# These tasks will be deleted once we go live.
+#
+require "./app/models/fuseki/faculty_solrize.rb"
+require "./app/models/fuseki/organization_solrize.rb"
 namespace :vivo do
   desc "Sends to Solr information about all faculty members"
   task :solrize_faculty_all => :environment do
