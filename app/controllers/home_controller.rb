@@ -23,4 +23,10 @@ class HomeController < ApplicationController
 
   def termsofuse
   end
+
+  def page_not_found
+    err_msg = "Page #{request.url} was not found"
+    Rails.logger.warn(err_msg)
+    render "not_found", status: 404
+  end
 end
