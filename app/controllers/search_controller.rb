@@ -3,6 +3,10 @@ class SearchController < ApplicationController
   def index
     execute_search()
     render "results"
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render search. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
   end
 
   # Returns the facet values (as JSON) for a search.
@@ -16,6 +20,10 @@ class SearchController < ApplicationController
     execute_search(-1)
     facet_data = @presenter.facets.find {|f| f.name == facet_name }
     render :json => facet_data.values
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render facets as JSON. Exception: #{ex} \r\n #{backtrace}")
+    render :json => nil, status: 500
   end
 
   private
