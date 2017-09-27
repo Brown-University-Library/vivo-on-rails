@@ -5,4 +5,8 @@ class EducationItem
   def initialize(values)
     ModelUtils.set_values_from_hash(self, values)
   end
+
+  def self.from_hash_array(values)
+    values.map {|v| EducationItem.new(v)}.sort_by {|v| v.date || ""}.reverse
+  end
 end

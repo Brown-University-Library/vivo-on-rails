@@ -17,6 +17,10 @@ class CredentialItem
     @end_date = DateUtils.str_to_date(@end_date)
   end
 
+  def self.from_hash_array(values)
+    values.map {|v| CredentialItem.new(v)}.sort_by {|v| v.start_date || ""}.reverse
+  end
+
   def init_defaults()
     @uri = ""
     @id = ""

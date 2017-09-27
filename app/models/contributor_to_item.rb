@@ -71,6 +71,10 @@ class ContributorToItem
     pub_type.downcase.gsub(" ","_")
   end
 
+  def self.from_hash_array(values)
+    values.map {|v| ContributorToItem.new(v)}.sort_by {|v| v.date || ""}.reverse
+  end
+
   private
     def publisher
       case

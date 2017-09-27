@@ -38,7 +38,12 @@ class OrganizationItem
         org.thumbnail = ModelUtils.safe_thumbnail(value)
       else
         setter = key.to_s + "="
-        org.send(setter, value)
+        if org.respond_to?(setter)
+          org.send(setter, value)
+        else
+          # we've got a value in Solr that we don't expect/want.
+          Rails.logger.warn("Unexpected field #{key} received for organization #{hash['uri']}")
+        end
       end
     end
     org

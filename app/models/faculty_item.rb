@@ -7,8 +7,7 @@ class FacultyItem
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
     :on_the_web, :appointments, :published_in, :hidden,
-    :cv_link, :cv_link_text,
-    :credentials, :training
+    :cv_link, :credentials, :training
 
   def initialize(values = nil)
     init_defaults()
@@ -41,6 +40,7 @@ class FacultyItem
     @on_the_web = []
     @appointments = []
     @hidden = false
+    @cv_link = nil
     @credentials = []
     @training = []
   end
@@ -65,27 +65,29 @@ class FacultyItem
       getter = key.to_s
       case getter
       when "affiliations"
-        faculty.affiliations = value.map {|v| AffiliationItem.new(v)}.sort_by {|v| v.name.downcase}
+        faculty.affiliations = AffiliationItem.from_hash_array(value)
       when "collaborators"
-        faculty.collaborators = value.map {|v| CollaboratorItem.new(v)}
+        faculty.collaborators = CollaboratorItem.from_hash_array(value)
       when "contributor_to"
-        faculty.contributor_to = value.map {|v| ContributorToItem.new(v)}
+        faculty.contributor_to = ContributorToItem.from_hash_array(value)
       when "education"
-        faculty.education = value.map {|v| EducationItem.new(v)}
+        faculty.education = EducationItem.from_hash_array(value)
       when "appointments"
-        faculty.appointments = value.map {|v| AppointmentItem.new(v)}
+        faculty.appointments = AppointmentItem.from_hash_array(value)
       when "credentials"
-        faculty.credentials = value.map {|v| CredentialItem.new(v)}
+        faculty.credentials = CredentialItem.from_hash_array(value)
       when "on_the_web"
-        faculty.on_the_web = value.map {|v| OnTheWebItem.new(v)}
+        faculty.on_the_web = OnTheWebItem.from_hash_array(value)
       when "training"
-        faculty.training = value.map {|v| TrainingItem.new(v)}
+        faculty.training = TrainingItem.from_hash_array(value)
+      when "cv"
+        faculty.cv_link = get_cv_link(value)
       when "teacher_for"
         # string array, no special handling
-        faculty.teacher_for = value
+        faculty.teacher_for = value.sort_by {|a| (a || "").downcase}
       when "research_areas"
         # string array, no special handling
-        faculty.research_areas = value.sort_by {|a| a.downcase}
+        faculty.research_areas = value.sort_by {|a| (a || "").downcase}
       when "thumbnail"
         faculty.thumbnail = ModelUtils.safe_thumbnail(value)
       else
@@ -94,9 +96,17 @@ class FacultyItem
           faculty.send(setter, value)
         else
           # we've got a value in Solr that we don't expect/want.
+          Rails.logger.warn("Unexpected field #{key} received for faculty #{hash['uri']}")
         end
       end
     end
     faculty
+  end
+
+  def self.get_cv_link(values)
+    if values == nil || values.length == 0
+      return nil
+    end
+    values[0]["cv_link"]
   end
 end

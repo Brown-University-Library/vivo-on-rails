@@ -17,4 +17,8 @@ class AffiliationItem
     return "" if @id == nil
     @id.split("/").last
   end
+
+  def self.from_hash_array(values)
+    values.map {|v| AffiliationItem.new(v)}.sort_by {|v| (v.name || "").downcase}
+  end
 end

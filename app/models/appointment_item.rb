@@ -35,4 +35,8 @@ class AppointmentItem
   def year_range_str
     DateUtils.year_range_str(@start_date, @end_date)
   end
+
+  def self.from_hash_array(values)
+    values.map {|v| AppointmentItem.new(v)}.sort_by {|v| v.start_date || ""}.reverse
+  end
 end
