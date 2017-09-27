@@ -1,26 +1,20 @@
 development:
-  adapter: mysql2
-  database: vivo_on_rails_dev
-  encoding: utf8
+  adapter: sqlite3
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  timeout: 5000
+  database: db/development.sqlite3
 
 test:
-  adapter: mysql2
-  database: vivo_on_rails_test
-  encoding: utf8
+  adapter: sqlite3
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  timeout: 5000
+  database: db/test.sqlite3
 
 production:
   adapter: <%= ENV['DATABASE_ADAPTER'] %>
-  encoding: utf8
   database: <%= ENV['DATABASE'] %>
-  pool: 5
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
+  encoding: utf8
+  pool: 5

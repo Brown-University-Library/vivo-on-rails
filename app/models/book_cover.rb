@@ -1,3 +1,4 @@
+require "./app/models/book_cover_sample_data.rb"
 class BookCoverModel
   attr_accessor :author_first, :author_last, :author_id, :author_url,
     :title, :pub_date, :image
@@ -37,6 +38,14 @@ class BookCoverModel
   end
 
   def self.get_all(author_base_url)
+    if Rails.env.production?
+      self.get_all_from_db(author_base_url)
+    else
+      BookCoversSampleData.get_all()
+    end
+  end
+
+  def self.get_all_from_db(author_base_url)
     covers = []
     if ENV["BOOK_COVER_HOST"] != nil
       Rails.logger.info "Fetching covers from the database..."
