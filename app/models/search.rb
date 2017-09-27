@@ -22,18 +22,12 @@ class Search
         next
       end
 
-      json = JsonUtils.safe_parse(json_txt)
-      if json == nil
+      hash = JsonUtils.safe_parse(json_txt)
+      if hash == nil
         next
       end
 
-      if record_type == "ORGANIZATION"
-        item = OrganizationItem.new(json)
-        results.items << SearchItem.from_organization(item)
-      else
-        item = FacultyListItem.new(json)
-        results.items << SearchItem.from_person(item)
-      end
+      results.items << SearchItem.from_hash(hash, record_type)
     end
     results
   end

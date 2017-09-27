@@ -1,5 +1,5 @@
+require "./app/models/model_utils.rb"
 class FacultyItem
-  include ModelUtils # needed for set_values_from_hash
 
   attr_accessor :record_type, :id, :uri, :overview, :email, :org_label, :name,
     :title, :contributor_to, :thumbnail, :education, :awards,
@@ -12,7 +12,7 @@ class FacultyItem
 
   def initialize(values = nil)
     init_defaults()
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
     @id = uri
   end
 
@@ -86,6 +86,8 @@ class FacultyItem
       when "research_areas"
         # string array, no special handling
         faculty.research_areas = value.sort_by {|a| a.downcase}
+      when "thumbnail"
+        faculty.thumbnail = ModelUtils.safe_thumbnail(value)
       else
         setter = key.to_s + "="
         if faculty.respond_to?(setter)

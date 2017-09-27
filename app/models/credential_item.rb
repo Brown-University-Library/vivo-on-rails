@@ -1,8 +1,6 @@
 require "./app/models/model_utils.rb"
 require "./app/models/date_utils.rb"
 class CredentialItem
-  include ModelUtils
-
   attr_accessor :uri, :id
   attr_accessor :name           # e.g. CSR-Allopathic Physician (MD)
   attr_accessor :number         # e.g. #MD11676
@@ -13,7 +11,7 @@ class CredentialItem
 
   def initialize(values)
     init_defaults()
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
     @id = @uri
     @start_date = DateUtils.str_to_date(@start_date)
     @end_date = DateUtils.str_to_date(@end_date)

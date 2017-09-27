@@ -1,10 +1,9 @@
 require "./app/models/model_utils.rb"
 class CollaboratorItem
-  include ModelUtils
   attr_accessor :uri, :name, :title
 
   def initialize(values)
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
     @id = @uri
   end
 

@@ -1,3 +1,8 @@
+# Interface's with VIVO/Vitro native API
+# We use this to provide raw VIVO data in our front end without having
+# to re-implement what VIVO does natively. For example we use this to
+# to provide JSON-LD representations of faculty data.
+#
 class VitroAPI
   APPLICATION_JSON = "application/json"
   TEXT_TURTLE = "text/turtle"

@@ -1,21 +1,28 @@
-module ModelUtils
-  def set_values_from_hash(hash)
+class ModelUtils
+  def self.safe_thumbnail(value)
+    if (value || "").strip.length == 0
+      return nil
+    end
+    value
+  end
+
+  def self.set_values_from_hash(obj, hash)
     return if hash == nil
     hash.each do |key, value|
       setter = key.to_s + "="
-      if self.respond_to?(setter)
+      if obj.respond_to?(setter)
         if value.class == Array
           getter = key.to_s
-          if self.send(getter).class == Array
-            self.send(setter, value)
+          if obj.send(getter).class == Array
+            obj.send(setter, value)
           else
             # If we got an array but we were not expecting one
             # just get the first value (this is useful when
             # handling values from Solr)
-            self.send(setter, value.first)
+            obj.send(setter, value.first)
           end
         else
-          self.send(setter, value)
+          obj.send(setter, value)
         end
       end
     end

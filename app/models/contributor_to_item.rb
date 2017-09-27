@@ -1,12 +1,10 @@
 require "./app/models/model_utils.rb"
 class ContributorToItem
-  include ModelUtils # needed for set_values_from_hash
-
   attr_accessor :uri, :authors, :title, :volume, :issue,
     :date, :pages, :published_in, :venue_name, :type, :doi, :pub_med_id
 
   def initialize(values)
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
     @year = nil
     year = date.to_i
     if year >= 1900 && year <= 2200

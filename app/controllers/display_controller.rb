@@ -27,7 +27,8 @@ class DisplayController < ApplicationController
       render_vitro_data(id, type)
     end
   rescue => ex
-    Rails.logger.error("Could not render record #{id}, type #{type}. Exception: #{ex}")
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render record #{id}, type #{type}. Exception: #{ex} \r\n #{backtrace}")
     render "error"
   end
 

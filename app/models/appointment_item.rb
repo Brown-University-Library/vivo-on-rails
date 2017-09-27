@@ -1,7 +1,6 @@
 require "./app/models/model_utils.rb"
 require "./app/models/date_utils.rb"
 class AppointmentItem
-  include ModelUtils
 
   attr_accessor :uri, :id
   attr_accessor :org_name       # e.g. "Harvard University"
@@ -12,7 +11,7 @@ class AppointmentItem
 
   def initialize(values)
     init_defaults()
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
     @id = @uri
     @start_date = DateUtils.str_to_date(@start_date)
     @end_date = DateUtils.str_to_date(@end_date)

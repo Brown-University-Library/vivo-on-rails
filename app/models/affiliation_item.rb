@@ -1,11 +1,9 @@
 require "./app/models/model_utils.rb"
 class AffiliationItem
-  include ModelUtils
-
   attr_accessor :uri, :name, :id
   def initialize(values)
     init_defaults()
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
     @id = @uri
   end
 
