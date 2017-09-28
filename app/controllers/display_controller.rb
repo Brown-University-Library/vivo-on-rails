@@ -51,6 +51,12 @@ class DisplayController < ApplicationController
         render "error", status: 500
         return
       end
+
+      if params["debug"] == "true"
+        render :json => faculty.to_json
+        return
+      end
+
       referer = request.headers.env["HTTP_REFERER"]
       @presenter = FacultyPresenter.new(faculty, search_url(), referer)
       render "faculty/show"
