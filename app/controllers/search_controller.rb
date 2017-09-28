@@ -2,6 +2,9 @@ class SearchController < ApplicationController
   # Normal search. Returns search results as HTML.
   def index
     execute_search()
+    if @presenter.num_found == 0
+      Rails.logger.warn("No results were found. Search: #{@presenter.search_qs}")
+    end
     render "results"
   rescue => ex
     backtrace = ex.backtrace.join("\r\n")
