@@ -1,0 +1,23 @@
+<!-- search terms used -->
+<div class="facet-breadcrumbs">
+  <% if !@presenter.query.empty? %>
+    for <b><%= @presenter.query %></b>
+    <a href="<%= @presenter.remove_q_url %>">
+      <span class="glyphicon glyphicon-remove"></span>
+      <span class="sr-only">Remove search term <%= @presenter.query %></span>
+    </a>
+  <% end %>
+  <% @presenter.fq.each do |fq| %>
+    (<%= fq.title %> > <%= fq.value %>
+      <a href="<%= fq.remove_url %>">
+        <span class="glyphicon glyphicon-remove"></span>
+        <span class="sr-only">Remove facet <%= fq.value %></span>
+      </a>)
+  <% end %>
+
+  <% if @presenter.num_found > 0 && @presenter.suggest_url != nil %>
+    <p>Would you like to see additional results for
+      <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
+      instead?</p>
+  <% end %>
+</div>
