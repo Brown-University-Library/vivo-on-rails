@@ -11,7 +11,7 @@
 require "./lib/sparql/query.rb"
 require "./lib/solr_lite/solr.rb"
 require "./app/models/json_utils.rb"
-require "./app/models/faculty_list_item.rb"
+#require "./app/models/faculty_list_item.rb"
 require "./app/models/faculty_item.rb"
 require "./app/models/contributor_to_item.rb"
 require "./app/models/education_item.rb"

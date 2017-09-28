@@ -6,7 +6,7 @@
 #
 # These tasks will be deleted once we go live.
 #
-require "./app/models/export.rb"
+require "./app/models/fuseki/export.rb"
 namespace :vivo do
   desc "Export information about all faculty members"
   task :export_all do
