@@ -1057,12 +1057,29 @@ td.citation-data.pub-item {
 	border-top: 1px solid #333;
 	border-bottom: 1px solid #333;
 	height: 4.5rem;
+	margin: -2.5rem -3rem 2.5rem 0;
 }
 .container.profile.org-profile .below-nav-links {
-	display: flex;
-	align-items: center;
-	font-weight: bold;
-	margin: .8rem 0 .5rem 0;	
+	height: 4.5rem;
+	width: 200px;
+	top: 0;
+	right: 0;
+}
+.container.profile.org-profile .advanced-search {
+	display: none;
+}
+.container.profile.org-profile .profile-login {
+	margin-top: 0.2rem;
+	width: 100%;
+}
+.container.profile.org-profile .profile-login:before {
+	background: #000;
+	content: "";
+	height: 95%;
+	width: 1px;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 .org-profile p a {
 	color: #594036;
@@ -1093,6 +1110,9 @@ td.citation-data.pub-item {
 .org-profile #individual-info header ul li a {
 	color: #594036;
 	font-weight: bold;
+}
+.org-profile #individual-info header ul li a:hover {
+	border-bottom: solid 3px #594036;
 }
 .org-profile #individual-info p {
 	font-size: 1.75rem;
@@ -1141,6 +1161,9 @@ td.citation-data.pub-item {
 	border: none;
 	color: #fff;
 	margin: 0;
+}
+.org-profile .tab-content a:hover {
+	border-bottom: solid 3px #594036;
 }
 /* End of Organization Page */
 
@@ -1451,5 +1474,12 @@ td.citation-data.pub-item {
 @media screen and (min-width: 1380px) and (max-width: 1560px) {
 	.person-content > .container {
 		max-width: 62%;
+	}
+}
+
+/* organization page */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+	.org-profile {
+		border: 5px solid red;
 	}
 }
