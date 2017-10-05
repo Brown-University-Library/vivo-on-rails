@@ -699,7 +699,7 @@ a.manage-profile-link:visited {
 	max-width: 76%;
 	padding: 0;
 }
-.person-content > .container > div {
+.container.profile .person-content > .container.profile-page > div {
 	padding: 0;
 }
 /* left panel */
@@ -1282,8 +1282,9 @@ td.citation-data.pub-item {
 	.below-nav-links {
 		top: 2rem;
 	}
-	.results-wrapper {
-/*		border: 5px solid blue;*/
+	.person-content .container div.organization-description  {
+		border: 5px solid red;
+/*		padding: 0 2.5rem;*/
 	}
 }
 
@@ -1459,11 +1460,26 @@ td.citation-data.pub-item {
 		padding: 3rem 1.5rem;
 	}
 }
-@media screen and (min-width: 768px) and (max-width: 1199px) {
+@media screen and (min-width: 768px) and (max-width: 991px) {
 	.person-content .container {
 		width: 100%;
 		max-width: 100%;
 		padding: 0 2.5rem 0 7rem;
+		border: 5px solid green;
+	}
+/*	.person-content .container.organization-page {
+		border: 5px solid pink;
+	}*/
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	.person-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 2.5rem 0 7rem;
+		border: 5px solid green;
+	}
+	.person-content .container.organization-page {
+		border: 5px solid pink;
 	}
 }
 @media screen and (min-width: 1200px) and (max-width: 1379px) {
@@ -1478,17 +1494,26 @@ td.citation-data.pub-item {
 }
 
 /* organization page */
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-	.container.profile .organization-page {
-		padding: 0;
+@media screen (max-width: 991px) {
+	.person-content .container div.organization-description {
+		padding: 0 3rem 0 3rem;
+		border: 5px solid blue;
 	}
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
 	.container.profile.org-profile .subnavbar {
 		margin: 3rem 1.5rem;
 	}
 	.container.profile.org-profile .below-nav-links {
 		top: 0;
 	}
-	.container.profile .organization-description {
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	.person-content .container.organization-page {
+		border: 5px solid pink;
+	}
+	.person-content .container div.organization-description  {
 		padding-right: 7rem;
 	}
 }
+
