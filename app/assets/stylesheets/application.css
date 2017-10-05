@@ -1479,7 +1479,16 @@ td.citation-data.pub-item {
 
 /* organization page */
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-	.org-profile {
-		border: 5px solid red;
+	.container.profile .organization-page {
+		padding: 0;
+	}
+	.container.profile.org-profile .subnavbar {
+		margin: 3rem 1.5rem;
+	}
+	.container.profile.org-profile .below-nav-links {
+		top: 0;
+	}
+	.container.profile .organization-description {
+		padding-right: 7rem;
 	}
 }
