@@ -1,5 +1,6 @@
 class IndividualController < ApplicationController
   APPLICATION_JSON = "application/json"
+  APPLICATION_RDF_XML = "application/rdf+xml"
   TEXT_TURTLE = "text/turtle"
   SEE_OTHER = 303
 
@@ -14,6 +15,8 @@ class IndividualController < ApplicationController
       url = individual_export_url(id: id, format: "jsonld")
     elsif content_type == TEXT_TURTLE
       url = individual_export_url(id: id, format: "ttl")
+    elsif content_type == APPLICATION_RDF_XML
+      url = individual_export_url(id: id, format: "rdf")
     else
       # default to the HTML representation
       url = display_show_url(id)
@@ -33,6 +36,8 @@ class IndividualController < ApplicationController
         render_vitro_data(id, APPLICATION_JSON)
       when format == "ttl"
         render_vitro_data(id, TEXT_TURTLE)
+      when format == "rdf"
+        render_vitro_data(id, APPLICATION_RDF_XML)
       else
         Rails.logger.warn("Invalid format (#{format}) requested.")
         render "error", status: 400

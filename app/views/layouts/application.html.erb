@@ -19,6 +19,9 @@
 <%= csrf_meta_tags %>
 <%= favicon_link_tag 'favicon.ico' %>
 
+<% if @link_alternate %>
+	<link rel="alternate" type="application/rdf+xml" href="<%= @link_alternate %>" />
+<% end %>
 <link rel="shortcut icon" type="image/x-icon" href="<%= root_path %>">
 </head>
 
