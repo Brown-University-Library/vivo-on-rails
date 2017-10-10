@@ -17,4 +17,14 @@ class SearchItem
     SearchItem.new(hash["id"], hash["name"], hash["thumbnail"], hash["title"],
       hash["email"], record_type)
   end
+
+  def type_schema_org()
+    if @type == "PEOPLE"
+      "http://schema.org/Person"
+    elsif @type == "ORGANIZATION"
+      "http://schema.org/Organization"
+    else
+      nil
+    end
+  end
 end

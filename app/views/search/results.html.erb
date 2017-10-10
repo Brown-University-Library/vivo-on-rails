@@ -58,7 +58,7 @@
             <div class="clearfix visible-xs-block"></div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
               <div class="gap30"></div>
-              <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+              <section itemscope itemtype="<%= item.type_schema_org() %>" id="individual-intro" class="vcard person" role="region">
                 <div class="emailsContainer">
                   <h4>
                     <a href="mailto:<%= item.email %>" title="Email <%= item.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
