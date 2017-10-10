@@ -200,7 +200,7 @@ a.manage-profile-link:visited {
   text-decoration: none;
 }
 .below-nav-links a:visited {
-  color: 594036;
+  color: #594036;
   opacity: .67;
 }
 
@@ -220,7 +220,6 @@ a.manage-profile-link:visited {
 }
 .panel-default {
 	border: 1px solid #333;
-/*	background-color: #F5F2EC;*/
 }
 .panel-default > .panel-heading {
 	background-color: #333;
@@ -659,8 +658,46 @@ a.manage-profile-link:visited {
 	margin-top: -3.9rem;
 	margin-bottom: -70px;
 	padding: 0 0 6rem 0;
-	position: relative; /* a quick fix to add some styles to the advanced search / login links */
-	top: -16px; /* a quick fix to add some styles to the advanced search / login links */
+	position: relative;
+	top: -16px;
+}
+.wrapper__back-to-search {
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	height: 4.5rem;
+	margin: 1.5rem 0 1rem 0;	
+}
+a.back-to-search {
+	color: #333;
+	display: flex;
+	align-items: center;
+	height: 4rem;
+	margin-right: 2rem;
+	padding: 0 1rem;
+}
+a.back-to-search:after {
+	background: #000;
+	content: "";
+	height: 90%;
+	width: 1px;
+	position: absolute;
+	top: 5%;
+	left: 15rem;
+}
+a.back-to-search .glyphicon-chevron-left {
+	color: #333;
+	margin-right: .5rem;
+	transform: scale(1.5);
+}
+a.back-to-search:hover .glyphicon-chevron-left {
+	color: #E8D98B;
+	transition-property: color;
+	transition-delay: 0s;
+	transition-duration: .3s;
+	transition-timing-function: ease;
 }
 .container.profile .subnavbar {
 	height: 0;
@@ -669,7 +706,7 @@ a.manage-profile-link:visited {
 	height: 4.5rem;
 	width: 200px;
 	margin-right: 1.5rem;
-	top: .8rem;
+	top: 1.5rem;
 	right: 0;
 }
 .container.profile .advanced-search {
@@ -703,44 +740,6 @@ a.manage-profile-link:visited {
 	padding: 0;
 }
 /* left panel */
-.wrapper__back-to-search {
-	border-top: 1px solid #333;
-	border-bottom: 1px solid #333;
-	display: flex;
-	align-items: center;
-	font-weight: bold;
-	height: 4.5rem;
-	margin: .8rem 0 .5rem 0;	
-}
-a.back-to-search {
-	color: #333;
-	display: flex;
-	align-items: center;
-	height: 4rem;
-	margin-right: 2rem;
-	padding: 0 1rem;
-}
-a.back-to-search:after {
-	background: #000;
-	content: "";
-	height: 90%;
-	width: 1px;
-	position: absolute;
-	top: 5%;
-	left: 15rem;
-}
-a.back-to-search .glyphicon-chevron-left {
-	color: #333;
-	margin-right: .5rem;
-	transform: scale(1.5);
-}
-a.back-to-search:hover .glyphicon-chevron-left {
-	color: #E8D98B;
-	transition-property: color;
-	transition-delay: 0s;
-	transition-duration: .3s;
-	transition-timing-function: ease;
-}
 #individual-intro {
 	display: flex;
 	flex-direction: column;
@@ -1050,29 +1049,52 @@ td.citation-data.pub-item {
 
 
 /* Organization Page */
-.container.organization-page {
+.org-profile {
+	background-color: #F5F2EC;
+	display: inline-block;
+	float: left;
+	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
+	width: 100%;
+	margin-top: -3.9rem;
+	margin-bottom: -70px;
+	padding: 0 0 6rem 0;
+	position: relative;
+	top: -16px;
+}
+.org-profile .org-content {
+	display: flex;
+	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+	margin: 0;
+}
+.org-profile .org-content .container {
+	background-color: #fff;
+	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
+	max-width: 76%;
+	padding: 0;
+}
+.org-profile .organization-page {
 	padding: 5rem 3rem 5rem 0;
 }
-.container.profile.org-profile .subnavbar {
+.org-profile .subnavbar {
 	border-top: 1px solid #333;
 	border-bottom: 1px solid #333;
 	height: 4.5rem;
-	margin: -2.5rem -3rem 2.5rem 0;
+	margin: 1.5rem 0 2.5rem 0;
 }
-.container.profile.org-profile .below-nav-links {
+.org-profile .below-nav-links {
 	height: 4.5rem;
 	width: 200px;
 	top: 0;
 	right: 0;
 }
-.container.profile.org-profile .advanced-search {
+.org-profile .advanced-search {
 	display: none;
 }
-.container.profile.org-profile .profile-login {
+.org-profile .profile-login {
 	margin-top: 0.2rem;
 	width: 100%;
 }
-.container.profile.org-profile .profile-login:before {
+.org-profile .profile-login:before {
 	background: #000;
 	content: "";
 	height: 95%;
@@ -1088,7 +1110,7 @@ td.citation-data.pub-item {
 .organization-photo-panel img {
 	width: 250px;
 }
-.person-content .container div.organization-description {
+.org-content .container div.organization-description {
 	padding-left: 0;
 }
 .org-profile #individual-info h2.vcard.foaf-person.hidden-xs {
@@ -1201,24 +1223,6 @@ td.citation-data.pub-item {
 		min-height: 2rem;
 		max-height: 3rem;
 	}
-	/*.navbar-form {
-		border: none;
-		box-shadow: none;
-	}
-	#sticky-nav {
-		float: right;
-		height: 5rem;
-		width: 25%;
-	}
-	.form-group {
-		display: none;
-	}
-	#sticky-nav button.btn.sympl-search {
-		float: right;
-		position: relative;
-		top: -1rem;
-		width: 4rem;
-	}*/
 	.subnavbar {
 		border-top: 1px solid #000;
 		border-bottom: 1px solid #000;
@@ -1282,10 +1286,10 @@ td.citation-data.pub-item {
 	.below-nav-links {
 		top: 2rem;
 	}
-	.person-content .container div.organization-description  {
-		border: 5px solid red;
-/*		padding: 0 2.5rem;*/
-	}
+/*	.org-content .container div.organization-description  {  check 
+		border: 5px solid yellow;
+		padding: 0 2.5rem;
+	}*/
 }
 
 /*** Specific Breakpoints ***/
@@ -1368,6 +1372,33 @@ td.citation-data.pub-item {
 		margin-bottom: 1.5rem;
 	}
 }
+
+
+/* profile page */
+@media (max-width: 438px) {
+	.container.profile {  /* a quick fix to add some styles to the advanced search / login links */
+		top: 0;
+	}
+}
+@media (max-width: 767px) {
+	.person-content .container {
+		max-width: 100%;
+	}
+	.share-contact h2 {
+		color: #fff;
+	}
+	.btn-group-vertical .btn {
+		font-size: 2.4rem;
+		padding: 3rem 1.5rem;
+	}
+	.org-profile .org-content .container { /* broken state */
+		max-width: 100%;
+		border: 5px solid orange;
+	}
+	.container.org-profile .subnavbar {
+		margin: 0 1.5rem 3rem 1.5rem;
+	}
+}
 @media (max-width: 991px) {
 	.expert-results {
 		min-height: 10rem;
@@ -1428,6 +1459,68 @@ td.citation-data.pub-item {
 	.emailsContainer .glyphicon-envelope:hover {
 		color: #ddd;
 	}
+	.org-content .container div.organization-description {
+		padding: 0 1.5rem;
+	}
+	.org-content .container div.organization-description .row {
+		margin-left: 0;
+	}
+	.org-content .container div.organization-description .person-container {
+		padding: 0 0 0 6px;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.person-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 2.5rem 0 2.5rem;
+	}
+	.org-profile .org-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0;
+	}
+	.container.org-profile .subnavbar {
+		margin: 1.5rem 1.5rem 3rem 1.5rem;
+	}
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	.person-content .container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 2.5rem 0 2.5rem;
+	}
+	.person-content .container .subnavbar {
+		margin: 1rem -1.5rem;
+	}
+	.org-profile .org-content .container div.organization-description  {
+		padding-right: 7rem;
+	}
+	.container.profile .below-nav-links {
+		top: 5px;
+	}
+	.container.org-profile .subnavbar {
+		margin: 1.5rem 0 3rem 0;
+	}
+	.container.org-profile .below-nav-links {
+		top: 0px;
+	}
+}
+@media screen and (min-width: 1200px) and (max-width: 1379px) {
+	.person-content > .container {
+		max-width: 70%;
+	}
+	.org-profile .org-content > .container {
+		max-width: 70%;
+	}
+}
+@media screen and (min-width: 1380px) and (max-width: 1560px) {
+	.person-content > .container {
+		max-width: 62%;
+	}
+	.org-profile .org-content > .container {
+		max-width: 62%;
+	}
 }
 @media (min-width: 1700px) {
 	.results-row {
@@ -1438,82 +1531,4 @@ td.citation-data.pub-item {
 	}
 }
 
-/* profile page */
-@media (max-width: 438px) {
-/*	.subnavbar {
-		min-height: 5.5rem;
-		max-height: 15rem;
-	}*/
-	.container.profile {  /* a quick fix to add some styles to the advanced search / login links */
-		top: 0;
-	}
-}
-@media (max-width: 767px) {
-	.person-content .container {
-		max-width: 100%;
-	}
-	.share-contact h2 {
-		color: #fff;
-	}
-	.btn-group-vertical .btn {
-		font-size: 2.4rem;
-		padding: 3rem 1.5rem;
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 991px) {
-	.person-content .container {
-		width: 100%;
-		max-width: 100%;
-		padding: 0 2.5rem 0 7rem;
-		border: 5px solid green;
-	}
-/*	.person-content .container.organization-page {
-		border: 5px solid pink;
-	}*/
-}
-@media screen and (min-width: 992px) and (max-width: 1199px) {
-	.person-content .container {
-		width: 100%;
-		max-width: 100%;
-		padding: 0 2.5rem 0 7rem;
-		border: 5px solid green;
-	}
-	.person-content .container.organization-page {
-		border: 5px solid pink;
-	}
-}
-@media screen and (min-width: 1200px) and (max-width: 1379px) {
-	.person-content > .container {
-		max-width: 70%;
-	}
-}
-@media screen and (min-width: 1380px) and (max-width: 1560px) {
-	.person-content > .container {
-		max-width: 62%;
-	}
-}
-
-/* organization page */
-@media screen (max-width: 991px) {
-	.person-content .container div.organization-description {
-		padding: 0 3rem 0 3rem;
-		border: 5px solid blue;
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-	.container.profile.org-profile .subnavbar {
-		margin: 3rem 1.5rem;
-	}
-	.container.profile.org-profile .below-nav-links {
-		top: 0;
-	}
-}
-@media screen and (min-width: 992px) and (max-width: 1199px) {
-	.person-content .container.organization-page {
-		border: 5px solid pink;
-	}
-	.person-content .container div.organization-description  {
-		padding-right: 7rem;
-	}
-}
 
