@@ -146,10 +146,13 @@ a.manage-profile-link:visited {
 }
 /* End of Header */
 
+/* Profile / Advanced Search Links */
 .subnavbar {
 	position: relative;
+	border: none;
 }
 .below-nav-links {
+	border: 5px solid red;
 	padding: 0;
 	position: absolute;
 	top: 0.2rem;
@@ -205,6 +208,12 @@ a.manage-profile-link:visited {
 .container-fluid {
 	padding-top: 0rem;
 	margin-top: -3rem;
+}
+#search-result-none {
+	border: 5px solid blue;
+}
+#search-result-none .subnavbar {
+	border: 5px solid red;
 }
 /* facet panel */
 #search-facets {
