@@ -199,11 +199,18 @@
         <!-- search terms used -->
         <div class="facet-breadcrumbs">
           <% if !@presenter.query.empty? %>
-            for <b><%= @presenter.query %></b>
+            <span class="search-result-facets no-orphans">
+                <a href="<%= @presenter.remove_q_url %>">
+                  <span><span class="facet-category">Search Term | </span><%= @presenter.query %></span>
+                  <span class="glyphicon glyphicon-remove"></span>
+                  <span class="sr-only">Remove search term <%= @presenter.query %></span>
+                </a>
+            </span>
+<!--             for <b><%= @presenter.query %></b>
             <a href="<%= @presenter.remove_q_url %>">
               <span class="glyphicon glyphicon-remove"></span>
               <span class="sr-only">Remove search term <%= @presenter.query %></span>
-            </a>
+            </a> -->
           <% end %>
           <% @presenter.fq.each do |fq| %>
             <span class="search-result-facets no-orphans">
