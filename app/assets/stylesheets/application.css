@@ -211,6 +211,7 @@ a.manage-profile-link:visited {
 }
 #search-result-none {
 	border: 5px solid blue;
+	display: block;
 }
 #search-result-none .subnavbar {
 	border: 5px solid red;
