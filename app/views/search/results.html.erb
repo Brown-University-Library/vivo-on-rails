@@ -206,11 +206,6 @@
                   <span class="sr-only">Remove search term <%= @presenter.query %></span>
                 </a>
             </span>
-<!--             for <b><%= @presenter.query %></b>
-            <a href="<%= @presenter.remove_q_url %>">
-              <span class="glyphicon glyphicon-remove"></span>
-              <span class="sr-only">Remove search term <%= @presenter.query %></span>
-            </a> -->
           <% end %>
           <% @presenter.fq.each do |fq| %>
             <span class="search-result-facets no-orphans">

@@ -1063,7 +1063,6 @@ td.citation-data.pub-item {
 	background-color: #F5F2EC;
 	display: inline-block;
 	float: left;
-/*	min-height: calc(100vh - 230px);  navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	width: 100%;
 	margin-top: -3.9rem;
 	margin-bottom: -70px;
@@ -1079,7 +1078,6 @@ td.citation-data.pub-item {
 }
 .org-profile .org-content .container {
 	background-color: #fff;
-	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	max-width: 76%;
 	padding: 0;
 }
@@ -1295,6 +1293,9 @@ td.citation-data.pub-item {
 	}
 	.below-nav-links {
 		top: 2rem;
+	}
+	.search-result-none-wrapper {
+		min-height: calc(100vh - 248px); /* navbar = height:50px + subnavbar = height:15px + footer = height:180px + ???:3px */
 	}
 }
 
