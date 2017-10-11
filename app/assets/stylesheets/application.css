@@ -208,6 +208,7 @@ a.manage-profile-link:visited {
 	padding-top: 0rem;
 	margin-top: -3rem;
 }
+/* no results */
 .search-result-none-wrapper {
 	margin: 0;
 	min-height: calc(100vh - 253px); /* navbar = height:50px + subnavbar = height:20px + footer = height:180px + ???:3px */
@@ -220,6 +221,22 @@ a.manage-profile-link:visited {
 }
 #search-result-none {
 	padding: 0;
+}
+#search-result-none p {
+	font-size: 2.8rem;
+	line-height: 3.2rem;
+	margin-bottom: 2rem;
+}
+#search-result-none b {
+	color: #7E7E7E;
+}
+#search-result-none a {
+	color: #594036;
+	font-weight: 600;
+}
+#search-result-none a:hover {
+	border-bottom: 4px solid #594036;
+	line-height: 1rem;
 }
 /* facet panel */
 #search-facets {
