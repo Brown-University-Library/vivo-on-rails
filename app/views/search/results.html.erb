@@ -147,10 +147,10 @@
 <div class="container-fluid col-sm-12">
   <%= render "manage_profile_login" %>
   <% if @presenter.num_found == 0 %>
-    <div class="row search-result-none-wrapper">
+    <div class="row search-result-none-wrapper col-lg-12 col-md-12 col-sm-12">
+      <div class="subnavbar__pseudo"></div>
       <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
         <div class="col-lg-12 col-md-12 col-sm-12">
-          <div id="subnavbar__psuedo"></div>
           <div id="search-result-none" class="col-lg-8 col-md-8 col-sm-8">
             <p>No results were found for <b><%= @presenter.query %></b>.
 
