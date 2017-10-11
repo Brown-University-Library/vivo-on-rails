@@ -680,7 +680,7 @@ a.manage-profile-link:visited {
 	background-color: #F5F2EC;
 	display: inline-block;
 	float: left;
-	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
+/*	min-height: calc(100vh - 244px);  navbar = height:50px / subnavbar = height:14px / footer = height:180px */
 	width: 100%;
 	margin-top: -3.9rem;
 	margin-bottom: -70px;
@@ -759,9 +759,11 @@ a.back-to-search:hover .glyphicon-chevron-left {
 }
 .person-content .container {
 	background-color: #fff;
-	min-height: calc(100vh - 280px); /* navbar = height:50px / subnavbar = height:50px / footer = height:180px */
 	max-width: 76%;
 	padding: 0;
+}
+.profile-page {
+	min-height: calc(100vh - 234px); /* navbar = height:50px + footer = height:180px + ???:4px */
 }
 .container.profile .person-content > .container.profile-page > div {
 	padding: 0;
