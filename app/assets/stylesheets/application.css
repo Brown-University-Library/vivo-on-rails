@@ -209,12 +209,15 @@ a.manage-profile-link:visited {
 	padding-top: 0rem;
 	margin-top: -3rem;
 }
+.search-result-none-wrapper {
+	min-height: calc(100vh - 253px); /* navbar = height:50px + subnavbar = height:20px + footer = height:180px + ???:3px */
+}
 #search-result-none {
-	border: 5px solid blue;
-	display: block;
+/*	border: 5px solid blue;*/
+	padding: 0;
 }
 #search-result-none .subnavbar {
-	border: 5px solid red;
+/*	border: 5px solid red;*/
 }
 /* facet panel */
 #search-facets {
