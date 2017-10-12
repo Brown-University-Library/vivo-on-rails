@@ -36,13 +36,7 @@ class SearchController < ApplicationController
       params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
       params.q = "*" if params.q == ""
       params.facet_limit = facet_limit if facet_limit != nil
-
-      if ENV["USE_VIVO_SOLR"] == "true"
-        search_results = searcher.search(params, [])
-      else
-        not_hidden_fq = SolrLite::FilterQuery.new("hidden_b", "false")
-        search_results = searcher.search(params, [not_hidden_fq])
-      end
+      search_results = searcher.search(params, [])
       @presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
       @presenter
     end

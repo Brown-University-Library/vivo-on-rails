@@ -76,26 +76,59 @@ module SolrLite
       @params.facets
     end
 
-    def spellcheck
-      @solr_response.fetch("spellcheck",{})
+    def spellcheck()
+      @spellcheck ||= @solr_response.fetch("spellcheck",{})
     end
 
-    def spellcheck_suggestions
-      spellcheck.fetch("suggestions",[])
+    def spellcheck_suggestions()
+      @spellcheck_suggestions ||= spellcheck().fetch("suggestions",[])
     end
 
-    def spellcheck_collations
-      spellcheck().fetch("collations",[])
+    def spellcheck_collations()
+      @spellcheck_collations ||= begin
+        collations = spellcheck().fetch("collations",nil)
+        if collations != nil
+          if collations.kind_of?(Array)
+            # We must be in Solr6, use the collation information as-is
+          else
+            # uh-oh...
+            []
+          end
+        else
+          # We must be on Solr4, mimic the structure of the Solr6 results
+          # which is an array in the form:
+          #
+          #   ["collation", {"collationQuery": "wordA"}, "collation", {"collationQuery": "wordB"}, ...]
+          #
+          # As a reference, the structure in Solr4 is slightly different in that
+          # the collationQuery information is in an array within an array:
+          #
+          #   ["collation", ["collationQuery", "wordA"], "collation"["collationQuery", "wordB"], ...]
+          #
+          collations = []
+          suggestions = spellcheck_suggestions()
+          suggestions.each_with_index do |x, i|
+            if x == "collation"
+              collationQuery = suggestions[i+1]
+              word = collationQuery[1]
+              collations << "collation"
+              collations << {"collationQuery" => word}
+            end
+          end
+        end
+        collations
+      end
     end
 
-    def spellcheck_correctly_spelled
+    def spellcheck_correctly_spelled()
       spellcheck().fetch("correctlySpelled", true)
     end
 
-    def spellcheck_top_collation_query
-      return nil if spellcheck_collations.length < 2
-      collation = spellcheck_collations[1] || {}
-      collation.fetch("collationQuery", nil)
+    def spellcheck_top_collation_query()
+      collations = spellcheck_collations()
+      return nil if collations.length < 2
+      top_collation = collations[1] || {}
+      top_collation.fetch("collationQuery", nil)
     end
 
     def set_facet_values()
