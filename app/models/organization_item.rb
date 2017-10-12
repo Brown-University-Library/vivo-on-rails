@@ -1,13 +1,12 @@
 require "./app/models/model_utils.rb"
 class OrganizationItem
-  include ModelUtils
-
   attr_accessor :id, :record_type, :uri, :name, :overview,
     :thumbnail, :people, :web_pages
 
   def initialize(values)
     init_defaults()
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
+    @thumbnail = ModelUtils.safe_thumbnail(@thumbnail)
     @id = uri
   end
 
@@ -21,7 +20,7 @@ class OrganizationItem
     @uri = ""
     @name = ""
     @overview = ""
-    @thumbnail = ""
+    @thumbnail = nil
     @people = []
     @web_pages = []
   end
@@ -35,9 +34,16 @@ class OrganizationItem
         org.web_pages = value.map { |v| OnTheWebItem.new(v) }
       when "people"
         org.people = value.map { |v| OrganizationMemberItem.new(v)}
+      when "thumbnail"
+        org.thumbnail = ModelUtils.safe_thumbnail(value)
       else
         setter = key.to_s + "="
-        org.send(setter, value)
+        if org.respond_to?(setter)
+          org.send(setter, value)
+        else
+          # we've got a value in Solr that we don't expect/want.
+          Rails.logger.warn("Unexpected field #{key} received for organization #{hash['uri']}")
+        end
       end
     end
     org

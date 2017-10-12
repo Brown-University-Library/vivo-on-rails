@@ -88,6 +88,7 @@ $(document).ready(function() {
 </script>
 
 <% @page_title = @presenter.faculty.name %>
+<% @link_alternate = individual_export_path(format: "rdf") %>
 
 <%= render "search_box" %>
 

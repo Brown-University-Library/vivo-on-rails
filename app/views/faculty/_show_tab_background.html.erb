@@ -43,23 +43,5 @@
         title: "Honors and Awards",
         text: @presenter.faculty.awards} %>
 
-      <% if @presenter.faculty.on_the_web.count > 0 %>
-          <div class="panel-heading">
-            <h4 id="relatedBy-Authorship" title="" class="panel-title">On the Web</h4>
-          </div>
-          <div class="panel-body">
-            <table class="table table-hover">
-              <tbody>
-                <% @presenter.faculty.on_the_web.each do |web| %>
-                  <tr class="tableRow" role="listitem">
-                    <td class="citation-data">
-                      <span class="listDateTime"><a target="_blank" href="<%= web.url %>"><%= web.text %></a></span>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-      <% end %> <!-- on_the_web.count -->
   </div> <!-- panel -->
 <% end %>

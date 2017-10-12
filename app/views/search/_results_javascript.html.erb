@@ -1,0 +1,143 @@
+<script type="text/javascript">
+  // This object must be rendered before the `result_facets`
+  // partial view is rendered so that it is available by
+  // the time the facet data is rendered.
+  var facetsMoreObj = {};
+
+  // An object with the data for all facets. Each facet is kept in
+  // a separate key, for example:
+  //    {
+  //      facet1: [values...],
+  //      facet2: [values...]
+  //    }
+  //
+  // See AddFacetValue() below.
+  facetsMoreObj.data = {};
+
+  facetsMoreObj.AddFacetValue = function(facetName, value, count, addUrl, removeUrl) {
+    if (facetsMoreObj.data[facetName] === undefined) {
+      facetsMoreObj.data[facetName] = [];
+    }
+    item = {value: value, count: count, addUrl: addUrl, removeUrl: removeUrl};
+    facetsMoreObj.data[facetName].push(item);
+  };
+
+  facetsMoreObj.SortFacetByValue = function(facetName) {
+    facetsMoreObj.data[facetName] = facetsMoreObj.data[facetName].sort(function(a,b) {
+      // sort ascending
+      if (a.value.toUpperCase() < b.value.toUpperCase()) return -1;
+      if (a.value.toUpperCase() > b.value.toUpperCase()) return 1;
+      return 0;
+    });
+
+    var sortAzId = "#modal_form_" + facetName + "_sort_az";
+    var sortNumId = "#modal_form_" + facetName + "_sort_num";
+    $(sortAzId).addClass("active");
+    $(sortNumId).removeClass("active");
+    facetsMoreObj.GoFirstPage(facetName);
+  };
+
+  facetsMoreObj.SortFacetByCount = function(facetName) {
+    facetsMoreObj.data[facetName] = facetsMoreObj.data[facetName].sort(function(a,b) {
+      // sort descending
+      if (a.count < b.count) return 1;
+      if (a.count > b.count) return -1;
+      return 0;
+    });
+    var sortAzId = "#modal_form_" + facetName + "_sort_az";
+    var sortNumId = "#modal_form_" + facetName + "_sort_num";
+    $(sortAzId).removeClass("active");
+    $(sortNumId).addClass("active");
+    facetsMoreObj.GoFirstPage(facetName);
+  };
+
+  facetsMoreObj.PageNum = function(facetName) {
+    var pageNumId = "#modal_form_" + facetName + "_page_num";
+    return parseInt($(pageNumId).text(), 10);
+  };
+
+  facetsMoreObj.RenderFacet = function(facetName) {
+    var pageNum = facetsMoreObj.PageNum(facetName);
+    var ulId = "#modal_form_" + facetName + "_items";
+    var ul = $(ulId);
+    var items = [];
+    var filterId = "#modal_form_" + facetName + "_filter";
+    var filter = $(filterId).val();
+    var pageSize, start, stop, i, item, text, href, html, pageCount;
+
+    if (filter == "") {
+      items = facetsMoreObj.data[facetName];
+    }
+    else {
+      for(i = 0; i < facetsMoreObj.data[facetName].length; i++) {
+        item = facetsMoreObj.data[facetName][i];
+        if (item.value.toUpperCase().includes(filter.toUpperCase())) {
+          items.push(item);
+        }
+      }
+    }
+
+    pageSize = 20;
+    start = (pageNum - 1) * pageSize;
+    stop = Math.min(items.length, start + pageSize);
+    pageCount = parseInt(items.length / pageSize) + ((items.length % pageSize) == 0 ? 0 : 1);
+
+    $(ul).children().remove();
+    for(i = start; i < stop; i++) {
+      item = items[i];
+      if (item.removeUrl == null) {
+          href = "<a href='" + item.addUrl + "'>" + item.value + "</a>";
+          text = "(" + item.count + ")";
+          html = "<li>" + href + " " + text
+      } else {
+          text = item.value + " (" + item.count + ")";
+          href = "<a href='" + item.removeUrl + "'><span class='glyphicon glyphicon-remove'></span></a>";
+          html = "<li>" + text + " " + href;
+      }
+      $(ul).append(html);
+    }
+    facetsMoreObj.TooglePrevNextPage(facetName, pageCount);
+  };
+
+  facetsMoreObj.TooglePrevNextPage = function(facetName, pageCount) {
+    var prevLinkId = "#modal_form_" + facetName + "_prev_link";
+    var nextLinkId = "#modal_form_" + facetName + "_next_link";
+    var pageNum = facetsMoreObj.PageNum(facetName)
+
+    if (pageNum == 1) {
+      $(prevLinkId).unbind("click");
+      $(prevLinkId).addClass("disabled");
+    } else {
+      $(prevLinkId).bind("click");
+      $(prevLinkId).removeClass("disabled");
+    }
+
+    if (pageNum >= pageCount) {
+      $(nextLinkId).unbind("click");
+      $(nextLinkId).addClass("disabled");
+    } else {
+      $(nextLinkId).bind("click");
+      $(nextLinkId).removeClass("disabled");
+    }
+  };
+
+  facetsMoreObj.GoPrevPage = function(facetName) {
+    var pageNum = facetsMoreObj.PageNum(facetName)
+    var pageNumId = "#modal_form_" + facetName + "_page_num";
+    $(pageNumId).text(pageNum - 1);
+    facetsMoreObj.RenderFacet(facetName);
+  };
+
+  facetsMoreObj.GoNextPage = function(facetName) {
+    var pageNum = facetsMoreObj.PageNum(facetName)
+    var pageNumId = "#modal_form_" + facetName + "_page_num";
+    $(pageNumId).text(pageNum + 1);
+    facetsMoreObj.RenderFacet(facetName);
+  }
+
+  facetsMoreObj.GoFirstPage = function(facetName) {
+    var pageNumId = "#modal_form_" + facetName + "_page_num";
+    $(pageNumId).text(1);
+    facetsMoreObj.RenderFacet(facetName);
+  }
+</script>

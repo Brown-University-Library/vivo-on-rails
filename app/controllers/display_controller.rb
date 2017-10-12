@@ -26,6 +26,10 @@ class DisplayController < ApplicationController
       # PEOPLE nor ORGANIZATION.
       render_vitro_data(id, type)
     end
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render record #{id}, type #{type}. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
   end
 
   private
@@ -42,6 +46,17 @@ class DisplayController < ApplicationController
       from_solr = true
       from_solr = false if params[:fuseki] == "true"
       faculty = Faculty.get_one(id, from_solr)
+      if faculty == nil
+        Rails.logger.error("Could not render faculty #{id}.")
+        render "error", status: 500
+        return
+      end
+
+      if params["debug"] == "true"
+        render :json => faculty.to_json
+        return
+      end
+
       referer = request.headers.env["HTTP_REFERER"]
       @presenter = FacultyPresenter.new(faculty, search_url(), referer)
       render "faculty/show"
@@ -50,6 +65,11 @@ class DisplayController < ApplicationController
     def render_org(id)
       @presenter = DefaultPresenter.new()
       @organization = Organization.get_one(id)
+      if @organization == nil
+        Rails.logger.error("Could not render organization #{id}.")
+        render "error", status: 500
+        return
+      end
       render "organization/show"
     end
 

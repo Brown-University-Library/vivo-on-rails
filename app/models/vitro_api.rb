@@ -1,5 +1,11 @@
+# Interface's with VIVO/Vitro native API
+# We use this to provide raw VIVO data in our front end without having
+# to re-implement what VIVO does natively. For example we use this to
+# to provide JSON-LD representations of faculty data.
+#
 class VitroAPI
   APPLICATION_JSON = "application/json"
+  APPLICATION_RDF_XML = "application/rdf+xml"
   TEXT_TURTLE = "text/turtle"
 
   def initialize(vivo_url)
@@ -12,6 +18,8 @@ class VitroAPI
         url = "#{@vivo_url}/individual/#{id}/#{id}.jsonld"
       when content_type == TEXT_TURTLE
         url = "#{@vivo_url}/individual/#{id}/#{id}.ttl"
+      when content_type == APPLICATION_RDF_XML
+        url = "#{@vivo_url}/individual/#{id}/#{id}.rdf"
       else
         return nil
     end

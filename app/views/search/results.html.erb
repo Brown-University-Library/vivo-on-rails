@@ -1,146 +1,4 @@
-<script type="text/javascript">
-  // This object must be rendered before the `result_facets`
-  // partial view is rendered so that it is available by
-  // the time the facet data is rendered.
-  var facetsMoreObj = {};
-
-  // An object with the data for all facets. Each facet is kept in
-  // a separate key, for example:
-  //    {
-  //      facet1: [values...],
-  //      facet2: [values...]
-  //    }
-  //
-  // See AddFacetValue() below.
-  facetsMoreObj.data = {};
-
-  facetsMoreObj.AddFacetValue = function(facetName, value, count, addUrl, removeUrl) {
-    if (facetsMoreObj.data[facetName] === undefined) {
-      facetsMoreObj.data[facetName] = [];
-    }
-    item = {value: value, count: count, addUrl: addUrl, removeUrl: removeUrl};
-    facetsMoreObj.data[facetName].push(item);
-  };
-
-  facetsMoreObj.SortFacetByValue = function(facetName) {
-    facetsMoreObj.data[facetName] = facetsMoreObj.data[facetName].sort(function(a,b) {
-      // sort ascending
-      if (a.value.toUpperCase() < b.value.toUpperCase()) return -1;
-      if (a.value.toUpperCase() > b.value.toUpperCase()) return 1;
-      return 0;
-    });
-
-    var sortAzId = "#modal_form_" + facetName + "_sort_az";
-    var sortNumId = "#modal_form_" + facetName + "_sort_num";
-    $(sortAzId).addClass("active");
-    $(sortNumId).removeClass("active");
-    facetsMoreObj.GoFirstPage(facetName);
-  };
-
-  facetsMoreObj.SortFacetByCount = function(facetName) {
-    facetsMoreObj.data[facetName] = facetsMoreObj.data[facetName].sort(function(a,b) {
-      // sort descending
-      if (a.count < b.count) return 1;
-      if (a.count > b.count) return -1;
-      return 0;
-    });
-    var sortAzId = "#modal_form_" + facetName + "_sort_az";
-    var sortNumId = "#modal_form_" + facetName + "_sort_num";
-    $(sortAzId).removeClass("active");
-    $(sortNumId).addClass("active");
-    facetsMoreObj.GoFirstPage(facetName);
-  };
-
-  facetsMoreObj.PageNum = function(facetName) {
-    var pageNumId = "#modal_form_" + facetName + "_page_num";
-    return parseInt($(pageNumId).text(), 10);
-  };
-
-  facetsMoreObj.RenderFacet = function(facetName) {
-    var pageNum = facetsMoreObj.PageNum(facetName);
-    var ulId = "#modal_form_" + facetName + "_items";
-    var ul = $(ulId);
-    var items = [];
-    var filterId = "#modal_form_" + facetName + "_filter";
-    var filter = $(filterId).val();
-    var pageSize, start, stop, i, item, text, href, html, pageCount;
-
-    if (filter == "") {
-      items = facetsMoreObj.data[facetName];
-    }
-    else {
-      for(i = 0; i < facetsMoreObj.data[facetName].length; i++) {
-        item = facetsMoreObj.data[facetName][i];
-        if (item.value.toUpperCase().includes(filter.toUpperCase())) {
-          items.push(item);
-        }
-      }
-    }
-
-    pageSize = 20;
-    start = (pageNum - 1) * pageSize;
-    stop = Math.min(items.length, start + pageSize);
-    pageCount = parseInt(items.length / pageSize) + ((items.length % pageSize) == 0 ? 0 : 1);
-
-    $(ul).children().remove();
-    for(i = start; i < stop; i++) {
-      item = items[i];
-      if (item.removeUrl == null) {
-          href = "<a href='" + item.addUrl + "'>" + item.value + "</a>";
-          text = "(" + item.count + ")";
-          html = "<li>" + href + " " + text
-      } else {
-          text = item.value + " (" + item.count + ")";
-          href = "<a href='" + item.removeUrl + "'><span class='glyphicon glyphicon-remove'></span></a>";
-          html = "<li>" + text + " " + href;
-      }
-      $(ul).append(html);
-    }
-    facetsMoreObj.TooglePrevNextPage(facetName, pageCount);
-  };
-
-  facetsMoreObj.TooglePrevNextPage = function(facetName, pageCount) {
-    var prevLinkId = "#modal_form_" + facetName + "_prev_link";
-    var nextLinkId = "#modal_form_" + facetName + "_next_link";
-    var pageNum = facetsMoreObj.PageNum(facetName)
-
-    if (pageNum == 1) {
-      $(prevLinkId).unbind("click");
-      $(prevLinkId).addClass("disabled");
-    } else {
-      $(prevLinkId).bind("click");
-      $(prevLinkId).removeClass("disabled");
-    }
-
-    if (pageNum >= pageCount) {
-      $(nextLinkId).unbind("click");
-      $(nextLinkId).addClass("disabled");
-    } else {
-      $(nextLinkId).bind("click");
-      $(nextLinkId).removeClass("disabled");
-    }
-  };
-
-  facetsMoreObj.GoPrevPage = function(facetName) {
-    var pageNum = facetsMoreObj.PageNum(facetName)
-    var pageNumId = "#modal_form_" + facetName + "_page_num";
-    $(pageNumId).text(pageNum - 1);
-    facetsMoreObj.RenderFacet(facetName);
-  };
-
-  facetsMoreObj.GoNextPage = function(facetName) {
-    var pageNum = facetsMoreObj.PageNum(facetName)
-    var pageNumId = "#modal_form_" + facetName + "_page_num";
-    $(pageNumId).text(pageNum + 1);
-    facetsMoreObj.RenderFacet(facetName);
-  }
-
-  facetsMoreObj.GoFirstPage = function(facetName) {
-    var pageNumId = "#modal_form_" + facetName + "_page_num";
-    $(pageNumId).text(1);
-    facetsMoreObj.RenderFacet(facetName);
-  }
-</script>
+<%= render "results_javascript" %>
 
 <%= render "search_box" %>
 
@@ -153,7 +11,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div id="search-result-none" class="col-lg-8 col-md-8 col-sm-8">
             <p>No results were found for <b><%= @presenter.query %></b>.</p>
-
+            
             <% if @presenter.suggest_url != nil %>
               <p>Would you like to search for
                 <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
@@ -165,7 +23,7 @@
       <div class="row">
         <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
           <div class="result-nums-breadcrumbs-wrapper">
-              <!-- 1/N results found -->
+              <!-- top bar: 1/N results found -->
               <div id="search-result-count" class="text-muted">
                   <% if @presenter.page == 1 %>
                     <span class="search-result-previous">
@@ -176,6 +34,7 @@
                       <a href="<%= @presenter.previous_url %>" ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="chevron-nav-title"> Previous </span></a>
                     </span>
                   <% end %>
+                
                   <span class="search-result-numbers">
                     <span id="search-page-start"><%= @presenter.start + 1 %></span>
                     -
@@ -196,34 +55,8 @@
               </div>
         <% end %>
 
-        <!-- search terms used -->
-        <div class="facet-breadcrumbs">
-          <% if !@presenter.query.empty? %>
-            <span class="search-result-facets no-orphans">
-                <a href="<%= @presenter.remove_q_url %>">
-                  <span><span class="facet-category">Search Term | </span><%= @presenter.query %></span>
-                  <span class="glyphicon glyphicon-remove"></span>
-                  <span class="sr-only">Remove search term <%= @presenter.query %></span>
-                </a>
-            </span>
-          <% end %>
-          <% @presenter.fq.each do |fq| %>
-            <span class="search-result-facets no-orphans">
-                <a href="<%= fq.remove_url %>">
-                  <span><span class="facet-category"><%= fq.title %> | </span><%= fq.value %></span>
-                  <span class="glyphicon glyphicon-remove"></span>
-                  <span class="sr-only">Remove facet <%= fq.value %></span>
-                </a>
-            </span>
-          <% end %>
-
-          <% if @presenter.num_found > 0 && @presenter.suggest_url != nil %>
-            <p>Would you like to see additional results for
-              <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
-              instead?</p>
-          <% end %>
-        </div>
-      </div>
+        <%= render "results_search_terms" %>
+      </div> <!-- result-nums-breadcrumbs-wrapper -->
 
       <h2 class="visible-print">Results</h2>
 
@@ -233,19 +66,16 @@
           <h3 class="hidden">Fully-matching results</h3>
 
           <div class="clearfix visible-md-block"></div>
-          <!-- <div class="row top-buffer"> -->
           <div class="clearfix visible-lg-block"></div>
 
           <% @presenter.results.each_with_index do |item, index| %>
             <div class="clearfix visible-sm-block"></div>
             <div class="clearfix visible-xs-block"></div>
-            <!-- render "results_item", item: item -->
-
-<!-- RESULTS ITEM BEGINS -->
+            <!-- RESULTS ITEM BEGINS -->
             <div class="clearfix visible-xs-block"></div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
               <div class="gap30"></div>
-              <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+              <section itemscope itemtype="<%= item.type_schema_org() %>" id="individual-intro" class="vcard person" role="region">
                 <div class="emailsContainer">
                   <h4>
                     <a href="mailto:<%= item.email %>" title="Email <%= item.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
@@ -267,16 +97,14 @@
                 </section>
               </section>
             </div>
-<!-- RESULTS ITEM ENDS -->
-
+            <!-- RESULTS ITEM ENDS -->
           <% end %>
-      </div>
-
+      </div> <!-- row results-row col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
       <%= render "results_pagination" %>
 
-    </div>
+    </div> <!-- results-wrapper col-lg-9 col-lg-push-3 ... -->
   <% if @presenter.num_found > 0 %>
     <%= render "results_facets" %>
   <% end %>
-  </div>
-</div>
+  </div> <!-- row -->
+</div> <!-- container-fluid col-sm-12 -->

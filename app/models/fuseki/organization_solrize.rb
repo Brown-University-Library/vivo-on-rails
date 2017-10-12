@@ -1,3 +1,12 @@
+# Handles populating Solr with Organization information.
+#
+# This class was used then we protyped populating a separate Solr index
+# with data from VIVO rather than using the built-in Solr index that
+# VIVO manages.
+#
+# We don't use this class anymore.
+# This class should be removed after we go live.
+#
 require "./app/models/organization.rb"
 require "./lib/solr_lite/solr.rb"
 class OrganizationSolrize

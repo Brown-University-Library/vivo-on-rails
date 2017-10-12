@@ -1,7 +1,6 @@
 require "./app/models/model_utils.rb"
 require "./app/models/date_utils.rb"
 class AppointmentItem
-  include ModelUtils
 
   attr_accessor :uri, :id
   attr_accessor :org_name       # e.g. "Harvard University"
@@ -12,7 +11,7 @@ class AppointmentItem
 
   def initialize(values)
     init_defaults()
-    set_values_from_hash(values)
+    ModelUtils.set_values_from_hash(self, values)
     @id = @uri
     @start_date = DateUtils.str_to_date(@start_date)
     @end_date = DateUtils.str_to_date(@end_date)
@@ -35,5 +34,9 @@ class AppointmentItem
 
   def year_range_str
     DateUtils.year_range_str(@start_date, @end_date)
+  end
+
+  def self.from_hash_array(values)
+    values.map {|v| AppointmentItem.new(v)}.sort_by {|v| v.start_date || ""}.reverse
   end
 end

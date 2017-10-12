@@ -11,7 +11,6 @@
         </div>
         <form id="search-homepage" action="<%= search_path() %>" name="search-home" role="search" method="GET">
           <div class="input-group input-group-lg">
-            <input class="hidden" name="home" type="text" value="">
             <input class="form-control" id="q" name="q" placeholder="Search for an Expert..." type="text">
             <div class="input-group-btn">
               <button type="submit" class="btn btn-default btn-lg sympl-search">
@@ -24,105 +23,90 @@
     </div>
     <div class="col-md-12">
       <div class="container">
-
-            <div id="homepage-link-row">
-              <a href="" target="_blank">Advanced search&hellip;</a>
-            </div>
-
+        <div id="homepage-link-row">
+          <a href="" target="_blank">Advanced search&hellip;</a>
+        </div>
         <div class="jumbotron">
           <p>&nbsp;</p>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<div class="row faculty-home">
-  <div class="container">
-    <div class="col-md-12">
-      <h2 class="h1">Recent faculty books</h2>
-      <h5><em>Click book jacket to view faculty profile</em></h4>
-      <div class="gap20"></div>
-      <!-- Use bootstrap carousel to showcase faculty members' books, edited in lib-home-page.ftl and homePageUtils.js -->
+<% if @bookCoversPaginated.count > 0 %>
+  <!-- Book carousel -->
+  <div class="row faculty-home">
+    <div class="container">
+      <div class="col-md-12">
 
-      <section id="faculty-books-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
-        <div style="display: none;" id="tempSpacing">
-          <span>Loading books . . .&nbsp;&nbsp;&nbsp;
-            <%= image_tag("indicatorWhite.gif") %>
-          </span>
-        </div>
+        <h2 class="h1">Recent faculty books</h2>
+        <h5><em>Click book jacket to view faculty profile</em></h4>
+        <div class="gap20"></div>
 
-        <!-- <div id="research-faculty-mbrs" class="carousel-inner" role="listbox"> -->
-        <div class="carousel-inner" role="listbox">
-
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/mgutmann.jpg') %>" width="160">
-            </a>
+        <div class="carousel slide multi-item-carousel" id="books-carousel">
+          <!-- Crystal/Ben -- how can we get the indicators not to overlay
+          with the book covers? -->
+          <ol class="carousel-indicators">
+            <% @bookCoversPaginated.each_with_index do |page, i| %>
+              <li data-target="#books-carousel" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>">
+            <% end %>
+          </ol>
+          <div class="carousel-inner">
+            <% @bookCoversPaginated.each_with_index do |page, i| %>
+              <div class="item <%= i == 0 ? "active" : "" %>">
+                <ul>
+                  <% page.each do |cover| %>
+                    <a href="<%= cover.author_url %>" class="book-cover">
+                      <img src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
+                    </a>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
           </div>
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/stobin.jpg') %>" width="160">
-            </a>
-          </div>
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/gwood.jpg') %>" width="160">
-            </a>
-          </div>
-          <div class="item">
-            <a href="" class="book-cover">
-              <img src="<%= image_url('book-covers/miwhite.jpg') %>" width="160">
-            </a>
-          </div>
-        </div>
+          <a class="left carousel-control" href="#books-carousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#books-carousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+          </a>
+        </div> <!-- books-carousel -->
+      </div> <!-- col-md-12 -->
+    </div> <!-- container -->
+  </div> <!-- row faculty-home -->
+<% end %>
 
-        <a class="left carousel-control" href="#faculty-carousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#faculty-carousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-      </section>
-    </div>
-  </div>
-</div>
-
-<div class="row recent-books">
-<div class="row icons-home">
-  <div class="col-md-4">
+<!-- Bottom three big blocks -->
+<div class="row">
+  <div class="col-md-4 icons-home">
     <a href="<%= search_path() %>" id="icon1">
       <span class="glyphicon glyphicon-user"></span>
       <h3>Search for a researcher</h3>
     </a>
   </div>
-  <div class="col-md-4">
-    <a href="<%= search_path() %>" id="icon2">
+  <div class="col-md-4 icons-home">
+    <a href="https://library.brown.edu/orcid/" id="icon2">
       <span class="glyphicon glyphicon-pencil"></span>
-      <h3>Find an organization</h3>
+      <img src="https://vivo.brown.edu/themes/rab/images/orcid-logo.png"/>
+      <h3>Get a Brown ORCID Identifier!</h3>
     </a>
   </div>
   <div class="col-md-4">
-   <!-- repurpose this section for news links or alerts or announcements
-    <a href="<%= search_path() %>" id="icon3">
-    <span class="glyphicon glyphicon-education"></span>
-    <h3>Browse all&hellip;</h3>
-   </a> -->
-   <h3 style="text-align: left;padding-left: 1.5em;color: #aba698;padding-bottom: .375em;">Researchers@Brown News</h3>
+   <h3 style="text-align: left;padding-left: 1.5em;color: #aba698;padding-bottom: .375em;">Did you know?</h3>
     <ul style="text-align: left;padding-left: 2.1875em;">
-      <li class="news-link"><a href="">News or announcement item phrase; news or announcement item phrase; news or announcement item phrase&hellip;</a></li>
-      <li class="news-link"><a href="">News or announcement item phrase&hellip;</a></li>
-      <li class="news-link"><a href="">News or announcement item phrase&hellip;</a></li>
+      <li class="news-link">You can assign one of more deputies to update your profile. <a href="<%= home_faq_url() %>#assign_deputy">Learn how.</a></li>
+      <li class="news-link">Your profile is highly discoverable. This site has over half a million visitors and 2 million pageviews a year.</li>
+      <li class="news-link"><a href="https://bitly.com/vivoseo" target="_blank">In a recent study</a>, Brown ranked #1 out of 90 sites for the highest proportion of profiles in the top 3 Google search results.</li>
+      <li class="news-link">Researchers@Brown contains citations and links to full text for over 34,000 publications. Another 24,000 are awaiting approval. Check the "Manage Publications" section in your profile.</li>
     </ul>
   </div>
 </div>
 
 <script>
-$(function() {
-  // Force focus to the search textbox
-  $("#q").focus();
-});
+  $(function() {
+    $("#q").focus(); // Force focus to the search textbox
+  });
 </script>

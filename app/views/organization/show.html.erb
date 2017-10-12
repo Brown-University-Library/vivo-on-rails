@@ -1,8 +1,10 @@
+<% @link_alternate = individual_export_path(format: "rdf") %>
+
 <%= render "search_box" %>
 
 <div class="container org-profile">
   <% '= render "show_toolbar"' %>
-  <div class="row org-content">
+  <div class="row org-content" itemscope itemtype="http://schema.org/Organization">
     <div class="container organization-page">
       <%= render "manage_profile_login" %>
       <%= render "organization/show_left_panel" %>

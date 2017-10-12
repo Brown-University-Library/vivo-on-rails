@@ -13,20 +13,21 @@ class Search
     results = @solr.search(params, extra_fqs)
     results.solr_docs.each do |doc|
       record_type = (doc["record_type"] || []).first
-      case record_type
-      when "ORGANIZATION"
-        json = JsonUtils.safe_parse(doc["json_txt"].first)
-        item = OrganizationItem.new(json)
-        results.items << SearchItem.from_organization(item)
-      when "PEOPLE"
-        json = JsonUtils.safe_parse(doc["json_txt"].first)
-        item = FacultyListItem.new(json)
-        results.items << SearchItem.from_person(item)
-      else
+      json_txt = doc["json_txt"].first
+      if record_type != "ORGANIZATION" && record_type != "PEOPLE"
         # A VIVO type not supported on our new front-end.
         # TODO: we should either filter them our in our `q` parameter
         # so that they are not returned at all.
+        Rails.logger.warn("Ignored record_type: #{record_type}. #{json_txt}")
+        next
       end
+
+      hash = JsonUtils.safe_parse(json_txt)
+      if hash == nil
+        next
+      end
+
+      results.items << SearchItem.from_hash(hash, record_type)
     end
     results
   end

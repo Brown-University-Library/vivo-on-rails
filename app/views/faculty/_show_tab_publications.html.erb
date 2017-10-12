@@ -1,9 +1,6 @@
 <% if @presenter.has_publications %>
       <div id="tabPublications" class="panel panel-default hidden">
         <h3>Publications</h3>
-        <div class="panel-heading">
-          <h4 id="relatedBy-Authorship" title="" class="panel-title">Contributor to </h4>
-        </div>
 
         <div class="panel-body">
           <% if @presenter.publication_filters.count > 0 %>
@@ -31,9 +28,6 @@
                     <i><%= c.title %></i>
                     <%= c.pub_info %>
                     <div class="no-orphans">
-                      <% if c.pub_type %>
-                        <span class="pub-item-tag label label-default"><%= c.pub_type.downcase %></span>
-                      <% end %>
                       <% if c.doi_url %>
                         <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.doi_url %>">full text</a>
                       <% end %>

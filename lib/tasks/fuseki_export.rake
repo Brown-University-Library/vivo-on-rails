@@ -1,6 +1,12 @@
 # These tasks are used to export data from our live Fuseki
 # endpoint to files that we can import in our test environments.
-require "./app/models/export.rb"
+#
+# We are not using these Rake task anymore now that we are using the
+# native Solr index that comes with VIVO.
+#
+# These tasks will be deleted once we go live.
+#
+require "./app/models/fuseki/export.rb"
 namespace :vivo do
   desc "Export information about all faculty members"
   task :export_all do

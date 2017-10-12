@@ -2,7 +2,14 @@ class SearchController < ApplicationController
   # Normal search. Returns search results as HTML.
   def index
     execute_search()
+    if @presenter.num_found == 0
+      Rails.logger.warn("No results were found. Search: #{@presenter.search_qs}")
+    end
     render "results"
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render search. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
   end
 
   # Returns the facet values (as JSON) for a search.
@@ -16,6 +23,10 @@ class SearchController < ApplicationController
     execute_search(-1)
     facet_data = @presenter.facets.find {|f| f.name == facet_name }
     render :json => facet_data.values
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render facets as JSON. Exception: #{ex} \r\n #{backtrace}")
+    render :json => nil, status: 500
   end
 
   private
@@ -25,24 +36,15 @@ class SearchController < ApplicationController
       params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
       params.q = "*" if params.q == ""
       params.facet_limit = facet_limit if facet_limit != nil
-
-      if request.params["home"] != nil
-        # default to people if coming from the home page
-        params.fq << SolrLite::FilterQuery.new("record_type", "PEOPLE")
-      end
-
-      not_hidden_fq = SolrLite::FilterQuery.new("hidden_b", "false")
-      search_results = searcher.search(params, [not_hidden_fq])
-      if ENV["USE_VIVO_SOLR"] == "true"
-        search_results = searcher.search(params, [])
-      end
+      search_results = searcher.search(params, [])
       @presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
+      @presenter
     end
 
     def facets_fields()
       f = []
       f << SolrLite::FacetField.new("record_type", "Type")
-      f << SolrLite::FacetField.new("affiliations", "Affiliations")
+      f << SolrLite::FacetField.new("affiliations", "Brown Affiliations")
       f << SolrLite::FacetField.new("research_areas", "Research Areas")
       f << SolrLite::FacetField.new("published_in", "Published In")
       f

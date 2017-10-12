@@ -1,21 +1,15 @@
 # VIVO on Rails
-
 This is a proof of concept at creating a Rails application to browse through the
-researcher information stored in a VIVO database and a SOLR index.
+researcher information stored in VIVO through a Solr index.
 
 The CSS styles used on this web site were taken from
 [Symplectic's bootstrap template](https://www.digital-science.com/blog/news/introducing-bootstrapped-vivo-symplectic-reimagines-vivo-research-profile-design/)
 
 
 # Pre-requisites
-You need to have [Solr](http://lucene.apache.org/solr/) and
-[Fuseki](https://jena.apache.org/index.html) installed and running.
-
-```
-fuseki start
-solr start
-solr create_core -c vivo
-```
+You need to have [Solr](http://lucene.apache.org/solr/) running. We use the
+Solr index that VIVO provides out of the box but we have added several fields
+needed by this project. See **Solr Index** section below.
 
 
 # To get started
@@ -27,23 +21,19 @@ source .env_sample
 bundle exec rails server
 ```
 
-You'll need to tweak the values in `.env_sample` to match the URLs where
-Solr and Fuseki are running in your environment.
+Update the values in `.env_sample` to match the URLs where Solr is running in
+your environment.
 
 
 # General Architecture
 This is a Ruby on Rails web site that shows faculty information stored in Solr.
 All searches and retrieval of information are done against Solr.
 
-The information is assumed to come from a Fuseki instance with VIVO information
-but the site does not interface with Fuseki except in a few `rake` tasks to
-populate the Solr index.
-
-In the future, access to Fuseki triple store will be used to perform linked
+In the future, access to the Fuseki triple store will be used to perform linked
 data queries and other visualizations.
 
 A few diagrams on how the project is structure can be found
-[here](https://docs.google.com/presentation/d/1envsRrRUw_1MXzHIqqvhhwILbTx7eH0inWG8MwTMFds/edit?usp=sharing)
+[here](https://docs.google.com/presentation/d/1eXatLlX-VOkjPeJqYRZ7AhzkMK96XrQfykX1rvDdJKE/edit?usp=sharing)
 
 
 # Solr Index
@@ -158,20 +148,18 @@ search experience, for example, a separate field for name to give it a higher
 boost on search results and the ability to facet the data by other fields.
 
 
-# To populate Solr
-There are a couple of `rake` tasks that can be used to push to Solr a set of
-faculty and organizations from your VIVO triple store into Solr.
-
-```
-bundle exec rake vivo:solrize_org_all
-bundle exec rake vivo:solrize_faculty_all
-```
-
 # Caveats
-This is a proof of concept at this point.
-
-The code at this point is hard-coded for very specific predicates
-that we use at Brown and might not work on your particular VIVO database.
+The code at this point is hard-coded for very specific predicates that we use
+at Brown and might not work on your particular VIVO database.
 
 The unit tests (`bundle exec rake vivo:tests`) are hard-coded to find very
 specific people/departments so they will very likely fail on your installation.
+
+
+# Sidenote
+*An older version of this project* included code to create a Solr index by querying
+VIVO's Fuseki endpoint. We have moved away from this approach. In the current
+version we use the native Solr index with a few extra fields that we have added
+to support the functionality that we need. If you are interested in the code
+that we used back then you can still find the models under
+`./app/models/fuseki` and the rake tasks under `./lib/tasks/fuseki_solrize.rake`.

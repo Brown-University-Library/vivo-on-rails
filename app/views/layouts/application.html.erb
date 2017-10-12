@@ -7,9 +7,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Google Chrome Frame open source plug-in brings Google Chrome's open web
-  technologies and speedy JavaScript engine to Internet Explorer-->
-<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
 <title><%= @page_title || "Researchers @ Brown" %></title>
 
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
@@ -20,7 +17,11 @@
 
 <%= javascript_include_tag 'application' %>
 <%= csrf_meta_tags %>
+<%= favicon_link_tag 'favicon.ico' %>
 
+<% if @link_alternate %>
+	<link rel="alternate" type="application/rdf+xml" href="<%= @link_alternate %>" />
+<% end %>
 <link rel="shortcut icon" type="image/x-icon" href="<%= root_path %>">
 </head>
 
@@ -98,7 +99,7 @@
 						<li role="listitem">
 							<a href="http://brown.edu/" target="_blank">Brown University</a>
 						<li role="listitem">
-							<a href="https://docs.google.com/a/brown.edu/forms/d/1H_LzEHRzpxv3OY266RjSwpAMwVuTEUFyNEgMPcZ4NiA/viewform" title="Submit feedback">Contact Us</a>
+							<a href="<%= contact_us_url %>" title="Submit feedback">Contact Us</a>
 					</ul>
 				</nav>
 				<p class="copyright">
