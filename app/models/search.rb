@@ -1,6 +1,7 @@
 require "./app/models/json_utils.rb"
 require "./app/models/search_item.rb"
 require "./app/models/faculty.rb"
+require "./lib/solr_lite/filter_query.rb"
 require "./lib/solr_lite/solr.rb"
 require "./lib/solr_lite/search_results.rb"
 class Search
@@ -8,7 +9,15 @@ class Search
     @solr = SolrLite::Solr.new(solr_url)
   end
 
-  def search(params, extra_fqs)
+  def search(params)
+    extra_fqs = []
+    if !record_type_filter?(params)
+      Rails.logger.warn "RECORD_TYPE: added PEOPLE OR ORGANIZATION"
+      fq = SolrLite::FilterQuery.new("record_type",["PEOPLE", "ORGANIZATION"])
+      extra_fqs = [fq]
+    else
+      Rails.logger.warn "RECORD_TYPE: already filtered"
+    end
     params.fl = ["id", "record_type", "json_txt"]
     results = @solr.search(params, extra_fqs)
     results.solr_docs.each do |doc|
@@ -30,5 +39,9 @@ class Search
       results.items << SearchItem.from_hash(hash, record_type)
     end
     results
+  end
+
+  def record_type_filter?(params)
+    params.fq.find {|f| f.field == "record_type" } != nil
   end
 end
