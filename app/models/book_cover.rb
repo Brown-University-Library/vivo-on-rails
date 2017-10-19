@@ -38,10 +38,10 @@ class BookCoverModel
   end
 
   def self.get_all(author_base_url)
-    if Rails.env.production?
-      self.get_all_from_db(author_base_url)
-    else
+    if ENV["BOOK_COVER_STUB"]=="true"
       BookCoversSampleData.get_all()
+    else
+      self.get_all_from_db(author_base_url)
     end
   end
 
