@@ -2,7 +2,7 @@ class BookCoversSampleData
   # We only use this data in development so that Crystal and Ben can get data
   # for the carousel without having to connect to the production MySQL database.
   def self.get_all()
-    host_url = ENV["HOST_URL"] || ""
+    host_url = (ENV["HOST_URL"] || "") + "/display"
     covers = []
 
     cover = BookCoverModel.new()
