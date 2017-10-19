@@ -3,6 +3,10 @@ class ModelUtils
     if (value || "").strip.length == 0
       return nil
     end
+    if value.start_with?("http://vivo.brown.edu")
+      # Prefer HTTPS
+      return value.gsub("http://", "https://")
+    end
     value
   end
 
