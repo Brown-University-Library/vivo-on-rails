@@ -155,8 +155,8 @@ a.manage-profile-link:visited {
 	padding: 0;
 	position: absolute;
 	top: 0.2rem;
-	right: 3rem;
-	width: 300px;
+	right: 1.5rem;
+	width: 30rem;
 	z-index: 10;
 }
 .below-nav-links p {
@@ -1453,6 +1453,12 @@ td.citation-data.pub-item {
 	}
 }
 @media (max-width: 991px) {
+	.below-nav-links {
+		width: 15rem;
+	}
+	.below-nav-links p span {
+		width: 100%;
+	}
 	.expert-results {
 		min-height: 10rem;
 		max-height: 24rem;
@@ -1472,7 +1478,7 @@ td.citation-data.pub-item {
 		justify-content: flex-start;
 	}
 	.expert-results .results__photo {
-		border: 1px solid green;
+/*		border: 1px solid green;*/
 		position: relative;
 		top: auto;
 		bottom: auto;
@@ -1481,7 +1487,7 @@ td.citation-data.pub-item {
 		margin: 0;
 	}
 	.contact-content {
-		border: 1px solid red;
+/*		border: 1px solid red;*/
 		margin: 0;
 		position: relative;
 		top: auto;
