@@ -13,8 +13,9 @@ class SearchItem
     @type = type
   end
 
-  def self.from_hash(hash, record_type)
-    SearchItem.new(hash["id"], hash["name"], hash["thumbnail"], hash["title"],
+  def self.from_hash(hash, record_type, thumbnail_path)
+    thumbnail_url = ModelUtils.thumbnail_url(thumbnail_path)
+    SearchItem.new(hash["id"], hash["name"], thumbnail_url, hash["title"],
       hash["email"], record_type)
   end
 

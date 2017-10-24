@@ -18,10 +18,11 @@ class Search
       fq = SolrLite::FilterQuery.new("record_type",["PEOPLE", "ORGANIZATION"])
       extra_fqs = [fq]
     end
-    params.fl = ["id", "record_type", "json_txt"]
+    params.fl = ["id", "record_type", "thumbnail_file_path_s", "json_txt"]
     results = @solr.search(params, extra_fqs)
     results.solr_docs.each do |doc|
       record_type = (doc["record_type"] || []).first
+      thumbnail = doc["thumbnail_file_path_s"]
       json_txt = doc["json_txt"].first
       if record_type != "PEOPLE" && record_type != "ORGANIZATION"
         # A VIVO type not supported on our new front-end.
@@ -34,7 +35,7 @@ class Search
         next
       end
 
-      results.items << SearchItem.from_hash(hash, record_type)
+      results.items << SearchItem.from_hash(hash, record_type, thumbnail)
     end
     results
   end

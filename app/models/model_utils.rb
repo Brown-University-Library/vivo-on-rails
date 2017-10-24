@@ -10,6 +10,33 @@ class ModelUtils
     value
   end
 
+  # Generates the proper URL for a given file path in VIVO.
+  # For example for file_path
+  #     "/file/n12345/somebody.jpg"
+  # it returns
+  #     "/profile-images/123/45/somebody.jpg"
+  def self.thumbnail_url(file_path, root_url = nil)
+    if (file_path || "").strip.length == 0
+      return nil
+    end
+    if file_path[0] != "/"
+      return nil # Must start with a /
+    end
+    tokens = file_path.split("/")
+    if tokens.count != 4
+      return nil
+    end
+    id = tokens[2]
+    if id.length != 6
+      return nil
+    end
+    part_a = id[1..3]
+    part_b = id[4..5]
+    file_name = tokens[3]
+    url = "#{root_url}/profile-images/#{part_a}/#{part_b}/#{file_name}"
+    url
+  end
+
   def self.set_values_from_hash(obj, hash)
     return if hash == nil
     hash.each do |key, value|
