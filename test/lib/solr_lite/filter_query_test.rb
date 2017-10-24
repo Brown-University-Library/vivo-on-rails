@@ -7,7 +7,7 @@ class FilterQueryTest < Minitest::Test
     fq = SolrLite::FilterQuery.from_query_string('F1|V1 b&w')
     assert_equal "F1", fq.field
     assert_equal "V1 b&w", fq.value
-    assert_equal "F1%3A%22V1+b%26w%22", fq.solr_value
+    assert_equal "%28F1%3A%22V1+b%26w%22%29", fq.solr_value
     assert_equal "F1|V1+b%26w", fq.qs_value
     assert_equal "F1|V1 b&w", fq.form_value
 
