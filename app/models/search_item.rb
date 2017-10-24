@@ -7,14 +7,14 @@ class SearchItem
     @vivo_id = @id.split("/").last
     @uri = nil # set in the presenter
     @name = name
-    @thumbnail = ModelUtils.safe_thumbnail(thumbnail)
+    @thumbnail = thumbnail
     @title = title
     @email = email
     @type = type
   end
 
-  def self.from_hash(hash, record_type)
-    SearchItem.new(hash["id"], hash["name"], hash["thumbnail"], hash["title"],
+  def self.from_hash(hash, record_type, thumbnail_url)
+    SearchItem.new(hash["id"], hash["name"], thumbnail_url, hash["title"],
       hash["email"], record_type)
   end
 

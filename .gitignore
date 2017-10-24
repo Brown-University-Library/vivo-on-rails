@@ -20,6 +20,11 @@
 .env
 .byebug_history
 .DS_Store
+/public/assets
+
+# Our Apache/Passenger config in production
+/http
+refresh.sh
 
 # A large file with triples
 some.ttl

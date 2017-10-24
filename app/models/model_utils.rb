@@ -3,7 +3,43 @@ class ModelUtils
     if (value || "").strip.length == 0
       return nil
     end
+    if value.start_with?("http://vivo.brown.edu")
+      # Prefer HTTPS
+      return value.gsub("http://", "https://")
+    end
     value
+  end
+
+  # Generates the proper URL for a given file path in VIVO.
+  # For example for file_path
+  #     "/file/n12345/somebody.jpg"
+  # it returns
+  #     "/profile-images/123/45/somebody.jpg"
+  def self.thumbnail_url(file_path, root_url = nil)
+    if (file_path || "").strip.length == 0
+      return nil
+    end
+    if file_path[0] != "/"
+      return nil # Must start with a /
+    end
+    tokens = file_path.split("/")
+    if tokens.count != 4
+      return nil
+    end
+    file_name = tokens[3]
+    id = tokens[2]
+    case
+    when id.length >= 3 && id.length <= 4
+      part_a = id[1..-1]
+      url = "#{root_url}/profile-images/#{part_a}/#{file_name}"
+    when id.length >= 5 && id.length <= 7
+      part_a = id[1..3]
+      part_b = id[4..-1]
+      url = "#{root_url}/profile-images/#{part_a}/#{part_b}/#{file_name}"
+    else
+      url = nil
+    end
+    url
   end
 
   def self.set_values_from_hash(obj, hash)

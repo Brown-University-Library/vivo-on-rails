@@ -58,7 +58,7 @@ class SearchParamsTest < Minitest::Test
 
     # Expect this value to be URL encoded. This is important because
     # non encoded works OK on the Mac but not on Linux.
-    assert qs.include?('&fq=F1%3A%22V1%22')
+    assert qs.include?('&fq=%28F1%3A%22V1%22%29')
 
     # Make sure the facets are included
     assert qs.include?("&facet.field=fieldA")
@@ -73,13 +73,13 @@ class SearchParamsTest < Minitest::Test
     params = SolrLite::SearchParams.new(q, fq)
     qs = params.to_solr_query_string
     assert qs.include?("&q=hello")
-    assert qs.include?('&fq=F1%3A%22V1%22')
+    assert qs.include?('&fq=%28F1%3A%22V1%22%29')
 
     # no q
     params = SolrLite::SearchParams.new("", fq)
     qs = params.to_solr_query_string
     assert !qs.include?("&q=")
-    assert qs.include?('&fq=F1%3A%22V1%22')
+    assert qs.include?('&fq=%28F1%3A%22V1%22%29')
 
     # no fq
     params = SolrLite::SearchParams.new(q)
@@ -104,6 +104,6 @@ class SearchParamsTest < Minitest::Test
     params = SolrLite::SearchParams.new(q, fq)
     solr_qs = params.to_solr_query_string
     assert solr_qs.include?('q=B+%26+W')
-    assert solr_qs.include?('fq=published_in%3A%22Signs%3A+Journal+of+Women%27s+in+Culture+%26+Society%22')
+    assert solr_qs.include?('fq=%28published_in%3A%22Signs%3A+Journal+of+Women%27s+in+Culture+%26+Society%22%29')
   end
 end

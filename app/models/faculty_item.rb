@@ -59,8 +59,9 @@ class FacultyItem
     @contributor_to
   end
 
-  def self.from_hash(hash)
+  def self.from_hash(hash, thumbnail_url)
     faculty = FacultyItem.new(nil)
+    faculty.thumbnail = thumbnail_url
     hash.each do |key, value|
       getter = key.to_s
       case getter
@@ -89,7 +90,7 @@ class FacultyItem
         # string array, no special handling
         faculty.research_areas = value.sort_by {|a| (a || "").downcase}
       when "thumbnail"
-        faculty.thumbnail = ModelUtils.safe_thumbnail(value)
+        # Ignore this value, we use thumbnail_path parameter instead
       else
         setter = key.to_s + "="
         if faculty.respond_to?(setter)
