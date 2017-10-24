@@ -62,6 +62,9 @@ class FacultyItem
   def self.from_hash(hash, thumbnail_path)
     faculty = FacultyItem.new(nil)
     faculty.thumbnail = ModelUtils.thumbnail_url(thumbnail_path)
+    if thumbnail_path != nil && faculty.thumbnail == nil
+      Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail_path} (#{hash['id']})"
+    end
     hash.each do |key, value|
       getter = key.to_s
       case getter
