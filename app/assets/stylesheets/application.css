@@ -1237,6 +1237,7 @@ td.citation-data.pub-item {
 		font-size: 2.4rem;
 	}
 	#sticky-nav	{
+		display: none; /***/
 		background-color: red;
 		float: right;
 		height: 3rem !important;
@@ -1245,7 +1246,8 @@ td.citation-data.pub-item {
 		right: 1.5rem;
 	}
 	.navbar-form {
-		background-color: green;
+		display: none; /***/
+		background-color: blue;
 		border: none;
 		box-shadow: none;
 		min-height: 2rem;
@@ -1255,18 +1257,22 @@ td.citation-data.pub-item {
 		border-top: 1px solid #000;
 		border-bottom: 1px solid #000;
 		height: 4.5rem;
-		margin: 0 1.5rem;
-		top: 1.5rem;
+		top: 1rem;
 	}
 	.below-nav-links { /* create hamburger menu */
-		display: none;
+		display: none; /***/
 	}
 	.container-fluid {
-		margin: 0;
-		top: 2rem;
+/*		margin: 0;*/ /***/
+		padding: 0;
+		top: 3rem;
 	}
 	.results-wrapper {
 		padding-left: 0;
+		top: 1.5rem;
+	}
+	.result-nums-breadcrumbs-wrapper {
+		margin-bottom: -.8rem;
 	}
 	#search-result-count {
 		height: 4.5rem;
@@ -1295,11 +1301,28 @@ td.citation-data.pub-item {
 	.expert-results {
 		min-width: 27rem;
 	}
+	.expert-results .emailsContainer {
+		display: none; /***/
+	}
+	.expert-results .share-contact {
+		min-height: 10rem;
+		max-height: 20rem;
+	}
 	.expert-results .results__photo {
-		margin-right: 2rem;
+		margin: 0 1rem 0 0;
 	}
 	.expert-results .results__photo img {
 		width: 100px;
+	}
+	.contact-content .results-title {
+		font-size: 1.5rem;
+	}
+	.contact-content h4 {
+		margin: 0 0 .5rem 0;
+	}
+	.contact-content a {
+		padding: 0;
+		font-size: 1.8rem;
 	}
 	.footer {
 		float: left;
@@ -1438,8 +1461,8 @@ td.citation-data.pub-item {
 	.expert-results .gap30 {
 		display: none;
 	}
-	.expert-results #individual-intro {
-		margin: 0;
+	.expert-results .share-contact--bottom {
+		display: none;
 	}
 	.expert-results .share-contact {
 		background-color: #594036;
@@ -1447,41 +1470,23 @@ td.citation-data.pub-item {
 		flex-direction: row;
 		align-items: center;
 		justify-content: flex-start;
-		min-height: 20rem;
-		max-height: 24rem;
-	}
-	.expert-results .share-contact--bottom {
-		display: none;
 	}
 	.expert-results .results__photo {
-		margin: 0;
-		margin-right: 4rem;
+		border: 1px solid green;
 		position: relative;
 		top: auto;
 		bottom: auto;
 	}
+	.expert-results #individual-intro {
+		margin: 0;
+	}
 	.contact-content {
+		border: 1px solid red;
 		margin: 0;
 		position: relative;
 		top: auto;
 		bottom: auto;
 		text-align: left;
-	}
-	.contact-content a {
-		padding: 0;
-		font-size: 2.4rem;
-	}
-	.contact-content a:hover {
-		border-left: none;
-		color: #ddd;
-		padding-left: 0;
-		transition-property: color;
-		transition-delay: 0s;
-		transition-duration: .3s;
-		transition-timing-function: ease;
-	}
-	.contact-content .results-title {
-		font-size: 1.8rem;
 	}
 	.emailsContainer .glyphicon-envelope {
 		color: #fff;
@@ -1500,6 +1505,29 @@ td.citation-data.pub-item {
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
+	.expert-results .share-contact {
+		min-height: 20rem;
+		max-height: 24rem;
+	}
+	.expert-results .results__photo {
+		margin: 0 4rem 0 0;
+	}
+	.contact-content a {
+		padding: 0;
+		font-size: 2.4rem;
+	}
+	.contact-content a:hover {
+		border-left: none;
+		color: #ddd;
+		padding-left: 0;
+		transition-property: color;
+		transition-delay: 0s;
+		transition-duration: .3s;
+		transition-timing-function: ease;
+	}
+	.contact-content .results-title {
+		font-size: 1.8rem;
+	}
 	.person-content .container {
 		width: 100%;
 		max-width: 100%;
