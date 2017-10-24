@@ -7,7 +7,7 @@ class SearchItem
     @vivo_id = @id.split("/").last
     @uri = nil # set in the presenter
     @name = name
-    @thumbnail = ModelUtils.safe_thumbnail(thumbnail)
+    @thumbnail = thumbnail
     @title = title
     @email = email
     @type = type

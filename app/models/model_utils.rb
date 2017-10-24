@@ -26,14 +26,19 @@ class ModelUtils
     if tokens.count != 4
       return nil
     end
-    id = tokens[2]
-    if id.length != 6
-      return nil
-    end
-    part_a = id[1..3]
-    part_b = id[4..5]
     file_name = tokens[3]
-    url = "#{root_url}/profile-images/#{part_a}/#{part_b}/#{file_name}"
+    id = tokens[2]
+    case
+    when id.length >= 3 && id.length <= 4
+      part_a = id[1..-1]
+      url = "#{root_url}/profile-images/#{part_a}/#{file_name}"
+    when id.length >= 5 && id.length <= 7
+      part_a = id[1..3]
+      part_b = id[4..-1]
+      url = "#{root_url}/profile-images/#{part_a}/#{part_b}/#{file_name}"
+    else
+      url = nil
+    end
     url
   end
 
