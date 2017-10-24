@@ -10,9 +10,12 @@ module SolrLite
       @field = field
       @value = values.join("|")
       @solr_value = to_solr_fq_value(field, values)
-      @qs_value = "#{field}|#{CGI.escape(@value)}"  # URL friendly (no : or quotes)
-      @form_value = "#{field}|#{@value}"            # HTML Form friendly (no encoding, the form auto-encodes on POST)
-      @title = field                                # default to field name
+      @qs_value = "#{field}"
+      values.each do |v|
+        @qs_value += "|#{CGI.escape(v)}"    # URL friendly (no : or quotes)
+      end
+      @form_value = "#{field}|#{@value}"    # HTML Form friendly (no encoding, the form auto-encodes on POST)
+      @title = field                        # default to field name
       @remove_url = nil
     end
 
