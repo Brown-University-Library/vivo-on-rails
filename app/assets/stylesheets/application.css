@@ -1300,6 +1300,7 @@ td.citation-data.pub-item {
 	}
 	.expert-results {
 		min-width: 27rem;
+		margin-bottom: .2rem;
 	}
 	.expert-results .emailsContainer {
 		display: none; /***/
@@ -1462,7 +1463,6 @@ td.citation-data.pub-item {
 	.expert-results {
 		min-height: 10rem;
 		max-height: 24rem;
-		margin-bottom: 1.5rem;
 	}
 	.expert-results .gap30 {
 		display: none;
@@ -1511,6 +1511,9 @@ td.citation-data.pub-item {
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
+	.expert-results {
+		margin-bottom: 1.5rem;
+	}
 	.expert-results .share-contact {
 		min-height: 20rem;
 		max-height: 24rem;
