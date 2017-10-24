@@ -1324,6 +1324,7 @@ td.citation-data.pub-item {
 		padding: 0;
 		font-size: 1.8rem;
 	}
+	/* profile page */
 	.container.profile {
 		margin-top: 0;
 		top: -.5rem;
@@ -1331,8 +1332,28 @@ td.citation-data.pub-item {
 	.container.profile .subnavbar {
 		display: none; /***/
 	}
-
-
+	.person-content .container {
+		max-width: 100%;
+	}
+	.share-contact h2 {
+		color: #fff;
+	}
+	.btn-group-vertical .btn {
+		font-size: 2.4rem;
+		padding: 3rem 1.5rem;
+	}
+	/* org page */
+	.org-profile {
+		margin-top: 0;
+		padding: 0;
+		top: 0;
+	}
+	.org-profile .org-content .container {
+		max-width: 100%;
+	}
+	.container.org-profile .subnavbar {
+		margin: 0 0 1rem 0;
+	}
 	.footer {
 		float: left;
 		width: 100%;
@@ -1456,25 +1477,6 @@ td.citation-data.pub-item {
 		top: 0;
 	}
 }
-@media (max-width: 767px) {
-	.person-content .container {
-		max-width: 100%;
-	}
-	.share-contact h2 {
-		color: #fff;
-	}
-	.btn-group-vertical .btn {
-		font-size: 2.4rem;
-		padding: 3rem 1.5rem;
-	}
-	.org-profile .org-content .container { /* broken state */
-		max-width: 100%;
-		border: 5px solid orange;
-	}
-	.container.org-profile .subnavbar {
-		margin: 0 1.5rem 3rem 1.5rem;
-	}
-}
 @media (max-width: 991px) {
 	.below-nav-links {
 		width: 15rem;
@@ -1482,6 +1484,7 @@ td.citation-data.pub-item {
 	.below-nav-links p span {
 		width: 100%;
 	}
+	/* results page */
 	.expert-results {
 		min-height: 10rem;
 		max-height: 24rem;
@@ -1522,6 +1525,7 @@ td.citation-data.pub-item {
 	.emailsContainer .glyphicon-envelope:hover {
 		color: #ddd;
 	}
+	/* org page */
 	.org-content .container div.organization-description {
 		padding: 0 1.5rem;
 	}
@@ -1533,6 +1537,7 @@ td.citation-data.pub-item {
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
+	/* results page */
 	.expert-results {
 		margin-bottom: 1.5rem;
 	}
@@ -1564,6 +1569,7 @@ td.citation-data.pub-item {
 		max-width: 100%;
 		padding: 0 2.5rem 0 2.5rem;
 	}
+	/* org page */
 	.org-profile .org-content .container {
 		width: 100%;
 		max-width: 100%;
