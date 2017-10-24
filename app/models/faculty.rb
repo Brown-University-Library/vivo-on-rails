@@ -15,6 +15,7 @@ class Faculty
     solr_json = solr_doc["json_txt"].first
     hash = JsonUtils.safe_parse(solr_json)
     return nil if hash == nil
-    FacultyItem.from_hash(hash)
+    thumbnail = solr_doc["thumbnail_file_path_s"]
+    FacultyItem.from_hash(hash, thumbnail)
   end
 end
