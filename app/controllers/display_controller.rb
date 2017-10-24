@@ -44,8 +44,7 @@ class DisplayController < ApplicationController
     def render_faculty(id)
       id = params[:id]
       from_solr = true
-      from_solr = false if params[:fuseki] == "true"
-      faculty = Faculty.get_one(id, from_solr)
+      faculty = Faculty.get_one(id)
       if faculty == nil
         Rails.logger.error("Could not render faculty #{id}.")
         render "error", status: 500

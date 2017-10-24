@@ -5,7 +5,8 @@ require "./lib/solr_lite/filter_query.rb"
 require "./lib/solr_lite/solr.rb"
 require "./lib/solr_lite/search_results.rb"
 class Search
-  def initialize(solr_url)
+  def initialize(solr_url, images_url = nil)
+    @images_url = images_url
     @solr = SolrLite::Solr.new(solr_url)
   end
 
@@ -34,8 +35,13 @@ class Search
       if hash == nil
         next
       end
+      
+      thumbnail_url = ModelUtils.thumbnail_url(thumbnail, @images_url)
+      if thumbnail != nil && thumbnail_url == nil
+        Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{hash['id']})"
+      end
 
-      results.items << SearchItem.from_hash(hash, record_type, thumbnail)
+      results.items << SearchItem.from_hash(hash, record_type, thumbnail_url)
     end
     results
   end
