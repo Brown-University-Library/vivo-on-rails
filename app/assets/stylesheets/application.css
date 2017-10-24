@@ -1263,7 +1263,6 @@ td.citation-data.pub-item {
 		display: none; /***/
 	}
 	.container-fluid {
-/*		margin: 0;*/ /***/
 		padding: 0;
 		top: 3rem;
 	}
@@ -1325,6 +1324,15 @@ td.citation-data.pub-item {
 		padding: 0;
 		font-size: 1.8rem;
 	}
+	.container.profile {
+		margin-top: 0;
+		top: -.5rem;
+	}
+	.container.profile .subnavbar {
+		display: none; /***/
+	}
+
+
 	.footer {
 		float: left;
 		width: 100%;
@@ -1343,7 +1351,8 @@ td.citation-data.pub-item {
 }
 
 /*** Specific Breakpoints ***/
-@media (max-width: 440px) { /* search result numbers */
+@media (max-width: 440px) {
+	/* results page */
 	.search-result-previous {
 		width: 12%;
 	}
@@ -1363,8 +1372,13 @@ td.citation-data.pub-item {
 	#search-result-count .glyphicon-chevron-right {
 		margin: 0;
 	}
+	/* profile page */
+	.wrapper__back-to-search {
+		margin: 1rem 0 1rem 0;	
+	}
 }
 @media (min-width: 441px) and (max-width: 540px) {
+	/* results page */
 	.search-result-previous {
 		width: 25%;
 	}
@@ -1375,8 +1389,14 @@ td.citation-data.pub-item {
 		width: 25%;
 	}
 }
-/* header */
+@media (min-width: 441px) and (max-width: 767px) {
+	/* profile page */
+	.wrapper__back-to-search {
+		margin: 1.5rem 0 1rem 0;	
+	}
+}
 @media (max-width: 1270px) {
+	/* header */
 	#sticky-nav .navbar-btn {
 		display: none;
 	}
@@ -1398,12 +1418,14 @@ td.citation-data.pub-item {
 		margin-bottom: 1.5rem;
 	}
 }
-@media (min-width: 768px) and (max-width: 991px) { /* subnavbar */
+/* subnavbar */
+@media (min-width: 768px) and (max-width: 991px) {
 	.advanced-search {
 		display: none;
 	}
 }
-@media (min-width: 768px) and (max-width: 1000px) { /* result nums and nav */
+/* results page */
+@media (min-width: 768px) and (max-width: 1000px) {
 	.chevron-nav-title {
 		display: none;
 	}
