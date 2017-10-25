@@ -30,7 +30,8 @@ module SolrLite
     # extra_fqs is an array of FilterQuery objects. This is used to
     #   add filters to the search that we don't want to allow the
     #   user to override.
-    def search(params, extra_fqs = [])
+    # qf is used to override the server's qf value.
+    def search(params, extra_fqs = [], qf = nil)
       if params.fl != nil
         query_string = "fl=#{params.fl.join(",")}"
       else
@@ -39,6 +40,9 @@ module SolrLite
       query_string += "&wt=json&indent=on"
       query_string += "&" + params.to_solr_query_string(extra_fqs)
       query_string += "&q.op=AND"
+      if qf != nil
+        query_string += "&qf=#{CGI.escape(qf)}"
+      end
       url = "#{@solr_url}/select?#{query_string}"
       http_response = http_get(url)
       results = SearchResults.new(http_response, params)
