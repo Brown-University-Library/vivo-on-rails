@@ -1609,9 +1609,9 @@ td.citation-data.pub-item {
 		max-width: 70%;
 	}
 }
-@media screen and (min-width: 1271px) and (max-width: 1284px) {
+@media screen and (min-width: 1271px) and (max-width: 1300px) {
 	#sticky-nav .container {
-		padding: 0 1rem;
+		padding: 0 .5rem;
 	}
 }
 @media screen and (min-width: 1380px) and (max-width: 1560px) {
