@@ -112,7 +112,7 @@ header {
 	z-index: 1000;
 }
 #sticky-nav .container {
-	padding-left: 0 1.5rem;
+	padding: 0 1.5rem;
 	width: 100%;
 }
 #sticky-nav .navbar-btn {
@@ -1219,7 +1219,7 @@ td.citation-data.pub-item {
 
 
 /*** General Breakpoints ***/
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
 	.site-title h1 a {
 		font-size: 2rem;
 	}
@@ -1229,7 +1229,7 @@ td.citation-data.pub-item {
 		top: 0;
 	}
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
 	.site-title {
 		margin-top: 1.5rem;
 	}
@@ -1240,7 +1240,7 @@ td.citation-data.pub-item {
 		display: none; /***/
 		background-color: red;
 		float: right;
-		height: 3rem !important;
+		height: 8rem !important;
 		width: calc(50% - 1.5rem);
 		top: 1.5rem;
 		right: 1.5rem;
@@ -1359,7 +1359,7 @@ td.citation-data.pub-item {
 		width: 100%;
 	}
 }
-@media (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
+@media screen and (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
 	.container-fluid {
 		margin-top: -3.5rem;
 	}
@@ -1372,7 +1372,7 @@ td.citation-data.pub-item {
 }
 
 /*** Specific Breakpoints ***/
-@media (max-width: 440px) {
+@media screen and (max-width: 440px) {
 	/* results page */
 	.search-result-previous {
 		width: 12%;
@@ -1398,7 +1398,7 @@ td.citation-data.pub-item {
 		margin: 1rem 0 1rem 0;	
 	}
 }
-@media (min-width: 441px) and (max-width: 540px) {
+@media screen and (min-width: 441px) and (max-width: 540px) {
 	/* results page */
 	.search-result-previous {
 		width: 25%;
@@ -1410,13 +1410,13 @@ td.citation-data.pub-item {
 		width: 25%;
 	}
 }
-@media (min-width: 441px) and (max-width: 767px) {
+@media screen and (min-width: 441px) and (max-width: 767px) {
 	/* profile page */
 	.wrapper__back-to-search {
 		margin: 1.5rem 0 1rem 0;	
 	}
 }
-@media (max-width: 1270px) {
+@media screen and (max-width: 1270px) {
 	/* header */
 	#sticky-nav .navbar-btn {
 		display: none;
@@ -1424,34 +1424,34 @@ td.citation-data.pub-item {
 }
 
 /* results page */
-@media (max-width: 320px) {
+@media screen and (max-width: 320px) {
 	#search-result-count .search-result-numbers { /* this needs a better solution/a wrapper. breaks at 1000+ */
 		padding: 1rem;
 	}
 }
-@media (min-width: 321px) and (max-width: 438px) { /* this needs a better solution/a wrapper. breaks at 1000+ */
+@media screen and (min-width: 321px) and (max-width: 438px) { /* this needs a better solution/a wrapper. breaks at 1000+ */
 	#search-result-count .search-result-numbers {
 		padding: 1rem 2rem;
 	}
 }
-@media (min-width: 439px) and (max-width: 991px) {
+@media screen and (min-width: 439px) and (max-width: 991px) {
 	.result-nums-breadcrumbs-wrapper {
 		margin-bottom: 1.5rem;
 	}
 }
 /* subnavbar */
-@media (min-width: 768px) and (max-width: 991px) {
+@media screen and (min-width: 768px) and (max-width: 991px) {
 	.advanced-search {
 		display: none;
 	}
 }
 /* results page */
-@media (min-width: 768px) and (max-width: 1000px) {
+@media screen and (min-width: 768px) and (max-width: 1000px) {
 	.chevron-nav-title {
 		display: none;
 	}
 }
-@media (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
 	.below-nav-links {
 		top: 0.2rem;
 	}
@@ -1472,12 +1472,12 @@ td.citation-data.pub-item {
 
 
 /* profile page */
-@media (max-width: 438px) {
+@media screen and (max-width: 438px) {
 	.container.profile {  /* a quick fix to add some styles to the advanced search / login links */
 		top: 0;
 	}
 }
-@media (max-width: 991px) {
+@media screen and (max-width: 991px) {
 	.below-nav-links {
 		width: 15rem;
 	}
@@ -1609,6 +1609,11 @@ td.citation-data.pub-item {
 		max-width: 70%;
 	}
 }
+@media screen and (min-width: 1271px) and (max-width: 1284px) {
+	#sticky-nav .container {
+		padding: 0 1rem;
+	}
+}
 @media screen and (min-width: 1380px) and (max-width: 1560px) {
 	.person-content > .container {
 		max-width: 62%;
@@ -1617,7 +1622,7 @@ td.citation-data.pub-item {
 		max-width: 62%;
 	}
 }
-@media (min-width: 1700px) {
+@media screen and  (min-width: 1700px) {
 	.results-row {
 		max-width: 1600px;
 	}
