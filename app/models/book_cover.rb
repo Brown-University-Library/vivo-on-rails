@@ -49,7 +49,7 @@ class BookCoverModel
       WHERE active = 'y'
       ORDER BY pub_date DESC
     END_SQL
-    rows = ActiveRecord::Base.connection.execute(sql)
+    rows = ActiveRecord::Base.connection.exec_query(sql)
     rows.each do |row|
       cover = BookCoverModel.new()
       cover.author_first = row['firstname']
