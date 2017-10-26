@@ -2,6 +2,12 @@ class BookCoversSampleData
   # We only use this data in development so that Crystal and Ben can get data
   # for the carousel without having to connect to the production MySQL database.
   def self.get_all()
+    base_path = ENV["BOOK_COVER_BASE_PATH"]
+    if base_path == nil
+      Rails.logger.error "BOOK_COVER_BASE_PATH has not been defined. Book covers will not be available."
+      return []
+    end
+
     host_url = (ENV["HOST_URL"] || "") + "/display"
     covers = []
 
@@ -12,7 +18,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jpallen"
     cover.title = "Middle Egyptian Literature: Eight Literary Works of the Middle Kingdom"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Allen_MiddleEgyptianLiterature.jpg"
+    cover.image = "#{base_path}/Allen_MiddleEgyptianLiterature.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -22,7 +28,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/pandreas"
     cover.title = "Rebel Mother: My Childhood Chasing the Revolution"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Andreas_RebelMother.jpg"
+    cover.image = "#{base_path}/Andreas_RebelMother.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -32,7 +38,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/rarenber"
     cover.title = "Defending the Filibuster: The Soul of the Senate, Revised and Updated"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Arenberg_DefendingTheFilibuster.jpg"
+    cover.image = "#{base_path}/Arenberg_DefendingTheFilibuster.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -42,7 +48,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/pbarmstr"
     cover.title = "Norton Critical Edition of Joseph Conrad, Heart of Darkness, 5th ed"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Armstrong_HeartofDarkness.jpg"
+    cover.image = "#{base_path}/Armstrong_HeartofDarkness.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -52,7 +58,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/narpaly"
     cover.title = "In Praise of Desire by Nomy Arpaly"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/arpaly.jpg"
+    cover.image = "#{base_path}/arpaly.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -62,7 +68,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/ebalk"
     cover.title = "Benefits and Harms of Routine Preoperative Testing"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Balk_BenefitsAndHarms.jpg"
+    cover.image = "#{base_path}/Balk_BenefitsAndHarms.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -72,7 +78,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/obartov"
     cover.title = "The Holocaust: Origins, Implementation, Aftermath, 2nd Edition"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Bartov_Holocaust.jpg"
+    cover.image = "#{base_path}/Bartov_Holocaust.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -82,7 +88,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/abenton"
     cover.title = "HIV Exceptionalism: Development through Disease in Sierra Leone"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/abenton.jpg"
+    cover.image = "#{base_path}/abenton.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -92,7 +98,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mblasing"
     cover.title = "Nazim Hikmet: The Life and Times of Turkey's World Poet"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/blasing.jpg"
+    cover.image = "#{base_path}/blasing.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -102,7 +108,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mblyth"
     cover.title = "Austerity: The History of a Dangerous Idea"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/blyth.jpg"
+    cover.image = "#{base_path}/blyth.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -112,7 +118,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/ebrainer"
     cover.title = "Great Transformations in Vertebrate Evolution"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Brainerd_GreatTransformations.jpg"
+    cover.image = "#{base_path}/Brainerd_GreatTransformations.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -122,7 +128,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/lbraun"
     cover.title = "Breathing Race into the Machine"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/lbraun.jpg"
+    cover.image = "#{base_path}/lbraun.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -132,7 +138,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/sb5"
     cover.title = "Visions of Religion: Experience, Meaning, and Power"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Bush_VisionsOfReligion.jpg"
+    cover.image = "#{base_path}/Bush_VisionsOfReligion.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -142,7 +148,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mcammett"
     cover.title = "Compassionate Communalism, Welfare and Sectarianism in Lebanon"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/cammett.jpg"
+    cover.image = "#{base_path}/cammett.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -152,7 +158,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/ccastigl"
     cover.title = "Accounting for Affection: Mothering and Politics in Early Modern Rome"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Castiglione_AccountingForAffection.jpg"
+    cover.image = "#{base_path}/Castiglione_AccountingForAffection.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -162,7 +168,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/cchanner"
     cover.title = "Providential"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Channer_Providential.jpg"
+    cover.image = "#{base_path}/Channer_Providential.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -172,7 +178,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/rcheit"
     cover.title = "The Witch-Hunt Narrative: Politics, Psychology, and the Sexual Abuse of Children"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/cheit.jpg"
+    cover.image = "#{base_path}/cheit.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -182,7 +188,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/tc69"
     cover.title = "Savage Exchange: Han Imperialism, Chinese Literary Style, and the Economic Imagination"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Chin_SavageExchange.jpg"
+    cover.image = "#{base_path}/Chin_SavageExchange.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -192,7 +198,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/dchriste"
     cover.title = "The Epistemology of Disagreement: New Essays"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Christensen_Epistemology.jpg"
+    cover.image = "#{base_path}/Christensen_Epistemology.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -202,7 +208,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/hchudaco"
     cover.title = "Changing the Playbook: How Power, Profit, and Politics Transformed College Sports"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/hchudaco.jpg"
+    cover.image = "#{base_path}/hchudaco.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -212,7 +218,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/wchun"
     cover.title = "New Media, Old Media: A History and Theory Reader"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Chun_NewMedia.jpg"
+    cover.image = "#{base_path}/Chun_NewMedia.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -222,7 +228,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/bconnors"
     cover.title = "Neuroscience: Exploring the Brain, 4th ed. "
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Connors_Neuroscience.jpg"
+    cover.image = "#{base_path}/Connors_Neuroscience.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -232,7 +238,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/hjcook"
     cover.title = "Ways of Making and Knowing: The Material Culture of Empirical Knowledge"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Cook_WaysOfMakingAndKnowing.jpg"
+    cover.image = "#{base_path}/Cook_WaysOfMakingAndKnowing.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -242,7 +248,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/rcoover"
     cover.title = "Brunist Day of Wrath by Robert Coover"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/coover.jpg"
+    cover.image = "#{base_path}/coover.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -252,7 +258,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/ed12"
     cover.title = "Articular Cartilage, Second Edition"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Darling_ArticularCartilage.jpg"
+    cover.image = "#{base_path}/Darling_ArticularCartilage.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -262,7 +268,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/ndenzey"
     cover.title = "Cosmology and Fate in Gnosticism and the Graeco-Roman World: Under A Pitiless Sky"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Denzey_CosmologyAndFate.jpg"
+    cover.image = "#{base_path}/Denzey_CosmologyAndFate.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -272,7 +278,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/pfaudree"
     cover.title = "Singing for the Dead: The Politics of Indigenous Revival in Mexico "
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/faudree.jpg"
+    cover.image = "#{base_path}/faudree.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -282,7 +288,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/tfield"
     cover.title = "Experimental Animals: A Reality Fiction"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Field_ExperimentalAnimals.jpg"
+    cover.image = "#{base_path}/Field_ExperimentalAnimals.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -292,7 +298,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/lf7"
     cover.title = "Decoding Roger Williams: The Lost Essay of Rhode Island's Founding Father"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Fisher_DecodingRogerWilliams.jpg"
+    cover.image = "#{base_path}/Fisher_DecodingRogerWilliams.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -302,7 +308,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/cfrank"
     cover.title = "Global Trade and Visual Arts in Federal New England "
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Frank_GlobalTrade.jpg"
+    cover.image = "#{base_path}/Frank_GlobalTrade.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -312,7 +318,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/hfreedth"
     cover.title = "Spoiled Distinctions: Aesthetics and the Ordinary in French Modernism"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Freed-Thall_SpoiledDistinctions.jpg"
+    cover.image = "#{base_path}/Freed-Thall_SpoiledDistinctions.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -322,7 +328,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/fgander"
     cover.title = "The Trace"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Gander_trace.jpg"
+    cover.image = "#{base_path}/Gander_trace.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -332,7 +338,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/lgandhi"
     cover.title = "The Common Cause: Postcolonial Ethics and the Practice of Democracy, 1900-1955 "
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Gandhi_TheCommonCause.jpg"
+    cover.image = "#{base_path}/Gandhi_TheCommonCause.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -342,7 +348,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/egartman"
     cover.title = "Ultrasound in the Intensive Care Unit"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Gartman_UltrasoundInTheIntensiveCareUnit.jpg"
+    cover.image = "#{base_path}/Gartman_UltrasoundInTheIntensiveCareUnit.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -352,7 +358,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/vgolstei"
     cover.title = "Svetlana Aleksijevitj – Sovjetintelligentians Röst (The Voice of Soviet Intelligentsia)"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Golstein_Svetlana.jpg"
+    cover.image = "#{base_path}/Golstein_Svetlana.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -362,7 +368,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/sgolub"
     cover.title = "Incapacity: Wittgenstein, Anxiety, and Performance Behavior "
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/sgolub.jpg"
+    cover.image = "#{base_path}/sgolub.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -372,7 +378,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/pgould"
     cover.title = "Writing the Rebellion: Loyalists and the Literature of Politics in British America"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/gould.jpg"
+    cover.image = "#{base_path}/gould.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -382,7 +388,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jngreen"
     cover.title = "Ditadura e homossexualidades : repressão, resistência e a busca da verdade"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Green_Ditadura.jpg"
+    cover.image = "#{base_path}/Green_Ditadura.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -392,7 +398,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/eguldi"
     cover.title = "The History Manifesto"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Guldi_TheHistoryManifesto.jpg"
+    cover.image = "#{base_path}/Guldi_TheHistoryManifesto.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -402,7 +408,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mguterl"
     cover.title = "Hotel Life: The Story of a Place Where Anything Can Happen"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Guterl_HotelLife.jpg"
+    cover.image = "#{base_path}/Guterl_HotelLife.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -412,7 +418,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mgutmann"
     cover.title = "Global Latin America: Into the Twenty-First Century"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Gutmann_GlobalLatinAmerica.jpg"
+    cover.image = "#{base_path}/Gutmann_GlobalLatinAmerica.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -422,7 +428,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/fhamlin"
     cover.title = "These Truly Are The Brave: An Anthology of African American Writings on War and Citizenship"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Hamlin_TheseTrulyAreTheBrave.jpg"
+    cover.image = "#{base_path}/Hamlin_TheseTrulyAreTheBrave.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -432,7 +438,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jhanink"
     cover.title = "The Classical Debt: Greek Antiquity in an Era of Austerity"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Hanink_ClassicalDebt.jpg"
+    cover.image = "#{base_path}/Hanink_ClassicalDebt.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -442,7 +448,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/oharmans"
     cover.title = "Place, Memory, and Healing: An Archaeology of Anatolian Rock Monuments "
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Harmansah_PlaceMemoryAndHealing.jpg"
+    cover.image = "#{base_path}/Harmansah_PlaceMemoryAndHealing.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -452,7 +458,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/tgharris"
     cover.title = "Rebellion: Britain's First Stuart Kings, 1567-1642"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/harris.jpg"
+    cover.image = "#{base_path}/harris.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -462,7 +468,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/khaynes"
     cover.title = "Broken Hierarchies: Collected Poems 1952-2012"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/haynes.jpg"
+    cover.image = "#{base_path}/haynes.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -472,7 +478,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/shouston"
     cover.title = "The Life Within: Classic Maya and the Matter of Permanence"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/houston.jpg"
+    cover.image = "#{base_path}/houston.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -482,7 +488,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/cimbrigl"
     cover.title = "Intimacy"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/imbriglio.jpg"
+    cover.image = "#{base_path}/imbriglio.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -492,7 +498,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/dcjackso"
     cover.title = "Celebrating Life: An Appreciation of Animals in Verse and Prose "
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Jackson_Celebrating.jpg"
+    cover.image = "#{base_path}/Jackson_Celebrating.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -502,7 +508,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/njacobs"
     cover.title = "Birders of Africa: History of a Network "
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Jacobs_BirdersOfAfrica.jpg"
+    cover.image = "#{base_path}/Jacobs_BirdersOfAfrica.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -512,7 +518,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/dkertzer"
     cover.title = "The Pope and Mussolini"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/kertzer.jpg"
+    cover.image = "#{base_path}/kertzer.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -522,7 +528,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jkhalip"
     cover.title = "Constellations of a Contemporary Romanticism"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Khalip_Constellations.jpg"
+    cover.image = "#{base_path}/Khalip_Constellations.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -532,7 +538,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/dakim"
     cover.title = "The Cambridge Companion to Asian American Literature"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Kim_Cambridge.jpg"
+    cover.image = "#{base_path}/Kim_Cambridge.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -542,7 +548,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/tkniesch"
     cover.title = "Einführung in den Kriminalroman"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Kniesche_Einfuhrung.jpg"
+    cover.image = "#{base_path}/Kniesche_Einfuhrung.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -552,7 +558,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/pkramerm"
     cover.title = "Ordinarily Well: The Case for Antidepressants"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Kramer_OrdinarilyWell.jpg"
+    cover.image = "#{base_path}/Kramer_OrdinarilyWell.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -562,7 +568,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/gkroumpo"
     cover.title = "Text Atlas of Obstetric Dermatology"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Kroumpouzos_TextAtlasOfObstetricDermatology.jpg"
+    cover.image = "#{base_path}/Kroumpouzos_TextAtlasOfObstetricDermatology.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -572,7 +578,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jkuzner"
     cover.title = "Shakespeare as a Way of Life: Skeptical Practice and the Politics of Weakness"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Kuzner_ShakespeareAsAWayOfLife.jpg"
+    cover.image = "#{base_path}/Kuzner_ShakespeareAsAWayOfLife.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -582,7 +588,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jleinawe"
     cover.title = "Adoptive Migration: Raising Latinos in Spain"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/leinaweaver.jpg"
+    cover.image = "#{base_path}/leinaweaver.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -592,7 +598,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/plieberm"
     cover.title = "The Unpredictable Species: What Makes Humans Unique "
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/plieberm.jpg"
+    cover.image = "#{base_path}/plieberm.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -602,7 +608,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/el46"
     cover.title = "Brown Boys and Rice Queens: Spellbinding Performance in the Asias "
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/lim.jpg"
+    cover.image = "#{base_path}/lim.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -612,7 +618,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/elincoln"
     cover.title = "Brilliant Discourse: Pictures and Readers in Early Modern Rome"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/lincoln.jpg"
+    cover.image = "#{base_path}/lincoln.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -622,7 +628,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/slubar"
     cover.title = "Inside the Lost Museum: Curating, Past and Present"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Lubar_LostMuseum.jpg"
+    cover.image = "#{base_path}/Lubar_LostMuseum.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -632,7 +638,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/clutz"
     cover.title = "Schooled: Ordinary, Extraordinary Teaching in an Age of Change"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/clutz.jpg"
+    cover.image = "#{base_path}/clutz.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -642,7 +648,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mmandel"
     cover.title = "Muslims and Jews in France "
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/mandel.jpg"
+    cover.image = "#{base_path}/mandel.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -652,7 +658,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/cm40"
     cover.title = "Lawrence Alloway: Critic and Curator"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Martin_LawrenceAlloway.jpg"
+    cover.image = "#{base_path}/Martin_LawrenceAlloway.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -662,7 +668,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/fmartin1"
     cover.title = "Una cultura de invernadero: trópico y civilización en Colombia (1808-1928)"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Martinez_Pinzon_UnaCultura.jpg"
+    cover.image = "#{base_path}/Martinez_Pinzon_UnaCultura.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -672,7 +678,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/kam6"
     cover.title = "Infectious Change: Reinventing Chinese Public Health after an Epidemic"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Mason_Infectious.jpg"
+    cover.image = "#{base_path}/Mason_Infectious.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -682,7 +688,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/kmclaugh"
     cover.title = "Poetic Force: Poetry after Kant"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/McLaughlin_PoeticForce.jpg"
+    cover.image = "#{base_path}/McLaughlin_PoeticForce.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -692,7 +698,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/rmeckel"
     cover.title = "Save the Babies: American Public Health Reform and the Prevention of Infant Mortality, 1850-1929"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Meckel_SaveTheBabies.jpg"
+    cover.image = "#{base_path}/Meckel_SaveTheBabies.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -702,7 +708,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/bmeeks"
     cover.title = "Freedom, Power and Sovereignty: The Thought of Gordon K. Lewis "
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Meeks_Freedom.jpg"
+    cover.image = "#{base_path}/Meeks_Freedom.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -712,7 +718,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/cmontros"
     cover.title = "Falling Into the Fire: A Psychiatrist's Encounters with the Mind in Crisis"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/montross.jpg"
+    cover.image = "#{base_path}/montross.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -722,7 +728,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/omostefa"
     cover.title = "Jean-Jacques Rousseau écrivain polémique"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Mostefai_Rousseau.jpg"
+    cover.image = "#{base_path}/Mostefai_Rousseau.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -732,7 +738,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jmmuller"
     cover.title = "St. Jacob’s Antwerp Art and Counter Reformation in Rubens’s Parish Church"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Muller_StJacob.jpg"
+    cover.image = "#{base_path}/Muller_StJacob.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -742,7 +748,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/dmurphyd"
     cover.title = "Clinical Reasoning in Spine Pain Vol II:  Primary Management of Cervical Disorders Using the CRISP Protocol"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Murphy_ClinicalReasoning.jpg"
+    cover.image = "#{base_path}/Murphy_ClinicalReasoning.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -752,7 +758,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/iosayimw"
     cover.title = "Colonialism and Modern Architecture in Germany"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Osayimwese_Colonialism.jpg"
+    cover.image = "#{base_path}/Osayimwese_Colonialism.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -762,7 +768,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/kyperry"
     cover.title = "Black Women against the Land Grab: The Fight for Racial Justice in Brazil"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/perry.jpg"
+    cover.image = "#{base_path}/perry.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -772,7 +778,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/sperry"
     cover.title = "Five Faces of Japanese Feminism: Crimson and Other Stories"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Perry_FiveFaces.jpg"
+    cover.image = "#{base_path}/Perry_FiveFaces.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -782,7 +788,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/cpittell"
     cover.title = "Como Fernando Pessoa Pode Mudar a sua Vida."
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Pittella_ComoFernando.jpg"
+    cover.image = "#{base_path}/Pittella_ComoFernando.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -792,7 +798,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jpucci"
     cover.title = "Augustine's Virgilian Retreat: Reading the Auctores at Cassiciacum"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/pucci.jpg"
+    cover.image = "#{base_path}/pucci.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -802,7 +808,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/rrambuss"
     cover.title = "The English Poems of Richard Crashaw"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/rambuss.jpg"
+    cover.image = "#{base_path}/rambuss.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -812,7 +818,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/travindr"
     cover.title = "Donner le change: l'impensé animal"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Ravindranathan_donner-le-change.jpg"
+    cover.image = "#{base_path}/Ravindranathan_donner-le-change.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -822,7 +828,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mredfiel"
     cover.title = "Theory at Yale: The Strange Case of Deconstruction in America"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/mredfiel.jpg"
+    cover.image = "#{base_path}/mredfiel.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -832,7 +838,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/aremensn"
     cover.title = "La Conquistadora: The Virgin Mary at War and Peace in the Old and New Worlds"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/remensnyder.jpg"
+    cover.image = "#{base_path}/remensnyder.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -842,7 +848,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mriva"
     cover.title = "Pico della Mirandola: Oration on the Dignity of Man. A New Translation and Commentary"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Riva_Pico.jpg"
+    cover.image = "#{base_path}/Riva_Pico.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -852,7 +858,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/srockman"
     cover.title = "Slavery’s Capitalism: A New History of American Economic Development"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Rockman_SlaverysCapitalism.jpg"
+    cover.image = "#{base_path}/Rockman_SlaverysCapitalism.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -862,7 +868,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/brubenst"
     cover.title = "Advances in the Computational Sciences: Symposium in Honor of Dr. Berni Alder's 90th Birthday"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Rubenstein_Advances.jpg"
+    cover.image = "#{base_path}/Rubenstein_Advances.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -872,7 +878,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mrutz"
     cover.title = "Bodies of Knowledge in Ancient Mesopotamia: The Diviners of Late Bronze Age Emar and their Tablet Collection"
     cover.pub_date = "2013"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/rutz.jpg"
+    cover.image = "#{base_path}/rutz.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -882,7 +888,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/as49"
     cover.title = "Mortuary Landscapes of the Classic Maya: Rituals of Body and Soul"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Scherer_Mortuary.jpg"
+    cover.image = "#{base_path}/Scherer_Mortuary.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -892,7 +898,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/wschille"
     cover.title = "Electing the Senate: Indirect Democracy before the Seventeenth Amendment"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Schiller_Electing.jpg"
+    cover.image = "#{base_path}/Schiller_Electing.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -902,7 +908,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/rcschnei"
     cover.title = "Theatre & History"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/rcschnei.jpg"
+    cover.image = "#{base_path}/rcschnei.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -912,7 +918,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/gschultz"
     cover.title = "Sapphic Fathers: Discourses of Same-Sex Desire from Nineteenth-Century France"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Schultz_Sapphic.jpg"
+    cover.image = "#{base_path}/Schultz_Sapphic.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -922,7 +928,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/lseifert"
     cover.title = "Fairy Tales for the Disillusioned"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Seifert_FairyTales.jpg"
+    cover.image = "#{base_path}/Seifert_FairyTales.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -932,7 +938,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/nshibusa"
     cover.title = "Gender, Imperialism, and Global Exchanges"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Shibusawa_Gender.jpg"
+    cover.image = "#{base_path}/Shibusawa_Gender.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -942,7 +948,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jmsteele"
     cover.title = "Rising Time Schemes in Babylonian Astronomy"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Steele_RisingTimeSchemes.jpg"
+    cover.image = "#{base_path}/Steele_RisingTimeSchemes.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -952,7 +958,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/jtiton"
     cover.title = "Worlds of Music (6th edition)"
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Titon_WorldsofMusic.jpg"
+    cover.image = "#{base_path}/Titon_WorldsofMusic.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -962,7 +968,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/avidler"
     cover.title = "The Third Typology and Other Essays"
     cover.pub_date = "2015"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/vidler.jpg"
+    cover.image = "#{base_path}/vidler.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -972,7 +978,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/mviglian"
     cover.title = "A History of Medicine in 50 Discoveries."
     cover.pub_date = "2017"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Vigliani_HistoryOfMedicine.jpg"
+    cover.image = "#{base_path}/Vigliani_HistoryOfMedicine.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -982,7 +988,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/miwhite"
     cover.title = "International Handbook of Migration and Population Distribution"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/White_Migration.jpg"
+    cover.image = "#{base_path}/White_Migration.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -992,7 +998,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/acw3"
     cover.title = "Toward a Humean True Religion"
     cover.pub_date = "2014"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Willis_TowardAHumean.jpg"
+    cover.image = "#{base_path}/Willis_TowardAHumean.jpg"
     covers << cover
 
     cover = BookCoverModel.new()
@@ -1002,7 +1008,7 @@ class BookCoversSampleData
     cover.author_url = "#{host_url}/szipp"
     cover.title = "Vital Little Plans: The Short Works of Jane Jacobs"
     cover.pub_date = "2016"
-    cover.image = "https://vivo.brown.edu/themes/rab/images/books/Zipp_VitalLittlePlans.jpg"
+    cover.image = "#{base_path}/Zipp_VitalLittlePlans.jpg"
     covers << cover
 
     covers

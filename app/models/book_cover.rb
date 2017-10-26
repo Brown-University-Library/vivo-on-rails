@@ -2,7 +2,6 @@ require "./app/models/book_cover_sample_data.rb"
 class BookCoverModel
   attr_accessor :author_first, :author_last, :author_id, :author_url,
     :title, :pub_date, :image
-  BASE_PATH = "https://vivo.brown.edu/themes/rab/images/books"
 
   @@covers_paginated = nil
 
@@ -46,6 +45,11 @@ class BookCoverModel
   end
 
   def self.get_all_from_db(author_base_url)
+    base_path = ENV["BOOK_COVER_BASE_PATH"]
+    if base_path == nil
+      Rails.logger.error "BOOK_COVER_BASE_PATH has not been defined. Book covers will not be available."
+      return []
+    end
     covers = []
     if ENV["BOOK_COVER_HOST"] != nil
       Rails.logger.info "Fetching covers from the database..."
@@ -53,6 +57,7 @@ class BookCoverModel
         SELECT jacket_id, firstname, lastname, shortID, title, pub_date,
         image, dept, dept2, dept3, active
         FROM book_jackets
+        WHERE active = 'y'
         ORDER BY pub_date DESC
       END_SQL
       pool = db_pool()
@@ -65,7 +70,7 @@ class BookCoverModel
         cover.author_url = "#{author_base_url}#{row['shortID']}"
         cover.title = row['title']
         cover.pub_date = row['pub_date']
-        cover.image = "#{BASE_PATH}/#{row['image']}"
+        cover.image = "#{base_path}/#{row['image']}"
         covers << cover
       end
       pool.disconnect!
