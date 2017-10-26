@@ -3,6 +3,9 @@ class HomeController < ApplicationController
   def about
   end
 
+  def brown
+  end
+
   def faq
   end
 

@@ -20,7 +20,13 @@ class Search
       extra_fqs = [fq]
     end
     params.fl = ["id", "record_type", "thumbnail_file_path_s", "json_txt"]
-    results = @solr.search(params, extra_fqs)
+
+    # Remove this once Steve updates the server's values.
+    qf = "short_id_s^2500 email_s^2500 nameText^2000 title_t^1600 department_t^1500 " +
+      "affiliations^450 research_areas^400 " +
+      "ALLTEXT ALLTEXTUNSTEMMED nameUnstemmed^2.0 nameStemmed^2.0 nameLowercase"
+
+    results = @solr.search(params, extra_fqs, qf)
     results.solr_docs.each do |doc|
       record_type = (doc["record_type"] || []).first
       thumbnail = doc["thumbnail_file_path_s"]
@@ -35,7 +41,7 @@ class Search
       if hash == nil
         next
       end
-      
+
       thumbnail_url = ModelUtils.thumbnail_url(thumbnail, @images_url)
       if thumbnail != nil && thumbnail_url == nil
         Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{hash['id']})"

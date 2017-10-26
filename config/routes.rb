@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'search_facets' => 'search#facets'
   get 'search' => 'search#index', as: :search
 
+  get 'brown' => 'home#brown', as: :home_brown
   get 'about' => 'home#about', as: :home_about
   get 'faq' => 'home#faq', as: :home_faq
   get 'help' => 'home#help', as: :home_help
