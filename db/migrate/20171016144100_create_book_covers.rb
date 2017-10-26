@@ -1,7 +1,11 @@
 # -*- encoding : utf-8 -*-
 class CreateBookCovers < ActiveRecord::Migration
   def self.up
-    create_table :book_covers do |t|
+    options = nil
+    if Rails.env.production?
+      options = 'DEFAULT CHARSET=utf8'
+    end
+    create_table(:book_covers, :options => options) do |t|
       # structure mimics legacy table
       t.integer :jacket_id
       t.string :firstname, limit: 60
