@@ -3,7 +3,7 @@
   <% if !@presenter.query.empty? %>
     <span class="search-result-facets no-orphans">
       <a href="<%= @presenter.remove_q_url %>" title="Remove search term <%= @presenter.query %>">
-        <span><span class="facet-category">Search Term | </span><%= @presenter.query %></span>
+        <span><span class="facet-category">Searched for: </span><%= @presenter.query %></span>
         <span class="glyphicon glyphicon-remove"></span>
         <span class="sr-only">Remove search term <%= @presenter.query %></span>
       </a>
@@ -12,7 +12,7 @@
   <% @presenter.fq.each do |fq| %>
     <span class="search-result-facets no-orphans">
         <a href="<%= fq.remove_url %>" title="Remove facet <%= fq.value %>">
-        <span><span class="facet-category"><%= fq.title %> | </span><%= fq.value %></span>
+        <span><span class="facet-category"><%= fq.title %>: </span><%= fq.value %></span>
         <span class="glyphicon glyphicon-remove"></span>
         <span class="sr-only">Remove facet <%= fq.value %></span>
         </a>

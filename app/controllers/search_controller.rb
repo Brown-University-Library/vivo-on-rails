@@ -1,4 +1,8 @@
 class SearchController < ApplicationController
+  # Advanced search.
+  def advanced
+  end
+
   # Normal search. Returns search results as HTML.
   def index
     execute_search()
