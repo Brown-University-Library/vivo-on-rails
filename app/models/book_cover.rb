@@ -45,7 +45,7 @@ class BookCoverModel
     sql = <<-END_SQL.gsub(/\n/, '')
       SELECT jacket_id, firstname, lastname, shortID, title, pub_date,
       image, dept, dept2, dept3, active
-      FROM book_jackets
+      FROM book_covers
       WHERE active = 'y'
       ORDER BY pub_date DESC
     END_SQL
