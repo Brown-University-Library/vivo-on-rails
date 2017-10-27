@@ -34,31 +34,5 @@
                   type="text" class="hidden">
             <% end %>
         </form>
-
-        <div class="nav navbar-right dropdown" id="navbar-browse">
-            <button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Browse
-                <span class="caret"></span>
-            </button>
-            <button id="xs-browse" class="btn btn-default navbar-btn btn-block hidden-sm hidden-md hidden-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Browse
-                <span class="caret"></span>
-            </button>
-
-            <ul class="dropdown-menu">
-                <li role="listitem">
-                    <a href="<%= search_url() %>" title="Home menu item">Home</a>
-                </li>
-                <li role="listitem">
-                    <a href="<%= search_url() + '?&fq=record_type|PEOPLE' %>" title="People menu item">People</a>
-                </li>
-                <li role="listitem">
-                    <a href="<%= search_url() + '?&fq=record_type|ORGANIZATION' %>" title="Organizations menu item">Organizations</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav navbar-right funnelsearch">
-        </div>
     </div>
 </nav>
