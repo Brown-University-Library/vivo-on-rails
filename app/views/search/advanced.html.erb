@@ -11,14 +11,13 @@
         <label for="title">Researcher Title</label>
         <input class="form-control" id="title_t" name="title_t" placeholder="" type="text" value="<%= @presenter.title %>" >
       </div>
-      <!-- Don't do this until we tokenize the department field 
+      <!-- Don't do this until we tokenize the department field
        <div class="form-group">
         <%= label_tag(:department, "Department (e.g. Department, Center):") %>
         <input class="form-control" id="department_t" name="department_t" placeholder="" type="text" value="<%= @presenter.department %>" >
       </div> -->
       <input class="hidden" id="search" name="search" value="true" >
       <button type="submit" class="btn btn-default btn-lg sympl-search">Search</button>
-      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     <% end %>
   </div>
 </div>
