@@ -2,43 +2,23 @@
   <div class="row col-lg-12 col-md-12 col-sm-12">
     <p>&nbsp;</p>
     <h2>Advanced Search</h2>
-
-    <form id="search-advanced" action="<%= search_path() %>" name="search-advanced" role="search" method="GET">
+    <%= form_tag(search_advanced_path(), method: "get") do %>
       <div class="form-group">
         <label for="name">Researcher Name</label>
-        <input class="form-control" id="name" name="name" placeholder="" type="text">
+        <input class="form-control" id="name_t" name="name_t" placeholder="" type="text" value="<%= @presenter.name %>" >
       </div>
       <div class="form-group">
         <label for="title">Researcher Title</label>
-        <input class="form-control" id="title" name="title" placeholder="" type="text">
+        <input class="form-control" id="title_t" name="title_t" placeholder="" type="text" value="<%= @presenter.title %>" >
       </div>
-      <div class="form-group">
-        <label for="affiliation">Brown Affiliation (e.g. Department, Center)</label>
-        <input class="form-control" id="affiliation" name="affiliation" placeholder="" type="text">
-      </div>
-      <div class="form-group">
-        <label for="research_area">Research Area</label>
-        <input class="form-control" id="research_area" name="research_area" placeholder="" type="text">
-      </div>
-      <div class="form-group">
-        <label for="published_in">Published In (e.g. Journal of Medicine)</label>
-        <input class="form-control" id="published_in" name="published_in" placeholder="" type="text">
-      </div>
-      <div class="form-group">
-        <label for="teacher_for">Teacher for (e.g. Etiology of Substance Use Disorders)</label>
-        <input class="form-control" id="teacher_for" name="teacher_for" placeholder="" type="text">
-      </div>
-      <div class="form-group">
-        <label for="overview">Overview (e.g. Etiology of Substance Use Disorders)</label>
-        <input class="form-control" id="overview" name="overview" placeholder="" type="text">
-      </div>
-      <div class="form-group">
-        <label for="almni_of">Alumni of (e.g. Brown University)</label>
-        <input class="form-control" id="almni_of" name="almni_of" placeholder="" type="text">
-      </div>
-      <button type="submit" class="btn btn-default btn-lg sympl-search">
+      <!-- Don't do this until we tokenize the department field 
+       <div class="form-group">
+        <%= label_tag(:department, "Department (e.g. Department, Center):") %>
+        <input class="form-control" id="department_t" name="department_t" placeholder="" type="text" value="<%= @presenter.department %>" >
+      </div> -->
+      <input class="hidden" id="search" name="search" value="true" >
+      <button type="submit" class="btn btn-default btn-lg sympl-search">Search</button>
       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-    </form>
-
+    <% end %>
   </div>
 </div>

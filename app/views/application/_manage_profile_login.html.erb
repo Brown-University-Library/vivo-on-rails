@@ -1,7 +1,7 @@
 <div class="row subnavbar">
     <div class="below-nav-links">
         <p>
-          <span class="advanced-search"><a href="<%= search_advanced_path() %>">Advanced search&hellip;</a></span>
+          <span class="advanced-search"><a href="<%= search_advanced_path() + "?" + request.query_string %>">Advanced search&hellip;</a></span>
           <span class="profile-login"><a href="https://vivo.brown.edu/manager">Manage your Profile</a></span>
         </p>
     </div>
