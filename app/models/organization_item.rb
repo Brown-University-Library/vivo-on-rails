@@ -33,7 +33,7 @@ class OrganizationItem
       when "web_pages"
         org.web_pages = value.map { |v| OnTheWebItem.new(v) }
       when "people"
-        org.people = value.map { |v| OrganizationMemberItem.new(v)}
+        org.people = OrganizationMemberItem.from_hash_array(value)
       when "thumbnail"
         org.thumbnail = ModelUtils.safe_thumbnail(value)
       else
