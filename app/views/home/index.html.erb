@@ -45,20 +45,13 @@
         <div class="gap20"></div>
 
         <div class="carousel slide multi-item-carousel" id="books-carousel">
-          <!-- Crystal/Ben -- how can we get the indicators not to overlay
-          with the book covers? -->
-          <ol class="carousel-indicators">
-            <% @bookCoversPaginated.each_with_index do |page, i| %>
-              <li data-target="#books-carousel" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>">
-            <% end %>
-          </ol>
           <div class="carousel-inner">
             <% @bookCoversPaginated.each_with_index do |page, i| %>
               <div class="item <%= i == 0 ? "active" : "" %>">
                 <ul>
                   <% page.each do |cover| %>
                     <a href="<%= cover.author_url %>" class="book-cover">
-                      <img src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
+                      <img data-src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
                     </a>
                   <% end %>
                 </ul>
@@ -108,5 +101,26 @@
 <script>
   $(function() {
     $("#q").focus(); // Force focus to the search textbox
+
+    // Setup the carousel to load images on demand
+    // (adapted from https://stackoverflow.com/a/45649722/446681)
+    var carousel = $('#books-carousel');
+    carousel.on('slide.bs.carousel', function (e) {
+      var imgTags = $(e.relatedTarget).find('img');
+      setCarouselImages(imgTags, imgTags.length);
+    });
+    // Preload the first four images
+    var imgTags = carousel.find('img');
+    setCarouselImages(imgTags, Math.min(imgTags.length, 4))
   });
+
+  function setCarouselImages(imgTags, count) {
+    var i, img;
+    for(i = 0; i < count; i++) {
+      img = $(imgTags[i]);
+      if (typeof img.attr('src') === 'undefined') {
+        img.attr('src', img.data('src'));
+      }
+    }
+  }
 </script>
