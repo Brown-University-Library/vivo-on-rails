@@ -51,6 +51,9 @@
                 <ul>
                   <% page.each do |cover| %>
                     <a href="<%= cover.author_url %>" class="book-cover">
+                      <!-- notice that we set `data-src` here and later on we
+                           set `src` via the JavaScript code at the bottom of
+                           the page -->
                       <img data-src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
                     </a>
                   <% end %>
@@ -120,6 +123,7 @@
     for(i = 0; i < count; i++) {
       img = $(imgTags[i]);
       if (typeof img.attr('src') === 'undefined') {
+        // set src to the value in data-src
         img.attr('src', img.data('src'));
       }
     }
