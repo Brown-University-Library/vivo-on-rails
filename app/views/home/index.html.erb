@@ -105,6 +105,7 @@
     // Setup the carousel to load images on demand
     // (adapted from https://stackoverflow.com/a/45649722/446681)
     var carousel = $('#books-carousel');
+    carousel.carousel({interval: 5000});  // auto-scroll
     carousel.on('slide.bs.carousel', function (e) {
       var imgTags = $(e.relatedTarget).find('img');
       setCarouselImages(imgTags, imgTags.length);
