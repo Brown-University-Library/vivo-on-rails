@@ -67,17 +67,23 @@ class DisplayController < ApplicationController
 
     def render_org(id)
       @presenter = DefaultPresenter.new()
-      @organization = Organization.get_one(id)
+      @organization = Organization.load_from_solr(id)
       if @organization == nil
         Rails.logger.error("Could not render organization #{id}.")
         render "error", status: 500
         return
       end
 
-      if params["format"] == "json"
-        render :json => @organization.to_json
+      if params["format"] == "json_txt"
+        render :json => @organization.json_txt.to_json
         return
       end
+
+      if params["format"] == "json"
+        render :json => @organization.item.to_json
+        return
+      end
+
       render "organization/show"
     end
 

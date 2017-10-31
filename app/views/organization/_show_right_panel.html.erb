@@ -2,13 +2,13 @@
   <section id="individual-info" role="region">
     <header>
       <h2 class="vcard foaf-person hidden-xs"><% "xxx" %></h2>
-      <h3><%= @organization.name %></h3>
+      <h3><%= @organization.item.name %></h3>
       <ul>
-      <% @organization.web_pages.each do |page| %>
+      <% @organization.item.web_pages.each do |page| %>
         <li><a href="<%= page.url %>"><%= page.text %></a>
       <% end %>
       </ul>
-      <p><%= @organization.overview.html_safe %></p>
+      <p><%= @organization.item.overview.html_safe %></p>
     </header>
   </section>
 
@@ -28,7 +28,7 @@
     <!-- tabs content -->
     <div class="col-md-12 person-container">
       <div class="tab-content" id="individualNavTabsContent">
-        <% @organization.people.each do |p| %>
+        <% @organization.item.people.each do |p| %>
           <p>
             <% if p.vivo_id != "" %>
               <a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>,
