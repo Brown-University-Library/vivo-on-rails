@@ -1,25 +1,31 @@
 class Faculty
-  def self.get_one(id)
-    self.get_one_from_solr(id)
+  attr_accessor :solr_doc, :json_txt, :item
+
+  def self.load_from_solr(id)
+    solr_doc = get_solr_doc(id)
+    if solr_doc == nil
+      return nil
+    end
+
+    f = Faculty.new()
+    f.solr_doc = solr_doc
+    json_txt = solr_doc["json_txt"].first
+    f.json_txt = JsonUtils.safe_parse(json_txt)
+    if f.json_txt != nil
+      images_url = ENV["IMAGES_URL"]
+      thumbnail = f.solr_doc["thumbnail_file_path_s"]
+      thumbnail_url = ModelUtils.thumbnail_url(thumbnail, images_url)
+      if thumbnail != nil && thumbnail_url == nil
+        Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{hash['id']})"
+      end
+      f.item = FacultyItem.from_hash(f.json_txt, thumbnail_url)
+    end
+    f
   end
 
-  def self.get_one_from_solr(id)
+  def self.get_solr_doc(id)
     solr_url = ENV["SOLR_URL"]
     solr = SolrLite::Solr.new(solr_url)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
-    return nil if solr_doc == nil
-
-    solr_json = solr_doc["json_txt"].first
-    hash = JsonUtils.safe_parse(solr_json)
-    return nil if hash == nil
-
-    images_url = ENV["IMAGES_URL"]
-    thumbnail = solr_doc["thumbnail_file_path_s"]
-    thumbnail_url = ModelUtils.thumbnail_url(thumbnail, images_url)
-    if thumbnail != nil && thumbnail_url == nil
-      Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{hash['id']})"
-    end
-
-    FacultyItem.from_hash(hash, thumbnail_url)
   end
 end

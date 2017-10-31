@@ -43,21 +43,25 @@ class DisplayController < ApplicationController
 
     def render_faculty(id)
       id = params[:id]
-      from_solr = true
-      faculty = Faculty.get_one(id)
+      faculty = Faculty.load_from_solr(id)
       if faculty == nil
         Rails.logger.error("Could not render faculty #{id}.")
         render "error", status: 500
         return
       end
 
-      if params["debug"] == "true"
-        render :json => faculty.to_json
+      if params["format"] == "json_txt"
+        render :json => faculty.json_txt.to_json
+        return
+      end
+
+      if params["format"] == "json"
+        render :json => faculty.item.to_json
         return
       end
 
       referer = request.headers.env["HTTP_REFERER"]
-      @presenter = FacultyPresenter.new(faculty, search_url(), referer)
+      @presenter = FacultyPresenter.new(faculty.item, search_url(), referer)
       render "faculty/show"
     end
 
@@ -67,6 +71,11 @@ class DisplayController < ApplicationController
       if @organization == nil
         Rails.logger.error("Could not render organization #{id}.")
         render "error", status: 500
+        return
+      end
+
+      if params["format"] == "json"
+        render :json => @organization.to_json
         return
       end
       render "organization/show"
