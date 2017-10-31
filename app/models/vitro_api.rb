@@ -7,6 +7,7 @@ class VitroAPI
   APPLICATION_JSON = "application/json"
   APPLICATION_RDF_XML = "application/rdf+xml"
   TEXT_TURTLE = "text/turtle"
+  VIVO_TIMEOUT = 5  # seconds
 
   def initialize(vivo_url)
     @vivo_url = vivo_url
@@ -41,12 +42,15 @@ class VitroAPI
 
   private
     def http_get(url, content_type)
+      # url = "" #REMOVE_TEST
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
       if url.start_with?("https://")
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
+      http.open_timeout = VIVO_TIMEOUT
+      http.read_timeout = VIVO_TIMEOUT
       request = Net::HTTP::Get.new(uri.request_uri)
       if content_type
         request["Content-Type"] = content_type
