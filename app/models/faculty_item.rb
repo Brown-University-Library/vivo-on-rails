@@ -2,7 +2,7 @@ require "./app/models/model_utils.rb"
 class FacultyItem
 
   attr_accessor :record_type, :id, :uri, :overview, :email, :org_label, :name,
-    :title, :contributor_to, :thumbnail, :education, :awards,
+    :display_name, :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
@@ -27,6 +27,7 @@ class FacultyItem
     @email = ""
     @funded_research = ""
     @name = ""
+    @display_name = ""
     @org_label = ""
     @overview = ""
     @research_overview = ""
@@ -45,8 +46,9 @@ class FacultyItem
     @training = []
   end
 
-  def self.from_hash(hash, thumbnail_url)
+  def self.from_hash(hash, display_name, thumbnail_url)
     faculty = FacultyItem.new(nil)
+    faculty.display_name = display_name
     faculty.thumbnail = thumbnail_url
     hash.each do |key, value|
       getter = key.to_s
