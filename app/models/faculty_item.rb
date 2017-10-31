@@ -48,7 +48,6 @@ class FacultyItem
 
   def self.from_hash(hash, display_name, thumbnail_url)
     faculty = FacultyItem.new(nil)
-    faculty.display_name = display_name
     faculty.thumbnail = thumbnail_url
     hash.each do |key, value|
       getter = key.to_s
@@ -89,6 +88,14 @@ class FacultyItem
         end
       end
     end
+
+    if display_name != nil
+      faculty.display_name = display_name
+    else
+      byebug
+      faculty.display_name = faculty.name || ""
+    end
+
     faculty
   end
 
