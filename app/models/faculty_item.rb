@@ -92,7 +92,6 @@ class FacultyItem
     if display_name != nil
       faculty.display_name = display_name
     else
-      byebug
       faculty.display_name = faculty.name || ""
     end
 
