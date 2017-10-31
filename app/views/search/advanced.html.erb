@@ -1,6 +1,11 @@
 <div class="container-fluid col-sm-12">
   <div class="row col-lg-12 col-md-12 col-sm-12">
     <p>&nbsp;</p>
+    <div class="wrapper__back-to-search col-xs-12">
+      <a href="<%= search_url() %>" class="back-to-search">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search
+      </a>
+    </div>
     <h2>Advanced Search</h2>
     <%= form_tag(search_advanced_path(), method: "get") do %>
       <div class="form-group">
