@@ -77,7 +77,7 @@ class FacultyItem
         # string array, no special handling
         faculty.research_areas = value.sort_by {|a| (a || "").downcase}
       when "thumbnail"
-        # Ignore this value, we use thumbnail_path parameter instead
+        # Ignore this value, we use thumbnail_url parameter instead
       else
         setter = key.to_s + "="
         if faculty.respond_to?(setter)

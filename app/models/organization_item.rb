@@ -34,6 +34,8 @@ class OrganizationItem
         org.web_pages = value.map { |v| OnTheWebItem.new(v) }
       when "people"
         org.people = OrganizationMemberItem.from_hash_array(value)
+      when "thumbnail"
+        # Ignore this value, we use thumbnail_url parameter instead
       else
         setter = key.to_s + "="
         if org.respond_to?(setter)
