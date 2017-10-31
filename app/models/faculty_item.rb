@@ -45,20 +45,6 @@ class FacultyItem
     @training = []
   end
 
-  def contributor_to=(value)
-    @contributor_to = value
-
-    # Merge both contribution[:published_in] and
-    # contribution[:venue_name] into faculty.published_in
-    @published_in = []
-    @contributor_to.each do |c|
-      @published_in << c.published_in if c.published_in
-      @published_in << c.venue_name if c.venue_name
-    end
-
-    @contributor_to
-  end
-
   def self.from_hash(hash, thumbnail_url)
     faculty = FacultyItem.new(nil)
     faculty.thumbnail = thumbnail_url

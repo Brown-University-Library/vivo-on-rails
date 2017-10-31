@@ -1,7 +1,7 @@
 require "./app/models/model_utils.rb"
 class ContributorToItem
   attr_accessor :uri, :authors, :title, :volume, :issue,
-    :date, :pages, :published_in, :venue_name, :type, :doi, :pub_med_id
+    :date, :pages, :published_in, :venue, :type, :doi, :pub_med_id
 
   def initialize(values)
     ModelUtils.set_values_from_hash(self, values)
@@ -78,14 +78,14 @@ class ContributorToItem
   private
     def publisher
       case
-      when @published_in == nil && @venue_name == nil
+      when @published_in == nil && @venue == nil
         nil
-      when @published_in == nil && @venue_name != nil
-        @venue_name
-      when @published_in != nil && @venue_name == nil
+      when @published_in == nil && @venue != nil
+        @venue
+      when @published_in != nil && @venue == nil
         @published_in
       else
-        @published_in + "/" +  @venue_name
+        @published_in + "/" +  @venue
       end
     end
 end
