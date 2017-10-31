@@ -4,14 +4,6 @@ class IndividualController < ApplicationController
   TEXT_TURTLE = "text/turtle"
   SEE_OTHER = 303
 
-  #REMOVE_TEST
-  def slow_request
-    begin_time = Time.now
-    sleep(10)
-    end_time = Time.now
-    render body: "sleept from #{begin_time} to #{end_time}"
-  end
-
   # This method mimics the `/individual/:id` endpoint in VIVO in that it
   # just redirects the user to the appropriate URL for the given ID. In
   # some instances it redirects to the HTML representation for the ID while

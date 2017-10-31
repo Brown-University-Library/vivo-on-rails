@@ -42,7 +42,6 @@ class VitroAPI
 
   private
     def http_get(url, content_type)
-      # url = "" #REMOVE_TEST
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
       if url.start_with?("https://")
