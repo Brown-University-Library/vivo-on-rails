@@ -1303,6 +1303,10 @@ td.citation-data.pub-item {
 	.facet-category {
 		display: none;
 	}
+	.facet-breadcrumbs {
+		margin-bottom: 2rem;
+		padding: 0 1rem;
+	}
 	.expert-results {
 		min-width: 27rem;
 		margin-bottom: .2rem;
