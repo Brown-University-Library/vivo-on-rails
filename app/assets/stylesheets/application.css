@@ -94,6 +94,10 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
+.no-orphans {
+	display: inline-block;
+	white-space: nowrap;
+}
 
 /* Header */
 .header {
@@ -348,10 +352,6 @@ a.manage-profile-link:visited {
 }
 .panel-body ul li:hover .categoryCount {
 	color: #594036;
-}
-.no-orphans {
-	display: inline-block;
-	white-space: nowrap;
 }
 .glyphicon-remove {
 	top: 3px;
@@ -1269,28 +1269,29 @@ td.citation-data.pub-item {
 		font-size: 2.4rem;
 	}
 	#sticky-nav	{
-		display: none; /***/
-		background-color: red;
-		float: right;
-		height: 8rem !important;
-		width: calc(50% - 1.5rem);
-		top: 1.5rem;
-		right: 1.5rem;
+		top: .9rem;
 	}
 	.navbar-form {
-		display: none; /***/
-		background-color: blue;
 		border: none;
 		box-shadow: none;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 		min-height: 2rem;
 		max-height: 3rem;
 	}
-/***//*	.subnavbar {  
-		border-top: 1px solid #000;
-		border-bottom: 1px solid #000;
-		height: 4.5rem;
-		top: 1rem;
-	}*/
+	.navbar-form .form-group {
+		flex-grow: 2;
+		margin: 0;
+	}
+	#sticky-nav button.btn.sympl-search {
+		display: flex;
+		flex-grow: 1;
+		justify-content: center;
+		width: 0;
+		margin-left: .5rem;
+		padding: 1.2rem;
+	}
 	.subnavbar {  
 		border-top: 1px solid #000;
 		border-bottom: 1px solid #000;
@@ -1299,6 +1300,9 @@ td.citation-data.pub-item {
 	}
 	.below-nav-links { /* create hamburger menu */
 		display: none; /***/
+	}
+	.container-fluid.results-page {
+		margin-top: -8rem;
 	}
 	.results-wrapper {
 		margin-bottom: 5rem;
