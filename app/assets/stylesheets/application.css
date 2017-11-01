@@ -1336,11 +1336,11 @@ td.citation-data.pub-item {
 		padding: 0;
 		font-size: 1.8rem;
 	}
-	.pagination {
-		padding-left: .4rem;
-	}
 	#search-facets {
 		padding-left: 0;
+	}
+	.search-result-none-wrapper .subnavbar__pseudo {
+		display: none;
 	}
 	/* profile page */
 	.container.profile {
