@@ -1,7 +1,8 @@
 require "./app/models/model_utils.rb"
 class ContributorToItem
   attr_accessor :uri, :authors, :title, :volume, :issue,
-    :date, :pages, :published_in, :venue, :type, :doi, :pub_med_id
+    :date, :pages, :published_in, :venue, :type, :doi, :pub_med_id,
+    :external_url
 
   def initialize(values)
     ModelUtils.set_values_from_hash(self, values)
@@ -9,6 +10,10 @@ class ContributorToItem
     year = date.to_i
     if year >= 1900 && year <= 2200
       @year = year
+    end
+    if @uri == "http://vivo.brown.edu/individual/n73188"
+      # Hard-code this for now for testing
+      @external_url = "https://repository.library.brown.edu/studio/item/bdr:712459/"
     end
   end
 
@@ -41,6 +46,13 @@ class ContributorToItem
   def pub_med_url
     return nil if @pub_med_id == nil
     "http://www.ncbi.nlm.nih.gov/pubmed/?term=#{@pub_med_id}"
+  end
+
+  def bdr_url
+    if @external_url == nil || !@external_url.start_with?("https://repository.library.brown.edu")
+      return nil
+    end
+    @external_url
   end
 
   def pub_type
