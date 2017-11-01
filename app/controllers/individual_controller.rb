@@ -22,6 +22,10 @@ class IndividualController < ApplicationController
       url = display_show_url(id)
     end
     redirect_to url, status: SEE_OTHER
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not redirect to record #{id}. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
   end
 
   # This method mimics the `/individual/:id/:id.format` endpoint in VIVO but
@@ -42,6 +46,10 @@ class IndividualController < ApplicationController
         Rails.logger.warn("Invalid format (#{format}) requested.")
         render "error", status: 400
     end
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not fetch record #{id} from VIVO. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
   end
 
   private

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'display/' => 'display#index'
 
   get 'search_facets' => 'search#facets'
+  get 'search/advanced' => 'search#advanced', as: :search_advanced
   get 'search' => 'search#index', as: :search
 
   get 'brown' => 'home#brown', as: :home_brown

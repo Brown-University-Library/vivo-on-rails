@@ -20,12 +20,14 @@
                     type="text">
             </div>
 
-            <button type="submit" class="btn btn-default sympl-search hidden-xs" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
-                <span class="glyphicon glyphicon-search" role="submit"></span>
+            <button type="submit" class="btn btn-default sympl-search hidden-xs">
+                <span class="glyphicon glyphicon-search" role="submit" aria-hidden="true"></span>
+                <span aria-only="true">Search</span>
             </button>
 
-            <button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-md hidden-lg" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
-                <span class="glyphicon glyphicon-search" role="submit"></span>
+            <button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-md hidden-lg">
+                <span class="glyphicon glyphicon-search" role="submit" aria-hidden="true"></span>
+                <span aria-only="true">Search</span>
             </button>
 
             <% (@presenter.form_values || []).each do |form_value| %>
@@ -34,39 +36,5 @@
                   type="text" class="hidden">
             <% end %>
         </form>
-
-        <div class="nav navbar-right dropdown" id="navbar-browse">
-            <button id="lg-browse" class="btn btn-default navbar-btn dropdown-toggle hidden-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Browse
-                <span class="caret"></span>
-            </button>
-            <button id="xs-browse" class="btn btn-default navbar-btn btn-block hidden-sm hidden-md hidden-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Browse
-                <span class="caret"></span>
-            </button>
-
-            <ul class="dropdown-menu">
-                <li role="listitem">
-                    <a href="<%= search_url() %>" title="Home menu item">Home</a>
-                </li>
-                <li role="listitem">
-                    <a href="<%= search_url() + '?&fq=record_type|PEOPLE' %>" title="People menu item">People</a>
-                </li>
-                <li role="listitem">
-                    <a href="<%= search_url() + '?&fq=record_type|ORGANIZATION' %>" title="Organizations menu item">Organizations</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav navbar-right funnelsearch">
-        </div>
     </div>
 </nav>
-
-<% unless current_page?(root_path) %>
-<!--     <div class="row subnavbar">
-        <div class="below-nav-links">
-            <p><span class="advanced-search"><a href="">Advanced search&hellip;</a></span><span class="profile-login"><a href="https://vivo.brown.edu/manager">Manage your Profile</a></span></p>
-        </div>
-    </div> -->
-<% end %>

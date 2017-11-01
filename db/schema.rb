@@ -11,6 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20171016144100) do
+
+  create_table "book_covers", force: :cascade do |t|
+    t.integer  "jacket_id"
+    t.string   "firstname",  limit: 60
+    t.string   "lastname",   limit: 90
+    t.string   "shortID",    limit: 8
+    t.string   "title",      limit: 255
+    t.integer  "pub_date"
+    t.string   "image",      limit: 255
+    t.string   "role",       limit: 20
+    t.string   "dept",       limit: 155
+    t.string   "dept2",      limit: 255
+    t.string   "dept3",      limit: 255
+    t.string   "active",     limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "book_covers", ["pub_date"], name: "index_book_covers_on_pub_date"
 
 end

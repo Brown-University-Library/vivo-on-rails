@@ -553,6 +553,7 @@ a.manage-profile-link:visited {
 	position: absolute;
 	left: 0;
 	right: 0;
+  margin-top: 10px;
 }
 .emailsContainer .glyphicon-envelope {
 	color: #7E7E7E;
@@ -700,7 +701,7 @@ a.manage-profile-link:visited {
 	align-items: center;
 	font-weight: bold;
 	height: 4.5rem;
-	margin: 1.5rem 0 1rem 0;	
+	margin: 1.5rem 0 1rem 0;
 }
 a.back-to-search {
 	color: #333;
@@ -1668,5 +1669,3 @@ td.citation-data.pub-item {
 		max-width: 1600px;
 	}
 }
-
-

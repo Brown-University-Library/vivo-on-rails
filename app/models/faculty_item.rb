@@ -2,7 +2,7 @@ require "./app/models/model_utils.rb"
 class FacultyItem
 
   attr_accessor :record_type, :id, :uri, :overview, :email, :org_label, :name,
-    :title, :contributor_to, :thumbnail, :education, :awards,
+    :display_name, :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
@@ -27,6 +27,7 @@ class FacultyItem
     @email = ""
     @funded_research = ""
     @name = ""
+    @display_name = ""
     @org_label = ""
     @overview = ""
     @research_overview = ""
@@ -45,21 +46,7 @@ class FacultyItem
     @training = []
   end
 
-  def contributor_to=(value)
-    @contributor_to = value
-
-    # Merge both contribution[:published_in] and
-    # contribution[:venue_name] into faculty.published_in
-    @published_in = []
-    @contributor_to.each do |c|
-      @published_in << c.published_in if c.published_in
-      @published_in << c.venue_name if c.venue_name
-    end
-
-    @contributor_to
-  end
-
-  def self.from_hash(hash, thumbnail_url)
+  def self.from_hash(hash, display_name, thumbnail_url)
     faculty = FacultyItem.new(nil)
     faculty.thumbnail = thumbnail_url
     hash.each do |key, value|
@@ -90,7 +77,7 @@ class FacultyItem
         # string array, no special handling
         faculty.research_areas = value.sort_by {|a| (a || "").downcase}
       when "thumbnail"
-        # Ignore this value, we use thumbnail_path parameter instead
+        # Ignore this value, we use thumbnail_url parameter instead
       else
         setter = key.to_s + "="
         if faculty.respond_to?(setter)
@@ -101,6 +88,13 @@ class FacultyItem
         end
       end
     end
+
+    if display_name != nil
+      faculty.display_name = display_name
+    else
+      faculty.display_name = faculty.name || ""
+    end
+
     faculty
   end
 

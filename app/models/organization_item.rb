@@ -6,7 +6,6 @@ class OrganizationItem
   def initialize(values)
     init_defaults()
     ModelUtils.set_values_from_hash(self, values)
-    @thumbnail = ModelUtils.safe_thumbnail(@thumbnail)
     @id = uri
   end
 
@@ -20,22 +19,23 @@ class OrganizationItem
     @uri = ""
     @name = ""
     @overview = ""
-    @thumbnail = nil
+    @thumbnail = ""
     @people = []
     @web_pages = []
   end
 
-  def self.from_hash(hash)
+  def self.from_hash(hash, thumbnail_url)
     org = OrganizationItem.new(nil)
+    org.thumbnail = thumbnail_url
     hash.each do |key, value|
       getter = key.to_s
       case getter
       when "web_pages"
         org.web_pages = value.map { |v| OnTheWebItem.new(v) }
       when "people"
-        org.people = value.map { |v| OrganizationMemberItem.new(v)}
+        org.people = OrganizationMemberItem.from_hash_array(value)
       when "thumbnail"
-        org.thumbnail = ModelUtils.safe_thumbnail(value)
+        # Ignore this value, we use thumbnail_url parameter instead
       else
         setter = key.to_s + "="
         if org.respond_to?(setter)

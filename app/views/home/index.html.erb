@@ -11,10 +11,11 @@
         </div>
         <form id="search-homepage" action="<%= search_path() %>" name="search-home" role="search" method="GET">
           <div class="input-group input-group-lg">
-            <input class="form-control" id="q" name="q" placeholder="Search for an Expert..." type="text">
+            <input class="form-control" id="q" name="q" placeholder="Search for an Expert..." title="Enter text to search for" type="text">
             <div class="input-group-btn">
               <button type="submit" class="btn btn-default btn-lg sympl-search">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <span aria-only="true">Search</span>
               </button>
             </div>
           </div>
@@ -24,7 +25,7 @@
     <div class="col-md-12">
       <div class="container">
         <div id="homepage-link-row">
-          <a href="" target="_blank">Advanced search&hellip;</a>
+          <a href="<%= search_advanced_path() %>">Advanced search&hellip;</a>
         </div>
         <div class="jumbotron">
           <p>&nbsp;</p>
@@ -45,20 +46,16 @@
         <div class="gap20"></div>
 
         <div class="carousel slide multi-item-carousel" id="books-carousel">
-          <!-- Crystal/Ben -- how can we get the indicators not to overlay
-          with the book covers? -->
-          <ol class="carousel-indicators">
-            <% @bookCoversPaginated.each_with_index do |page, i| %>
-              <li data-target="#books-carousel" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>">
-            <% end %>
-          </ol>
           <div class="carousel-inner">
             <% @bookCoversPaginated.each_with_index do |page, i| %>
               <div class="item <%= i == 0 ? "active" : "" %>">
                 <ul>
                   <% page.each do |cover| %>
                     <a href="<%= cover.author_url %>" class="book-cover">
-                      <img src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
+                      <!-- notice that we set `data-src` here and later on we
+                           set `src` via the JavaScript code at the bottom of
+                           the page -->
+                      <img data-src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
                     </a>
                   <% end %>
                 </ul>
@@ -90,7 +87,7 @@
   <div class="col-md-4 icons-home">
     <a href="https://library.brown.edu/orcid/" id="icon2">
       <span class="glyphicon glyphicon-pencil"></span>
-      <img src="https://vivo.brown.edu/themes/rab/images/orcid-logo.png"/>
+      <img src="https://vivo.brown.edu/themes/rab/images/orcid-logo.png" alt="ORCID logo"/>
       <h3>Get a Brown ORCID Identifier!</h3>
     </a>
   </div>
@@ -108,5 +105,28 @@
 <script>
   $(function() {
     $("#q").focus(); // Force focus to the search textbox
+
+    // Setup the carousel to load images on demand
+    // (adapted from https://stackoverflow.com/a/45649722/446681)
+    var carousel = $('#books-carousel');
+    carousel.carousel({interval: 5000});  // auto-scroll
+    carousel.on('slide.bs.carousel', function (e) {
+      var imgTags = $(e.relatedTarget).find('img');
+      setCarouselImages(imgTags, imgTags.length);
+    });
+    // Preload the first four images
+    var imgTags = carousel.find('img');
+    setCarouselImages(imgTags, Math.min(imgTags.length, 4))
   });
+
+  function setCarouselImages(imgTags, count) {
+    var i, img;
+    for(i = 0; i < count; i++) {
+      img = $(imgTags[i]);
+      if (typeof img.attr('src') === 'undefined') {
+        // set src to the value in data-src
+        img.attr('src', img.data('src'));
+      }
+    }
+  }
 </script>

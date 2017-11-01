@@ -1,7 +1,9 @@
+require "./app/models/model_utils.rb"
+
 class OrganizationMemberItem
   attr_accessor :id, :uri, :label, :general_position, :specific_position
   def initialize(values = nil)
-    set_values(values)
+    ModelUtils.set_values_from_hash(self, values)
     @id = @uri
   end
 
@@ -10,13 +12,7 @@ class OrganizationMemberItem
     @id.split("/").last
   end
 
-  def set_values(hash)
-    return if hash == nil
-    hash.each do |key, value|
-      setter = key.to_s + "="
-      if self.respond_to?(setter)
-        self.send(setter, value)
-      end
-    end
+  def self.from_hash_array(values)
+    values.map { |v| OrganizationMemberItem.new(v)}.sort_by {|v| v.label || ""}
   end
 end

@@ -1,4 +1,19 @@
 class SearchController < ApplicationController
+  # Advanced search.
+  def advanced
+    q = build_q_from_params()
+    if params["search"] == "true" && q != ""
+      redirect_to "#{search_url()}?q=#{q}"
+    else
+      @presenter = AdvancedSearchPresenter.new(params)
+      render "advanced"
+    end
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render advanced search. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
+  end
+
   # Normal search. Returns search results as HTML.
   def index
     execute_search()
@@ -61,5 +76,25 @@ class SearchController < ApplicationController
         url += "?"
       end
       url
+    end
+
+    def build_q_from_params()
+      q = ""
+      q = build_q(q, params["title_t"], "title_t")
+      q = build_q(q, params["department_t"], "department_t")
+      q = build_q(q, params["name_t"], "name_t")
+      q
+    end
+
+    def build_q(q, value, field)
+      if value == nil || value.empty?
+        q
+      else
+        if q == ""
+          "#{field}:\"#{value}\""
+        else
+          q + "+AND+#{field}:\"#{value}\""
+        end
+      end
     end
 end
