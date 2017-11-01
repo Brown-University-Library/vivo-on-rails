@@ -1298,7 +1298,7 @@ td.citation-data.pub-item {
 		height: 4.5rem;
 		top: 4rem;
 	}
-	.below-nav-links { /* create hamburger menu */
+	.below-nav-links { /* create hamburger menu for advanced search and manage profile */
 		display: none; /***/
 	}
 	.container-fluid.results-page {
@@ -1390,7 +1390,8 @@ td.citation-data.pub-item {
 	}
 	/* org page */
 	.org-profile {
-		margin-top: 0;
+		margin-top: -8rem;
+		margin-bottom: 0;
 		padding: 0;
 		top: 0;
 	}
@@ -1399,6 +1400,22 @@ td.citation-data.pub-item {
 	}
 	.container.org-profile .subnavbar {
 		margin: 0 0 1rem 0;
+	}
+	.organization-photo-panel {
+		margin-top: 5rem;
+	}
+	.org-profile #individual-info header h3 {
+		font-size: 4.8rem;
+		line-height: 5rem;
+	}
+	.org-profile #individual-info li {
+		margin-bottom: 1rem;
+	}
+	.org-profile #individual-info a {
+		word-wrap: break-word;
+	}
+	.org-profile #individual-info p {
+		word-wrap: break-word;
 	}
 	.footer {
 		float: left;
