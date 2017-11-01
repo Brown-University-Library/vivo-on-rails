@@ -33,41 +33,9 @@
   to { transform: scale(1) rotate(360deg);}
 }
 
-.noScroll {
-	overflow-y: scroll;
-			/* no scroll */
-		height: 100%;
-/*		margin-top: 5rem;*/
-margin-bottom: -6.5rem;
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-}
 .bkg-test {
 	overflow: hidden;
 	height: 100vh;
-}
-.slide-in-out {
-/*	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	overflow-y: scroll;*/
-	transform: translateX(calc(100vw + 3rem));
-	transition: .3s ease all;
-}
-.slide-out {
-/*	transform: translateX(-200vw);
-	transition: .3s ease all;*/
-}
-
-.mobile-facets-menu-wrapper {
-	display: none;
-	height: 6.5rem;
-	background-color: green;
 }
 
 /* MAKE YOUR CSS CHANGES HERE */
@@ -1387,6 +1355,15 @@ td.citation-data.pub-item {
 	.btn-group-vertical .btn {
 		font-size: 2.4rem;
 		padding: 3rem 1.5rem;
+	}
+	.container.profile #tabOverview p {
+		word-wrap: break-word;
+	}
+	.brown-research-areas-list a {
+		word-wrap: break-word;
+	}
+	.container.profile .panel-body .property-list {
+		word-wrap: break-word;
 	}
 	/* org page */
 	.org-profile {
