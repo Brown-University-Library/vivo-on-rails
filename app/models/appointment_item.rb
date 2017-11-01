@@ -15,6 +15,7 @@ class AppointmentItem
     @id = @uri
     @start_date = DateUtils.str_to_date(@start_date)
     @end_date = DateUtils.str_to_date(@end_date)
+    @org_name = values["hospital_name"] || ""
   end
 
   def init_defaults()
