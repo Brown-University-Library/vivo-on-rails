@@ -11,10 +11,7 @@ class ContributorToItem
     if year >= 1900 && year <= 2200
       @year = year
     end
-    if @uri == "http://vivo.brown.edu/individual/n73188"
-      # Hard-code this for now for testing
-      @external_url = "https://repository.library.brown.edu/studio/item/bdr:712459/"
-    end
+    @external_url = values["url"]
   end
 
   def pub_info
