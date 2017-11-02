@@ -33,6 +33,11 @@
   to { transform: scale(1) rotate(360deg);}
 }
 
+.bkg-test {
+	overflow: hidden;
+	height: 100vh;
+}
+
 /* MAKE YOUR CSS CHANGES HERE */
 
 /* COLORS */
@@ -56,6 +61,10 @@ html, body {
 	height: 100%;
     max-width: 100%;
     overflow-x: hidden;
+}
+.no-orphans {
+	display: inline-block;
+	white-space: nowrap;
 }
 
 /* Header */
@@ -112,7 +121,7 @@ header {
 	z-index: 1000;
 }
 #sticky-nav .container {
-	padding-left: 0 1.5rem;
+	padding: 0 1.5rem;
 	width: 100%;
 }
 #sticky-nav .navbar-btn {
@@ -155,8 +164,8 @@ a.manage-profile-link:visited {
 	padding: 0;
 	position: absolute;
 	top: 0.2rem;
-	right: 3rem;
-	width: 300px;
+	right: 1.5rem;
+	width: 30rem;
 	z-index: 10;
 }
 .below-nav-links p {
@@ -204,7 +213,7 @@ a.manage-profile-link:visited {
 
 
 /* Results Page */
-.container-fluid {
+.container-fluid.results-page {
 	padding-top: 0rem;
 	margin-top: -3rem;
 }
@@ -311,10 +320,6 @@ a.manage-profile-link:visited {
 }
 .panel-body ul li:hover .categoryCount {
 	color: #594036;
-}
-.no-orphans {
-	display: inline-block;
-	white-space: nowrap;
 }
 .glyphicon-remove {
 	top: 3px;
@@ -1220,17 +1225,12 @@ td.citation-data.pub-item {
 
 
 /*** General Breakpoints ***/
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
 	.site-title h1 a {
 		font-size: 2rem;
 	}
-	#search-facets {
-		display: none; /* temporary while getting the results-wrapper positioning right */
-		position: absolute;
-		top: 0;
-	}
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
 	.site-title {
 		margin-top: 1.5rem;
 	}
@@ -1238,45 +1238,56 @@ td.citation-data.pub-item {
 		font-size: 2.4rem;
 	}
 	#sticky-nav	{
-		background-color: red;
-		float: right;
-		height: 3rem !important;
-		width: calc(50% - 1.5rem);
-		top: 1.5rem;
-		right: 1.5rem;
+		top: .9rem;
 	}
 	.navbar-form {
-		background-color: green;
 		border: none;
 		box-shadow: none;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 		min-height: 2rem;
 		max-height: 3rem;
 	}
-	.subnavbar {
+	.navbar-form .form-group {
+		flex-grow: 2;
+		margin: 0;
+	}
+	#sticky-nav button.btn.sympl-search {
+		display: flex;
+		flex-grow: 1;
+		justify-content: center;
+		width: 0;
+		margin-left: .5rem;
+		padding: 1.2rem;
+	}
+	.subnavbar {  
 		border-top: 1px solid #000;
 		border-bottom: 1px solid #000;
 		height: 4.5rem;
-		margin: 0 1.5rem;
-		top: 1.5rem;
+		top: 4rem;
 	}
-	.below-nav-links { /* create hamburger menu */
-		display: none;
+	.below-nav-links { /* create hamburger menu for advanced search and manage profile */
+		display: none; /***/
 	}
-	.container-fluid {
-		margin: 0;
-		top: 2rem;
+	.container-fluid.results-page {
+		margin-top: -8rem;
 	}
 	.results-wrapper {
+		margin-bottom: 5rem;
 		padding-left: 0;
+		top: 4.5rem;
 	}
-	#search-result-count {
-		height: 4.5rem;
-		width: calc(100% - 3rem);
+	.result-nums-breadcrumbs-wrapper {
+		margin-bottom: -.8rem;
 	}
 	#search-result-count {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		height: 4.5rem;
+		width: 100%;
+		margin: 0 0 1.8rem 0;
 	}
 	.search-result-previous {
 		text-align: left;
@@ -1293,21 +1304,107 @@ td.citation-data.pub-item {
 	.facet-category {
 		display: none;
 	}
+	.facet-breadcrumbs {
+		margin-bottom: 2rem;
+		padding: 0 1rem;
+	}
 	.expert-results {
 		min-width: 27rem;
+		margin-bottom: .2rem;
+		padding: 0;
+	}
+	.expert-results .emailsContainer {
+		padding: 0 2rem;
+		z-index: 10;
+	}
+	.expert-results .share-contact {
+		min-height: 10rem;
+		max-height: 20rem;
 	}
 	.expert-results .results__photo {
-		margin-right: 2rem;
+		margin: 0 1rem 0 0;
 	}
 	.expert-results .results__photo img {
 		width: 100px;
+	}
+	.contact-content .results-title {
+		font-size: 1.5rem;
+	}
+	.contact-content h4 {
+		margin: 0 0 .5rem 0;
+	}
+	.contact-content a {
+		padding: 0;
+		font-size: 1.8rem;
+	}
+	#search-facets {
+		padding-left: 0;
+	}
+	.search-result-none-wrapper .subnavbar__pseudo {
+		display: none;
+	}
+	/* profile page */
+	.container.profile {
+		margin-top: 0;
+		top: -.5rem;
+	}
+	.container.profile .subnavbar {
+		display: none; /***/
+	}
+	.person-content .container {
+		max-width: 100%;
+	}
+	.share-contact h2 {
+		color: #fff;
+	}
+	.btn-group-vertical .btn {
+		font-size: 2.4rem;
+		padding: 3rem 1.5rem;
+	}
+	.container.profile #tabOverview p {
+		word-wrap: break-word;
+	}
+	.brown-research-areas-list a {
+		word-wrap: break-word;
+	}
+	.container.profile .panel-body .property-list {
+		word-wrap: break-word;
+	}
+	/* org page */
+	.org-profile {
+		margin-top: -8rem;
+		margin-bottom: 0;
+		padding: 0;
+		top: 0;
+	}
+	.org-profile .org-content .container {
+		max-width: 100%;
+	}
+	.container.org-profile .subnavbar {
+		margin: 0 0 1rem 0;
+	}
+	.organization-photo-panel {
+		margin-top: 5rem;
+	}
+	.org-profile #individual-info header h3 {
+		font-size: 4.8rem;
+		line-height: 5rem;
+	}
+	.org-profile #individual-info li {
+		margin-bottom: 1rem;
+	}
+	.org-profile #individual-info a {
+		word-wrap: break-word;
+	}
+	.org-profile #individual-info p {
+		word-wrap: break-word;
 	}
 	.footer {
 		float: left;
 		width: 100%;
 	}
 }
-@media (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
+@media screen and (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
 	.container-fluid {
 		margin-top: -3.5rem;
 	}
@@ -1319,8 +1416,31 @@ td.citation-data.pub-item {
 	}
 }
 
+
 /*** Specific Breakpoints ***/
-@media (max-width: 440px) { /* search result numbers */
+@media screen and (max-width: 320px) {
+	#search-result-count .search-result-numbers { /* this needs a better solution/a wrapper. breaks at 1000+ */
+		padding: 1rem;
+	}
+}
+/* profile page */
+@media screen and (max-width: 438px) {
+	.container.profile {  /* a quick fix to add some styles to the advanced search / login links */
+		top: 0;
+	}
+}
+@media screen and (min-width: 321px) and (max-width: 438px) { /* this needs a better solution/a wrapper. breaks at 1000+ */
+	#search-result-count .search-result-numbers {
+		padding: 1rem 2rem;
+	}
+}
+@media screen and (min-width: 439px) and (max-width: 991px) {
+	.result-nums-breadcrumbs-wrapper {
+		margin-bottom: 1.5rem;
+	}
+}
+@media screen and (max-width: 440px) {
+	/* results page */
 	.search-result-previous {
 		width: 12%;
 	}
@@ -1340,8 +1460,13 @@ td.citation-data.pub-item {
 	#search-result-count .glyphicon-chevron-right {
 		margin: 0;
 	}
+	/* profile page */
+	.wrapper__back-to-search {
+		margin: 1rem 0 1rem 0;	
+	}
 }
-@media (min-width: 441px) and (max-width: 540px) {
+@media screen and (min-width: 441px) and (max-width: 540px) {
+	/* results page */
 	.search-result-previous {
 		width: 25%;
 	}
@@ -1352,95 +1477,29 @@ td.citation-data.pub-item {
 		width: 25%;
 	}
 }
-/* header */
-@media (max-width: 1270px) {
-	#sticky-nav .navbar-btn {
-		display: none;
+@media screen and (min-width: 441px) and (max-width: 767px) {
+	/* profile page */
+	.wrapper__back-to-search {
+		margin: 1.5rem 0 1rem 0;	
 	}
 }
-
-/* results page */
-@media (max-width: 320px) {
-	#search-result-count .search-result-numbers { /* this needs a better solution/a wrapper. breaks at 1000+ */
-		padding: 1rem;
-	}
-}
-@media (min-width: 321px) and (max-width: 438px) { /* this needs a better solution/a wrapper. breaks at 1000+ */
-	#search-result-count .search-result-numbers {
-		padding: 1rem 2rem;
-	}
-}
-@media (min-width: 439px) and (max-width: 991px) {
-	.result-nums-breadcrumbs-wrapper {
-		margin-bottom: 1.5rem;
-	}
-}
-@media (min-width: 768px) and (max-width: 991px) { /* subnavbar */
-	.advanced-search {
-		display: none;
-	}
-}
-@media (min-width: 768px) and (max-width: 1000px) { /* result nums and nav */
-	.chevron-nav-title {
-		display: none;
-	}
-}
-@media (min-width: 768px) and (max-width: 1024px) {
+@media screen and (max-width: 991px) {
 	.below-nav-links {
-		top: 0.2rem;
+		width: 15rem;
 	}
-	.results-wrapper {
-		padding: 0;
+	.below-nav-links p span {
+		width: 100%;
 	}
-	ul.pagination.pagination-lg li:nth-child(1) a {
-		padding: 1rem 1.2rem;
-	}
-	ul.pagination.pagination-lg li a {
-		padding: 1rem 1.2rem;
-	}
-	ul.pagination.pagination-lg li:nth-last-child(1) a {
-		padding: 1rem 1.2rem;
-	}
-}
-
-
-
-/* profile page */
-@media (max-width: 438px) {
-	.container.profile {  /* a quick fix to add some styles to the advanced search / login links */
-		top: 0;
-	}
-}
-@media (max-width: 767px) {
-	.person-content .container {
-		max-width: 100%;
-	}
-	.share-contact h2 {
-		color: #fff;
-	}
-	.btn-group-vertical .btn {
-		font-size: 2.4rem;
-		padding: 3rem 1.5rem;
-	}
-	.org-profile .org-content .container { /* broken state */
-		max-width: 100%;
-		border: 5px solid orange;
-	}
-	.container.org-profile .subnavbar {
-		margin: 0 1.5rem 3rem 1.5rem;
-	}
-}
-@media (max-width: 991px) {
+	/* results page */
 	.expert-results {
 		min-height: 10rem;
 		max-height: 24rem;
-		margin-bottom: 1.5rem;
 	}
 	.expert-results .gap30 {
 		display: none;
 	}
-	.expert-results #individual-intro {
-		margin: 0;
+	.expert-results .share-contact--bottom {
+		display: none;
 	}
 	.expert-results .share-contact {
 		background-color: #594036;
@@ -1448,25 +1507,56 @@ td.citation-data.pub-item {
 		flex-direction: row;
 		align-items: center;
 		justify-content: flex-start;
-		min-height: 20rem;
-		max-height: 24rem;
-	}
-	.expert-results .share-contact--bottom {
-		display: none;
 	}
 	.expert-results .results__photo {
-		margin: 0;
-		margin-right: 4rem;
+/*		border: 1px solid green;*/
 		position: relative;
 		top: auto;
 		bottom: auto;
 	}
+	.expert-results #individual-intro {
+		margin: 0;
+	}
 	.contact-content {
+/*		border: 1px solid red;*/
 		margin: 0;
 		position: relative;
 		top: auto;
 		bottom: auto;
 		text-align: left;
+	}
+	.emailsContainer .glyphicon-envelope {
+		color: #fff;
+	}
+	.emailsContainer .glyphicon-envelope:hover {
+		color: #ddd;
+	}
+	/* org page */
+	.org-content .container div.organization-description {
+		padding: 0 1.5rem;
+	}
+	.org-content .container div.organization-description .row {
+		margin-left: 0;
+	}
+	.org-content .container div.organization-description .person-container {
+		padding: 0 0 0 6px;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	/* subnavbar */
+	.advanced-search {
+		display: none;
+	}
+	/* results page */
+	.expert-results {
+		margin-bottom: 1.5rem;
+	}
+	.expert-results .share-contact {
+		min-height: 20rem;
+		max-height: 24rem;
+	}
+	.expert-results .results__photo {
+		margin: 0 4rem 0 0;
 	}
 	.contact-content a {
 		padding: 0;
@@ -1484,28 +1574,12 @@ td.citation-data.pub-item {
 	.contact-content .results-title {
 		font-size: 1.8rem;
 	}
-	.emailsContainer .glyphicon-envelope {
-		color: #fff;
-	}
-	.emailsContainer .glyphicon-envelope:hover {
-		color: #ddd;
-	}
-	.org-content .container div.organization-description {
-		padding: 0 1.5rem;
-	}
-	.org-content .container div.organization-description .row {
-		margin-left: 0;
-	}
-	.org-content .container div.organization-description .person-container {
-		padding: 0 0 0 6px;
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 991px) {
 	.person-content .container {
 		width: 100%;
 		max-width: 100%;
 		padding: 0 2.5rem 0 2.5rem;
 	}
+	/* org page */
 	.org-profile .org-content .container {
 		width: 100%;
 		max-width: 100%;
@@ -1513,6 +1587,29 @@ td.citation-data.pub-item {
 	}
 	.container.org-profile .subnavbar {
 		margin: 1.5rem 1.5rem 3rem 1.5rem;
+	}
+}
+/* results page */
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+	.chevron-nav-title {
+		display: none;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	.below-nav-links {
+		top: 0.2rem;
+	}
+	.results-wrapper {
+		padding: 0;
+	}
+	ul.pagination.pagination-lg li:nth-child(1) a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li a {
+		padding: 1rem 1.2rem;
+	}
+	ul.pagination.pagination-lg li:nth-last-child(1) a {
+		padding: 1rem 1.2rem;
 	}
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -1537,12 +1634,23 @@ td.citation-data.pub-item {
 		top: 0px;
 	}
 }
+@media screen and (max-width: 1270px) {
+	/* header */
+	#sticky-nav .navbar-btn {
+		display: none;
+	}
+}
 @media screen and (min-width: 1200px) and (max-width: 1379px) {
 	.person-content > .container {
 		max-width: 70%;
 	}
 	.org-profile .org-content > .container {
 		max-width: 70%;
+	}
+}
+@media screen and (min-width: 1271px) and (max-width: 1300px) {
+	#sticky-nav .container {
+		padding: 0 .5rem;
 	}
 }
 @media screen and (min-width: 1380px) and (max-width: 1560px) {
@@ -1553,7 +1661,7 @@ td.citation-data.pub-item {
 		max-width: 62%;
 	}
 }
-@media (min-width: 1700px) {
+@media screen and  (min-width: 1700px) {
 	.results-row {
 		max-width: 1600px;
 	}

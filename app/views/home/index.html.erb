@@ -47,14 +47,13 @@
 
         <div class="carousel slide multi-item-carousel" id="books-carousel">
           <div class="carousel-inner">
+            <!-- Notice that we set `data-src` for the images (not `src`).
+                 `src` is set via the JavaScript code at the bottom of the page -->
             <% @bookCoversPaginated.each_with_index do |page, i| %>
               <div class="item <%= i == 0 ? "active" : "" %>">
                 <ul>
                   <% page.each do |cover| %>
                     <a href="<%= cover.author_url %>" class="book-cover">
-                      <!-- notice that we set `data-src` here and later on we
-                           set `src` via the JavaScript code at the bottom of
-                           the page -->
                       <img data-src="<%= cover.image %>" alt="<%= cover.title %>" title="<%= cover.title %>" width="160">
                     </a>
                   <% end %>
