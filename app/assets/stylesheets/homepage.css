@@ -193,15 +193,10 @@ Create large linked icon sections below hero search
   width: 10rem;
   bottom: 0;
 }
-/*.icons-home-test:nth-child(1) {
-  grid-area: 1 / 1 / 1 / 2;
-  background-color: green;
-}*/
 .glyphicon-user {
   color: #fff;
   font-size: 10rem;
 }
-/* END MY BIG BUTTON STYLES */
 /*---------------------------------------------
 Homepage explore rectangular links with images for background
 ----------------------------------------------*/
@@ -362,4 +357,21 @@ Customise the statistics section
   background-color: #2E6DA4;
   color: white;
   border-radius: 3px;
+}
+
+/***** MEDIA QUERIES *****/
+@media screen and (max-width: 767px) {
+  .three-big-blocks {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(500px, 1fr), 1fr, minmax(250px, 1fr);
+  }
+  .icons-home:nth-child(odd) {
+    padding: 4rem 0 2rem 0;
+  }
+  .glyphicon-user {
+    font-size: 7rem;
+  }
+  .icons-home svg {
+    width: 8rem;
+  }
 }
