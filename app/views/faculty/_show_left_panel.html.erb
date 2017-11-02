@@ -10,9 +10,10 @@
 
       <!-- Contact Info -->
       <div class="emailsContainer">
-        <h4>
-          <a href="mailto:<%= @presenter.faculty.email %>" title="Email <%= @presenter.faculty.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-        </h4>
+          <a href="mailto:<%= @presenter.faculty.email %>" title="Email <%= @presenter.faculty.email %>">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+            <span class="sr-only" aria-hidden="true">title="Email <%= @presenter.faculty.email %></span>
+          </a>
       </div>
 
       <div id="tabButtons" class="btn-group-vertical">

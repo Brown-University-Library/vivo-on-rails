@@ -20,12 +20,14 @@
                     type="text">
             </div>
 
-            <button type="submit" class="btn btn-default sympl-search hidden-xs" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
-                <span class="glyphicon glyphicon-search" role="submit"></span>
+            <button type="submit" class="btn btn-default sympl-search hidden-xs">
+                <span class="glyphicon glyphicon-search" role="submit" aria-hidden="true"></span>
+                <span aria-only="true">Search</span>
             </button>
 
-            <button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-md hidden-lg" data-ng-disabled="isDisplayed('cart') || isDisplayed('history')">
-                <span class="glyphicon glyphicon-search" role="submit"></span>
+            <button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-md hidden-lg">
+                <span class="glyphicon glyphicon-search" role="submit" aria-hidden="true"></span>
+                <span aria-only="true">Search</span>
             </button>
 
             <% (@presenter.form_values || []).each do |form_value| %>

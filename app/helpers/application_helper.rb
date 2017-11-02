@@ -12,7 +12,13 @@ module ApplicationHelper
     "new-backgrounds/" + images[rand(images.size)]
   end
 
-  def contact_us_url
-    "https://docs.google.com/a/brown.edu/forms/d/1H_LzEHRzpxv3OY266RjSwpAMwVuTEUFyNEgMPcZ4NiA/viewform"
+  def contact_us_url()
+    url = "https://docs.google.com/forms/d/e/1FAIpQLSe9_8wO8f6Vd0E0N_ZVXiBN2YSO7NmWvP-utEGiQLJXz3nkJA/viewform?usp=pp_url&entry.1922592043&entry.911094868&entry.1400327620&entry.197578216&entry.19651479={LINK}"
+    if defined?(request) && request != nil
+      link = CGI.escape(request.url)
+    else
+      link = ""
+    end
+    url.gsub("{LINK}", link)
   end
 end

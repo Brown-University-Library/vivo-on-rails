@@ -11,7 +11,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div id="search-result-none" class="col-lg-8 col-md-8 col-sm-8">
             <p>No results were found for <b><%= @presenter.query %></b>.</p>
-            
+
             <% if @presenter.suggest_url != nil %>
               <p>Would you like to search for
                 <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
@@ -34,7 +34,7 @@
                       <a href="<%= @presenter.previous_url %>" ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="chevron-nav-title"> Previous </span></a>
                     </span>
                   <% end %>
-                
+
                   <span class="search-result-numbers">
                     <span id="search-page-start"><%= @presenter.start + 1 %></span>
                     -
@@ -73,13 +73,14 @@
             <div class="clearfix visible-xs-block"></div>
             <!-- RESULTS ITEM BEGINS -->
             <div class="clearfix visible-xs-block"></div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results ng-scope" data-fb-result="<%= item.uri %>">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results" data-fb-result="<%= item.uri %>">
               <div class="gap30"></div>
               <section itemscope itemtype="<%= item.type_schema_org() %>" id="individual-intro" class="vcard person" role="region">
                 <div class="emailsContainer">
-                  <h4>
-                    <a href="mailto:<%= item.email %>" title="Email <%= item.email %>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-                  </h4>
+                    <a href="mailto:<%= item.email %>" title="Email <%= item.email %>">
+                      <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                      <span class="sr-only">Email researcher</span>
+                    </a>
                 </div>
                 <section class="share-contact" role="region">
                   <div class="share-contact--bottom"></div>

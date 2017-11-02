@@ -44,7 +44,7 @@ class SearchResultsPresenter
       if item.type == "PEOPLE"
         item.thumbnail = "person_placeholder.jpg" if item.thumbnail == nil
       else
-        item.thumbnail = "org_placeholder.jpg" if item.thumbnail == nil
+        item.thumbnail = "org_placeholder.png" if item.thumbnail == nil
       end
       if item.title != nil && item.title.length > 50
         item.title = item.title[0..47] + "..."

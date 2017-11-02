@@ -1,10 +1,13 @@
 require "./app/models/model_utils.rb"
 
 class OrganizationMemberItem
-  attr_accessor :id, :uri, :label, :general_position, :specific_position
+  attr_accessor :id, :faculty_uri, :label, :general_position, :specific_position
   def initialize(values = nil)
     ModelUtils.set_values_from_hash(self, values)
-    @id = @uri
+    if values["uri"] != nil
+      @faculty_uri = values["uri"]
+    end
+    @id = @faculty_uri
   end
 
   def vivo_id
