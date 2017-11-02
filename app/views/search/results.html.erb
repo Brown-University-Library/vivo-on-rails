@@ -2,7 +2,7 @@
 
 <%= render "search_box" %>
 
-<div class="container-fluid col-sm-12">
+<div class="container-fluid results-page col-sm-12">
   <%= render "manage_profile_login" %>
   <% if @presenter.num_found == 0 %>
     <div class="row search-result-none-wrapper col-lg-12 col-md-12 col-sm-12">
@@ -20,7 +20,7 @@
           </div>
         </div>
     <% else %>
-      <div class="row">
+      <div class="row results-page-wrapper">
         <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
           <div class="result-nums-breadcrumbs-wrapper">
               <!-- top bar: 1/N results found -->
