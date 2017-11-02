@@ -231,6 +231,9 @@ height: 100%;
 .icons-home:nth-child(1) {
   background-color: #831B1B;
 }
+.icons-home:nth-child(1):hover {
+  background-color: hsla(0, 66%, 25%, 1);
+}
 .icons-home:nth-child(2) {
   background-color: #F5F2EC;
 }
@@ -239,6 +242,9 @@ height: 100%;
 }
 .icons-home:nth-child(3) {
   background-color: #594036;
+}
+.icons-home:nth-child(3):hover {
+  background-color: hsla(17, 24%, 20%, 1);
 }
 .icons-home h3 {
   color: #fff;
@@ -271,8 +277,8 @@ height: 100%;
   background-color: green;
 }*/
 .glyphicon-user {
-/*  transform: scale(5);*/
-width: 100%;
+  color: #fff;
+  font-size: 10rem;
 }
 /* END MY BIG BUTTON STYLES */
 /*---------------------------------------------
