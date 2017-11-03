@@ -288,6 +288,9 @@ Customise the meet faculty/expert section
   padding-left: 10px;
   padding-right: 10px;
 }
+.carousel-indicators {
+  margin-bottom: -3em;
+}
 /*---------------------------------------------
 Customise the about our research section
 ----------------------------------------------*/
