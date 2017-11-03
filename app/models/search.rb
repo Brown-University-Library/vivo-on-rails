@@ -21,10 +21,11 @@ class Search
     end
     params.fl = ["id", "record_type", "thumbnail_file_path_s", "json_txt"]
 
-    # Remove this once Steve updates the server's values.
-    qf = "short_id_s^2500 email_s^2500 nameText^2000 title_t^1600 department_t^1500 " +
-      "affiliations^450 research_areas^400 " +
-      "ALLTEXT ALLTEXTUNSTEMMED nameUnstemmed^2.0 nameStemmed^2.0 nameLowercase"
+    # Query filter with custom boost values
+    # TODO: test boosting research_areas^400 once we've tokenized them
+    qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
+    "title_t^1600 department_t^1500 affiliations^450 " +
+    "nameUnstemmed^2.0 nameStemmed^2.0 nameLowercase ALLTEXT ALLTEXTUNSTEMMED"
 
     results = @solr.search(params, extra_fqs, qf)
     results.solr_docs.each do |doc|
