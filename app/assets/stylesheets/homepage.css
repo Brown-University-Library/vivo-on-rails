@@ -393,6 +393,7 @@ Customise the statistics section
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
   .icons-home:nth-child(odd) span {
     margin-bottom: 2rem;
@@ -403,5 +404,6 @@ Customise the statistics section
     }
   }
 }
+
 
 
