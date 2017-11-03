@@ -375,3 +375,33 @@ Customise the statistics section
     width: 8rem;
   }
 }
+
+@supports not (display: grid) {
+  .three-big-blocks {
+    display: flex;
+  }
+  .icons-home {
+    flex: 1;
+  }
+  .icons-home h3 {
+    font-size: 2rem;
+  }
+  .icons-home:nth-child(odd) {
+    padding: 4rem 2rem;
+  }
+  .icons-home:nth-child(odd) a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .icons-home:nth-child(odd) span {
+    margin-bottom: 2rem;
+  }
+  @media screen and (max-width: 767px) {
+    .three-big-blocks {
+      flex-direction: column;
+    }
+  }
+}
+
+
