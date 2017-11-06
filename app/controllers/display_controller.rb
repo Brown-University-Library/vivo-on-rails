@@ -66,24 +66,25 @@ class DisplayController < ApplicationController
     end
 
     def render_org(id)
-      @presenter = DefaultPresenter.new()
-      @organization = Organization.load_from_solr(id)
-      if @organization == nil
+      organization = Organization.load_from_solr(id)
+      if organization == nil
         Rails.logger.error("Could not render organization #{id}.")
         render "error", status: 500
         return
       end
 
       if params["format"] == "json_txt"
-        render :json => @organization.json_txt.to_json
+        render :json => organization.json_txt.to_json
         return
       end
 
       if params["format"] == "json"
-        render :json => @organization.item.to_json
+        render :json => organization.item.to_json
         return
       end
 
+      referer = request.headers.env["HTTP_REFERER"]
+      @presenter = OrganizationPresenter.new(organization.item, search_url(), referer)
       render "organization/show"
     end
 

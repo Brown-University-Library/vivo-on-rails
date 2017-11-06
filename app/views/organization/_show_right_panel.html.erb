@@ -1,13 +1,13 @@
 <div class="organization-description col-md-8 col-sm-12 col-xs-12">
   <section id="individual-info" role="region">
     <header>
-      <h3><%= @organization.item.name %></h3>
+      <h3><%= @presenter.organization.name %></h3>
       <ul>
-      <% @organization.item.web_pages.each do |page| %>
+      <% @presenter.organization.web_pages.each do |page| %>
         <li><a href="<%= page.url %>"><%= page.text %></a>
       <% end %>
       </ul>
-      <p><%= @organization.item.overview.html_safe %></p>
+      <p><%= @presenter.organization.overview.html_safe %></p>
     </header>
   </section>
 
@@ -25,17 +25,32 @@
     </div>
 
     <!-- tabs content -->
-    <div class="col-md-12 person-container">
-      <div class="tab-content" id="individualNavTabsContent">
-        <% @organization.item.people.each do |p| %>
-          <p>
-            <% if p.vivo_id != "" %>
+    <% if @presenter.admin_positions.count > 0 %>
+      <div class="col-md-12 person-container">
+        <div class="tab-content" id="individualNavTabsContent">
+          <h3>Faculty Administrative Positions</h3>
+          <% @presenter.admin_positions.each do |p| %>
+            <p>
               <a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>,
               <%= p.specific_position %>
-            <% end %>
-          </p>
-        <% end %>
+            </p>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
+
+    <% if @presenter.faculty_positions.count > 0 %>
+      <div class="col-md-12 person-container">
+        <div class="tab-content" id="individualNavTabsContent">
+          <h3>Faculty Positions</h3>
+          <% @presenter.faculty_positions.each do |p| %>
+            <p>
+              <a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>,
+              <%= p.specific_position %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
