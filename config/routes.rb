@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'publications' => 'home#publications', as: :home_publications
   get 'roadmap' => 'home#roadmap', as: :home_roadmap
   get 'termsOfUse' => 'home#termsofuse', as: :home_terms
+  get 'status' => 'home#status'
+
   root 'home#index'
 
   get '*path' => 'home#page_not_found'
