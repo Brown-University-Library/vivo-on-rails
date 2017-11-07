@@ -51,6 +51,9 @@ class SearchController < ApplicationController
       searcher = Search.new(solr_url, images_url)
       params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
       params.q = "*" if params.q == ""
+      if params.q == "*"
+        params.sort = "profile_updated_s desc"
+      end
       params.facet_limit = facet_limit if facet_limit != nil
       search_results = searcher.search(params)
       @presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())

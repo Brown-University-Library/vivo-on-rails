@@ -14,12 +14,15 @@ class Faculty
     if f.json_txt != nil
       images_url = ENV["IMAGES_URL"]
       display_name = f.solr_doc["display_name_s"]
+      fis_updated = f.solr_doc["fis_updated_s"]
+      profile_updated = f.solr_doc["profile_updated_s"]
       thumbnail = f.solr_doc["thumbnail_file_path_s"]
       thumbnail_url = ModelUtils.thumbnail_url(thumbnail, images_url)
       if thumbnail != nil && thumbnail_url == nil
         Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{hash['id']})"
       end
-      f.item = FacultyItem.from_hash(f.json_txt, display_name, thumbnail_url)
+      f.item = FacultyItem.from_hash(f.json_txt, display_name, thumbnail_url,
+        fis_updated, profile_updated)
     end
     f
   end

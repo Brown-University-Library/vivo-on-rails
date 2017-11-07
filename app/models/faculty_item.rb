@@ -7,7 +7,8 @@ class FacultyItem
     :teaching_overview, :scholarly_work, :funded_research,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
     :on_the_web, :appointments, :published_in, :hidden,
-    :cv_link, :credentials, :training
+    :cv_link, :credentials, :training,
+    :fis_updated, :profile_updated
 
   def initialize(values = nil)
     init_defaults()
@@ -44,11 +45,15 @@ class FacultyItem
     @cv_link = nil
     @credentials = []
     @training = []
+    @fis_updated = nil
+    @profile_updated = nil
   end
 
-  def self.from_hash(hash, display_name, thumbnail_url)
+  def self.from_hash(hash, display_name, thumbnail_url, fis_updated, profile_updated)
     faculty = FacultyItem.new(nil)
     faculty.thumbnail = thumbnail_url
+    faculty.fis_updated = fis_updated
+    faculty.profile_updated = profile_updated
     hash.each do |key, value|
       getter = key.to_s
       case getter

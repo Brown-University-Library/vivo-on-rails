@@ -63,7 +63,9 @@ module SolrLite
       end
       qs += "&rows=#{@page_size}" if @page_size != DEFAULT_PAGE_SIZE
       qs += "&page=#{@page}" if @page != 1
-      qs += "&sort=#{@sort}" if sort != ""
+      # Don't surface this to the UI for now
+      # (since we don't let the user change the sorting)
+      # qs += "&sort=#{@sort}" if sort != ""
       qs
     end
 
