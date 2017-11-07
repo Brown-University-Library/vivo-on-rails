@@ -49,6 +49,11 @@ class FacultyItem
     @profile_updated = nil
   end
 
+  def vivo_id
+    return "" if @id == nil
+    @id.split("/").last
+  end
+
   def self.from_hash(hash, display_name, thumbnail_url, fis_updated, profile_updated)
     faculty = FacultyItem.new(nil)
     faculty.thumbnail = thumbnail_url
