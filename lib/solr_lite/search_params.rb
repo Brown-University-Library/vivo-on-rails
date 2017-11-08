@@ -119,7 +119,9 @@ module SolrLite
 
       values << {name: "rows", value: @page_size} if @page_size != DEFAULT_PAGE_SIZE
       values << {name: "page", value: @page} if @page != 1
-      values << {name: "sort", value: @sort} if sort != ""
+      # Don't surface this to the UI for now
+      # (since we don't let the user change the sorting)
+      # values << {name: "sort", value: @sort} if sort != ""
       values
     end
 
