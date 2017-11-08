@@ -89,7 +89,7 @@ module SolrLite
       qs += "&rows=#{@page_size}"
       qs += "&start=#{start_row()}"
       if sort != ""
-        qs += "&sort=#{@sort}"
+        qs += "&sort=#{CGI.escape(@sort)}"
       end
       if @facets.count > 0
         qs += "&facet=on"
