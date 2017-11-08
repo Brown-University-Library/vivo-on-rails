@@ -16,9 +16,13 @@ class SearchController < ApplicationController
 
   # Normal search. Returns search results as HTML.
   def index
-    execute_search()
+    @presenter = execute_search()
     if @presenter.num_found == 0
       Rails.logger.warn("No results were found. Search: #{@presenter.search_qs}")
+    end
+    if params["format"] == "json"
+      render :json => @presenter.results.to_json
+      return
     end
     render "results"
   rescue => ex
@@ -35,7 +39,7 @@ class SearchController < ApplicationController
       render :json => nil
       return
     end
-    execute_search(-1)
+    @presenter = execute_search(-1)
     facet_data = @presenter.facets.find {|f| f.name == facet_name }
     render :json => facet_data.values
   rescue => ex
@@ -51,13 +55,13 @@ class SearchController < ApplicationController
       searcher = Search.new(solr_url, images_url)
       params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
       params.q = "*" if params.q == ""
+      params.page_size = 20 # don't allow the client to control this
       if params.q == "*"
         params.sort = "profile_updated_s desc"
       end
       params.facet_limit = facet_limit if facet_limit != nil
       search_results = searcher.search(params)
-      @presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
-      @presenter
+      SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
     end
 
     def facets_fields()
