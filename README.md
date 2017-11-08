@@ -1,10 +1,9 @@
 # VIVO on Rails
-This is a proof of concept at creating a Rails application to browse through the
-researcher information stored in VIVO through a Solr index.
+This is the code for the new VIVO front-end for Researchers@Brown. This is a
+Ruby on Rails application that searches directly against the VIVO's Solr
+index. See the General Architecture information below for more details.
 
-The CSS styles used on this web site were taken from
-[Symplectic's bootstrap template](https://www.digital-science.com/blog/news/introducing-bootstrapped-vivo-symplectic-reimagines-vivo-research-profile-design/)
-
+We are currently in "soft launch" mode, you can view the site [here](https://vivostaging.brown.edu).
 
 # Pre-requisites
 You need to have [Solr](http://lucene.apache.org/solr/) running. We use the
