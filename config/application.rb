@@ -23,9 +23,10 @@ module Vivoview
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    # if !ENV["FUSEKI_URL"]
-    #   raise "No FUSEKI_URL was indicated in the environment"
-    # end
+    if Rails.env.production?
+      # Don't log "Rendered <viewname> in production
+      config.action_view.logger = nil
+    end
 
     if !ENV["SOLR_URL"]
       raise "No SOLR_URL was indicated in the environment"
