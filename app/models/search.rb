@@ -28,6 +28,10 @@ class Search
     "nameUnstemmed^2.0 nameStemmed^2.0 nameLowercase ALLTEXT ALLTEXTUNSTEMMED"
 
     results = @solr.search(params, extra_fqs, qf)
+    if !results.ok?
+      raise("Solr reported: #{results.error_msg}")
+    end
+
     results.solr_docs.each do |doc|
       record_type = (doc["record_type"] || []).first
       thumbnail = doc["thumbnail_file_path_s"]

@@ -20,8 +20,8 @@
   <% end %>
 
   <% if @presenter.num_found > 0 && @presenter.suggest_url != nil %>
-    <p>Would you like to see additional results for
-      <a href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
+    <p>Would you like to see results for
+      <a class="search-instead-links" href="<%= @presenter.suggest_url %>"><%= @presenter.suggest_q %></a>
       instead?</p>
   <% end %>
 </div>

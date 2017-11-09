@@ -176,6 +176,7 @@ a.manage-profile-link:visited {
 	position: absolute;
 	width: 50%;
 }
+
 .advanced-search {
 	left: 0;
 }
@@ -206,6 +207,14 @@ a.manage-profile-link:visited {
   text-decoration: none;
 }
 
+.search-instead-links {
+  font-weight: bold; /* a quick fix to add some styles to the advanced search / login links */
+	height: 3rem;
+  color: #594036;
+  height: 100%;
+  width: 100%;
+  padding: 1rem 0;
+}
 
 /* Results Page */
 .container-fluid.results-page {
@@ -1256,7 +1265,7 @@ td.citation-data.pub-item {
 		margin-left: .5rem;
 		padding: 1.2rem;
 	}
-	.subnavbar {  
+	.subnavbar {
 		border-top: 1px solid #000;
 		border-bottom: 1px solid #000;
 		height: 4.5rem;
@@ -1457,7 +1466,7 @@ td.citation-data.pub-item {
 	}
 	/* profile page */
 	.wrapper__back-to-search {
-		margin: 1rem 0 1rem 0;	
+		margin: 1rem 0 1rem 0;
 	}
 }
 @media screen and (min-width: 441px) and (max-width: 540px) {
@@ -1475,7 +1484,7 @@ td.citation-data.pub-item {
 @media screen and (min-width: 441px) and (max-width: 767px) {
 	/* profile page */
 	.wrapper__back-to-search {
-		margin: 1.5rem 0 1rem 0;	
+		margin: 1.5rem 0 1rem 0;
 	}
 }
 @media screen and (max-width: 991px) {

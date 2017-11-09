@@ -31,7 +31,8 @@ class HomeController < ApplicationController
   def page_not_found
     err_msg = "Page #{request.url} was not found"
     Rails.logger.warn(err_msg)
-    render "not_found", status: 404
+    # Force to render as HTML
+    render "not_found", status: 404, formats: [:html]
   end
 
   def status

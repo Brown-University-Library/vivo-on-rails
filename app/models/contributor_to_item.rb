@@ -72,7 +72,9 @@ class ContributorToItem
     citationPrefix = "http://vivo.brown.edu/ontology/citation#"
     return nil if @type == nil
     return nil if !@type.start_with?(citationPrefix)
-    return @type.gsub(citationPrefix,"")
+    type = @type.gsub(citationPrefix,"")
+    type = type.gsub(/[A-Z]/, ' \0') # adds space between words
+    return type
   end
 
   def pub_type_id
