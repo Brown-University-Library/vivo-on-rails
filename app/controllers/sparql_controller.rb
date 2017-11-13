@@ -24,15 +24,12 @@ class SparqlController < ApplicationController
       empty_search = false
     end
     fuseki_url = ENV["FUSEKI_URL"]
+    raise "No FUSEKI_URL defined" if fuseki_url == nil
     query = Sparql::Query.new(fuseki_url, sparql_exec)
 
     if empty_search
-      sparql = default_sparql()
+      sparql = ""
     end
     presenter = SparqlPresenter.new(sparql, query, limit, output, empty_search)
-  end
-
-  def default_sparql()
-    "SELECT ?s ?p ?o\nWHERE {\n  ?s ?p ?o .\n}"
   end
 end

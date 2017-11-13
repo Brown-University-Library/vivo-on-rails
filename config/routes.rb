@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get 'search/advanced' => 'search#advanced', as: :search_advanced
   get 'search' => 'search#index', as: :search
 
+  if ENV["FUSEKI_URL"] != nil
+    get 'sparql/query' => 'sparql#query'
+  end
+
   get 'brown' => 'home#brown', as: :home_brown
   get 'about' => 'home#about', as: :home_about
   get 'faq' => 'home#faq', as: :home_faq
