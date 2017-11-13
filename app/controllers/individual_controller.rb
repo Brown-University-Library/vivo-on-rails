@@ -54,6 +54,7 @@ class IndividualController < ApplicationController
 
   private
     def render_vitro_data(id, content_type)
+      Rails.logger.info("Fetching from VIVO: #{id}, #{content_type}")
       vivo_url = ENV["VIVO_BACKEND_URL"]
       vitro = VitroAPI.new(vivo_url)
       data = vitro.get_one(id, content_type)
