@@ -109,3 +109,9 @@
   <% end %>
   </div> <!-- row -->
 </div> <!-- container-fluid col-sm-12 -->
+
+<% if @presenter.explain_html != nil %>
+<pre>
+<%= @presenter.explain_html.html_safe %>
+</pre>
+<% end %>

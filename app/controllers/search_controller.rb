@@ -61,7 +61,11 @@ class SearchController < ApplicationController
       end
       params.facet_limit = facet_limit if facet_limit != nil
       search_results = searcher.search(params)
-      SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
+      presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
+      if request.params["explain"] != nil
+        presenter.set_explain_html(request.params["explain"])
+      end
+      presenter
     end
 
     def facets_fields()

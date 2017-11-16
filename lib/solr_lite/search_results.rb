@@ -1,4 +1,5 @@
 require "./lib/solr_lite/facet_field.rb"
+require "./lib/solr_lite/explainer.rb"
 module SolrLite
   # TODO: this should be renamed to SolrResponse
   class SearchResults
@@ -6,6 +7,7 @@ module SolrLite
     def initialize(solr_response, params)
       @solr_response = solr_response
       @params = params
+      @explainer = nil
       set_facet_values()
 
       # This value can be set by the client if we want to use a custom
@@ -152,6 +154,10 @@ module SolrLite
         end
       end
       # TODO: make sure we sort the FacetField.VALUES descending by count
+    end
+
+    def explainer()
+      @explainer ||= SolrLite::Explainer.new(@solr_response)
     end
   end # class
 end # module

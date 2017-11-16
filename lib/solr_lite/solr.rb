@@ -31,18 +31,30 @@ module SolrLite
     #   add filters to the search that we don't want to allow the
     #   user to override.
     # qf is used to override the server's qf value.
-    def search(params, extra_fqs = [], qf = nil)
+    # mm is used to override the server's mm value.
+    def search(params, extra_fqs = [], qf = nil, mm = nil, debug = false)
       if params.fl != nil
         query_string = "fl=#{params.fl.join(",")}"
       else
         query_string = "" # use Solr defaults
       end
+
       query_string += "&wt=json&indent=on"
       query_string += "&" + params.to_solr_query_string(extra_fqs)
       query_string += "&q.op=AND"
+
       if qf != nil
         query_string += "&qf=#{CGI.escape(qf)}"
       end
+
+      if mm != nil
+        query_string += "&mm=#{CGI.escape(mm)}"
+      end
+
+      if debug
+        query_string += "&debugQuery=true"
+      end
+
       url = "#{@solr_url}/select?#{query_string}"
       http_response = http_get(url)
       results = SearchResults.new(http_response, params)
