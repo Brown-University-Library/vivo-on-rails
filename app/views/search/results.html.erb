@@ -84,8 +84,8 @@
                 </div>
                 <section class="share-contact" role="region">
                   <div class="share-contact--bottom"></div>
-                  <div id="photo-wrapper" class="results__photo" aria="hidden" style="height:150px; width: 150px; margin-left:auto; margin-right:auto">
-                    <a href="<%= item.uri %>" style="background-image:url('<%= item.thumbnail %>'); background-size:cover; background-repeat:no-repeat; border-radius:50%; display:block; height:150px; width: 150px"></a>
+                  <div id="photo-wrapper" class="results__photo">
+                    <a href="<%= item.uri %>"><%= image_tag(item.thumbnail, class: "img-circle") %></a>
                   </div>
                   <div class="contact-content">
                     <h4>

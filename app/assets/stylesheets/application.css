@@ -589,6 +589,8 @@ a.manage-profile-link:visited {
 	height: 13rem;
 	width: auto;
 	max-width: 80%;
+	object-fit: cover;
+	object-position: 25% 0;
 }
 .contact-content {
 	color: #fff;
