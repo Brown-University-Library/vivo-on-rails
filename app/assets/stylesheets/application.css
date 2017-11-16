@@ -585,6 +585,11 @@ a.manage-profile-link:visited {
 	right: 0;
 	z-index: 10;
 }
+.expert-results .img-circle {
+	height: 13rem;
+	width: auto;
+	max-width: 80%;
+}
 .contact-content {
 	color: #fff;
 	margin: 0 30px;
