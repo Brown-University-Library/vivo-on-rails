@@ -9,12 +9,23 @@
 </style>
 
 <form id="sparql-query" name="sparql-query" method="get">
-  <b>SPARQL </b>
-  <button id="showPrefixes" type="button" class="btn btn-info btn-xs">Show Prefixes</button>
-  <div id = "prefixes" class="small hidden monospace">
-  <% @presenter.prefixes.each do |p| %>
-    prefix <%= p[:prefix] %>: &lt;<%= p[:uri] %>&gt;<br/>
-  <% end %>
+  <div>
+    <b>SPARQL: </b>
+    <% @presenter.queries.each_with_index do |q, i| %>
+      <button id="query_<%= i %>"
+        type="button"
+        data-text="sparql_<%= i %>"
+        class="btn btn-info btn-xs query_button"><%= q[:name] %></button>
+      <span class="hidden query_sparql" id="sparql_<%= i %>"><%= q[:sparql] %></span>
+    <% end %>
+  </div>
+  <div>
+    <button id="showPrefixes" type="button" class="btn btn-info btn-xs">Show Prefixes</button>
+    <div id = "prefixes" class="small hidden monospace">
+    <% @presenter.prefixes.each do |p| %>
+      prefix <%= p[:prefix] %>: &lt;<%= p[:uri] %>&gt;<br/>
+    <% end %>
+    </div>
   </div>
   <div>
     <textarea id="sparql" name="sparql"
@@ -52,5 +63,12 @@ $(document).ready(function() {
      $("#prefixes").removeClass("hidden");
      $("#showPrefixes").addClass("hidden");
    });
+
+   $(".query_button").click(function(x) {
+     var sparql_span = "#" + $(this).attr("data-text");
+     var query = $(sparql_span).text();
+     $("#sparql").val(query)
+   });
 });
+
 </script>
