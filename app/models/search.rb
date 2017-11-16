@@ -10,7 +10,7 @@ class Search
     @solr = SolrLite::Solr.new(solr_url)
   end
 
-  def search(params)
+  def search(params, debug = false)
     extra_fqs = []
     if !record_type_filter?(params)
       # VIVO stores many kind of documents in Solr. We only care about
@@ -29,9 +29,6 @@ class Search
 
     # Require almost all words in the query to match, but not all.
     mm = "99%"
-
-    # Include query explain in the response
-    debug = true
 
     results = @solr.search(params, extra_fqs, qf, mm, debug)
     if !results.ok?

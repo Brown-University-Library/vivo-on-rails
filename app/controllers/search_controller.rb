@@ -60,10 +60,12 @@ class SearchController < ApplicationController
         params.sort = "profile_updated_s desc"
       end
       params.facet_limit = facet_limit if facet_limit != nil
-      search_results = searcher.search(params)
+      explain_query = request.params["explain"]
+      debug = explain_query != nil
+      search_results = searcher.search(params, debug)
       presenter = SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
-      if request.params["explain"] != nil
-        presenter.set_explain_html(request.params["explain"])
+      if explain_query != nil
+        presenter.set_explain_html(explain_query)
       end
       presenter
     end
