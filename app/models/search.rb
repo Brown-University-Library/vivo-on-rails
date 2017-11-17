@@ -10,7 +10,7 @@ class Search
     @solr = SolrLite::Solr.new(solr_url)
   end
 
-  def search(params, debug = false)
+  def search(params, debug = false, flag = nil)
     extra_fqs = []
     if !record_type_filter?(params)
       # VIVO stores many kind of documents in Solr. We only care about
@@ -25,7 +25,11 @@ class Search
     # TODO: test boosting research_areas_txt^400 once we've tokenized them
     qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
     "title_t^1600 department_t^1500 affiliations^450 " +
-    "nameUnstemmed^2.0 nameStemmed^2.0 nameLowercase ALLTEXT ALLTEXTUNSTEMMED"
+    "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
+
+    if flag != nil
+      qf += " research_areas_txt "
+    end
 
     # Require almost all words in the query to match, but not all.
     mm = "99%"

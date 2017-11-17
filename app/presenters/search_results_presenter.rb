@@ -9,9 +9,10 @@ class SearchResultsPresenter
     :page, :start, :end, :num_found, :num_pages, :page_start, :page_end,
     :previous_url, :next_url,
     :remove_q_url, :facetSearchBaseUrl,
-    :suggest_q, :suggest_url, :explain_html
+    :suggest_q, :suggest_url,
+    :explainer, :explain_format
 
-  def initialize(results, params, base_url, base_facet_search_url)
+  def initialize(results, params, base_url, base_facet_search_url, explain_format)
     @base_url = base_url
     @facetSearchBaseUrl = base_facet_search_url
 
@@ -73,8 +74,9 @@ class SearchResultsPresenter
 
     @previous_url = page_url(@page-1)
     @next_url = page_url(@page+1)
+
+    @explain_format = explain_format
     @explainer = results.explainer
-    @explain_html = nil
   end
 
   def pages_urls()
@@ -90,23 +92,6 @@ class SearchResultsPresenter
   def page_url(page_number)
     qs = @search_qs.gsub(/page=[0-9]*/,"").chomp("&")
     "#{@base_url}?#{qs}&page=#{page_number}"
-  end
-
-  def set_explain_html(type = nil)
-    @explain_html = nil
-    text = nil
-    if type == "topmatch"
-      text = @explainer.topmatch()
-    elsif type == "matches"
-      text = @explainer.matches()
-    elsif type == "scores"
-      text = @explainer.scores()
-    elsif type == "text"
-      text = @explainer.text()
-    end
-    if text != nil
-      @explain_html = text.gsub("\r\n", "</br>")
-    end
   end
 
   private
