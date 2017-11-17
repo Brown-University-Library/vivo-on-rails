@@ -1338,6 +1338,7 @@ td.citation-data.pub-item {
 	.expert-results .img-circle {
 		height: auto;
 		min-height: .6rem;
+		max-height: 19rem;
 		width: 10rem;
 		max-width: 10rem;
 	}
