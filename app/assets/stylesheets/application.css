@@ -586,7 +586,7 @@ a.manage-profile-link:visited {
 	z-index: 10;
 }
 .expert-results .img-circle {
-	height: 13rem;
+	height: 12.5rem;
 	width: auto;
 	max-width: 80%;
 	object-fit: cover;
@@ -1335,8 +1335,9 @@ td.citation-data.pub-item {
 	.expert-results .results__photo {
 		margin: 0 1rem 0 0;
 	}
-	.expert-results .results__photo img {
-		width: 100px;
+	.expert-results .img-circle {
+		height: auto;
+		width: 10rem;
 	}
 	.contact-content .results-title {
 		font-size: 1.5rem;
@@ -1520,7 +1521,6 @@ td.citation-data.pub-item {
 		justify-content: flex-start;
 	}
 	.expert-results .results__photo {
-/*		border: 1px solid green;*/
 		position: relative;
 		top: auto;
 		bottom: auto;
@@ -1529,7 +1529,6 @@ td.citation-data.pub-item {
 		margin: 0;
 	}
 	.contact-content {
-/*		border: 1px solid red;*/
 		margin: 0;
 		position: relative;
 		top: auto;
@@ -1568,6 +1567,10 @@ td.citation-data.pub-item {
 	}
 	.expert-results .results__photo {
 		margin: 0 4rem 0 0;
+	}
+	.expert-results .img-circle {
+		height: auto;
+		width: 13rem;
 	}
 	.contact-content a {
 		padding: 0;
