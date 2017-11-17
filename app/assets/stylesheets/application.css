@@ -1337,7 +1337,9 @@ td.citation-data.pub-item {
 	}
 	.expert-results .img-circle {
 		height: auto;
+		min-height: .6rem;
 		width: 10rem;
+		max-width: 10rem;
 	}
 	.contact-content .results-title {
 		font-size: 1.5rem;
@@ -1570,7 +1572,10 @@ td.citation-data.pub-item {
 	}
 	.expert-results .img-circle {
 		height: auto;
-		width: 13rem;
+		min-height: 10rem;
+		max-height: 22rem;
+		width: 12.5rem;
+		max-width: 12.5rem;
 	}
 	.contact-content a {
 		padding: 0;
