@@ -49,6 +49,7 @@
 #B9B9B8	  cool gray 			|| 			hsla(60, 1%, 72%, 1)
 #F5F2EC	  warm gray 			|| 			hsla(40, 31%, 94%, 1)
 #EFECE5	  brown warm gray 1* 	|| 			hsla(42, 24%, 92%, 1)
+#CCC6B8	  brown warm gray 2*	||			hsla(42, 16%, 76%, 1)
 #C00404	  red 					|| 			hsla(0, 96%, 38%, 1)
 #FF5252	  happy red 			|| 			hsla(0, 100%, 66%, 1)
 #831B1B	  dark red 				|| 			hsla(0, 66%, 31%, 1)
@@ -660,31 +661,29 @@ a.manage-profile-link:visited {
 
 /* Footer */
 .footer {
-	background-color: #2F2A20;
+	background-color: #CCC6B8;
 	height: 180px;
 }
 .footer #footer-nav li a {
-	color: #ddd;
+	color: #222;
 	font-weight: bold;
-}
-.footer #footer-nav li a {
 	transition: none;
 }
 .footer #footer-nav li a:hover {
-	border-bottom: 2px solid #aaa;
-	color: #bbb;
+	border-bottom: 4px solid #46322B;
+	color: #46322B;
 	text-decoration: none;
 }
 .footer p.copyright {
-	color: #ddd;
+	color: #222;
 }
 .footer p.copyright a{
-	color: #ddd;
+	color: #222;
 	font-weight: bold;
 }
 .footer p.copyright a:hover {
-	color: #bbb;
-	border-bottom: 2px solid #aaa;
+	color: #46322B;
+	border-bottom: 4px solid #46322B;
 }
 /* End of Footer */
 
