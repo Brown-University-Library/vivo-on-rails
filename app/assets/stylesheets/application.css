@@ -33,11 +33,6 @@
   to { transform: scale(1) rotate(360deg);}
 }
 
-.bkg-test {
-	overflow: hidden;
-	height: 100vh;
-}
-
 /* MAKE YOUR CSS CHANGES HERE */
 
 /* COLORS */
@@ -590,6 +585,13 @@ a.manage-profile-link:visited {
 	left: 0;
 	right: 0;
 	z-index: 10;
+}
+.expert-results .img-circle {
+	height: 12.5rem;
+	width: auto;
+	max-width: 80%;
+	object-fit: cover;
+	object-position: 25% 0;
 }
 .contact-content {
 	color: #fff;
@@ -1332,8 +1334,12 @@ td.citation-data.pub-item {
 	.expert-results .results__photo {
 		margin: 0 1rem 0 0;
 	}
-	.expert-results .results__photo img {
-		width: 100px;
+	.expert-results .img-circle {
+		height: auto;
+		min-height: .6rem;
+		max-height: 19rem;
+		width: 10rem;
+		max-width: 10rem;
 	}
 	.contact-content .results-title {
 		font-size: 1.5rem;
@@ -1517,7 +1523,6 @@ td.citation-data.pub-item {
 		justify-content: flex-start;
 	}
 	.expert-results .results__photo {
-/*		border: 1px solid green;*/
 		position: relative;
 		top: auto;
 		bottom: auto;
@@ -1526,7 +1531,6 @@ td.citation-data.pub-item {
 		margin: 0;
 	}
 	.contact-content {
-/*		border: 1px solid red;*/
 		margin: 0;
 		position: relative;
 		top: auto;
@@ -1565,6 +1569,13 @@ td.citation-data.pub-item {
 	}
 	.expert-results .results__photo {
 		margin: 0 4rem 0 0;
+	}
+	.expert-results .img-circle {
+		height: auto;
+		min-height: 10rem;
+		max-height: 22rem;
+		width: 12.5rem;
+		max-width: 12.5rem;
 	}
 	.contact-content a {
 		padding: 0;
