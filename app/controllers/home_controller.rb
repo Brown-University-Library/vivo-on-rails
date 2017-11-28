@@ -35,6 +35,16 @@ class HomeController < ApplicationController
     render "not_found", status: 404, formats: [:html]
   end
 
+  # Redirect to new facetted search
+  def people
+    redirect_to "#{search_url()}?fq=record_type|PEOPLE"
+  end
+
+  # Redirect to new facetted search
+  def organizations
+    redirect_to "#{search_url()}?fq=record_type|ORGANIZATION"
+  end
+
   def status
     solr_url = ENV["SOLR_URL"]
     searcher = Search.new(solr_url, nil)

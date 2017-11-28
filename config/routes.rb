@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     get 'sparql/query' => 'sparql#query'
   end
 
+  # VIVO original URLs
+  get 'people' => 'home#people'
+  get 'ous' => 'home#organizations'
+
   get 'brown' => 'home#brown', as: :home_brown
   get 'about' => 'home#about', as: :home_about
   get 'faq' => 'home#faq', as: :home_faq
