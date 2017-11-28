@@ -18,15 +18,20 @@ class SearchController < ApplicationController
 
   # Normal search. Returns search results as HTML.
   def index
-    @presenter = execute_search()
-    if @presenter.num_found == 0
-      Rails.logger.warn("No results were found. Search: #{@presenter.search_qs}")
+    if is_legacy_search?()
+      Rails.logger.warn("Redirected legacy search for #{request.url}")
+      redirect_to "#{search_url()}?q=#{params["querytext"]}"
+    else
+      @presenter = execute_search()
+      if @presenter.num_found == 0
+        Rails.logger.warn("No results were found. Search: #{@presenter.search_qs}")
+      end
+      if params["format"] == "json"
+        render :json => @presenter.results.to_json
+        return
+      end
+      render "results"
     end
-    if params["format"] == "json"
-      render :json => @presenter.results.to_json
-      return
-    end
-    render "results"
   rescue => ex
     backtrace = ex.backtrace.join("\r\n")
     Rails.logger.error("Could not render search. Exception: #{ex} \r\n #{backtrace}")
@@ -113,5 +118,9 @@ class SearchController < ApplicationController
           q + "+AND+#{field}:\"#{value}\""
         end
       end
+    end
+
+    def is_legacy_search?()
+      params["querytext"] != nil
     end
 end
