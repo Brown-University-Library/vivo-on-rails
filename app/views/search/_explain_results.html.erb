@@ -1,0 +1,36 @@
+<pre>
+<% if @presenter.explain_format == "text" %>
+
+<% @presenter.explainer.entries.each do |entry| %>
+<b><%= entry.key %></b> {
+  <%= entry.text.gsub("\r\n", "</br>") %>
+}</br>
+<% end %>
+
+<% elsif @presenter.explain_format == "scores" %>
+
+<h3>Scores</h3>
+<% @presenter.explainer.entries.each do |entry| %>
+  <%= entry.key %>  <%= entry.score %>
+<% end %>
+
+<% elsif @presenter.explain_format == "matches" %>
+
+<h3>Matches</h3>
+<% @presenter.explainer.entries.each do |entry| %>
+<b><%= entry.key %></b> {
+  <%= entry.matches.join("</br>").html_safe %>
+}</br>
+<% end %>
+
+<% elsif @presenter.explain_format == "topmatches" %>
+
+<h3>Top Matches</h3>
+<% @presenter.explainer.entries.each do |entry| %>
+<b><%= entry.key %></b> {
+  <%= entry.top_matches.join("</br>").html_safe %>
+}</br>
+<% end %>
+
+<% end %>
+</pre>

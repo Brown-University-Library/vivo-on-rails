@@ -1,3 +1,5 @@
+require "./lib/solr_lite/search_params.rb"
+
 class SearchController < ApplicationController
   # Advanced search.
   def advanced
@@ -52,7 +54,10 @@ class SearchController < ApplicationController
     def execute_search(facet_limit = nil)
       solr_url = ENV["SOLR_URL"]
       images_url = ENV["IMAGES_URL"]
-      searcher = Search.new(solr_url, images_url)
+      explain_query = request.params["explain"]
+      debug = explain_query != nil
+      flag = request.params["flag"]
+
       params = SolrLite::SearchParams.from_query_string(request.query_string, facets_fields())
       params.q = "*" if params.q == ""
       params.page_size = 20 # don't allow the client to control this
@@ -60,8 +65,13 @@ class SearchController < ApplicationController
         params.sort = "profile_updated_s desc"
       end
       params.facet_limit = facet_limit if facet_limit != nil
-      search_results = searcher.search(params)
-      SearchResultsPresenter.new(search_results, params, search_url(), base_facet_search_url())
+
+      searcher = Search.new(solr_url, images_url)
+      search_results = searcher.search(params, debug, flag)
+
+      presenter = SearchResultsPresenter.new(search_results, params, search_url(),
+        base_facet_search_url(), explain_query)
+      presenter
     end
 
     def facets_fields()

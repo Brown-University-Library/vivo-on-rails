@@ -9,9 +9,10 @@ class SearchResultsPresenter
     :page, :start, :end, :num_found, :num_pages, :page_start, :page_end,
     :previous_url, :next_url,
     :remove_q_url, :facetSearchBaseUrl,
-    :suggest_q, :suggest_url
+    :suggest_q, :suggest_url,
+    :explainer, :explain_format
 
-  def initialize(results, params, base_url, base_facet_search_url)
+  def initialize(results, params, base_url, base_facet_search_url, explain_format)
     @base_url = base_url
     @facetSearchBaseUrl = base_facet_search_url
 
@@ -73,6 +74,9 @@ class SearchResultsPresenter
 
     @previous_url = page_url(@page-1)
     @next_url = page_url(@page+1)
+
+    @explain_format = explain_format
+    @explainer = results.explainer
   end
 
   def pages_urls()

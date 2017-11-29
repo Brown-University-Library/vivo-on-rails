@@ -109,3 +109,7 @@
   <% end %>
   </div> <!-- row -->
 </div> <!-- container-fluid col-sm-12 -->
+
+<% if @presenter.explain_format != nil %>
+  <%= render "explain_results" %>
+<% end %>

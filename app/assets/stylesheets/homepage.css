@@ -114,17 +114,17 @@ Create large linked icon sections below hero search
 ----------------------------------------------*/
 /* BROWN'S BIG BUTTON STYLES */
 .three-big-blocks {
+  background-color: #CCC6B8;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
   margin: 0;
-  background-color: #B9B9B8;
 }
 .icons-home:nth-child(1) {
   background-color: #831B1B;
 }
 .icons-home:nth-child(1):hover {
-  background-color: hsla(0, 66%, 25%, 1);
+  background-color: hsla(0, 66%, 25%, 1); /* #B9B9B8 darkened */
   transition-property: background-color;
   transition-delay: 0s;
   transition-duration: .2s;
@@ -161,7 +161,7 @@ Create large linked icon sections below hero search
   background-color: #594036;
 }
 .icons-home:nth-child(3):hover {
-  background-color: hsla(17, 24%, 20%, 1);
+  background-color: hsla(17, 24%, 20%, 1); /* #594036 darkened */
   transition-property: background-color;
   transition-delay: 0s;
   transition-duration: .2s;
@@ -181,10 +181,10 @@ Create large linked icon sections below hero search
   height: 100%;
 }
 .icons-home > a span {
+  grid-area: 1 / 1 / 2 / 1;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  grid-area: 1 / 1 / 2 / 1;
 }
 .icons-home > a h3 {
   grid-area: 2 / 1 / 3 / 1;
@@ -193,15 +193,10 @@ Create large linked icon sections below hero search
   width: 10rem;
   bottom: 0;
 }
-/*.icons-home-test:nth-child(1) {
-  grid-area: 1 / 1 / 1 / 2;
-  background-color: green;
-}*/
 .glyphicon-user {
   color: #fff;
   font-size: 10rem;
 }
-/* END MY BIG BUTTON STYLES */
 /*---------------------------------------------
 Homepage explore rectangular links with images for background
 ----------------------------------------------*/
@@ -366,3 +361,52 @@ Customise the statistics section
   color: white;
   border-radius: 3px;
 }
+
+/***** MEDIA QUERIES *****/
+@media screen and (max-width: 767px) {
+  .three-big-blocks {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(500px, 1fr), 1fr, minmax(250px, 1fr);
+  }
+  .icons-home:nth-child(odd) {
+    padding: 4rem 0 2rem 0;
+  }
+  .glyphicon-user {
+    font-size: 7rem;
+  }
+  .icons-home svg {
+    width: 8rem;
+  }
+}
+
+@supports not (display: grid) {
+  .three-big-blocks {
+    display: flex;
+  }
+  .icons-home {
+    flex: 1 0 0%;
+  }
+  .icons-home h3 {
+    font-size: 2rem;
+  }
+  .icons-home:nth-child(odd) {
+    padding: 4rem 2rem;
+  }
+  .icons-home:nth-child(odd) a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .icons-home:nth-child(odd) span {
+    margin-bottom: 2rem;
+  }
+  @media screen and (max-width: 767px) {
+    .three-big-blocks {
+      flex-direction: column;
+    }
+  }
+}
+
+
+
