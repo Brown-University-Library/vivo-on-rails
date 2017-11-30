@@ -1453,7 +1453,22 @@ td.citation-data.pub-item {
 	}
 	.footer {
 		float: left;
+		padding: 4rem 0 2rem 0;
 		width: 100%;
+	}
+	.footer .container .col-md-12 {
+		padding: 0;
+	}
+	.footer #footer-nav {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-around;
+		margin-bottom: 0;
+		padding: 0;
+	}
+	.footer #footer-nav li {
+		margin-right: 0;
+		padding: 1.5rem;
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) { /* tablets / small laptops */
