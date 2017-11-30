@@ -151,30 +151,30 @@ a.manage-profile-link:visited {
 }
 /* End of Header */
 
-/* 404 */
-#page-not-found-wrapper {
+/* Error or 404 Pages */
+.error-404-wrapper {
 	background-color: #831B1B;
 	margin: -2rem;
 	min-height: calc(100vh - 210px); /* navbar = height:50px + subnavbar = height:20px + footer = height:180px + ???:3px */
 }
-#page-not-found-wrapper h1 {
+.error-404-wrapper h1 {
 	color: #fff;
 	font-size: 4.8rem;
 	font-weight: 600;
 	padding: 4rem 8rem 0 8rem;
 }
-#page-not-found-wrapper p {
+.error-404-wrapper p {
 	color: hsla(0, 100%, 100%, .8);
 	font-size: 2.8rem;
 	line-height: 3.2rem;
 	margin-bottom: 4rem;
 	padding: 0 8rem;
 }
-#page-not-found-wrapper a {
+.error-404-wrapper a {
 	color: #fff;
 	font-weight: 600;
 }
-#page-not-found-wrapper a:hover {
+.error-404-wrapper a:hover {
 	border-bottom: 4px solid #fff;
 	line-height: 1rem;
 }
@@ -1299,11 +1299,11 @@ td.citation-data.pub-item {
 		margin-left: .5rem;
 		padding: 1.2rem;
 	}
-	#page-not-found-wrapper h1 {
+	.error-404-wrapper h1 {
 		font-size: 3.8rem;
 		padding: 2rem 6rem 0 6rem;
 	}
-	#page-not-found-wrapper p {
+	.error-404-wrapper p {
 		font-size: 2rem;
 		line-height: 2.8rem;
 		margin-bottom: 2rem;
