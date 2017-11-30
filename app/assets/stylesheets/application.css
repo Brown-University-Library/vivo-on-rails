@@ -194,7 +194,7 @@ a.manage-profile-link:visited {
 }
 .below-nav-links p {
 	font-size: 90%;
-	font-weight: bold; /* a quick fix to add some styles to the advanced search / login links */
+	font-weight: 600; /* a quick fix to add some styles to the advanced search / login links */
 	height: 3rem;
 	margin: 0;
 	position: relative;
@@ -341,7 +341,7 @@ a.manage-profile-link:visited {
 }
 .panel-body ul li:hover a {
 	color: #594036;
-	font-weight: bold;
+	font-weight: 600;
 	transition-property: color;
 	transition-delay: 0s;
 	transition-duration: .1s;
@@ -366,7 +366,7 @@ a.manage-profile-link:visited {
 .search-toggle-more-categories:hover {
 	border-left: 5px solid #B9B9B8;
 	color: #594036;
-	font-weight: bold;
+	font-weight: 600;
 	margin-left: -.3rem;
 	padding-left: 1.4rem;
 	outline: none;
@@ -425,7 +425,7 @@ a.manage-profile-link:visited {
 .modal-footer a {
 	border: none;
 	border-radius: 0;
-	font-weight: bold;
+	font-weight: 600;
 	text-shadow: none;
 }
 .modal-footer .btn:hover {
@@ -564,7 +564,7 @@ a.manage-profile-link:visited {
 	color: #333;
 }
 #search-result-count a {
-	font-weight: bold;
+	font-weight: 600;
 }
 .facet-breadcrumbs a {
 	color: #333;
@@ -636,7 +636,7 @@ a.manage-profile-link:visited {
 .contact-content a {
 	color: #fff;
 	font-size: 1.9rem;
-	font-weight: bold;
+	font-weight: 600;
 	opacity: .9;
 	padding: 0 .8rem;
 }
@@ -675,13 +675,13 @@ a.manage-profile-link:visited {
 .pagination > li > a:hover {
 	background-color: #F5F2EC;
 	color: #333;
-	font-weight: bold;
+	font-weight: 600;
 }
 .pagination > .active > a {
 	background-color: #E8D98B;
 	border-color: #E8D98B;
 	color: #333;
-	font-weight: bold;
+	font-weight: 600;
 }
 .pagination > .active > a:hover {
 	background-color: #E8D98B;
@@ -708,7 +708,7 @@ a.manage-profile-link:visited {
 }
 .footer #footer-nav li a {
 	color: #222;
-	font-weight: bold;
+	font-weight: 600;
 	transition: none;
 }
 .footer #footer-nav li a:hover {
@@ -721,7 +721,7 @@ a.manage-profile-link:visited {
 }
 .footer p.copyright a{
 	color: #222;
-	font-weight: bold;
+	font-weight: 600;
 }
 .footer p.copyright a:hover {
 	color: #46322B;
@@ -749,7 +749,7 @@ a.manage-profile-link:visited {
 	border-bottom: 1px solid #333;
 	display: flex;
 	align-items: center;
-	font-weight: bold;
+	font-weight: 600;
 	height: 4.5rem;
 	margin: 1.5rem 0 1rem 0;
 }
@@ -897,28 +897,28 @@ a.back-to-search:hover .glyphicon-chevron-left {
 .btn-group-vertical a:hover {
 	background-color: #333;
 	border-left: solid 6px #E8D98B;
-	font-weight: bold;
+	font-weight: 600;
 }
 .btn-group-vertical .btn-default.active {
 	background-color: #fff;
 	border-left: solid 6px #E8D98B;
 	box-shadow: none;
 	color: #000;
-	font-weight: bold;
+	font-weight: 600;
 }
 .btn-group-vertical .btn-default.active:hover {
 	background-color: #fff;
 	border-left: solid 6px #E8D98B;
 	color: #000;
 	cursor: default;
-	font-weight: bold;
+	font-weight: 600;
 }
 .btn-group-vertical > .btn:focus {
 	background-color: #fff;
 	border-left: solid 6px #E8D98B;
 	box-shadow: none;
 	color: #000;
-	font-weight: bold;
+	font-weight: 600;
 }
 .btn-group-vertical > .btn:first-child:not(:last-child) {
 	border-radius: 0;
@@ -936,7 +936,7 @@ a.back-to-search:hover .glyphicon-chevron-left {
 	padding: 0 4rem;
 }
 h2.vcard {
-	font-weight: bold;
+	font-weight: 600;
 	margin: 4rem 0 0 0;
 }
 h3.individual_overview {
@@ -955,7 +955,7 @@ h4.individual_overview {
 #section_overview p a:link {
 	color: #594036;
 	font-size: 1.6rem;
-	font-weight: bold;
+	font-weight: 600;
 }
 #section_overview p a:link:hover {
 	border-bottom: solid 3px #594036;
@@ -987,7 +987,7 @@ h4.individual_overview {
 .tabFinder a {
 	color: #594036;
 	font-size: 1.5rem;
-	font-weight: bold;
+	font-weight: 600;
 }
 .tabFinder a:hover {
 	border-bottom: solid 3px #594036;
@@ -1017,7 +1017,7 @@ h4.individual_overview {
 	color: #594036;
 	cursor: pointer;
 	font-size: 1.6rem;
-	font-weight: bold;
+	font-weight: 600;
 }
 #section_overview table a:hover {
 	border-bottom: 3px solid #594036;
@@ -1050,7 +1050,7 @@ h4.individual_overview {
 	box-shadow: none;
 	color: #444;
 	font-size: 1.6rem;
-	font-weight: bold;
+	font-weight: 600;
 	margin: .2rem;
 	padding: 1rem 0;
 	text-shadow: none;
@@ -1189,7 +1189,7 @@ td.citation-data.pub-item {
 }
 .org-profile p a {
 	color: #594036;
-	font-weight: bold;
+	font-weight: 600;
 }
 .organization-photo-panel img {
 	width: 250px;
@@ -1202,7 +1202,7 @@ td.citation-data.pub-item {
 }
 .org-profile #individual-info header h3 {
 	font-size: 6rem;
-	font-weight: bold;
+	font-weight: 600;
 	line-height: 6rem;
 	margin-top: 0;
 	margin-bottom: 1rem;
@@ -1215,7 +1215,7 @@ td.citation-data.pub-item {
 }
 .org-profile #individual-info header ul li a {
 	color: #594036;
-	font-weight: bold;
+	font-weight: 600;
 }
 .org-profile #individual-info header ul li a:hover {
 	border-bottom: solid 3px #594036;
@@ -1232,7 +1232,7 @@ td.citation-data.pub-item {
 .org-profile #individual-info p a:link {
 	color: #594036;
 	font-size: 1.6rem;
-	font-weight: bold;
+	font-weight: 600;
 }
 .org-profile #individual-info p a:hover {
 	border-bottom: solid 3px #594036;
