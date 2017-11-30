@@ -76,12 +76,6 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results" data-fb-result="<%= item.uri %>">
               <div class="gap30"></div>
               <section itemscope itemtype="<%= item.type_schema_org() %>" id="individual-intro" class="vcard person" role="region">
-                <div class="emailsContainer">
-                    <a href="mailto:<%= item.email %>" title="Email <%= item.email %>">
-                      <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                      <span class="sr-only">Email researcher</span>
-                    </a>
-                </div>
                 <section class="share-contact" role="region">
                   <div class="share-contact--bottom"></div>
                   <div id="photo-wrapper" class="results__photo" aria-hidden="true">
@@ -96,6 +90,12 @@
                     <span class="results-title"><%= item.title %></span>
                   </div>
                 </section>
+                <div class="emailsContainer">
+                    <a href="mailto:<%= item.email %>" title="Email <%= item.email %>">
+                      <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                      <span class="sr-only">Email researcher</span>
+                    </a>
+                </div>
               </section>
             </div>
             <!-- RESULTS ITEM ENDS -->
