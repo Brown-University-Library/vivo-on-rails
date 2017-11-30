@@ -1,7 +1,7 @@
 <div class="col-md-3 col-sm-4 col-xs-12">
   <section itemscope="" itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section class="share-contact" role="region">
-      <div id="photo-wrapper">
+      <div id="photo-wrapper" aria-hidden="true">
         <%= image_tag(@presenter.faculty.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "175", class: "img-circle") %>
       </div>
       <h2 class="hidden-sm hidden-md hidden-lg">
