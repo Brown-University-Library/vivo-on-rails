@@ -657,6 +657,18 @@ a.manage-profile-link:visited {
 }
 
 /* pagination */
+.pagination-wrapper {
+	float: none;
+}
+.pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 2rem 0;
+	width: 100%;
+}
 .pagination > li > a {
 	color: #333;
 }
