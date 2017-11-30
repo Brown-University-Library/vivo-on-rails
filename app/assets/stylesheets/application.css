@@ -153,29 +153,29 @@ a.manage-profile-link:visited {
 
 /* Error or 404 Pages */
 .error-404-wrapper {
-	background-color: #831B1B;
+	background-color: #F5F2EC;
 	margin: -2rem;
 	min-height: calc(100vh - 210px); /* navbar = height:50px + subnavbar = height:20px + footer = height:180px + ???:3px */
 }
 .error-404-wrapper h1 {
-	color: #fff;
+	color: #333;
 	font-size: 4.8rem;
 	font-weight: 600;
-	padding: 4rem 8rem 0 8rem;
+	padding: 4rem 10rem 0 10rem;
 }
 .error-404-wrapper p {
-	color: hsla(0, 100%, 100%, .8);
+	color: hsla(0, 0%, 0%, .6);
 	font-size: 2.8rem;
 	line-height: 3.2rem;
-	margin-bottom: 4rem;
-	padding: 0 8rem;
+	margin-bottom: 6rem;
+	padding: 0 10rem;
 }
 .error-404-wrapper a {
-	color: #fff;
+	color: #444;
 	font-weight: 600;
 }
 .error-404-wrapper a:hover {
-	border-bottom: 4px solid #fff;
+	border-bottom: 4px solid #444;
 	line-height: 1rem;
 }
 
