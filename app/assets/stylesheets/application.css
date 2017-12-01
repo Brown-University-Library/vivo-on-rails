@@ -579,7 +579,12 @@ a.manage-profile-link:visited {
 .expert-results {
 	min-height: 32rem;
 }
-.emailsContainer {
+.share-contact {
+	background-color: #F5F2EC;
+	min-height: 32rem;
+	padding: 1rem;
+}
+.share-contact .emailsContainer {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 10px;
@@ -587,22 +592,18 @@ a.manage-profile-link:visited {
 	position: absolute;
 	left: 0;
 	right: 0;
+	z-index: 20;
 }
-.emailsContainer .glyphicon-envelope {
+.share-contact .emailsContainer span.glyphicon.glyphicon-envelope {
 	color: #7E7E7E;
 	transform: scaleX(1.3);
 }
-.emailsContainer .glyphicon-envelope:hover {
+.share-contact .emailsContainer span.glyphicon.glyphicon-envelope:hover {
 	color: #333;
 	transition-property: color;
 	transition-delay: 0s;
 	transition-duration: .3s;
 	transition-timing-function: ease;
-}
-.share-contact {
-	background-color: #F5F2EC;
-	min-height: 32rem;
-	padding: 1rem;
 }
 #photo-wrapper {
 	margin-bottom: 0;
@@ -1577,6 +1578,15 @@ td.citation-data.pub-item {
 	.expert-results .gap30 {
 		display: none;
 	}
+	.share-contact .emailsContainer {
+		top: 0;
+	}
+	.share-contact .emailsContainer span.glyphicon.glyphicon-envelope {
+		color: #fff;
+	}
+	.share-contact .emailsContainer span.glyphicon.glyphicon-envelope:hover {
+		color: #ddd;
+	}
 	.expert-results .share-contact--bottom {
 		display: none;
 	}
@@ -1601,12 +1611,6 @@ td.citation-data.pub-item {
 		top: auto;
 		bottom: auto;
 		text-align: left;
-	}
-	.emailsContainer .glyphicon-envelope {
-		color: #fff;
-	}
-	.emailsContainer .glyphicon-envelope:hover {
-		color: #ddd;
 	}
 	/* org page */
 	.org-content .container div.organization-description {
