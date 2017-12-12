@@ -135,6 +135,14 @@ header {
 	border: none;
 	padding: 8px 12px;
 }
+.sympl-search span:nth-child(2) {
+	position: relative;
+	top: -.1rem;
+}
+span.glyphicon.glyphicon-search {
+	margin-right: .2rem;
+	top: .2rem;
+}
 a.manage-profile-link {
   margin-left: 0em;
   margin-top:.33em;
