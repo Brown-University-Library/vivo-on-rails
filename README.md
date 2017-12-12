@@ -1,9 +1,8 @@
 # VIVO on Rails
-This is the code for the new VIVO front-end for Researchers@Brown. This is a
+This is the code for the new VIVO front-end for [Researchers@Brown](https://vivo.brown.edu). This is a
 Ruby on Rails application that searches directly against the VIVO's Solr
 index. See the General Architecture information below for more details.
 
-We are currently in "soft launch" mode, you can view the site [here](https://vivostaging.brown.edu).
 
 # Pre-requisites
 You need to have [Solr](http://lucene.apache.org/solr/) running. We use the
