@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   # VIVO original URLs
   get 'people' => 'home#people'
   get 'ous' => 'home#organizations'
+  get 'file/:id/:file_name' => 'display#old_image'
 
   get 'brown' => 'home#brown', as: :home_brown
   get 'about' => 'home#about', as: :home_about
