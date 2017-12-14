@@ -1,7 +1,7 @@
 <div class="organization-photo-panel col-xs-12 col-sm-12 col-md-4 col-lg-4">
   <section itemscope="" itemtype="http://schema.org/Organization" id="individual-intro" class="vcard person" role="region">
     <section role="region">
-      <div id="photo-wrapper">
+      <div id="photo-wrapper" aria-hidden="true">
         <%= image_tag(@presenter.organization.thumbnail || "org_placeholder.png", alt: "Organization Picture") %>
       </div>
     </section>
