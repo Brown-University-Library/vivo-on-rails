@@ -96,7 +96,7 @@ class ContributorToItem
   # another from the same year. Plus, I am not sure our "date of publication"
   # values are very accurate (e.g. most of them say have month "01", day "01").
   def <=>(other)
-    year1 = 1(self.year || 0)
+    year1 = (self.year || 0)
     year2 = (other.year || 0)
     if year1 == year2
       # ascending by title
