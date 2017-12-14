@@ -124,7 +124,7 @@ Create large linked icon sections below hero search
   background-color: #831B1B;
 }
 .icons-home:nth-child(1):hover {
-  background-color: hsla(0, 66%, 25%, 1); /* #B9B9B8 darkened */
+  background-color: hsla(0, 66%, 25%, 1); /* #831B1B darkened */
   transition-property: background-color;
   transition-delay: 0s;
   transition-duration: .2s;

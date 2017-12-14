@@ -120,20 +120,54 @@ header {
 	padding: 0 1.5rem;
 	width: 100%;
 }
+#sticky-nav form.navbar-form.navbar-right {
+	display: flex;
+	width: 100%;
+}
 #sticky-nav .navbar-btn {
 	padding: 8px 12px;
 	border: none;
 }
 .form-group {
+	display: flex;
+	flex-basis: auto;
+	flex-grow: 3;
 	margin-left: .625rem;
+	padding-right: .5rem;
 }
-.form-control {
+.navbar-form .form-control {
 	border: none;
+	border-radius: 0;
+	width: 100%;
 }
 #sticky-nav button.btn.sympl-search {
 	background-color: #232323;
 	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-basis: auto;
+	flex-grow: 1;
+	margin-top: -1px;
 	padding: 8px 12px;
+}
+#sticky-nav button.btn.sympl-search:hover {
+	background-color: #E8D98B;
+	box-shadow: inset 0 0 1px #333;
+	color: #333;
+	transition-property: background-color, box-shadow, color;
+	transition-delay: 0s;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+.sympl-search span:nth-child(2) {
+	font-weight: 400;
+	font-size: 1.6rem;
+}
+span.glyphicon.glyphicon-search {
+	margin-right: .6rem;
+	margin-top: -.2rem;
+	transform: scale(1.2);
 }
 a.manage-profile-link {
   margin-left: 0em;
@@ -1291,26 +1325,35 @@ td.citation-data.pub-item {
 	#sticky-nav	{
 		top: .9rem;
 	}
-	.navbar-form {
+	#sticky-nav form.navbar-form.navbar-right {
 		border: none;
 		box-shadow: none;
-		display: flex;
 		flex-direction: row;
 		align-items: center;
 		min-height: 2rem;
 		max-height: 3rem;
+		margin: 8px 0;
+		padding: 0;
 	}
 	.navbar-form .form-group {
-		flex-grow: 2;
 		margin: 0;
 	}
+	.form-group .form-control {
+		border: none;
+		border-bottom: 1px solid #888;
+		box-shadow: 0 7px 8px -8px #333;
+
+	}
 	#sticky-nav button.btn.sympl-search {
-		display: flex;
-		flex-grow: 1;
-		justify-content: center;
-		width: 0;
+		margin-top: 0;
 		margin-left: .5rem;
-		padding: 1.2rem;
+		padding: .8rem 1.2rem .9rem 1.2rem;
+	}
+	#sticky-nav button.btn.sympl-search:hover {
+		box-shadow: none;
+	}
+	#sticky-nav button.btn-block {
+		width: auto;
 	}
 	.error-404-wrapper h1 {
 		font-size: 3.8rem;
