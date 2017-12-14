@@ -4,6 +4,22 @@ class DisplayController < ApplicationController
     redirect_to search_url()
   end
 
+  # The original VIVO used to serve the profile images directly.
+  # This method handles those requests and redirects the client to
+  # pick the image from the new location outside of VIVO.
+  def old_image
+    images_url = ENV["IMAGES_URL"]
+    legacy_path = "/file/#{params[:id]}/#{params[:file_name]}.#{params[:format]}"
+    new_thumbnail = ModelUtils.thumbnail_url(legacy_path, images_url)
+    if new_thumbnail != nil
+      Rails.logger.warn("Legacy path redirected: #{legacy_path} => #{new_thumbnail}")
+      redirect_to new_thumbnail, :status => :moved_permanently
+    else
+      Rails.logger.warn("Legacy path could not be redirected: #{legacy_path}")
+      render "not_found", status: 404, formats: [:html]
+    end
+  end
+
   # This method replaces the original `/display/:id` endpoint in VIVO.
   #
   # Notice that if the client passes an HTTP Header with "Accept: application/json"
@@ -91,7 +107,7 @@ class DisplayController < ApplicationController
     def render_not_found(id)
       err_msg = "Individual ID (#{id}) was not found"
       Rails.logger.warn(err_msg)
-      render "not_found", status: 404
+      render "not_found", status: 404, formats: [:html]
     end
 
     def render_vitro_data(id, type)

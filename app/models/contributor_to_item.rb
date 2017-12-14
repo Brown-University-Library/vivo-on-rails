@@ -4,6 +4,8 @@ class ContributorToItem
     :date, :pages, :published_in, :venue, :type, :doi, :pub_med_id,
     :external_url
 
+  attr_reader :year
+
   def initialize(values)
     ModelUtils.set_values_from_hash(self, values)
     @year = nil
@@ -83,7 +85,32 @@ class ContributorToItem
   end
 
   def self.from_hash_array(values)
-    values.map {|v| ContributorToItem.new(v)}.sort_by {|v| v.date || ""}.reverse
+    values.map {|v| ContributorToItem.new(v)}.sort
+  end
+
+  # Custom sorting of publications (descending by year, ascending by title)
+  #
+  # Notice that we use the year and not the full date of publication. This is
+  # probably becase we don't display the full date of publication and without
+  # it it's confusing for users to figure out why a publication shows before
+  # another from the same year. Plus, I am not sure our "date of publication"
+  # values are very accurate (e.g. most of them say have month "01", day "01").
+  def <=>(other)
+    year1 = (self.year || 0)
+    year2 = (other.year || 0)
+    if year1 == year2
+      # ascending by title
+      title1 = (self.title || "").strip.downcase
+      title2 = (other.title || "").strip.downcase
+      return title1 <=> title2
+    else
+      # descending by year
+      if year1 > year2
+        return -1
+      else
+        return 1
+      end
+    end
   end
 
   private
