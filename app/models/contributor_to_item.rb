@@ -83,7 +83,26 @@ class ContributorToItem
   end
 
   def self.from_hash_array(values)
-    values.map {|v| ContributorToItem.new(v)}.sort_by {|v| v.date || ""}.reverse
+    values.map {|v| ContributorToItem.new(v)}.sort
+  end
+
+  # Custom sorting of publications (descending by year, ascending by title)
+  def <=>(other)
+    year1 = (self.date || "")
+    year2 = (other.date || "")
+    if year1 == year2
+      # ascending by title
+      title1 = (self.title || "").downcase
+      title2 = (other.title || "").downcase
+      return title1 <=> title2
+    else
+      # descending by year
+      if year1 > year2
+        return -1
+      else
+        return 1
+      end
+    end
   end
 
   private
