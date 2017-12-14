@@ -100,8 +100,8 @@ class ContributorToItem
     year2 = (other.year || 0)
     if year1 == year2
       # ascending by title
-      title1 = (self.title || "").downcase
-      title2 = (other.title || "").downcase
+      title1 = (self.title || "").strip.downcase
+      title2 = (other.title || "").strip.downcase
       return title1 <=> title2
     else
       # descending by year
