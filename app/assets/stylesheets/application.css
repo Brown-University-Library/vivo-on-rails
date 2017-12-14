@@ -132,10 +132,12 @@ header {
 }
 #sticky-nav button.btn.sympl-search {
 	background-color: #232323;
+/*	background-color: blue;*/
 	border: none;
 	padding: 8px 12px;
 }
 .sympl-search span:nth-child(2) {
+	font-weight: 600;
 	position: relative;
 	top: -.1rem;
 }

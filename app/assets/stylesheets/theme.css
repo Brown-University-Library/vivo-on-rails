@@ -58,6 +58,13 @@ button.btn.sympl-search {
   color: #fff;
   border: 2px solid #c9c9c9;
 }
+button.btn.sympl-search:hover {
+  background: hsla(0, 66%, 25%, 1); /* #831B1B darkened */
+  transition-property: background;
+  transition-delay: 0s;
+  transition-duration: .2s;
+  transition-timing-function: ease;
+}
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
