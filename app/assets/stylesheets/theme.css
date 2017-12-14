@@ -96,7 +96,7 @@ section#browse-by nav#alpha-browse-container.panel ul#alpha-browse-individuals {
   padding: 0;
   margin: 0;
   list-style: none;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 18px;
 }
 section#browse-by nav#alpha-browse-container.panel ul#alpha-browse-individuals li {

@@ -1,27 +1,33 @@
-<div class="text-center hidden-print">
-    <h2 class="sr-only">Pagination</h2>
-    <ul class="pagination pagination-lg">
+<div class="pagination-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="text-center hidden-print">
+      <h2 class="sr-only">Pagination</h2>
+      <ul class="pagination pagination-lg">
 
-      <% if @presenter.page > 1 %>
-        <li>
-          <a href="<%= @presenter.previous_url %>" >
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Previous page</span>
-          </a>
-      <% end %>
+        <% if @presenter.page > 1 %>
+          <li>
+            <a href="<%= @presenter.previous_url %>" >
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous page</span>
+            </a>
+        <% end %>
 
-      <% (@presenter.page_start..@presenter.page_end).each do |page| %>
-        <% css_class = @presenter.page == page ? "active" : "" %>
-          <li class="<%= css_class %>">
-            <a href="<%= @presenter.pages_urls[page-1] %>"><%= page %></a>
-      <% end %>
+        <% (@presenter.page_start..@presenter.page_end).each do |page| %>
+          <% css_class = @presenter.page == page ? "active" : "" %>
+            <li class="<%= css_class %>">
+              <a href="<%= @presenter.pages_urls[page-1] %>"><%= page %></a>
+        <% end %>
 
-      <% if @presenter.page < @presenter.num_pages %>
-        <li>
-          <a href="<%= @presenter.next_url %>" >
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span class="sr-only">Next page</span>
-          </a>
-      <% end %>
-    </ul>
+        <% if @presenter.page < @presenter.num_pages %>
+          <li>
+            <a href="<%= @presenter.next_url %>" >
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next page</span>
+            </a>
+        <% end %>
+      </ul>
+  </div>
 </div>
+<!-- future fix for pagination on mobile
+<div class="pagination-wrapper col-lg-12 col-md-12 col-sm-12 hidden-xs">render 10 page pagination nav</div>
+<div class="pagination-wrapper col-xs-12 visible-xs-block">render 5 page pagination nav</div>
+-->

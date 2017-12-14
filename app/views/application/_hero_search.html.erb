@@ -5,16 +5,17 @@
 
         <div class="jumbotron">
           <!-- Researchers @ BROWN -->
-          <img src="<%= image_url('RaB-type.svg') %>"
+          <img src="<%= image_url('RaB-type2.svg') %>"
             style="width: 64%;y: 2em;padding-bottom: 0;margin-bottom: 0;"
             alt="Researchers at Brown">
         </div>
         <form id="search-homepage" action="<%= search_path() %>" name="search-home" role="search" method="GET">
           <div class="input-group input-group-lg">
-            <input class="form-control" id="q" name="q" placeholder="Search for an Expert..." type="text">
+            <input class="form-control" id="q" name="q" placeholder="Search for an expert..." aria-label="Enter text to search for a researcher or an organization at Brown" type="text">
             <div class="input-group-btn">
               <button type="submit" class="btn btn-default btn-lg sympl-search">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <span aria-only="true">Search</span>
               </button>
             </div>
           </div>
