@@ -111,10 +111,15 @@ class DisplayController < ApplicationController
     end
 
     def render_vitro_data(id, type)
-      Rails.logger.warn("ID #{id} is of type #{type}, returning JSON-LD representation")
-      vivo_url = ENV["VIVO_BACKEND_URL"]
-      vitro = VitroAPI.new(vivo_url)
-      data = vitro.get_one(id)
-      render body: data[:body], status: data[:code], content_type: data[:content_type]
+      if ENV["LEGACY_DISPLAY_ENABLED"] == "true"
+        Rails.logger.warn("ID #{id} is of type #{type}, returning JSON-LD representation")
+        vivo_url = ENV["VIVO_BACKEND_URL"]
+        vitro = VitroAPI.new(vivo_url)
+        data = vitro.get_one(id)
+        render body: data[:body], status: data[:code], content_type: data[:content_type]
+      else
+        Rails.logger.warn("ID #{id} is of type #{type}, legacy display is not enabled (skipping call to VIVO)")
+        render "not_found", status: 404, formats: [:html]
+      end
     end
 end
