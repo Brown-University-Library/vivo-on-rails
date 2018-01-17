@@ -36,27 +36,6 @@
         title: "Affiliations",
         text: @presenter.faculty.affiliations_text} %>
 
-      <% if @presenter.faculty.training.count > 0 %>
-          <div class="panel-heading">
-            <h4 id="relatedBy-Authorship" title="" class="panel-title">Postdoctoral/Other Training</h4>
-          </div>
-          <div class="panel-body panel-body-postdoc">
-            <table class="table table-hover">
-              <tbody>
-                <% @presenter.faculty.training.each do |t| %>
-                  <tr class="tableRow" role="listitem">
-                    <td><%= t.name %></td>
-                    <!-- TODO: should we render the org_full_name components as individual hyperlinks? -->
-                    <td><%= t.org_full_name %></td>
-                    <td><%= t.year_range_str %></td>
-                    <td><%= t.location %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-      <% end %>
-
       <% if @presenter.faculty.credentials.count > 0 %>
           <div class="panel-heading">
             <h4 id="relatedBy-Authorship" title="" class="panel-title">Credentials/Licenses</h4>
