@@ -3,3 +3,22 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-agent: *
 # Disallow: /
+
+User-agent: *
+Crawl-delay: 30
+Disallow: /admin/
+Disallow: /help/
+Disallow: /images/
+Disallow: /js/
+Disallow: /quickedits/
+Disallow: /site_icons/
+Disallow: /src/
+Disallow: /templates/
+Disallow: /themes/
+Disallow: /WEB-INF/
+Disallow: /xsl/
+Disallow: /coauthors/
+Disallow: /pubsbyorg/
+Disallow: /fedsearch/
+Disallow: /comments.jsp
+Disallow: /dataservice/
