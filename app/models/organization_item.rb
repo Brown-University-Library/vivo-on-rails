@@ -28,22 +28,28 @@ class OrganizationItem
     org = OrganizationItem.new(nil)
     org.thumbnail = thumbnail_url
     hash.each do |key, value|
-      getter = key.to_s
-      case getter
-      when "web_pages"
-        org.web_pages = value.map { |v| OnTheWebItem.new(v) }
-      when "people"
-        org.people = OrganizationMemberItem.from_hash_array(value)
-      when "thumbnail"
-        # Ignore this value, we use thumbnail_url parameter instead
-      else
-        setter = key.to_s + "="
-        if org.respond_to?(setter)
-          org.send(setter, value)
+      begin
+        getter = key.to_s
+        case getter
+        when "web_pages"
+          org.web_pages = value.map { |v| OnTheWebItem.new(v) }
+        when "people"
+          2/0
+          org.people = OrganizationMemberItem.from_hash_array(value)
+        when "thumbnail"
+          # Ignore this value, we use thumbnail_url parameter instead
         else
-          # we've got a value in Solr that we don't expect/want.
-          Rails.logger.warn("Unexpected field #{key} received for organization #{hash['uri']}")
+          setter = key.to_s + "="
+          if org.respond_to?(setter)
+            org.send(setter, value)
+          else
+            # we've got a value in Solr that we don't expect/want.
+            Rails.logger.warn("Unexpected field #{key} received for organization #{hash['uri']}")
+          end
         end
+      rescue => ex
+        backtrace = ex.backtrace.join("\r\n")
+        Rails.logger.error("Error parsing data for Organization: #{hash['uri']}. Exception: #{ex} \r\n #{backtrace}")
       end
     end
     org

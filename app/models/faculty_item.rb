@@ -61,41 +61,46 @@ class FacultyItem
     faculty.profile_updated = profile_updated
     hash.each do |key, value|
       getter = key.to_s
-      case getter
-      when "affiliations"
-        faculty.affiliations = AffiliationItem.from_hash_array(value)
-      when "collaborators"
-        faculty.collaborators = CollaboratorItem.from_hash_array(value)
-      when "contributor_to"
-        faculty.contributor_to = ContributorToItem.from_hash_array(value)
-      when "education"
-        faculty.education = EducationItem.from_hash_array(value)
-      when "appointments"
-        faculty.appointments = AppointmentItem.from_hash_array(value)
-      when "credentials"
-        faculty.credentials = CredentialItem.from_hash_array(value)
-      when "on_the_web"
-        faculty.on_the_web = OnTheWebItem.from_hash_array(value)
-      when "training"
-        faculty.training = TrainingItem.from_hash_array(value)
-      when "cv"
-        faculty.cv_link = get_cv_link(value)
-      when "teacher_for"
-        # string array, no special handling
-        faculty.teacher_for = value.sort_by {|a| (a || "").downcase}
-      when "research_areas"
-        # string array, no special handling
-        faculty.research_areas = value.sort_by {|a| (a || "").downcase}
-      when "thumbnail"
-        # Ignore this value, we use thumbnail_url parameter instead
-      else
-        setter = key.to_s + "="
-        if faculty.respond_to?(setter)
-          faculty.send(setter, value)
+      begin
+        case getter
+        when "affiliations"
+          faculty.affiliations = AffiliationItem.from_hash_array(value)
+        when "collaborators"
+          faculty.collaborators = CollaboratorItem.from_hash_array(value)
+        when "contributor_to"
+          faculty.contributor_to = ContributorToItem.from_hash_array(value)
+        when "education"
+          faculty.education = EducationItem.from_hash_array(value)
+        when "appointments"
+          faculty.appointments = AppointmentItem.from_hash_array(value)
+        when "credentials"
+          faculty.credentials = CredentialItem.from_hash_array(value)
+        when "on_the_web"
+          faculty.on_the_web = OnTheWebItem.from_hash_array(value)
+        when "training"
+          faculty.training = TrainingItem.from_hash_array(value)
+        when "cv"
+          faculty.cv_link = get_cv_link(value)
+        when "teacher_for"
+          # string array, no special handling
+          faculty.teacher_for = value.sort_by {|a| (a || "").downcase}
+        when "research_areas"
+          # string array, no special handling
+          faculty.research_areas = value.sort_by {|a| (a || "").downcase}
+        when "thumbnail"
+          # Ignore this value, we use thumbnail_url parameter instead
         else
-          # we've got a value in Solr that we don't expect/want.
-          Rails.logger.warn("Unexpected field #{key} received for faculty #{hash['uri']}")
+          setter = key.to_s + "="
+          if faculty.respond_to?(setter)
+            faculty.send(setter, value)
+          else
+            # we've got a value in Solr that we don't expect/want.
+            Rails.logger.warn("Unexpected field #{key} received for faculty #{hash['uri']}")
+          end
         end
+      rescue => ex
+        backtrace = ex.backtrace.join("\r\n")
+        Rails.logger.error("Error parsing data for Faculty #{hash['uri']} (#{display_name}). Exception: #{ex} \r\n #{backtrace}")
       end
     end
 
