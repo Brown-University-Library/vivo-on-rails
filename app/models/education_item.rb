@@ -10,6 +10,7 @@ class EducationItem
   end
 
   def self.from_hash_array(values)
+    # date is really just a year (e.g. "1999") and therefore OK to compare with ""
     values.map {|v| EducationItem.new(v)}.sort_by {|v| v.date || ""}.reverse
   end
 end
