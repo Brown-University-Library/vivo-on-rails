@@ -1,0 +1,146 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/lhochber",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/scruiksh",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/scruiksh",
+            "target": "http://vivo.brown.edu/individual/bconnors",
+            "weight": 11
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/bconnors",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ll7",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cvargas",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dborton",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bconnors",
+            "target": "http://vivo.brown.edu/individual/jsimeral",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bconnors",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bconnors",
+            "target": "http://vivo.brown.edu/individual/jmachan",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jdonoghu",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/anurmikk",
+            "target": "http://vivo.brown.edu/individual/rzia",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/anurmikk",
+            "target": "http://vivo.brown.edu/individual/dsheinbe",
+            "weight": 3
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/lhochber",
+            "name": "Hochberg, Leigh"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/scruiksh",
+            "name": "Cruikshank, Scott"
+        },
+        {
+            "group": "Psychology",
+            "id": "http://vivo.brown.edu/individual/rburwell",
+            "name": "Burwell, Rebecca"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/ll7",
+            "name": "Larson, Lawrence"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/cvargas",
+            "name": "Vargas-Irwin, Carlos"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dborton",
+            "name": "Borton, David"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/bconnors",
+            "name": "Connors, Barry"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jsimeral",
+            "name": "Simeral, John"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jmachan",
+            "name": "Machan, Jason"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jdonoghu",
+            "name": "Donoghue, John"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/anurmikk",
+            "name": "Nurmikko, Arto"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/rzia",
+            "name": "Zia, Rashid"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/dsheinbe",
+            "name": "Sheinberg, David"
+        }
+    ]
+}

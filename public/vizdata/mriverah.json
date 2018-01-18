@@ -1,0 +1,136 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/tshirem1",
+            "target": "http://vivo.brown.edu/individual/ogalarra",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mlurieph",
+            "target": "http://vivo.brown.edu/individual/ogalarra",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/doperari",
+            "target": "http://vivo.brown.edu/individual/ogalarra",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ck39",
+            "target": "http://vivo.brown.edu/individual/ogalarra",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mriverah",
+            "target": "http://vivo.brown.edu/individual/ogalarra",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/vmor",
+            "target": "http://vivo.brown.edu/individual/ogalarra",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bm8",
+            "target": "http://vivo.brown.edu/individual/ogalarra",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ogalarra",
+            "target": "http://vivo.brown.edu/individual/ddore",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ogalarra",
+            "target": "http://vivo.brown.edu/individual/iwilson",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ogalarra",
+            "target": "http://vivo.brown.edu/individual/azullo",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ogalarra",
+            "target": "http://vivo.brown.edu/individual/bgenberg",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ogalarra",
+            "target": "http://vivo.brown.edu/individual/dmwillia",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/tshirem1",
+            "name": "Shireman, Theresa"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/mlurieph",
+            "name": "Lurie, Mark"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/doperari",
+            "name": "Operario, Don"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/ck39",
+            "name": "Kuo, Caroline"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/mriverah",
+            "name": "Rivera-Hernandez, Maricruz"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/vmor",
+            "name": "Mor, Vincent"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/bm8",
+            "name": "Marshall, Brandon"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/ogalarra",
+            "name": "Galarraga, Omar"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/iwilson",
+            "name": "Wilson, Ira"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/ddore",
+            "name": "Dore, David"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/azullo",
+            "name": "Zullo, Andrew"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/bgenberg",
+            "name": "Genberg, Becky"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/dmwillia",
+            "name": "Williams, David"
+        }
+    ]
+}

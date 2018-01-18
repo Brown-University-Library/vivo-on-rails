@@ -1,0 +1,96 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jtidey",
+            "target": "http://vivo.brown.edu/individual/tchunmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/drohseno",
+            "target": "http://vivo.brown.edu/individual/tchunmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tchunmd",
+            "target": "http://vivo.brown.edu/individual/htreloar",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tchunmd",
+            "target": "http://vivo.brown.edu/individual/lh15",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tchunmd",
+            "target": "http://vivo.brown.edu/individual/erk",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tchunmd",
+            "target": "http://vivo.brown.edu/individual/jlinakis",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tchunmd",
+            "target": "http://vivo.brown.edu/individual/fluksmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tchunmd",
+            "target": "http://vivo.brown.edu/individual/aspirito",
+            "weight": 3
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jtidey",
+            "name": "Tidey, Jennifer"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/drohseno",
+            "name": "Rohsenow, Damaris"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/tchunmd",
+            "name": "Chun, Thomas"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/htreloar",
+            "name": "Padovano, Hayley"
+        },
+        {
+            "group": "Community Health",
+            "id": "http://vivo.brown.edu/individual/lh15",
+            "name": "Hernandez, Lynn"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/erk",
+            "name": "Katz, Emily"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/jlinakis",
+            "name": "Linakis, James"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/fluksmd",
+            "name": "Luks, Francois"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/aspirito",
+            "name": "Spirito, Anthony"
+        }
+    ]
+}

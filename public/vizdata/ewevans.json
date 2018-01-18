@@ -1,0 +1,96 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/ewevans",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/gpapando",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/jroth",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ablummd",
+            "target": "http://vivo.brown.edu/individual/jroth",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jroth",
+            "target": "http://vivo.brown.edu/individual/wlafranc",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jroth",
+            "target": "http://vivo.brown.edu/individual/ewevans",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jroth",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lcardell",
+            "name": "Rathier, Lucille"
+        },
+        {
+            "group": "Neurology",
+            "id": "http://vivo.brown.edu/individual/ablummd",
+            "name": "Blum, Andrew"
+        },
+        {
+            "group": "Neurology",
+            "id": "http://vivo.brown.edu/individual/jroth",
+            "name": "Roth, Julie"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jdavisph",
+            "name": "Davis, Jennifer"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/wlafranc",
+            "name": "Lafrance, W"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/ewevans",
+            "name": "Evans, Erin"
+        },
+        {
+            "group": "Biostatistics",
+            "id": "http://vivo.brown.edu/individual/gpapando",
+            "name": "Papandonatos, George"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/gtremont",
+            "name": "Tremont, Geoffrey"
+        }
+    ]
+}

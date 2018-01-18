@@ -1,0 +1,116 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/ariese",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sp157",
+            "target": "http://vivo.brown.edu/individual/ariese",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sp157",
+            "target": "http://vivo.brown.edu/individual/ec78",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/adrucker",
+            "target": "http://vivo.brown.edu/individual/ec78",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mranney",
+            "target": "http://vivo.brown.edu/individual/ariese",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ariese",
+            "target": "http://vivo.brown.edu/individual/mmellomd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ariese",
+            "target": "http://vivo.brown.edu/individual/dsteelem",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ariese",
+            "target": "http://vivo.brown.edu/individual/agjelsvi",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ariese",
+            "target": "http://vivo.brown.edu/individual/jw9",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ec78",
+            "target": "http://vivo.brown.edu/individual/wl68",
+            "weight": 13
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/pgeorge",
+            "name": "George, Paul"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/sp157",
+            "name": "Park, Sangshin"
+        },
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/adrucker",
+            "name": "Drucker, Aaron"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/mranney",
+            "name": "Ranney, Megan"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/ariese",
+            "name": "Riese, Alison"
+        },
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/ec78",
+            "name": "Cho, Eunyoung"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/mmellomd",
+            "name": "Mello, Michael"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/dsteelem",
+            "name": "Steele, Dale"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/agjelsvi",
+            "name": "Gjelsvik, Annie"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/wl68",
+            "name": "Li, Wen-Qing"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/jw9",
+            "name": "White, Jordan"
+        }
+    ]
+}

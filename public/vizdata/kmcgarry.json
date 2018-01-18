@@ -1,0 +1,96 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/gpareek",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jrenzull",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/slu",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 7
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/fluksmd",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/jquintos",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/kmcgarry",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/asbrodsk",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/gpareek",
+            "name": "Pareek, Gyan"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/jrenzull",
+            "name": "Renzulli, Joseph"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/slu",
+            "name": "Lu, Shaolei"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/smangray",
+            "name": "Mangray, Shamlal"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/fluksmd",
+            "name": "Luks, Francois"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/jquintos",
+            "name": "Quintos, Jose"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/kmcgarry",
+            "name": "McGarry, Kelly"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/cschorlp",
+            "name": "Schorl, Christoph"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/asbrodsk",
+            "name": "Brodsky, Alexander"
+        }
+    ]
+}

@@ -1,0 +1,141 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jrmorgan",
+            "target": "http://vivo.brown.edu/individual/gwessel",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rfreiman",
+            "target": "http://vivo.brown.edu/individual/gwessel",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gwessel",
+            "target": "http://vivo.brown.edu/individual/myajima",
+            "weight": 14
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gwessel",
+            "target": "http://vivo.brown.edu/individual/rcretonp",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gwessel",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gwessel",
+            "target": "http://vivo.brown.edu/individual/wfairbro",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gwessel",
+            "target": "http://vivo.brown.edu/individual/rreenan",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gwessel",
+            "target": "http://vivo.brown.edu/individual/shaley",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gwessel",
+            "target": "http://vivo.brown.edu/individual/cd7",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rcretonp",
+            "target": "http://vivo.brown.edu/individual/jkreilin",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jkreilin",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jkreilin",
+            "target": "http://vivo.brown.edu/individual/kmowryph",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jkreilin",
+            "target": "http://vivo.brown.edu/individual/jsedivy",
+            "weight": 4
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jrmorgan",
+            "name": "Morgan, Jeffrey"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/rfreiman",
+            "name": "Freiman, Richard"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/gwessel",
+            "name": "Wessel, Gary"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/rcretonp",
+            "name": "Creton, Robbert"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/jkreilin",
+            "name": "Kreiling, Jill"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/jsedivy",
+            "name": "Sedivy, John"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/kmowryph",
+            "name": "Mowry, Kimberly"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/myajima",
+            "name": "Yajima, Mamiko"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/nneretti",
+            "name": "Neretti, Nicola"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/wfairbro",
+            "name": "Fairbrother, William"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/rreenan",
+            "name": "Reenan, Robert"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/shaley",
+            "name": "Haley, Sheila"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/cd7",
+            "name": "Dunn, Casey"
+        }
+    ]
+}

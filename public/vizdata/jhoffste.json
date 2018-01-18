@@ -1,0 +1,26 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jhoffste",
+            "target": "http://vivo.brown.edu/individual/johsilve",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Mathematics",
+            "id": "http://vivo.brown.edu/individual/jhoffste",
+            "name": "Hoffstein, Jeffrey"
+        },
+        {
+            "group": "Mathematics",
+            "id": "http://vivo.brown.edu/individual/johsilve",
+            "name": "Silverman, Joseph"
+        }
+    ]
+}

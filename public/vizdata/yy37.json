@@ -1,0 +1,36 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jili",
+            "target": "http://vivo.brown.edu/individual/dasobel",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jili",
+            "target": "http://vivo.brown.edu/individual/yy37",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Education",
+            "id": "http://vivo.brown.edu/individual/jili",
+            "name": "Li, Jin"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/dasobel",
+            "name": "Sobel, David"
+        },
+        {
+            "group": "Education",
+            "id": "http://vivo.brown.edu/individual/yy37",
+            "name": "Yamamoto, Yoko"
+        }
+    ]
+}

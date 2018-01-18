@@ -1,0 +1,36 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/kbreuer",
+            "target": "http://vivo.brown.edu/individual/tpowers",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rpelcovi",
+            "target": "http://vivo.brown.edu/individual/tpowers",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/kbreuer",
+            "name": "Breuer, Kenneth"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/rpelcovi",
+            "name": "Pelcovits, Robert"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/tpowers",
+            "name": "Powers, Thomas"
+        }
+    ]
+}

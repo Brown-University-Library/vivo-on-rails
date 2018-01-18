@@ -1,0 +1,106 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/rc30",
+            "target": "http://vivo.brown.edu/individual/jf32",
+            "weight": 34
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sdudley",
+            "target": "http://vivo.brown.edu/individual/jf32",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/aehsan",
+            "target": "http://vivo.brown.edu/individual/jf32",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/js29",
+            "target": "http://vivo.brown.edu/individual/jf32",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rabid",
+            "target": "http://vivo.brown.edu/individual/jf32",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jrudolp1",
+            "target": "http://vivo.brown.edu/individual/jf32",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jf32",
+            "target": "http://vivo.brown.edu/individual/gchoudha",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jf32",
+            "target": "http://vivo.brown.edu/individual/eoharrin",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jf32",
+            "target": "http://vivo.brown.edu/individual/yguan",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/rc30",
+            "name": "Clements, Richard"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/sdudley",
+            "name": "Dudley, Samuel"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/aehsan",
+            "name": "Ehsan, Afshin"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/js29",
+            "name": "Scott, Jeffrey"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/rabid",
+            "name": "Abid, Ruhul"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/jrudolp1",
+            "name": "Rudolph, James"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/jf32",
+            "name": "Feng, Jun"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/gchoudha",
+            "name": "Choudhary, Gaurav"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/eoharrin",
+            "name": "Harrington, Elizabeth"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/yguan",
+            "name": "Guan, Yingjie"
+        }
+    ]
+}

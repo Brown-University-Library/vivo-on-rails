@@ -1,0 +1,26 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/gdeclipp",
+            "target": "http://vivo.brown.edu/individual/bknight",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Economics",
+            "id": "http://vivo.brown.edu/individual/gdeclipp",
+            "name": "De Clippel, Geoffroy"
+        },
+        {
+            "group": "Economics",
+            "id": "http://vivo.brown.edu/individual/bknight",
+            "name": "Knight, Brian"
+        }
+    ]
+}

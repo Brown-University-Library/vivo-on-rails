@@ -1,0 +1,56 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/sclemens",
+            "target": "http://vivo.brown.edu/individual/wprell",
+            "weight": 8
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wprell",
+            "target": "http://vivo.brown.edu/individual/yohuang",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wprell",
+            "target": "http://vivo.brown.edu/individual/dmurray",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wprell",
+            "target": "http://vivo.brown.edu/individual/therbert",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/sclemens",
+            "name": "Clemens, Steven"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/wprell",
+            "name": "Prell, Warren"
+        },
+        {
+            "group": "Geological Sciences",
+            "id": "http://vivo.brown.edu/individual/yohuang",
+            "name": "Huang, Yongsong"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/dmurray",
+            "name": "Murray, David"
+        },
+        {
+            "group": "Environmental Studies",
+            "id": "http://vivo.brown.edu/individual/therbert",
+            "name": "Herbert, Timothy"
+        }
+    ]
+}

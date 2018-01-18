@@ -1,0 +1,51 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jhirth",
+            "target": "http://vivo.brown.edu/individual/dforsyth",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jhirth",
+            "target": "http://vivo.brown.edu/individual/kfischer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asaal",
+            "target": "http://vivo.brown.edu/individual/dforsyth",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dforsyth",
+            "target": "http://vivo.brown.edu/individual/kfischer",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/jhirth",
+            "name": "Hirth, Greg"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/asaal",
+            "name": "Saal, Alberto"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/dforsyth",
+            "name": "Forsyth, Donald"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/kfischer",
+            "name": "Fischer, Karen"
+        }
+    ]
+}

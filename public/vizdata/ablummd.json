@@ -1,0 +1,266 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/lhochber",
+            "target": "http://vivo.brown.edu/individual/jsimeral",
+            "weight": 8
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lhochber",
+            "target": "http://vivo.brown.edu/individual/ablummd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lhochber",
+            "target": "http://vivo.brown.edu/individual/jdonoghu",
+            "weight": 17
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lhochber",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lhochber",
+            "target": "http://vivo.brown.edu/individual/dborton",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lhochber",
+            "target": "http://vivo.brown.edu/individual/jrmorgan",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/jroth",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcardell",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkeitner",
+            "target": "http://vivo.brown.edu/individual/wlafranc",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/estopamd",
+            "target": "http://vivo.brown.edu/individual/wlafranc",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ewevans",
+            "target": "http://vivo.brown.edu/individual/jroth",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpapando",
+            "target": "http://vivo.brown.edu/individual/wlafranc",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpapando",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpapando",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wlafranc",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wlafranc",
+            "target": "http://vivo.brown.edu/individual/gbaird",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wlafranc",
+            "target": "http://vivo.brown.edu/individual/ablummd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wlafranc",
+            "target": "http://vivo.brown.edu/individual/jroth",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wlafranc",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wlafranc",
+            "target": "http://vivo.brown.edu/individual/jmachan",
+            "weight": 7
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bottmd",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bottmd",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ablummd",
+            "target": "http://vivo.brown.edu/individual/jroth",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ablummd",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ablummd",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jroth",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jdavisph",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jdavisph",
+            "target": "http://vivo.brown.edu/individual/pgozalo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgozalo",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/lhochber",
+            "name": "Hochberg, Leigh"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lcardell",
+            "name": "Rathier, Lucille"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/gkeitner",
+            "name": "Keitner, Gabor"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/estopamd",
+            "name": "Stopa, Edward"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/ewevans",
+            "name": "Evans, Erin"
+        },
+        {
+            "group": "Biostatistics",
+            "id": "http://vivo.brown.edu/individual/gpapando",
+            "name": "Papandonatos, George"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dborton",
+            "name": "Borton, David"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jrmorgan",
+            "name": "Morgan, Jeffrey"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jsimeral",
+            "name": "Simeral, John"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/wlafranc",
+            "name": "Lafrance, W"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/gbaird",
+            "name": "Baird, Grayson"
+        },
+        {
+            "group": "Clin Neurosciences (Neurology)",
+            "id": "http://vivo.brown.edu/individual/bottmd",
+            "name": "Ott, Brian"
+        },
+        {
+            "group": "Neurology",
+            "id": "http://vivo.brown.edu/individual/ablummd",
+            "name": "Blum, Andrew"
+        },
+        {
+            "group": "Neurology",
+            "id": "http://vivo.brown.edu/individual/jroth",
+            "name": "Roth, Julie"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jcrisco",
+            "name": "Crisco, Joseph"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jdavisph",
+            "name": "Davis, Jennifer"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jdonoghu",
+            "name": "Donoghue, John"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/pgozalo",
+            "name": "Gozalo, Pedro"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/anurmikk",
+            "name": "Nurmikko, Arto"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jmachan",
+            "name": "Machan, Jason"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/gtremont",
+            "name": "Tremont, Geoffrey"
+        }
+    ]
+}

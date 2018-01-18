@@ -1,0 +1,211 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/skshaw",
+            "target": "http://vivo.brown.edu/individual/rgong",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/skshaw",
+            "target": "http://vivo.brown.edu/individual/dmorrisp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rgong",
+            "target": "http://vivo.brown.edu/individual/lwang16",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rgong",
+            "target": "http://vivo.brown.edu/individual/dmorrisp",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rgong",
+            "target": "http://vivo.brown.edu/individual/ldworkin",
+            "weight": 18
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ekerns",
+            "target": "http://vivo.brown.edu/individual/suhu",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dmorrisp",
+            "target": "http://vivo.brown.edu/individual/gpareek",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dmorrisp",
+            "target": "http://vivo.brown.edu/individual/ldworkin",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rgohhmd",
+            "target": "http://vivo.brown.edu/individual/suhu",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fakhlagh",
+            "target": "http://vivo.brown.edu/individual/gjaymdph",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fakhlagh",
+            "target": "http://vivo.brown.edu/individual/jwandsmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fakhlagh",
+            "target": "http://vivo.brown.edu/individual/dsteelem",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fakhlagh",
+            "target": "http://vivo.brown.edu/individual/jmachan",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fakhlagh",
+            "target": "http://vivo.brown.edu/individual/jlinakis",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fakhlagh",
+            "target": "http://vivo.brown.edu/individual/suhu",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fakhlagh",
+            "target": "http://vivo.brown.edu/individual/ldworkin",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tmurphym",
+            "target": "http://vivo.brown.edu/individual/mbelandm",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tmurphym",
+            "target": "http://vivo.brown.edu/individual/gbaird",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tmurphym",
+            "target": "http://vivo.brown.edu/individual/ldworkin",
+            "weight": 11
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tmurphym",
+            "target": "http://vivo.brown.edu/individual/jmachan",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mbelandm",
+            "target": "http://vivo.brown.edu/individual/suhu",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/suhu",
+            "target": "http://vivo.brown.edu/individual/ldworkin",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/skshaw",
+            "name": "Shaw, Sunil"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/rgong",
+            "name": "Gong, Rujun"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/ekerns",
+            "name": "Kerns, Eric"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/dmorrisp",
+            "name": "Morris, David"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/rgohhmd",
+            "name": "Gohh, Reginald"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/fakhlagh",
+            "name": "Akhlaghi, Fatemeh"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/tmurphym",
+            "name": "Murphy, Timothy"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/lwang16",
+            "name": "Wang, Li Juan"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/gpareek",
+            "name": "Pareek, Gyan"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/dsteelem",
+            "name": "Steele, Dale"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/jwandsmd",
+            "name": "Wands, Jack"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/gbaird",
+            "name": "Baird, Grayson"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jmachan",
+            "name": "Machan, Jason"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/gjaymdph",
+            "name": "Jay, Gregory"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/mbelandm",
+            "name": "Beland, Michael"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/jlinakis",
+            "name": "Linakis, James"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/suhu",
+            "name": "Hu, Susie"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/ldworkin",
+            "name": "Dworkin, Lance"
+        }
+    ]
+}

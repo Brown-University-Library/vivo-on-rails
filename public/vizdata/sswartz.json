@@ -1,0 +1,141 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jcrisco",
+            "target": "http://vivo.brown.edu/individual/ebrainer",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/troberts",
+            "target": "http://vivo.brown.edu/individual/chai",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/troberts",
+            "target": "http://vivo.brown.edu/individual/sswartz",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/troberts",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/bfleming",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/sswartz",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/sgatesy",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/dcjackso",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tpowers",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkarniad",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gtaubin",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbreuer",
+            "target": "http://vivo.brown.edu/individual/sswartz",
+            "weight": 17
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbreuer",
+            "target": "http://vivo.brown.edu/individual/gjaymdph",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jcrisco",
+            "name": "Crisco, Joseph"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/troberts",
+            "name": "Roberts, Thomas"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/ebrainer",
+            "name": "Brainerd, Elizabeth"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/chai",
+            "name": "Hai, Chi-Ming"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/bfleming",
+            "name": "Fleming, Braden"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/sgatesy",
+            "name": "Gatesy, Stephen"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/tpowers",
+            "name": "Powers, Thomas"
+        },
+        {
+            "group": "Applied Mathematics",
+            "id": "http://vivo.brown.edu/individual/gkarniad",
+            "name": "Karniadakis, George"
+        },
+        {
+            "group": "Computer Science",
+            "id": "http://vivo.brown.edu/individual/gtaubin",
+            "name": "Taubin, Gabriel"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/kbreuer",
+            "name": "Breuer, Kenneth"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/dcjackso",
+            "name": "Jackson, Donald"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/sswartz",
+            "name": "Swartz, Sharon"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/gjaymdph",
+            "name": "Jay, Gregory"
+        }
+    ]
+}

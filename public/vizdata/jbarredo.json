@@ -1,0 +1,181 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/ssloman",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/mjfrank",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/jbarredo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/sgarnaat",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/jbarredo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/dsheinbe",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/kscaplen",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/anurmikk",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/jsedivy",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/dborton",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/bconnors",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lpricemd",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 16
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rseiferp",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jbarredo",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/atyrka",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 16
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/nphilip",
+            "target": "http://vivo.brown.edu/individual/lcarpent",
+            "weight": 18
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mvantwou",
+            "name": "van 't Wout, Mascha"
+        },
+        {
+            "group": "Psychology",
+            "id": "http://vivo.brown.edu/individual/rburwell",
+            "name": "Burwell, Rebecca"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/kscaplen",
+            "name": "Scaplen, Kristin"
+        },
+        {
+            "group": "Cognitive and Linguistic Sciences",
+            "id": "http://vivo.brown.edu/individual/ssloman",
+            "name": "Sloman, Steven"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lpricemd",
+            "name": "Price, Lawrence"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/jsedivy",
+            "name": "Sedivy, John"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dborton",
+            "name": "Borton, David"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/sgarnaat",
+            "name": "Garnaat, Sarah"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/rseiferp",
+            "name": "Seifer, Ronald"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jbarredo",
+            "name": "Barredo, Jennifer"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/atyrka",
+            "name": "Tyrka, Audrey"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/nphilip",
+            "name": "Philip, Noah"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/anurmikk",
+            "name": "Nurmikko, Arto"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/bconnors",
+            "name": "Connors, Barry"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/dsheinbe",
+            "name": "Sheinberg, David"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lcarpent",
+            "name": "Carpenter, Linda"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/mjfrank",
+            "name": "Frank, Michael"
+        }
+    ]
+}

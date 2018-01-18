@@ -1,0 +1,151 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/sswartz",
+            "target": "http://vivo.brown.edu/individual/ebrainer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sswartz",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 17
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sswartz",
+            "target": "http://vivo.brown.edu/individual/troberts",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/qilu",
+            "target": "http://vivo.brown.edu/individual/chai",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/chai",
+            "target": "http://vivo.brown.edu/individual/blechner",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/chai",
+            "target": "http://vivo.brown.edu/individual/srounds",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/chai",
+            "target": "http://vivo.brown.edu/individual/bstonest",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/chai",
+            "target": "http://vivo.brown.edu/individual/troberts",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/chai",
+            "target": "http://vivo.brown.edu/individual/eoharrin",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/troberts",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tpowers",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkarniad",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbreuer",
+            "target": "http://vivo.brown.edu/individual/gtaubin",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbreuer",
+            "target": "http://vivo.brown.edu/individual/gjaymdph",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/sswartz",
+            "name": "Swartz, Sharon"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/qilu",
+            "name": "Lu, Qing"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/chai",
+            "name": "Hai, Chi-Ming"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/troberts",
+            "name": "Roberts, Thomas"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/ebrainer",
+            "name": "Brainerd, Elizabeth"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/eoharrin",
+            "name": "Harrington, Elizabeth"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/tpowers",
+            "name": "Powers, Thomas"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/blechner",
+            "name": "Lechner, Beatrice"
+        },
+        {
+            "group": "Applied Mathematics",
+            "id": "http://vivo.brown.edu/individual/gkarniad",
+            "name": "Karniadakis, George"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/srounds",
+            "name": "Rounds, Sharon"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/kbreuer",
+            "name": "Breuer, Kenneth"
+        },
+        {
+            "group": "Computer Science",
+            "id": "http://vivo.brown.edu/individual/gtaubin",
+            "name": "Taubin, Gabriel"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/bstonest",
+            "name": "Stonestreet, Barbara"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/gjaymdph",
+            "name": "Jay, Gregory"
+        }
+    ]
+}

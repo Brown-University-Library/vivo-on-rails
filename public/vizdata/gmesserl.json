@@ -1,0 +1,56 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/gmesserl",
+            "target": "http://vivo.brown.edu/individual/gpalomak",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dcoustan",
+            "target": "http://vivo.brown.edu/individual/gpalomak",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smcgarve",
+            "target": "http://vivo.brown.edu/individual/gpalomak",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpalomak",
+            "target": "http://vivo.brown.edu/individual/jhaddow",
+            "weight": 165
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/gmesserl",
+            "name": "Messerlian, Geralyn"
+        },
+        {
+            "group": "Obstetrics and Gynecology",
+            "id": "http://vivo.brown.edu/individual/dcoustan",
+            "name": "Coustan, Donald"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/smcgarve",
+            "name": "McGarvey, Stephen"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/gpalomak",
+            "name": "Palomaki, Glenn"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/jhaddow",
+            "name": "Haddow, James"
+        }
+    ]
+}

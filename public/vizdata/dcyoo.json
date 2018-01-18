@@ -1,0 +1,136 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/idahabre",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jgraceph",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpapando",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 15
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/estopamd",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jedonahu",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wheindel",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 11
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pmalloyp",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bottmd",
+            "target": "http://vivo.brown.edu/individual/pgozalo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bottmd",
+            "target": "http://vivo.brown.edu/individual/efesta",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bottmd",
+            "target": "http://vivo.brown.edu/individual/jdavisph",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bottmd",
+            "target": "http://vivo.brown.edu/individual/dcyoo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bottmd",
+            "target": "http://vivo.brown.edu/individual/gtremont",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/idahabre",
+            "name": "Dahabreh, Issa"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jgraceph",
+            "name": "Grace, Janet"
+        },
+        {
+            "group": "Biostatistics",
+            "id": "http://vivo.brown.edu/individual/gpapando",
+            "name": "Papandonatos, George"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/estopamd",
+            "name": "Stopa, Edward"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/jedonahu",
+            "name": "Donahue, John"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/wheindel",
+            "name": "Heindel, William"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/pmalloyp",
+            "name": "Malloy, Paul"
+        },
+        {
+            "group": "Clin Neurosciences (Neurology)",
+            "id": "http://vivo.brown.edu/individual/bottmd",
+            "name": "Ott, Brian"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/pgozalo",
+            "name": "Gozalo, Pedro"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/efesta",
+            "name": "Festa, Elena"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jdavisph",
+            "name": "Davis, Jennifer"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/dcyoo",
+            "name": "Yoo, Don"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/gtremont",
+            "name": "Tremont, Geoffrey"
+        }
+    ]
+}

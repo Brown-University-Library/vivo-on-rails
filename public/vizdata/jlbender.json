@@ -1,0 +1,26 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/mjohnso1",
+            "target": "http://vivo.brown.edu/individual/jlbender",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/mjohnso1",
+            "name": "Johnson, Mark"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/jlbender",
+            "name": "Bender, Judith"
+        }
+    ]
+}

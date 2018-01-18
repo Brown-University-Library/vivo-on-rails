@@ -1,0 +1,36 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/adahlber",
+            "target": "http://vivo.brown.edu/individual/gjogl",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dcane",
+            "target": "http://vivo.brown.edu/individual/gjogl",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/adahlber",
+            "name": "Dahlberg, Albert"
+        },
+        {
+            "group": "Chemistry",
+            "id": "http://vivo.brown.edu/individual/dcane",
+            "name": "Cane, David"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/gjogl",
+            "name": "Jogl, Gerwald"
+        }
+    ]
+}

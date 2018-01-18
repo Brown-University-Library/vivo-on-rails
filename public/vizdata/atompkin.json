@@ -1,0 +1,186 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/dgolijan",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kh9",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jaliotta",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gturini",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/aamin",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jmachan",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpareek",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 14
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sschiffm",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/anunn",
+            "target": "http://vivo.brown.edu/individual/agardner",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/atompkin",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/atompkin",
+            "target": "http://vivo.brown.edu/individual/agardner",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gbaird",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/agardner",
+            "target": "http://vivo.brown.edu/individual/llagasse",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/agardner",
+            "target": "http://vivo.brown.edu/individual/arana",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/agardner",
+            "target": "http://vivo.brown.edu/individual/ejcarter",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/agardner",
+            "target": "http://vivo.brown.edu/individual/jrichmph",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/dgolijan",
+            "name": "Golijanin, Dragan"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/kh9",
+            "name": "Hwang, Kathleen"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/jaliotta",
+            "name": "Aliotta, Jason"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/smangray",
+            "name": "Mangray, Shamlal"
+        },
+        {
+            "group": "Medical Science",
+            "id": "http://vivo.brown.edu/individual/gturini",
+            "name": "Turini, George"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/aamin",
+            "name": "Amin, Ali"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jmachan",
+            "name": "Machan, Jason"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/gpareek",
+            "name": "Pareek, Gyan"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/sschiffm",
+            "name": "Schiff, Stephen"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/anunn",
+            "name": "Nunn, Amy"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/atompkin",
+            "name": "Tompkins, Andrew"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/gbaird",
+            "name": "Baird, Grayson"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/agardner",
+            "name": "Gardner, Adrian"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/arana",
+            "name": "Rana, Aadia"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/ejcarter",
+            "name": "Carter, E."
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/llagasse",
+            "name": "LaGasse, Linda"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/jrenzull",
+            "name": "Renzulli, Joseph"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/jrichmph",
+            "name": "Rich, Josiah"
+        }
+    ]
+}

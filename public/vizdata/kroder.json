@@ -1,0 +1,56 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/dterenty",
+            "target": "http://vivo.brown.edu/individual/pdubiele",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dterenty",
+            "target": "http://vivo.brown.edu/individual/aolszews",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dterenty",
+            "target": "http://vivo.brown.edu/individual/kroder",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dterenty",
+            "target": "http://vivo.brown.edu/individual/nahsan1",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/dterenty",
+            "name": "Terentyev, Dmitry"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/pdubiele",
+            "name": "Dubielecka-Szczerba, Patrycja"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/kroder",
+            "name": "Roder, Karim"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/aolszews",
+            "name": "Olszewski, Adam"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/nahsan1",
+            "name": "Ahsan, Nagib"
+        }
+    ]
+}

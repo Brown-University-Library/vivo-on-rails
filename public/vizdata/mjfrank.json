@@ -1,0 +1,76 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/ssloman",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/mjfrank",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/jbarredo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/sgarnaat",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbath",
+            "target": "http://vivo.brown.edu/individual/mjfrank",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mvantwou",
+            "name": "van 't Wout, Mascha"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/kbath",
+            "name": "Bath, Kevin"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/nphilip",
+            "name": "Philip, Noah"
+        },
+        {
+            "group": "Cognitive and Linguistic Sciences",
+            "id": "http://vivo.brown.edu/individual/ssloman",
+            "name": "Sloman, Steven"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/mjfrank",
+            "name": "Frank, Michael"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jbarredo",
+            "name": "Barredo, Jennifer"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/sgarnaat",
+            "name": "Garnaat, Sarah"
+        }
+    ]
+}

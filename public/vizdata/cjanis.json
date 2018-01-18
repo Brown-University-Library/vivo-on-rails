@@ -1,0 +1,91 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/yohuang",
+            "target": "http://vivo.brown.edu/individual/jarussel",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/yohuang",
+            "target": "http://vivo.brown.edu/individual/cjanis",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/yohuang",
+            "target": "http://vivo.brown.edu/individual/wprell",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/yohuang",
+            "target": "http://vivo.brown.edu/individual/therbert",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/yohuang",
+            "target": "http://vivo.brown.edu/individual/sclemens",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/yohuang",
+            "target": "http://vivo.brown.edu/individual/ejedward",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cjanis",
+            "target": "http://vivo.brown.edu/individual/ejedward",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ejedward",
+            "target": "http://vivo.brown.edu/individual/cd7",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Geological Sciences",
+            "id": "http://vivo.brown.edu/individual/yohuang",
+            "name": "Huang, Yongsong"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/jarussel",
+            "name": "Russell, James"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/cjanis",
+            "name": "Janis, Christine"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/wprell",
+            "name": "Prell, Warren"
+        },
+        {
+            "group": "Environmental Studies",
+            "id": "http://vivo.brown.edu/individual/therbert",
+            "name": "Herbert, Timothy"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/sclemens",
+            "name": "Clemens, Steven"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/ejedward",
+            "name": "Edwards, Erika"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/cd7",
+            "name": "Dunn, Casey"
+        }
+    ]
+}

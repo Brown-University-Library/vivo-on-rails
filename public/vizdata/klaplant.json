@@ -1,0 +1,66 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/klaplant",
+            "target": "http://vivo.brown.edu/individual/lmermeld",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/nwardmd",
+            "target": "http://vivo.brown.edu/individual/lmermeld",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/nhudepoh",
+            "target": "http://vivo.brown.edu/individual/lmermeld",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ccunha",
+            "target": "http://vivo.brown.edu/individual/lmermeld",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lmermeld",
+            "target": "http://vivo.brown.edu/individual/emylonak",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/klaplant",
+            "name": "Laplante, Kerry"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/nwardmd",
+            "name": "Ward, Nicholas"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/nhudepoh",
+            "name": "Hudepohl, Nathan"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/ccunha",
+            "name": "Cunha, Cheston"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/lmermeld",
+            "name": "Mermel, Leonard"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/emylonak",
+            "name": "Mylonakis, Eleftherios"
+        }
+    ]
+}

@@ -1,0 +1,181 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jboxerma",
+            "target": "http://vivo.brown.edu/individual/mjayaram",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sswartz",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 17
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mjayaram",
+            "target": "http://vivo.brown.edu/individual/pkriz",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mjayaram",
+            "target": "http://vivo.brown.edu/individual/gkarniad",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mjayaram",
+            "target": "http://vivo.brown.edu/individual/jroggmd",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mjayaram",
+            "target": "http://vivo.brown.edu/individual/lkobayas",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mjayaram",
+            "target": "http://vivo.brown.edu/individual/ddupuymd",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/troberts",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkarniad",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkarniad",
+            "target": "http://vivo.brown.edu/individual/mainswor",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkarniad",
+            "target": "http://vivo.brown.edu/individual/zl25",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkarniad",
+            "target": "http://vivo.brown.edu/individual/xl24",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/xl24",
+            "target": "http://vivo.brown.edu/individual/hgao",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/xl24",
+            "target": "http://vivo.brown.edu/individual/zl25",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tpowers",
+            "target": "http://vivo.brown.edu/individual/kbreuer",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbreuer",
+            "target": "http://vivo.brown.edu/individual/gtaubin",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbreuer",
+            "target": "http://vivo.brown.edu/individual/gjaymdph",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/jboxerma",
+            "name": "Boxerman, Jerrold"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/sswartz",
+            "name": "Swartz, Sharon"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/mjayaram",
+            "name": "Jayaraman, Mahesh"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/troberts",
+            "name": "Roberts, Thomas"
+        },
+        {
+            "group": "Applied Mathematics",
+            "id": "http://vivo.brown.edu/individual/gkarniad",
+            "name": "Karniadakis, George"
+        },
+        {
+            "group": "Applied Mathematics",
+            "id": "http://vivo.brown.edu/individual/xl24",
+            "name": "Li, Xuejin"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/tpowers",
+            "name": "Powers, Thomas"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/lkobayas",
+            "name": "Kobayashi, Leo"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/hgao",
+            "name": "Gao, Huajian"
+        },
+        {
+            "group": "Applied Mathematics",
+            "id": "http://vivo.brown.edu/individual/mainswor",
+            "name": "Ainsworth, Mark"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/kbreuer",
+            "name": "Breuer, Kenneth"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/pkriz",
+            "name": "Kriz, Peter"
+        },
+        {
+            "group": "Computer Science",
+            "id": "http://vivo.brown.edu/individual/gtaubin",
+            "name": "Taubin, Gabriel"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/ddupuymd",
+            "name": "Dupuy, Damian"
+        },
+        {
+            "group": "Applied Mathematics",
+            "id": "http://vivo.brown.edu/individual/zl25",
+            "name": "Li, Zhen"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/jroggmd",
+            "name": "Rogg, Jeffrey"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/gjaymdph",
+            "name": "Jay, Gregory"
+        }
+    ]
+}

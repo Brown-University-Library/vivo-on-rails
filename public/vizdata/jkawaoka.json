@@ -1,0 +1,46 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/hhiggins",
+            "target": "http://vivo.brown.edu/individual/gkroumpo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jw102",
+            "target": "http://vivo.brown.edu/individual/gkroumpo",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkroumpo",
+            "target": "http://vivo.brown.edu/individual/jkawaoka",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/hhiggins",
+            "name": "Higgins, H"
+        },
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/jw102",
+            "name": "Walker, Joanna"
+        },
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/gkroumpo",
+            "name": "Kroumpouzos, George"
+        },
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/jkawaoka",
+            "name": "Kawaoka, John"
+        }
+    ]
+}

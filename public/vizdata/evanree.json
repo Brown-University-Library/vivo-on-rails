@@ -1,0 +1,356 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/aspirito",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/evanree",
+            "target": "http://vivo.brown.edu/individual/kmsharke",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/evanree",
+            "target": "http://vivo.brown.edu/individual/dhbarker",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/evanree",
+            "target": "http://vivo.brown.edu/individual/mcarskad",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/evanree",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jrudolp1",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/emmorrow",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/whadley",
+            "target": "http://vivo.brown.edu/individual/dhbarker",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/blu",
+            "target": "http://vivo.brown.edu/individual/kmsharke",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/blu",
+            "target": "http://vivo.brown.edu/individual/mcarskad",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tpearlst",
+            "target": "http://vivo.brown.edu/individual/kmsharke",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tpearlst",
+            "target": "http://vivo.brown.edu/individual/mcarskad",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/ddickste",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/ejelalia",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/vknopik",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/kmsharke",
+            "weight": 14
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/dhbarker",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/jmachan",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/rherz",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/rseiferp",
+            "weight": 19
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/eloucks",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mcarskad",
+            "target": "http://vivo.brown.edu/individual/ceatonmd",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ceatonmd",
+            "target": "http://vivo.brown.edu/individual/kmsharke",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/vmor",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pmalloyp",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rseiferp",
+            "target": "http://vivo.brown.edu/individual/kmsharke",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rseiferp",
+            "target": "http://vivo.brown.edu/individual/dhbarker",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lbrownmd",
+            "target": "http://vivo.brown.edu/individual/dhbarker",
+            "weight": 7
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ejelalia",
+            "target": "http://vivo.brown.edu/individual/dhbarker",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/vknopik",
+            "target": "http://vivo.brown.edu/individual/kmsharke",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kmsharke",
+            "target": "http://vivo.brown.edu/individual/gbourjei",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kmsharke",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kmsharke",
+            "target": "http://vivo.brown.edu/individual/jmachan",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kmsharke",
+            "target": "http://vivo.brown.edu/individual/dhbarker",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kmsharke",
+            "target": "http://vivo.brown.edu/individual/eloucks",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dhbarker",
+            "target": "http://vivo.brown.edu/individual/mm171",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dhbarker",
+            "target": "http://vivo.brown.edu/individual/mpcarey",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dhbarker",
+            "target": "http://vivo.brown.edu/individual/rherz",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dhbarker",
+            "target": "http://vivo.brown.edu/individual/chouck",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/nbarnett",
+            "target": "http://vivo.brown.edu/individual/rnjones",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rnjones",
+            "target": "http://vivo.brown.edu/individual/ddickste",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/aspirito",
+            "name": "Spirito, Anthony"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/evanree",
+            "name": "Van Reen, Eliza"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/jrudolp1",
+            "name": "Rudolph, James"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/emmorrow",
+            "name": "Morrow, Eric"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/whadley",
+            "name": "Hadley, Wendy"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/blu",
+            "name": "Lu, Bing"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/tpearlst",
+            "name": "Pearlstein, Teri"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mcarskad",
+            "name": "Carskadon, Mary"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/ceatonmd",
+            "name": "Eaton, Charles"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/vmor",
+            "name": "Mor, Vincent"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/pmalloyp",
+            "name": "Malloy, Paul"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/rseiferp",
+            "name": "Seifer, Ronald"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lbrownmd",
+            "name": "Brown, Larry"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/ejelalia",
+            "name": "Jelalian, Elissa"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/vknopik",
+            "name": "Knopik, Valerie"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/kmsharke",
+            "name": "Sharkey, Katherine"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/dhbarker",
+            "name": "Barker, David"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/gbourjei",
+            "name": "Bourjeily, Ghada"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/nbarnett",
+            "name": "Barnett, Nancy"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/rnjones",
+            "name": "Jones, Rich"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/ddickste",
+            "name": "Dickstein, Daniel"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/eloucks",
+            "name": "Loucks, Eric"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jmachan",
+            "name": "Machan, Jason"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mm171",
+            "name": "McCullough, Mary Beth"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mpcarey",
+            "name": "Carey, Michael"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/rherz",
+            "name": "Herz, Rachel"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/chouck",
+            "name": "Houck, Christopher"
+        }
+    ]
+}

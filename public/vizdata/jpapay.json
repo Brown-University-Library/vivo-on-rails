@@ -1,0 +1,26 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jpapay",
+            "target": "http://vivo.brown.edu/individual/mkraft",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Education",
+            "id": "http://vivo.brown.edu/individual/jpapay",
+            "name": "Papay, John"
+        },
+        {
+            "group": "Education",
+            "id": "http://vivo.brown.edu/individual/mkraft",
+            "name": "Kraft, Matthew"
+        }
+    ]
+}

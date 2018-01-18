@@ -1,0 +1,166 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/sswartz",
+            "target": "http://vivo.brown.edu/individual/ebrainer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jfranck",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bfleming",
+            "target": "http://vivo.brown.edu/individual/ebrainer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bfleming",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 14
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ahdaniel",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cf5",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jblume",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dcjackso",
+            "target": "http://vivo.brown.edu/individual/ebrainer",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/sgatesy",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lresnikp",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sgatesy",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jcrisco",
+            "target": "http://vivo.brown.edu/individual/rterekmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jcrisco",
+            "target": "http://vivo.brown.edu/individual/jmachan",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jcrisco",
+            "target": "http://vivo.brown.edu/individual/wlafranc",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jcrisco",
+            "target": "http://vivo.brown.edu/individual/gjaymdph",
+            "weight": 6
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/sswartz",
+            "name": "Swartz, Sharon"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jfranck",
+            "name": "Franck, Jennifer"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/bfleming",
+            "name": "Fleming, Braden"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/ahdaniel",
+            "name": "Daniels, Alan"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/cf5",
+            "name": "Franck, Christian"
+        },
+        {
+            "group": "French Studies",
+            "id": "http://vivo.brown.edu/individual/jblume",
+            "name": "Blume, Janet"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/dcjackso",
+            "name": "Jackson, Donald"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/ebrainer",
+            "name": "Brainerd, Elizabeth"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/lresnikp",
+            "name": "Resnik, Linda"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/sgatesy",
+            "name": "Gatesy, Stephen"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jcrisco",
+            "name": "Crisco, Joseph"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jmachan",
+            "name": "Machan, Jason"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/rterekmd",
+            "name": "Terek, Richard"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/wlafranc",
+            "name": "Lafrance, W"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/gjaymdph",
+            "name": "Jay, Gregory"
+        }
+    ]
+}

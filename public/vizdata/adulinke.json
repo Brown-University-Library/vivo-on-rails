@@ -1,0 +1,81 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/wrakowsk",
+            "target": "http://vivo.brown.edu/individual/prisciad",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ceatonmd",
+            "target": "http://vivo.brown.edu/individual/prisciad",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rgoldman",
+            "target": "http://vivo.brown.edu/individual/prisciad",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/prisciad",
+            "target": "http://vivo.brown.edu/individual/adulinke",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/prisciad",
+            "target": "http://vivo.brown.edu/individual/kgansphd",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/adulinke",
+            "target": "http://vivo.brown.edu/individual/kgansphd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kgansphd",
+            "target": "http://vivo.brown.edu/individual/bbockphd",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/wrakowsk",
+            "name": "Rakowski, William"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/ceatonmd",
+            "name": "Eaton, Charles"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/rgoldman",
+            "name": "Goldman, Roberta"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/prisciad",
+            "name": "Risica, Patricia"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/adulinke",
+            "name": "Keita, Akilah"
+        },
+        {
+            "group": "Behavioral and Social Sciences",
+            "id": "http://vivo.brown.edu/individual/kgansphd",
+            "name": "Gans, Kim"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/bbockphd",
+            "name": "Bock, Beth"
+        }
+    ]
+}

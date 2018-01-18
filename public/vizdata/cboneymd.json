@@ -1,0 +1,66 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/jquintos",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jquintos",
+            "target": "http://vivo.brown.edu/individual/emmorrow",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jquintos",
+            "target": "http://vivo.brown.edu/individual/cboneymd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jquintos",
+            "target": "http://vivo.brown.edu/individual/jmshapir",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jquintos",
+            "target": "http://vivo.brown.edu/individual/lswartzt",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/smangray",
+            "name": "Mangray, Shamlal"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/jquintos",
+            "name": "Quintos, Jose"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/emmorrow",
+            "name": "Morrow, Eric"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/cboneymd",
+            "name": "Boney, Charlotte"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/jmshapir",
+            "name": "Shapiro, Jason"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/lswartzt",
+            "name": "Swartz Topor, Lisa"
+        }
+    ]
+}

@@ -1,0 +1,186 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/idahabre",
+            "target": "http://vivo.brown.edu/individual/bottmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/idahabre",
+            "target": "http://vivo.brown.edu/individual/ttrikali",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/idahabre",
+            "target": "http://vivo.brown.edu/individual/jl122",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/idahabre",
+            "target": "http://vivo.brown.edu/individual/ebalk",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/idahabre",
+            "target": "http://vivo.brown.edu/individual/dsteelem",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/idahabre",
+            "target": "http://vivo.brown.edu/individual/cschmid",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dwazermd",
+            "target": "http://vivo.brown.edu/individual/cschmid",
+            "weight": 8
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dwazermd",
+            "target": "http://vivo.brown.edu/individual/ebalk",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jl122",
+            "target": "http://vivo.brown.edu/individual/ttrikali",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jl122",
+            "target": "http://vivo.brown.edu/individual/cschmid",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jl122",
+            "target": "http://vivo.brown.edu/individual/ebalk",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebalk",
+            "target": "http://vivo.brown.edu/individual/vsung",
+            "weight": 9
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebalk",
+            "target": "http://vivo.brown.edu/individual/clcarber",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebalk",
+            "target": "http://vivo.brown.edu/individual/ttrikali",
+            "weight": 12
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebalk",
+            "target": "http://vivo.brown.edu/individual/cschmid",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ml117",
+            "target": "http://vivo.brown.edu/individual/ttrikali",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/iwilson",
+            "target": "http://vivo.brown.edu/individual/ttrikali",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dkielmd",
+            "target": "http://vivo.brown.edu/individual/ttrikali",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/al16",
+            "target": "http://vivo.brown.edu/individual/cschmid",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dsteelem",
+            "target": "http://vivo.brown.edu/individual/ttrikali",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ttrikali",
+            "target": "http://vivo.brown.edu/individual/cschmid",
+            "weight": 13
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/idahabre",
+            "name": "Dahabreh, Issa"
+        },
+        {
+            "group": "Radiation Oncology",
+            "id": "http://vivo.brown.edu/individual/dwazermd",
+            "name": "Wazer, David"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/jl122",
+            "name": "Lau, Joseph"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/ebalk",
+            "name": "Balk, Ethan"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/ml117",
+            "name": "Laws, Michael"
+        },
+        {
+            "group": "Obstetrics and Gynecology",
+            "id": "http://vivo.brown.edu/individual/clcarber",
+            "name": "Carberry, Cassandra"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/iwilson",
+            "name": "Wilson, Ira"
+        },
+        {
+            "group": "Clin Neurosciences (Neurology)",
+            "id": "http://vivo.brown.edu/individual/bottmd",
+            "name": "Ott, Brian"
+        },
+        {
+            "group": "Community Health",
+            "id": "http://vivo.brown.edu/individual/dkielmd",
+            "name": "Kiel, Douglas"
+        },
+        {
+            "group": "Obstetrics and Gynecology",
+            "id": "http://vivo.brown.edu/individual/vsung",
+            "name": "Sung, Vivian"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/al16",
+            "name": "Levine, Adam"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/dsteelem",
+            "name": "Steele, Dale"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/ttrikali",
+            "name": "Trikalinos, Thomas"
+        },
+        {
+            "group": "Biostatistics",
+            "id": "http://vivo.brown.edu/individual/cschmid",
+            "name": "Schmid, Christopher"
+        }
+    ]
+}

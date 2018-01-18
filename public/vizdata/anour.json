@@ -1,0 +1,81 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/qilu",
+            "target": "http://vivo.brown.edu/individual/yzhou1",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/clee12",
+            "target": "http://vivo.brown.edu/individual/yzhou1",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/clee12",
+            "target": "http://vivo.brown.edu/individual/jaelias",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/clee12",
+            "target": "http://vivo.brown.edu/individual/anour",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/srounds",
+            "target": "http://vivo.brown.edu/individual/yzhou1",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/anour",
+            "target": "http://vivo.brown.edu/individual/yzhou1",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/eoharrin",
+            "target": "http://vivo.brown.edu/individual/yzhou1",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/qilu",
+            "name": "Lu, Qing"
+        },
+        {
+            "group": "Molecular Microbiology and Immunology",
+            "id": "http://vivo.brown.edu/individual/clee12",
+            "name": "Lee, Changmin"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/srounds",
+            "name": "Rounds, Sharon"
+        },
+        {
+            "group": "Brown University",
+            "id": "http://vivo.brown.edu/individual/jaelias",
+            "name": "Elias, Jack"
+        },
+        {
+            "group": "Molecular Microbiology and Immunology",
+            "id": "http://vivo.brown.edu/individual/anour",
+            "name": "Mohamed Nour M Arfan, Adel"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/eoharrin",
+            "name": "Harrington, Elizabeth"
+        },
+        {
+            "group": "Molecular Microbiology and Immunology",
+            "id": "http://vivo.brown.edu/individual/yzhou1",
+            "name": "Zhou, Yang"
+        }
+    ]
+}

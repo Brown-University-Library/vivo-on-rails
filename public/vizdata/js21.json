@@ -1,0 +1,76 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/js21",
+            "target": "http://vivo.brown.edu/individual/dasobel",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/js21",
+            "target": "http://vivo.brown.edu/individual/pbedard",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/js21",
+            "target": "http://vivo.brown.edu/individual/fdomini",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dasobel",
+            "target": "http://vivo.brown.edu/individual/jili",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dasobel",
+            "target": "http://vivo.brown.edu/individual/jlmorgan",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dasobel",
+            "target": "http://vivo.brown.edu/individual/bmalle",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/js21",
+            "name": "Song, Joo-Hyun"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/dasobel",
+            "name": "Sobel, David"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/pbedard",
+            "name": "Bedard, Patrick"
+        },
+        {
+            "group": "Education",
+            "id": "http://vivo.brown.edu/individual/jili",
+            "name": "Li, Jin"
+        },
+        {
+            "group": "Cognitive and Linguistic Sciences",
+            "id": "http://vivo.brown.edu/individual/jlmorgan",
+            "name": "Morgan, James"
+        },
+        {
+            "group": "Psychology",
+            "id": "http://vivo.brown.edu/individual/bmalle",
+            "name": "Malle, Bertram"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/fdomini",
+            "name": "Domini, Fulvio"
+        }
+    ]
+}

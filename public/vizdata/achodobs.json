@@ -1,0 +1,46 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/bzink",
+            "target": "http://vivo.brown.edu/individual/bclyne",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bzink",
+            "target": "http://vivo.brown.edu/individual/mranney",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bzink",
+            "target": "http://vivo.brown.edu/individual/achodobs",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/bzink",
+            "name": "Zink, Brian"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/bclyne",
+            "name": "Clyne, Brian"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/mranney",
+            "name": "Ranney, Megan"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/achodobs",
+            "name": "Chodobski, Adam"
+        }
+    ]
+}

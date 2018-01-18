@@ -1,0 +1,66 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/mbelandm",
+            "target": "http://vivo.brown.edu/individual/suhu",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rgohhmd",
+            "target": "http://vivo.brown.edu/individual/suhu",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/suhu",
+            "target": "http://vivo.brown.edu/individual/ekerns",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/suhu",
+            "target": "http://vivo.brown.edu/individual/fakhlagh",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/suhu",
+            "target": "http://vivo.brown.edu/individual/ldworkin",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/mbelandm",
+            "name": "Beland, Michael"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/rgohhmd",
+            "name": "Gohh, Reginald"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/suhu",
+            "name": "Hu, Susie"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/fakhlagh",
+            "name": "Akhlaghi, Fatemeh"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/ekerns",
+            "name": "Kerns, Eric"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/ldworkin",
+            "name": "Dworkin, Lance"
+        }
+    ]
+}

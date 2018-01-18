@@ -1,0 +1,116 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/sl83",
+            "target": "http://vivo.brown.edu/individual/luebelac",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mkeller",
+            "target": "http://vivo.brown.edu/individual/luebelac",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gkeitner",
+            "target": "http://vivo.brown.edu/individual/luebelac",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/luebelac",
+            "target": "http://vivo.brown.edu/individual/lweinsto",
+            "weight": 8
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/luebelac",
+            "target": "http://vivo.brown.edu/individual/syenphd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/luebelac",
+            "target": "http://vivo.brown.edu/individual/tt15",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/luebelac",
+            "target": "http://vivo.brown.edu/individual/dsherman",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/luebelac",
+            "target": "http://vivo.brown.edu/individual/ceatonmd",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/luebelac",
+            "target": "http://vivo.brown.edu/individual/bgaudian",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/luebelac",
+            "target": "http://vivo.brown.edu/individual/msteinm",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/sl83",
+            "name": "Liu, Simin"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mkeller",
+            "name": "Keller, Martin"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/gkeitner",
+            "name": "Keitner, Gabor"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/luebelac",
+            "name": "Uebelacker, Lisa"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/syenphd",
+            "name": "Yen, Shirley"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/tt15",
+            "name": "Tran, Tanya"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/bgaudian",
+            "name": "Gaudiano, Brandon"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/dsherman",
+            "name": "Herman, Debra"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/ceatonmd",
+            "name": "Eaton, Charles"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lweinsto",
+            "name": "Weinstock, Lauren"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/msteinm",
+            "name": "Stein, Michael"
+        }
+    ]
+}

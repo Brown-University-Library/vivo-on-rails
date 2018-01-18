@@ -1,0 +1,106 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/rbahar",
+            "target": "http://vivo.brown.edu/individual/azaslavs",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dpaine",
+            "target": "http://vivo.brown.edu/individual/jberesfo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dpaine",
+            "target": "http://vivo.brown.edu/individual/azaslavs",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dpaine",
+            "target": "http://vivo.brown.edu/individual/dpacific",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dpaine",
+            "target": "http://vivo.brown.edu/individual/ssun",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/echasonp",
+            "target": "http://vivo.brown.edu/individual/jberesfo",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dfeldman",
+            "target": "http://vivo.brown.edu/individual/azaslavs",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/azaslavs",
+            "target": "http://vivo.brown.edu/individual/dpacific",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/azaslavs",
+            "target": "http://vivo.brown.edu/individual/jberesfo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bsheldon",
+            "target": "http://vivo.brown.edu/individual/jberesfo",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Computer Science",
+            "id": "http://vivo.brown.edu/individual/rbahar",
+            "name": "Bahar, R."
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dpaine",
+            "name": "Paine, David"
+        },
+        {
+            "group": "Chemistry",
+            "id": "http://vivo.brown.edu/individual/ssun",
+            "name": "Sun, Shouheng"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/echasonp",
+            "name": "Chason, Eric"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/dfeldman",
+            "name": "Feldman, Dmitri"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/azaslavs",
+            "name": "Zaslavsky, Alexander"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dpacific",
+            "name": "Pacifici, Domenico"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/bsheldon",
+            "name": "Sheldon, Brian"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jberesfo",
+            "name": "Beresford, Rod"
+        }
+    ]
+}

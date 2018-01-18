@@ -1,0 +1,36 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/asaal",
+            "target": "http://vivo.brown.edu/individual/yliang",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/eparment",
+            "target": "http://vivo.brown.edu/individual/yliang",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/asaal",
+            "name": "Saal, Alberto"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/eparment",
+            "name": "Parmentier, Edgar"
+        },
+        {
+            "group": "Earth, Environmental, and Planetary Sciences",
+            "id": "http://vivo.brown.edu/individual/yliang",
+            "name": "Liang, Yan"
+        }
+    ]
+}

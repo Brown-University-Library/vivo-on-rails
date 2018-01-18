@@ -1,0 +1,36 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/azimmerm",
+            "target": "http://vivo.brown.edu/individual/mzimmt",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/azimmerm",
+            "target": "http://vivo.brown.edu/individual/dhorriga",
+            "weight": 4
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/azimmerm",
+            "name": "Zimmerman, Anita"
+        },
+        {
+            "group": "Chemistry",
+            "id": "http://vivo.brown.edu/individual/mzimmt",
+            "name": "Zimmt, Matthew"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/dhorriga",
+            "name": "Horrigan, Diana"
+        }
+    ]
+}

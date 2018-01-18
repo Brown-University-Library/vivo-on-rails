@@ -1,0 +1,541 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/jkurtis",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jusanche",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/wsikovmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/slu",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/yw26",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/auzun",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asbrodsk",
+            "target": "http://vivo.brown.edu/individual/rfreiman",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jaliotta",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/khawes",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpapando",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jsedivy",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 11
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jsedivy",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jsimmons",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/slu",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 7
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/slu",
+            "target": "http://vivo.brown.edu/individual/aamin",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/slu",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/slu",
+            "target": "http://vivo.brown.edu/individual/emylonak",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/slu",
+            "target": "http://vivo.brown.edu/individual/ddupuymd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/auzun",
+            "target": "http://vivo.brown.edu/individual/skshaw",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/auzun",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 13
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/auzun",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wsikovmd",
+            "target": "http://vivo.brown.edu/individual/yw26",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wsikovmd",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sc7",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/vknopik",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lstroud",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/gpareek",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/aayalaph",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/skostadi",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/shaley",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/aolszews",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/skshaw",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jasander",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jasander",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mtatarph",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fluksmd",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fluksmd",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jkreilin",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ktkelsey",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/arsalomo",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgruppus",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgruppus",
+            "target": "http://vivo.brown.edu/individual/cschorlp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgruppus",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cschorlp",
+            "target": "http://vivo.brown.edu/individual/pdubiele",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cschorlp",
+            "target": "http://vivo.brown.edu/individual/smangray",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cschorlp",
+            "target": "http://vivo.brown.edu/individual/rfreiman",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cschorlp",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cschorlp",
+            "target": "http://vivo.brown.edu/individual/yw26",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/cschorlp",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/asalisbu",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rfreiman",
+            "target": "http://vivo.brown.edu/individual/nneretti",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rfreiman",
+            "target": "http://vivo.brown.edu/individual/gwessel",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/jrenzull",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/jquintos",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/smangray",
+            "target": "http://vivo.brown.edu/individual/kmcgarry",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/estopamd",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bstonest",
+            "target": "http://vivo.brown.edu/individual/jpadbury",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/nneretti",
+            "target": "http://vivo.brown.edu/individual/gwessel",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/jkurtis",
+            "name": "Kurtis, Jonathan"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/jusanche",
+            "name": "Sanchez-Esteban, Juan"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/asbrodsk",
+            "name": "Brodsky, Alexander"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/jaliotta",
+            "name": "Aliotta, Jason"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/khawes",
+            "name": "Hawes, Katheleen"
+        },
+        {
+            "group": "Biostatistics",
+            "id": "http://vivo.brown.edu/individual/gpapando",
+            "name": "Papandonatos, George"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/jsedivy",
+            "name": "Sedivy, John"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/jsimmons",
+            "name": "Simmons, James"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/slu",
+            "name": "Lu, Shaolei"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/auzun",
+            "name": "Uzun, Alper"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/wsikovmd",
+            "name": "Sikov, William"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/sc7",
+            "name": "Cheng, Shibin"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/vknopik",
+            "name": "Knopik, Valerie"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lstroud",
+            "name": "Stroud, Laura"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/ddupuymd",
+            "name": "Dupuy, Damian"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/gpareek",
+            "name": "Pareek, Gyan"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/aayalaph",
+            "name": "Ayala, Alfred"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/skostadi",
+            "name": "Kostadinov, Stefan"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/shaley",
+            "name": "Haley, Sheila"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/aolszews",
+            "name": "Olszewski, Adam"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/skshaw",
+            "name": "Shaw, Sunil"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/jasander",
+            "name": "Sanders, Jennifer"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/mtatarph",
+            "name": "Tatar, Marc"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/fluksmd",
+            "name": "Luks, Francois"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/jkreilin",
+            "name": "Kreiling, Jill"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/emylonak",
+            "name": "Mylonakis, Eleftherios"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/ktkelsey",
+            "name": "Kelsey, Karl"
+        },
+        {
+            "group": "Chemistry",
+            "id": "http://vivo.brown.edu/individual/arsalomo",
+            "name": "Salomon, Arthur"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/pgruppus",
+            "name": "Gruppuso, Philip"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/cschorlp",
+            "name": "Schorl, Christoph"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/pdubiele",
+            "name": "Dubielecka-Szczerba, Patrycja"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/asalisbu",
+            "name": "Salisbury, Amy"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/rfreiman",
+            "name": "Freiman, Richard"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/smangray",
+            "name": "Mangray, Shamlal"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/estopamd",
+            "name": "Stopa, Edward"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/kmcgarry",
+            "name": "McGarry, Kelly"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/aamin",
+            "name": "Amin, Ali"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/bstonest",
+            "name": "Stonestreet, Barbara"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/jrenzull",
+            "name": "Renzulli, Joseph"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/jpadbury",
+            "name": "Padbury, James"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/nneretti",
+            "name": "Neretti, Nicola"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/gwessel",
+            "name": "Wessel, Gary"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/yw26",
+            "name": "Wang, Yihong"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/jquintos",
+            "name": "Quintos, Jose"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/srj3",
+            "target": "http://vivo.brown.edu/individual/sl210",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/srj3",
+            "name": "Jones, Stephanie"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/sl210",
+            "name": "Lee, Shane"
+        }
+    ]
+}

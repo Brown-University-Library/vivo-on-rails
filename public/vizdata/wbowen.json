@@ -1,0 +1,26 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/dberson",
+            "target": "http://vivo.brown.edu/individual/wbowen",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/dberson",
+            "name": "Berson, David"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/wbowen",
+            "name": "Bowen, Wayne"
+        }
+    ]
+}

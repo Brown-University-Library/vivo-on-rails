@@ -1,0 +1,156 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/bzink",
+            "target": "http://vivo.brown.edu/individual/bclyne",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rbarron",
+            "target": "http://vivo.brown.edu/individual/ajmcgreg",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bclyne",
+            "target": "http://vivo.brown.edu/individual/pgeorge",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bclyne",
+            "target": "http://vivo.brown.edu/individual/ajmcgreg",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bclyne",
+            "target": "http://vivo.brown.edu/individual/tmadsen",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bclyne",
+            "target": "http://vivo.brown.edu/individual/srougas",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/alourenc",
+            "target": "http://vivo.brown.edu/individual/ajmcgreg",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/alourenc",
+            "target": "http://vivo.brown.edu/individual/gbaird",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/alourenc",
+            "target": "http://vivo.brown.edu/individual/fbeaudoi",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rcmercha",
+            "target": "http://vivo.brown.edu/individual/fbeaudoi",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fbeaudoi",
+            "target": "http://vivo.brown.edu/individual/ajmcgreg",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/fbeaudoi",
+            "target": "http://vivo.brown.edu/individual/tl7",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/agjelsvi",
+            "target": "http://vivo.brown.edu/individual/tmadsen",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ajmcgreg",
+            "target": "http://vivo.brown.edu/individual/tmadsen",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tmadsen",
+            "target": "http://vivo.brown.edu/individual/anapolim",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/bzink",
+            "name": "Zink, Brian"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/rbarron",
+            "name": "Barron, Rebecca"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/bclyne",
+            "name": "Clyne, Brian"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/alourenc",
+            "name": "Lourenco, Ana"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/rcmercha",
+            "name": "Merchant, Roland"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/fbeaudoi",
+            "name": "Beaudoin, Francesca"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/agjelsvi",
+            "name": "Gjelsvik, Annie"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/ajmcgreg",
+            "name": "McGregor, Alyson"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/pgeorge",
+            "name": "George, Paul"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/gbaird",
+            "name": "Baird, Grayson"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/tmadsen",
+            "name": "Madsen, Tracy"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/srougas",
+            "name": "Rougas, Steven"
+        },
+        {
+            "group": "Biostatistics",
+            "id": "http://vivo.brown.edu/individual/tl7",
+            "name": "Liu, Tao"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/anapolim",
+            "name": "Napoli, Anthony"
+        }
+    ]
+}

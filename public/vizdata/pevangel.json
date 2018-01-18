@@ -1,0 +1,36 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/pevangel",
+            "target": "http://vivo.brown.edu/individual/pkriz",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pkriz",
+            "target": "http://vivo.brown.edu/individual/mjayaram",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/pevangel",
+            "name": "Evangelista, Peter"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/pkriz",
+            "name": "Kriz, Peter"
+        },
+        {
+            "group": "Diagnostic Imaging",
+            "id": "http://vivo.brown.edu/individual/mjayaram",
+            "name": "Jayaraman, Mahesh"
+        }
+    ]
+}

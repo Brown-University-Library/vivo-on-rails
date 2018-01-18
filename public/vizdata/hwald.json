@@ -1,0 +1,181 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/pgruppus",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/pgreenbe",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/bclyne",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/ariese",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/ceatonmd",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/mnothnag",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/etobinty",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/hwald",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/swarrier",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/jw9",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/blu",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/rgoldman",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/mnothnag",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/ceatonmd",
+            "weight": 7
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/dparkerd",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/rshieldp",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/pgruppus",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jborkanm",
+            "target": "http://vivo.brown.edu/individual/hwald",
+            "weight": 5
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/pgeorge",
+            "name": "George, Paul"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/pgreenbe",
+            "name": "Greenberg, Paul"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/bclyne",
+            "name": "Clyne, Brian"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/jborkanm",
+            "name": "Borkan, Jeffrey"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/etobinty",
+            "name": "Tobin-Tyler, Elizabeth"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/pgruppus",
+            "name": "Gruppuso, Philip"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/mnothnag",
+            "name": "Nothnagle, Melissa"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/blu",
+            "name": "Lu, Bing"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/rgoldman",
+            "name": "Goldman, Roberta"
+        },
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/ariese",
+            "name": "Riese, Alison"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/ceatonmd",
+            "name": "Eaton, Charles"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/dparkerd",
+            "name": "Parker, Donna"
+        },
+        {
+            "group": "Health Services, Policy and Practice",
+            "id": "http://vivo.brown.edu/individual/rshieldp",
+            "name": "Shield, Renee"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/hwald",
+            "name": "Wald, Hedy"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/swarrier",
+            "name": "Warrier, Sarita"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/jw9",
+            "name": "White, Jordan"
+        }
+    ]
+}

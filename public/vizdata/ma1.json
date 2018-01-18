@@ -1,0 +1,111 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/mkeller",
+            "target": "http://vivo.brown.edu/individual/emoitra",
+            "weight": 10
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ma1",
+            "target": "http://vivo.brown.edu/individual/emoitra",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ma1",
+            "target": "http://vivo.brown.edu/individual/bgaudian",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bgaudian",
+            "target": "http://vivo.brown.edu/individual/emoitra",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bgaudian",
+            "target": "http://vivo.brown.edu/individual/rkohnmd",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bgaudian",
+            "target": "http://vivo.brown.edu/individual/luebelac",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bgaudian",
+            "target": "http://vivo.brown.edu/individual/lweinsto",
+            "weight": 10
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/msteinm",
+            "target": "http://vivo.brown.edu/individual/emoitra",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rbrownph",
+            "target": "http://vivo.brown.edu/individual/emoitra",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dsherman",
+            "target": "http://vivo.brown.edu/individual/emoitra",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mkeller",
+            "name": "Keller, Martin"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/ma1",
+            "name": "Armey, Michael"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/bgaudian",
+            "name": "Gaudiano, Brandon"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/luebelac",
+            "name": "Uebelacker, Lisa"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/msteinm",
+            "name": "Stein, Michael"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/rbrownph",
+            "name": "Brown, Richard"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/dsherman",
+            "name": "Herman, Debra"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/emoitra",
+            "name": "Moitra, Ethan"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/rkohnmd",
+            "name": "Kohn, Robert"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lweinsto",
+            "name": "Weinstock, Lauren"
+        }
+    ]
+}

@@ -1,0 +1,86 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/dborton",
+            "target": "http://vivo.brown.edu/individual/rburwell",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dsheinbe",
+            "target": "http://vivo.brown.edu/individual/rburwell",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kscaplen",
+            "target": "http://vivo.brown.edu/individual/rburwell",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/anurmikk",
+            "target": "http://vivo.brown.edu/individual/rburwell",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/jsedivy",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/jbarredo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/bconnors",
+            "weight": 3
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dborton",
+            "name": "Borton, David"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/dsheinbe",
+            "name": "Sheinberg, David"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/kscaplen",
+            "name": "Scaplen, Kristin"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/anurmikk",
+            "name": "Nurmikko, Arto"
+        },
+        {
+            "group": "Psychology",
+            "id": "http://vivo.brown.edu/individual/rburwell",
+            "name": "Burwell, Rebecca"
+        },
+        {
+            "group": "Molecular Biology, Cell Biology and Biochemistry",
+            "id": "http://vivo.brown.edu/individual/jsedivy",
+            "name": "Sedivy, John"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jbarredo",
+            "name": "Barredo, Jennifer"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/bconnors",
+            "name": "Connors, Barry"
+        }
+    ]
+}

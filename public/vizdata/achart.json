@@ -1,0 +1,22 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/achart",
+            "target": "http://vivo.brown.edu/individual/mhoh",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "id": "http://vivo.brown.edu/individual/achart"
+        },
+        {
+            "id": "http://vivo.brown.edu/individual/mhoh"
+        }
+    ]
+}

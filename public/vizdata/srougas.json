@@ -1,0 +1,101 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/bzink",
+            "target": "http://vivo.brown.edu/individual/bclyne",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/bclyne",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/pgeorge",
+            "target": "http://vivo.brown.edu/individual/swarrier",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/tmadsen",
+            "target": "http://vivo.brown.edu/individual/bclyne",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kdodd",
+            "target": "http://vivo.brown.edu/individual/swarrier",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bclyne",
+            "target": "http://vivo.brown.edu/individual/ajmcgreg",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bclyne",
+            "target": "http://vivo.brown.edu/individual/srougas",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jtaylorm",
+            "target": "http://vivo.brown.edu/individual/swarrier",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/swarrier",
+            "target": "http://vivo.brown.edu/individual/srougas",
+            "weight": 2
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/bzink",
+            "name": "Zink, Brian"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/pgeorge",
+            "name": "George, Paul"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/tmadsen",
+            "name": "Madsen, Tracy"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/kdodd",
+            "name": "Dodd, Kimberly"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/bclyne",
+            "name": "Clyne, Brian"
+        },
+        {
+            "group": "Family Medicine",
+            "id": "http://vivo.brown.edu/individual/jtaylorm",
+            "name": "Taylor, Julie"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/ajmcgreg",
+            "name": "McGregor, Alyson"
+        },
+        {
+            "group": "Medicine",
+            "id": "http://vivo.brown.edu/individual/swarrier",
+            "name": "Warrier, Sarita"
+        },
+        {
+            "group": "Emergency Medicine",
+            "id": "http://vivo.brown.edu/individual/srougas",
+            "name": "Rougas, Steven"
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/bfleming",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/sswartz",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/jcrisco",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/sgatesy",
+            "weight": 4
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ebrainer",
+            "target": "http://vivo.brown.edu/individual/dcjackso",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/ebrainer",
+            "name": "Brainerd, Elizabeth"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/sswartz",
+            "name": "Swartz, Sharon"
+        },
+        {
+            "group": "Ecology and Evolutionary Biology",
+            "id": "http://vivo.brown.edu/individual/sgatesy",
+            "name": "Gatesy, Stephen"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/bfleming",
+            "name": "Fleming, Braden"
+        },
+        {
+            "group": "Orthopaedics",
+            "id": "http://vivo.brown.edu/individual/jcrisco",
+            "name": "Crisco, Joseph"
+        },
+        {
+            "group": "Molecular Pharmacology, Physiology and Biotechnology",
+            "id": "http://vivo.brown.edu/individual/dcjackso",
+            "name": "Jackson, Donald"
+        }
+    ]
+}

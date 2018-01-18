@@ -1,0 +1,46 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/dkertzer",
+            "target": "http://vivo.brown.edu/individual/miwhite",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/miwhite",
+            "target": "http://vivo.brown.edu/individual/smcgarve",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/miwhite",
+            "target": "http://vivo.brown.edu/individual/djsmith",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Anthropology",
+            "id": "http://vivo.brown.edu/individual/dkertzer",
+            "name": "Kertzer, David"
+        },
+        {
+            "group": "Sociology",
+            "id": "http://vivo.brown.edu/individual/miwhite",
+            "name": "White, Michael"
+        },
+        {
+            "group": "Anthropology",
+            "id": "http://vivo.brown.edu/individual/djsmith",
+            "name": "Smith, Daniel"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/smcgarve",
+            "name": "McGarvey, Stephen"
+        }
+    ]
+}

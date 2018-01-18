@@ -1,0 +1,56 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/csungmd",
+            "target": "http://vivo.brown.edu/individual/bcronin",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/csungmd",
+            "target": "http://vivo.brown.edu/individual/mquddusm",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sschecht",
+            "target": "http://vivo.brown.edu/individual/bcronin",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/bcronin",
+            "target": "http://vivo.brown.edu/individual/krobison",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/csungmd",
+            "name": "Sung, C"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/sschecht",
+            "name": "Schechter, Steven"
+        },
+        {
+            "group": "Obstetrics and Gynecology",
+            "id": "http://vivo.brown.edu/individual/bcronin",
+            "name": "Cronin, Beth"
+        },
+        {
+            "group": "Pathology and Laboratory Medicine",
+            "id": "http://vivo.brown.edu/individual/mquddusm",
+            "name": "Quddus, M. Ruhul"
+        },
+        {
+            "group": "Obstetrics and Gynecology",
+            "id": "http://vivo.brown.edu/individual/krobison",
+            "name": "Robison, Katina"
+        }
+    ]
+}

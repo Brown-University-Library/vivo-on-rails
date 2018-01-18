@@ -1,0 +1,26 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/bmacgror",
+            "target": "http://vivo.brown.edu/individual/tburton",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Neurology",
+            "id": "http://vivo.brown.edu/individual/bmacgror",
+            "name": "Mac Grory, Brian"
+        },
+        {
+            "group": "Neurology",
+            "id": "http://vivo.brown.edu/individual/tburton",
+            "name": "Burton, Tina"
+        }
+    ]
+}

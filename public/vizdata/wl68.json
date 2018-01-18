@@ -1,0 +1,51 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/sp157",
+            "target": "http://vivo.brown.edu/individual/ec78",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wl68",
+            "target": "http://vivo.brown.edu/individual/adrucker",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/wl68",
+            "target": "http://vivo.brown.edu/individual/ec78",
+            "weight": 13
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/adrucker",
+            "target": "http://vivo.brown.edu/individual/ec78",
+            "weight": 6
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Pediatrics",
+            "id": "http://vivo.brown.edu/individual/sp157",
+            "name": "Park, Sangshin"
+        },
+        {
+            "group": "Epidemiology",
+            "id": "http://vivo.brown.edu/individual/wl68",
+            "name": "Li, Wen-Qing"
+        },
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/adrucker",
+            "name": "Drucker, Aaron"
+        },
+        {
+            "group": "Dermatology",
+            "id": "http://vivo.brown.edu/individual/ec78",
+            "name": "Cho, Eunyoung"
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/rbahar",
+            "target": "http://vivo.brown.edu/individual/azaslavs",
+            "weight": 5
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ssun",
+            "target": "http://vivo.brown.edu/individual/dpaine",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ssun",
+            "target": "http://vivo.brown.edu/individual/ewalsh",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ssun",
+            "target": "http://vivo.brown.edu/individual/ap31",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ssun",
+            "target": "http://vivo.brown.edu/individual/cschung",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/ssun",
+            "target": "http://vivo.brown.edu/individual/jrmorgan",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/echasonp",
+            "target": "http://vivo.brown.edu/individual/jberesfo",
+            "weight": 6
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dfeldman",
+            "target": "http://vivo.brown.edu/individual/azaslavs",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/azaslavs",
+            "target": "http://vivo.brown.edu/individual/jberesfo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/azaslavs",
+            "target": "http://vivo.brown.edu/individual/dpacific",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/azaslavs",
+            "target": "http://vivo.brown.edu/individual/dpaine",
+            "weight": 3
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/dpacific",
+            "target": "http://vivo.brown.edu/individual/dpaine",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jberesfo",
+            "target": "http://vivo.brown.edu/individual/dpaine",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/jberesfo",
+            "target": "http://vivo.brown.edu/individual/bsheldon",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Computer Science",
+            "id": "http://vivo.brown.edu/individual/rbahar",
+            "name": "Bahar, R."
+        },
+        {
+            "group": "Chemistry",
+            "id": "http://vivo.brown.edu/individual/ssun",
+            "name": "Sun, Shouheng"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/echasonp",
+            "name": "Chason, Eric"
+        },
+        {
+            "group": "Physics",
+            "id": "http://vivo.brown.edu/individual/dfeldman",
+            "name": "Feldman, Dmitri"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/azaslavs",
+            "name": "Zaslavsky, Alexander"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dpacific",
+            "name": "Pacifici, Domenico"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jrmorgan",
+            "name": "Morgan, Jeffrey"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/jberesfo",
+            "name": "Beresford, Rod"
+        },
+        {
+            "group": "Neuroscience",
+            "id": "http://vivo.brown.edu/individual/ewalsh",
+            "name": "Walsh, Edward"
+        },
+        {
+            "group": "Surgery",
+            "id": "http://vivo.brown.edu/individual/cschung",
+            "name": "Chung, Chun-Shiang"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/dpaine",
+            "name": "Paine, David"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/ap31",
+            "name": "Peterson, Andrew"
+        },
+        {
+            "group": "Engineering",
+            "id": "http://vivo.brown.edu/individual/bsheldon",
+            "name": "Sheldon, Brian"
+        }
+    ]
+}

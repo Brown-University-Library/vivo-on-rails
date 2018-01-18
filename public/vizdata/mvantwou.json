@@ -1,0 +1,151 @@
+{
+    "directed": false,
+    "graph": {
+        "name": "compose( ,  )"
+    },
+    "links": [
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/ssloman",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/sgarnaat",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/jbarredo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/mvantwou",
+            "target": "http://vivo.brown.edu/individual/mjfrank",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/kbath",
+            "target": "http://vivo.brown.edu/individual/mjfrank",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/atyrka",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 16
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lpricemd",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 16
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sgarnaat",
+            "target": "http://vivo.brown.edu/individual/ayip",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/sgarnaat",
+            "target": "http://vivo.brown.edu/individual/cboissea",
+            "weight": 2
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rseiferp",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/lcarpent",
+            "target": "http://vivo.brown.edu/individual/nphilip",
+            "weight": 18
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/nphilip",
+            "target": "http://vivo.brown.edu/individual/jbarredo",
+            "weight": 1
+        },
+        {
+            "source": "http://vivo.brown.edu/individual/rburwell",
+            "target": "http://vivo.brown.edu/individual/jbarredo",
+            "weight": 1
+        }
+    ],
+    "multigraph": false,
+    "nodes": [
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/mvantwou",
+            "name": "van 't Wout, Mascha"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/kbath",
+            "name": "Bath, Kevin"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/atyrka",
+            "name": "Tyrka, Audrey"
+        },
+        {
+            "group": "Cognitive and Linguistic Sciences",
+            "id": "http://vivo.brown.edu/individual/ssloman",
+            "name": "Sloman, Steven"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lpricemd",
+            "name": "Price, Lawrence"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/sgarnaat",
+            "name": "Garnaat, Sarah"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/rseiferp",
+            "name": "Seifer, Ronald"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/lcarpent",
+            "name": "Carpenter, Linda"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/nphilip",
+            "name": "Philip, Noah"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/ayip",
+            "name": "Yip, Agustin"
+        },
+        {
+            "group": "Psychology",
+            "id": "http://vivo.brown.edu/individual/rburwell",
+            "name": "Burwell, Rebecca"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/cboissea",
+            "name": "Boisseau, Christina"
+        },
+        {
+            "group": "Psychiatry and Human Behavior",
+            "id": "http://vivo.brown.edu/individual/jbarredo",
+            "name": "Barredo, Jennifer"
+        },
+        {
+            "group": "Cognitive, Linguistic and Psychological Sciences",
+            "id": "http://vivo.brown.edu/individual/mjfrank",
+            "name": "Frank, Michael"
+        }
+    ]
+}
