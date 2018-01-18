@@ -34,7 +34,6 @@ class OrganizationItem
         when "web_pages"
           org.web_pages = value.map { |v| OnTheWebItem.new(v) }
         when "people"
-          2/0
           org.people = OrganizationMemberItem.from_hash_array(value)
         when "thumbnail"
           # Ignore this value, we use thumbnail_url parameter instead
