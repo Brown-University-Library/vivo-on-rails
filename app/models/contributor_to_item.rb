@@ -39,7 +39,7 @@ class ContributorToItem
 
   def doi_url
     return nil if @doi == nil
-    "http://dx.doi.org/#{@doi}"
+    "https://doi.org/#{@doi}"
   end
 
   def pub_med_url
