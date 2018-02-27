@@ -13,10 +13,10 @@ namespace :vivo do
     require file
   end
 
-  desc "Runs tests related to solr_lite"
-  task :testsolr do
-    Dir.glob("./test/lib/solr_lite/*_test.rb").each do |file|
-      require file
-    end
-  end
+  # desc "Runs tests related to solr_lite"
+  # task :testsolr do
+  #   Dir.glob("./test/lib/solr_lite/*_test.rb").each do |file|
+  #     require file
+  #   end
+  # end
 end

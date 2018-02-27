@@ -1,4 +1,4 @@
-require "./lib/solr_lite/search_params.rb"
+# require "./lib/solr_lite/search_params.rb"
 
 class SearchController < ApplicationController
   # Advanced search.

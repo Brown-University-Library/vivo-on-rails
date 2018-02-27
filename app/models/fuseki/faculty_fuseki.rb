@@ -9,7 +9,7 @@
 # This class should be removed after we go live.
 #
 require "./lib/sparql/query.rb"
-require "./lib/solr_lite/solr.rb"
+# require "./lib/solr_lite/solr.rb"
 require "./app/models/json_utils.rb"
 #require "./app/models/faculty_list_item.rb"
 require "./app/models/faculty_item.rb"

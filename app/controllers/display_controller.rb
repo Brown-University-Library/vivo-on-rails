@@ -1,4 +1,4 @@
-require "./lib/solr_lite/solr.rb"
+# require "./lib/solr_lite/solr.rb"
 class DisplayController < ApplicationController
   def index
     redirect_to search_url()

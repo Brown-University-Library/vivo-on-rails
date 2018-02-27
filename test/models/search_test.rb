@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "byebug"
 require "./app/models/search.rb"
-require "./lib/solr_lite/search_params.rb"
+# require "./lib/solr_lite/search_params.rb"
 
 class SearchTest < Minitest::Test
   def test_faculty_search

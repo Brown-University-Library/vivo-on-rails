@@ -41,3 +41,5 @@ gem "rb-readline"
 # Loads environment settings from .env file
 # See https://github.com/bkeepers/dotenv
 gem 'dotenv-rails'
+
+gem "solr_lite", :git => 'https://github.com/Brown-University-Library/solr_lite.git'
