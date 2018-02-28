@@ -54,6 +54,26 @@ class ContributorToItem
     @external_url
   end
 
+  def full_text_url
+    if bdr_url != nil
+      # Give preference to the BDR URL
+      # since it's more likely to be open access.
+      bdr_url
+    elsif doi_url != nil
+      doi_url
+    else
+      nil
+    end
+  end
+
+  def more_info_url
+    if pub_med_url != nil || full_text_url != nil
+      nil
+    else
+      @external_url
+    end
+  end
+
   def pub_type
     # Typical @type values:
     #   citation:Abstract

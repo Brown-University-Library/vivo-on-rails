@@ -28,15 +28,13 @@
                     <i><%= c.title.html_safe %>.</i>
                     <%= c.pub_info %>
                     <div class="no-orphans">
-                      <% if c.doi_url %>
-                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.doi_url %>">Full Text</a>
+                      <% if c.full_text_url %>
+                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.full_text_url %>">Full Text</a>
                       <% end %>
                       <% if c.pub_med_url %>
                         <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
                       <% end %>
-                      <% if c.bdr_url %>
-                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.bdr_url %>" title="View it on the Brown Digital Repository">BDR</a>
-                      <% elsif c.external_url %>
+                      <% if c.more_info_url %>
                         <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.external_url %>">More Info</a>
                       <% end %>
                     </div>
