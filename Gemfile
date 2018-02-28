@@ -42,4 +42,4 @@ gem "rb-readline"
 # See https://github.com/bkeepers/dotenv
 gem 'dotenv-rails'
 
-gem "solr_lite", :git => 'https://github.com/Brown-University-Library/solr_lite.git'
+gem "solr_lite", '0.0.5'

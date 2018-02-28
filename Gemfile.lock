@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/Brown-University-Library/solr_lite.git
-  revision: deee4fe2348b91e2431dd81a72edb5052421f8fd
-  specs:
-    solr_lite (0.0.5)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,6 +127,7 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    solr_lite (0.0.5)
     spring (2.0.1)
       activesupport (>= 4.2)
     sprockets (3.7.1)
@@ -175,7 +170,7 @@ DEPENDENCIES
   rb-readline
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  solr_lite!
+  solr_lite (= 0.0.5)
   spring
   sqlite3
   therubyracer
