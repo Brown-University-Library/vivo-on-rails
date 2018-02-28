@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/Brown-University-Library/solr_lite.git
-  revision: 30a9f65b9f5d6c2bcdfff72ea9644726e77d7458
+  revision: deee4fe2348b91e2431dd81a72edb5052421f8fd
   specs:
-    solr_lite (0.0.3)
+    solr_lite (0.0.5)
 
 GEM
   remote: https://rubygems.org/

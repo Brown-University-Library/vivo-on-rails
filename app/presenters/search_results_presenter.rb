@@ -29,8 +29,8 @@ class SearchResultsPresenter
     @search_qs = params.to_user_query_string()
     @remove_q_url = "#{@base_url}?#{params.to_user_query_string_no_q()}"
 
-    @suggest_q = results.spellcheck_top_collation_query()
-    if results.spellcheck_top_collation_query != nil
+    @suggest_q = results.spellcheck.top_collation_query()
+    if results.spellcheck.top_collation_query != nil
       @suggest_url = @remove_q_url + "&q=#{CGI.escape(suggest_q)}"
     end
 

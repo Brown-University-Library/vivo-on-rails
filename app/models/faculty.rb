@@ -29,7 +29,8 @@ class Faculty
 
   def self.get_solr_doc(id)
     solr_url = ENV["SOLR_URL"]
-    solr = SolrLite::Solr.new(solr_url)
+    logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
+    solr = SolrLite::Solr.new(solr_url, logger)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
   end
 end

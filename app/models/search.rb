@@ -1,13 +1,11 @@
 require "./app/models/json_utils.rb"
 require "./app/models/search_item.rb"
 require "./app/models/faculty.rb"
-# require "./lib/solr_lite/filter_query.rb"
-# require "./lib/solr_lite/solr.rb"
-# require "./lib/solr_lite/search_results.rb"
 class Search
   def initialize(solr_url, images_url = nil)
     @images_url = images_url
-    @solr = SolrLite::Solr.new(solr_url)
+    logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
+    @solr = SolrLite::Solr.new(solr_url, logger)
   end
 
   def search(params, debug = false, flag = nil)
