@@ -1,4 +1,26 @@
 class VisualizationController < ApplicationController
+  def chord
+    id = params["id"]
+    faculty = Faculty.load_from_solr(id)
+    @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
+    render "chord"
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render chord visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
+  end
+
+  def coauthor
+    id = params["id"]
+    faculty = Faculty.load_from_solr(id)
+    @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
+    render "coauthor"
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render coauthor visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
+  end
+
   def fake_chord_list
     str = VisualizationFakeData.chord_list
     json = JSON.parse(str)

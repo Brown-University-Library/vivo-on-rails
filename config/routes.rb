@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   # Support for original VIVO URLs
   get 'individual/:id/:id.:format' => 'individual#export', as: :individual_export
   get 'individual/:id' => 'individual#redirect'
-  get 'display/:id/data/coauthor' => 'display#data_coauthor'
-  get 'display/:id/viz' => 'display#visualizations', as: :display_visualizations
   get 'display/:id' => 'display#show', as: :display_show
   get 'display/' => 'display#index'
 
@@ -17,10 +15,14 @@ Rails.application.routes.draw do
 
   # Forwards call to viz data service (used to bypass same-origin
   # check when testing in dev with production services)
-  get 'visualizations/forward/forceEdgeGraph/:id' => 'visualization#fwd_force_one'
-  get 'visualizations/forward/forceEdgeGraph/' => 'visualization#fwd_force_list'
-  get 'visualizations/forward/chordDiagram/:id' => 'visualization#fwd_chord_one'
-  get 'visualizations/forward/chordDiagram/' => 'visualization#fwd_chord_list'
+  get 'visualization/forward/forceEdgeGraph/:id' => 'visualization#fwd_force_one'
+  get 'visualization/forward/forceEdgeGraph/' => 'visualization#fwd_force_list'
+  get 'visualization/forward/chordDiagram/:id' => 'visualization#fwd_chord_one'
+  get 'visualization/forward/chordDiagram/' => 'visualization#fwd_chord_list'
+
+  # Visualization
+  get 'visualization/:id/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
+  get 'visualization/:id/chord' => 'visualization#chord', as: :visualization_chord
 
   # Returns hard-coded response
   get 'visualizations/fake/force/:id' => 'visualization#fake_force_one'

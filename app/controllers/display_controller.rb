@@ -47,34 +47,6 @@ class DisplayController < ApplicationController
     render "error", status: 500
   end
 
-  def visualizations
-    id = params["id"]
-    faculty = Faculty.load_from_solr(id)
-    @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-    render "faculty/visualizations"
-  rescue => ex
-    backtrace = ex.backtrace.join("\r\n")
-    Rails.logger.error("Could not render visualizations for #{id}. Exception: #{ex} \r\n #{backtrace}")
-    render "error", status: 500
-  end
-
-  # this should be on its own controller
-  def data_coauthor
-    id = params["id"]
-    faculty = Faculty.load_from_solr(id)
-    data_file = "./public/vizdata/#{id}.json"
-    if File.file?(data_file)
-      data = File.read(data_file)
-      render :json => JSON.parse(data)
-    else
-      render :status => 404, :json => []
-    end
-  rescue => ex
-    backtrace = ex.backtrace.join("\r\n")
-    Rails.logger.error("Could not render visualizations for #{id}. Exception: #{ex} \r\n #{backtrace}")
-    render "error", status: 500
-  end
-
   private
     def type_for_id(id)
       solr_url = ENV["SOLR_URL"]

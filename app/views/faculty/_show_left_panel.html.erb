@@ -85,9 +85,11 @@
 
           <a class="btn btn-default hidden"
             id="viz_menu"
-            href="<%= display_visualizations_path(@presenter.faculty.vivo_id) %>"
+            href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>"
             target="_blank"
-            title="Visualizations">Visualizations</a>
+            title="Visualizations">
+              Visualizations&nbsp;<i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+          </a>
 
           <% if @presenter.has_details %>
             <a id="tabAllBtn"

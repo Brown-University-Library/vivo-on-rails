@@ -1,5 +1,8 @@
 <% @page_title = (@presenter.faculty.name || "") + " Visualizations"%>
 
+<a class="btn btn-primary btn-lg active" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Co-Author Network</a>
+<a class="btn btn-default btn-lg" role="button" href="<%= visualization_chord_path(@presenter.faculty.vivo_id) %>" >Chord Graph</a>
+
 <style>
   .links line {
     stroke: #999;
@@ -14,11 +17,10 @@
 
 <h1><%= @presenter.faculty.display_name %></h1>
 <h2>Co-author network</h2>
-<h3 id="errorMsg" class="hidden">Sorry, no co-author data is available for this researcher.</h3>
+<h3 id="errorMsg" class="hidden">Sorry, no data is available for this researcher.</h3>
+<svg width="960" height="960"></svg>
 
-<svg width="960" height="600"></svg>
-
-<p>Download the data as <a href="http://localhost:3000/visualizations/forward/force/one">JSON</a></p>
+<p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
 
 <!-- <script src="d3.v4.min.js"></script> -->
 
