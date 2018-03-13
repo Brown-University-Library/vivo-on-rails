@@ -83,12 +83,11 @@
             </a>
           <% end %>
 
-          <% if @presenter.show_visualizations %>
-            <a class="btn btn-default"
-              href="<%= display_visualizations_path(@presenter.faculty.vivo_id) %>"
-              target="_blank"
-              title="Visualizations">Visualizations</a>
-          <% end %>
+          <a class="btn btn-default hidden"
+            id="viz_menu"
+            href="<%= display_visualizations_path(@presenter.faculty.vivo_id) %>"
+            target="_blank"
+            title="Visualizations">Visualizations</a>
 
           <% if @presenter.has_details %>
             <a id="tabAllBtn"

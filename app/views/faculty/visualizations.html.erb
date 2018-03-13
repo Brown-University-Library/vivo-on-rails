@@ -18,7 +18,7 @@
 
 <svg width="960" height="600"></svg>
 
-<p>Download the data as <a href="/display/<%= @presenter.faculty.vivo_id %>/data/coauthor">JSON</a></p>
+<p>Download the data as <a href="http://localhost:3000/visualizations/forward/force/one">JSON</a></p>
 
 <!-- <script src="d3.v4.min.js"></script> -->
 
@@ -34,8 +34,7 @@
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(width / 2, height / 2));
 
-  var json_data_addr = '/display/<%= @presenter.faculty.vivo_id %>/data/coauthor';
-
+  var json_data_addr = "<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>";
   d3.json(json_data_addr, function(error, graph) {
 
     if (error) {

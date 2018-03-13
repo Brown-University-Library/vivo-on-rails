@@ -28,7 +28,6 @@ group :development, :test do
   gem "better_errors"         # web page for errors
   gem "binding_of_caller"     # allows inspecting values in web error page
   gem 'web-console', '~> 2.0' # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'spring'                # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 end
 
 # Needed on RedHat

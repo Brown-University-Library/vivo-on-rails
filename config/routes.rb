@@ -15,6 +15,19 @@ Rails.application.routes.draw do
     get 'sparql/query' => 'sparql#query'
   end
 
+  # Forwards call to viz data service (used to bypass same-origin
+  # check when testing in dev with production services)
+  get 'visualizations/forward/forceEdgeGraph/:id' => 'visualization#fwd_force_one'
+  get 'visualizations/forward/forceEdgeGraph/' => 'visualization#fwd_force_list'
+  get 'visualizations/forward/chordDiagram/:id' => 'visualization#fwd_chord_one'
+  get 'visualizations/forward/chordDiagram/' => 'visualization#fwd_chord_list'
+
+  # Returns hard-coded response
+  get 'visualizations/fake/force/:id' => 'visualization#fake_force_one'
+  # get 'visualizations/fake/force/' => 'visualization#fake_force_list'
+  get 'visualizations/fake/chord/:id' => 'visualization#fake_chord_one'
+  get 'visualizations/fake/chord/' => 'visualization#fake_chord_list'
+
   # VIVO original URLs
   get 'people' => 'home#people'
   get 'ous' => 'home#organizations'
