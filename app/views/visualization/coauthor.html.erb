@@ -18,7 +18,7 @@
 <h1><%= @presenter.faculty.display_name %></h1>
 <h2>Co-author network</h2>
 <h3 id="errorMsg" class="hidden">Sorry, no data is available for this researcher.</h3>
-<svg width="960" height="960"></svg>
+<svg width="960" height="600"></svg>
 
 <p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
 

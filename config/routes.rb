@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   get 'display/:id' => 'display#show', as: :display_show
   get 'display/' => 'display#index'
 
+  # Visualizations for faculty
+  get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
+  get 'display/:id/viz/chord' => 'visualization#chord', as: :visualization_chord
+  # get 'display/:id/viz' => 'visualization#coauthor', as: :visualization_home
+
   get 'search_facets' => 'search#facets'
   get 'search/advanced' => 'search#advanced', as: :search_advanced
   get 'search' => 'search#index', as: :search
@@ -20,11 +25,7 @@ Rails.application.routes.draw do
   get 'visualization/forward/chordDiagram/:id' => 'visualization#fwd_chord_one'
   get 'visualization/forward/chordDiagram/' => 'visualization#fwd_chord_list'
 
-  # Visualization
-  get 'visualization/:id/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
-  get 'visualization/:id/chord' => 'visualization#chord', as: :visualization_chord
-
-  # Returns hard-coded response
+  # Returns hard-coded responses for testing offline
   get 'visualizations/fake/force/:id' => 'visualization#fake_force_one'
   # get 'visualizations/fake/force/' => 'visualization#fake_force_list'
   get 'visualizations/fake/chord/:id' => 'visualization#fake_chord_one'
