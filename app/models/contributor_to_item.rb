@@ -95,6 +95,9 @@ class ContributorToItem
     return nil if @type == nil
     return nil if !@type.start_with?(citationPrefix)
     type = @type.gsub(citationPrefix,"")
+    if type == "Citation"
+      type = "Other"
+    end
     type = type.gsub(/[A-Z]/, ' \0') # adds space between words
     return type
   end
