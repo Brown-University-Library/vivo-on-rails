@@ -2,7 +2,7 @@
 
 <a class="btn btn-default btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Co-Author Network</a>
 <a class="btn btn-default btn-lg" role="button" href="<%= visualization_chord_path(@presenter.faculty.vivo_id) %>" >Chord Graph</a>
-<a class="btn btn-primary btn-lg" role="button" href="<%= visualization_test_path(@presenter.faculty.vivo_id) %>" >Test Network</a>
+<a class="btn btn-primary btn-lg" role="button" href="<%= visualization_test_path(@presenter.faculty.vivo_id) %>" >Co-Author V2</a>
 
 <style>
   .links line {
@@ -17,7 +17,7 @@
 </style>
 
 <h1><%= @presenter.faculty.display_name %></h1>
-<h2>Co-author network 2</h2>
+<h2>Co-author network with labels</h2>
 <h3 id="errorMsg" class="hidden">Sorry, no data is available for this researcher.</h3>
 <p>Show labels<input id="showLabels" type="checkbox" checked/></p>
 
@@ -27,7 +27,8 @@
 
 <script>
 
-  var faculty_id = "<%= @presenter.faculty.id %>";
+  var facultyId = "<%= @presenter.faculty.id %>";
+  var vivoId = "<%= @presenter.faculty.vivo_id %>";
   var json_data_addr = "<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>";
 
   $(document).ready(function() {
@@ -63,19 +64,26 @@
     var x = $("#showLabels").is(":checked");
     if (x) {
       d3.selectAll(".node-text").classed("hidden",false);
-      // $(".node-text").removeClass("hidden");
       console.log("showing...");
     } else {
       d3.selectAll(".node-text").classed("hidden",true);
-      // $(".node-text").addClass("hidden");
       console.log("hiding...");
     }
+  }
+
+  function nodeColor(d, i) {
+    if (d.level == 0) {
+      return "#1f77b4"; // blue
+    } else if(d.level ==1) {
+      return "#aec7e8"; // light blue
+    }
+    return "#c7c7c7";   // light blue
   }
 
   function drawGraph(data, status) {
 
     var showLabels = $("#showLabels").is(":checked");
-    console.log(showLabels);
+    // console.log(showLabels);
 
     var svg = d3.select("svg");
     var w = +svg.attr("width");
@@ -123,14 +131,18 @@
     }
 
     // find first level nodes
+    var rootIndex = getNodeIndex(data.nodes, facultyId);
     var firstLevel = [];
     var edge;
     console.log("First level:")
     for(i = 0; i < dataset.edges.length; i++) {
       edge = dataset.edges[i];
-      if (edge.source == 0) {
+      if (edge.source == rootIndex) {
         firstLevel.push(edge.target);
-        console.log(dataset.nodes[edge.target].id);
+        console.log("S: " + dataset.nodes[edge.target].id);
+      } else if(edge.target == rootIndex) {
+        firstLevel.push(edge.source);
+        console.log("T: " + dataset.nodes[edge.source].id);
       }
     }
 
@@ -139,28 +151,19 @@
       edge = dataset.edges[i];
       if(inArray(firstLevel, edge.target)) {
         dataset.nodes[edge.target].level = 1;
+      } else if(inArray(firstLevel, edge.source)) {
+        dataset.nodes[edge.source].level = 1;
       }
     }
 
     // mark the root
     for(i = 0; i < dataset.nodes.length; i++) {
-      if (dataset.nodes[i].id == faculty_id) {
+      if (dataset.nodes[i].id == facultyId) {
         dataset.nodes[i].level = 0;
         break;
       }
     }
-
     // console.log(dataset.nodes);
-
-
-    // console.log("NODES");
-    // console.log(dataset.nodes);
-    //
-    // console.log("EDGES..");
-    // console.log(dataset.edges);
-    //
-    // console.log("W: " + w.toString());
-    // console.log("H: " + w.toString());
 
     var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -169,19 +172,15 @@
       .force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
       .force("center", d3.forceCenter().x(w/2).y(h/2));
 
-
-// TODO: see https://stackoverflow.com/questions/40872317/d3-forcesimulation-link-distance
-
 // works
 //      .force("link", d3.forceLink(dataset.edges))
 //      .force("link", d3.forceLink(dataset.edges).distance(function(d) {return 150;}).strength(0.1))
-
+//
 // does not work
 //       .force("link", d3.forceLink().distance(50).id(function(d) { return d.id; }))
-
+//
 // does not work -- seems to be v3 specific
 // force.linkDistance(100);
-
 
     var edges = svg.selectAll("line")
       .data(dataset.edges)
@@ -197,24 +196,42 @@
 
     nodes.append("circle")
       .attr("r", function(d) {
-        if (d.id == faculty_id) {
+        if (d.level == 0) {
+          return 15;
+        } else if(d.level == 1) {
           return 10;
         }
         return 5;
       })
-      .style("fill", function(d, i) { return colors(d.level); });
+      .style("fill", nodeColor);
 
-      // .style("stroke", "purple")
-      // .style("stroke-width", function(d, i) {
-      //   if (d.id == faculty_id) {
-      //     return 3;
-      //   }
-      //   return 0;
-      // });
+      nodes.selectAll("circle").on('mouseenter', function(d){
+        d3.select(this).style("fill", "#ffbb78");
+      });
 
+      nodes.selectAll("circle").on('mouseover', function(d){
+        d3.select(this).style("fill", "#ffbb78"); // yellow-ish
+      });
+
+      nodes.selectAll("circle").on('mouseout', function(d){
+        d3.select(this).style("fill", nodeColor(d, 0));
+      });
+
+      nodes.selectAll("circle").on('click', function(d){
+        var shortId = d.id.substring(d.id.lastIndexOf("/")+1);
+        var currentSegment = "/display/" + vivoId + "/viz/";
+        var newSegment = "/display/" + shortId + "/viz/";
+        var newUrl = window.location.toString().replace(currentSegment, newSegment);
+        window.location.assign(newUrl);
+      });
+
+      nodes.selectAll("circle").on('mouseout', function(d){
+        d3.select(this).style("fill", nodeColor(d, 0));
+      });
 
     nodes.append("text")
-      .style("font-size", "10px")
+      .style("font-size", function(d) { return d.level == 0 ? "12px" : "8px"; })
+      .style("font-weight", function(d) { return d.level == 0 ? "bold" : "normal"; })
       .attr("class", "node-text")
       .text(function(d) { return d.name; });
 
@@ -230,7 +247,4 @@
 
     updateLabels();
   }
-
-// version 2
-// http://jsfiddle.net/pnavarrc/RRUzZ/20/
 </script>
