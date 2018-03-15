@@ -1,24 +1,14 @@
 class VisualizationController < ApplicationController
   def chord
-    id = params["id"]
-    faculty = Faculty.load_from_solr(id)
-    @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-    render "chord"
-  rescue => ex
-    backtrace = ex.backtrace.join("\r\n")
-    Rails.logger.error("Could not render chord visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
-    render "error", status: 500
+    render_viz("chord")
   end
 
   def coauthor
-    id = params["id"]
-    faculty = Faculty.load_from_solr(id)
-    @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-    render "coauthor"
-  rescue => ex
-    backtrace = ex.backtrace.join("\r\n")
-    Rails.logger.error("Could not render coauthor visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
-    render "error", status: 500
+    render_viz("coauthor")
+  end
+
+  def test
+    render_viz("test")
   end
 
   def fake_chord_list
@@ -64,6 +54,17 @@ class VisualizationController < ApplicationController
   end
 
   private
+    def render_viz(name)
+      id = params["id"]
+      faculty = Faculty.load_from_solr(id)
+      @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
+      render name
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not render #{name} visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render "error", status: 500
+    end
+
     def render_json(str)
       json = JSON.parse(str)
       render :json => json
