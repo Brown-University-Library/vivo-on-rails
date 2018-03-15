@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
   get 'display/:id/viz/chord' => 'visualization#chord', as: :visualization_chord
   get 'display/:id/viz/test' => 'visualization#test', as: :visualization_test
-  # get 'display/:id/viz' => 'visualization#coauthor', as: :visualization_home
+  get 'display/:id/viz' => 'visualization#home', as: :visualization_home
 
   get 'search_facets' => 'search#facets'
   get 'search/advanced' => 'search#advanced', as: :search_advanced

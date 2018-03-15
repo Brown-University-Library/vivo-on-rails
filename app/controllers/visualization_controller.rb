@@ -11,6 +11,10 @@ class VisualizationController < ApplicationController
     render_viz("test")
   end
 
+  def home
+    redirect_to visualization_coauthor_path
+  end
+
   def fake_chord_list
     str = VisualizationFakeData.chord_list
     json = JSON.parse(str)

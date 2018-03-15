@@ -19,9 +19,21 @@
 <h1><%= @presenter.faculty.display_name %></h1>
 <h2>Co-author network with labels</h2>
 <h3 id="errorMsg" class="hidden">Sorry, no data is available for this researcher.</h3>
-<p>Show labels<input id="showLabels" type="checkbox" checked/></p>
 
-<svg width="960" height="700"></svg>
+<div class="row">
+  <div class="col-md-9">
+    <svg width="960" height="700"></svg>
+  </div>
+  <div class="col-md-3">
+    <p><b>Legend</b></p>
+    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
+    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Co-author</p>
+    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Co-author's co-author</p>
+    <p>Show labels<input id="showLabels" type="checkbox" checked/></p>
+    <!-- <p>Force to fit<input id="forceToFit" type="checkbox"/></p> -->
+  </div>
+</div>
+
 
 <p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
 
@@ -34,6 +46,7 @@
   $(document).ready(function() {
     initGraph();
     $("#showLabels").on("click", updateLabels);
+    // $("#forceToFit").on("click", initGraph);
   });
 
   function initGraph() {
@@ -77,7 +90,7 @@
     } else if(d.level ==1) {
       return "#aec7e8"; // light blue
     }
-    return "#c7c7c7";   // light blue
+    return "#c7c7c7";   // light gray
   }
 
   function drawGraph(data, status) {
@@ -169,12 +182,19 @@
 
     var force = d3.forceSimulation(dataset.nodes)
       .force("charge", d3.forceManyBody())
-      .force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
       .force("center", d3.forceCenter().x(w/2).y(h/2));
+
+    // var forceToFit = $("#forceToFit").is(":checked");
+    var forceToFit = false;
+    if (forceToFit) {
+      force.force("link", d3.forceLink(dataset.edges));
+    } else {
+      force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
+    }
 
 // works
 //      .force("link", d3.forceLink(dataset.edges))
-//      .force("link", d3.forceLink(dataset.edges).distance(function(d) {return 150;}).strength(0.1))
+//      .force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
 //
 // does not work
 //       .force("link", d3.forceLink().distance(50).id(function(d) { return d.id; }))
