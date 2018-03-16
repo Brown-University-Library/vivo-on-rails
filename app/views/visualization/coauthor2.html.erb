@@ -23,7 +23,18 @@
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
     pointer-events: none;
   }
+
+  #title {
+    font-weight: bold;
+  }
+
+  #subtitle2 {
+    font-size: small;
+    font-style: italic;
+  }
 </style>
+
+<%= render "search_box" %>
 
 <h1><%= @presenter.faculty.display_name %></h1>
 <h2>Co-author network (with labels)</h2>
@@ -34,19 +45,23 @@
     <svg width="960" height="700"></svg>
   </div>
   <div class="col-md-3">
+    <p><b>Options</b></p>
+    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">Go to Researcher's Profile</a></p>
+    <p>Show labels<input id="showLabels" type="checkbox" checked/></p>
+    <p>Show details on mouse hover<input id="showDetails" type="checkbox" checked/></p>
+    <p>Force to fit<input id="forceToFit" type="checkbox"/></p>
+    <p>&nbsp;</p>
     <p><b>Legend</b></p>
     <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
     <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
     <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
-    <p>Show labels<input id="showLabels" type="checkbox" checked/></p>
-    <p>Show details on mouse hover<input id="showDetails" type="checkbox" checked/></p>
-    <p>Force to fit<input id="forceToFit" type="checkbox"/></p>
   </div>
 </div>
 
 <div id="tooltip" class="hidden">
   <p id="title"></p>
   <p id="subtitle"></p>
+  <p id="subtitle2"></p>
 </div>
 
 <p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
@@ -268,6 +283,7 @@
             .select("#title")
             .text(d.name);
           d3.select("#subtitle").text(d.group);
+          d3.select("#subtitle2").text("Click to view " + d.name + "'s coauthors");
           d3.select("#tooltip").classed("hidden", false);
         } else {
           d3.select(this).select('text')
