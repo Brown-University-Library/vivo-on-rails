@@ -1,8 +1,5 @@
 <% @page_title = (@presenter.faculty.name || "") + " Visualizations"%>
 
-<a class="btn btn-default btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Co-Author Graph</a>
-<a class="btn btn-primary btn-lg active" role="button" href="<%= visualization_chord_path(@presenter.faculty.vivo_id) %>" >Chord Graph</a>
-
 <style>
 /* body {
   font: 10px sans-serif;
@@ -18,11 +15,33 @@
 
 </style>
 
+<%= render "search_box" %>
+
 <h1><%= @presenter.faculty.display_name %></h1>
-<h2>Co-author network</h2>
+<h2>Chord Diagram</h2>
 <h3 id="errorMsg" class="hidden">Sorry, no data is available for this researcher.</h3>
 
-<svg width="960" height="960"></svg>
+<div class="row">
+  <div class="col-md-9">
+    <svg width="960" height="700"></svg>
+  </div>
+  <div class="col-md-3">
+    <a class="btn btn-default btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Coauthor Network</a>
+    <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_chord_path(@presenter.faculty.vivo_id) %>" >Chord Diagram</a>
+    <p>&nbsp;</p>
+    <p><b>Legend</b></p>
+    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;pending</p>
+    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;pending</p>
+    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;pending</p>
+    <p>&nbsp;</p>
+    <p><b>Options</b></p>
+    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">Go to Researcher's Profile</a></p>
+    <p>pending</p>
+    <p>pending</p>
+    <p>pending</p>
+    <p><a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">Download data (JSON)</a></p>
+  </div>
+</div>
 
 <p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/chordDiagram/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
 

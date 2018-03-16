@@ -1,8 +1,5 @@
 <% @page_title = (@presenter.faculty.name || "") + " Visualizations"%>
 
-<a class="btn btn-default btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Co-Author Graph</a>
-<a class="btn btn-default btn-lg" role="button" href="<%= visualization_chord_path(@presenter.faculty.vivo_id) %>" >Chord Graph</a>
-
 <style>
   .links line {
     stroke: #999;
@@ -36,7 +33,7 @@
 <%= render "search_box" %>
 
 <h1><%= @presenter.faculty.display_name %></h1>
-<h2>Co-author network (with labels)</h2>
+<h2>Coauthor Network</h2>
 <h3 id="errorMsg" class="hidden">Sorry, no data is available for this researcher.</h3>
 
 <div class="row">
@@ -44,6 +41,9 @@
     <svg width="960" height="700"></svg>
   </div>
   <div class="col-md-3">
+    <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Coauthor Network</a>
+    <a class="btn btn-default btn-lg" role="button" href="<%= visualization_chord_path(@presenter.faculty.vivo_id) %>" >Chord Diagram</a>
+    <p>&nbsp;</p>
     <p><b>Legend</b></p>
     <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
     <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
