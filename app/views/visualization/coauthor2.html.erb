@@ -45,16 +45,17 @@
     <svg width="960" height="700"></svg>
   </div>
   <div class="col-md-3">
+    <p><b>Legend</b></p>
+    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
+    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
+    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
+    <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">Go to Researcher's Profile</a></p>
     <p>Show labels<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit<input id="forceToFit" type="checkbox"/></p>
-    <p>&nbsp;</p>
-    <p><b>Legend</b></p>
-    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
-    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
-    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
+    <p><a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">Download data (JSON)</a></p>
   </div>
 </div>
 
@@ -64,26 +65,25 @@
   <p id="subtitle2"></p>
 </div>
 
-<p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
 
 <script>
 
   var facultyId = "<%= @presenter.faculty.id %>";     // http://vivo.brown.edu/jcarberry
   var vivoId = "<%= @presenter.faculty.vivo_id %>";   // jcarberry
   var json_data_addr = "<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>";
-  var vizUrl =
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
-      console.log("defaulted to true");
+      console.log("force to fit defaulted to true");
       $("#forceToFit").attr("checked", true);
     }
 
     initGraph();
+
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
-      console.log("clicked");
+      console.log("force to fit clicked");
       var checked = $("#forceToFit").is(":checked");
       var newUrl = "<%= visualization_coauthor2_path(@presenter.faculty.vivo_id)%>";
       if (checked) {
@@ -138,47 +138,26 @@
   }
 
   function drawGraph(data, status) {
+    var i;
     var svg = d3.select("svg");
     var w = +svg.attr("width");
     var h = +svg.attr("height");
+    var dataset = {nodes: data.nodes, edges: []};
 
-    var dataset = {
-      nodes: [
-        {name: "Adam",    id: 0},
-        {name: "Bob",     id: 1},
-        {name: "Carrie",  id: 2},
-        {name: "Dan",     id: 3},
-        {name: "Edward",  id: 4},
-        {name: "Frances", id: 5}
-      ],
-      edges: [
-        {source: 0, target: 1}, // adam to bob
-        {source: 0, target: 2}, // adam to carrie
-        {source: 0, target: 3}, // adam to dan
-        {source: 1, target: 4}, // bob to edward
-        {source: 2, target: 3}  // carrie to dan
-      ]
-    };
-
-    // set to true to use live data
-    if (true) {
-      dataset = {nodes: [], edges: []};
-      var i;
-      for(i = 0; i < data.nodes.length; i++) {
-        obj = {id: data.nodes[i].id, name: data.nodes[i].name, group: data.nodes[i].group};
-        dataset.nodes.push(obj);
-      }
-
-      for(i = 0; i < data.links.length; i++) {
-        obj = {
-          source: getNodeIndex(data.nodes, data.links[i].source),
-          target: getNodeIndex(data.nodes, data.links[i].target)
-        };
-        dataset.edges.push(obj);
-      }
+    // calculate the edges from the data
+    for(i = 0; i < data.links.length; i++) {
+      obj = {
+        source: getNodeIndex(data.nodes, data.links[i].source),
+        target: getNodeIndex(data.nodes, data.links[i].target)
+      };
+      dataset.edges.push(obj);
     }
 
-    // init all levels to 2
+    // set all nodes to level 2 initially
+    //
+    // level 0 - author
+    // level 1 - coauthor
+    // level 2 - coauthor's coauthor
     for(i = 0; i < dataset.nodes.length; i++) {
       dataset.nodes[i].level = 2;
     }
@@ -187,15 +166,12 @@
     var rootIndex = getNodeIndex(data.nodes, facultyId);
     var firstLevel = [];
     var edge;
-    // console.log("First level:")
     for(i = 0; i < dataset.edges.length; i++) {
       edge = dataset.edges[i];
       if (edge.source == rootIndex) {
         firstLevel.push(edge.target);
-        // console.log("S: " + dataset.nodes[edge.target].id);
       } else if(edge.target == rootIndex) {
         firstLevel.push(edge.source);
-        // console.log("T: " + dataset.nodes[edge.source].id);
       }
     }
 
@@ -216,13 +192,12 @@
         break;
       }
     }
-    // console.log(dataset.nodes);
 
     var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     var force = d3.forceSimulation(dataset.nodes)
       .force("charge", d3.forceManyBody())
-      .force("center", d3.forceCenter().x(w/2).y(h/2));
+      .force("center", d3.forceCenter(w/2, h/2));
 
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
@@ -233,27 +208,39 @@
       force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
-// works
-//      .force("link", d3.forceLink(dataset.edges))
-//      .force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
-//
-// does not work
-//       .force("link", d3.forceLink().distance(50).id(function(d) { return d.id; }))
-//
-// does not work -- seems to be v3 specific
-// force.linkDistance(100);
-
     var edges = svg.selectAll("line")
       .data(dataset.edges)
       .enter()
       .append("line")
       .style("stroke", "#ccc")
       .style("stroke-width", 1);
+      // .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+    var dragstarted = function(d) {
+      if (!d3.event.active) force.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    var dragged = function(d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+
+    var dragended = function (d) {
+      if (!d3.event.active) force.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
 
     var nodes = svg.selectAll("g")
       .data(dataset.nodes)
       .enter()
-      .append("g");
+      .append("g")
+      .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
 
     nodes.append("circle")
       .attr("r", function(d) {
@@ -266,64 +253,60 @@
       })
       .style("fill", nodeColor);
 
-      nodes.on('mouseover', function(d){
-        // var xPos = d.x + 10;
-        // var yPos = d.y + (h / 4);
-        // var xPos = d3.select(this).select("circle").attr("cx");
-        // var yPos = d3.select(this).select("circle").attr("cy");
-        var showDetails = $("#showDetails").is(":checked");
-        if(showDetails) {
-          // https://stackoverflow.com/a/24041991/446681
-          var matrix = this.getScreenCTM().translate(+ this.getAttribute("cx"), + this.getAttribute("cy"));
-          var xPos = window.pageXOffset + matrix.e + 15;
-          var yPos = window.pageYOffset + matrix.f - 30;
-          d3.select("#tooltip")
-            .style("left", xPos + "px")
-            .style("top", yPos + "px")
-            .select("#title")
-            .text(d.name);
-          d3.select("#subtitle").text(d.group);
-          d3.select("#subtitle2").text("Click to view " + d.name + "'s coauthors");
-          d3.select("#tooltip").classed("hidden", false);
-        } else {
+    nodes.on('mouseover', function(d){
+      var showDetails = $("#showDetails").is(":checked");
+      if(showDetails) {
+        // https://stackoverflow.com/a/24041991/446681
+        var matrix = this.getScreenCTM().translate(+ this.getAttribute("cx"), + this.getAttribute("cy"));
+        var xPos = window.pageXOffset + matrix.e + 15;
+        var yPos = window.pageYOffset + matrix.f - 30;
+        d3.select("#tooltip")
+          .style("left", xPos + "px")
+          .style("top", yPos + "px")
+          .select("#title")
+          .text(d.name);
+        d3.select("#subtitle").text(d.group);
+        d3.select("#subtitle2").text("Click to view " + d.name + "'s coauthors");
+        d3.select("#tooltip").classed("hidden", false);
+      } else {
           d3.select(this).select('text')
             .style("font-weight", "bold")
             .style("font-size", "12px");
-        }
-        d3.select(this).select('circle').style("fill", "#ffbb78");
-      });
+      }
+      d3.select(this).select('circle').style("fill", "#ffbb78");
+    });
 
-      nodes.on('mouseout', function(d){
-        var showDetails = $("#showDetails").is(":checked");
-        if(showDetails) {
-          d3.select("#tooltip").classed("hidden", true);
-        } else {
-          d3.select(this).select('text')
-            .style("font-weight", "normal")
-            .style("font-size", "10px");
-        }
-        d3.select(this).select('circle').style("fill", nodeColor(d, 0));
-      });
+    nodes.on('mouseout', function(d){
+      var showDetails = $("#showDetails").is(":checked");
+      if(showDetails) {
+        d3.select("#tooltip").classed("hidden", true);
+      } else {
+        d3.select(this).select('text')
+          .style("font-weight", "normal")
+          .style("font-size", "10px");
+      }
+      d3.select(this).select('circle').style("fill", nodeColor(d, 0));
+    });
 
-      nodes.on('click', function(d){
-        var shortId = d.id.substring(d.id.lastIndexOf("/")+1);
-        var currentSegment = "/display/" + vivoId + "/viz/";
-        var newSegment = "/display/" + shortId + "/viz/";
-        var newUrl = window.location.toString().replace(currentSegment, newSegment);
-        window.location.assign(newUrl);
-      });
+    nodes.on('click', function(d){
+      var shortId = d.id.substring(d.id.lastIndexOf("/")+1);
+      var currentSegment = "/display/" + vivoId + "/viz/";
+      var newSegment = "/display/" + shortId + "/viz/";
+      var newUrl = window.location.toString().replace(currentSegment, newSegment);
+      window.location.assign(newUrl);
+    });
 
-      nodes.selectAll("circle").on('click', function(d){
-        var shortId = d.id.substring(d.id.lastIndexOf("/")+1);
-        var currentSegment = "/display/" + vivoId + "/viz/";
-        var newSegment = "/display/" + shortId + "/viz/";
-        var newUrl = window.location.toString().replace(currentSegment, newSegment);
-        window.location.assign(newUrl);
-      });
+    nodes.selectAll("circle").on('click', function(d){
+      var shortId = d.id.substring(d.id.lastIndexOf("/")+1);
+      var currentSegment = "/display/" + vivoId + "/viz/";
+      var newSegment = "/display/" + shortId + "/viz/";
+      var newUrl = window.location.toString().replace(currentSegment, newSegment);
+      window.location.assign(newUrl);
+    });
 
-      nodes.selectAll("circle").on('mouseout', function(d){
-        d3.select(this).style("fill", nodeColor(d, 0));
-      });
+    nodes.selectAll("circle").on('mouseout', function(d){
+      d3.select(this).style("fill", nodeColor(d, 0));
+    });
 
     nodes.append("text")
       .style("font-size", function(d) { return d.level == 0 ? "12px" : "8px"; })
@@ -342,5 +325,7 @@
     });
 
     updateLabels();
-  }
+  } // function drawGraph() {
+
+
 </script>
