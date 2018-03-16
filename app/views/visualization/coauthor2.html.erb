@@ -1,8 +1,8 @@
 <% @page_title = (@presenter.faculty.name || "") + " Visualizations"%>
 
-<a class="btn btn-default btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Co-Author Network</a>
+<a class="btn btn-default btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Co-Author</a>
 <a class="btn btn-default btn-lg" role="button" href="<%= visualization_chord_path(@presenter.faculty.vivo_id) %>" >Chord Graph</a>
-<a class="btn btn-primary btn-lg" role="button" href="<%= visualization_test_path(@presenter.faculty.vivo_id) %>" >Co-Author V2</a>
+<a class="btn btn-primary btn-lg" role="button" href="<%= visualization_coauthor2_path(@presenter.faculty.vivo_id) %>" >Co-Author V2</a>
 
 <style>
   .links line {
@@ -14,10 +14,19 @@
     stroke: #fff;
     stroke-width: 1.5px;
   }
+
+  #tooltip {
+    position: absolute;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+  }
 </style>
 
 <h1><%= @presenter.faculty.display_name %></h1>
-<h2>Co-author network with labels</h2>
+<h2>Co-author network (with labels)</h2>
 <h3 id="errorMsg" class="hidden">Sorry, no data is available for this researcher.</h3>
 
 <div class="row">
@@ -27,26 +36,46 @@
   <div class="col-md-3">
     <p><b>Legend</b></p>
     <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
-    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Co-author</p>
-    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Co-author's co-author</p>
+    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
+    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
     <p>Show labels<input id="showLabels" type="checkbox" checked/></p>
-    <!-- <p>Force to fit<input id="forceToFit" type="checkbox"/></p> -->
+    <p>Show details on mouse hover<input id="showDetails" type="checkbox" checked/></p>
+    <p>Force to fit<input id="forceToFit" type="checkbox"/></p>
   </div>
 </div>
 
+<div id="tooltip" class="hidden">
+  <p id="title"></p>
+  <p id="subtitle"></p>
+</div>
 
 <p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
 
 <script>
 
-  var facultyId = "<%= @presenter.faculty.id %>";
-  var vivoId = "<%= @presenter.faculty.vivo_id %>";
+  var facultyId = "<%= @presenter.faculty.id %>";     // http://vivo.brown.edu/jcarberry
+  var vivoId = "<%= @presenter.faculty.vivo_id %>";   // jcarberry
   var json_data_addr = "<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>";
+  var vizUrl =
 
   $(document).ready(function() {
+    var forceToFit = window.location.href.indexOf("?fit") != -1;
+    if (forceToFit) {
+      console.log("defaulted to true");
+      $("#forceToFit").attr("checked", true);
+    }
+
     initGraph();
     $("#showLabels").on("click", updateLabels);
-    // $("#forceToFit").on("click", initGraph);
+    $("#forceToFit").on("click", function() {
+      console.log("clicked");
+      var checked = $("#forceToFit").is(":checked");
+      var newUrl = "<%= visualization_coauthor2_path(@presenter.faculty.vivo_id)%>";
+      if (checked) {
+        newUrl += "?fit=1";
+      }
+      window.location.assign(newUrl);
+    });
   });
 
   function initGraph() {
@@ -74,8 +103,8 @@
   }
 
   function updateLabels() {
-    var x = $("#showLabels").is(":checked");
-    if (x) {
+    var showLabels = $("#showLabels").is(":checked");
+    if (showLabels) {
       d3.selectAll(".node-text").classed("hidden",false);
       console.log("showing...");
     } else {
@@ -94,10 +123,6 @@
   }
 
   function drawGraph(data, status) {
-
-    var showLabels = $("#showLabels").is(":checked");
-    // console.log(showLabels);
-
     var svg = d3.select("svg");
     var w = +svg.attr("width");
     var h = +svg.attr("height");
@@ -125,7 +150,7 @@
       dataset = {nodes: [], edges: []};
       var i;
       for(i = 0; i < data.nodes.length; i++) {
-        obj = {id: data.nodes[i].id, name: data.nodes[i].name};
+        obj = {id: data.nodes[i].id, name: data.nodes[i].name, group: data.nodes[i].group};
         dataset.nodes.push(obj);
       }
 
@@ -147,15 +172,15 @@
     var rootIndex = getNodeIndex(data.nodes, facultyId);
     var firstLevel = [];
     var edge;
-    console.log("First level:")
+    // console.log("First level:")
     for(i = 0; i < dataset.edges.length; i++) {
       edge = dataset.edges[i];
       if (edge.source == rootIndex) {
         firstLevel.push(edge.target);
-        console.log("S: " + dataset.nodes[edge.target].id);
+        // console.log("S: " + dataset.nodes[edge.target].id);
       } else if(edge.target == rootIndex) {
         firstLevel.push(edge.source);
-        console.log("T: " + dataset.nodes[edge.source].id);
+        // console.log("T: " + dataset.nodes[edge.source].id);
       }
     }
 
@@ -184,11 +209,12 @@
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter().x(w/2).y(h/2));
 
-    // var forceToFit = $("#forceToFit").is(":checked");
-    var forceToFit = false;
+    var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
+      console.log("Force to fit: yes");
       force.force("link", d3.forceLink(dataset.edges));
     } else {
+      console.log("Force to fit: no");
       force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
@@ -226,17 +252,41 @@
       .style("fill", nodeColor);
 
       nodes.on('mouseover', function(d){
+        // var xPos = d.x + 10;
+        // var yPos = d.y + (h / 4);
+        // var xPos = d3.select(this).select("circle").attr("cx");
+        // var yPos = d3.select(this).select("circle").attr("cy");
+        var showDetails = $("#showDetails").is(":checked");
+        if(showDetails) {
+          // https://stackoverflow.com/a/24041991/446681
+          var matrix = this.getScreenCTM().translate(+ this.getAttribute("cx"), + this.getAttribute("cy"));
+          var xPos = window.pageXOffset + matrix.e + 15;
+          var yPos = window.pageYOffset + matrix.f - 30;
+          d3.select("#tooltip")
+            .style("left", xPos + "px")
+            .style("top", yPos + "px")
+            .select("#title")
+            .text(d.name);
+          d3.select("#subtitle").text(d.group);
+          d3.select("#tooltip").classed("hidden", false);
+        } else {
+          d3.select(this).select('text')
+            .style("font-weight", "bold")
+            .style("font-size", "12px");
+        }
         d3.select(this).select('circle').style("fill", "#ffbb78");
-        d3.select(this).select('text')
-          .style("font-weight", "bold")
-          .style("font-size", "12px");
       });
 
       nodes.on('mouseout', function(d){
+        var showDetails = $("#showDetails").is(":checked");
+        if(showDetails) {
+          d3.select("#tooltip").classed("hidden", true);
+        } else {
+          d3.select(this).select('text')
+            .style("font-weight", "normal")
+            .style("font-size", "10px");
+        }
         d3.select(this).select('circle').style("fill", nodeColor(d, 0));
-        d3.select(this).select('text')
-          .style("font-weight", "normal")
-          .style("font-size", "10px");
       });
 
       nodes.on('click', function(d){

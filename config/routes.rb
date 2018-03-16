@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Visualizations for faculty
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
   get 'display/:id/viz/chord' => 'visualization#chord', as: :visualization_chord
-  get 'display/:id/viz/test' => 'visualization#test', as: :visualization_test
+  get 'display/:id/viz/coauthor2' => 'visualization#coauthor2', as: :visualization_coauthor2
   get 'display/:id/viz' => 'visualization#home', as: :visualization_home
 
   get 'search_facets' => 'search#facets'

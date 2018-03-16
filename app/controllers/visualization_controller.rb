@@ -7,8 +7,8 @@ class VisualizationController < ApplicationController
     render_viz("coauthor")
   end
 
-  def test
-    render_viz("test")
+  def coauthor2
+    render_viz("coauthor2")
   end
 
   def home
