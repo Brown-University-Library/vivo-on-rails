@@ -84,7 +84,7 @@
     $("#forceToFit").on("click", function() {
       console.log("force to fit clicked");
       var checked = $("#forceToFit").is(":checked");
-      var newUrl = "<%= visualization_coauthor2_path(@presenter.faculty.vivo_id)%>";
+      var newUrl = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id)%>";
       if (checked) {
         newUrl += "?fit=1";
       }
