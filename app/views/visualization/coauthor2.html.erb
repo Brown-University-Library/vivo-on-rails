@@ -228,6 +228,7 @@
     }
 
     var dragended = function (d) {
+      return;
       if (!d3.event.active) force.alphaTarget(0);
       d.fx = null;
       d.fy = null;
