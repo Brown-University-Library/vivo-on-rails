@@ -19,7 +19,7 @@ class Faculty
       thumbnail = f.solr_doc["thumbnail_file_path_s"]
       thumbnail_url = ModelUtils.thumbnail_url(thumbnail, images_url)
       if thumbnail != nil && thumbnail_url == nil
-        Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{hash['id']})"
+        Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{id})"
       end
       f.item = FacultyItem.from_hash(f.json_txt, display_name, thumbnail_url,
         fis_updated, profile_updated)
