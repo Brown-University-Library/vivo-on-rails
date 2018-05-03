@@ -25,6 +25,11 @@ class ModelUtils
       part_a = id[1..3]
       part_b = id[4..-1]
       url = "#{root_url}/profile-images/#{part_a}/#{part_b}/#{file_name}"
+    when id.length >= 8 && id.length <= 9
+      part_a = id[1..3]
+      part_b = id[4..6]
+      part_c = id[7..-1]
+      url = "#{root_url}/profile-images/#{part_a}/#{part_b}/#{part_c}/#{file_name}"
     else
       url = nil
     end
