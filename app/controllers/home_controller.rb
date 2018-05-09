@@ -13,6 +13,9 @@ class HomeController < ApplicationController
   def help
   end
 
+  def history
+  end
+
   def index
     page_size = 4
     base_author_url = display_show_url("")

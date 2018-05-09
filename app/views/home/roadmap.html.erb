@@ -1,83 +1,48 @@
 <div class="container">
   <div class="row">
-    <h2>Recent Improvements and Roadmap for future Development</h2>
+    <h2>Improvements and Roadmap for future Development</h2>
+
     <p><a href="https://docs.google.com/a/brown.edu/forms/d/1H_LzEHRzpxv3OY266RjSwpAMwVuTEUFyNEgMPcZ4NiA/viewform">Make a suggestion!</a></p>
 
-    <p>The implementation of Researchers@Brown has been overseen by a core team composed of representatives from the Dean of the Faculty,
-    Division of Biology, School of Public Health, Office of the Vice President for Research, Provost's Office, Computing and Information Services, and the Library.
-    Having launched on May 1, 2014, Researchers@Brown is now in a transitional stage.  A new oversight structure to set
-    policies and development priorities is under discussion. The roadmap below is therefore tentative.</p>
-
-    <hr />
-
-    <h3>Improvements and New Features Since Launch</h3>
-    <ul style="list-style:disc;margin-left:25px;">
-      <li><span style="color:black">Structured Publication Data</span><br/>
-        <p>A new <a href="/publications">"Publications"</a> section is now available.  Features include:
-          <ul style="list-style:circle;margin-left:50px;">
-            <li>Enter DOI or PMID to have full citation automatically retrieved</li>
-            <li>Links to full text when available</li>
-            <li>Easy form for entering/editing publications as separate fields</li>
-            <li>Harvested publications from PubMed for Biology and Public Health faculty</li>
-          </ul>
-        </p>
-      <li><span style="color:black">Geographic Research Areas</span><br/>
-        You may now add geographic research areas using a standard set of
-        geographic terms. This section in under "Research" in the Profile Manager.
-        Type 3 characters to pull up a list of terms from which to choose.<br /><br />
+    <h3>Improvements</h3>
+    <ul>
+    <li>In November 2017 we launched a new public interface with a more modern look and feel that focuses on the most common needs of our users rather than the generic experience that VIVO provides out of the box.  The new front end is a Ruby on Rails application on top of the Apache Solr search platform and emphasizes search over the ‘browse’ model of the native VIVO application.  The user interface is based on the responsive Bootstrap design and is now fully mobile compatible.</li>
+    <li>Launched a sister project to introduce and register <a href="https://library.brown.edu/DigitalTechnologies/category/orcid/">ORCID identifiers</a> at Brown.
+    <li>Added <a href="https://fast.oclc.org/searchfast/">FAST subject headings</a> as an option for research and geographical terms.</li>
+    <li>Launched a <a href="https://library.brown.edu/DigitalTechnologies/announcing-a-researchers-brown-data-service/">data service</a> for campus developers who might want to use data from Researchers@Brown in other websites.</li>
     </ul>
 
-    <hr />
-
-    <h3>Planned and Potential Future Improvements and New Features</h3>
-    <ul style="list-style:disc;margin-left:25px;">
-      <li><span style="color:black">Expanded Harvesting of Publications</span><br/>
-        In the future we will harvest publications from other sources
-        (Web of Science, arXiv, etc.) and for additional faculty groups and disciplines.
-        <br /><br />
-
-      <li><span style="color:black">Software Upgrades</span><br/>
-        Upgrade to <a href="http://duraspace.org/node/2175">VIVO 1.7</a>
-        <br /><br />
-
-      <li><span style="color:black">Additional and Improved Structured Data</span><br />
-        Grant data is currently plain text migrated from the DRR-B.  Coeus and government
-        sources will be used in the future to automate (when possible) the capture of
-        grant data. <br /><br />
-
-        Other data types -- service, presentations, artistic works, awards and honors, etc
-        will be considered and prioritized by the oversight group for conversion to
-        structured data.<br /><br />
-
-        Improvements are planned in the Research Areas section:  Use of subject vocabularies,
-        normalization of entries, and user guidelines. This will provide a more robust search.<br /><br />
-
-        Normalization of the names of external organizations and the addition of links as
-        appropriate are in the planning stage.<br /><br />
-
-      <li><span style="color:black">Non-Brown Collaborators</span><br/>
-        The ability to add non-Brown collarborators and non-faculty Brown collarborators
-        is a future improvement.<br /><br />
-
-      <li><span style="color:black">Integration with Other Systems</span><br/>
-        Researchers@Brown will use <a href="http://orcid.org">ORCID</a> identifiers when
-        that system is rolled out to the campus.<br /><br />
-
-        The future integration of Researchers@Brown with the
-        <a href="https://repository.library.brown.edu/">Brown Digital Repository (BDR)</a>
-        is highly desirable. A faculty member might deposit a publication in the BDR and
-        have the citation and link automatically available in Researchers@Brown.
-        <br /><br />
-
-        A widget that would allow you to add Researchers@Brown data to your website has
-        been developed for Duke University's VIVO instance and may be customized in the
-        future for Brown use. <br /><br />
-
-      <li><span style="color:black">Output to NIH Biosketch</span><br/>
-        The University of Florida has developed a tool for creating NIH Biosketch documents
-        in RTF using SPARQL and Python.  See: <a href="http://www.youtube.com/watch?v=sA77759ESzE&feature=youtu.be">http://www.youtube.com/watch?v=sA77759ESzE&feature=youtu.be</a>
-        As additional structured data becomes available in Researchers@Brown,
-        the capacity to output to CV other formats will become more feasible.<br/><br/>
+    <h3>Current Work</h3>
+    <ul>
+    <li>We will soon add Brown co-author network visualizations to profiles. These visualizations are based on publications data in Researchers@Brown and will be exportable as JSON and CSV.</li>
+    <li>We are exploring possible integrations with Faculty Activity Report data with the goal of reducing the need for users to enter data in multiple systems.</li>
+    <li>We are working on improving pages for organizations in Researchers@Brown.</li>
     </ul>
+
+    <h3>Future Development</h3>
+    <p><strong><em>Curate Research Terms</em></strong>
+    	<ul>
+    	<li>Separate controlled vocabulary entries from manual entries.</li>
+    	<li>Separate research terms and geographic terms (research geography)</li>
+    	<li>Create an option for faculty-controlled ordering of research terms. (Research terms current display alphabetically.)</li>
+    	<li>Investigate other controlled vocabulary sources: MESH, publication data, etc.</li>
+    	</ul>
+    </p>
+    <p><strong><em>Integrate with other systems</em></strong>
+    	<ul>
+    	<li>Faculty Activity Report (see Current Work)</li>
+    	<li>Add and index ORCID identifiers in profiles.</li>
+    	<li>Create a dissertation adviser role in Researchers@Brown and cross link to dissertations in the Brown Digital Repository (BDR).</li>
+    	<li>Integrate structured data from other sources, e.g. grants.</li>
+    	</ul>
+    </p>
+    <p><strong><em>Create/Expand User Tools</em></strong>
+    	<ul>
+    	<li>Create export tools for VIVO data beginning with a simple tool for re-use of VIVO data (Phase One) and, in future, customized export in multiple formats (Phase Two) and Export to CV and Biosketch (Phase Three).</li>
+    	<li>Expand coauthor visualizations to non-Brown coauthors. Based on user feedback, create new visualization options.</li>
+    	<li>Explore providing Google Analytics data to individual faculty.</li>
+    	<li>Continue to improve search functionality and ranking algorithms.</li>
+    	</ul>
+    </p>
   </div>
 </div>

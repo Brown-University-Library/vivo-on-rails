@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get 'about' => 'home#about', as: :home_about
   get 'faq' => 'home#faq', as: :home_faq
   get 'help' => 'home#help', as: :home_help
+  get 'history' => 'home#history', as: :home_history
   get 'publications' => 'home#publications', as: :home_publications
   get 'roadmap' => 'home#roadmap', as: :home_roadmap
   get 'termsOfUse' => 'home#termsofuse', as: :home_terms
