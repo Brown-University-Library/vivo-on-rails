@@ -2,33 +2,42 @@ require 'securerandom'
 require "./app/models/book_cover.rb"
 class HomeController < ApplicationController
   def about
+    @presenter = DefaultPresenter.new()
   end
 
   def brown
+    @presenter = DefaultPresenter.new()
   end
 
   def faq
+    @presenter = DefaultPresenter.new()
   end
 
   def help
+    @presenter = DefaultPresenter.new()
   end
 
   def history
+    @presenter = DefaultPresenter.new()
   end
 
   def index
     page_size = 4
     base_author_url = display_show_url("")
     @bookCoversPaginated = BookCoverModel.get_all_paginated(base_author_url, page_size)
+    @presenter = DefaultPresenter.new()
   end
 
   def publications
+    @presenter = DefaultPresenter.new()
   end
 
   def roadmap
+    @presenter = DefaultPresenter.new()
   end
 
   def termsofuse
+    @presenter = DefaultPresenter.new()
   end
 
   def page_not_found
