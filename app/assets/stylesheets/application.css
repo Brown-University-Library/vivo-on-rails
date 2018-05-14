@@ -1313,6 +1313,9 @@ td.citation-data.pub-item {
 .container {
 	clear: both;
 }
+.container > .row > h2 {
+	text-align: center;
+}
 /* End of Supplementary Pages */
 
 /*** General Breakpoints ***/
