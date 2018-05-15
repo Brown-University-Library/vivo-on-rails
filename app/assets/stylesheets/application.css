@@ -1309,6 +1309,15 @@ td.citation-data.pub-item {
 /* End of Organization Page */
 
 
+/* Supplementary Pages */
+.container {
+	clear: both;
+}
+.container > .row > h2 {
+	text-align: center;
+}
+/* End of Supplementary Pages */
+
 /*** General Breakpoints ***/
 @media screen and (max-width: 600px) {
 	.site-title h1 a {
