@@ -28,6 +28,14 @@
     font-size: small;
     font-style: italic;
   }
+
+  .htmlSnippet {
+    background-color: #f5f5d3; /* light yellow */
+    border:1px solid #999999;
+    width:98%;
+    margin:5px 0;
+    padding:1%;
+  }
 </style>
 
 <%= render "search_box" %>
@@ -38,7 +46,7 @@
 
 <div class="row">
   <div class="col-md-9">
-    <svg width="960" height="700"></svg>
+    <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
     <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Coauthor Network</a>
@@ -51,11 +59,26 @@
     <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">Go to Researcher's Profile</a></p>
-    <p>Show labels<input id="showLabels" type="checkbox" checked/></p>
-    <p>Show details on mouse hover<input id="showDetails" type="checkbox" checked/></p>
-    <p>Force to fit<input id="forceToFit" type="checkbox"/></p>
-    <p><a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>">Download data (JSON)</a></p>
+    <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
+    <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
+    <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
+    <p><a href="<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>" title="Format suitable for D3 and other visualization tools.">Download data (JSON)</a></p>
+    <p><a href="#" id="embedHtml" title="Shows HTML to embed the graph as an SVG element into your own page.">Embed SVG Code</a></p>
+    <p><a href="#" id="downloadPng" title="Downlods the graph as an image file in PNG format. This only works in Chrome and Firefox.">Download Image (PNG)</a></p>
   </div>
+</div>
+
+<div class="row hidden" id="canvasDiv">
+  <canvas id="canvasElement"></canvas>
+  <a id="canvasImgLink" href="#" download="coauthors.png" target="_blank"></a>
+</div>
+
+<div class="row hidden" id="embedHtmlDiv">
+  <div class="col-md-12">
+    <p>Copy the following HTML to embed the SVG into your own page</p>
+    <textarea id="embedHtmlText" rows="15" class="htmlSnippet"></textarea>
+  </div>
+  <div><p>&nbsp;</p></div>
 </div>
 
 <div id="tooltip" class="hidden">
@@ -64,17 +87,17 @@
   <p id="subtitle2" style="margin:0;"></p>
 </div>
 
-
 <script>
 
   var facultyId = "<%= @presenter.faculty.id %>";     // http://vivo.brown.edu/jcarberry
   var vivoId = "<%= @presenter.faculty.vivo_id %>";   // jcarberry
   var json_data_addr = "<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/<%= @presenter.faculty.vivo_id %>";
+  var svgWidth = 960;
+  var svgHeight = 700;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
-      console.log("force to fit defaulted to true");
       $("#forceToFit").attr("checked", true);
     }
 
@@ -82,7 +105,6 @@
 
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
-      console.log("force to fit clicked");
       var checked = $("#forceToFit").is(":checked");
       var newUrl = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id)%>";
       if (checked) {
@@ -90,6 +112,9 @@
       }
       window.location.assign(newUrl);
     });
+
+    $("#embedHtml").on("click", showEmbedHtml);
+    $("#downloadPng").on("click", downloadPng);
   });
 
   function initGraph() {
@@ -120,12 +145,88 @@
     var showLabels = $("#showLabels").is(":checked");
     if (showLabels) {
       d3.selectAll(".node-text").classed("hidden",false);
-      console.log("showing...");
     } else {
       d3.selectAll(".node-text").classed("hidden",true);
-      console.log("hiding...");
     }
   }
+
+  function downloadPng() {
+    // The process to download the graphic in the SVG element as an image file
+    // is a far more complicated than it looks on the surface. The general
+    // process is as follows:
+    //
+    //  1. Create an HTML IMG element using the raw SVG as its source.
+    //  2. Add this image to an HTML canvas.
+    //  3. Use the canvas.toBlob() to create binary image (image/png)
+    //     out of the SVG that we created on step 1.
+    //  4. Force the download of the binary image.
+    //
+    // Source: http://dinbror.dk/blog/how-to-download-an-inline-svg-as-jpg-or-png/
+    var svgHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="' + svgWidth + '" height="' + svgHeight + '">\r\n' +
+      '<rect width="100%" height="100%" fill="white"/>\r\n' +
+      $("#svgElement").html() + '\r\n' +
+      '</svg>';
+    var svgRaw = "data:image/svg+xml," + encodeURIComponent(svgHtml);
+
+    var canvas = document.getElementById("canvasElement");
+    canvas.setAttribute("width", svgWidth);
+    canvas.setAttribute("height", svgHeight);
+
+    var ctx = canvas.getContext("2d");
+    var svgImage = new Image();
+
+    svgImage.onload = function () {
+      // Draw the SVG image inside the canvas
+      ctx.drawImage(svgImage, 0, 0, svgWidth, svgHeight);
+
+      // Generate a binary version of the canvas
+      canvas.toBlob(function (blob) {
+        url = URL.createObjectURL(blob);
+
+        // Tell the browser that is safe to garbage collect the created blob
+        // once it has been loaded.
+        var pngImg = document.createElement("img");
+        pngImg.onload = function () { URL.revokeObjectURL(url); };
+        pngImg.src = url;
+
+        // Set the blob URL as the target of our HTML anchor tag...
+        var a = document.getElementById("canvasImgLink");
+        var fileName = "coauthors_" + vivoId + ".png";
+        a.setAttribute("download", fileName);
+        a.setAttribute("href", url);
+
+        // ...and force a click event on the HTML anchor tag
+        // (this is what prompts the user to safe the image.)
+        var clickEvent = new MouseEvent("click", {
+          "view": window,
+          "bubbles": true,
+          "cancelable": true
+        });
+        a.dispatchEvent(clickEvent);
+      }, "image/png", 1);
+    }
+
+    svgImage.src = svgRaw;
+    return false;
+  }
+
+  function showEmbedHtml() {
+    // Dump the HTML to a text area element...
+    var svgElement = $("#svgElement").html();
+    var svgHtml = '<svg width="' + svgWidth + '" height="' + svgHeight + '">\r\n' + svgElement + '\r\n</svg>';
+    $("#embedHtmlDiv").removeClass("hidden");
+    $("#embedHtmlText").val(svgHtml);
+
+    // ...and scroll to the text area element into view.
+    // https://stackoverflow.com/a/5909328/446681
+    $('html, body').animate({
+      scrollTop: $(document).height()-$(window).height()},
+      1400,
+      "swing"
+    );
+    return false;
+  }
+
 
   function nodeColor(d, i) {
     if (d.level == 0) {
@@ -200,10 +301,8 @@
 
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
-      console.log("Force to fit: yes");
       force.force("link", d3.forceLink(dataset.edges));
     } else {
-      console.log("Force to fit: no");
       force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
@@ -227,9 +326,9 @@
     }
 
     var dragended = function (d) {
-      // if (!d3.event.active) force.alphaTarget(0);
-      // d.fx = null;
-      // d.fy = null;
+      if ($("#forceToFit").prop("checked") == true) {
+        $("#forceToFit").attr("checked", false);
+      }
     }
 
     var nodes = svg.selectAll("g")
@@ -325,6 +424,5 @@
 
     updateLabels();
   } // function drawGraph() {
-
 
 </script>
