@@ -27,10 +27,10 @@ Rails.application.routes.draw do
   get 'visualization/forward/chordDiagram/' => 'visualization#fwd_chord_list'
 
   # Returns hard-coded responses for testing offline
-  get 'visualizations/fake/force/:id' => 'visualization#fake_force_one'
-  # get 'visualizations/fake/force/' => 'visualization#fake_force_list'
-  get 'visualizations/fake/chord/:id' => 'visualization#fake_chord_one'
-  get 'visualizations/fake/chord/' => 'visualization#fake_chord_list'
+  get 'visualizations/fake/forceEdgeGraph/:id' => 'visualization#fake_force_one'
+  # get 'visualizations/fake/forceEdgeGraph/' => 'visualization#fake_force_list'
+  get 'visualizations/fake/chordDiagram/:id' => 'visualization#fake_chord_one'
+  get 'visualizations/fake/chordDiagram/' => 'visualization#fake_chord_list'
 
   # VIVO original URLs
   get 'people' => 'home#people'
