@@ -68,8 +68,14 @@ class VisualizationController < ApplicationController
     def render_viz(name)
       id = params["id"]
       faculty = Faculty.load_from_solr(id)
-      @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-      render name
+      if faculty == nil
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render "not_found", status: 404, formats: [:html]
+      else
+        @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
+        render name
+      end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not render #{name} visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
