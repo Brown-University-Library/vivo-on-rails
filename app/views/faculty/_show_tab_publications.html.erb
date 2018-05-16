@@ -1,6 +1,14 @@
 <% if @presenter.has_publications %>
       <div id="tabPublications" class="panel panel-default hidden">
-        <h3>Publications</h3>
+        <h3 style="padding-bottom: 21px;">Publications
+          <% if @presenter.show_visualizations %>
+            <a id="viz_coauthor" class="btn btn-default hidden" style="float:right;"
+              href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" target="_blank"
+              title="Visualize coauthors network">Visualizate it&nbsp;
+              <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+            </a>
+          <% end %>
+        </h3>
 
         <div class="panel-body">
           <% if @presenter.publication_filters.count > 0 %>

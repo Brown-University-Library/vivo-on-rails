@@ -74,17 +74,13 @@
       showTab(tabId);
     }
 
-    if (<%= ENV["VIZ_CLIENT_URL"] != nil %>) {
-      // We turn on visualizations if faculty has forceEdge data
-      // TODO: should we check chord data too?
+    if (<%= ENV["VIZ_ENABLED"] == "true" && ENV["VIZ_CLIENT_URL"] != nil %>) {
+      // Turn on coauthor visualization if we have data for it.
       vizUrl = "<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/";
       req = $.ajax({url: vizUrl, dataType: "json", timeout: 5000});
       req.success(function(data, status) {
         if (data[facultyId] !== undefined) {
-          $("#viz_menu").removeClass("hidden");
-          console.log(facultyId + " has viz");
-        } else {
-          console.log(facultyId + " does NOT have viz");
+          $("#viz_coauthor").removeClass("hidden");
         }
       });
       req.error(function(data, status) {

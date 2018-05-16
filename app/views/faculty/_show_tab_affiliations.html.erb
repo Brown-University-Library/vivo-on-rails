@@ -1,10 +1,18 @@
 <% if @presenter.has_affiliations %>
   <div id="tabAffiliations" class="panel panel-default hidden">
-    <h3>Affiliations</h3>
+    <h3 style="padding-bottom: 21px;">Affiliations
+      <% if @presenter.show_visualizations && @presenter.faculty.collaborators.count > 0 %>
+        <a id="viz_collab" class="btn btn-default" style="float:right;"
+          href="<%= visualization_collab_path(@presenter.faculty.vivo_id) %>" target="_blank"
+          title="Visualize collaborators network">Visualizate it&nbsp;
+          <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+        </a>
+      <% end %>
+    </h3>
 
       <% if @presenter.faculty.collaborators.count > 0 %>
           <div class="panel-heading">
-            <h4 id="relatedBy-Authorship" title="" class="panel-title">Collaborators</h4>
+            <h4 id="relatedBy-Authorship" class="panel-title">Collaborators</h4>
           </div>
 
           <div class="panel-body panel-body-collaborators">

@@ -76,7 +76,7 @@ class DisplayController < ApplicationController
         return
       end
 
-      show_viz = false
+      show_viz = ENV["VIZ_ENABLED"] == "true"
       referer = request.headers.env["HTTP_REFERER"]
       @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, show_viz)
       render "faculty/show"
