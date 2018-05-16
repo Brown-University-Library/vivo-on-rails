@@ -7,8 +7,8 @@ class VisualizationController < ApplicationController
     render_viz("coauthor")
   end
 
-  def coauthor2
-    render_viz("coauthor2")
+  def collab
+    render_viz("collab")
   end
 
   def home
@@ -37,6 +37,13 @@ class VisualizationController < ApplicationController
     url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{params[:id]}"
     str = fwd_http(url)
     render_json(str)
+  end
+
+  def collab_one
+    id = params[:id]
+    collab = CollabGraph.new()
+    graph = collab.graph_for(id)
+    render_json(graph.to_json)
   end
 
   def fwd_force_list
