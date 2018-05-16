@@ -5,21 +5,6 @@ class CollabGraph
     @graph = EdgeGraph.new()
   end
 
-  def self.collab_one(id)
-    byebug
-    collab = CollabGraph.new()
-    graph = collab.graph_for(id)
-    return graph.to_json
-    network = {directed: "false", graph: {}, links: graph.links, nodes: graph.nodes}
-    puts "NEW"
-    puts network.to_json
-    puts "=="
-    puts "OLD"
-    puts self.collab_one_ok(id)
-    puts "  "
-    return self.collab_one_ok(id)
-  end
-
   def graph_for(id)
     get_collabs(id, 1)
     @graph
