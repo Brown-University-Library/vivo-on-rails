@@ -1,71 +1,75 @@
 class VisualizationController < ApplicationController
-  def chord
-    render_viz("chord")
+  def home
+    redirect_to visualization_collab_path
   end
 
+  # def chord
+  #   id = params["id"]
+  #   faculty = Faculty.load_from_solr(id)
+  #   if faculty == nil
+  #     err_msg = "Individual ID (#{id}) was not found"
+  #     Rails.logger.warn(err_msg)
+  #     render "not_found", status: 404, formats: [:html]
+  #   else
+  #     @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
+  #     render "chord"
+  #   end
+  # rescue => ex
+  #   backtrace = ex.backtrace.join("\r\n")
+  #   Rails.logger.error("Could not render #{name} visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
+  #   render "error", status: 500
+  # end
+
   def coauthor
-    render_viz("coauthor")
+    if params["format"] == "json"
+      coauthor_data()
+    else
+      coauthor_view()
+    end
   end
 
   def collab
-    render_viz("collab")
+    if params["format"] == "json"
+      collab_data()
+    else
+      collab_view()
+    end
   end
 
-  def home
-    redirect_to visualization_coauthor_path
-  end
-
-  def fake_chord_list
-    str = VisualizationFakeData.chord_list
-    json = JSON.parse(str)
+  def coauthor_graph_list
+    if ENV['VIZ_SERVICE_URL']
+      # Returns the list of researchers that have a coauthor graph.
+      # For now we let the client decide whether it should show the graph based
+      # on the response.
+      url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/"
+      str = fwd_http(url)
+      json = JSON.parse(str)
+    else
+      json = {}
+    end
     render :json => json
   end
 
-  def fake_chord_one
-    str = VisualizationFakeData.chord_one
-    json = JSON.parse(str)
-    render :json => json
-  end
-
-  def fake_force_one
-    str = VisualizationFakeData.force_one
-    json = JSON.parse(str)
-    render :json => json
-  end
-
-  def fwd_force_one
-    url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{params[:id]}"
-    str = fwd_http(url)
-    render_json(str)
-  end
-
-  def collab_one
-    id = params[:id]
-    collab = CollabGraph.new()
-    graph = collab.graph_for(id)
-    render_json(graph.to_json)
-  end
-
-  def fwd_force_list
-    url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/"
-    str = fwd_http(url)
-    render_json(str)
-  end
-
-  def fwd_chord_one
-    url = "#{ENV['VIZ_SERVICE_URL']}/chordDiagram/#{params[:id]}"
-    str = fwd_http(url)
-    render_json(str)
-  end
-
-  def fwd_chord_list
-    url = "#{ENV['VIZ_SERVICE_URL']}/chordDiagram/"
-    str = fwd_http(url)
-    render_json(str)
-  end
+  # def fwd_chord_one
+  #   url = "#{ENV['VIZ_SERVICE_URL']}/chordDiagram/#{params[:id]}"
+  #   str = fwd_http(url)
+  #   render_json(str)
+  # end
+  #
+  # def fake_chord_one
+  #   str = VisualizationFakeData.chord_one
+  #   json = JSON.parse(str)
+  #   render :json => json
+  # end
+  #
+  # def fake_force_one
+  #   str = VisualizationFakeData.force_one
+  #   json = JSON.parse(str)
+  #   render :json => json
+  # end
 
   private
-    def render_viz(name)
+    def coauthor_view
       id = params["id"]
       faculty = Faculty.load_from_solr(id)
       if faculty == nil
@@ -74,7 +78,7 @@ class VisualizationController < ApplicationController
         render "not_found", status: 404, formats: [:html]
       else
         @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-        render name
+        render "coauthor"
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
@@ -82,9 +86,59 @@ class VisualizationController < ApplicationController
       render "error", status: 500
     end
 
-    def render_json(str)
+    def coauthor_data
+      id = "#{params[:id]}"
+      url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{id}"
+      str = fwd_http(url)
       json = JSON.parse(str)
       render :json => json
+    end
+
+    def collab_view
+      id = params["id"]
+      type = ModelUtils.type_for_id(id)
+      case type
+      when "PEOPLE"
+        faculty = Faculty.load_from_solr(id)
+        @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
+        render "collab"
+      when "ORGANIZATION"
+        org = Organization.load_from_solr(id)
+        @presenter = OrganizationPresenter.new(org.item, search_url(), nil)
+        render "collab_org"
+      else
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render "not_found", status: 404, formats: [:html]
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not render collaboration visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render "error", status: 500
+    end
+
+    def collab_data
+      id = params["id"]
+      type = ModelUtils.type_for_id(id)
+      case type
+      when "PEOPLE"
+        collab = CollabGraph.new()
+        graph = collab.graph_for(id)
+        render :json => graph
+      when "ORGANIZATION"
+        id = params[:id]
+        collab = CollabGraph.new()
+        graph = collab.graph_for_org(id)
+        render :json => graph
+      else
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render :json => [], status: 404
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not fetc collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render :json => "error", status: 500
     end
 
     def fwd_http(url)

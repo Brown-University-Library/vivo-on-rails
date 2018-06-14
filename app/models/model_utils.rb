@@ -1,4 +1,14 @@
 class ModelUtils
+
+  def self.type_for_id(id)
+    solr_url = ENV["SOLR_URL"]
+    logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
+    solr = SolrLite::Solr.new(solr_url, logger)
+    solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
+    return nil if solr_doc == nil
+    (solr_doc["record_type"] || []).first
+  end
+
   # Generates the proper URL for a given file path in VIVO.
   # For example for file_path
   #     "/file/n12345/somebody.jpg"

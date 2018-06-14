@@ -1,3 +1,5 @@
+require "./app/models/model_utils.rb"
+
 class DisplayController < ApplicationController
   def index
     redirect_to search_url()
@@ -27,7 +29,7 @@ class DisplayController < ApplicationController
   # the "Accept" header and always return HTML.
   def show
     id = params["id"]
-    type = type_for_id(id)
+    type = ModelUtils.type_for_id(id)
     case type
     when nil
       render_not_found(id)
@@ -48,15 +50,6 @@ class DisplayController < ApplicationController
   end
 
   private
-    def type_for_id(id)
-      solr_url = ENV["SOLR_URL"]
-      logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
-      solr = SolrLite::Solr.new(solr_url, logger)
-      solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
-      return nil if solr_doc == nil
-      (solr_doc["record_type"] || []).first
-    end
-
     def render_faculty(id)
       id = params[:id]
       faculty = Faculty.load_from_solr(id)

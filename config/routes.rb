@@ -5,33 +5,21 @@ Rails.application.routes.draw do
   get 'display/:id' => 'display#show', as: :display_show
   get 'display/' => 'display#index'
 
-  # Visualizations for faculty
+
+  # Visualizations for faculty (and organizations)
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
-  get 'display/:id/viz/chord' => 'visualization#chord', as: :visualization_chord
+  # get 'display/:id/viz/chord' => 'visualization#chord', as: :visualization_chord
   get 'display/:id/viz/collab' => 'visualization#collab', as: :visualization_collab
   get 'display/:id/viz' => 'visualization#home', as: :visualization_home
+  get 'viz/coauthorGraphList' => 'visualization#coauthor_graph_list', as: :visualization_coauthor_graph_list
+  # get 'viz/coauthorChordList' => 'visualization#coauthor_cord_list', as: :visualization_coauthor_chord_list
 
+
+  # Search URLs
   get 'search_facets' => 'search#facets'
   get 'search/advanced' => 'search#advanced', as: :search_advanced
   get 'search' => 'search#index', as: :search
 
-  if ENV["FUSEKI_URL"] != nil
-    get 'sparql/query' => 'sparql#query'
-  end
-
-  # Forwards call to viz data service (used to bypass same-origin
-  # check when testing in dev with production services)
-  get 'visualization/forward/collabGraph/:id' => 'visualization#collab_one'
-  get 'visualization/forward/forceEdgeGraph/:id' => 'visualization#fwd_force_one'
-  get 'visualization/forward/forceEdgeGraph/' => 'visualization#fwd_force_list'
-  get 'visualization/forward/chordDiagram/:id' => 'visualization#fwd_chord_one'
-  get 'visualization/forward/chordDiagram/' => 'visualization#fwd_chord_list'
-
-  # Returns hard-coded responses for testing offline
-  get 'visualizations/fake/forceEdgeGraph/:id' => 'visualization#fake_force_one'
-  # get 'visualizations/fake/forceEdgeGraph/' => 'visualization#fake_force_list'
-  get 'visualizations/fake/chordDiagram/:id' => 'visualization#fake_chord_one'
-  get 'visualizations/fake/chordDiagram/' => 'visualization#fake_chord_list'
 
   # VIVO original URLs
   get 'people' => 'home#people'

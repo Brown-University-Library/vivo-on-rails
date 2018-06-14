@@ -88,19 +88,16 @@
     }
 
     if (<%= ENV["VIZ_ENABLED"] == "true" %> || hasUrlParameter("viz") == "true") {
-      if (<%= ENV["VIZ_CLIENT_URL"] != nil %>) {
-        // Turn on coauthor visualization if we have data for it.
-        vizUrl = "<%= ENV['VIZ_CLIENT_URL'] %>/forceEdgeGraph/";
-        req = $.ajax({url: vizUrl, dataType: "json", timeout: 5000});
-        req.success(function(data, status) {
-          if (data[facultyId] !== undefined) {
-            $("#viz_coauthor").removeClass("hidden");
-          }
-        });
-        req.error(function(data, status) {
-          console.log("Error checking for viz data");
-        });
-      }
+      vizUrl = "<%= visualization_coauthor_graph_list_path() %>";
+      req = $.ajax({url: vizUrl, dataType: "json", timeout: 5000});
+      req.success(function(data, status) {
+        if (data[facultyId] !== undefined) {
+          $("#viz_coauthor").removeClass("hidden");
+        }
+      });
+      req.error(function(data, status) {
+        console.log("Error checking for viz data");
+      });
     }
   });
 </script>

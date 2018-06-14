@@ -1,4 +1,4 @@
-<% @page_title = (@presenter.faculty.name || "") + " Coauthor network"%>
+<% @page_title = (@presenter.organization.name || "") + " Collaborator network"%>
 
 <style>
   .links line {
@@ -40,12 +40,13 @@
 
 <%= render "search_box" %>
 
-<h1><%= @presenter.faculty.display_name %></h1>
-<h2>Coauthor Network</h2>
+<h1><%= @presenter.organization.name %></h1>
+<h2>Collaborator Network</h2>
+
 <div id="errorMsg" class="alert alert-danger hidden" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
-  No coauthor data is available for this researcher.
+  No collaboration data is available for this researcher.
 </div>
 
 <div class="row">
@@ -53,20 +54,20 @@
     <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
-    <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Coauthor Network</a>
-    <a class="btn btn-default btn-lg" role="button" href="<%= visualization_collab_path(@presenter.faculty.vivo_id) %>" >Collaborator Network</a>
+    <a class="btn btn-default btn-lg" role="button" href="<%= 'visualization_coauthor_path(@presenter.faculty.vivo_id)' %>" >Coauthor Network</a>
+    <a class="btn btn-primary btn-lg" role="button" href="<%= 'visualization_collab_path(@presenter.faculty.vivo_id)' %>" >Collaborator Network</a>
     <p>&nbsp;</p>
     <p><b>Legend</b></p>
-    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
-    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
-    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
+    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher</p>
+    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators</p>
+    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators</p>
     <p>&nbsp;</p>
     <p><b>Options</b></p>
-    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
+    <p><a href="<%= 'display_show_path(@presenter.faculty.vivo_id)' %>">View Researcher's Profile</a></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
-    <p><a href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>" title="Format suitable for D3 and other visualization tools.">Download data (JSON)</a></p>
+    <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>" title="Format suitable for D3 and other visualization tools.">Download data (JSON)</a></p>
     <p><a href="#" id="embedHtml" title="Shows HTML to embed the graph as an SVG element into your own page.">Embed SVG Code</a></p>
     <p><a href="#" id="downloadPng" title="Downlods the graph as an image file in PNG format. This only works in Chrome and Firefox.">Download Image (PNG)</a></p>
   </div>
@@ -74,7 +75,7 @@
 
 <div class="row hidden" id="canvasDiv">
   <canvas id="canvasElement"></canvas>
-  <a id="canvasImgLink" href="#" download="coauthors.png" target="_blank"></a>
+  <a id="canvasImgLink" href="#" download="collaborators.png" target="_blank"></a>
 </div>
 
 <div class="row hidden" id="embedHtmlDiv">
@@ -93,9 +94,9 @@
 
 <script>
 
-  var facultyId = "<%= @presenter.faculty.id %>";     // http://vivo.brown.edu/jcarberry
-  var vivoId = "<%= @presenter.faculty.vivo_id %>";   // jcarberry
-  var json_data_addr = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>";
+  var facultyId = "<%= @presenter.organization.id %>";     // http://vivo.brown.edu/jcarberry
+  var vivoId = "<%= @presenter.organization.vivo_id %>";   // jcarberry
+  var json_data_addr = "<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>";
   var svgWidth = 960;
   var svgHeight = 700;
 
@@ -110,7 +111,7 @@
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
       var checked = $("#forceToFit").is(":checked");
-      var newUrl = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id)%>";
+      var newUrl = "<%= 'visualization_collab_path(@presenter.faculty.vivo_id)' %>";
       if (checked) {
         newUrl += "?fit=1";
       }
@@ -195,7 +196,7 @@
 
         // Set the blob URL as the target of our HTML anchor tag...
         var a = document.getElementById("canvasImgLink");
-        var fileName = "coauthors_" + vivoId + ".png";
+        var fileName = "collaborators_" + vivoId + ".png";
         a.setAttribute("download", fileName);
         a.setAttribute("href", url);
 
@@ -262,51 +263,18 @@
       dataset.edges.push(obj);
     }
 
-    // set all nodes to level 2 initially
-    //
-    // level 0 - author
-    // level 1 - coauthor
-    // level 2 - coauthor's coauthor
-    for(i = 0; i < dataset.nodes.length; i++) {
-      dataset.nodes[i].level = 2;
-    }
-
-    // find first level nodes
-    var rootIndex = getNodeIndex(data.nodes, facultyId);
-    var firstLevel = [];
-    var edge;
-    for(i = 0; i < dataset.edges.length; i++) {
-      edge = dataset.edges[i];
-      if (edge.source == rootIndex) {
-        firstLevel.push(edge.target);
-      } else if(edge.target == rootIndex) {
-        firstLevel.push(edge.source);
-      }
-    }
-
-    // mark the first level nodes
-    for(i = 0; i < dataset.edges.length; i++) {
-      edge = dataset.edges[i];
-      if(inArray(firstLevel, edge.target)) {
-        dataset.nodes[edge.target].level = 1;
-      } else if(inArray(firstLevel, edge.source)) {
-        dataset.nodes[edge.source].level = 1;
-      }
-    }
-
-    // mark the root
-    for(i = 0; i < dataset.nodes.length; i++) {
-      if (dataset.nodes[i].id == facultyId) {
-        dataset.nodes[i].level = 0;
-        break;
-      }
-    }
-
     var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     var force = d3.forceSimulation(dataset.nodes)
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(w/2, h/2));
+
+    force.force("gravity", function(d) {return 10.1;});
+
+      // var force = d3.layout.force()
+      //       .charge(repel)
+      //       .linkDistance(linkDist)
+      //       .size([800, 600]);
 
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
@@ -352,11 +320,11 @@
     nodes.append("circle")
       .attr("r", function(d) {
         if (d.level == 0) {
-          return 15;
+          return 9;
         } else if(d.level == 1) {
-          return 11;
+          return 7;
         }
-        return 6;
+        return 5;
       })
       .style("fill", nodeColor);
 
@@ -376,7 +344,7 @@
         if (d.level == 0) {
           d3.select("#subtitle2").classed("hidden", true);
         } else {
-          d3.select("#subtitle2").classed("hidden", false).text("Click to view " + d.name + "'s coauthors");
+          d3.select("#subtitle2").classed("hidden", false).text("Click to view " + d.name + "'s collaborators");
         }
         d3.select("#tooltip").classed("hidden", false);
       } else {
@@ -415,11 +383,11 @@
       d3.select(this).style("fill", nodeColor(d, 0));
     });
 
-    nodes.append("text")
-      .style("font-size", function(d) { return d.level == 0 ? "12px" : "8px"; })
-      .style("font-weight", function(d) { return d.level == 0 ? "bold" : "normal"; })
-      .attr("class", "node-text")
-      .text(function(d) { return d.name; });
+    // nodes.append("text")
+    //   .style("font-size", function(d) { return d.level == 0 ? "12px" : "8px"; })
+    //   .style("font-weight", function(d) { return d.level == 0 ? "bold" : "normal"; })
+    //   .attr("class", "node-text")
+    //   .text(function(d) { return d.name; });
 
     force.on("tick", function() {
       edges.attr("x1", function(d) { return d.source.x; })

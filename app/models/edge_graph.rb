@@ -27,18 +27,16 @@ class EdgeGraph
   end
 
   def add_link(new_link)
-    link_found = nil
+    link_found = false
     @links.each do |link|
       if link[:source] == new_link[:source] && link[:target] == new_link[:target]
-        link_found = link
+        link[:weight] += 1
+        link_found = true
         break
       end
     end
-    if link_found
-      link_found[:weight] += 1
-    else
+    if !link_found
       @links << new_link
     end
   end
-
 end

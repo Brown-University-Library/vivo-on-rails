@@ -5,6 +5,14 @@ class CollabGraph
     @graph = EdgeGraph.new()
   end
 
+  def graph_for_org(org_id)
+    organization = Organization.load_from_solr(org_id)
+    organization.item.people.each do |faculty|
+      get_collabs(faculty.vivo_id, 1)
+    end
+    @graph
+  end
+
   def graph_for(id)
     get_collabs(id, 1)
     @graph
@@ -16,13 +24,13 @@ class CollabGraph
     return if faculty == nil
 
     # add a node for this faculty...
-    node = {group: faculty.item.title, id: faculty.item.uri, name: faculty.item.name}
+    node = {group: faculty.item.title, id: faculty.item.uri, name: faculty.item.name, level: level-1}
     @graph.add_node(node)
 
     # and process his/hers collaborators...
     faculty.item.collaborators.each do |collab|
-      node = {group: collab.title, id: collab.uri, name: collab.name}
-      link = {source: faculty.item.uri, target: collab.uri, weigth: 1}
+      node = {group: collab.title, id: collab.uri, name: collab.name, level: level}
+      link = {source: faculty.item.uri, target: collab.uri, weight: 1}
       @graph.add_node(node)
       @graph.add_link(link)
       next_id = collab.uri.split("/").last
