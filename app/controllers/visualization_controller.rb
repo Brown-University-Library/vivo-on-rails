@@ -21,16 +21,22 @@ class VisualizationController < ApplicationController
   # end
 
   def coauthor
-    if params["format"] == "json"
-      coauthor_data()
+    case params["format"]
+    when "json"
+      coauthor_json()
+    when "csv"
+      coauthor_csv()
     else
       coauthor_view()
     end
   end
 
   def collab
-    if params["format"] == "json"
-      collab_data()
+    case params["format"]
+    when "json"
+      collab_json()
+    when "csv"
+      collab_csv()
     else
       collab_view()
     end
@@ -86,12 +92,24 @@ class VisualizationController < ApplicationController
       render "error", status: 500
     end
 
-    def coauthor_data
+    def coauthor_json
       id = "#{params[:id]}"
       url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{id}"
       str = fwd_http(url)
       json = JSON.parse(str)
-      render :json => json
+      render json: json
+    end
+
+    def coauthor_csv
+      # get the JSON version
+      id = "#{params[:id]}"
+      url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{id}"
+      str = fwd_http(url)
+      json = JSON.parse(str, {symbolize_names: true})
+
+      # dump it to an EdgeGraph in order to produce the CSV output
+      graph = EdgeGraph.new_from_hash(json)
+      render text: graph.to_csv()
     end
 
     def collab_view
@@ -117,28 +135,52 @@ class VisualizationController < ApplicationController
       render "error", status: 500
     end
 
-    def collab_data
+    def collab_json
       id = params["id"]
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
         collab = CollabGraph.new()
         graph = collab.graph_for(id)
-        render :json => graph
+        render json: graph
       when "ORGANIZATION"
         id = params[:id]
         collab = CollabGraph.new()
         graph = collab.graph_for_org(id)
-        render :json => graph
+        render json: graph
       else
         err_msg = "Individual ID (#{id}) was not found"
         Rails.logger.warn(err_msg)
-        render :json => [], status: 404
+        render json: [], status: 404
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not fetc collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
-      render :json => "error", status: 500
+      render json: "error", status: 500
+    end
+
+    def collab_csv
+      id = params["id"]
+      type = ModelUtils.type_for_id(id)
+      case type
+      when "PEOPLE"
+        collab = CollabGraph.new()
+        graph = collab.graph_for(id)
+        render text: graph.to_csv()
+      when "ORGANIZATION"
+        id = params[:id]
+        collab = CollabGraph.new()
+        graph = collab.graph_for_org(id)
+        render text: graph.to_csv()
+      else
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render text: "", status: 404
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not fetc collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render text: "error", status: 500
     end
 
     def fwd_http(url)

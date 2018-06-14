@@ -1,3 +1,5 @@
+require "csv"
+
 class EdgeGraph
   # EdgeGraph represents the data in a graph that can be used in an Edge Graph
   # visualization in D3.
@@ -11,6 +13,22 @@ class EdgeGraph
     @graph = {}
     @links = []
     @nodes = []
+  end
+
+  # Creates and initializes a new EdgeGraph with the data in Hash
+  # that is expected to have :nodes and :links arrays with the proper
+  # structure (as documented in the `initialize()` method above)
+  def self.new_from_hash(json)
+    graph = EdgeGraph.new()
+    json[:nodes].each do |node|
+      graph.add_node(node)
+    end
+
+    json[:links].each do |link|
+      graph.add_link(link)
+    end
+
+    graph
   end
 
   def add_node(new_node)
@@ -38,5 +56,27 @@ class EdgeGraph
     if !link_found
       @links << new_link
     end
+  end
+
+  def find_node(id)
+    @nodes.each do |node|
+      if node[:id] == id
+        return node
+      end
+    end
+    nil
+  end
+
+  def to_csv
+    return "" if @links.count == 0
+    str = CSV.generate do |csv|
+      csv << ["id", "name", "info", "collab_with", "count"]
+      @links.each do |link|
+        source = find_node(link[:source])
+        target = find_node(link[:target])
+        csv << [source[:id], source[:name], source[:group], target[:id], link[:weight]]
+      end
+    end
+    str
   end
 end
