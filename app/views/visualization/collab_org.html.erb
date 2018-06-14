@@ -51,19 +51,19 @@
 
 <div class="row">
   <div class="col-md-9">
+    <div id="loadingMsg">
+      <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
+    </div>
     <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
-    <a class="btn btn-default btn-lg" role="button" href="<%= 'visualization_coauthor_path(@presenter.faculty.vivo_id)' %>" >Coauthor Network</a>
-    <a class="btn btn-primary btn-lg" role="button" href="<%= 'visualization_collab_path(@presenter.faculty.vivo_id)' %>" >Collaborator Network</a>
-    <p>&nbsp;</p>
     <p><b>Legend</b></p>
-    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher</p>
+    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Member of the organization</p>
     <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators</p>
     <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators</p>
     <p>&nbsp;</p>
     <p><b>Options</b></p>
-    <p><a href="<%= 'display_show_path(@presenter.faculty.vivo_id)' %>">View Researcher's Profile</a></p>
+    <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
@@ -101,7 +101,8 @@
 
   var facultyId = "<%= @presenter.organization.id %>";     // http://vivo.brown.edu/jcarberry
   var vivoId = "<%= @presenter.organization.vivo_id %>";   // jcarberry
-  var json_data_addr = "<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>";
+  var jsonDataUrl = "<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>";
+  var researcherUrl = "<%= display_show_path('placeholder') %>";
   var svgWidth = 960;
   var svgHeight = 700;
 
@@ -116,7 +117,7 @@
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
       var checked = $("#forceToFit").is(":checked");
-      var newUrl = "<%= 'visualization_collab_path(@presenter.faculty.vivo_id)' %>";
+      var newUrl = "<%= visualization_collab_path(@presenter.organization.vivo_id) %>";
       if (checked) {
         newUrl += "?fit=1";
       }
@@ -128,7 +129,7 @@
   });
 
   function initGraph() {
-    $.getJSON(json_data_addr, drawGraph);
+    $.getJSON(jsonDataUrl, drawGraph);
   }
 
   function inArray(array, value) {
@@ -249,6 +250,8 @@
 
   function drawGraph(data, status) {
 
+    $("#loadingMsg").addClass("hidden");
+
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
     }
@@ -346,11 +349,7 @@
           .select("#title")
           .text(d.name);
         d3.select("#subtitle").text(d.group);
-        if (d.level == 0) {
-          d3.select("#subtitle2").classed("hidden", true);
-        } else {
-          d3.select("#subtitle2").classed("hidden", false).text("Click to view " + d.name + "'s collaborators");
-        }
+        d3.select("#subtitle2").classed("hidden", false).text("Click to view " + d.name + "'s profile");
         d3.select("#tooltip").classed("hidden", false);
       } else {
           d3.select(this).select('text')
@@ -373,26 +372,20 @@
     });
 
     nodes.on('click', function(d){
-      if (d.level == 0) {
-        // do nothing
-      } else {
-        var shortId = d.id.substring(d.id.lastIndexOf("/")+1);
-        var currentSegment = "/display/" + vivoId + "/viz/";
-        var newSegment = "/display/" + shortId + "/viz/";
-        var newUrl = window.location.toString().replace(currentSegment, newSegment);
-        window.location.assign(newUrl);
-      }
+      var shortId = d.id.substring(d.id.lastIndexOf("/")+1);
+      var newUrl = researcherUrl.replace("placeholder", shortId);
+      window.location.assign(newUrl);
     });
 
     nodes.selectAll("circle").on('mouseout', function(d){
       d3.select(this).style("fill", nodeColor(d, 0));
     });
 
-    // nodes.append("text")
-    //   .style("font-size", function(d) { return d.level == 0 ? "12px" : "8px"; })
-    //   .style("font-weight", function(d) { return d.level == 0 ? "bold" : "normal"; })
-    //   .attr("class", "node-text")
-    //   .text(function(d) { return d.name; });
+    nodes.append("text")
+      .style("font-size", function(d) { return d.level == -10 ? "12px" : "8px"; })
+      .style("font-weight", function(d) { return d.level == -10 ? "bold" : "normal"; })
+      .attr("class", "node-text")
+      .text(function(d) { return d.name; });
 
     force.on("tick", function() {
       edges.attr("x1", function(d) { return d.source.x; })
