@@ -122,7 +122,7 @@ class VisualizationController < ApplicationController
         render "collab"
       when "ORGANIZATION"
         org = Organization.load_from_solr(id)
-        @presenter = OrganizationPresenter.new(org.item, search_url(), nil)
+        @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
         render "collab_org"
       else
         err_msg = "Individual ID (#{id}) was not found"

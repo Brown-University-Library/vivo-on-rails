@@ -19,6 +19,13 @@
         <li id="affiliationsTab" role="presentation" class="active">
           <a href="#affiliations" aria-controls="Affiliations" role="tab" data-toggle="tab">
               Affiliations
+              <% if @presenter.show_visualizations && @presenter.all_positions.count > 0 %>
+                <a id="viz_collab" class="btn btn-default" style="float:right;"
+                  href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" target="_blank"
+                  title="Visualize collaborators network">Visualize it&nbsp;
+                  <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+                </a>
+              <% end %>
           </a>
         </li>
       </ul>
