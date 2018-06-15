@@ -46,7 +46,7 @@
 <div id="errorMsg" class="alert alert-danger hidden" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
-  No collaboration data is available for this researcher.
+  No collaboration data is available for this organization.
 </div>
 
 <div class="row">
@@ -274,20 +274,26 @@
     var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     var force = d3.forceSimulation(dataset.nodes)
-      .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(w/2, h/2));
 
-    force.force("gravity", function(d) {return 10.1;});
+    // original
+    // var force = d3.forceSimulation(dataset.nodes)
+    //   .force("charge", d3.forceManyBody())
+    //   .force("center", d3.forceCenter(w/2, h/2));
 
-      // var force = d3.layout.force()
-      //       .charge(repel)
-      //       .linkDistance(linkDist)
-      //       .size([800, 600]);
+    // force.force("gravity", function(d) {return 10.1;});
+
+    // var force = d3.layout.force()
+    //       .charge(repel)
+    //       .linkDistance(linkDist)
+    //       .size([800, 600]);
 
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
+      // don't use forceManyBody() to help keep the graph tight.
       force.force("link", d3.forceLink(dataset.edges));
     } else {
+      force.force("charge", d3.forceManyBody());
       force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
