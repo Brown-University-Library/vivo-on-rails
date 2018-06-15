@@ -6,10 +6,22 @@ class CollabGraph
   end
 
   def graph_for_org(org_id)
+    # add the members of the organization as root nodes (level 0)
+    root_nodes = []
     organization = Organization.load_from_solr(org_id)
-    organization.item.people.each do |faculty|
-      get_collabs(faculty.vivo_id, 1)
+    organization.item.people.each do |member|
+      faculty = Faculty.load_from_solr(member.vivo_id)
+      next if faculty == nil
+      node = {group: faculty.item.title, id: faculty.item.uri, name: faculty.item.name, level: 0}
+      @graph.add_node(node)
+      root_nodes << member.vivo_id
     end
+
+    # calculate the collaboration graph for each of them
+    root_nodes.each do |id|
+      get_collabs(id, 1)
+    end
+
     @graph
   end
 

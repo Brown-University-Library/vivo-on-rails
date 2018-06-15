@@ -32,14 +32,20 @@ class EdgeGraph
   end
 
   def add_node(new_node)
-    node_found = nil
-    @nodes.each do |node|
+    node_found = false
+    @nodes.each_with_index do |node, ix|
       if node[:id] == new_node[:id]
-        node_found = node
+        if new_node[:level] < node[:level]
+          # If the new node has a lower level replace the existing node
+          # with the new one. This is important because we use the level
+          # to indicate proximity in collaboration.
+          node = new_node
+        end
+        node_found = true
         break
       end
     end
-    if node_found == nil
+    if !node_found
       @nodes << new_node
     end
   end
@@ -67,6 +73,10 @@ class EdgeGraph
     nil
   end
 
+  # Generates a comma separated value representation of the graph.
+  # It only includes information from the links which means that nodes
+  # with no connections are not included. We might want to change that
+  # in the future.
   def to_csv
     return "" if @links.count == 0
     str = CSV.generate do |csv|
