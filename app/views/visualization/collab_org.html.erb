@@ -59,8 +59,8 @@
   <div class="col-md-3">
     <p><b>Legend</b></p>
     <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Member of the organization</p>
-    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators</p>
-    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators</p>
+    <p><span style='background-color:#6ebced;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators</p>
+    <p><span style='background-color:#cdeafc;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators</p>
     <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
@@ -105,7 +105,7 @@
   var researcherUrl = "<%= display_show_path('placeholder') %>";
   var svgWidth = 960;
   var svgHeight = 700;
-  var fixedNodeSize = false;
+  var numberOfNodes = 0;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
@@ -244,9 +244,9 @@
     if (d.level == 0) {
       return "#1f77b4"; // blue
     } else if(d.level ==1) {
-      return "#aec7e8"; // light blue
+      return "#6ebced"; // light blue
     }
-    return "#c7c7c7";   // light gray
+    return "#cdeafc"; // lighter blue
   }
 
   function drawGraph(data, status) {
@@ -272,7 +272,7 @@
       dataset.edges.push(obj);
     }
 
-    fixedNodeSize = data.nodes.length > 50;
+    numberOfNodes = data.nodes.length;
 
     var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -305,7 +305,11 @@
       // to repel one another while for visualisations where we’re clumping
       // elements together, attractive forces are necessary."
       // -- Source: http://d3indepth.com/force-layout/
-      force.force("charge", d3.forceManyBody().strength(0));
+      if (numberOfNodes > 40) {
+        force.force("charge", d3.forceManyBody().strength(0));
+      } else {
+        force.force("charge", d3.forceManyBody().strength(-30));
+      }
       force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
@@ -347,8 +351,11 @@
 
     nodes.append("circle")
       .attr("r", function(d) {
-        if (fixedNodeSize) {
+        if (numberOfNodes > 100) {
           return 3;
+        }
+        if (numberOfNodes > 40) {
+          return 5;
         }
         if (d.level == 0) {
           return 9;
