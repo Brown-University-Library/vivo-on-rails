@@ -39,7 +39,7 @@ class EdgeGraph
           # If the new node has a lower level replace the existing node
           # with the new one. This is important because we use the level
           # to indicate proximity in collaboration.
-          node = new_node
+          node[:level] = new_node[:level]
         end
         node_found = true
         break
