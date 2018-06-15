@@ -105,6 +105,7 @@
   var researcherUrl = "<%= display_show_path('placeholder') %>";
   var svgWidth = 960;
   var svgHeight = 700;
+  var fixedNodeSize = false;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
@@ -271,6 +272,8 @@
       dataset.edges.push(obj);
     }
 
+    fixedNodeSize = data.nodes.length > 50;
+
     var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     var force = d3.forceSimulation(dataset.nodes)
@@ -293,7 +296,16 @@
       // don't use forceManyBody() to help keep the graph tight.
       force.force("link", d3.forceLink(dataset.edges));
     } else {
-      force.force("charge", d3.forceManyBody());
+      // "forceManyBody causes all elements to attract or repel one another.
+      // The strength of the attraction or repulsion can be set using .strength()
+      // where a positive value will cause elements to attract one another while a
+      // negative value causes elements to repel each other. The default value is -30.
+      // [...]
+      // As a rule of thumb, when creating network diagrams we want the elements
+      // to repel one another while for visualisations where we’re clumping
+      // elements together, attractive forces are necessary."
+      // -- Source: http://d3indepth.com/force-layout/
+      force.force("charge", d3.forceManyBody().strength(0));
       force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
@@ -306,7 +318,9 @@
       // .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
 
     var dragstarted = function(d) {
-      if (!d3.event.active) force.alphaTarget(0.3).restart();
+      if (!d3.event.active) {
+        force.alphaTarget(0.3).restart();
+      }
       d.fx = d.x;
       d.fy = d.y;
     }
@@ -333,6 +347,9 @@
 
     nodes.append("circle")
       .attr("r", function(d) {
+        if (fixedNodeSize) {
+          return 3;
+        }
         if (d.level == 0) {
           return 9;
         } else if(d.level == 1) {
