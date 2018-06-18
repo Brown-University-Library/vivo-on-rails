@@ -59,11 +59,18 @@
   <div class="col-md-3">
     <p><b>Legend</b></p>
     <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Member of the organization</p>
-    <p><span style='background-color:#6ebced;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators</p>
-    <p><span style='background-color:#cdeafc;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators</p>
+    <p><span style='background-color:#6ebced;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators
+      <a id="level1Hide" href="">(hide)</a>
+      <a id="level1Show" class="hidden" href="">(show)</a>
+    </p>
+    <p><span style='background-color:#92eace;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators
+      <a id="level2Hide" href="">(hide)</a>
+      <a id="level2Show" class="hidden" href="">(show)</a>
+    </p>
     <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
+    <p>Show members without collaborators&nbsp;<input id="showOrphans" type="checkbox" checked/></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
@@ -106,6 +113,10 @@
   var svgWidth = 960;
   var svgHeight = 700;
   var numberOfNodes = 0;
+  var theData = null;
+  var level1Hidden = false;
+  var level2Hidden = false;
+  var showOrphans = true;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
@@ -114,6 +125,15 @@
     }
 
     initGraph();
+
+    $("#level1Hide").on("click", function() { level1Hidden = true; drawGraph(); return false; });
+    $("#level1Show").on("click", function() { level1Hidden = false; drawGraph(); return false; });
+
+    $("#level2Hide").on("click", function() { level2Hidden = true; drawGraph(); return false; });
+    $("#level2Show").on("click", function() { level2Hidden = false; drawGraph(); return false; });
+
+    $("#showOrphans").on("click", function() { showOrphans = !showOrphans; drawGraph(); });
+
 
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
@@ -130,7 +150,7 @@
   });
 
   function initGraph() {
-    $.getJSON(jsonDataUrl, drawGraph);
+    $.getJSON(jsonDataUrl, drawGraphInit);
   }
 
   function inArray(array, value) {
@@ -246,12 +266,32 @@
     } else if(d.level ==1) {
       return "#6ebced"; // light blue
     }
-    return "#cdeafc"; // lighter blue
+    return "#92eace"; // lighter blue
   }
 
-  function drawGraph(data, status) {
+  function drawGraphInit(data, status) {
+    theData = data;
+    drawGraph();
+  }
 
+  function drawGraph() {
+    var data = theData;
     $("#loadingMsg").addClass("hidden");
+
+    if (level1Hidden) {
+      $("#level1Hide").addClass("hidden");
+      $("#level1Show").removeClass("hidden");
+      $("#level2Hide").addClass("hidden");
+      $("#level2Show").addClass("hidden");
+    } else if (level2Hidden) {
+      $("#level2Hide").addClass("hidden");
+      $("#level2Show").removeClass("hidden");
+    } else {
+      $("#level1Hide").removeClass("hidden");
+      $("#level1Show").addClass("hidden");
+      $("#level2Hide").removeClass("hidden");
+      $("#level2Show").addClass("hidden");
+    }
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
@@ -259,42 +299,74 @@
 
     var i;
     var svg = d3.select("svg");
+    svg.selectAll("*").remove();
+
     var w = +svg.attr("width");
     var h = +svg.attr("height");
-    var dataset = {nodes: data.nodes, edges: []};
+    var dataset = {nodes: [], edges: []};
+    var sourceIndex, targetIndex;
+    var visibleNodes = [];
+    var j;
+    var notOrphans = [];
 
-    // calculate the edges from the data
-    for(i = 0; i < data.links.length; i++) {
-      obj = {
-        source: getNodeIndex(data.nodes, data.links[i].source),
-        target: getNodeIndex(data.nodes, data.links[i].target)
-      };
-      dataset.edges.push(obj);
+    // Calculate what nodes should be visible based on the show/include collaborators
+    // and collaborators' collaborators checkboxes
+    for (i=0; i < data.nodes.length; i++) {
+      var level = data.nodes[i].level;
+      var valid = true;
+      if (level2Hidden) {
+        valid = level < 2;
+      } if (level1Hidden) {
+        valid = level < 1;
+      }
+      if (valid) {
+        visibleNodes.push(data.nodes[i]);
+      }
     }
 
-    numberOfNodes = data.nodes.length;
+    if (showOrphans) {
+      dataset.nodes = visibleNodes;
+    } else {
+      // Find non-orphan nodes and only show those.
+      for(i = 0; i < visibleNodes.length; i++) {
+        for(j = 0; j < data.links.length; j++) {
+          if (data.links[j].source == visibleNodes[i].id || data.links[j].target == visibleNodes[i].id) {
+            notOrphans.push(visibleNodes[i]);
+            break;
+          }
+        }
+      }
+      dataset.nodes = notOrphans;
+    }
+
+    // Calculate the edges from the data
+    for(i = 0; i < data.links.length; i++) {
+      // Notice that we use the nodes from the *dataset* (which includes only
+      // nodes that we want to display) but use the links from the *data*
+      // (which includes the original)
+      sourceIndex = getNodeIndex(dataset.nodes, data.links[i].source);
+      targetIndex = getNodeIndex(dataset.nodes, data.links[i].target);
+      if ((sourceIndex != -1) && (targetIndex != -1)) {
+        obj = {source: sourceIndex, target: targetIndex};
+        dataset.edges.push(obj);
+      }
+    }
+
+    numberOfNodes = dataset.nodes.length;
 
     var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var force = d3.forceSimulation(dataset.nodes)
+    var simulation = d3.forceSimulation(dataset.nodes)
       .force("center", d3.forceCenter(w/2, h/2));
-
-    // original
-    // var force = d3.forceSimulation(dataset.nodes)
-    //   .force("charge", d3.forceManyBody())
-    //   .force("center", d3.forceCenter(w/2, h/2));
-
-    // force.force("gravity", function(d) {return 10.1;});
-
-    // var force = d3.layout.force()
-    //       .charge(repel)
-    //       .linkDistance(linkDist)
-    //       .size([800, 600]);
 
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
-      // don't use forceManyBody() to help keep the graph tight.
-      force.force("link", d3.forceLink(dataset.edges));
+      if (numberOfNodes > 40) {
+        // don't use forceManyBody() to help keep the graph tight.
+      } else {
+        simulation.force("charge", d3.forceManyBody().strength(-10));
+      }
+      simulation.force("link", d3.forceLink(dataset.edges));
     } else {
       // "forceManyBody causes all elements to attract or repel one another.
       // The strength of the attraction or repulsion can be set using .strength()
@@ -306,11 +378,11 @@
       // elements together, attractive forces are necessary."
       // -- Source: http://d3indepth.com/force-layout/
       if (numberOfNodes > 40) {
-        force.force("charge", d3.forceManyBody().strength(0));
+        simulation.force("charge", d3.forceManyBody().strength(0));
       } else {
-        force.force("charge", d3.forceManyBody().strength(-30));
+        simulation.force("charge", d3.forceManyBody().strength(-30));
       }
-      force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
+      simulation.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
     var edges = svg.selectAll("line")
@@ -319,11 +391,10 @@
       .append("line")
       .style("stroke", "#ccc")
       .style("stroke-width", 1);
-      // .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
 
     var dragstarted = function(d) {
       if (!d3.event.active) {
-        force.alphaTarget(0.3).restart();
+        simulation.alphaTarget(0.3).restart();
       }
       d.fx = d.x;
       d.fy = d.y;
@@ -352,11 +423,21 @@
     nodes.append("circle")
       .attr("r", function(d) {
         if (numberOfNodes > 100) {
-          return 3;
+          if (d.level == 0) {
+            return 5;
+          } else {
+            return 3;
+          }
         }
+
         if (numberOfNodes > 40) {
-          return 5;
+          if (d.level == 0) {
+            return 7;
+          } else {
+            return 5;
+          }
         }
+
         if (d.level == 0) {
           return 9;
         } else if(d.level == 1) {
@@ -417,7 +498,7 @@
       .attr("class", "node-text")
       .text(function(d) { return d.name; });
 
-    force.on("tick", function() {
+    simulation.on("tick", function() {
       edges.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
