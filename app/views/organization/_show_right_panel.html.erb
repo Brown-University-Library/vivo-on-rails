@@ -1,63 +1,41 @@
-<div class="organization-description col-md-8 col-sm-12 col-xs-12">
-  <section id="individual-info" role="region">
-    <header>
-      <h3><%= @presenter.organization.name %></h3>
-      <ul>
+<div class="col-md-8 col-sm-12 col-xs-12" id="section_overview">
+  <h2><%= @presenter.organization.name %></h2>
+  <p>
+    <ul>
       <% @presenter.organization.web_pages.each do |page| %>
         <li><a href="<%= page.url %>"><%= page.text %></a>
       <% end %>
-      </ul>
-      <p><%= @presenter.organization.overview.html_safe %></p>
-    </header>
-  </section>
+    </ul>
+  </p>
+  <p><%= @presenter.organization.overview.html_safe %></p>
 
-  <div class="row">
+  <div id="tabOverview" class="tabFinder" >
+    <h3 style="padding-bottom: 21px;">Affiliations
+    <% if @presenter.show_visualizations && @presenter.all_positions.count > 0 %>
+      <a id="viz_collab" class="btn btn-default" style="float:right;"
+        href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" target="_blank"
+        title="Visualize collaborators network">Visualize it&nbsp;
+        <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+      </a>
+    <% end %>
+    </h3>
 
-    <!-- tabs -->
-    <div class="col-md-12 tab-heading">
-      <ul class="nav nav-tabs user-nav" role="tablist" id="individualNavTabs">
-        <li id="affiliationsTab" role="presentation" class="active">
-          <a href="#affiliations" aria-controls="Affiliations" role="tab" data-toggle="tab">
-              Affiliations
-              <% if @presenter.show_visualizations && @presenter.all_positions.count > 0 %>
-                <a id="viz_collab" class="btn btn-default" style="float:right;"
-                  href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" target="_blank"
-                  title="Visualize collaborators network">Visualize it&nbsp;
-                  <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
-                </a>
-              <% end %>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- tabs content -->
     <% if @presenter.admin_positions.count > 0 %>
-      <div class="col-md-12 person-container">
-        <div class="tab-content" id="individualNavTabsContent">
-          <h3>Faculty Administrative Positions</h3>
-          <% @presenter.admin_positions.each do |p| %>
-            <p>
-              <a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>,
-              <%= p.specific_position %>
-            </p>
-          <% end %>
-        </div>
+      <h4 class="brown-affiliations panel-heading">Faculty Administrative Positions</h4>
+      <div class="brown-affiliations-list">
+        <% @presenter.admin_positions.each do |p| %>
+          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>, <%= p.specific_position %></p>
+        <% end %>
       </div>
     <% end %>
 
     <% if @presenter.faculty_positions.count > 0 %>
-      <div class="col-md-12 person-container">
-        <div class="tab-content" id="individualNavTabsContent">
-          <h3>Faculty Positions</h3>
-          <% @presenter.faculty_positions.each do |p| %>
-            <p>
-              <a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>,
-              <%= p.specific_position %>
-            </p>
-          <% end %>
-        </div>
+      <h4 class="brown-affiliations panel-heading">Faculty Positions</h4>
+      <div class="brown-affiliations-list">
+        <% @presenter.faculty_positions.each do |p| %>
+          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>, <%= p.specific_position %></p>
+        <% end %>
       </div>
     <% end %>
-  </div>
-</div>
+  </div> <!-- tabOverview -->
+</div> <!-- section_overview -->
