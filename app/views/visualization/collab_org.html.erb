@@ -58,15 +58,19 @@
   </div>
   <div class="col-md-3">
     <p><b>Legend</b></p>
-    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Member of the organization</p>
-    <p><span style='background-color:#6ebced;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators
+    <div>
+      <span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Member of the organization
+    </div>
+    <div id="level1Legend">
+      <span style='background-color:#6ebced;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators
       <a id="level1Hide" href="">(hide)</a>
       <a id="level1Show" class="hidden" href="">(show)</a>
-    </p>
-    <p><span style='background-color:#92eace;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators
+    </div>
+    <div id="level2Legend">
+      <span style='background-color:#92eace;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators
       <a id="level2Hide" href="">(hide)</a>
       <a id="level2Show" class="hidden" href="">(show)</a>
-    </p>
+    </div>
     <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
@@ -281,12 +285,17 @@
     if (level1Hidden) {
       $("#level1Hide").addClass("hidden");
       $("#level1Show").removeClass("hidden");
-      $("#level2Hide").addClass("hidden");
-      $("#level2Show").addClass("hidden");
+      $("#level2Legend").addClass("hidden");
+      // $("#level2Hide").addClass("hidden");
+      // $("#level2Show").addClass("hidden");
     } else if (level2Hidden) {
+      $("#level2Legend").removeClass("hidden");
+      $("#level1Hide").removeClass("hidden");
+      $("#level1Show").addClass("hidden");
       $("#level2Hide").addClass("hidden");
       $("#level2Show").removeClass("hidden");
     } else {
+      $("#level2Legend").removeClass("hidden");
       $("#level1Hide").removeClass("hidden");
       $("#level1Show").addClass("hidden");
       $("#level2Hide").removeClass("hidden");
