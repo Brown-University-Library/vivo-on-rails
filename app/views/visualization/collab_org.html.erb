@@ -128,6 +128,10 @@
       $("#forceToFit").attr("checked", true);
     }
 
+    // Set the variable based on the checkbox. This is required because
+    // when reloading the page the checkbox might not be checked.
+    showOrphans = $("#showOrphans").is(":checked");
+
     initGraph();
 
     $("#level1Hide").on("click", function() { level1Hidden = true; drawGraph(); return false; });
