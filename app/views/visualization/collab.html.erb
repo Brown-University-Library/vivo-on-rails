@@ -1,49 +1,6 @@
 <% @page_title = (@presenter.faculty.name || "") + " Collaborator network"%>
 
-<style>
-  .links line {
-    stroke: #999;
-    stroke-opacity: 0.6;
-  }
-
-  .nodes circle {
-    stroke: #fff;
-    stroke-width: 1.5px;
-  }
-
-  /* Force left alignment https://github.com/Brown-University-Library/vivo-on-rails/pull/27/files */
-  .researcherName {
-    clear: both;
-    text-align: left;
-  }
-
-  #tooltip {
-    position: absolute;
-    padding: 5px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-    pointer-events: none;
-  }
-
-  #title {
-    font-weight: bold;
-  }
-
-  #subtitle2 {
-    font-size: small;
-    font-style: italic;
-  }
-
-  .htmlSnippet {
-    background-color: #f5f5d3; /* light yellow */
-    border:1px solid #999999;
-    width:98%;
-    margin:5px 0;
-    padding:1%;
-  }
-</style>
-
+<%= render "visualization/viz_style" %>
 <%= render "visualization/viz_javascript" %>
 <%= render "search_box" %>
 
@@ -69,9 +26,9 @@
     <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_collab_path(@presenter.faculty.vivo_id) %>" >Collaborator Network</a>
     <p>&nbsp;</p>
     <p><b>Legend</b></p>
-    <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher</p>
-    <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators</p>
-    <p><span style='background-color:#92eace;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators</p>
+    <p><span class="level0">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher</p>
+    <p><span class="level1">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators</p>
+    <p><span class="level2">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators</p>
     <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
@@ -159,11 +116,11 @@
 
   function nodeColor(d, i) {
     if (d.level == 0) {
-      return "#1f77b4"; // blue
+      return level0Color;
     } else if(d.level ==1) {
-      return "#aec7e8"; // light blue
+      return level1Color;
     }
-    return "#92eace";   // lighter blue
+    return level2Color;
   }
 
   function drawGraph(data, status) {
