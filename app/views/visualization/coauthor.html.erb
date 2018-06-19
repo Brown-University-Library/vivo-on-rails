@@ -11,6 +11,12 @@
     stroke-width: 1.5px;
   }
 
+  /* Force left alignment https://github.com/Brown-University-Library/vivo-on-rails/pull/27/files */
+  .researcherName {
+    clear: both;
+    text-align: left;
+  }
+
   #tooltip {
     position: absolute;
     padding: 5px;
@@ -40,16 +46,23 @@
 
 <%= render "search_box" %>
 
-<h1><%= @presenter.faculty.display_name %></h1>
-<h2>Coauthor Network</h2>
-<div id="errorMsg" class="alert alert-danger hidden" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  No coauthor data is available for this researcher.
-</div>
+<h1 class="researcherName"><%= @presenter.faculty.display_name %></h1>
+<h4>Coauthor Network</h4>
 
 <div class="row">
   <div class="col-md-9">
+    <div id="descriptionMsg">
+      The coauthor network is created with the information available for this
+      researcher under the
+      <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Publications">Publications tab of their profile</a>.
+      Only publications where more than one researcher at Brown has confirmed authorship
+      are considered in this network.
+    </div>
+    <div id="errorMsg" class="alert alert-danger hidden" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      No coauthor data is available for this researcher.
+    </div>
     <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
@@ -59,7 +72,7 @@
     <p><b>Legend</b></p>
     <p><span style='background-color:#1f77b4;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Author</p>
     <p><span style='background-color:#aec7e8;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
-    <p><span style='background-color:#c7c7c7;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
+    <p><span style='background-color:#92eace;'>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
     <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
@@ -243,7 +256,7 @@
     } else if(d.level ==1) {
       return "#aec7e8"; // light blue
     }
-    return "#c7c7c7";   // light gray
+    return "#92eace";   // lighter blue
   }
 
   function drawGraph(data, status) {

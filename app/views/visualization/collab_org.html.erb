@@ -11,6 +11,12 @@
     stroke-width: 1.5px;
   }
 
+  /* Force left alignment https://github.com/Brown-University-Library/vivo-on-rails/pull/27/files */
+  .researcherName {
+    clear: both;
+    text-align: left;
+  }
+
   #tooltip {
     position: absolute;
     padding: 5px;
@@ -40,17 +46,21 @@
 
 <%= render "search_box" %>
 
-<h1><%= @presenter.organization.name %></h1>
-<h2>Collaborator Network</h2>
-
-<div id="errorMsg" class="alert alert-danger hidden" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  No collaboration data is available for this organization.
-</div>
+<h1 class="researcherName"><%= @presenter.organization.name %></h1>
+<h4>Collaborator Network</h4>
 
 <div class="row">
   <div class="col-md-9">
+    <div id="descriptionMsg">
+      The collaborator network is created with the information provided by each
+      researcher associated with this organization. You can view the individual
+      collaborator information for a researcher under the Affiliations tab.
+    </div>
+    <div id="errorMsg" class="alert alert-danger hidden" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      No collaboration data is available for this organization.
+    </div>
     <div id="loadingMsg">
       <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
     </div>
