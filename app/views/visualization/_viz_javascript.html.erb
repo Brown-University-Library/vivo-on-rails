@@ -1,4 +1,28 @@
 <script type="text/javascript">
+// Common functions used in the visualizations
+
+
+// Returns true if the value indicates exists in the array.
+function inArray(array, value) {
+  var i;
+  for(i = 0; i < array.length; i++) {
+    if (array[i] == value) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Returns the index where the requested ID was found in the nodes array.
+function getNodeIndex(nodes, id) {
+  var i;
+  for(i = 0; i < nodes.length; i++) {
+    if (nodes[i].id == id) {
+      return i;
+    }
+  }
+  return -1;
+}
 
 function downloadPng(svgId, svgWidth, svgHeight, canvasId, linkId, fileName) {
   // The process to download the graphic in the SVG element as an image file
@@ -59,4 +83,21 @@ function downloadPng(svgId, svgWidth, svgHeight, canvasId, linkId, fileName) {
   return false;
 }
 
+function showEmbedHtml(svgId, svgWidth, svgHeight, divId, textId) {
+  // Dump the HTML to a text area element...
+  var svgHtml = '<svg width="' + svgWidth + '" height="' + svgHeight + '">\r\n' +
+    $("#" + svgId).html() + '\r\n' +
+    '</svg>';
+  $("#" + divId).removeClass("hidden");
+  $("#" + textId).val(svgHtml);
+
+  // ...and scroll to the text area element into view.
+  // https://stackoverflow.com/a/5909328/446681
+  $('html, body').animate({
+    scrollTop: $(document).height()-$(window).height()},
+    1400,
+    "swing"
+  );
+  return false;
+}
 </script>

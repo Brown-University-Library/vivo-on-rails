@@ -134,7 +134,10 @@
       window.location.assign(newUrl);
     });
 
-    $("#embedHtml").on("click", showEmbedHtml);
+    $("#embedHtml").on("click", function() {
+      showEmbedHtml("svgElement", svgWidth, svgHeight, "embedHtmlDiv", "embedHtmlText");
+    });
+
     $("#downloadPng").on("click", function() {
       downloadPng("svgElement", svgWidth, svgHeight,
         "canvasElement", "canvasImgLink", "collabs_" + vivoId + ".png");
@@ -145,26 +148,6 @@
     $.getJSON(json_data_addr, drawGraph);
   }
 
-  function inArray(array, value) {
-    var i;
-    for(i = 0; i < array.length; i++) {
-      if (array[i] == value) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  function getNodeIndex(nodes, id) {
-    var i;
-    for(i = 0; i < nodes.length; i++) {
-      if (nodes[i].id == id) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
   function updateLabels() {
     var showLabels = $("#showLabels").is(":checked");
     if (showLabels) {
@@ -173,24 +156,6 @@
       d3.selectAll(".node-text").classed("hidden",true);
     }
   }
-
-  function showEmbedHtml() {
-    // Dump the HTML to a text area element...
-    var svgElement = $("#svgElement").html();
-    var svgHtml = '<svg width="' + svgWidth + '" height="' + svgHeight + '">\r\n' + svgElement + '\r\n</svg>';
-    $("#embedHtmlDiv").removeClass("hidden");
-    $("#embedHtmlText").val(svgHtml);
-
-    // ...and scroll to the text area element into view.
-    // https://stackoverflow.com/a/5909328/446681
-    $('html, body').animate({
-      scrollTop: $(document).height()-$(window).height()},
-      1400,
-      "swing"
-    );
-    return false;
-  }
-
 
   function nodeColor(d, i) {
     if (d.level == 0) {
