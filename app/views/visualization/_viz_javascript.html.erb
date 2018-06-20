@@ -27,6 +27,38 @@ function getNodeIndex(nodes, id) {
   return -1;
 }
 
+function filterGraphData(data, showLevel) {
+
+  var i, sourceIndex, targetIndex, obj;
+  var dataset = {nodes: [], edges: []};
+  var visibleNodes = [];
+
+  // Calculate what nodes should be visible based on the showLevel
+  for (i=0; i < data.nodes.length; i++) {
+    if (data.nodes[i].level <= showLevel) {
+      visibleNodes.push(data.nodes[i]);
+    }
+  }
+
+  dataset.nodes = visibleNodes;
+  // TODO: filter orphans
+
+  // Calculate the edges from the data
+  for(i = 0; i < data.links.length; i++) {
+    // Notice that we use the nodes from the *dataset* (which includes only
+    // nodes that we want to display) but use the links from the *data*
+    // (which includes the original)
+    sourceIndex = getNodeIndex(dataset.nodes, data.links[i].source);
+    targetIndex = getNodeIndex(dataset.nodes, data.links[i].target);
+    if ((sourceIndex != -1) && (targetIndex != -1)) {
+      obj = {source: sourceIndex, target: targetIndex};
+      dataset.edges.push(obj);
+    }
+  }
+
+  return dataset;
+}
+
 function downloadPng(svgId, svgWidth, svgHeight, canvasId, linkId, fileName) {
   // The process to download the graphic in the SVG element as an image file
   // is a far more complicated than it looks on the surface. The general
