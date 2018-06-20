@@ -27,11 +27,12 @@
     <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Coauthor Network</a>
     <a class="btn btn-default btn-lg" role="button" href="<%= visualization_collab_path(@presenter.faculty.vivo_id) %>" >Collaborator Network</a>
     <p>&nbsp;</p>
+    <div id="legend">
     <p><b>Legend</b></p>
-    <p><span class="level0">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher</p>
-    <p><span class="level1">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors</p>
-    <p><span class="level2">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors' coauthors</p>
-    <p>&nbsp;</p>
+    <ul id="legendList" class="legend">
+      <!-- added via JavaScript -->
+    </ul>
+    </div>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
@@ -116,15 +117,6 @@
     }
   }
 
-  function nodeColor(d, i) {
-    if (d.level == 0) {
-      return level0Color;
-    } else if(d.level ==1) {
-      return level1Color;
-    }
-    return level2Color;
-  }
-
   function drawGraph(data, status) {
 
     if (data.links === undefined || data.links.length == 0) {
@@ -186,7 +178,48 @@
       }
     }
 
-    var colors = d3.scaleOrdinal(d3.schemeCategory10);
+    var colorByDepth = window.location.href.indexOf("?depth") != -1;;
+    var colorScheme;
+    var nodeColor;
+    if (colorByDepth) {
+      nodeColor = function (d) {
+        if (d.level == 0) {
+          return level0Color;
+        } else if(d.level ==1) {
+          return level1Color;
+        }
+        return level2Color;
+      }
+    } else {
+      colorScheme = d3.scaleOrdinal(d3.schemeCategory10);
+      nodeColor = function (d) {
+        return colorScheme(d.group);
+      }
+    }
+
+    var ul = $("#legendList");
+    if (colorByDepth) {
+      ul.append('<li><span class="level0">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher');
+      ul.append('<li><span class="level1">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors');
+      ul.append('<li><span class="level2">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors\' coauthors');
+    } else {
+      var groups = [];
+      var groupColor;
+      var groupName;
+      for(i = 0; i < dataset.nodes.length; i++) {
+        if (!inArray(groups, dataset.nodes[i].group)){
+          groups.push(dataset.nodes[i].group)
+        }
+      }
+      for(i = 0; i < groups.length; i++) {
+        groupName = groups[i];
+        groupColor = colorScheme(groupName);
+        if (groupName == "") {
+          groupName = "N/A"
+        }
+        ul.append('<li><span style="background-color: ' + groupColor + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
+      }
+    }
 
     var force = d3.forceSimulation(dataset.nodes)
       .force("charge", d3.forceManyBody())
@@ -205,7 +238,6 @@
       .append("line")
       .style("stroke", "#ccc")
       .style("stroke-width", 1);
-      // .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
 
     var dragstarted = function(d) {
       if (!d3.event.active) force.alphaTarget(0.3).restart();
@@ -268,7 +300,7 @@
             .style("font-weight", "bold")
             .style("font-size", "12px");
       }
-      d3.select(this).select('circle').style("fill", "#ffbb78");
+      d3.select(this).select('circle').style("stroke", "#ffbb78").style("stroke-width", "3");
     });
 
     nodes.on('mouseout', function(d){
@@ -280,7 +312,7 @@
           .style("font-weight", "normal")
           .style("font-size", "10px");
       }
-      d3.select(this).select('circle').style("fill", nodeColor(d, 0));
+      d3.select(this).select('circle').style("stroke", nodeColor(d)).style("stroke-width", "3");
     });
 
     nodes.on('click', function(d){
@@ -296,7 +328,7 @@
     });
 
     nodes.selectAll("circle").on('mouseout', function(d){
-      d3.select(this).style("fill", nodeColor(d, 0));
+      d3.select(this).style("fill", nodeColor(d));
     });
 
     nodes.append("text")
