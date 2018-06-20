@@ -36,8 +36,8 @@
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
 
-    <p><a href="#" id="showMore" class="hidden" title="Include coauthors and their coauthors.">Show more</a></p>
-    <p><a href="#" id="showLess" title="Include only coauthors.">Show less</a></p>
+    <p><a href="#" id="showMore" class="hidden" title="Include coauthors and their coauthors.">Show more coauthors</a></p>
+    <p><a href="#" id="showLess" title="Include only coauthors.">Show less coauthors</a></p>
 
     <p>Display labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Display details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
@@ -125,25 +125,33 @@
     }
   }
 
-  function calculateEdgesFromLinks(data) {
+  // Calculates the edges from the links in the data
+  // Links point to nodes by ID where as edges points to them by index.
+  function calculateEdges(nodes, links) {
     var i, obj;
     var edges = []
-    // calculate the edges from the links in the data
-    for(i = 0; i < data.links.length; i++) {
+    for(i = 0; i < links.length; i++) {
       obj = {
-        source: getNodeIndex(data.nodes, data.links[i].source),
-        target: getNodeIndex(data.nodes, data.links[i].target)
+        source: getNodeIndex(nodes, links[i].source),
+        target: getNodeIndex(nodes, links[i].target)
       };
-      edges.push(obj);
+      if ((obj.source != -1) && (obj.target != -1)) {
+        edges.push(obj);
+      }
     }
     return edges;
   }
 
-  function setNodeLevels(nodes, edges, facultyId) {
+  // Sets the level for each node based on the information on the links array.
+  //
+  // `nodes` is an array of objects, each object is expected to have an `id` property.
+  // `links` is an array of objects, each object is expected to be in the form:
+  // {source: node-id, target: other-node-id}
+  // `rootId` represents the `id` of the root node.
+  function setNodeLevels(nodes, links, rootId) {
     var i;
     var edge;
     var firstLevelNodes = [];
-    var rootIndex = getNodeIndex(nodes, facultyId);
 
     // set all nodes to level 2 initially:
     //    level 0 - author
@@ -154,31 +162,63 @@
     }
 
     // find first level nodes (nodes connected to the root)
-    for(i = 0; i < edges.length; i++) {
-      edge = edges[i];
-      if (edge.source == rootIndex) {
-        firstLevelNodes.push(edge.source);
-      } else if (edge.target == rootIndex) {
-        firstLevelNodes.push(edge.target);
+    for(i = 0; i < links.length; i++) {
+      link = links[i];
+      if (link.source == rootId) {
+        firstLevelNodes.push(link.target);
+      } else if (link.target == rootId) {
+        firstLevelNodes.push(link.source);
       }
     }
 
-    // mark the first level nodes
-    for(i = 0; i < edges.length; i++) {
-      edge = edges[i];
-      if(inArray(firstLevelNodes, edge.source)) {
-        nodes[edge.source].level = 1;
-      } else if (inArray(firstLevelNodes, edge.source)) {
-        nodes[edge.target].level = 1;
+    // mark the first level nodes (and the root node) with the proper level
+    for(i = 0; i < nodes.length; i++) {
+      if(nodes[i].id == rootId) {
+        nodes[i].level = 0;
+      } else if(inArray(firstLevelNodes, nodes[i].id)) {
+        nodes[i].level = 1;
       }
     }
 
-    // mark the root
-    nodes[rootIndex].level = 0;
-
-    return data;
+    return nodes;
   }
 
+  function datasetByLevel(nodes, edges, links, showLevel) {
+    if (showLevel == 2) {
+      return {nodes: nodes, edges: edges};
+    }
+
+    // showLevel 0 or 1
+    var i;
+    var visibleNodes = [];
+    for(i = 0; i < nodes.length; i++) {
+      if (nodes[i].level <= showLevel) {
+        visibleNodes.push(nodes[i]);
+      }
+    }
+
+    // recalculate the edges
+    edges = calculateEdges(visibleNodes, links)
+    return {nodes: visibleNodes, edges: edges};
+  }
+
+  function groupsFromNodes(nodes) {
+    var i, groupName;
+    var groups = [];
+    for(i = 0; i < nodes.length; i++) {
+      groupName = nodes[i].group;
+      if (groupName == "") {
+        groupName = "N/A"
+      }
+      if (!inArray(groups, groupName)){
+        groups.push(groupName)
+      }
+    }
+    groups.sort();
+    return groups;
+  }
+
+  // The data array contains the `nodes` and `links` for the coauthor graph.
   function drawGraph(data, status) {
 
     if (data.links === undefined || data.links.length == 0) {
@@ -195,12 +235,15 @@
 
     var i;
     var svg = d3.select("svg");
+    svg.selectAll("*").remove();
+
     var w = +svg.attr("width");
     var h = +svg.attr("height");
-    var dataset = {nodes: data.nodes, edges: []};
 
-
-    dataset.edges = calculateEdgesFromLinks(data);
+    var nodes = setNodeLevels(data.nodes, data.links, facultyId);
+    var edges = calculateEdges(nodes, data.links);
+    var showLevel = showMore ? 2 : 1;
+    var dataset = datasetByLevel(nodes, edges, data.links, showLevel);
 
     var colorByDepth = window.location.href.indexOf("?depth") != -1;;
     var colorScheme;
@@ -222,25 +265,17 @@
     }
 
     var ul = $("#legendList");
+    ul.empty();
     if (colorByDepth) {
       ul.append('<li><span class="level0">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher');
       ul.append('<li><span class="level1">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors');
       ul.append('<li><span class="level2">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors\' coauthors');
     } else {
-      var groups = [];
-      var groupColor;
-      var groupName;
-      for(i = 0; i < dataset.nodes.length; i++) {
-        if (!inArray(groups, dataset.nodes[i].group)){
-          groups.push(dataset.nodes[i].group)
-        }
-      }
+      var groupColor, groupName;
+      var groups = groupsFromNodes(dataset.nodes);
       for(i = 0; i < groups.length; i++) {
         groupName = groups[i];
         groupColor = colorScheme(groupName);
-        if (groupName == "") {
-          groupName = "N/A"
-        }
         ul.append('<li><span style="background-color: ' + groupColor + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
       }
     }
