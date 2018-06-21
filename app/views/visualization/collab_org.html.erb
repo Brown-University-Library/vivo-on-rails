@@ -33,7 +33,8 @@
     </div>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
-    <p>Show members without collaborators&nbsp;<input id="showOrphans" type="checkbox" checked/></p>
+    <p><a href="#" id="showMore" title="...">Show More</a></p>
+    <p><a href="#" id="showLess" title="...">Show Less</a></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
@@ -75,11 +76,8 @@
   var researcherUrl = "<%= display_show_path('placeholder') %>";
   var svgWidth = 960;
   var svgHeight = 700;
-  var numberOfNodes = 0;
   var theData = null;
-  var level1Hidden = false;
-  var level2Hidden = false;
-  var showOrphans = true;
+  var showLevel = 0;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
@@ -96,13 +94,19 @@
       drawGraph();
     });
 
-    $("#level1Hide").on("click", function() { level1Hidden = true; drawGraph(); return false; });
-    $("#level1Show").on("click", function() { level1Hidden = false; drawGraph(); return false; });
+    $("#showMore").on("click", function() {
+      if (showLevel < 2) {
+        showLevel += 1;
+        drawGraph();
+      }
+    });
 
-    $("#level2Hide").on("click", function() { level2Hidden = true; drawGraph(); return false; });
-    $("#level2Show").on("click", function() { level2Hidden = false; drawGraph(); return false; });
-
-    $("#showOrphans").on("click", function() { showOrphans = !showOrphans; drawGraph(); });
+    $("#showLess").on("click", function() {
+      if (showLevel > 0) {
+        showLevel -= 1;
+        drawGraph();
+      }
+    });
 
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
@@ -133,38 +137,9 @@
     }
   }
 
-  function nodeColor(d, i) {
-    if (d.level == 0) {
-      return level0Color;
-    } else if(d.level ==1) {
-      return level1Color;
-    }
-    return level2Color;
-  }
-
   function drawGraph() {
     var data = theData;
     $("#loadingMsg").addClass("hidden");
-
-    if (level1Hidden) {
-      $("#level1Hide").addClass("hidden");
-      $("#level1Show").removeClass("hidden");
-      $("#level2Legend").addClass("hidden");
-      // $("#level2Hide").addClass("hidden");
-      // $("#level2Show").addClass("hidden");
-    } else if (level2Hidden) {
-      $("#level2Legend").removeClass("hidden");
-      $("#level1Hide").removeClass("hidden");
-      $("#level1Show").addClass("hidden");
-      $("#level2Hide").addClass("hidden");
-      $("#level2Show").removeClass("hidden");
-    } else {
-      $("#level2Legend").removeClass("hidden");
-      $("#level1Hide").removeClass("hidden");
-      $("#level1Show").addClass("hidden");
-      $("#level2Hide").removeClass("hidden");
-      $("#level2Show").addClass("hidden");
-    }
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
@@ -180,12 +155,12 @@
     var nodes = data.nodes;
     var edges = calculateEdges(nodes, data.links);
     var allGroups = groupsFromNodes(nodes);
-    var showLevel = 2; // TODO: showMore ? 2 : 1;
     var dataset = datasetByLevel(nodes, edges, data.links, showLevel);
     var colorScheme = d3.scaleOrdinal(d3.schemeCategory10);
     var colors = groupColors(allGroups, colorScheme);
     var nodeColor = function (d) {
       if (d.group == null) {
+        // Currently leaf nodes don't have a group. 
         return groupColor("N/A", colorScheme)
       }
       return groupColor(d.group, colorScheme)
@@ -200,34 +175,15 @@
       ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
     }
 
-    numberOfNodes = dataset.nodes.length;
-    var simulation = d3.forceSimulation(dataset.nodes)
+    var force = d3.forceSimulation(dataset.nodes)
+      .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(w/2, h/2));
 
     var forceToFit = window.location.href.indexOf("?fit") != -1;
     if (forceToFit) {
-      if (numberOfNodes > 40) {
-        // don't use forceManyBody() to help keep the graph tight.
-      } else {
-        simulation.force("charge", d3.forceManyBody().strength(-10));
-      }
-      simulation.force("link", d3.forceLink(dataset.edges));
+      force.force("link", d3.forceLink(dataset.edges));
     } else {
-      // "forceManyBody causes all elements to attract or repel one another.
-      // The strength of the attraction or repulsion can be set using .strength()
-      // where a positive value will cause elements to attract one another while a
-      // negative value causes elements to repel each other. The default value is -30.
-      // [...]
-      // As a rule of thumb, when creating network diagrams we want the elements
-      // to repel one another while for visualisations where we’re clumping
-      // elements together, attractive forces are necessary."
-      // -- Source: http://d3indepth.com/force-layout/
-      if (numberOfNodes > 40) {
-        simulation.force("charge", d3.forceManyBody().strength(0));
-      } else {
-        simulation.force("charge", d3.forceManyBody().strength(-30));
-      }
-      simulation.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
+      force.force("link", d3.forceLink(dataset.edges).distance(function(d) {return 100;}).strength(0.1))
     }
 
     var edges = svg.selectAll("line")
@@ -239,7 +195,7 @@
 
     var dragstarted = function(d) {
       if (!d3.event.active) {
-        simulation.alphaTarget(0.3).restart();
+        force.alphaTarget(0.3).restart();
       }
       d.fx = d.x;
       d.fy = d.y;
@@ -273,28 +229,6 @@
           return 11;
         }
         return 6;
-        // if (numberOfNodes > 100) {
-        //   if (d.level == 0) {
-        //     return 5;
-        //   } else {
-        //     return 3;
-        //   }
-        // }
-        //
-        // if (numberOfNodes > 40) {
-        //   if (d.level == 0) {
-        //     return 7;
-        //   } else {
-        //     return 5;
-        //   }
-        // }
-        //
-        // if (d.level == 0) {
-        //   return 9;
-        // } else if(d.level == 1) {
-        //   return 7;
-        // }
-        // return 5;
       })
       .style("fill", nodeColor);
 
@@ -330,7 +264,7 @@
           .style("font-weight", "normal")
           .style("font-size", "10px");
       }
-      d3.select(this).select('circle').style("fill", nodeColor(d, 0));
+      d3.select(this).select('circle').style("fill", nodeColor(d));
     });
 
     nodes.on('click', function(d){
@@ -340,7 +274,7 @@
     });
 
     nodes.selectAll("circle").on('mouseout', function(d){
-      d3.select(this).style("fill", nodeColor(d, 0));
+      d3.select(this).style("fill", nodeColor(d));
     });
 
     nodes.append("text")
@@ -349,7 +283,7 @@
       .attr("class", "node-text")
       .text(function(d) { return d.name; });
 
-    simulation.on("tick", function() {
+    force.on("tick", function() {
       edges.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
