@@ -43,17 +43,24 @@ class VisualizationController < ApplicationController
   end
 
   def coauthor_graph_list
+    status = 200
     if ENV['VIZ_SERVICE_URL']
       # Returns the list of researchers that have a coauthor graph.
       # For now we let the client decide whether it should show the graph based
       # on the response.
       url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/"
-      str = fwd_http(url)
-      json = JSON.parse(str)
+      ok, str = fwd_http(url)
+      if ok
+        json = JSON.parse(str)
+      else
+        Rails.logger.error("Could not retrieve graph at #{url}")
+        status = 500
+        json = {error: true, message: "Could not retrieve graph data"}
+      end
     else
       json = {}
     end
-    render :json => json
+    render json: json, status: status
   end
 
   # def fwd_chord_one
@@ -93,23 +100,33 @@ class VisualizationController < ApplicationController
     end
 
     def coauthor_json
+      status = 200
       id = "#{params[:id]}"
       url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{id}"
-      str = fwd_http(url)
-      json = JSON.parse(str)
-      render json: json
+      ok, str = fwd_http(url)
+      if ok
+        json = JSON.parse(str)
+      else
+        Rails.logger.error("Could not retrieve graph at #{url}")
+        status = 500
+        json = {error: true, message: "Could not retrieve graph for #{id}"}
+      end
+      render json: json, status: status
     end
 
     def coauthor_csv
       # get the JSON version
       id = "#{params[:id]}"
       url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{id}"
-      str = fwd_http(url)
-      json = JSON.parse(str, {symbolize_names: true})
-
-      # dump it to an EdgeGraph in order to produce the CSV output
-      graph = EdgeGraph.new_from_hash(json)
-      render text: graph.to_csv()
+      ok, str = fwd_http(url)
+      if ok
+        # dump it to an EdgeGraph in order to produce the CSV output
+        json = JSON.parse(str, {symbolize_names: true})
+        graph = EdgeGraph.new_from_hash(json)
+        render text: graph.to_csv()
+      else
+        render text: "Could not fetch graph for #{id}", status: 500
+      end
     end
 
     def collab_view
@@ -179,17 +196,24 @@ class VisualizationController < ApplicationController
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
-      Rails.logger.error("Could not fetc collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      Rails.logger.error("Could not fetch collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
       render text: "error", status: 500
     end
 
     def fwd_http(url)
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
+      http.open_timeout = 10
+      http.read_timeout = 10
+      http.ssl_timeout = 10
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request = Net::HTTP::Get.new(uri.request_uri)
       response = http.request(request)
-      response.body
+      ok = (response.code >= "200" && response.code <= "299")
+      [ok, response.body]
+    rescue => ex
+      Rails.logger.error("Fetching: #{url}. Exception: #{ex}")
+      [false, ""]
     end
 end
