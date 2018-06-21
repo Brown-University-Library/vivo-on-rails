@@ -214,10 +214,11 @@
       .append("line")
       .style("stroke", "#ccc")
       .style("stroke-width", 1);
-      // .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
 
     var dragstarted = function(d) {
-      if (!d3.event.active) force.alphaTarget(0.3).restart();
+      if (!d3.event.active) {
+        force.alphaTarget(0.3).restart();
+      }
       d.fx = d.x;
       d.fy = d.y;
     }
