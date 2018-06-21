@@ -160,12 +160,17 @@
 
     var nodes = setNodeLevels(data.nodes, data.links, facultyId);
     var edges = calculateEdges(nodes, data.links);
+    var allGroups = groupsFromNodes(nodes);
     var showLevel = showMore ? 2 : 1;
     var dataset = datasetByLevel(nodes, edges, data.links, showLevel);
+    var colorScheme = d3.scaleOrdinal(d3.schemeCategory10);
+    var colors = groupColors(allGroups, colorScheme);
+    var nodeColor = function (d) {
+      return groupColor(d.group, colorScheme)
+    };
 
+    // TODO: remove this after demo
     var colorByDepth = window.location.href.indexOf("?depth") != -1;
-    var colorScheme;
-    var nodeColor;
     if (colorByDepth) {
       nodeColor = function (d) {
         if (d.level == 0) {
@@ -174,11 +179,6 @@
           return level1Color;
         }
         return level2Color;
-      }
-    } else {
-      colorScheme = d3.scaleOrdinal(d3.schemeCategory10);
-      nodeColor = function (d) {
-        return colorScheme(d.group);
       }
     }
 
@@ -189,12 +189,11 @@
       ul.append('<li><span class="level1">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors');
       ul.append('<li><span class="level2">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors\' coauthors');
     } else {
-      var groupColor, groupName;
+      var groupName;
       var groups = groupsFromNodes(dataset.nodes);
       for(i = 0; i < groups.length; i++) {
         groupName = groups[i];
-        groupColor = colorScheme(groupName);
-        ul.append('<li><span style="background-color: ' + groupColor + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
+        ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
       }
     }
 

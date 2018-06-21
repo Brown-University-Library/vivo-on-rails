@@ -120,6 +120,25 @@ function datasetByLevel(nodes, edges, links, showLevel) {
   return {nodes: visibleNodes, edges: edges};
 }
 
+function groupColor(group, colorScheme) {
+  return colorScheme(group)
+}
+
+function groupColors(groups, colorScheme) {
+  var i;
+  var colors = [];
+
+  for(i = 0; i < groups.length; i++) {
+    color = {
+      group: groups[i],
+      color: colorScheme(groups[i])
+    }
+    colors.push(color);
+  }
+
+  return colors;
+}
+
 function downloadPng(svgId, svgWidth, svgHeight, canvasId, linkId, fileName) {
   // The process to download the graphic in the SVG element as an image file
   // is a far more complicated than it looks on the surface. The general
