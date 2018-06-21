@@ -21,6 +21,9 @@
       <span class="sr-only">Error:</span>
       No coauthor data is available for this researcher.
     </div>
+    <div id="loadingMsg">
+      <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
+    </div>
     <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
@@ -76,9 +79,10 @@
 
   var facultyId = "<%= @presenter.faculty.id %>";     // http://vivo.brown.edu/jcarberry
   var vivoId = "<%= @presenter.faculty.vivo_id %>";   // jcarberry
-  var json_data_addr = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>";
+  var jsonDataUrl = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>";
   var svgWidth = 960;
   var svgHeight = 700;
+  var theData = null;
   var showMore = true;
 
   $(document).ready(function() {
@@ -87,10 +91,13 @@
       $("#forceToFit").attr("checked", true);
     }
 
-    initGraph();
+    $.getJSON(jsonDataUrl, function(data, status) {
+      theData = data; // save the data in our global variable
+      drawGraph();
+    });
 
-    $("#showMore").on("click", function() { showMore = true; initGraph(); return false; });
-    $("#showLess").on("click", function() { showMore = false; initGraph(); return false;});
+    $("#showMore").on("click", function() { showMore = true; drawGraph(); return false; });
+    $("#showLess").on("click", function() { showMore = false; drawGraph(); return false;});
 
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
@@ -112,10 +119,6 @@
     });
   });
 
-  function initGraph() {
-    $.getJSON(json_data_addr, drawGraph);
-  }
-
   function updateLabels() {
     var showLabels = $("#showLabels").is(":checked");
     if (showLabels) {
@@ -125,101 +128,9 @@
     }
   }
 
-  // Calculates the edges from the links in the data
-  // Links point to nodes by ID where as edges points to them by index.
-  function calculateEdges(nodes, links) {
-    var i, obj;
-    var edges = []
-    for(i = 0; i < links.length; i++) {
-      obj = {
-        source: getNodeIndex(nodes, links[i].source),
-        target: getNodeIndex(nodes, links[i].target)
-      };
-      if ((obj.source != -1) && (obj.target != -1)) {
-        edges.push(obj);
-      }
-    }
-    return edges;
-  }
-
-  // Sets the level for each node based on the information on the links array.
-  //
-  // `nodes` is an array of objects, each object is expected to have an `id` property.
-  // `links` is an array of objects, each object is expected to be in the form:
-  // {source: node-id, target: other-node-id}
-  // `rootId` represents the `id` of the root node.
-  function setNodeLevels(nodes, links, rootId) {
-    var i;
-    var edge;
-    var firstLevelNodes = [];
-
-    // set all nodes to level 2 initially:
-    //    level 0 - author
-    //    level 1 - coauthor
-    //    level 2 - coauthor's coauthor
-    for(i = 0; i < nodes.length; i++) {
-      nodes[i].level = 2;
-    }
-
-    // find first level nodes (nodes connected to the root)
-    for(i = 0; i < links.length; i++) {
-      link = links[i];
-      if (link.source == rootId) {
-        firstLevelNodes.push(link.target);
-      } else if (link.target == rootId) {
-        firstLevelNodes.push(link.source);
-      }
-    }
-
-    // mark the first level nodes (and the root node) with the proper level
-    for(i = 0; i < nodes.length; i++) {
-      if(nodes[i].id == rootId) {
-        nodes[i].level = 0;
-      } else if(inArray(firstLevelNodes, nodes[i].id)) {
-        nodes[i].level = 1;
-      }
-    }
-
-    return nodes;
-  }
-
-  function datasetByLevel(nodes, edges, links, showLevel) {
-    if (showLevel == 2) {
-      return {nodes: nodes, edges: edges};
-    }
-
-    // showLevel 0 or 1
-    var i;
-    var visibleNodes = [];
-    for(i = 0; i < nodes.length; i++) {
-      if (nodes[i].level <= showLevel) {
-        visibleNodes.push(nodes[i]);
-      }
-    }
-
-    // recalculate the edges
-    edges = calculateEdges(visibleNodes, links)
-    return {nodes: visibleNodes, edges: edges};
-  }
-
-  function groupsFromNodes(nodes) {
-    var i, groupName;
-    var groups = [];
-    for(i = 0; i < nodes.length; i++) {
-      groupName = nodes[i].group;
-      if (groupName == "") {
-        groupName = "N/A"
-      }
-      if (!inArray(groups, groupName)){
-        groups.push(groupName)
-      }
-    }
-    groups.sort();
-    return groups;
-  }
-
-  // The data array contains the `nodes` and `links` for the coauthor graph.
-  function drawGraph(data, status) {
+  function drawGraph() {
+    var data = theData;
+    $("#loadingMsg").addClass("hidden");
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
@@ -245,7 +156,7 @@
     var showLevel = showMore ? 2 : 1;
     var dataset = datasetByLevel(nodes, edges, data.links, showLevel);
 
-    var colorByDepth = window.location.href.indexOf("?depth") != -1;;
+    var colorByDepth = window.location.href.indexOf("?depth") != -1;
     var colorScheme;
     var nodeColor;
     if (colorByDepth) {

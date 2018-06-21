@@ -100,7 +100,10 @@
     // when reloading the page the checkbox might not be checked.
     showOrphans = $("#showOrphans").is(":checked");
 
-    initGraph();
+    $.getJSON(jsonDataUrl, function(data, status) {
+      theData = data; // save the data in our global variable
+      drawGraph();
+    });
 
     $("#level1Hide").on("click", function() { level1Hidden = true; drawGraph(); return false; });
     $("#level1Show").on("click", function() { level1Hidden = false; drawGraph(); return false; });
@@ -109,7 +112,6 @@
     $("#level2Show").on("click", function() { level2Hidden = false; drawGraph(); return false; });
 
     $("#showOrphans").on("click", function() { showOrphans = !showOrphans; drawGraph(); });
-
 
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
@@ -131,10 +133,6 @@
     });
   });
 
-  function initGraph() {
-    $.getJSON(jsonDataUrl, drawGraphInit);
-  }
-
   function updateLabels() {
     var showLabels = $("#showLabels").is(":checked");
     if (showLabels) {
@@ -151,11 +149,6 @@
       return level1Color;
     }
     return level2Color;
-  }
-
-  function drawGraphInit(data, status) {
-    theData = data;
-    drawGraph();
   }
 
   function drawGraph() {

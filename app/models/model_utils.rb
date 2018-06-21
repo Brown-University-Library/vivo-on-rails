@@ -1,5 +1,10 @@
 class ModelUtils
 
+  def self.vivo_id(id)
+    return "" if id == nil
+    id.split("/").last
+  end
+
   def self.type_for_id(id)
     solr_url = ENV["SOLR_URL"]
     logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil

@@ -41,6 +41,10 @@ class EdgeGraph
           # to indicate proximity in collaboration.
           node[:level] = new_node[:level]
         end
+        if node[:group] == nil && new_node[:group] != nil
+          # set the missing group value
+          node[:group] = new_node[:group]
+        end
         node_found = true
         break
       end
