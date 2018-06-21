@@ -162,8 +162,9 @@ class VisualizationController < ApplicationController
         render json: graph
       when "ORGANIZATION"
         id = params[:id]
+        org = Organization.load_from_solr(id)
         collab = CollabGraph.new()
-        graph = collab.graph_for_org(id)
+        graph = collab.graph_for_org(id, org.item.name)
         render json: graph
       else
         err_msg = "Individual ID (#{id}) was not found"

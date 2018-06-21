@@ -25,21 +25,12 @@
     <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
+    <div id="legend">
     <p><b>Legend</b></p>
-    <div>
-      <span class="level0">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Member of the organization
+    <ul id="legendList" class="legend">
+      <!-- added via JavaScript -->
+    </ul>
     </div>
-    <div id="level1Legend">
-      <span class="level1">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators
-      <a id="level1Hide" href="">(hide)</a>
-      <a id="level1Show" class="hidden" href="">(show)</a>
-    </div>
-    <div id="level2Legend">
-      <span class="level2">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Collaborators' collaborators
-      <a id="level2Hide" href="">(hide)</a>
-      <a id="level2Show" class="hidden" href="">(show)</a>
-    </div>
-    <p>&nbsp;</p>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
     <p>Show members without collaborators&nbsp;<input id="showOrphans" type="checkbox" checked/></p>
@@ -185,59 +176,31 @@
 
     var w = +svg.attr("width");
     var h = +svg.attr("height");
-    var dataset = {nodes: [], edges: []};
-    var sourceIndex, targetIndex;
-    var visibleNodes = [];
-    var j;
-    var notOrphans = [];
 
-    // Calculate what nodes should be visible based on the show/include collaborators
-    // and collaborators' collaborators checkboxes
-    for (i=0; i < data.nodes.length; i++) {
-      var level = data.nodes[i].level;
-      var valid = true;
-      if (level2Hidden) {
-        valid = level < 2;
-      } if (level1Hidden) {
-        valid = level < 1;
+    var nodes = data.nodes;
+    var edges = calculateEdges(nodes, data.links);
+    var allGroups = groupsFromNodes(nodes);
+    var showLevel = 2; // TODO: showMore ? 2 : 1;
+    var dataset = datasetByLevel(nodes, edges, data.links, showLevel);
+    var colorScheme = d3.scaleOrdinal(d3.schemeCategory10);
+    var colors = groupColors(allGroups, colorScheme);
+    var nodeColor = function (d) {
+      if (d.group == null) {
+        return groupColor("N/A", colorScheme)
       }
-      if (valid) {
-        visibleNodes.push(data.nodes[i]);
-      }
-    }
+      return groupColor(d.group, colorScheme)
+    };
 
-    if (showOrphans) {
-      dataset.nodes = visibleNodes;
-    } else {
-      // Find non-orphan nodes and only show those.
-      for(i = 0; i < visibleNodes.length; i++) {
-        for(j = 0; j < data.links.length; j++) {
-          if (data.links[j].source == visibleNodes[i].id || data.links[j].target == visibleNodes[i].id) {
-            notOrphans.push(visibleNodes[i]);
-            break;
-          }
-        }
-      }
-      dataset.nodes = notOrphans;
-    }
-
-    // Calculate the edges from the data
-    for(i = 0; i < data.links.length; i++) {
-      // Notice that we use the nodes from the *dataset* (which includes only
-      // nodes that we want to display) but use the links from the *data*
-      // (which includes the original)
-      sourceIndex = getNodeIndex(dataset.nodes, data.links[i].source);
-      targetIndex = getNodeIndex(dataset.nodes, data.links[i].target);
-      if ((sourceIndex != -1) && (targetIndex != -1)) {
-        obj = {source: sourceIndex, target: targetIndex};
-        dataset.edges.push(obj);
-      }
+    var ul = $("#legendList");
+    ul.empty();
+    var groupName;
+    var groups = groupsFromNodes(dataset.nodes);
+    for(i = 0; i < groups.length; i++) {
+      groupName = groups[i];
+      ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
     }
 
     numberOfNodes = dataset.nodes.length;
-
-    var colors = d3.scaleOrdinal(d3.schemeCategory10);
-
     var simulation = d3.forceSimulation(dataset.nodes)
       .force("center", d3.forceCenter(w/2, h/2));
 
@@ -304,28 +267,34 @@
 
     nodes.append("circle")
       .attr("r", function(d) {
-        if (numberOfNodes > 100) {
-          if (d.level == 0) {
-            return 5;
-          } else {
-            return 3;
-          }
-        }
-
-        if (numberOfNodes > 40) {
-          if (d.level == 0) {
-            return 7;
-          } else {
-            return 5;
-          }
-        }
-
         if (d.level == 0) {
-          return 9;
+          return 15;
         } else if(d.level == 1) {
-          return 7;
+          return 11;
         }
-        return 5;
+        return 6;
+        // if (numberOfNodes > 100) {
+        //   if (d.level == 0) {
+        //     return 5;
+        //   } else {
+        //     return 3;
+        //   }
+        // }
+        //
+        // if (numberOfNodes > 40) {
+        //   if (d.level == 0) {
+        //     return 7;
+        //   } else {
+        //     return 5;
+        //   }
+        // }
+        //
+        // if (d.level == 0) {
+        //   return 9;
+        // } else if(d.level == 1) {
+        //   return 7;
+        // }
+        // return 5;
       })
       .style("fill", nodeColor);
 

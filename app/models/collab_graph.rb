@@ -5,14 +5,22 @@ class CollabGraph
     @graph = EdgeGraph.new()
   end
 
-  def graph_for_org(org_id)
+  def graph_for_org(org_id, org_name)
     # add the members of the organization as root nodes (level 0)
     root_nodes = []
     organization = Organization.load_from_solr(org_id)
     organization.item.people.each do |member|
       faculty = Faculty.load_from_solr(member.vivo_id)
       next if faculty == nil
-      node = {group: faculty.item.title, id: faculty.item.uri, name: faculty.item.name, level: 0}
+      # Notice that we use the passed org_name to prevent
+      # inconsistencies with faculty that belong to many
+      # organizations.
+      node = {
+        group: org_name,
+        title: faculty.item.title,
+        id: faculty.item.uri,
+        name: faculty.item.name,
+        level: 0}
       @graph.add_node(node)
       root_nodes << member.vivo_id
     end

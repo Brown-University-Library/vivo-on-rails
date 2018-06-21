@@ -32,7 +32,7 @@ function groupsFromNodes(nodes) {
   var groups = [];
   for(i = 0; i < nodes.length; i++) {
     groupName = nodes[i].group;
-    if (groupName == "") {
+    if ((groupName == "") || (groupName == null)) {
       groupName = "N/A"
     }
     if (!inArray(groups, groupName)){
