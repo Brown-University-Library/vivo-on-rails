@@ -156,7 +156,7 @@
     var allGroups = groupsFromNodes(nodes);
     var showLevel = showMore ? 2 : 1;
     var dataset = datasetByLevel(nodes, edges, data.links, showLevel);
-    var colorScheme = d3.scaleOrdinal(d3.schemeCategory10);
+    var colorScheme = d3.scaleOrdinal(d3.schemeCategory20);
     var colors = groupColors(allGroups, colorScheme);
     var nodeColor = function (d) {
       return groupColor(d.group, colorScheme)
