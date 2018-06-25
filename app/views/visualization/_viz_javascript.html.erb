@@ -51,7 +51,8 @@ function calculateEdges(nodes, links) {
   for(i = 0; i < links.length; i++) {
     obj = {
       source: getNodeIndex(nodes, links[i].source),
-      target: getNodeIndex(nodes, links[i].target)
+      target: getNodeIndex(nodes, links[i].target),
+      weight: links[i].weight
     };
     if ((obj.source != -1) && (obj.target != -1)) {
       edges.push(obj);

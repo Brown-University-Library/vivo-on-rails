@@ -1,10 +1,6 @@
 <% @page_title = (@presenter.faculty.name || "") + " Visualizations"%>
 
 <style>
-/* body {
-  font: 10px sans-serif;
-} */
-
 .group-tick line {
   stroke: #000;
 }
@@ -43,13 +39,16 @@
   </div>
 </div>
 
-<p>Download the data as <a href="<%= ENV['VIZ_CLIENT_URL'] %>/chordDiagram/<%= @presenter.faculty.vivo_id %>">JSON</a></p>
-
 <script>
 
 $(document).ready(function() {
-  var vizUrl = "<%= ENV['VIZ_CLIENT_URL'] %>/chordDiagram/<%= @presenter.faculty.vivo_id %>";
-  var req = $.ajax({url: vizUrl, dataType: "json", timeout: 5000});
+  var jsonDataUrl = "<%= visualization_chord_path(@presenter.faculty.vivo_id, format: :json) %>";
+  var options = {
+    url: jsonDataUrl,
+    dataType: "json",
+    timeout: 5000
+  };
+  var req = $.ajax(options);
   req.success(chordGraphDisplay);
   req.error(function(data, status) {
     console.log("Error getting data for chord graph");
@@ -115,7 +114,9 @@ function chordGraphDisplay(data, status) {
       .attr("dy", ".35em")
       .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180) translate(-16)" : null; })
       .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-      .text(function(d) { return formatValue(d.value); });
+      .text(function(d) {
+        return "hello";
+      });
 
   g.append("g")
       .attr("class", "ribbons")

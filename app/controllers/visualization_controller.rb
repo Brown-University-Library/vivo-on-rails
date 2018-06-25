@@ -3,22 +3,16 @@ class VisualizationController < ApplicationController
     redirect_to visualization_collab_path
   end
 
-  # def chord
-  #   id = params["id"]
-  #   faculty = Faculty.load_from_solr(id)
-  #   if faculty == nil
-  #     err_msg = "Individual ID (#{id}) was not found"
-  #     Rails.logger.warn(err_msg)
-  #     render "not_found", status: 404, formats: [:html]
-  #   else
-  #     @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-  #     render "chord"
-  #   end
-  # rescue => ex
-  #   backtrace = ex.backtrace.join("\r\n")
-  #   Rails.logger.error("Could not render #{name} visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
-  #   render "error", status: 500
-  # end
+  def chord
+    case params["format"]
+    when "json"
+      chord_json()
+    # when "csv"
+    #   chord_csv()
+    else
+      chord_view()
+    end
+  end
 
   def coauthor
     case params["format"]
@@ -63,25 +57,39 @@ class VisualizationController < ApplicationController
     render json: json, status: status
   end
 
-  # def fwd_chord_one
-  #   url = "#{ENV['VIZ_SERVICE_URL']}/chordDiagram/#{params[:id]}"
-  #   str = fwd_http(url)
-  #   render_json(str)
-  # end
-  #
-  # def fake_chord_one
-  #   str = VisualizationFakeData.chord_one
-  #   json = JSON.parse(str)
-  #   render :json => json
-  # end
-  #
-  # def fake_force_one
-  #   str = VisualizationFakeData.force_one
-  #   json = JSON.parse(str)
-  #   render :json => json
-  # end
-
   private
+    def chord_view
+      id = params["id"]
+      faculty = Faculty.load_from_solr(id)
+      if faculty == nil
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render "not_found", status: 404, formats: [:html]
+      else
+        @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
+        render "chord"
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not render #{name} visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render "error", status: 500
+    end
+
+    def chord_json
+      status = 200
+      id = "#{params[:id]}"
+      url = "#{ENV['VIZ_SERVICE_URL']}/chordDiagram/#{id}"
+      ok, str = fwd_http(url)
+      if ok
+        json = JSON.parse(str)
+      else
+        Rails.logger.error("Could not retrieve graph at #{url}")
+        status = 500
+        json = {error: true, message: "Could not retrieve graph for #{id}"}
+      end
+      render json: json, status: status
+    end
+
     def coauthor_view
       id = params["id"]
       faculty = Faculty.load_from_solr(id)
