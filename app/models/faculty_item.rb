@@ -8,7 +8,7 @@ class FacultyItem
     :collaborators, :affiliations_text, :affiliations, :research_areas,
     :on_the_web, :appointments, :published_in, :hidden,
     :cv_link, :credentials, :training,
-    :fis_updated, :profile_updated
+    :fis_updated, :profile_updated, :show_visualizations
 
   def initialize(values = nil)
     init_defaults()
@@ -47,6 +47,7 @@ class FacultyItem
     @training = []
     @fis_updated = nil
     @profile_updated = nil
+    @show_visualizations = false
   end
 
   def vivo_id
@@ -54,11 +55,12 @@ class FacultyItem
     @id.split("/").last
   end
 
-  def self.from_hash(hash, display_name, thumbnail_url, fis_updated, profile_updated)
+  def self.from_hash(hash, display_name, thumbnail_url, fis_updated, profile_updated, show_viz)
     faculty = FacultyItem.new(nil)
     faculty.thumbnail = thumbnail_url
     faculty.fis_updated = fis_updated
     faculty.profile_updated = profile_updated
+    faculty.show_visualizations = show_viz
     hash.each do |key, value|
       getter = key.to_s
       begin

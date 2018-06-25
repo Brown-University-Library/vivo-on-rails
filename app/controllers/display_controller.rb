@@ -69,9 +69,9 @@ class DisplayController < ApplicationController
         return
       end
 
-      show_viz = ENV["VIZ_ENABLED"] == "true" || params[:viz] == "true"
+      force_show_viz = params[:viz] == "true"
       referer = request.headers.env["HTTP_REFERER"]
-      @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, show_viz)
+      @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz)
       render "faculty/show"
     end
 
