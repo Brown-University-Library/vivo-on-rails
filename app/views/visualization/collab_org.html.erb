@@ -19,6 +19,17 @@
       <span class="sr-only">Error:</span>
       No collaboration data is available for this organization.
     </div>
+    <div class="btn-group btn-group" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <button id="showLevel0" type="button" class="btn btn-info" title="Show collaboration between department members only">Department members</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button id="showLevel1" type="button" class="btn btn-default" title="Show collaboration outside the department">Department's collaborators</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button id="showLevel2" type="button" class="btn btn-default" title="Show collaboration outside the department">Collaborator's collaborators</button>
+      </div>
+    </div>
     <div id="loadingMsg">
       <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
     </div>
@@ -33,8 +44,6 @@
     </div>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
-    <p><a href="#" id="showMore" title="...">Show More</a></p>
-    <p><a href="#" id="showLess" title="...">Show Less</a></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
@@ -94,19 +103,9 @@
       drawGraph();
     });
 
-    $("#showMore").on("click", function() {
-      if (showLevel < 2) {
-        showLevel += 1;
-        drawGraph();
-      }
-    });
-
-    $("#showLess").on("click", function() {
-      if (showLevel > 0) {
-        showLevel -= 1;
-        drawGraph();
-      }
-    });
+    $("#showLevel0").on("click", function() { showLevel = 0; drawGraph(); });
+    $("#showLevel1").on("click", function() { showLevel = 1; drawGraph(); });
+    $("#showLevel2").on("click", function() { showLevel = 2; drawGraph(); });
 
     $("#showLabels").on("click", updateLabels);
     $("#forceToFit").on("click", function() {
@@ -143,6 +142,29 @@
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
+    }
+
+    if (showLevel == 0) {
+      $("#showLevel0").addClass("btn-info");
+      $("#showLevel0").removeClass("btn-default");
+      $("#showLevel1").addClass("btn-default");
+      $("#showLevel1").removeClass("btn-info");
+      $("#showLevel2").addClass("btn-default");
+      $("#showLevel2").removeClass("btn-info");
+    } else if (showLevel == 1) {
+      $("#showLevel0").addClass("btn-default");
+      $("#showLevel0").removeClass("btn-info");
+      $("#showLevel1").addClass("btn-info");
+      $("#showLevel1").removeClass("btn-default");
+      $("#showLevel2").addClass("btn-default");
+      $("#showLevel2").removeClass("btn-info");
+    } else {
+      $("#showLevel0").addClass("btn-default");
+      $("#showLevel0").removeClass("btn-info");
+      $("#showLevel1").addClass("btn-default");
+      $("#showLevel1").removeClass("btn-info");
+      $("#showLevel2").addClass("btn-info");
+      $("#showLevel2").removeClass("btn-default");
     }
 
     var i;
