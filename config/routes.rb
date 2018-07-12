@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   # Visualizations for faculty (and organizations)
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
+  get 'display/:id/viz/coauthor_treemap' => 'visualization#coauthor_treemap', as: :visualization_coauthor_treemap
   get 'display/:id/viz/chord' => 'visualization#chord', as: :visualization_chord
   get 'display/:id/viz/collab' => 'visualization#collab', as: :visualization_collab
   get 'display/:id/viz' => 'visualization#home', as: :visualization_home

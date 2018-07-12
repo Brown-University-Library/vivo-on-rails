@@ -7,8 +7,6 @@ class VisualizationController < ApplicationController
     case params["format"]
     when "json"
       chord_json()
-    # when "csv"
-    #   chord_csv()
     else
       chord_view()
     end
@@ -21,7 +19,18 @@ class VisualizationController < ApplicationController
     when "csv"
       coauthor_csv()
     else
-      coauthor_view()
+      coauthor_view("coauthor")
+    end
+  end
+
+  def coauthor_treemap
+    case params["format"]
+    when "json"
+      coauthor_json()
+    when "csv"
+      coauthor_csv()
+    else
+      coauthor_view("coauthor_treemap")
     end
   end
 
@@ -90,7 +99,7 @@ class VisualizationController < ApplicationController
       render json: json, status: status
     end
 
-    def coauthor_view
+    def coauthor_view(view_name)
       id = params["id"]
       faculty = Faculty.load_from_solr(id)
       if faculty == nil
@@ -99,7 +108,7 @@ class VisualizationController < ApplicationController
         render "not_found", status: 404, formats: [:html]
       else
         @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-        render "coauthor"
+        render view_name
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")

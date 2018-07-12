@@ -1,0 +1,251 @@
+<% @page_title = (@presenter.faculty.name || "") + " Coauthor treemap"%>
+
+<%= render "visualization/viz_style" %>
+<%= render "visualization/viz_javascript" %>
+<%= render "search_box" %>
+
+<h1 class="researcherName"><%= @presenter.faculty.display_name %></h1>
+<h4>Coauthor Treemap</h4>
+
+<div class="row">
+  <div class="col-md-9">
+    <div id="descriptionMsg">
+      The coauthor treemap is created with the information available for this
+      researcher under the
+      <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Publications">Publications tab of their profile</a>.
+      Only publications where more than one researcher at Brown has confirmed authorship
+      are considered in this network.
+    </div>
+    <div id="errorMsg" class="alert alert-danger hidden" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      No coauthor data is available for this researcher.
+    </div>
+    <div id="loadingMsg">
+      <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
+    </div>
+    <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="col-md-3">
+    <a class="btn btn-default btn-lg" role="button" href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" >Coauthor Network</a>
+    <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_coauthor_treemap_path(@presenter.faculty.vivo_id) %>" >Coauthor Treemap</a>
+    <a class="btn btn-default btn-lg" role="button" href="<%= visualization_collab_path(@presenter.faculty.vivo_id) %>" >Collaborator Network</a>
+    <p>&nbsp;</p>
+    <div id="legend">
+    <p><b>Legend</b></p>
+    <ul id="legendList" class="legend">
+      <!-- added via JavaScript -->
+    </ul>
+    </div>
+    <p><b>Options</b></p>
+    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
+
+    <p>Display labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
+    <p>Display details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
+    <p><a href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :csv) %>"
+      title="Format suitable for Excel and other tools."
+      target="_blank">Download data (CSV)</a></p>
+    <p><a href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>"
+      title="Format suitable for D3 and other visualization tools."
+      target="_blank">Download data (JSON)</a></p>
+    <p><a href="#" id="embedHtml" title="Shows HTML to embed the graph as an SVG element into your own page.">Embed SVG Code</a></p>
+    <p><a href="#" id="downloadPng" title="Downlods the graph as an image file in PNG format. This only works in Chrome and Firefox.">Download Image (PNG)</a></p>
+  </div>
+</div>
+
+<div class="row hidden" id="canvasDiv">
+  <canvas id="canvasElement"></canvas>
+  <a id="canvasImgLink" href="#" download="coauthors.png" target="_blank"></a>
+</div>
+
+<div class="row hidden" id="embedHtmlDiv">
+  <div class="col-md-12">
+    <p>Copy the following HTML to embed the SVG into your own page</p>
+    <textarea id="embedHtmlText" rows="15" class="htmlSnippet"></textarea>
+  </div>
+  <div><p>&nbsp;</p></div>
+</div>
+
+<div id="tooltip" class="hidden">
+  <p id="title" style="margin:0;"></p>
+  <p id="subtitle" style="margin:0;"></p>
+  <p id="subtitle2" style="margin:0;"></p>
+</div>
+
+<script>
+
+  var facultyId = "<%= @presenter.faculty.id %>";     // http://vivo.brown.edu/jcarberry
+  var vivoId = "<%= @presenter.faculty.vivo_id %>";   // jcarberry
+  var jsonDataUrl = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>";
+  var svgWidth = 960;
+  var svgHeight = 700;
+  var theData = null;
+
+  $(document).ready(function() {
+
+    $.getJSON(jsonDataUrl, function(data, status) {
+      theData = data; // save the data in our global variable
+      drawGraph();
+    });
+
+    $("#showLabels").on("click", updateLabels);
+
+    $("#embedHtml").on("click", function() {
+      showEmbedHtml("svgElement", svgWidth, svgHeight, "embedHtmlDiv", "embedHtmlText");
+    });
+
+    $("#downloadPng").on("click", function() {
+      downloadPng("svgElement", svgWidth, svgHeight,
+        "canvasElement", "canvasImgLink", "coauthors_" + vivoId + ".png");
+    });
+  });
+
+  function updateLabels() {
+    var showLabels = $("#showLabels").is(":checked");
+    if (showLabels) {
+      d3.selectAll(".node-text").classed("hidden",false);
+    } else {
+      d3.selectAll(".node-text").classed("hidden",true);
+    }
+  }
+
+  function findNode(treeMap, id) {
+    var i;
+    for(i = 0; i < treeMap.children.length; i++) {
+      if (treeMap.children[i].id == id) {
+        return treeMap.children[i];
+      }
+    }
+    return null;
+  }
+
+  // TODO: name too close to findNode
+  function nodeDetails(data, id) {
+    var i;
+    for(i = 0; i < data.nodes.length; i++) {
+      if (data.nodes[i].id == id) {
+        return data.nodes[i];
+      }
+    }
+    return null;
+  }
+
+  function drawGraph() {
+    var data = {
+      "name": "<%= @presenter.faculty.name %>", // TODO: account for quotes
+      "children": []
+    };
+
+    var i, link, newId, childNode;
+    for(i =0; i < theData.links.length; i++) {
+      link = theData.links[i];
+      childNode = null;
+      newId = null;
+      if (link.source == facultyId) {
+        newId = link.target;
+        childNode = findNode(data, newId)
+      } else if(link.target == facultyId) {
+        newId = link.source;
+        childNode = findNode(data, newId)
+      } else {
+        // ignore it
+      }
+      if (newId != null) {
+        if (childNode == null) {
+          childNode = {"id": newId, "name": newId, "group": newId, "size": link.weight, "color": "#7f7f7f"}
+          data.children.push(childNode)
+        } else {
+          childNode.size += link.weight;
+        }
+      }
+    }
+
+    var node;
+    for(i = 0; i < data.children.length; i++) {
+      childNode = data.children[i];
+      if (childNode.id == childNode.name) {
+        // update the details
+        node = nodeDetails(theData, childNode.id);
+        if (node != null) {
+          childNode.name = node.name;
+          childNode.group = node.group;
+        }
+      }
+    }
+
+    var allGroups = groupsFromNodes(data.children);
+    var colorScheme = d3.scaleOrdinal(d3.schemeCategory20);
+    var colors = groupColors(allGroups, colorScheme);
+    var nodeColor = function (d) {
+      return groupColor(d.group, colorScheme)
+    };
+
+    $("#loadingMsg").addClass("hidden");
+
+    var i;
+    var svg = d3.select("svg");
+    svg.selectAll("*").remove();
+
+    var w = +svg.attr("width");
+    var h = +svg.attr("height");
+
+    var color = function (d) {
+      return groupColor(d.group, colorScheme)
+    };
+
+    var format = d3.format(",d");
+
+    var treemap = d3.treemap()
+        .tile(d3.treemapResquarify)
+        .size([w, h])
+        .round(true)
+        .paddingInner(1);
+
+      var root = d3.hierarchy(data)
+          .eachBefore(function(d) { d.data.id = "Publications with " + d.data.name; })
+          .sum(function(d){return d.size;})
+          .sort(function(a, b) { return b.height - a.height || b.value - a.value; });
+
+      treemap(root);
+
+      var cell = svg.selectAll("g")
+        .data(root.leaves())
+        .enter().append("g")
+          .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; });
+
+      cell.append("rect")
+          .attr("id", function(d) { return d.data.id; })
+          .attr("width", function(d) { return d.x1 - d.x0; })
+          .attr("height", function(d) { return d.y1 - d.y0; })
+          .attr("fill", function(d) { return color(d.data); });
+
+      cell.append("clipPath")
+          .attr("id", function(d) { return "clip-" + d.data.id; })
+        .append("use")
+          .attr("xlink:href", function(d) { return "#" + d.data.id; });
+
+      cell.append("text")
+          .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+        .selectAll("tspan")
+          .data(function(d) { return d.data.name.split(/(?=[A-Z][^A-Z])/g); })
+        .enter().append("tspan")
+          .attr("x", 4)
+          .attr("y", function(d, i) { return 13 + i * 10; })
+          .text(function(d) { return d; });
+
+      cell.append("title")
+          .text(function(d) { return d.data.id + "\n" + format(d.value); });
+
+    var ul = $("#legendList");
+    ul.empty();
+    var groupName;
+    for(i = 0; i < allGroups.length; i++) {
+      groupName = allGroups[i];
+      ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
+    }
+
+
+    updateLabels();
+  } // function drawGraph() {
+
+</script>
