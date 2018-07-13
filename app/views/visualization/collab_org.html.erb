@@ -20,10 +20,10 @@
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">
-        <button id="showLevel0" type="button" class="btn btn-info" title="Shows collaboration between department members only">Intradepartmental collaboration</button>
+        <button id="showLevel1" type="button" class="btn btn-info" title="Shows collaboration with anyone at Brown University">Collaboration at Brown</button>
       </div>
       <div class="btn-group" role="group">
-        <button id="showLevel1" type="button" class="btn btn-default" title="Shows collaboration with anyone at Brown University">Collaboration at Brown</button>
+        <button id="showLevel0" type="button" class="btn btn-default" title="Shows collaboration with between department members only">Intradepartmental collaboration</button>
       </div>
       <!-- <div class="btn-group" role="group">
         <button id="showLevel2" type="button" class="btn btn-default" title="Show collaboration outside the department">Collaborator's collaborators</button>
@@ -85,7 +85,7 @@
   var svgWidth = 960;
   var svgHeight = 700;
   var theData = null;
-  var showLevel = 0;
+  var showLevel = 1;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
@@ -173,6 +173,7 @@
     var w = +svg.attr("width");
     var h = +svg.attr("height");
 
+    // TODO: give an option to show orpahs nodes
     // var nodes = data.nodes;  Includes all nodes in the department, even those without collaborations.
     var nodes = nodesWithLinks(data.nodes, data.links)
     var edges = calculateEdges(nodes, data.links);
