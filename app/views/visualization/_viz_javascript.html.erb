@@ -27,6 +27,15 @@ function getNodeIndex(nodes, id) {
   return -1;
 }
 
+// Returns the node for the requested ID.
+function getNode(nodes, id) {
+  var index = getNodeIndex(nodes, id);
+  if (index != -1) {
+    return nodes[index];
+  }
+  return null;
+}
+
 function groupForNode(nodes, id) {
   var i;
   for(i = 0; i < nodes.length; i++) {
@@ -111,6 +120,33 @@ function setNodeLevels(nodes, links, rootId) {
 
   return nodes;
 }
+
+function nodesWithLinks(nodes, links) {
+  var i;
+  var ids = [];
+  var results = [];
+
+  // Get all the unique IDs used in the links
+  for(i = 0; i < links.length; i++) {
+    if (!inArray(ids, links[i].source)) {
+      ids.push(links[i].source);
+    }
+    if (!inArray(ids, links[i].target)) {
+      ids.push(links[i].target);
+    }
+  }
+
+  // get the nodes for those IDs (it will only include nodes with links)
+  for(i = 0; i < ids.length; i++) {
+    node = getNode(nodes, ids[i])
+    if (node != null) {
+      results.push(node);
+    }
+  }
+
+  return results;
+}
+
 
 function datasetByLevel(nodes, edges, links, showLevel) {
   if (showLevel == 2) {
@@ -207,6 +243,10 @@ function downloadPng(svgId, svgWidth, svgHeight, canvasId, linkId, fileName) {
     }, "image/png", 1);
   }
 
+  // TODO: for some reason the svgRaw for the force edge renders fine
+  // as an image, but not the one for the treemap :( Need to figure out
+  // why.
+  // console.log(svgRaw);
   svgImage.src = svgRaw;
   return false;
 }
