@@ -5,7 +5,7 @@
 <%= render "search_box" %>
 
 <h1 class="researcherName"><%= @presenter.faculty.display_name %></h1>
-<h4>Collaborator Network</h4>
+<h3 class="facultyTitle"><%= @presenter.faculty.title %></h2>
 
 <div class="row">
   <div class="col-md-9">
@@ -178,6 +178,10 @@
     var nodeColor = function (d) {
       return groupColor(d.group, colorScheme)
     };
+
+    var researcherGroup = groupForNode(nodes, facultyId);
+    var researcherColor = groupColor(researcherGroup, colorScheme)
+    $(".facultyTitle").css("border-left-color", researcherColor);
 
     // TODO: remove this after demo
     var colorByDepth = window.location.href.indexOf("?depth") != -1;

@@ -27,6 +27,16 @@ function getNodeIndex(nodes, id) {
   return -1;
 }
 
+function groupForNode(nodes, id) {
+  var i;
+  for(i = 0; i < nodes.length; i++) {
+    if (nodes[i].id == id) {
+      return nodes[i].group;
+    }
+  }
+  return null;
+}
+
 function groupsFromNodes(nodes) {
   var i, groupName;
   var groups = [];

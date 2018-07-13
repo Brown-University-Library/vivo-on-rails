@@ -5,7 +5,7 @@
 <%= render "search_box" %>
 
 <h1 class="researcherName"><%= @presenter.faculty.display_name %></h1>
-<h4>Coauthor Treemap</h4>
+<h3 class="facultyTitle"><%= @presenter.faculty.title %></h2>
 
 <div class="row">
   <div class="col-md-9">
@@ -133,10 +133,19 @@
   function drawGraph() {
     var data, i, link, newId, node, childNode;
 
-    data = {
-      "name": "<%= @presenter.faculty.name %>", // TODO: account for quotes
-      "children": []
-    };
+    $("#loadingMsg").addClass("hidden");
+
+    if (theData.links === undefined || theData.links.length == 0) {
+      $("#errorMsg").removeClass("hidden");
+      theData.links = []; // prevent errors below
+      theData.nodes = []; // prevent errors below
+      data = {};
+    } else {
+      data = {
+        "name": "<%= @presenter.faculty.name %>", // TODO: account for quotes
+        "children": []
+      };
+    }
 
     // Populate the treemap children with the information in theData.
     for(i =0; i < theData.links.length; i++) {
@@ -199,7 +208,9 @@
       return groupColor(d.group, colorScheme)
     };
 
-    $("#loadingMsg").addClass("hidden");
+    var researcherGroup = groupForNode(theData.nodes, facultyId);
+    var researcherColor = groupColor(researcherGroup, colorScheme)
+    $(".facultyTitle").css("border-left-color", researcherColor);
 
     var svg = d3.select("svg");
     // svg.selectAll("*").remove();

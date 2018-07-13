@@ -5,7 +5,6 @@
 <%= render "search_box" %>
 
 <h1 class="researcherName"><%= @presenter.organization.name %></h1>
-<h4>Collaborator Network</h4>
 
 <div class="row">
   <div class="col-md-9">
@@ -187,6 +186,10 @@
       }
       return groupColor(d.group, colorScheme)
     };
+
+    var department = "<%= @presenter.organization.name %>";
+    var departmentColor = groupColor(department, colorScheme)
+    $(".researcherName").css("border-left-color", departmentColor);
 
     var ul = $("#legendList");
     ul.empty();

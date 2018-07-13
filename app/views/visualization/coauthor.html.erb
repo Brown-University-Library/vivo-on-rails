@@ -5,7 +5,7 @@
 <%= render "search_box" %>
 
 <h1 class="researcherName"><%= @presenter.faculty.display_name %></h1>
-<h4>Coauthor Network</h4>
+<h3 class="facultyTitle"><%= @presenter.faculty.title %></h2>
 
 <div class="row">
   <div class="col-md-9">
@@ -98,7 +98,10 @@
     }
 
     $.getJSON(jsonDataUrl, function(data, status) {
-      theData = data; // save the data in our global variable
+      // Save the data in a global variable. We use the global variable
+      // in subsequent calls to drawGraph() so that we don't have to
+      // fetch the data again.
+      theData = data;
       drawGraph();
     });
 
@@ -171,6 +174,10 @@
     var nodeColor = function (d) {
       return groupColor(d.group, colorScheme)
     };
+
+    var researcherGroup = groupForNode(nodes, facultyId);
+    var researcherColor = groupColor(researcherGroup, colorScheme)
+    $(".facultyTitle").css("border-left-color", researcherColor);
 
     // TODO: remove this after demo
     var colorByDepth = window.location.href.indexOf("?depth") != -1;
