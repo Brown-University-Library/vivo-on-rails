@@ -121,10 +121,12 @@ function datasetByLevel(nodes, edges, links, showLevel) {
   return {nodes: visibleNodes, edges: edges};
 }
 
+// Calculates the color for a specific group.
 function groupColor(group, colorScheme) {
   return colorScheme(group)
 }
 
+// Calculates and stores the colors for all the groups.
 function groupColors(groups, colorScheme) {
   var i;
   var colors = [];

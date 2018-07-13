@@ -131,12 +131,14 @@
   }
 
   function drawGraph() {
-    var data = {
+    var data, i, link, newId, node, childNode;
+
+    data = {
       "name": "<%= @presenter.faculty.name %>", // TODO: account for quotes
       "children": []
     };
 
-    var i, link, newId, childNode;
+    // Populate the treemap children with the information in theData.
     for(i =0; i < theData.links.length; i++) {
       link = theData.links[i];
       childNode = null;
@@ -152,7 +154,17 @@
       }
       if (newId != null) {
         if (childNode == null) {
-          childNode = {"id": newId, "name": newId, "group": newId, "size": link.weight, "color": "#7f7f7f"}
+          // Add the children node. Notice that some values are filled with
+          // the ID for now.
+          childNode = {
+            "id": newId,
+            "realId": newId,
+            "name": newId,
+            "text": newId,
+            "group": newId,
+            "size": link.weight,
+            "color": "#7f7f7f"
+          };
           data.children.push(childNode)
         } else {
           childNode.size += link.weight;
@@ -160,7 +172,7 @@
       }
     }
 
-    var node;
+    // Update the children data with the proper values.
     for(i = 0; i < data.children.length; i++) {
       childNode = data.children[i];
       if (childNode.id == childNode.name) {
@@ -168,12 +180,19 @@
         node = nodeDetails(theData, childNode.id);
         if (node != null) {
           childNode.name = node.name;
+          childNode.text = node.name;
           childNode.group = node.group;
         }
       }
     }
 
-    var allGroups = groupsFromNodes(data.children);
+    // IMPORTANT: We use theData.nodes (rather than data.children) to calculate
+    // colors to make sure they are calculated for the entire dataset including
+    // colors for groupts that we are not going to display in the treemap
+    // visualization. This helps to make sure groups are identified with the
+    // same color in the coauthor treemap visualization as in the coauthor force
+    // edge visualization.
+    var allGroups = groupsFromNodes(theData.nodes);
     var colorScheme = d3.scaleOrdinal(d3.schemeCategory20);
     var colors = groupColors(allGroups, colorScheme);
     var nodeColor = function (d) {
@@ -182,9 +201,8 @@
 
     $("#loadingMsg").addClass("hidden");
 
-    var i;
     var svg = d3.select("svg");
-    svg.selectAll("*").remove();
+    // svg.selectAll("*").remove();
 
     var w = +svg.attr("width");
     var h = +svg.attr("height");
@@ -236,11 +254,33 @@
       cell.append("title")
           .text(function(d) { return d.data.id + "\n" + format(d.value); });
 
+      cell.on('click', function(d){
+        var shortId = d.data.realId.substring(d.data.realId.lastIndexOf("/")+1);
+        var currentSegment = "/display/" + vivoId + "/viz/";
+        var newSegment = "/display/" + shortId + "/viz/";
+        var newUrl = window.location.toString().replace(currentSegment, newSegment);
+        window.location.assign(newUrl);
+      });
+
+      cell.on('mouseover', function(d){
+        // Reference: https://stackoverflow.com/questions/19297808/how-to-display-name-of-node-when-mouse-over-on-node-in-collapsible-tree-graph#19299080
+        var g = d3.select(this);
+        g.select("rect").attr("stroke","blue");
+        g.select("rect").attr("stroke-width","2");
+      });
+
+      cell.on('mouseout', function(d) {
+        var g = d3.select(this); // The node
+        g.select("rect").attr("stroke","");
+        g.select("rect").attr("stroke-width","0");
+      });
+
     var ul = $("#legendList");
     ul.empty();
     var groupName;
-    for(i = 0; i < allGroups.length; i++) {
-      groupName = allGroups[i];
+    var groupsInUse = groupsFromNodes(data.children);
+    for(i = 0; i < groupsInUse.length; i++) {
+      groupName = groupsInUse[i];
       ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
     }
 
