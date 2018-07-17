@@ -224,6 +224,7 @@
 
     var format = d3.format(",d");
 
+    // Source: https://bl.ocks.org/mbostock/4063582
     var treemap = d3.treemap()
         .tile(d3.treemapResquarify)
         .size([w, h])
@@ -249,9 +250,7 @@
           .attr("fill", function(d) { return color(d.data); });
 
       cell.append("clipPath")
-          .attr("id", function(d) { return "clip-" + d.data.id; })
-        .append("use")
-          .attr("xlink:href", function(d) { return "#" + d.data.id; });
+          .attr("id", function(d) { return "clip-" + d.data.id; });
 
       cell.append("text")
           .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })

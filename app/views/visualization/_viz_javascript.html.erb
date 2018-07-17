@@ -243,10 +243,6 @@ function downloadPng(svgId, svgWidth, svgHeight, canvasId, linkId, fileName) {
     }, "image/png", 1);
   }
 
-  // TODO: for some reason the svgRaw for the force edge renders fine
-  // as an image, but not the one for the treemap :( Need to figure out
-  // why.
-  // console.log(svgRaw);
   svgImage.src = svgRaw;
   return false;
 }
