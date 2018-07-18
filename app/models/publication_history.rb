@@ -3,10 +3,9 @@ class PublicationHistory
   def initialize()
   end
 
-  def for_org(org_id, org_name)
+  def self.for_org(org_id)
     history = {
       id: org_id,
-      name: org_name,
       min_year: nil,
       max_year: nil,
       faculty: []
@@ -56,5 +55,48 @@ class PublicationHistory
       end
     end
     history
+  end
+
+  def self.matrix_for_org(id)
+    # Get the publication history...
+    data = self.for_org(id)
+
+    # Initialize the matrix rows (years) / columns (faculty)
+    matrix = []
+    for i in data[:min_year]..data[:max_year]
+      row = {year: i, total: 0}
+      data[:faculty].each do |faculty|
+        key = faculty[:vivo_id]
+        row[key] = 0
+      end
+      matrix << row
+    end
+
+    # Populate the matrix with the counts for each year/faculty
+    columns = []
+    data[:faculty].each do |faculty|
+      if faculty[:pubs].count > 0
+        columns << faculty[:vivo_id]
+      end
+      faculty[:pubs].each do |pub|
+        offset = pub[:year].to_i - data[:min_year]
+        row = matrix[offset]
+        key = faculty[:vivo_id]
+        row[key] = pub[:count]
+        row[:total] += pub[:count]
+      end
+    end
+
+    # Only use the years with data
+    pubMatrix = []
+    years = []
+    matrix.each do |row|
+      if row[:total] > 0
+        years << row[:year].to_s
+        pubMatrix << row
+      end
+    end
+
+    [pubMatrix, years, columns]
   end
 end

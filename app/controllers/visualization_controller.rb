@@ -50,7 +50,7 @@ class VisualizationController < ApplicationController
     when "json"
       publications_json()
     when "csv"
-      # timeline_csv()
+      publications_csv()
     else
       publications_view()
     end
@@ -247,6 +247,38 @@ class VisualizationController < ApplicationController
       [false, ""]
     end
 
+    def publications_csv
+      id = params["id"]
+      type = ModelUtils.type_for_id(id)
+      case type
+      when "PEOPLE"
+        render text: "Not available"
+      when "ORGANIZATION"
+        id = params[:id]
+        org = Organization.load_from_solr(id)
+        matrix, years, columns = PublicationHistory.matrix_for_org(id)
+        text = []
+        # TODO: Include faculty headers
+        # Move this to PublicationHistory
+        matrix.each do |row|
+          line = []
+          row.keys.each do |key|
+            line << row[key]
+          end
+          text << line.join(",")
+        end
+        render text: text.join("\n")
+      else
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render text: "", status: 404
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not fetch publication data for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render text: "error", status: 500
+    end
+
     def publications_json
       id = params["id"]
       type = ModelUtils.type_for_id(id)
@@ -256,46 +288,8 @@ class VisualizationController < ApplicationController
       when "ORGANIZATION"
         id = params[:id]
         org = Organization.load_from_solr(id)
-        history = PublicationHistory.new()
-        data = history.for_org(id, org.item.name)
-
-        # initialize the matrix [year/faculty]
-        matrix = []
-        for i in data[:min_year]..data[:max_year]
-          row = {year: i, total: 0}
-          data[:faculty].each do |faculty|
-            key = faculty[:vivo_id]
-            row[key] = 0
-          end
-          matrix << row
-        end
-
-        # populate the matrix with the data
-        columns = []
-        data[:faculty].each do |faculty|
-          if faculty[:pubs].count > 0
-            columns << faculty[:vivo_id]
-          end
-          faculty[:pubs].each do |pub|
-            offset = pub[:year].to_i - data[:min_year]
-            row = matrix[offset]
-            key = faculty[:vivo_id]
-            row[key] = pub[:count]
-            row[:total] += pub[:count]
-          end
-        end
-
-        # Only use the years with data
-        pubMatrix = []
-        years = []
-        matrix.each do |row|
-          if row[:total] > 0
-            years << row[:year].to_s
-            pubMatrix << row
-          end
-        end
-
-        render json: {matrix: pubMatrix, years: years, columns: columns}
+        matrix, years, columns = PublicationHistory.matrix_for_org(id)
+        render json: {matrix: matrix, years: years, columns: columns}
       else
         err_msg = "Individual ID (#{id}) was not found"
         Rails.logger.warn(err_msg)
