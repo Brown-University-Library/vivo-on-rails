@@ -316,7 +316,7 @@ class VisualizationController < ApplicationController
         render "not_found", status: 404, formats: [:html]
       else
         @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
-        render "publications"
+        render "publications_org"
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
