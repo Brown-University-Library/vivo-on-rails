@@ -9,14 +9,14 @@
 <div class="row">
   <div class="col-md-9">
     <div id="descriptionMsg">
-      The [XYZ] is created with the information provided by each
+      The publication history visualization is created with the information provided by each
       researcher associated with this organization. You can view the individual
-      collaborator information for a researcher under the Affiliations tab.
+      publications for each researcher under the Publications tab.
     </div>
     <div id="errorMsg" class="alert alert-danger hidden" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>
-      No collaboration data is available for this organization.
+      No publication data is available for this organization.
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">
@@ -40,10 +40,10 @@
     </div>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
-    <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :csv) %>"
+    <p><a href="<%= visualization_publications_path(@presenter.organization.vivo_id, format: :csv) %>"
       title="Format suitable for Excel and other tools."
       target="_blank">Download data (CSV)</a></p>
-    <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>"
+    <p><a href="<%= visualization_publications_path(@presenter.organization.vivo_id, format: :json) %>"
       title="Format suitable for D3 and other visualization tools."
       target="_blank">Download data (JSON)</a></p>
     <p><a href="#" id="embedHtml" title="Shows HTML to embed the graph as an SVG element into your own page.">Embed SVG Code</a></p>
@@ -207,7 +207,7 @@
           .attr("fill", "#000")
           .attr("font-weight", "bold")
           .attr("text-anchor", "start")
-          .text("Population");
+          .text("Publications");
 
       var legend = g.append("g")
           .attr("font-family", "sans-serif")
