@@ -62,7 +62,7 @@ class VisualizationController < ApplicationController
       # Returns the list of researchers that have a coauthor graph.
       # For now we let the client decide whether it should show the graph based
       # on the response.
-      url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/"
+      url = "#{ENV['VIZ_SERVICE_URL']}/coauthors/"
       ok, str = fwd_http(url)
       if ok
         json = JSON.parse(str)
@@ -130,7 +130,7 @@ class VisualizationController < ApplicationController
     def coauthor_json
       status = 200
       id = "#{params[:id]}"
-      url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{id}"
+      url = "#{ENV['VIZ_SERVICE_URL']}/coauthors/#{id}?ds=graph"
       ok, str = fwd_http(url)
       if ok
         json = JSON.parse(str)
@@ -145,7 +145,7 @@ class VisualizationController < ApplicationController
     def coauthor_csv
       # get the JSON version
       id = "#{params[:id]}"
-      url = "#{ENV['VIZ_SERVICE_URL']}/forceEdgeGraph/#{id}"
+      url = "#{ENV['VIZ_SERVICE_URL']}/coauthors/#{id}?ds=graph"
       ok, str = fwd_http(url)
       if ok
         # dump it to an EdgeGraph in order to produce the CSV output
@@ -185,10 +185,18 @@ class VisualizationController < ApplicationController
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
-        collab = CollabGraph.new()
-        graph = collab.graph_for(id)
-        render json: graph
+        url = "#{ENV['VIZ_SERVICE_URL']}/collaborators/#{id}"
+        ok, str = fwd_http(url)
+        if ok
+          json = JSON.parse(str)
+        else
+          Rails.logger.error("Could not retrieve graph at #{url}")
+          status = 500
+          json = {error: true, message: "Could not retrieve graph for #{id}"}
+        end
+        render json: json
       when "ORGANIZATION"
+        # TODO: Update to use the visualization service when this data becomes available.
         id = params[:id]
         org = Organization.load_from_solr(id)
         collab = CollabGraph.new()
@@ -210,6 +218,7 @@ class VisualizationController < ApplicationController
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
+        # TODO: Use viz service and convert to CSV
         collab = CollabGraph.new()
         graph = collab.graph_for(id)
         render text: graph.to_csv()

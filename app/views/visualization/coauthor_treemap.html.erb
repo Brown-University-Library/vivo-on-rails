@@ -14,7 +14,8 @@
       researcher under the
       <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Publications">Publications tab of their profile</a>.
       Only publications where more than one researcher at Brown has confirmed authorship
-      are considered in this network.
+      are considered in this network. The coauthor treemap for this researcher was
+      calculated on <span id="txtLastUpdated"></span>.
     </div>
     <div id="errorMsg" class="alert alert-danger hidden" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -80,11 +81,13 @@
   var svgWidth = 960;
   var svgHeight = 700;
   var theData = null;
+  var lastUpdated = null;
 
   $(document).ready(function() {
 
     $.getJSON(jsonDataUrl, function(data, status) {
-      theData = data; // save the data in our global variable
+      lastUpdated = data.updated;
+      theData = data.data ; // save the data in our global variable
       drawGraph();
     });
 
@@ -145,6 +148,12 @@
         "name": "<%= @presenter.faculty.name %>", // TODO: account for quotes
         "children": []
       };
+    }
+
+    if (lastUpdated == null) {
+      $("#txtLastUpdated").text("(not available)");
+    } else {
+      $("#txtLastUpdated").text(lastUpdated);
     }
 
     // Populate the treemap children with the information in theData.

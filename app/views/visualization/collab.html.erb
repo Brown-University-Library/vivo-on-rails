@@ -13,6 +13,7 @@
       The collaborator network is created with the information provided by this
       researcher under the
       <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Affiliations">Affiliations tab of their profile</a>.
+      The collaborator network for this researcher was calculated on <span id="txtLastUpdated"></span>.
     </div>
     <div id="errorMsg" class="alert alert-danger hidden" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -88,6 +89,7 @@
   var svgHeight = 700;
   var theData = null;
   var showMore = false;
+  var lastUpdated = null;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
@@ -96,7 +98,8 @@
     }
 
     $.getJSON(jsonDataUrl, function(data, status) {
-      theData = data; // save the data in our global variable
+      theData = data.graph; // save the data in our global variable
+      lastUpdated = data.updated;
       drawGraph();
     });
 
@@ -147,6 +150,12 @@
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
+    }
+
+    if (lastUpdated == null) {
+      $("#txtLastUpdated").text("(not available)");
+    } else {
+      $("#txtLastUpdated").text(lastUpdated);
     }
 
     if (showMore) {

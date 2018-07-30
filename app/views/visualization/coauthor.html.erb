@@ -14,7 +14,8 @@
       researcher under the
       <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Publications">Publications tab of their profile</a>.
       Only publications where more than one researcher at Brown has confirmed authorship
-      are considered in this network.
+      are considered in this network. The coauthor network for this researcher was
+      calculated on <span id="txtLastUpdated"></span>.
     </div>
     <div id="errorMsg" class="alert alert-danger hidden" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -90,6 +91,7 @@
   var svgHeight = 700;
   var theData = null;
   var showMore = false;
+  var lastUpdated = null;
 
   $(document).ready(function() {
     var forceToFit = window.location.href.indexOf("?fit") != -1;
@@ -101,7 +103,8 @@
       // Save the data in a global variable. We use the global variable
       // in subsequent calls to drawGraph() so that we don't have to
       // fetch the data again.
-      theData = data;
+      lastUpdated = data.updated;
+      theData = data.data;
       drawGraph();
     });
 
@@ -143,6 +146,12 @@
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
+    }
+
+    if (lastUpdated == null) {
+      $("#txtLastUpdated").text("(not available)");
+    } else {
+      $("#txtLastUpdated").text(lastUpdated);
     }
 
     if (showMore) {
