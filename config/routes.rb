@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get 'roadmap' => 'home#roadmap', as: :home_roadmap
   get 'termsOfUse' => 'home#termsofuse', as: :home_terms
   get 'status' => 'home#status'
+  get 'side_stuff/brown_classic/:name' => 'home#brown_classic'
+  get 'side_stuff/brown_classic/' => 'home#brown_classic'
 
   root 'home#index'
 

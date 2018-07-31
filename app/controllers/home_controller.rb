@@ -9,6 +9,15 @@ class HomeController < ApplicationController
     @presenter = DefaultPresenter.new()
   end
 
+  # e.g. /side_stuff/brown_classic/Cherry_John.htm?_ijt=3br7bc50889e66bblosud6i95b
+  def brown_classic
+    q = ""
+    if params[:name]
+      q = params[:name].gsub("_", " ")
+    end
+    redirect_to "#{search_url(q: q)}"
+  end
+
   def faq
     @presenter = DefaultPresenter.new()
   end
