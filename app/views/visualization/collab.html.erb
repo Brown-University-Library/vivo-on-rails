@@ -45,11 +45,11 @@
     </ul>
     </div>
     <p><b>Options</b></p>
-    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
-
+    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">Go to Researcher's Profile</a></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
+    <p><b>Data</b></p>
     <p><a href="<%= visualization_collab_path(@presenter.faculty.vivo_id, :format => :csv) %>"
       title="Format suitable for Excel and tools."
       target="_blank">Download data (CSV)</a></p>
@@ -99,7 +99,7 @@
 
     $.getJSON(jsonDataUrl, function(data, status) {
       theData = data.graph; // save the data in our global variable
-      lastUpdated = data.updated;
+      lastUpdated = new Date(data.updated);
       drawGraph();
     });
 
@@ -152,10 +152,10 @@
       $("#errorMsg").removeClass("hidden");
     }
 
-    if (lastUpdated == null) {
-      $("#txtLastUpdated").text("(not available)");
+    if (isValidDate(lastUpdated)) {
+      $("#txtLastUpdated").text(lastUpdated.toLocaleDateString());
     } else {
-      $("#txtLastUpdated").text(lastUpdated);
+      $("#txtLastUpdated").text("(not available)");
     }
 
     if (showMore) {

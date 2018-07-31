@@ -39,10 +39,8 @@
     </ul>
     </div>
     <p><b>Options</b></p>
-    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">View Researcher's Profile</a></p>
-
-    <p>Display labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
-    <p>Display details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
+    <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">Go to Researcher's Profile</a></p>
+    <p><b>Data</b></p>
     <p><a href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :csv) %>"
       title="Format suitable for Excel and other tools."
       target="_blank">Download data (CSV)</a></p>
@@ -86,8 +84,8 @@
   $(document).ready(function() {
 
     $.getJSON(jsonDataUrl, function(data, status) {
-      lastUpdated = data.updated;
       theData = data.data ; // save the data in our global variable
+      lastUpdated = new Date(data.updated);
       drawGraph();
     });
 
@@ -150,10 +148,10 @@
       };
     }
 
-    if (lastUpdated == null) {
-      $("#txtLastUpdated").text("(not available)");
+    if (isValidDate(lastUpdated)) {
+      $("#txtLastUpdated").text(lastUpdated.toLocaleDateString());
     } else {
-      $("#txtLastUpdated").text(lastUpdated);
+      $("#txtLastUpdated").text("(not available)");
     }
 
     // Populate the treemap children with the information in theData.
