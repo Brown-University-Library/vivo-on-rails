@@ -151,9 +151,10 @@ class VisualizationController < ApplicationController
       if ok
         # dump it to an EdgeGraph in order to produce the CSV output
         json = JSON.parse(str, {symbolize_names: true})
-        graph = EdgeGraph.new_from_hash(json)
+        graph = EdgeGraph.new_from_hash(json[:data])
         render text: graph.to_csv()
       else
+        Rails.logger.error("Could not retrieve graph at #{url}")
         render text: "Could not fetch graph for #{id}", status: 500
       end
     end
@@ -219,10 +220,17 @@ class VisualizationController < ApplicationController
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
-        # TODO: Use viz service and convert to CSV
-        collab = CollabGraph.new()
-        graph = collab.graph_for(id)
-        render text: graph.to_csv()
+        url = "#{ENV['VIZ_SERVICE_URL']}/collaborators/#{id}"
+        ok, str = fwd_http(url)
+        if ok
+          # dump it to an EdgeGraph in order to produce the CSV output
+          json = JSON.parse(str, {symbolize_names: true})
+          graph = EdgeGraph.new_from_hash(json[:graph])
+          render text: graph.to_csv()
+        else
+          Rails.logger.error("Could not retrieve graph at #{url}")
+          render text: "Could not fetch graph for #{id}", status: 500
+        end
       when "ORGANIZATION"
         id = params[:id]
         org = Organization.load_from_solr(id)

@@ -136,7 +136,7 @@
 
     $("#loadingMsg").addClass("hidden");
 
-    if (data === undefined || theData.links === undefined || theData.links.length == 0) {
+    if (theData === undefined || theData.links === undefined || theData.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
       return; // bail out
     } else {
