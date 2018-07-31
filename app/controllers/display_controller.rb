@@ -100,6 +100,9 @@ class DisplayController < ApplicationController
     end
 
     def render_not_found(id)
+      # Use the page title to track page not found in Google Analytics
+      # (see https://www.practicalecommerce.com/Locating-404s-with-Google-Analytics)
+      @page_title = "Page not found"
       err_msg = "Individual ID (#{id}) was not found"
       Rails.logger.warn(err_msg)
       render "not_found", status: 404, formats: [:html]

@@ -50,6 +50,9 @@ class HomeController < ApplicationController
   end
 
   def page_not_found
+    # Use the page title to track page not found in Google Analytics
+    # (see https://www.practicalecommerce.com/Locating-404s-with-Google-Analytics)
+    @page_title = "Page not found"
     err_msg = "Page #{request.url} was not found"
     Rails.logger.warn(err_msg)
     # Force to render as HTML
