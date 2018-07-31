@@ -136,11 +136,9 @@
 
     $("#loadingMsg").addClass("hidden");
 
-    if (theData.links === undefined || theData.links.length == 0) {
+    if (data === undefined || theData.links === undefined || theData.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
-      theData.links = []; // prevent errors below
-      theData.nodes = []; // prevent errors below
-      data = {};
+      return; // bail out
     } else {
       data = {
         "name": "<%= @presenter.faculty.name %>", // TODO: account for quotes

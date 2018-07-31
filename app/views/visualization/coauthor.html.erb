@@ -144,8 +144,11 @@
     var data = theData;
     $("#loadingMsg").addClass("hidden");
 
-    if (data.links === undefined || data.links.length == 0) {
+    if (data === undefined || data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
+      $("#showMore").addClass("hidden");
+      $("#showLess").addClass("hidden");
+      return; // bail out
     }
 
     if (isValidDate(lastUpdated)) {

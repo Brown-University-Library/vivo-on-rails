@@ -3,6 +3,7 @@ class VisualizationController < ApplicationController
     redirect_to visualization_collab_path
   end
 
+  # Not used at the moment
   def chord
     case params["format"]
     when "json"
