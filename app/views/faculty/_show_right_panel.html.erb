@@ -13,8 +13,7 @@
           <% if i != 0 %>
             &nbsp;|&nbsp;
           <% end %>
-          <% qs = "?fq=affiliations|#{CGI.escape(aff.name)}" %>
-          <a href="<%= search_url() + qs %>">
+          <a href="<%= display_show_url(aff.vivo_id) %>">
             <%= aff.name %>
           </a>
         <% end %>
