@@ -3,16 +3,6 @@ class VisualizationController < ApplicationController
     redirect_to visualization_collab_path
   end
 
-  # Not used at the moment
-  def chord
-    case params["format"]
-    when "json"
-      chord_json()
-    else
-      chord_view()
-    end
-  end
-
   def coauthor
     case params["format"]
     when "json"
@@ -57,60 +47,7 @@ class VisualizationController < ApplicationController
     end
   end
 
-  def coauthor_graph_list
-    status = 200
-    if ENV['VIZ_SERVICE_URL']
-      # Returns the list of researchers that have a coauthor graph.
-      # For now we let the client decide whether it should show the graph based
-      # on the response.
-      url = "#{ENV['VIZ_SERVICE_URL']}/coauthors/"
-      ok, str = fwd_http(url)
-      if ok
-        json = JSON.parse(str)
-      else
-        Rails.logger.error("Could not retrieve graph at #{url}")
-        status = 500
-        json = {error: true, message: "Could not retrieve graph data"}
-      end
-    else
-      json = {}
-    end
-    render json: json, status: status
-  end
-
   private
-    def chord_view
-      id = params["id"]
-      faculty = Faculty.load_from_solr(id)
-      if faculty == nil
-        err_msg = "Individual ID (#{id}) was not found"
-        Rails.logger.warn(err_msg)
-        render "not_found", status: 404, formats: [:html]
-      else
-        @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
-        render "chord"
-      end
-    rescue => ex
-      backtrace = ex.backtrace.join("\r\n")
-      Rails.logger.error("Could not render #{name} visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
-      render "error", status: 500
-    end
-
-    def chord_json
-      status = 200
-      id = "#{params[:id]}"
-      url = "#{ENV['VIZ_SERVICE_URL']}/chordDiagram/#{id}"
-      ok, str = fwd_http(url)
-      if ok
-        json = JSON.parse(str)
-      else
-        Rails.logger.error("Could not retrieve graph at #{url}")
-        status = 500
-        json = {error: true, message: "Could not retrieve graph for #{id}"}
-      end
-      render json: json, status: status
-    end
-
     def coauthor_view(view_name)
       id = params["id"]
       faculty = Faculty.load_from_solr(id)
