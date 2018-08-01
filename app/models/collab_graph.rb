@@ -26,7 +26,7 @@ class CollabGraph
     end
 
     # calculate the collaboration graph for each of them
-    root_nodes.each do |id|
+    root_nodes.uniq.each do |id|
       get_collabs(id, 1)
     end
 

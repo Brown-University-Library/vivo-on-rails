@@ -163,6 +163,9 @@ class VisualizationController < ApplicationController
           # dump it to an EdgeGraph in order to produce the CSV output
           json = JSON.parse(str, {symbolize_names: true})
           graph = EdgeGraph.new_from_hash(json[:graph])
+          # Weight is meaninless here. We set all to 1 to match what the
+          # graph of individual collaborations return.
+          graph.links {|link| link.weight = 1}
           render text: graph.to_csv()
         else
           Rails.logger.error("Could not retrieve graph at #{url}")
