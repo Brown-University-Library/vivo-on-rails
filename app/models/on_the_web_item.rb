@@ -18,4 +18,12 @@ class OnTheWebItem
   def self.from_hash_array(values)
     values.map {|v| OnTheWebItem.new(v)}.sort_by {|v| v.rank}
   end
+
+  def icon
+    if @url.starts_with?("https://twitter.com/")
+      return "twitter"
+    end
+    return nil
+  end
+
 end
