@@ -1,6 +1,7 @@
 <script type="text/javascript">
-  var vivoId = "<%=  @presenter.faculty.vivo_id %>";
-  var facultyId = "<%=  @presenter.faculty.id %>";
+  var vivoId = "<%= @presenter.faculty.vivo_id %>";
+  var facultyId = "<%= @presenter.faculty.id %>";
+  var showFacultyViz = <%= @presenter.show_visualizations %>;
 </script>
 
 <%= render "faculty/show_javascript" %>

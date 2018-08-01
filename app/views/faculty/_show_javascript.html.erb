@@ -87,17 +87,9 @@
       showTab(tabId);
     }
 
-    if (<%= ENV["VIZ_ENABLED"] == "true" %> || hasUrlParameter("viz") == "true") {
-      vizUrl = "<%= visualization_coauthor_graph_list_path() %>";
-      req = $.ajax({url: vizUrl, dataType: "json", timeout: 5000});
-      req.success(function(data, status) {
-        if (data[facultyId] !== undefined) {
-          $("#viz_coauthor").removeClass("hidden");
-        }
-      });
-      req.error(function(data, status) {
-        console.log("Error checking for viz data");
-      });
+    if (<%= ENV["VIZ_ENABLED"] == "true" %> && showFacultyViz) {
+      $("#viz_coauthor").removeClass("hidden");
+      $("#viz_collab").removeClass("hidden");
     }
   });
 </script>

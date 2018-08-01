@@ -1,56 +1,54 @@
 <% if @presenter.has_publications %>
-      <div id="tabPublications" class="panel panel-default hidden">
-        <h3 style="padding-bottom: 21px;">Publications
-          <% if @presenter.show_visualizations %>
-            <a id="viz_coauthor" class="btn btn-default hidden" style="float:right;"
-              href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" target="_blank"
-              title="Visualize coauthors network">Visualize it&nbsp;
-              <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
-            </a>
-          <% end %>
-        </h3>
+  <div id="tabPublications" class="panel panel-default hidden">
+    <h3 style="padding-bottom: 21px;">Publications
+      <a id="viz_coauthor" class="btn btn-default hidden" style="float:right;"
+        href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" target="_blank"
+        title="Visualize coauthors network">Visualize it&nbsp;
+        <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+      </a>
+    </h3>
 
-        <div class="panel-body">
-          <% if @presenter.publication_filters.count > 0 %>
-              <div class="btn-group" role="group" aria-label="filter contributor to by">
-                <% if @presenter.publication_filters.count > 1 %>
-                  <button type="button" class="btn btn-default active btn-filter-pub"
-                    id="btn-for_all"
-                    onclick="javascript:publicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)
-                  </button>
-                <% end %>
-                <% @presenter.publication_filters.each_with_index do |filter, index| %>
-                  <% active_class = (@presenter.publication_filters.count == 1 && index == 0) ? "active" : "" %>
-                  <button type="button" class="btn btn-default btn-filter-pub <%= active_class %>"
-                    id="btn-for_<%= filter[:id] %>"
-                    onclick="javascript:publicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
-                <% end %>
-              </div>
+    <div class="panel-body">
+      <% if @presenter.publication_filters.count > 0 %>
+          <div class="btn-group" role="group" aria-label="filter contributor to by">
+            <% if @presenter.publication_filters.count > 1 %>
+              <button type="button" class="btn btn-default active btn-filter-pub"
+                id="btn-for_all"
+                onclick="javascript:publicationsShowAll()">View All (<%= @presenter.faculty.contributor_to.count %>)
+              </button>
+            <% end %>
+            <% @presenter.publication_filters.each_with_index do |filter, index| %>
+              <% active_class = (@presenter.publication_filters.count == 1 && index == 0) ? "active" : "" %>
+              <button type="button" class="btn btn-default btn-filter-pub <%= active_class %>"
+                id="btn-for_<%= filter[:id] %>"
+                onclick="javascript:publicationsShowOnly('<%= filter[:id] %>')"><%= filter[:text] %> (<%= filter[:count] %>)</button>
+            <% end %>
+          </div>
+      <% end %>
+      <table class="table table-hover">
+        <tbody>
+          <% @presenter.faculty.contributor_to.each do |c| %>
+            <tr class="publicationTableRow" role="listitem">
+              <td class="citation-data pub-item pub-type_<%= c.pub_type_id %>">
+                <span class="listDateTime"><%= c.authors %></span>
+                <i><%= c.title.html_safe %>.</i>
+                <%= c.pub_info %>
+                <div class="no-orphans">
+                  <% if c.full_text_url %>
+                    <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.full_text_url %>">Full Text</a>
+                  <% end %>
+                  <% if c.pub_med_url %>
+                    <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
+                  <% end %>
+                  <% if c.more_info_url %>
+                    <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.external_url %>">More Info</a>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
           <% end %>
-          <table class="table table-hover">
-            <tbody>
-              <% @presenter.faculty.contributor_to.each do |c| %>
-                <tr class="publicationTableRow" role="listitem">
-                  <td class="citation-data pub-item pub-type_<%= c.pub_type_id %>">
-                    <span class="listDateTime"><%= c.authors %></span>
-                    <i><%= c.title.html_safe %>.</i>
-                    <%= c.pub_info %>
-                    <div class="no-orphans">
-                      <% if c.full_text_url %>
-                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.full_text_url %>">Full Text</a>
-                      <% end %>
-                      <% if c.pub_med_url %>
-                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.pub_med_url %>">PubMed</a>
-                      <% end %>
-                      <% if c.more_info_url %>
-                        <a class="pub-item-tag full-text-link" target = "_blank" href="<%= c.external_url %>">More Info</a>
-                      <% end %>
-                    </div>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div> <!-- panel-body -->
-      </div> <!-- panel -->
+        </tbody>
+      </table>
+    </div> <!-- panel-body -->
+  </div> <!-- panel -->
 <% end %>
