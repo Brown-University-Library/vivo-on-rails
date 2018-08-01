@@ -214,18 +214,8 @@ class VisualizationController < ApplicationController
       when "ORGANIZATION"
         id = params[:id]
         org = Organization.load_from_solr(id)
-        matrix, years, columns = PublicationHistory.matrix_for_org(id)
-        text = []
-        # TODO: Include faculty headers
-        # Move this to PublicationHistory
-        matrix.each do |row|
-          line = []
-          row.keys.each do |key|
-            line << row[key]
-          end
-          text << line.join(",")
-        end
-        render text: text.join("\n")
+        csv = PublicationHistory.treemap_csv(id)
+        render text: csv
       else
         err_msg = "Individual ID (#{id}) was not found"
         Rails.logger.warn(err_msg)
@@ -246,8 +236,8 @@ class VisualizationController < ApplicationController
       when "ORGANIZATION"
         id = params[:id]
         org = Organization.load_from_solr(id)
-        matrix, years, columns = PublicationHistory.matrix_for_org(id)
-        render json: {matrix: matrix, years: years, columns: columns}
+        treemap = PublicationHistory.treemap(id)
+        render json: treemap
       else
         err_msg = "Individual ID (#{id}) was not found"
         Rails.logger.warn(err_msg)
