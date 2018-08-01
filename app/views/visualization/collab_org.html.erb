@@ -9,9 +9,9 @@
 <div class="row">
   <div class="col-md-9">
     <div id="descriptionMsg">
-      The collaborator network is created with the information provided by each
-      researcher associated with this organization. You can view the individual
-      collaborator information for a researcher under the Affiliations tab.
+      The collaborator network for an organization is created with the information
+      provided by each researcher associated with this organization under the
+      Affiliations tab for their profile.
     </div>
     <div id="errorMsg" class="alert alert-danger hidden" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -35,7 +35,7 @@
     <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
-    <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" >Collaboration Network</a>
+    <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" >Collaborator Network</a>
     <a class="btn btn-default btn-lg" role="button" href="<%= visualization_publications_path(@presenter.organization.vivo_id) %>" >Publication History</a>
     <div id="legend">
     <p><b>Legend</b></p>
@@ -44,10 +44,11 @@
     </ul>
     </div>
     <p><b>Options</b></p>
-    <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
+    <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">Go to Organization's Profile</a></p>
     <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
     <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
     <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
+    <p><b>Data</b></p>
     <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :csv) %>"
       title="Format suitable for Excel and other tools."
       target="_blank">Download data (CSV)</a></p>
