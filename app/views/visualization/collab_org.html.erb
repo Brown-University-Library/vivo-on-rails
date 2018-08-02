@@ -163,8 +163,7 @@
     var w = +svg.attr("width");
     var h = +svg.attr("height");
 
-    // TODO: give an option to show orpahs nodes.
-    debugger;
+    // TODO: give an option to show orphan nodes.
     var nodes = nodesWithLinks(data.nodes, data.links)
     var edges = calculateEdges(nodes, data.links);
     var allGroups = groupsFromNodes(nodes);
