@@ -11,7 +11,8 @@
     <div id="descriptionMsg">
       The collaborator network for an organization is created with the information
       provided by each researcher associated with this organization under the
-      Affiliations tab for their profile.
+      Affiliations tab for their profile. The collaborator network for this
+      organization was calculated on <span id="txtLastUpdated"></span>.
     </div>
     <div id="errorMsg" class="alert alert-danger hidden" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -142,6 +143,12 @@
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
+    }
+
+    if (isValidDate(lastUpdated)) {
+      $("#txtLastUpdated").text(lastUpdated.toLocaleDateString('en-US', {timeZone: 'UTC'}));
+    } else {
+      $("#txtLastUpdated").text("(not available)");
     }
 
     if (showLevel == 0) {
