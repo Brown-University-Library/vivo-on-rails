@@ -1,58 +1,65 @@
+require "coauthor_graph"
+require "collab_graph"
+require "model_utils"
+
 class VisualizationController < ApplicationController
   def home
     redirect_to visualization_collab_path
   end
 
   def coauthor
+    id = params["id"]
     case params["format"]
     when "json"
-      coauthor_json()
+      coauthor_json(id)
     when "csv"
-      coauthor_csv()
+      coauthor_csv(id)
     else
-      coauthor_view("coauthor")
+      coauthor_view(id, "coauthor")
     end
   end
 
   def coauthor_treemap
+    id = params["id"]
     case params["format"]
     when "json"
-      coauthor_json()
+      coauthor_json(id)
     when "csv"
-      coauthor_csv()
+      coauthor_csv(id)
     else
-      coauthor_view("coauthor_treemap")
+      coauthor_view(id, "coauthor_treemap")
     end
   end
 
   def collab
+    id = params["id"]
     case params["format"]
     when "json"
-      collab_json()
+      collab_json(id)
     when "csv"
-      collab_csv()
+      collab_csv(id)
     else
-      collab_view()
+      collab_view(id)
     end
   end
 
   def publications
+    id = params["id"]
     case params["format"]
     when "json"
-      publications_json()
+      publications_json(id)
     when "csv"
-      publications_csv()
+      publications_csv(id)
     else
-      publications_view()
+      publications_view(id)
     end
   end
 
   private
-    def coauthor_view(view_name)
-      id = params["id"]
+    def coauthor_view(id, view_name)
       faculty = Faculty.load_from_solr(id)
       if faculty == nil
-        err_msg = "Individual ID (#{id}) was not found"
+        err_msg = "Faculty ID (#{id}) was not found"
         Rails.logger.warn(err_msg)
         render "not_found", status: 404, formats: [:html]
       else
@@ -65,39 +72,27 @@ class VisualizationController < ApplicationController
       render "error", status: 500
     end
 
-    def coauthor_json
-      status = 200
-      id = "#{params[:id]}"
-      url = "#{ENV['VIZ_SERVICE_URL']}/coauthors/#{id}?ds=graph"
-      ok, str = fwd_http(url)
+    def coauthor_json(id)
+      ok, data = CoauthorGraph.get_data(id)
       if ok
-        json = JSON.parse(str)
+        render json: data, status: 200
       else
-        Rails.logger.error("Could not retrieve graph at #{url}")
-        status = 500
-        json = {error: true, message: "Could not retrieve graph for #{id}"}
-      end
-      render json: json, status: status
-    end
-
-    def coauthor_csv
-      # get the JSON version
-      id = "#{params[:id]}"
-      url = "#{ENV['VIZ_SERVICE_URL']}/coauthors/#{id}?ds=graph"
-      ok, str = fwd_http(url)
-      if ok
-        # dump it to an EdgeGraph in order to produce the CSV output
-        json = JSON.parse(str, {symbolize_names: true})
-        graph = EdgeGraph.new_from_hash(json[:data])
-        render text: graph.to_csv()
-      else
-        Rails.logger.error("Could not retrieve graph at #{url}")
-        render text: "Could not fetch graph for #{id}", status: 500
+        Rails.logger.error("#{data[:message]}")
+        render text: data[:message], status: data[:status]
       end
     end
 
-    def collab_view
-      id = params["id"]
+    def coauthor_csv(id)
+      ok, data = CoauthorGraph.get_data_csv(id)
+      if ok
+        render text: data
+      else
+        Rails.logger.error("#{data[:message]}")
+        render text: data[:message], status: data[:status]
+      end
+    end
+
+    def collab_view(id)
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
@@ -119,68 +114,27 @@ class VisualizationController < ApplicationController
       render "error", status: 500
     end
 
-    def collab_json
-      id = params["id"]
-      type = ModelUtils.type_for_id(id)
-      case type
-      when "PEOPLE"
-        url = "#{ENV['VIZ_SERVICE_URL']}/collaborators/#{id}"
-        ok, str = fwd_http(url)
-        if ok
-          json = JSON.parse(str)
-        else
-          Rails.logger.error("Could not retrieve graph at #{url}")
-          status = 500
-          json = {error: true, message: "Could not retrieve graph for #{id}"}
-        end
-        render json: json
-      when "ORGANIZATION"
-        # TODO: Update to use the visualization service when this data becomes available.
-        id = params[:id]
-        org = Organization.load_from_solr(id)
-        collab = CollabGraph.new()
-        graph = collab.graph_for_org(id, org.item.name)
-        render json: graph
+    def collab_json(id)
+      ok, data = CollabGraph.get_data(id)
+      if ok
+        render json: data, status: 200
       else
-        err_msg = "Individual ID (#{id}) was not found"
-        Rails.logger.warn(err_msg)
-        render json: [], status: 404
+        Rails.logger.error("#{data[:message]}")
+        render text: data[:message], status: data[:status]
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
-      Rails.logger.error("Could not fetc collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      Rails.logger.error("Could not fetch collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
       render json: "error", status: 500
     end
 
-    def collab_csv
-      id = params["id"]
-      type = ModelUtils.type_for_id(id)
-      case type
-      when "PEOPLE"
-        url = "#{ENV['VIZ_SERVICE_URL']}/collaborators/#{id}"
-        ok, str = fwd_http(url)
-        if ok
-          # dump it to an EdgeGraph in order to produce the CSV output
-          json = JSON.parse(str, {symbolize_names: true})
-          graph = EdgeGraph.new_from_hash(json[:graph])
-          # Weight is meaninless here. We set all to 1 to match what the
-          # graph of individual collaborations return.
-          graph.links {|link| link.weight = 1}
-          render text: graph.to_csv()
-        else
-          Rails.logger.error("Could not retrieve graph at #{url}")
-          render text: "Could not fetch graph for #{id}", status: 500
-        end
-      when "ORGANIZATION"
-        id = params[:id]
-        org = Organization.load_from_solr(id)
-        collab = CollabGraph.new()
-        graph = collab.graph_for_org(id, org.item.name)
-        render text: graph.to_csv()
+    def collab_csv(id)
+      ok, data = CollabGraph.get_data_csv(id)
+      if ok
+        render text: data
       else
-        err_msg = "Individual ID (#{id}) was not found"
-        Rails.logger.warn(err_msg)
-        render text: "", status: 404
+        Rails.logger.error("#{data[:message]}")
+        render text: data[:message], status: data[:status]
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
@@ -188,69 +142,7 @@ class VisualizationController < ApplicationController
       render text: "error", status: 500
     end
 
-    def fwd_http(url)
-      uri = URI.parse(url)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.open_timeout = 10
-      http.read_timeout = 10
-      http.ssl_timeout = 10
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Get.new(uri.request_uri)
-      response = http.request(request)
-      ok = (response.code >= "200" && response.code <= "299")
-      [ok, response.body]
-    rescue => ex
-      Rails.logger.error("Fetching: #{url}. Exception: #{ex}")
-      [false, ""]
-    end
-
-    def publications_csv
-      id = params["id"]
-      type = ModelUtils.type_for_id(id)
-      case type
-      when "PEOPLE"
-        render text: "Not available"
-      when "ORGANIZATION"
-        id = params[:id]
-        org = Organization.load_from_solr(id)
-        csv = PublicationHistory.treemap_csv(id)
-        render text: csv
-      else
-        err_msg = "Individual ID (#{id}) was not found"
-        Rails.logger.warn(err_msg)
-        render text: "", status: 404
-      end
-    rescue => ex
-      backtrace = ex.backtrace.join("\r\n")
-      Rails.logger.error("Could not fetch publication data for #{id}. Exception: #{ex} \r\n #{backtrace}")
-      render text: "error", status: 500
-    end
-
-    def publications_json
-      id = params["id"]
-      type = ModelUtils.type_for_id(id)
-      case type
-      when "PEOPLE"
-        # TODO
-      when "ORGANIZATION"
-        id = params[:id]
-        org = Organization.load_from_solr(id)
-        treemap = PublicationHistory.treemap(id)
-        render json: treemap
-      else
-        err_msg = "Individual ID (#{id}) was not found"
-        Rails.logger.warn(err_msg)
-        render json: [], status: 404
-      end
-    rescue => ex
-      backtrace = ex.backtrace.join("\r\n")
-      Rails.logger.error("Could not fetch publication timeline for #{id}. Exception: #{ex} \r\n #{backtrace}")
-      render json: "error", status: 500
-    end
-
-    def publications_view
-      id = params[:id]
+    def publications_view(id)
       org = Organization.load_from_solr(id)
       if org == nil
         err_msg = "Organization ID (#{id}) was not found"
@@ -264,5 +156,45 @@ class VisualizationController < ApplicationController
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not render publication visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
       render "error", status: 500
+    end
+
+    def publications_json(id)
+      type = ModelUtils.type_for_id(id)
+      case type
+      when "PEOPLE"
+        render json: {message: "Invalid request for this ID"}, status: 400
+      when "ORGANIZATION"
+        id = params[:id]
+        treemap = PublicationHistory.treemap(id)
+        render json: treemap
+      else
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render json: [], status: 404
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not fetch publication timeline for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render json: "error", status: 500
+    end
+
+    def publications_csv(id)
+      type = ModelUtils.type_for_id(id)
+      case type
+      when "PEOPLE"
+        render text: "Invalid request for this ID", status: 400
+      when "ORGANIZATION"
+        id = params[:id]
+        csv = PublicationHistory.treemap_csv(id)
+        render text: csv
+      else
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render text: "", status: 404
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not fetch publication data for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render text: "error", status: 500
     end
 end

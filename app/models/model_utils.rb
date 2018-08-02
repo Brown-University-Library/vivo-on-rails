@@ -77,4 +77,21 @@ class ModelUtils
       end
     end
   end
+
+  def self.http_get_body(url)
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.open_timeout = 10
+    http.read_timeout = 10
+    http.ssl_timeout = 10
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    ok = (response.code >= "200" && response.code <= "299")
+    [ok, response.body]
+  rescue => ex
+    Rails.logger.error("Fetching: #{url}. Exception: #{ex}")
+    [false, ""]
+  end
 end

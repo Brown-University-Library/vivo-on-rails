@@ -135,15 +135,6 @@
     }
   }
 
-  function nodeColor(d, i) {
-    if (d.level == 0) {
-      return level0Color;
-    } else if(d.level ==1) {
-      return level1Color;
-    }
-    return level2Color;
-  }
-
   function drawGraph() {
     var data = theData;
     $("#loadingMsg").addClass("hidden");
@@ -195,32 +186,13 @@
     var researcherColor = groupColor(researcherGroup, colorScheme)
     $(".facultyTitle").css("border-left-color", researcherColor);
 
-    // TODO: remove this after demo
-    var colorByDepth = window.location.href.indexOf("?depth") != -1;
-    if (colorByDepth) {
-      nodeColor = function (d) {
-        if (d.level == 0) {
-          return level0Color;
-        } else if(d.level ==1) {
-          return level1Color;
-        }
-        return level2Color;
-      }
-    }
-
     var ul = $("#legendList");
     ul.empty();
-    if (colorByDepth) {
-      ul.append('<li><span class="level0">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Researcher');
-      ul.append('<li><span class="level1">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors');
-      ul.append('<li><span class="level2">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;Coauthors\' coauthors');
-    } else {
-      var groupName;
-      var groups = groupsFromNodes(dataset.nodes);
-      for(i = 0; i < groups.length; i++) {
-        groupName = groups[i];
-        ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
-      }
+    var groupName;
+    var groups = groupsFromNodes(dataset.nodes);
+    for(i = 0; i < groups.length; i++) {
+      groupName = groups[i];
+      ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
     }
 
     var force = d3.forceSimulation(dataset.nodes)
