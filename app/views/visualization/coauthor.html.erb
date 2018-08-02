@@ -152,7 +152,7 @@
     }
 
     if (isValidDate(lastUpdated)) {
-      $("#txtLastUpdated").text(lastUpdated.toLocaleDateString());
+      $("#txtLastUpdated").text(lastUpdated.toLocaleDateString('en-US', { timeZone: 'UTC' }));
     } else {
       $("#txtLastUpdated").text("(not available)");
     }
