@@ -11,9 +11,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 
 group :production do
-  # Force it to under < 0.5 to bypass error when executing `bundle exec rake db:migrate`
-  #   Gem::LoadError: can't activate mysql2 (< 0.5, >= 0.3.13),
-  #   already activated mysql2-0.5.2. Make sure all dependencies are added to Gemfile.
+  # Rails 4.x must stay within MySQL 0.4
+  # https://github.com/brianmario/mysql2/issues/950#issuecomment-376375844
   gem 'mysql2', '< 0.5'
 end
 
