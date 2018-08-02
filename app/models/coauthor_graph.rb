@@ -40,7 +40,7 @@ class CoauthorGraph
       return false, data
     end
     # Dump it to an EdgeGraph in order to produce the CSV output.
-    graph = EdgeGraph.new_from_hash(data[:graph])
+    graph = EdgeGraph.new_from_hash(data[:data])
     return true, graph.to_csv()
   end
 end
