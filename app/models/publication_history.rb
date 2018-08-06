@@ -5,7 +5,7 @@ class PublicationHistory
   # The returned hash includes a matrix with the data (each row represents
   # a year, and its values the counts for each faculty for that year),
   # an array of years with data, and an array of the columns represented
-  # in the matrix
+  # in the matrix, and array with details about each faculty.
   def self.treemap(id)
     # Get the publication history...
     history = self._history(id)
@@ -30,21 +30,29 @@ class PublicationHistory
       matrix << row
     end
 
-    # Populate the counts for each year/faculty in the matrix.
+    # Populate the counts for each year/faculty in the matrix (in columns)
+    # and details about each faculty (in nodes)
     columns = []
+    nodes = []
     history[:faculty].each do |faculty|
-      if faculty[:pubs].count > 0
-        # keep track of faculty with publications
-        columns << faculty[:vivo_id]
+      next if faculty[:pubs].count == 0
+      # keep track of faculty with publications
+      columns << faculty[:vivo_id]
+      # and their details
+      node = {
+        faculty_id: faculty[:vivo_id],
+        name: faculty[:name],
+        group: faculty[:group]
+      }
+      nodes << node
 
-        # and process the publications for this faculty
-        faculty[:pubs].each do |pub|
-          offset = pub[:year].to_i - history[:min_year]
-          year_data = matrix[offset]
-          id = faculty[:vivo_id]
-          year_data[id] = pub[:count]         # count for this year/faculty
-          year_data[:total] += pub[:count]    # total for this year
-        end
+      # and process the publications for this faculty
+      faculty[:pubs].each do |pub|
+        offset = pub[:year].to_i - history[:min_year]
+        year_data = matrix[offset]
+        id = faculty[:vivo_id]
+        year_data[id] = pub[:count]         # count for this year/faculty
+        year_data[:total] += pub[:count]    # total for this year
       end
     end
 
@@ -59,7 +67,7 @@ class PublicationHistory
       end
     end
 
-    return {matrix: pubMatrix, years: years, columns: columns}
+    return {matrix: pubMatrix, years: years, columns: columns, nodes: nodes}
   end
 
   # Returns a comma separated value representation of the treemap.
@@ -130,7 +138,8 @@ class PublicationHistory
       #   }
       pubs_by_year = {}
       faculty.item.contributor_to.each do |pub|
-        next if pub.year == nil # skip it
+        next if pub.year == nil             # skip it
+        next if pub.year > Date.today.year  # skip future publications (most likely bad data)
         key = pub.year.to_s
         if pubs_by_year[key] == nil
           pubs_by_year[key] = 1
@@ -157,7 +166,8 @@ class PublicationHistory
         id: faculty.item.id,
         vivo_id: faculty.item.vivo_id,
         name: faculty.item.name,
-        pubs: pubs_by_year.map {|k,v| {year: k.to_s, count: v}}
+        pubs: pubs_by_year.map {|k,v| {year: k.to_s, count: v}},
+        group: faculty.item.title
       }
 
       # add this faculty data to our history hash
