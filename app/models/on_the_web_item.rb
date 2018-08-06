@@ -21,13 +21,16 @@ class OnTheWebItem
 
   def icon
     if @url.include?("/twitter.com/")
-      return "twitter"
+      return "twitter_logo.png"
     end
     if @url.include?("/www.facebook.com/")
-      return "facebook"
+      return "facebook_logo.png"
     end
     if @url.include?("/www.linkedin.com/")
-      return "linkedin"
+      return "linkedin_logo.png"
+    end
+    if @url.include?("/www.researchgate.net/")
+      return "researchgate_logo.png"
     end
     return nil
   end
