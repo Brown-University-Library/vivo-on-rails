@@ -14,10 +14,15 @@
       Affiliations tab for their profile. The collaborator network for this
       organization was calculated on <span id="txtLastUpdated"></span>.
     </div>
-    <div id="errorMsg" class="alert alert-danger hidden" role="alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span>
-      No collaboration data is available for this organization.
+    <div id="errorMsg" class="hidden">
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        No collaboration data is available for this organization.
+      </div>
+      <p>If you are a member of this organization you can define your collaborators
+        via the <a target="_blank" href="https://vivo.brown.edu/manager">manager</a>.
+      </p>
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">
@@ -143,6 +148,8 @@
 
     if (data.links === undefined || data.links.length == 0) {
       $("#errorMsg").removeClass("hidden");
+      $("#showLevel0").addClass("hidden");
+      $("#showLevel1").addClass("hidden");
     }
 
     if (isValidDate(lastUpdated)) {

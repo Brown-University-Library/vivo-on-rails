@@ -15,10 +15,15 @@
       <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Affiliations">Affiliations tab of their profile</a>.
       The collaborator network for this researcher was calculated on <span id="txtLastUpdated"></span>.
     </div>
-    <div id="errorMsg" class="alert alert-danger hidden" role="alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span>
-      No collaboration data is available for this researcher.
+    <div id="errorMsg" class="hidden">
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        No collaboration data is available for this researcher.
+      </div>
+      <p>If this is your profile you can define collaborators via the
+        <a target="_blank" href="https://vivo.brown.edu/manager">manager</a> to power this visualization.
+      </p>
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">
