@@ -40,7 +40,11 @@
       <div class="brown-research-areas-list">
         <% @presenter.faculty.on_the_web.each do |web| %>
           <% if web.icon == "twitter" %>
-            <%= image_tag( "twitter_logo.png", alt: "Brown University", height: "25px") %>
+            <%= image_tag( "twitter_logo.png", alt: "Twitter logo", height: "15px") %>
+          <% elsif web.icon == "facebook" %>
+            <%= image_tag( "facebook_logo.png", alt: "Facebook logo", height: "15px") %>
+          <% elsif web.icon == "linkedin" %>
+            <%= image_tag( "linkedin_logo.png", alt: "LinkedIn logo") %>
           <% end %>
           <a href="<%= web.url %>" target="_blank"><%= web.text %></a><br/>
         <% end %>

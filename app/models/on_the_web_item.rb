@@ -20,8 +20,14 @@ class OnTheWebItem
   end
 
   def icon
-    if @url.starts_with?("https://twitter.com/")
+    if @url.include?("/twitter.com/")
       return "twitter"
+    end
+    if @url.include?("/www.facebook.com/")
+      return "facebook"
+    end
+    if @url.include?("/www.linkedin.com/")
+      return "linkedin"
     end
     return nil
   end
