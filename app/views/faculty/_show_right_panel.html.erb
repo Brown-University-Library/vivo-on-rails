@@ -10,12 +10,12 @@
       <h4 class="brown-affiliations panel-heading">Brown Affiliations</h4>
       <div class="brown-affiliations-list">
         <% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
-          <% if i != 0 %>
-            &nbsp;|&nbsp;
-          <% end %>
+          <p>
+          <%= image_tag( aff.thumbnail, alt: aff.name + " logo", height: "50px") %>
           <a href="<%= display_show_url(aff.vivo_id) %>">
             <%= aff.name %>
           </a>
+          </p>
         <% end %>
       </div>
     <% end %>
