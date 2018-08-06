@@ -21,19 +21,11 @@
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">
         <button id="showLevel1" type="button" class="btn btn-default"
-          title="Show top 10 researchers (by number of publications) in the last 10 years">Last 10 years, top 10 researchers</button>
+          title="Show publication history for the last 10 years">Last 10 years</button>
       </div>
       <div class="btn-group" role="group">
         <button id="showLevel2" type="button" class="btn btn-default"
-          title="Show all researchers in the last 10 years">Last 10 years, all researchers</button>
-      </div>
-      <div class="btn-group" role="group">
-        <button id="showLevel3" type="button" class="btn btn-default"
-          title="Show top 10 researchers (by number of publications)">All history, top 10 researchers</button>
-      </div>
-      <div class="btn-group" role="group">
-        <button id="showLevel4" type="button" class="btn btn-default"
-          title="Show all researchers">All history, all researchers</button>
+          title="Show all publication history">All history</button>
       </div>
     </div>
     <div id="loadingMsg">
@@ -94,7 +86,7 @@
   var svgWidth = 960;
   var svgHeight = 700;
   var theData = null;
-  var showLevel = 2;
+  var showLevel = 1;
 
   $(document).ready(function() {
 
@@ -105,8 +97,6 @@
 
     $("#showLevel1").on("click", function() { showLevel = 1; drawGraph(); return false; });
     $("#showLevel2").on("click", function() { showLevel = 2; drawGraph(); return false; });
-    $("#showLevel3").on("click", function() { showLevel = 3; drawGraph(); return false; });
-    $("#showLevel4").on("click", function() { showLevel = 4; drawGraph(); return false; });
 
     $("#embedHtml").on("click", function() {
       showEmbedHtml("svgElement", svgWidth, svgHeight, "embedHtmlDiv", "embedHtmlText");
@@ -117,15 +107,6 @@
         "canvasElement", "canvasImgLink", "collabs_" + vivoId + ".png");
     });
   });
-
-  function updateLabels() {
-    var showLabels = $("#showLabels").is(":checked");
-    if (showLabels) {
-      d3.selectAll(".node-text").classed("hidden",false);
-    } else {
-      d3.selectAll(".node-text").classed("hidden",true);
-    }
-  }
 
   function drawGraph() {
     var data = theData;
@@ -168,43 +149,20 @@
 
     $("#showLevel1").addClass("btn-default");
     $("#showLevel2").addClass("btn-default");
-    $("#showLevel3").addClass("btn-default");
-    $("#showLevel4").addClass("btn-default");
     $("#showLevel1").removeClass("btn-info");
     $("#showLevel2").removeClass("btn-info");
-    $("#showLevel3").removeClass("btn-info");
-    $("#showLevel4").removeClass("btn-info");
 
-    // showLevel:
-    //  1 - last 10 years, top 10 researchers
-    //  2 - last 10 years, all researchers
-    //  3 - all history, top 10 researchers
-    //  4 - all history, all researchers
     var years;
-    if (showLevel == 1) {
-      // TODO: filter top 10 researchers
+    if (showLevel == 1) { // last 10 years
       data = theData.matrix.slice(-10);
       years = theData.years.slice(-10);
       $("#showLevel1").addClass("btn-info");
       $("#showLevel1").removeClass("btn-default");
-    } else if (showLevel == 2) {
-      data = theData.matrix.slice(-10);
-      years = theData.years.slice(-10);
+    } else { // al history
+      data = theData.matrix;
+      years = theData.years;
       $("#showLevel2").addClass("btn-info");
       $("#showLevel2").removeClass("btn-default");
-    } else if (showLevel == 3) {
-      // TODO: filter top 10 researchers
-      data = theData.matrix;
-      years = theData.years;
-      $("#showLevel3").addClass("btn-info");
-      $("#showLevel3").removeClass("btn-default");
-    } else if (showLevel == 4) {
-      data = theData.matrix;
-      years = theData.years;
-      $("#showLevel4").addClass("btn-info");
-      $("#showLevel4").removeClass("btn-default");
-    } else {
-      // wtf
     }
     var keys = theData.columns;
 
@@ -290,7 +248,6 @@
       }
     }
 
-    updateLabels();
   } // function drawGraph() {
 
 </script>
