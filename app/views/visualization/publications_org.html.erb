@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-md-9">
     <div id="descriptionMsg">
-      The publication history visualization for an organization is created with 
+      The publication history visualization for an organization is created with
       the information provided by each researcher associated with this organization
       under the Publications tab for their profile.
     </div>
@@ -20,10 +20,20 @@
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">
-        <button id="showLast10" type="button" class="btn btn-info" title="Show data for the last 10 years">Last 10 years</button>
+        <button id="showLevel1" type="button" class="btn btn-default"
+          title="Show top 10 researchers (by number of publications) in the last 10 years">Last 10 years, top 10 researchers</button>
       </div>
       <div class="btn-group" role="group">
-        <button id="showAll" type="button" class="btn btn-default" title="Show all data for this department">All history</button>
+        <button id="showLevel2" type="button" class="btn btn-default"
+          title="Show all researchers in the last 10 years">Last 10 years, all researchers</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button id="showLevel3" type="button" class="btn btn-default"
+          title="Show top 10 researchers (by number of publications)">All history, top 10 researchers</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button id="showLevel4" type="button" class="btn btn-default"
+          title="Show all researchers">All history, all researchers</button>
       </div>
     </div>
     <div id="loadingMsg">
@@ -43,6 +53,8 @@
     </div>
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">View Organization's Profile</a></p>
+    <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
+    <p><b>Data</b></p>
     <p><a href="<%= visualization_publications_path(@presenter.organization.vivo_id, format: :csv) %>"
       title="Format suitable for Excel and other tools."
       target="_blank">Download data (CSV)</a></p>
@@ -82,7 +94,7 @@
   var svgWidth = 960;
   var svgHeight = 700;
   var theData = null;
-  var showLast10 = true;
+  var showLevel = 2;
 
   $(document).ready(function() {
 
@@ -91,8 +103,10 @@
       drawGraph();
     });
 
-    $("#showLast10").on("click", function() { showLast10 = true; drawGraph(); return false; });
-    $("#showAll").on("click", function() { showLast10 = false; drawGraph(); return false;});
+    $("#showLevel1").on("click", function() { showLevel = 1; drawGraph(); return false; });
+    $("#showLevel2").on("click", function() { showLevel = 2; drawGraph(); return false; });
+    $("#showLevel3").on("click", function() { showLevel = 3; drawGraph(); return false; });
+    $("#showLevel4").on("click", function() { showLevel = 4; drawGraph(); return false; });
 
     $("#embedHtml").on("click", function() {
       showEmbedHtml("svgElement", svgWidth, svgHeight, "embedHtmlDiv", "embedHtmlText");
@@ -117,72 +131,128 @@
     var data = theData;
     $("#loadingMsg").addClass("hidden");
 
-    // if (data.links === undefined || data.links.length == 0) {
-    //   $("#errorMsg").removeClass("hidden");
-    // }
+    if (data.nodes === undefined || data.nodes.length == 0) {
+      $("#errorMsg").removeClass("hidden");
+    }
+
+    var facultyDetails = function(id) {
+      var i;
+      for(i = 0; i < theData.nodes.length; i++) {
+        if (theData.nodes[i].faculty_id == id) {
+          return theData.nodes[i];
+        }
+      }
+      return null;
+    }
 
     var i;
     var svg = d3.select("svg");
-
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
     var w = +svg.attr("width") - margin.left - margin.right;
     var h = +svg.attr("height") - margin.top - margin.bottom;
-
-    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     var parseTime = d3.timeParse("%d-%b-%y");
     var x = d3.scaleLinear().rangeRound([0, w]);
     var y = d3.scaleLinear().rangeRound([h, 0]);
-
     var line = d3.line()
         .x(function(d) { return x(d.year); })
         .y(function(d) { return y(d.count); });
 
-
-
     var svg = d3.select("svg");
     svg.selectAll("*").remove();
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    var x = d3.scaleBand()
-        .rangeRound([0, width])
-        .paddingInner(0.05)
-        .align(0.1);
-
-    var y = d3.scaleLinear()
-        .rangeRound([height, 0]);
+    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var x = d3.scaleBand().rangeRound([0, w]).paddingInner(0.05).align(0.1);
+    var y = d3.scaleLinear().rangeRound([h, 0]);
 
     var colorScheme = d3.scaleOrdinal(d3.schemeCategory20);
 
+    $("#showLevel1").addClass("btn-default");
+    $("#showLevel2").addClass("btn-default");
+    $("#showLevel3").addClass("btn-default");
+    $("#showLevel4").addClass("btn-default");
+    $("#showLevel1").removeClass("btn-info");
+    $("#showLevel2").removeClass("btn-info");
+    $("#showLevel3").removeClass("btn-info");
+    $("#showLevel4").removeClass("btn-info");
+
+    // showLevel:
+    //  1 - last 10 years, top 10 researchers
+    //  2 - last 10 years, all researchers
+    //  3 - all history, top 10 researchers
+    //  4 - all history, all researchers
     var years;
-    if (showLast10) {
+    if (showLevel == 1) {
+      // TODO: filter top 10 researchers
       data = theData.matrix.slice(-10);
       years = theData.years.slice(-10);
-      $("#showLast10").addClass("btn-info");
-      $("#showLast10").removeClass("btn-default");
-      $("#showAll").addClass("btn-default");
-      $("#showAll").removeClass("btn-info");
-    } else {
+      $("#showLevel1").addClass("btn-info");
+      $("#showLevel1").removeClass("btn-default");
+    } else if (showLevel == 2) {
+      data = theData.matrix.slice(-10);
+      years = theData.years.slice(-10);
+      $("#showLevel2").addClass("btn-info");
+      $("#showLevel2").removeClass("btn-default");
+    } else if (showLevel == 3) {
+      // TODO: filter top 10 researchers
       data = theData.matrix;
       years = theData.years;
-      $("#showLast10").addClass("btn-default");
-      $("#showLast10").removeClass("btn-info");
-      $("#showAll").addClass("btn-info");
-      $("#showAll").removeClass("btn-default");
+      $("#showLevel3").addClass("btn-info");
+      $("#showLevel3").removeClass("btn-default");
+    } else if (showLevel == 4) {
+      data = theData.matrix;
+      years = theData.years;
+      $("#showLevel4").addClass("btn-info");
+      $("#showLevel4").removeClass("btn-default");
+    } else {
+      // wtf
     }
-    keys = theData.columns;
+    var keys = theData.columns;
 
     x.domain(years);
     y.domain([0, d3.max(data, function(d) { return d.total; })]).nice();
 
+    // Source: https://bl.ocks.org/mbostock/3886208
     g.append("g")
       .selectAll("g")
       .data(d3.stack().keys(keys)(data))
       .enter().append("g")
         .attr("fill", function(d) { return colorScheme(d.key); })
+        .on('mouseover', function(d,da,db){
+          // Highlight the researcher. Notice that it highlights all the blocks
+          // (i.e. all years) for this researcher.
+          var g = d3.select(this);
+          g.attr("stroke","blue");
+          g.attr("stroke-width","2");
+
+          var showDetails = $("#showDetails").is(":checked");
+          if(showDetails) {
+            // Show the tooltip with the faculty details.
+            var faculty = facultyDetails(d.key);
+            if (faculty != null) {
+              // coordinates: http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
+              d3.select("#tooltip")
+                .style("left", d3.event.pageX + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+                .select("#title")
+                .text(faculty.name);
+              d3.select("#subtitle").text(faculty.group);
+              d3.select("#subtitle2").text("Click to view publications for this researcher");
+              d3.select("#tooltip").classed("hidden", false);
+            }
+          }
+        })
+        .on('mouseout', function(d){
+          // Remove highlight and tooltip
+          var g = d3.select(this);
+          g.attr("stroke","");
+          g.attr("stroke-width","0");
+          d3.select("#tooltip").classed("hidden", true);
+        })
+        .on('click', function(d){
+          // Make the blocks clickable
+          var newUrl = researcherUrl.replace("placeholder", d.key) + "#Publications";
+          window.location.assign(newUrl);
+        })
       .selectAll("rect")
       .data(function(d) { return d; })
       .enter().append("rect")
@@ -193,7 +263,7 @@
 
     g.append("g")
         .attr("class", "axis")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + h + ")")
         .call(d3.axisBottom(x));
 
     g.append("g")
@@ -208,12 +278,16 @@
         .attr("text-anchor", "start")
         .text("Publications");
 
+    // Display the legend
+    var id, faculty;
     var ul = $("#legendList");
     ul.empty();
-    var column;
     for(i = 0; i < theData.columns.length; i++) {
-      column = theData.columns[i];
-      ul.append('<li><span style="background-color: ' + colorScheme(column) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + column);
+      id = theData.columns[i];
+      faculty = facultyDetails(id);
+      if (faculty != null) {
+        ul.append('<li><span style="background-color: ' + colorScheme(id) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + faculty.name);
+      }
     }
 
     updateLabels();
