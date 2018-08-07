@@ -20,8 +20,8 @@ class OnTheWebItem
   end
 
   def icon
-    if @url.include?("/twitter.com/")
-      return "twitter_logo.png"
+    if @url.include?("brown.edu/")
+      return "brown_logo.png"
     end
     if @url.include?("/www.facebook.com/")
       return "facebook_logo.png"
@@ -31,6 +31,12 @@ class OnTheWebItem
     end
     if @url.include?("/www.researchgate.net/")
       return "researchgate_logo.png"
+    end
+    if @url.include?("scholar.google.com/")
+      return "google_scholar_logo.png"
+    end
+    if @url.include?("twitter.com/") # accounts for twitter.com and mobile.twitter.com
+      return "twitter_logo.png"
     end
     return nil
   end
