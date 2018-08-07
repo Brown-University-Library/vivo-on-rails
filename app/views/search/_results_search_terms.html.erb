@@ -1,6 +1,11 @@
 <!-- search terms used -->
 <div class="facet-breadcrumbs">
   <% if !@presenter.query.empty? %>
+
+    <% if @presenter.num_found == 0 %>
+      <h3>No results were found</h3>
+    <% end %>
+
     <span class="search-result-facets no-orphans">
       <a href="<%= @presenter.remove_q_url %>" title="Remove search term <%= @presenter.query %>">
         <span><span class="facet-category">Searched for: </span><%= @presenter.query %></span>
@@ -9,12 +14,13 @@
       </a>
     </span>
   <% end %>
+
   <% @presenter.fq.each do |fq| %>
     <span class="search-result-facets no-orphans">
-        <a href="<%= fq.remove_url %>" title="Remove facet <%= fq.value %>">
+        <a href="<%= fq.remove_url %>" title="Remove filter <%= fq.value %>">
         <span><span class="facet-category"><%= fq.title %>: </span><%= fq.value %></span>
         <span class="glyphicon glyphicon-remove"></span>
-        <span class="sr-only">Remove facet <%= fq.value %></span>
+        <span class="sr-only">Remove filter <%= fq.value %></span>
         </a>
     </span>
   <% end %>
