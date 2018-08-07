@@ -23,6 +23,9 @@ class OnTheWebItem
     if @url.include?("brown.edu/")
       return "brown_shield_logo.gif"
     end
+    if @url.include?("academia.edu/")
+      return "academia_logo.png"
+    end
     if @url.include?("facebook.com/")
       return "facebook_logo.png"
     end
