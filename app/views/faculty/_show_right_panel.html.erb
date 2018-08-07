@@ -41,6 +41,8 @@
         <% @presenter.faculty.on_the_web.each do |web| %>
           <% if web.icon != nil %>
             <%= image_tag(web.icon, height: "15px") %>
+          <% else %>
+            <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>          
           <% end %>
           <a href="<%= web.url %>" target="_blank"><%= web.text %></a><br/>
         <% end %>
