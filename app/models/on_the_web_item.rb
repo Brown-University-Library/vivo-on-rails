@@ -21,21 +21,24 @@ class OnTheWebItem
 
   def icon
     if @url.include?("brown.edu/")
-      return "brown_logo.png"
+      return "brown_shield_logo.gif"
     end
-    if @url.include?("/www.facebook.com/")
+    if @url.include?("facebook.com/")
       return "facebook_logo.png"
     end
-    if @url.include?("/www.linkedin.com/")
+    if @url.include?("linkedin.com/")
       return "linkedin_logo.png"
     end
-    if @url.include?("/www.researchgate.net/")
+    if @url.include?("researchgate.net/")
       return "researchgate_logo.png"
+    end
+    if @url.include?("orcid.org/")
+      return "orcid_logo.png"
     end
     if @url.include?("scholar.google.com/")
       return "google_scholar_logo.png"
     end
-    if @url.include?("twitter.com/") # accounts for twitter.com and mobile.twitter.com
+    if @url.include?("twitter.com/")
       return "twitter_logo.png"
     end
     return nil
