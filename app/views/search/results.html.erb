@@ -1,66 +1,65 @@
 <%= render "results_javascript" %>
-
 <%= render "search_box" %>
 
 <div class="container-fluid results-page col-sm-12">
   <%= render "manage_profile_login" %>
 
-      <div class="row results-page-wrapper">
-        <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
-          <div class="result-nums-breadcrumbs-wrapper">
-            <%= render "results_pagination_top" %>
-            <%= render "results_search_terms" %>
-          </div> <!-- result-nums-breadcrumbs-wrapper -->
+  <div class="row results-page-wrapper">
+    <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
+      <div class="result-nums-breadcrumbs-wrapper">
+        <%= render "results_pagination_top" %>
+        <%= render "results_search_terms" %>
+      </div> <!-- result-nums-breadcrumbs-wrapper -->
 
       <h2 class="visible-print">Results</h2>
 
       <!-- search results -->
       <div class="row results-row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <!--added for single row approach -->
-          <h3 class="hidden">Fully-matching results</h3>
 
-          <div class="clearfix visible-md-block"></div>
-          <div class="clearfix visible-lg-block"></div>
+        <!--added for single row approach -->
+        <h3 class="hidden">Fully-matching results</h3>
 
-          <% @presenter.results.each_with_index do |item, index| %>
-            <div class="clearfix visible-sm-block"></div>
-            <div class="clearfix visible-xs-block"></div>
-            <!-- RESULTS ITEM BEGINS -->
-            <div class="clearfix visible-xs-block"></div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results" data-fb-result="<%= item.uri %>">
-              <div class="gap30"></div>
-              <section itemscope itemtype="<%= item.type_schema_org() %>" id="individual-intro" class="vcard person" role="region">
-                <section class="share-contact" role="region">
-                  <div class="share-contact--bottom"></div>
-                  <div id="photo-wrapper" class="results__photo" aria-hidden="true">
-                    <a href="<%= item.uri %>"><%= image_tag(item.thumbnail, class: "img-circle") %></a>
-                  </div>
-                  <div class="contact-content">
-                    <h4>
-                      <span itemprop="name" class="fn">
-                        <a href="<%= item.uri %>"><%= item.name %></a>
-                      </span>
-                    </h4>
-                    <span class="results-title"><%= item.title %></span>
-                  </div>
-                  <div class="emailsContainer">
-                    <a href="mailto:<%= item.email %>" title="Email <%= item.email %>">
-                      <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                      <span class="sr-only">Email researcher</span>
-                    </a>
-                  </div>
-                </section>
+        <div class="clearfix visible-md-block"></div>
+        <div class="clearfix visible-lg-block"></div>
+
+        <% @presenter.results.each_with_index do |item, index| %>
+          <div class="clearfix visible-sm-block"></div>
+          <div class="clearfix visible-xs-block"></div>
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 expert-results" data-fb-result="<%= item.uri %>">
+            <div class="gap30"></div>
+            <section itemscope itemtype="<%= item.type_schema_org() %>" id="individual-intro" class="vcard person" role="region">
+              <section class="share-contact" role="region">
+                <div class="share-contact--bottom"></div>
+                <div id="photo-wrapper" class="results__photo" aria-hidden="true">
+                  <a href="<%= item.uri %>"><%= image_tag(item.thumbnail, class: "img-circle") %></a>
+                </div>
+                <div class="contact-content">
+                  <h4>
+                    <span itemprop="name" class="fn">
+                      <a href="<%= item.uri %>"><%= item.name %></a>
+                    </span>
+                  </h4>
+                  <span class="results-title"><%= item.title %></span>
+                </div>
+                <div class="emailsContainer">
+                  <a href="mailto:<%= item.email %>" title="Email <%= item.email %>">
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    <span class="sr-only">Email researcher</span>
+                  </a>
+                </div>
               </section>
-            </div>
-            <!-- RESULTS ITEM ENDS -->
-          <% end %>
+            </section>
+          </div>
+        <% end %>
       </div> <!-- row results-row col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
       <%= render "results_pagination_bottom" %>
 
     </div> <!-- results-wrapper col-lg-9 col-lg-push-3 ... -->
-  <% if @presenter.num_found > 0 %>
-    <%= render "results_facets" %>
-  <% end %>
+
+    <% if @presenter.num_found > 0 %>
+      <%= render "results_facets" %>
+    <% end %>
+
   </div> <!-- row -->
 </div> <!-- container-fluid col-sm-12 -->
 
