@@ -8,39 +8,9 @@
       <div class="row results-page-wrapper">
         <div class="results-wrapper col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
           <div class="result-nums-breadcrumbs-wrapper">
-              <!-- top bar: 1/N results found -->
-              <div id="search-result-count" class="text-muted">
-                  <% if @presenter.page == 1 %>
-                    <span class="search-result-previous">
-                      <span class="glyphicon glyphicon-chevron-left is-inactive" aria-hidden="true"></span><span class="chevron-nav-title"> Previous</span>
-                    </span>
-                  <% else %>
-                    <span class="search-result-previous is-active">
-                      <a href="<%= @presenter.previous_url %>" ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="chevron-nav-title"> Previous </span></a>
-                    </span>
-                  <% end %>
-
-                  <span class="search-result-numbers">
-                    <span id="search-page-start"><%= @presenter.start + 1 %></span>
-                    -
-                    <span id="search-page-end"><%= @presenter.end %></span>
-                    of
-                    <span id="search-total-matching"><%= @presenter.num_found %></span>
-                    search results
-                  </span>
-
-                  <% if @presenter.page >= (@presenter.num_pages) %>
-                    <span class="search-result-next"><span class="chevron-nav-title">Next </span><span class="glyphicon glyphicon-chevron-right is-inactive" aria-hidden="true"></span>
-                    </span>
-                  <% else %>
-                    <span class="search-result-next is-active">
-                      <a href="<%= @presenter.next_url %>" ><span class="chevron-nav-title">Next </span><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-                    </span>
-                  <% end %>
-              </div>
-
-        <%= render "results_search_terms" %>
-      </div> <!-- result-nums-breadcrumbs-wrapper -->
+            <%= render "results_pagination_top" %>
+            <%= render "results_search_terms" %>
+          </div> <!-- result-nums-breadcrumbs-wrapper -->
 
       <h2 class="visible-print">Results</h2>
 
@@ -85,7 +55,7 @@
             <!-- RESULTS ITEM ENDS -->
           <% end %>
       </div> <!-- row results-row col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
-      <%= render "results_pagination" %>
+      <%= render "results_pagination_bottom" %>
 
     </div> <!-- results-wrapper col-lg-9 col-lg-push-3 ... -->
   <% if @presenter.num_found > 0 %>
