@@ -225,6 +225,7 @@
     var researcherGroup = groupForNode(theData.nodes, facultyId);
     var researcherColor = groupColor(researcherGroup, colorScheme)
     $(".facultyTitle").css("border-left-color", researcherColor);
+    $(".researcherName").css("border-left-color", researcherColor);
 
     var svg = d3.select("svg");
     // svg.selectAll("*").remove();
