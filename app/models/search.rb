@@ -29,6 +29,13 @@ class Search
       qf += " research_areas_txt "
     end
 
+    # Hit highlighting
+    if ENV["SOLR_HIGHLIGHT"] == "true"
+      params.hl = true
+      params.hl_fl = "name_t title_t department_t affiliations ALLTEXT email_s short_id_s"
+      params.hl_snippets = 5
+    end
+
     # Require almost all words in the query to match, but not all.
     mm = "99%"
 
@@ -57,7 +64,14 @@ class Search
         Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{hash['id']})"
       end
 
-      results.items << SearchItem.from_hash(hash, record_type, thumbnail_url)
+      if ENV["SOLR_HIGHLIGHT"] == "true"
+        doc_id = "vitroIndividual:#{doc['id']}"
+        highlights = results.highlights.for(doc_id)
+      else
+        highlights = []
+      end
+
+      results.items << SearchItem.from_hash(hash, record_type, thumbnail_url, highlights)
     end
     results
   end

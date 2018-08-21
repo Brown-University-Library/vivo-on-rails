@@ -47,6 +47,22 @@
                     <span class="sr-only">Email researcher</span>
                   </a>
                 </div>
+                <% if item.highlights.count > 0 %>
+                  <!-- TODO: Move this to a separate HTML form
+                      rather than using the tooltip. Becareful with
+                      bad HTML that could come on the source (bad originally
+                      or bad due to the Solr snippets) -->
+                  <div class="searchHitContainer">
+                      <% hl_info = "" %>
+                      <% item.highlights.each do |hl| %>
+                        <% hl_info += "#{hl[:field].upcase}: #{hl[:value]}\r\n " %>
+                      <% end %>
+                      <a href="<%= item.uri %>#All" title="<%= hl_info.html_safe %>">
+                        <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                        <span class="sr-only">Search matches</span>
+                      </a>
+                  </div>
+                <% end %>
               </section>
             </section>
           </div>
