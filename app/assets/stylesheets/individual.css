@@ -228,6 +228,9 @@ This is styling for the individual object pages i.e. Publications, grants etc
   float: left;
   margin-right: 10px;
 }
+.brown-research-areas-list a {
+  line-height: 200%;
+}
 /*###########################################################################
 Everything after this is a hacky method to make the Conversation section look better. MUST BE REMOVED BEFORE COMMIT TO VIVO.
 ################################################################################*/
