@@ -230,6 +230,7 @@ This is styling for the individual object pages i.e. Publications, grants etc
 }
 .brown-research-areas-list a {
   line-height: 200%;
+  padding-left: .34em;
 }
 /*###########################################################################
 Everything after this is a hacky method to make the Conversation section look better. MUST BE REMOVED BEFORE COMMIT TO VIVO.
