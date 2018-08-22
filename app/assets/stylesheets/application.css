@@ -652,11 +652,11 @@ a.manage-profile-link:visited {
 	z-index: 20;
 }
 
-.share-contact .searchHitContainer span.glyphicon.glyphicon-zoom-in {
+.share-contact .searchHitContainer span.glyphicon.glyphicon-paperclip {
 	color: #7E7E7E;
-	/* transform: scaleX(1.3); */
 }
-.share-contact .searchHitContainer span.glyphicon.glyphicon-zoom-in:hover {
+
+.share-contact .searchHitContainer span.glyphicon.glyphicon-paperclip:hover {
 	color: #E7C655;
 	transition-property: color;
 	transition-delay: 0s;
