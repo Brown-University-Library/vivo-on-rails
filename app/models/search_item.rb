@@ -36,7 +36,7 @@ class SearchItem
     highlights.keys.each do |key|
       item = {
         field: key,
-        values: highlights[key]
+        values: highlights[key].map {|value| value.strip}
       }
       parsed << item
     end
@@ -45,39 +45,32 @@ class SearchItem
     return []
   end
 
-  def field_caption(field)
-    case
-    when field == "NAME_T"
-      return "Name"
-    when field == "TITLE_T"
-      return "Title"
-    when field == "DEPARTMENT_T"
-      return "Department"
-    when field == "DEPARMENT_T"
-      return "Department"
-    when field == "EMAIL_S"
-      return "Email"
-    when field == "SHORT_ID_S"
-      return "Id"
-    else
-      return "Text"
-    end
-  end
-
   def highlights_html()
     html = ""
     @highlights.each do |hl|
-      # html += "<p>#{field_caption(hl[:field].upcase)}: "
       html += "<p>"
       html += hl[:values].join("...<br/>")
       html += "</p>"
     end
 
     # HTML encode problematic characters so that we can render text safely as HTML
+    # (notice that we purposefuly preserve a few: <p>, <strong>, and <br/>)
+    html.gsub!('<p>', '{p}')
+    html.gsub!('</p>', '{/p}')
+    html.gsub!('<strong>', '{strong}')
+    html.gsub!('</strong>', '{/strong}')
+    html.gsub!('<br/>', '{br/}')
+
     html.gsub!("'", '&#39;')
-    html.gsub!('"', '&quote;')
-    html.gsub!('<', '&lt;')
-    html.gsub!('>', '&gt;')
+    html.gsub!('"', '&quot;')
+    html.gsub!('<', '&lsaquo;')   # looks like < but it's ‹
+    html.gsub!('>', '&rsaquo;')   # looks like > but it's ›
+
+    html.gsub!('{strong}', '<strong>')
+    html.gsub!('{/strong}', '</strong>')
+    html.gsub!('{br/}', '<br/>')
+    html.gsub!('{p}', '<p>')
+    html.gsub!('{/p}', '</p>')
 
     # Remove the VIVO identifier from the text since it's meaningless to
     # the user.
