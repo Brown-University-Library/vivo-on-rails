@@ -68,19 +68,18 @@
                   <span class="results-title"><%= item.title %></span>
                 </div>
                 <div class="emailsContainer">
+                  <% if item.highlights.count > 0 %>
+                    <a href="<%= item.uri %>#All" data-toggle="tooltip" title="<%= item.highlights_html.html_safe %>">
+                      <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+                      <span class="sr-only">Search matches</span>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                  <% end %>
                   <a href="mailto:<%= item.email %>" title="Email <%= item.email %>">
                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                     <span class="sr-only">Email researcher</span>
                   </a>
                 </div>
-                <% if item.highlights.count > 0 %>
-                  <div class="searchHitContainer">
-                    <a href="<%= item.uri %>#All" data-toggle="tooltip" title="<%= item.highlights_html.html_safe %>">
-                      <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-                      <span class="sr-only">Search matches</span>
-                    </a>
-                  </div>
-                <% end %>
               </section>
             </section>
           </div>
