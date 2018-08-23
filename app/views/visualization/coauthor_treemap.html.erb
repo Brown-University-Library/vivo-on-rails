@@ -18,7 +18,7 @@
       calculated on <span id="txtLastUpdated"></span>.
     </div>
     <div id="errorMsg" class="hidden">
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-warning" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
         No coauthor data is available for this researcher.
@@ -225,6 +225,7 @@
     var researcherGroup = groupForNode(theData.nodes, facultyId);
     var researcherColor = groupColor(researcherGroup, colorScheme)
     $(".facultyTitle").css("border-left-color", researcherColor);
+    $(".researcherName").css("border-left-color", researcherColor);
 
     var svg = d3.select("svg");
     // svg.selectAll("*").remove();

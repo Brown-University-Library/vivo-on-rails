@@ -11,7 +11,7 @@
       <div class="brown-affiliations-list">
         <% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
           <p>
-          <%= image_tag( aff.thumbnail, alt: aff.name + " logo", height: "50px") %>
+          <%= image_tag( aff.thumbnail, alt: aff.name + " logo", width: "17") %>
           <a href="<%= display_show_url(aff.vivo_id) %>">
             <%= aff.name %>
           </a>
@@ -40,7 +40,7 @@
       <div class="brown-research-areas-list">
         <% @presenter.faculty.on_the_web.each do |web| %>
           <% if web.icon != nil %>
-            <%= image_tag(web.icon, height: "15px") %>
+            <%= image_tag(web.icon, width: "17") %>
           <% else %>
             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
           <% end %>
