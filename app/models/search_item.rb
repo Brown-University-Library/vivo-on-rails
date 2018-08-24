@@ -3,6 +3,8 @@ class SearchItem
   attr_accessor :vivo_id, :id, :uri, :name, :thumbnail, :type, :overview,
     :title, :email, :highlights
 
+  HIGHLIGHTS_COUNT = 5
+
   def initialize(id, name, thumbnail, title, email, type, highlights)
     @id = id || ""
     @vivo_id = @id.split("/").last
@@ -107,7 +109,7 @@ class SearchItem
 
   def highlights_values()
     unique = highlights_values_unique()
-    if unique.count >= 5
+    if unique.count >= HIGHLIGHTS_COUNT
       # We got plenty of unique terms. We are done.
       return unique
     end
@@ -118,13 +120,13 @@ class SearchItem
       return unique
     end
 
-    # Less than 5 unique hits but we have more hits,
+    # Less unique hits than the max allowed but we have more hits,
     # let's add a few more non-unique hits.
     values = unique
     all.each do |value|
       if !values.include?(value)
         values << value
-        break if values.count >= 5
+        break if values.count >= HIGHLIGHTS_COUNT
       end
     end
     values
@@ -132,6 +134,7 @@ class SearchItem
 
   def highlights_html()
     html = ""
+    # values = highlights_values_all().take(HIGHLIGHTS_COUNT)
     values = highlights_values()
     values.each do |value|
       html += "<p>#{value}</p>"
