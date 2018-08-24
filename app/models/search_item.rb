@@ -106,9 +106,6 @@ class SearchItem
   end
 
   def highlights_values()
-    if vivo_id == "pmonti"
-      byebug
-    end
     unique = highlights_values_unique()
     if unique.count >= 5
       # We got plenty of unique terms. We are done.
