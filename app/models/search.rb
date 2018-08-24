@@ -29,7 +29,11 @@ class Search
     if ENV["SOLR_HIGHLIGHT"] == "true"
       params.hl = true
       params.hl_fl = "name_t title_t department_t research_areas_txt affiliations ALLTEXT email_s short_id_s"
-      params.hl_snippets = 10
+      # A large number here allows us to get a large number of hits which is
+      # useful for searches with 3 or more search terms. However, this value
+      # increases the size of the response and we might need to reduce it if
+      # results in performance issues.
+      params.hl_snippets = 30
     end
 
     # Minimum match value stolen from "Solr in Action" p. 229
