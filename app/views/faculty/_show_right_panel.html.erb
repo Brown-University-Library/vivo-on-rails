@@ -11,7 +11,7 @@
       <div class="brown-affiliations-list">
         <% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
           <p>
-          <%= image_tag( aff.thumbnail, alt: aff.name + " logo", width: "17") %>
+          <%= image_tag( aff.thumbnail, alt: aff.name + " logo", width: "36") %>
           <a href="<%= display_show_url(aff.vivo_id) %>">
             <%= aff.name %>
           </a>
