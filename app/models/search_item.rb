@@ -61,11 +61,11 @@ class SearchItem
     values = []
     @highlights.each do |hl|
       hl[:values].each do |snippet|
-        # The snippet should only contain one match but we still use the
-        # lazy match (.*?) and account for multiple hits, just in case.
-        hit = snippet.match(/<strong>.*?<\/strong>/)
-        if hit != nil
-          values << hit[0].upcase
+        # Notice that we use the lazy match (.*?) because the snippet
+        # could contain multiple matches (e.g. on a multi-word search)
+        hits = snippet.scan(/<strong>.*?<\/strong>/)
+        hits.each do |hit|
+          values << hit.upcase
         end
       end
     end
@@ -120,7 +120,7 @@ class SearchItem
       return unique
     end
 
-    # Less unique hits than the max allowed but we have more hits,
+    # We have less unique hits than the max allowed and we have more hits,
     # let's add a few more non-unique hits.
     values = unique
     all.each do |value|
