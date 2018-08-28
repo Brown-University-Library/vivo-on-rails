@@ -20,7 +20,13 @@ class Search
     params.fl = ["id", "record_type", "thumbnail_file_path_s", "json_txt"]
 
     # Query filter with custom boost values
-    # TODO: use esearch_areas_txt_en and affiliations_txt_en when they become available.
+    #
+    # TODO: Use this new qf once we update the production Solr with the new
+    #       fields (research_areas_en and affiliations_en)
+    # qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
+    # "title_t^1600 department_t^1500 research_areas_en^400 affiliations_en^450 " +
+    # "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
+    #
     qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
     "title_t^1600 department_t^1500 research_areas_txt^400 affiliations^450 " +
     "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
