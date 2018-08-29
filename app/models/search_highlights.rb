@@ -23,23 +23,17 @@ class SearchHighlights
     html = ""
     values = top_hits(count)
 
-    # Show the highlights for the Department field first...
-    departments = values.map {|v| v.field == "department_t" ? v.value : nil}.compact
-    if departments.count > 0
-      html += "<p>Department: " + departments.join(", ") + "</p>"
-    end
-
-    # then for the Research Areas field...
-    research_areas = values.map {|v| v.field == "research_areas_txt" ? v.value : nil}.compact
-    if research_areas.count > 0
-      html += "<p>Research areas: " + research_areas.join(", ") + "</p>"
-    end
-
+    # Gather the highlights in order: department + research areas + overview.
     # TODO: Add affiliations when we add affiliations_en field to Solr.
+    html += html_values_for(values, "department_t", "Department")
+    html += html_values_for(values, "research_areas_txt", "Research areas")
+    html += html_values_for(values, "overview_t", "Overview")
 
-    # and then the rest of the fields (i.e. ALLTEXT)
+    # and then highlights for the rest of the fields (i.e. ALLTEXT)
     values.each do |value|
-      next if value.field == "research_areas_txt" || value.field == "department_t"
+      if value.field == "research_areas_txt" || value.field == "department_t" || value.field == "overview_t"
+        next
+      end
       html += "<p>#{value.value}</p>"
     end
 
@@ -85,6 +79,15 @@ class SearchHighlights
       # Remove the VIVO identifier from the text since it's meaningless to
       # the user.
       html.gsub!("Agent Faculty Member Organization or Person at Brown Person", "")
+      html
+    end
+
+    def html_values_for(values, field_name, caption)
+      html = ""
+      field_values = values.map {|v| v.field == field_name ? v.value : nil}.compact
+      if field_values.count > 0
+        html += "<p>#{caption}: " + field_values.join(", ") + "</p>"
+      end
       html
     end
 

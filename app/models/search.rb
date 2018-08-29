@@ -38,7 +38,7 @@ class Search
       params.hl = true
       # Notice that we don't highlight name_t and title_t because we always
       # display those values.
-      params.hl_fl = "department_t research_areas_txt affiliations ALLTEXT email_s short_id_s"
+      params.hl_fl = "department_t research_areas_txt affiliations overview_t ALLTEXT email_s short_id_s"
       # A large number here allows us to get a large number of hits which is
       # useful for searches with 3 or more search terms. However, this value
       # increases the size of the response and we might need to reduce it if
