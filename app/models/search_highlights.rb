@@ -21,20 +21,20 @@ class SearchHighlights
   # Consider making it configurable after we go live.
   def html(count)
     html = ""
-    values = top_hits(count)
+    hits = top_hits(count)
 
     # Gather the highlights in order: department + research areas + overview.
     # TODO: Add affiliations when we add affiliations_en field to Solr.
-    html += html_values_for(values, "department_t", "Department")
-    html += html_values_for(values, "research_areas_txt", "Research areas")
-    html += html_values_for(values, "overview_t", "Overview")
+    html += html_for_field(hits, "department_t", "Department")
+    html += html_for_field(hits, "research_areas_txt", "Research areas")
+    html += html_for_field(hits, "overview_t", "Overview")
 
     # and then highlights for the rest of the fields (i.e. ALLTEXT)
-    values.each do |value|
-      if value.field == "research_areas_txt" || value.field == "department_t" || value.field == "overview_t"
+    hits.each do |hit|
+      if hit.field == "research_areas_txt" || hit.field == "department_t" || hit.field == "overview_t"
         next
       end
-      html += "<p>#{value.value}</p>"
+      html += "<p>#{hit.value}</p>"
     end
 
     clean_html(html)
@@ -82,11 +82,23 @@ class SearchHighlights
       html
     end
 
-    def html_values_for(values, field_name, caption)
+    def strip_html(html)
+      stripped = html
+      stripped = stripped.gsub('<p>', '')
+      stripped = stripped.gsub('</p>', '')
+
+      # https://stackoverflow.com/questions/2588942/convert-non-breaking-spaces-to-spaces-in-ruby
+      stripped = stripped.gsub(/\u00a0/, ' ')
+
+      stripped = stripped.gsub(/\s\s+/, ' ')  # consolidate spaces
+      stripped
+    end
+
+    def html_for_field(hits, field_name, caption)
       html = ""
-      field_values = values.map {|v| v.field == field_name ? v.value : nil}.compact
-      if field_values.count > 0
-        html += "<p>#{caption}: " + field_values.join(", ") + "</p>"
+      field_hits = hits.map {|hit| hit.field == field_name ? hit.value : nil}.compact
+      if field_hits.count > 0
+        html += "<p>#{caption}: " + strip_html(field_hits.join(", ")) + "</p>"
       end
       html
     end
