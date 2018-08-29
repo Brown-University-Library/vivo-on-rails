@@ -46,15 +46,16 @@ class Search
       params.hl_snippets = 30
     end
 
-    # Minimum match value stolen from "Solr in Action" p. 229
+    # For information on Solr's Minimum match value see
+    #   "Solr in Action" p. 229
+    #   and https://lucene.apache.org/solr/guide/6_6/the-dismax-query-parser.html
     #
     # Search terms    Criteria
     # ------------    ------------
-    # 1,2,3           all must match
-    # 4,5             one can be missing
-    # 6,7             four must match
-    # 8+              up to 30% do not have to match.
-    mm = "3<-1 5<4 7<-30%"
+    # 1,2             all search terms must be found
+    # 3+              at least 75% of the terms must be found
+    #                 (this helps with stop words, eg. "professor of history")
+    mm = "2<75%"
 
     results = @solr.search(params, extra_fqs, qf, mm, debug)
     if !results.ok?
