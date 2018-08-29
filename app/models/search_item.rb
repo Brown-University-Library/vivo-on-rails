@@ -1,4 +1,6 @@
 require "./app/models/model_utils.rb"
+require "./app/models/search_hit.rb"
+
 class SearchItem
   attr_accessor :vivo_id, :id, :uri, :name, :thumbnail, :type, :overview,
     :title, :email, :highlights
@@ -47,46 +49,54 @@ class SearchItem
     return []
   end
 
-  # Returns the unique hits. Notice that it is case insensitive.
+  # Returns the unique terms. Notice that it's case insensitive.
   #
   # For example if the highlights include:
-  #     abc<strong>Value 1</strong>xyz
-  #     abc<strong>Value 2</strong>xyz
-  #     abc<strong>VALUE 1</strong>xyz
+  #     [
+  #       "abc<strong>Value 1</strong>xyz",
+  #       "abc<strong>Value 2</strong>xyz",
+  #       "abc<strong>VALUE 1</strong>xyz"
+  #     ]
   #
   # the returning value will be
-  #     ["<strong>VALUE 1</strong>, "<strong>VALUE 2</strong>"]
+  #     [
+  #       "<strong>VALUE 1</strong>
+  #       "<strong>VALUE 2</strong>"
+  #     ]
   #
-  def highlights_unique_hits()
-    values = []
+  def highlight_terms()
+    terms = []
     @highlights.each do |hl|
       hl[:values].each do |snippet|
         # Notice that we use the lazy match (.*?) because the snippet
         # could contain multiple matches (e.g. on a multi-word search)
         hits = snippet.scan(/<strong>.*?<\/strong>/)
         hits.each do |hit|
-          values << hit.upcase
+          terms << hit.upcase
         end
       end
     end
-    values.uniq()
+    terms.uniq()
   end
 
-  # Returns the first highlight for each of the unique hits. For example
-  # if the word "research" was found 3 times only the first instace for it
-  # will be returned.
-  def highlights_values_unique()
+  # Returns an array of SearchHits, one item per search term. For example
+  # if the word "research" was found 3 times for a Solr document only the
+  # first instance for it will be returned.
+  def highlight_unique_values()
     values = []
-    # For each of the unique hits...
-    unique_hits = highlights_unique_hits()
-    unique_hits.each do |hit|
-      # ...find the first value in the highlights for it and collect it
+    highlight_terms.each do |term|
+      # For each unique term find the first instance of it in
+      # the highlights and collect it
       @highlights.each do |hl|
-        hit_value = hl[:values].find {|value| value.upcase.include?(hit) }
-        if hit_value != nil
-          if !values.include?(hit_value)
-            values << hit_value
+        snippet = hl[:values].find {|value| value.upcase.include?(term) }
+        if snippet != nil
+          if values.find {|x| x.value == snippet} == nil
+            values << SearchHit.new(hl[:field], snippet)
             break
+          else
+            # We already have this snippet, don't re-add it.
+            # This prevents adding the same snippet twice because it
+            # matched two different terms.
           end
         end
       end
@@ -97,34 +107,34 @@ class SearchItem
   # Returns all values for all the highlights, including duplicate hits.
   # For example if the word "research" was found 3 times, 3 results for it will
   # be returned.
-  def highlights_values_all()
+  def highlight_all_values()
     values = []
     @highlights.each do |hl|
       hl[:values].each do |value|
-        values << value
+        values << SearchHit.new(hl[:field], value)
       end
     end
     values
   end
 
   def highlights_values()
-    unique = highlights_values_unique()
-    if unique.count >= HIGHLIGHTS_COUNT
+    values = highlight_unique_values()
+    if values.count >= HIGHLIGHTS_COUNT
       # We got plenty of unique terms. We are done.
-      return unique
+      return values
     end
 
-    all = highlights_values_all()
-    if unique.count == all.count
+    all = highlight_all_values()
+    if values.count == all.count
       # We've got as much as we are going to get. We are done.
-      return unique
+      return values
     end
 
     # We have less unique hits than the max allowed and we have more hits,
     # let's add a few more non-unique hits.
-    values = unique
     all.each do |value|
-      if !values.include?(value)
+      duplicate = values.find {|x| x.value == value.value} != nil
+      if !duplicate
         values << value
         break if values.count >= HIGHLIGHTS_COUNT
       end
@@ -134,10 +144,9 @@ class SearchItem
 
   def highlights_html()
     html = ""
-    # values = highlights_values_all().take(HIGHLIGHTS_COUNT)
     values = highlights_values()
     values.each do |value|
-      html += "<p>#{value}</p>"
+      html += "<p>#{value.field}: #{value.value}</p>"
     end
 
     # HTML encode problematic characters so that we can render text safely as HTML
