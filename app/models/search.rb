@@ -25,13 +25,13 @@ class Search
     #       fields (research_areas_en and affiliations_en)
     #       Make sure we also include them under params.hl_fl below.
     #
-    qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
-    "title_t^1600 department_t^1500 research_areas_en^400 affiliations_en^450 " +
-    "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
-    #
     # qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
-    # "title_t^1600 department_t^1500 research_areas_txt^400 affiliations^450 " +
+    # "title_t^1600 department_t^1500 research_areas_en^400 affiliations_en^450 " +
     # "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
+    #
+    qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
+    "title_t^1600 department_t^1500 research_areas_txt^400 affiliations^450 " +
+    "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
 
     # Hit highlighting
     if ENV["SOLR_HIGHLIGHT"] == "true"

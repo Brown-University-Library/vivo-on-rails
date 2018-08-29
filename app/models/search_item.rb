@@ -142,11 +142,30 @@ class SearchItem
     values
   end
 
+  # Note: This code is hard-coded to match our fields. Consider making
+  # it configurable after we go live.
   def highlights_html()
     html = ""
     values = highlights_values()
+
+    # Show the Department highlights first...
+    departments = values.map {|v| v.field == "department_t" ? v.value : nil}.compact
+    if departments.count > 0
+      html += "<p>Department: " + departments.join(", ") + "</p>"
+    end
+
+    # then the Research Areas...
+    research_areas = values.map {|v| v.field == "research_areas_txt" ? v.value : nil}.compact
+    if research_areas.count > 0
+      html += "<p>Research areas: " + research_areas.join(", ") + "</p>"
+    end
+
+    # TODO: Add affiliations when we add affiliations_en field to Solr.
+
+    # and then the rest of the fields (i.e. ALLTEXT)
     values.each do |value|
-      html += "<p>#{value.field}: #{value.value}</p>"
+      next if value.field == "research_areas_txt" || value.field == "department_t"
+      html += "<p>#{value.value}</p>"
     end
 
     # HTML encode problematic characters so that we can render text safely as HTML
