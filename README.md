@@ -9,6 +9,16 @@ You need to have [Solr](http://lucene.apache.org/solr/) running. We use the
 Solr index that VIVO provides out of the box but we have added several fields
 needed by this project. See **Solr Index** section below.
 
+We are currently using Ruby 2.3.5, Rails 4.2.7, and MySQL.
+
+```
+brew install ruby-install
+brew install chruby
+ruby-install ruby 2.3.5
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+chruby 2.3.5
+brew install mysql
+```
 
 # To get started
 ```
@@ -16,6 +26,7 @@ git https://github.com/Brown-University-Library/vivo-on-rails.git
 cd vivo-on-rails
 bundle install
 source .env_sample
+bundle exec rake db:migrate
 bundle exec rails server
 ```
 
