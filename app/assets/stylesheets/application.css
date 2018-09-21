@@ -1352,6 +1352,28 @@ td.citation-data.pub-item {
 	white-space: nowrap;
 	text-overflow: ellipsis;*/
 }
+
+/* mobile */
+/*.organization-photo-panel {
+	background-color: orange;
+	padding: 0;
+	padding-top: 4rem;
+}
+.organization-page #section_overview h2 {
+	background-color: orange;
+	font-weight: 800;
+	margin: 0;
+	padding: 2rem;
+	position: absolute;
+	left: 0;
+	width: 100vw;
+}
+.organization-page #section_overview p:nth-of-type(1) {
+	margin-top: 10rem;
+}
+.organization-page #section_overview ul {
+	padding: 0;
+}*/
 /* End of Organization Page */
 
 
