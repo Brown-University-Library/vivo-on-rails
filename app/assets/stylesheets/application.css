@@ -13,29 +13,29 @@
  *= require_tree .
  *= require_self
  */
- .testClass {
- 	border: 2px solid purple;
- }
 
-/* source http://www.bootply.com/128062 */
-.glyphicon-refresh-animate {
-  -animation: spin .7s infinite linear;
-  -webkit-animation: spin2 .7s infinite linear;
-}
+ /**************************************
+ 
+ 0030 ~ COLORS
+ 0050 ~ TEST
+ 0060 ~ ANIMATIONS
+ 0070 ~ GLOBAL
+ 0100 ~ HEADER
+ 0200 ~ 404
+ 0200 ~ SUB-NAV
+ 0300 ~ SEARCH RESULTS PAGE
+ 0700 ~ FOOTER
+ 0800 ~ PROFILE PAGE
+ 1200 ~ ORGANIZATION PAGE
+ SUPPLEMENTARY PAGES
+ GENERAL BREAKPOINTS
+ UNIQUE BREAKPOINTS
 
-@-webkit-keyframes spin2 {
-  from { -webkit-transform: rotate(0deg);}
-  to { -webkit-transform: rotate(360deg);}
-}
-
-@keyframes spin {
-  from { transform: scale(1) rotate(0deg);}
-  to { transform: scale(1) rotate(360deg);}
-}
+ **************************************/
 
 /* MAKE YOUR CSS CHANGES HERE */
 
-/* COLORS */
+/***** COLORS *****/
 /*
 #333	  soft black 			|| 			hsla(0, 0%, 20%, 1)
 #2F2A20	  brown black* 			|| 			hsla(40, 19%, 15%, 1)
@@ -51,7 +51,29 @@
 #F4E84E	  happy yellow 			|| 			hsla(56, 88%, 63%, 1)
 #E8D98B	  pale gold 			|| 			hsla(50, 67%, 73%, 1)
 */
+ .testClass {
+ 	border: 2px solid purple;
+ }
 
+/***** ANIMATION *****/
+/* source http://www.bootply.com/128062 */
+.glyphicon-refresh-animate {
+  -animation: spin .7s infinite linear;
+  -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg);}
+  to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg);}
+  to { transform: scale(1) rotate(360deg);}
+}
+/* End of Animation */
+
+/***** GLOBAL *****/
 html, body {
  	box-sizing: border-box;
 	height: 100%;
@@ -62,8 +84,9 @@ html, body {
 	display: inline-block;
 	white-space: nowrap;
 }
+/* End of Global */
 
-/* Header */
+/***** HEADER *****/
 .header {
 	background-color: #594036;
 	border: none;
@@ -185,7 +208,7 @@ a.manage-profile-link:visited {
 }
 /* End of Header */
 
-/* Error or 404 Pages */
+/***** ERROR OR 404 PAGES *****/
 .error-404-wrapper {
 	background-color: #F5F2EC;
 	margin: -2rem;
@@ -213,7 +236,7 @@ a.manage-profile-link:visited {
 	line-height: 1rem;
 }
 
-/* Profile / Advanced Search Links */
+/***** PROFILE / ADVANCED SEARCH LINKS *****/
 .subnavbar {
 	position: relative;
 	border: none;
@@ -279,7 +302,7 @@ a.manage-profile-link:visited {
   padding: 1rem 0;
 }
 
-/* Results Page */
+/***** RESULTS PAGE *****/
 .container-fluid.results-page {
 	padding-top: 0rem;
 	margin-top: -3rem;
@@ -751,7 +774,7 @@ a.manage-profile-link:visited {
 /* End of Results Page */
 
 
-/* Footer */
+/***** FOOTER *****/
 .footer {
 	background-color: #CCC6B8;
 	height: 180px;
@@ -781,7 +804,7 @@ a.manage-profile-link:visited {
 
 
 
-/* Individual Page */
+/***** PROFILE PAGE *****/
 .container.profile {
 	background-color: #F5F2EC;
 	display: inline-block;
@@ -1180,10 +1203,10 @@ td.citation-data.pub-item {
 #tabAffiliations .panel-body-credentials td:nth-child(3) {
 	width: 11rem;
 }
-/* End of Individual Page */
+/* End of Individual Profile Page */
 
 
-/* Organization Page */
+/***** ORGANIZATION PAGE *****/
 .org-profile {
 	background-color: #F5F2EC;
 	display: inline-block;
@@ -1321,10 +1344,18 @@ td.citation-data.pub-item {
 .org-profile .tab-content a:hover {
 	border-bottom: solid 3px #594036;
 }
+
+.organization-page #section_overview ul a {
+	overflow-wrap: break-word;
+	word-break: break-word;
+/*	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;*/
+}
 /* End of Organization Page */
 
 
-/* Supplementary Pages */
+/***** SUPPLEMENTARY PAGES *****/
 .container {
 	clear: both;
 }
@@ -1333,7 +1364,7 @@ td.citation-data.pub-item {
 }
 /* End of Supplementary Pages */
 
-/*** General Breakpoints ***/
+/***** GENERAL BREAKPOINTS *****/
 @media screen and (max-width: 600px) {
 	.site-title h1 a {
 		font-size: 2rem;
@@ -1564,7 +1595,7 @@ td.citation-data.pub-item {
 }
 
 
-/*** Specific Breakpoints ***/
+/***** UNIQUE BREAKPOINTS *****/
 @media screen and (max-width: 320px) {
 	#search-result-count .search-result-numbers { /* this needs a better solution/a wrapper. breaks at 1000+ */
 		padding: 1rem;
