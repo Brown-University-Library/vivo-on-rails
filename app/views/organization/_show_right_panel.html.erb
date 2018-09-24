@@ -1,12 +1,4 @@
 <div class="col-md-8 col-sm-12 col-xs-12" id="section_overview">
-  <h2><%= @presenter.organization.name %></h2>
-  <p>
-    <ul>
-      <% @presenter.organization.web_pages.each do |page| %>
-        <li><a href="<%= page.url %>"><%= page.text %></a>
-      <% end %>
-    </ul>
-  </p>
   <p><%= @presenter.organization.overview.html_safe %></p>
 
   <div id="tabOverview" class="tabFinder" >
