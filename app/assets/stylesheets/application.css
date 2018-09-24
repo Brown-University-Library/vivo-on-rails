@@ -1410,17 +1410,6 @@ td.citation-data.pub-item {
 }
 
 /* mobile */
-
-.organization-page .organization-photo-panel {
-	grid-area: 2 / 8 / 3 / 13;
-}
-.organization-page .decorative-bar {
-	grid-area: 2 / 7 / 3 / 9;
-	min-height: 30vh;
-}
-.organization-page .organization-title {
-	grid-area: 2 / 1 / 3 / 8;
-}
 /*.organization-photo-panel {
 	background-color: orange;
 	padding: 0;
@@ -1909,12 +1898,18 @@ td.citation-data.pub-item {
 	}
 	.container.org-profile .subnavbar {
 		margin: 1.5rem 1.5rem 0 1.5rem;
-	}
+	}	
 	.organization-page .organization-photo-panel {
+		grid-area: 2 / 8 / 3 / 13;
 		padding-right: 2rem;
 	}
 	.organization-page .decorative-bar {
+		grid-area: 2 / 7 / 3 / 9;
 		margin: 1.5rem 0;
+		min-height: 30vh;
+	}
+	.organization-page .organization-title {
+		grid-area: 2 / 1 / 3 / 8;
 	}
 }
 /* results page */
