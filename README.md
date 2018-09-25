@@ -18,6 +18,7 @@ ruby-install ruby 2.3.5
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 chruby 2.3.5
 brew install mysql
+gem install bundle
 ```
 
 # To get started
