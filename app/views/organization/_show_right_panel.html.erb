@@ -2,16 +2,16 @@
   <div class="organization-overview"><p><%= @presenter.organization.overview.html_safe %></p></div>
 
   <% if @presenter.show_visualizations && @presenter.all_positions.count > 0 %>
-    <a id="viz_collab" class="btn btn-default" style="float:right;"
-      href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" target="_blank"
-      title="Visualize collaborators network">Visualize it&nbsp;
-      <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
-    </a>
+    <div class="viz_collab-wrapper">
+      <img class="viz_collab-image" src="https://vivo.brown.edu/profile-images/324/367/19/njoyce_photo_.png" aria-hidden="true" />
+      <a id="viz_collab" class="btn btn-default"
+        href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" target="_blank"
+        title="Visualize collaborators network">Visualize it&nbsp;</a>
+    </div>
   <% end %>
 
   <div id="tabOverview" class="tabFinder" >
-    <h3 style="padding-bottom: 21px;">Affiliations
-    </h3>
+    <h3>Affiliations</h3>
 
     <% if @presenter.admin_positions.count > 0 %>
       <h4 class="brown-affiliations panel-heading">Faculty Administrative Positions</h4>

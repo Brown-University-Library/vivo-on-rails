@@ -1169,6 +1169,22 @@ td.citation-data.pub-item {
 	background-color: #594036;
 	color: #fff;
 }
+#section_overview #tabOverview h3, 
+#section_overview #tabPublications h3, 
+#section_overview #tabResearch h3,
+#section_overview #tabBackground h3,
+#section_overview #tabAffiliations h3,
+#section_overview #tabTeaching h3 {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 5rem;
+	padding: 2rem .6rem;
+	width: 100%;
+}
+#section_overview #tabOverview h3 a, #viz_coauthor.btn {
+
+}
 .pub-title {
 	font-weight: 600;
 }
@@ -1413,11 +1429,28 @@ td.citation-data.pub-item {
 	margin-top: 5rem;
 	width: 100%;
 }
+.organization-page .viz_collab-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	grid-area: 1 / 1 / 2 / 4;
+	margin-top: 2rem;
+}
+.organization-page .viz_collab-image {
+	margin-bottom: 1rem;
+	max-width: 16rem;
+}
 .organization-page #viz_collab {
 /*	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row: auto;*/
-	grid-area: 1 / 1 / 2 / 4;
+	background-color: hsla(56, 88%, 63%, 1);
+	border: none;
+	font-size: 1.8rem;
+	font-weight: 600;
+	text-shadow: none;
+	width: 16rem;
 }
 .organization-page #section_overview .organization-overview {
 /*	grid-column-start: 4;
@@ -1432,6 +1465,10 @@ td.citation-data.pub-item {
 	grid-column-end: 13;
 	grid-row: auto;*/
 	grid-area: 2 / 1 / 3 / 13;
+}
+
+.organization-page #section_overview #tabOverview h3 {
+/*	padding: 2rem 0 2rem .5rem;*/
 }
 
 

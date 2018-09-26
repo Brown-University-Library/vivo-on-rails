@@ -1,7 +1,7 @@
 <% if @presenter.has_publications %>
   <div id="tabPublications" class="panel panel-default hidden">
-    <h3 style="padding-bottom: 21px;">Publications
-      <a id="viz_coauthor" class="btn btn-default hidden" style="float:right;"
+    <h3>Publications
+      <a id="viz_coauthor" class="btn btn-default hidden"
         href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id) %>" target="_blank"
         title="Visualize coauthors network">Visualize it&nbsp;
         <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
