@@ -1179,11 +1179,22 @@ td.citation-data.pub-item {
 	align-items: center;
 	justify-content: space-between;
 	height: 5rem;
+	max-height: 10rem;
 	padding: 2rem .6rem;
-	width: 100%;
 }
-#section_overview #tabOverview h3 a, #viz_coauthor.btn {
-
+#section_overview #tabOverview h3 a,
+#section_overview #tabOverview h3 .btn, 
+#section_overview #tabPublications h3 .btn, 
+#section_overview #tabResearch h3 .btn,
+#section_overview #tabBackground h3 .btn,
+#section_overview #tabAffiliations h3 .btn,
+#section_overview #tabTeaching h3 .btn {
+	border: none;
+	text-shadow: none;
+}
+#viz_coauthor.btn i, 
+#viz_collab.btn i {
+	color: hsla(50, 67%, 60%, 1);
 }
 .pub-title {
 	font-weight: 600;
