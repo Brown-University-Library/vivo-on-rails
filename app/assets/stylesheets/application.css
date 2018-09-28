@@ -1856,6 +1856,23 @@ display: none;
 /*.organization-page #tabOverview h4.brown-affiliations.panel-heading:nth-of-type(1) {
 	margin-top: 0;
 }*/
+	.organization-page #section_overview .brown-affiliations-list p {
+		display: flex;
+		flex-direction: column;
+	}
+	.organization-page #section_overview .brown-affiliations-list a {
+		color: #333;
+		font-size: 2rem;
+		line-height: 2.4rem;
+		margin-bottom: .3rem;
+	}
+	.organization-page #section_overview .brown-affiliations-list a:hover {
+		border-bottom: 3px solid #FF5252;
+	}
+	.organization-page #section_overview .brown-affiliations-list span {
+		font-size: 1.8rem;
+		line-height: 2.1rem;
+	}
 	.org-profile #individual-info header h3 {
 		font-size: 4.8rem;
 		line-height: 5rem;

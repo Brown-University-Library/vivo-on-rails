@@ -17,7 +17,7 @@
       <h4 class="brown-affiliations panel-heading">Faculty Administrative Positions</h4>
       <div class="brown-affiliations-list">
         <% @presenter.admin_positions.each do |p| %>
-          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>, <%= p.specific_position %></p>
+          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
         <% end %>
       </div>
     <% end %>
@@ -26,7 +26,7 @@
       <h4 class="brown-affiliations panel-heading">Faculty Positions</h4>
       <div class="brown-affiliations-list">
         <% @presenter.faculty_positions.each do |p| %>
-          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a>, <%= p.specific_position %></p>
+          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
         <% end %>
       </div>
     <% end %>
