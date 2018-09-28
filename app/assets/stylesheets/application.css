@@ -908,6 +908,10 @@ a.back-to-search:hover .glyphicon-chevron-left {
 .share-contact {
 	border-radius: 0;
 }
+.profile-page .share-contact h2 {
+	word-break: break-word;
+	word-wrap: break-word;
+}
 .share-contact > h4 {
 	margin: 3rem 0 2rem 0;
 }
@@ -1373,8 +1377,8 @@ td.citation-data.pub-item {
 }
 
 .organization-page #section_overview ul a {
-	overflow-wrap: break-word;
 	word-break: break-word;
+	word-wrap: break-word;
 }
 
 .container.organization-page {
@@ -1429,8 +1433,8 @@ td.citation-data.pub-item {
 }
 .organization-page .organization-title a {
 	color: #594036;
-	overflow-wrap: break-word;
 	word-break: break-word;
+	word-wrap: break-word;
 }
 .organization-page #section_overview {
 	display: grid;
@@ -1547,6 +1551,7 @@ display: none;
 }
 .organization-page p {
 	word-break: break-word;
+	word-wrap: break-word;
 }
 .organization-page #section_overview .panel-heading {
 	background-color: #333;
@@ -1730,18 +1735,22 @@ display: none;
 	}
 	.share-contact h2 {
 		color: #fff;
+		padding: 0 1rem;
 	}
 	.btn-group-vertical .btn {
 		font-size: 2.4rem;
 		padding: 3rem 1.5rem;
 	}
 	.container.profile #tabOverview p {
+		word-break: break-word;
 		word-wrap: break-word;
 	}
 	.brown-research-areas-list a {
+		word-break: break-word;
 		word-wrap: break-word;
 	}
 	.container.profile .panel-body .property-list {
+		word-break: break-word;
 		word-wrap: break-word;
 	}
 	/* org page */
@@ -1772,6 +1781,7 @@ display: none;
 	}
 	.organization-page p {
 		word-break: break-word;
+		word-wrap: break-word;
 	}
 	.organization-page .organization-title {
 		display: flex;
@@ -1856,20 +1866,25 @@ display: none;
 /*.organization-page #tabOverview h4.brown-affiliations.panel-heading:nth-of-type(1) {
 	margin-top: 0;
 }*/
+	.organization-page #section_overview .brown-affiliations-list img {
+		display: none;
+	}
 	.organization-page #section_overview .brown-affiliations-list p {
-		display: flex;
-		flex-direction: column;
+/*		display: flex;
+		flex-direction: column;*/
 	}
 	.organization-page #section_overview .brown-affiliations-list a {
 		color: #333;
 		font-size: 2rem;
 		line-height: 2.4rem;
 		margin-bottom: .3rem;
+		width: auto;
 	}
 	.organization-page #section_overview .brown-affiliations-list a:hover {
 		border-bottom: 3px solid #FF5252;
 	}
 	.organization-page #section_overview .brown-affiliations-list span {
+		display: block;
 		font-size: 1.8rem;
 		line-height: 2.1rem;
 	}
@@ -1881,9 +1896,11 @@ display: none;
 		margin-bottom: 1rem;
 	}
 	.org-profile #individual-info a {
+		word-break: break-word;
 		word-wrap: break-word;
 	}
 	.org-profile #individual-info p {
+		word-break: break-word;
 		word-wrap: break-word;
 	}
 	.footer {
