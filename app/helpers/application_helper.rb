@@ -12,6 +12,10 @@ module ApplicationHelper
     "new-backgrounds/" + images[rand(images.size)]
   end
 
+  def manager_url()
+    ENV['MANAGER_URL']
+  end
+
   def contact_us_url()
     url = "https://docs.google.com/forms/d/e/1FAIpQLSe9_8wO8f6Vd0E0N_ZVXiBN2YSO7NmWvP-utEGiQLJXz3nkJA/viewform?usp=pp_url&entry.1922592043&entry.911094868&entry.1400327620&entry.197578216&entry.19651479={LINK}"
     if defined?(request) && request != nil
