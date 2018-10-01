@@ -1401,7 +1401,7 @@ td.citation-data.pub-item {
 	margin: 0;
 }
 .organization-page .decorative-bar {
-	background-color: #B9B9B8;
+	background-color: hsla(60, 1%, 90%, 1);
 	display: flex;
 	justify-self: center;
 	grid-area: 2 / 6 / 3 / 8;
@@ -1438,9 +1438,10 @@ td.citation-data.pub-item {
 }
 .organization-page #section_overview {
 	display: grid;
+	grid-area: 3 / 1 / 4 / 13;
+	grid-gap: 2rem;
 	grid-template-columns: repeat(12, 1fr);
 	grid-template-rows: auto;
-	grid-area: 3 / 1 / 4 / 13;
 	margin-top: 5rem;
 	width: 100%;
 }
@@ -1453,10 +1454,14 @@ td.citation-data.pub-item {
 	margin-top: 2rem;
 }
 .organization-page .viz_collab-image {
+/*	background-color: hsla(56, 88%, 63%, 1);*/
+	height: auto;
+	min-height: 15rem;
 	margin-bottom: 1rem;
+	width: 100%;
 	max-width: 16rem;
 }
-.organization-page #viz_collab {
+.organization-page #viz_collab.btn {
 /*	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row: auto;*/
@@ -1466,6 +1471,10 @@ td.citation-data.pub-item {
 	font-weight: 600;
 	text-shadow: none;
 	width: 16rem;
+	z-index: 1;
+}
+.organization-page #viz_collab.btn:hover {
+	background-color: hsla(56, 88%, 73%, 1);
 }
 .organization-page #section_overview .organization-overview {
 /*	grid-column-start: 4;
@@ -1474,6 +1483,10 @@ td.citation-data.pub-item {
 	grid-area: 1 / 4 / 2 / 13;
 	font-size: 2.1rem;
 	line-height: 3.2rem;
+}
+.organization-page #section_overview .organization-overview a {
+	font-size: 2rem;
+	line-height: 3.1rem;
 }
 .organization-page #section_overview #tabOverview {
 /*	grid-column-start: 1;
@@ -1485,18 +1498,59 @@ td.citation-data.pub-item {
 .organization-page #section_overview #tabOverview h3 {
 	display: none;
 }
-.organization-page #section_overview .brown-affiliations-list a {
+.organization-page #section_overview .brown-affiliations-list {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: auto;
+}
+.organization-page #section_overview .brown-affiliate:nth-child(even) {
+	background-color: hsla(40, 31%, 94%, 1);
+}
+.organization-page #section_overview .brown-affiliate {
+	display: grid;
+	grid-column-start: 1;
+	grid-column-end: 13;
+	grid-gap: 1.5rem;
+	grid-row: auto;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: auto;
+	margin-bottom: 1.5rem;
+}
+.organization-page #section_overview .brown-affiliate img {
+	background-color: hsla(56, 88%, 63%, 1);
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row: auto;
+	height: auto;
+	min-height: 20rem;
+	width: 100%;
+	min-width: 100%;
+}
+.organization-page #section_overview .brown-affiliate p {
+/*	display: flex;*/
+/*	flex-direction: column;*/
+	grid-column-start: 4;
+	grid-column-end: 13;
+	grid-row: auto;
+	margin-top: 2rem;
+
+}
+.organization-page #section_overview .brown-affiliate a {
 	color: #333;
-/*		font-size: 2rem;
-		line-height: 2.4rem;
-		margin-bottom: .3rem;*/
+	font-size: 2rem;
+	line-height: 2.4rem;
+	margin-bottom: .3rem;
+	display: inline-block;
 }
-.organization-page #section_overview .brown-affiliations-list a:hover {
+.organization-page #section_overview .brown-affiliate a:hover {
 	border-bottom: 3px solid #333;
+	margin-bottom: 0rem;
 }
-.organization-page #section_overview .brown-affiliations-list span {
+.organization-page #section_overview .brown-affiliate span {
 /*	font-size: 1.8rem;
 	line-height: 2.1rem;*/
+	display: block;
+
 }
 .organization-page #section_overview ul {
 	padding: 0;
@@ -1835,21 +1889,21 @@ td.citation-data.pub-item {
 /*.organization-page #tabOverview h4.brown-affiliations.panel-heading:nth-of-type(1) {
 	margin-top: 0;
 }*/
-	.organization-page #section_overview .brown-affiliations-list img {
+	.organization-page #section_overview .brown-affiliate img {
 		display: none;
 	}
-	.organization-page #section_overview .brown-affiliations-list p {
+	.organization-page #section_overview .brown-affiliate p {
 		margin-bottom: 2rem;
 	}
-	.organization-page #section_overview .brown-affiliations-list a {
+	.organization-page #section_overview .brown-affiliate a {
 		font-size: 2rem;
 		line-height: 2.4rem;
 		margin-bottom: .3rem;
 	}
-	.organization-page #section_overview .brown-affiliations-list a:hover {
+	.organization-page #section_overview .brown-affiliate a:hover {
 		border-bottom: 3px solid #FF5252;
 	}
-	.organization-page #section_overview .brown-affiliations-list span {
+	.organization-page #section_overview .brown-affiliate span {
 		display: block;
 		font-size: 1.8rem;
 		line-height: 2.1rem;

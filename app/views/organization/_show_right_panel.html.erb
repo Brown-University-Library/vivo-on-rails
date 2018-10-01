@@ -3,7 +3,11 @@
 
   <% if @presenter.show_visualizations && @presenter.all_positions.count > 0 %>
     <div class="viz_collab-wrapper">
-      <img class="viz_collab-image" src=" " alt=" " aria-hidden="true" />
+      <div class="viz_collab-image" aria-hidden="true">
+        <svg transform="scale(4)" viewBox="10 -30 960 700">
+          <line x1="502.673652104801" y1="350.68520459323065" x2="402.7251593479398" y2="416.5887723542673" style="stroke: rgb(204, 204, 204); stroke-width: 1;"></line><line x1="502.673652104801" y1="350.68520459323065" x2="499.78845920192833" y2="237.86031944054113" style="stroke: rgb(204, 204, 204); stroke-width: 1;"></line><line x1="502.673652104801" y1="350.68520459323065" x2="565.5511229205018" y2="443.74075835464873" style="stroke: rgb(204, 204, 204); stroke-width: 1;"></line><line x1="502.673652104801" y1="350.68520459323065" x2="384.6396536498693" y2="335.42815590893093" style="stroke: rgb(204, 204, 204); stroke-width: 1;"></line><line x1="502.673652104801" y1="350.68520459323065" x2="597.2837081030898" y2="294.1619622100169" style="stroke: rgb(204, 204, 204); stroke-width: 1;"></line><line x1="457.79286555972226" y1="418.67277812899147" x2="429.54751433822946" y2="302.8619812431097" style="stroke: rgb(204, 204, 204); stroke-width: 1;"></line><g transform="translate(502.673652104801,350.68520459323065)"><circle r="15" style="fill: rgb(174, 199, 232);"></circle></g><g transform="translate(402.7251593479398,416.5887723542673)"><circle r="15" style="fill: rgb(174, 199, 232);"></circle></g><g transform="translate(499.78845920192833,237.86031944054113)"><circle r="15" style="fill: rgb(174, 199, 232);"></circle></g><g transform="translate(565.5511229205018,443.74075835464873)"><circle r="11" style="fill: rgb(255, 127, 14);"></circle></g><g transform="translate(384.6396536498693,335.42815590893093)"><circle r="15" style="fill: rgb(174, 199, 232);"></circle></g><g transform="translate(597.2837081030898,294.1619622100169)"><circle r="11" style="fill: rgb(31, 119, 180);"></circle></g><g transform="translate(457.79286555972226,418.67277812899147)"><circle r="15" style="fill: rgb(174, 199, 232);"></circle></g><g transform="translate(429.54751433822946,302.8619812431097)"><circle r="15" style="fill: rgb(174, 199, 232);"></circle></g>
+        </svg>
+      </div>
       <a id="viz_collab" class="btn btn-default"
         href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" target="_blank"
         title="Visualize collaborators network">Visualize it&nbsp;</a>
@@ -17,8 +21,10 @@
       <h4 class="brown-affiliations panel-heading">Faculty Administrative Positions</h4>
       <div class="brown-affiliations-list">
         <% @presenter.admin_positions.each do |p| %>
-          <img src=" " alt=" " />
-          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
+          <div class="brown-affiliate">
+            <img src=" " alt=" " />
+            <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
+          </div>
         <% end %>
       </div>
     <% end %>
@@ -27,8 +33,10 @@
       <h4 class="brown-affiliations panel-heading">Faculty Positions</h4>
       <div class="brown-affiliations-list">
         <% @presenter.faculty_positions.each do |p| %>
-          <img src=" " alt=" " />
-          <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
+          <div class="brown-affiliate">
+            <img src=" " alt=" " />
+            <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
+          </div>
         <% end %>
       </div>
     <% end %>
