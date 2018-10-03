@@ -845,6 +845,7 @@ a.back-to-search:after {
 }
 a.back-to-search .glyphicon-chevron-left {
 	color: #333;
+	margin-bottom: .5rem;
 	margin-right: .5rem;
 	transform: scale(1.5);
 }
