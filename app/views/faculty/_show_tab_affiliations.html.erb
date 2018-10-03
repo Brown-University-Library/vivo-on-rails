@@ -75,15 +75,17 @@
                 <% @presenter.faculty.appointments.each do |a| %>
                   <tr class="tableRow" role="listitem">
                     <td>
-                      <span class="listDateTime"><%= a.name %></span>.
-                      <span>
-                        <% qs = '?q=appointment_at:"' + CGI.escape(a.org_name) + '"' %>
-                        <a href="<%= search_url() + qs %>"
-                          title="Find researchers that had appointments at this institution">
-                          <%= a.org_name %></a>,
-                      </span>
-                      <span class="listDateTime"><%= a.department %></span>
-                      <span class="listDateTime"><%= a.year_range_str %></span>
+                      <span><%= a.name %></span>.
+                      <% if a.has_org? %>
+                        <span>
+                          <% qs = '?q=appointment_at:"' + CGI.escape(a.org_name) + '"' %>
+                          <a href="<%= search_url() + qs %>"
+                            title="Find researchers that had appointments at this institution">
+                            <%= a.org_name %></a>,
+                        </span>
+                      <% end %>
+                      <span><%= a.department %></span>
+                      <span><%= a.year_range_str %></span>
                     </td>
                   </tr>
                 <% end %>

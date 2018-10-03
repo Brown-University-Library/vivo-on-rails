@@ -40,4 +40,8 @@ class AppointmentItem
   def self.from_hash_array(values)
     values.map {|v| AppointmentItem.new(v)}.sort_by {|v| v.start_date || Date.new(1900,1,1)}.reverse
   end
+
+  def has_org?
+    @org_name != ""
+  end
 end
