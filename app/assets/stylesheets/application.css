@@ -1419,6 +1419,7 @@ td.citation-data.pub-item {
 	margin-right: 5.5rem;
 	padding-left: 2rem;
 	text-align: right;
+	z-index: 1;
 }
 .organization-page .organization-title h2 {
 	font-size: 5.2rem;
@@ -1802,6 +1803,7 @@ td.citation-data.pub-item {
 		margin: 0;
 		padding: 0;
 		text-align: left;
+		z-index: 0;
 	}
 	.organization-page .organization-title h2 {
 		align-items: center;
