@@ -1523,7 +1523,10 @@ td.citation-data.pub-item {
 	grid-column-end: 4;
 	grid-row: auto;
 	height: auto;
-	min-height: 20rem;
+	min-height: 18rem;
+/*	max-height: 20rem;*/
+	object-fit: cover;
+	object-position: 50% 0%;
 	width: 100%;
 	min-width: 100%;
 }
