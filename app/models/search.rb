@@ -20,17 +20,8 @@ class Search
     params.fl = ["id", "record_type", "thumbnail_file_path_s", "json_txt"]
 
     # Query filter with custom boost values
-    #
-    # TODO: Use this new qf once we update the production Solr with the new
-    #       fields (research_areas_en and affiliations_en)
-    #       Make sure we also include them under params.hl_fl below.
-    #
-    # qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
-    # "title_t^1600 department_t^1500 research_areas_en^400 affiliations_en^450 " +
-    # "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
-    #
     qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
-    "title_t^1600 department_t^1500 research_areas_txt^400 affiliations^450 " +
+    "title_t^1600 department_t^1500 research_areas_en^400 affiliations_en^450 " +
     "nameUnstemmed^4 nameStemmed^4 nameLowercase ALLTEXT^2 ALLTEXTUNSTEMMED^2"
 
     # Hit highlighting
@@ -38,10 +29,10 @@ class Search
       params.hl = true
       # Notice that we don't highlight name_t and title_t because we always
       # display those values.
-      params.hl_fl = "department_t research_areas_txt affiliations overview_t ALLTEXT email_s short_id_s"
+      params.hl_fl = "department_t research_areas_en affiliations_en overview_en ALLTEXT email_s short_id_s"
       # A large number here allows us to get a large number of hits which is
       # useful for searches with 3 or more search terms. However, this value
-      # increases the size of the response and we might need to reduce it if
+      # increases the size of the response and we might need to reduce if it
       # results in performance issues.
       params.hl_snippets = 30
     end
