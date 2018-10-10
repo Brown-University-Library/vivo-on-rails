@@ -22,7 +22,7 @@
       <div class="brown-affiliations-list">
         <% @presenter.admin_positions.each do |p| %>
           <div class="brown-affiliate">
-            <img src=" " alt=" " />
+            <%= image_tag(p.thumbnail_url, alt: "Faculty Picture") %>
             <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
           </div>
         <% end %>
@@ -34,7 +34,7 @@
       <div class="brown-affiliations-list">
         <% @presenter.faculty_positions.each do |p| %>
           <div class="brown-affiliate">
-            <img src=" " alt=" " />
+            <%= image_tag(p.thumbnail_url, alt: "Faculty Picture") %>
             <p><a href="<%= display_show_url(p.vivo_id) %>"><%= p.label %></a><span><%= p.specific_position %></span></p>
           </div>
         <% end %>
