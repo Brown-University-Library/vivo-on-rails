@@ -17,21 +17,22 @@ class SearchHighlights
   # user searched for three terms we try to include highlights for
   # all three terms rather than five highlights for the first one.
   #
-  # Note: This code is hard-coded to match our fields.
+  # TODO: This code is hard-coded to match our fields.
   # Consider making it configurable after we go live.
   def html(count)
     html = ""
     hits = top_hits(count)
 
     # Gather the highlights in order: department + research areas + overview.
-    # TODO: Add affiliations when we add affiliations_en field to Solr.
     html += html_for_field(hits, "department_t", "Department")
-    html += html_for_field(hits, "research_areas_txt", "Research areas")
-    html += html_for_field(hits, "overview_t", "Overview")
+    html += html_for_field(hits, "research_areas_en", "Research areas")
+    html += html_for_field(hits, "affiliations_en", "Affiliations")
+    html += html_for_field(hits, "overview_en", "Overview")
 
     # and then highlights for the rest of the fields (i.e. ALLTEXT)
     hits.each do |hit|
-      if hit.field == "research_areas_txt" || hit.field == "department_t" || hit.field == "overview_t"
+      if hit.field == "research_areas_en" || hit.field == "affiliations_en" ||
+        hit.field == "department_t" || hit.field == "overview_en"
         next
       end
       html += "<p>#{hit.value}</p>"
