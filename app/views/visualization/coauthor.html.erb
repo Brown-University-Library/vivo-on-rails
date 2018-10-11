@@ -16,19 +16,15 @@
       Only publications where more than one researcher at Brown has confirmed authorship
       are considered in this network. <span id="calculatedInfo"></span>
     </div>
-    <div id="errorMsg" class="hidden">
-      <div class="alert alert-warning" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        No coauthor data is available for this researcher.
-      </div>
+    <div id="errorMsg" class="alert alert-warning hidden" role="alert">
+      <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>No coauthor data is available for this researcher.</p>
       <p>The coauthor network is derived from the list of publications from a
         researcher. For a coauthor relationship to be considered in this
         visualization, two Brown University coauthors must approve the same
         publication. If this is your profile you can review and approve your
         publications via the
-        <a target="_blank" href="<%= manager_url() %>">manager</a>.
-      </p>
+        <a target="_blank" href="<%= manager_url() %>">manager</a>.</p>
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">

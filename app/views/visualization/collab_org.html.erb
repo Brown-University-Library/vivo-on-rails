@@ -14,12 +14,9 @@
       Affiliations tab for their profile. The collaborator network for this
       organization was calculated on <span id="txtLastUpdated"></span>.
     </div>
-    <div id="errorMsg" class="hidden">
-      <div class="alert alert-warning" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        No collaboration data is available for this organization.
-      </div>
+    <div id="errorMsg" class="alert alert-warning hidden" role="alert">
+      <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>No collaboration data is available for this organization.</p>
       <p>If you are a member of this organization you can define your collaborators
         via the <a target="_blank" href="<%= manager_url() %>">manager</a>.
       </p>

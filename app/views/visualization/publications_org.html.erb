@@ -13,10 +13,12 @@
       the information provided by each researcher associated with this organization
       under the Publications tab for their profile.
     </div>
-    <div id="errorMsg" class="alert alert-danger hidden" role="alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span>
-      No publication data is available for this organization.
+    <div id="errorMsg" class="alert alert-warning hidden" role="alert">
+      <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>No publication data is available for this organization.</p>
+      <p>If you are a member of this organization you can define your publications
+        via the <a target="_blank" href="<%= manager_url() %>">manager</a>.
+      </p>
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">

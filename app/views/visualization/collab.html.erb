@@ -15,15 +15,11 @@
       <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Affiliations">Affiliations tab of their profile</a>.
       <span id="calculatedInfo"></span>
     </div>
-    <div id="errorMsg" class="hidden">
-      <div class="alert alert-warning" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        No collaboration data is available for this researcher.
-      </div>
+    <div id="errorMsg" class="alert alert-warning hidden" role="alert">
+      <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>No collaboration data is available for this researcher.</p>
       <p>If this is your profile you can define collaborators via the
-        <a target="_blank" href="<%= manager_url() %>">manager</a>.
-      </p>
+        <a target="_blank" href="<%= manager_url() %>">manager</a>.</p>
     </div>
     <div class="btn-group btn-group" role="group" aria-label="...">
       <div class="btn-group" role="group">
