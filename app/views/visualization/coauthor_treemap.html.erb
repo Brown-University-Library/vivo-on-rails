@@ -14,8 +14,7 @@
       researcher under the
       <a href="<%= display_show_path(@presenter.faculty.vivo_id) %>#Publications">Publications tab of their profile</a>.
       Only publications where more than one researcher at Brown has confirmed authorship
-      are considered in this network. The coauthor treemap for this researcher was
-      calculated on <span id="txtLastUpdated"></span>.
+      are considered in this network. <span id="calculatedInfo"></span>
     </div>
     <div id="errorMsg" class="hidden">
       <div class="alert alert-warning" role="alert">
@@ -142,6 +141,7 @@
 
   function drawGraph() {
     var data, i, link, newId, node, childNode;
+    var calculatedInfo;
 
     $("#loadingMsg").addClass("hidden");
 
@@ -156,9 +156,11 @@
     }
 
     if (isValidDate(lastUpdated)) {
-      $("#txtLastUpdated").text(lastUpdated.toLocaleDateString('en-US', { timeZone: 'UTC' }));
+      calculatedInfo = "The coauthor treemap for this researcher was calculated on " +
+        lastUpdated.toLocaleDateString('en-US', { timeZone: 'UTC' }) + ".";
+      $("#calculatedInfo").text(calculatedInfo);
     } else {
-      $("#txtLastUpdated").text("(not available)");
+      // ???
     }
 
     // Populate the treemap children with the information in theData.
