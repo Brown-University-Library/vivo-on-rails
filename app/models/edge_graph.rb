@@ -20,6 +20,10 @@ class EdgeGraph
   # structure (as documented in the `initialize()` method above)
   def self.new_from_hash(json)
     graph = EdgeGraph.new()
+    if json == nil
+      return graph
+    end
+
     json[:nodes].each do |node|
       graph.add_node(node)
     end
@@ -27,7 +31,6 @@ class EdgeGraph
     json[:links].each do |link|
       graph.add_link(link)
     end
-
     graph
   end
 
