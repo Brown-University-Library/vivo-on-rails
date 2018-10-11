@@ -49,12 +49,8 @@
     <p><b>Options</b></p>
     <p><a href="<%= display_show_path(@presenter.faculty.vivo_id) %>">Go to Researcher's Profile</a></p>
     <p><b>Data</b></p>
-    <p><a href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :csv) %>"
-      title="Format suitable for Excel and other tools."
-      target="_blank">Download data (CSV)</a></p>
-    <p><a href="<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>"
-      title="Format suitable for D3 and other visualization tools."
-      target="_blank">Download data (JSON)</a></p>
+    <p><a href="#" id="csvData" title="Format suitable for Excel and other tools." target="_blank">Download data (CSV)</a></p>
+    <p><a href="#" id="jsonData" title="Format suitable for D3 and other visualization tools." target="_blank">Download data (JSON)</a></p>
     <p><a href="#" id="embedHtml" title="Shows HTML to embed the graph as an SVG element into your own page.">Embed SVG Code</a></p>
     <p><a href="#" id="downloadPng" title="Downlods the graph as an image file in PNG format. This only works in Chrome and Firefox.">Download Image (PNG)</a></p>
   </div>
@@ -84,6 +80,7 @@
   var facultyId = "<%= @presenter.faculty.id %>";     // http://vivo.brown.edu/jcarberry
   var vivoId = "<%= @presenter.faculty.vivo_id %>";   // jcarberry
   var jsonDataUrl = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :json) %>";
+  var csvDataUrl = "<%= visualization_coauthor_path(@presenter.faculty.vivo_id, format: :csv) %>";
   var svgWidth = 960;
   var svgHeight = 700;
   var theData = null;
@@ -96,6 +93,10 @@
       lastUpdated = new Date(data.updated);
       drawGraph();
     });
+
+    // Set theses URLs via JavaScript to reduce the number of bots that crawl them.
+    $("#csvData").attr("href", csvDataUrl);
+    $("#jsonData").attr("href", jsonDataUrl);
 
     $("#showLabels").on("click", updateLabels);
 
