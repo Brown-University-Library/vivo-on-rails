@@ -1,5 +1,5 @@
 require "csv"
-require "byebug"
+# require "byebug"
 require "./app/models/search.rb"
 namespace :vivo do
   desc "Determines which faculty will have visualizations"
