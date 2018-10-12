@@ -87,9 +87,13 @@
       showTab(tabId);
     }
 
-    if (<%= ENV["VIZ_ENABLED"] == "true" %> && showFacultyViz) {
-      $("#viz_coauthor").removeClass("hidden");
-      $("#viz_collab").removeClass("hidden");
+    if (showViz) {
+      if (hasCoauthors) {
+        $("#viz_coauthor").removeClass("hidden");
+      }
+      if (hasCollaborators) {
+        $("#viz_collab").removeClass("hidden");
+      }
     }
   });
 </script>

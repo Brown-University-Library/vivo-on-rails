@@ -8,7 +8,8 @@ class FacultyItem
     :collaborators, :affiliations_text, :affiliations, :research_areas,
     :on_the_web, :appointments, :published_in, :hidden,
     :cv_link, :credentials, :training,
-    :fis_updated, :profile_updated, :show_visualizations
+    :fis_updated, :profile_updated, :show_visualizations,
+    :has_coauthors
 
   def initialize(values = nil)
     init_defaults()
@@ -48,6 +49,7 @@ class FacultyItem
     @fis_updated = nil
     @profile_updated = nil
     @show_visualizations = false
+    @has_coauthors = false
   end
 
   def vivo_id

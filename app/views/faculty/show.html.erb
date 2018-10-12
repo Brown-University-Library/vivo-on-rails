@@ -1,7 +1,9 @@
 <script type="text/javascript">
   var vivoId = "<%= @presenter.faculty.vivo_id %>";
   var facultyId = "<%= @presenter.faculty.id %>";
-  var showFacultyViz = <%= @presenter.show_visualizations %>;
+  var showViz = <%= @presenter.show_visualizations %>;
+  var hasCoauthors = <%= @presenter.has_coauthors %>;
+  var hasCollaborators = true; // TODO: implement this
 </script>
 
 <%= render "faculty/show_javascript" %>

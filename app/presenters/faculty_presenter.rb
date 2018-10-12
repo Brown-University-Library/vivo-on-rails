@@ -3,7 +3,7 @@ class FacultyPresenter
   attr_accessor :faculty, :has_publications, :has_research, :has_background,
     :has_affiliations, :has_teaching, :has_details,
     :publication_filters,
-    :show_back_to_search, :show_visualizations
+    :show_back_to_search, :show_visualizations, :has_coauthors
 
   def initialize(faculty, search_url, referer, force_show_viz)
     @faculty = faculty
@@ -12,6 +12,7 @@ class FacultyPresenter
     @show_back_to_search = referer && referer.start_with?(search_url)
 
     @show_visualizations = @faculty.show_visualizations || force_show_viz
+    @has_coauthors = @faculty.has_coauthors
 
     @has_publications = faculty.contributor_to.count > 0
     @publication_filters = get_publication_filters()
