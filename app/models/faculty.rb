@@ -27,6 +27,16 @@ class Faculty
       f.item = FacultyItem.from_hash(f.json_txt, display_name, thumbnail_url,
         fis_updated, profile_updated, show_visualizations)
       f.item.has_coauthors = self.has_coauthors?(id)
+      if f.item.collaborators.count == 0
+        f.item.has_collaborators = false
+      else
+        # Note: Due to the way the data is stored in the Data service
+        # it is possible that we return true for individuals that have
+        # an empty collaborator network. This should be very rare since
+        # we are only making the call if the individual has explicitly
+        # indicated collaborators on their profile.
+        f.item.has_collaborators = self.has_collaborators?(id)
+      end
     end
     f
   end
@@ -49,12 +59,28 @@ class Faculty
     false
   end
 
-  def self.coauthors_cache
+  def self.has_collaborators?(id)
+    collabs = self.collaborators_cache()
+    if collabs != nil
+      key = "http://vivo.brown.edu/individual/#{id}"
+      if collabs[key] != nil
+        return true
+      end
+    end
+    false
+  end
+
+  def self.coauthors_cache()
     Rails.cache.fetch("coauthors_list", expires_in: 5.minute) do
       begin
         Rails.logger.info "Fetching coauthor list."
         ok, data = CoauthorGraph.get_list
-        data
+        if ok
+          data
+        else
+          Rails.logger.error "Could not cache coauthor list."
+          nil
+        end
       rescue Exception => e
         Rails.logger.error "Could not cache coauthor list. #{e}"
         nil
@@ -62,4 +88,21 @@ class Faculty
     end
   end
 
+  def self.collaborators_cache()
+    Rails.cache.fetch("collaborators_list", expires_in: 5.minute) do
+      begin
+        Rails.logger.info "Fetching collaborators list."
+        ok, data = CollabGraph.get_list
+        if ok
+          data
+        else
+          Rails.logger.error "Could not cache collaborators list."
+          nil
+        end
+      rescue Exception => e
+        Rails.logger.error "Could not cache collaborators list. #{e}"
+        nil
+      end
+    end
+  end
 end

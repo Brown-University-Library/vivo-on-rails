@@ -3,7 +3,7 @@ class FacultyPresenter
   attr_accessor :faculty, :has_publications, :has_research, :has_background,
     :has_affiliations, :has_teaching, :has_details,
     :publication_filters,
-    :show_back_to_search, :show_visualizations, :has_coauthors
+    :show_back_to_search, :show_visualizations, :has_coauthors, :has_collaborators
 
   def initialize(faculty, search_url, referer, force_show_viz)
     @faculty = faculty
@@ -11,8 +11,20 @@ class FacultyPresenter
     # Show it only if we are coming to the faculty page from a search
     @show_back_to_search = referer && referer.start_with?(search_url)
 
+    # These flags are used for deciding if we need to render the visualizations.
+    #
+    #   show_visualizations:  true if user has turned on visualizations.
+    #   has_coauthors:        true if there are coauthors for this researcher.
+    #   has_collaborators:    true if there are collaboators for this researcher.
+    #
+    # Notice that the has_coauthors and has_collaborators flags represent
+    # whether the corresponding network for the researcher has been calculated
+    # and contains data (i.e. it not just depending on a simple count of
+    # publications or collaborators).
+    #
     @show_visualizations = @faculty.show_visualizations || force_show_viz
     @has_coauthors = @faculty.has_coauthors
+    @has_collaborators = @faculty.has_collaborators
 
     @has_publications = faculty.contributor_to.count > 0
     @publication_filters = get_publication_filters()

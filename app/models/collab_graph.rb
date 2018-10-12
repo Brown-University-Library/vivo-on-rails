@@ -50,4 +50,15 @@ class CollabGraph
     graph.links {|link| link.weight = 1}
     return true, graph.to_csv()
   end
+
+  def self.get_list()
+    url = "#{ENV['VIZ_SERVICE_URL']}/collaborators/"
+    ok, str = ModelUtils.http_get_body(url)
+    if !ok
+      return false, {status: 500, message: "Could not retrieve collaborators graph list"}
+    end
+
+    data = JSON.parse(str, {symbolize_names: false})
+    return true, data
+  end
 end

@@ -9,7 +9,7 @@ class FacultyItem
     :on_the_web, :appointments, :published_in, :hidden,
     :cv_link, :credentials, :training,
     :fis_updated, :profile_updated, :show_visualizations,
-    :has_coauthors
+    :has_coauthors, :has_collaborators
 
   def initialize(values = nil)
     init_defaults()
@@ -50,6 +50,7 @@ class FacultyItem
     @profile_updated = nil
     @show_visualizations = false
     @has_coauthors = false
+    @has_collaborators = false
   end
 
   def vivo_id

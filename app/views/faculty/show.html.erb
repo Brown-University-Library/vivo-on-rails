@@ -3,7 +3,7 @@
   var facultyId = "<%= @presenter.faculty.id %>";
   var showViz = <%= @presenter.show_visualizations %>;
   var hasCoauthors = <%= @presenter.has_coauthors %>;
-  var hasCollaborators = true; // TODO: implement this
+  var hasCollaborators = <%= @presenter.has_collaborators %>;
 </script>
 
 <%= render "faculty/show_javascript" %>
