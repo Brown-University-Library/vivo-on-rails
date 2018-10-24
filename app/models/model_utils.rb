@@ -45,6 +45,22 @@ class ModelUtils
       part_b = id[4..6]
       part_c = id[7..-1]
       url = "#{root_url}/profile-images/#{part_a}/#{part_b}/#{part_c}/#{file_name}"
+    when id.length == 33
+      # It's a UUID.
+      # UUIDs come in the form: "n12345678901234567890123456789012"
+      #
+      # Drop the "n" and break the rest of the string into subpaths
+      # (3 characters each, except the last one which would be 2 characters long).
+      # For example, UUID "n649cb8816f214915b8d659c3fee9ffa9" will be brokend
+      # down as: "649/cb8/816/f21/491/5b8/d65/9c3/fee/9ff/a9/"
+      #
+      url = "#{root_url}/profile-images/"
+      (0..10).each do |i|
+        a = (i*3) + 1
+        b = from + 2
+        url += id[a..b] + "/"
+      end
+      url += "#{file_name}"
     else
       url = nil
     end
