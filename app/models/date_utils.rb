@@ -1,3 +1,5 @@
+require 'date'
+
 class DateUtils
   def self.year_range_str(start_date, stop_date)
     y1 = year_str(start_date)
@@ -25,7 +27,7 @@ class DateUtils
 
   def self.year_str(date)
     return "" if date == nil
-    return "Present" if date.year == 9999
+    return "Present" if date.year > Date.today.year
     return date.year.to_s
   end
 end
