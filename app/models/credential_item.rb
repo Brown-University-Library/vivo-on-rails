@@ -38,16 +38,25 @@ class CredentialItem
   end
 
   def grantor_display
+    a = capitalize_first(@grantor_name)
+    b = capitalize_first(@specialty_name)
     case
-    when @grantor_name != "" && @specialty_name != ""
-      @grantor_name + ", " + @specialty_name
-    when @grantor_name != "" && @specialty_name == ""
-      @grantor_name
-    when @grantor_name == "" && @specialty_name != ""
-      @specialty_name
+    when a != "" && b != ""
+      a + ", " + b
+    when a != "" && b == ""
+      a
+    when a == "" && b != ""
+      b
     else
       ""
     end
+  end
+
+  def capitalize_first(str)
+    if str == nil || str.length == 0
+      return ""
+    end
+    str[0].capitalize + str[1..-1]
   end
 
   def vivo_id
