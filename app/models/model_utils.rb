@@ -57,7 +57,7 @@ class ModelUtils
       url = "#{root_url}/profile-images/"
       (0..10).each do |i|
         a = (i*3) + 1
-        b = from + 2
+        b = a + 2
         url += id[a..b] + "/"
       end
       url += "#{file_name}"
