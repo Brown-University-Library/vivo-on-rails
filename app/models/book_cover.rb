@@ -67,6 +67,21 @@ class BookCoverModel
     []
   end
 
+  def self.delete_all!()
+    sql = "DELETE FROM book_covers;"
+    ActiveRecord::Base.connection.execute(sql)
+    Rails.logger.info "Deleted all book covers from the database"
+  end
+
+  def self.import_file(file_name)
+    columns, rows = self.read_tsv_file(file_name)
+    rows.each do |row|
+      sql = self.sql_insert(row)
+      ActiveRecord::Base.connection.execute(sql)
+    end
+    Rails.logger.info "Imported #{rows.count} book covers..."
+  end
+
   def self.init_default_data()
     if book_covers_cache_count() > 0
       puts "Book covers cache has already been initialized."
@@ -186,4 +201,48 @@ class BookCoverModel
     rows = ActiveRecord::Base.connection.exec_query('SELECT count(*) AS count FROM book_covers;')
     rows.first["count"]
   end
+
+  private
+    def self.read_tsv_file(file_name)
+      columns = []
+      rows = []
+      File.open(file_name, "r") do |f|
+        line_no = 0
+        f.each_line do |line|
+          line_no += 1
+          tokens = line.split("\t")
+
+          if line_no == 1
+            columns == tokens
+          else
+            rows << tokens
+          end
+        end
+      end
+      return [columns, rows]
+    end
+
+    def self.sql_insert(row)
+      # notice that we ignore the first two columns (id and jacket_id)
+      firstname = str_value(row[2])
+      lastname = str_value(row[3])
+      shortID = str_value(row[4])
+      title = str_value(row[5])
+      pub_date = row[6]
+      image = str_value(row[7])
+      role = str_value(row[8])
+      dept = str_value(row[9])
+      dept2 = str_value(row[10])
+      dept3 = str_value(row[11])
+      active = str_value(row[12])
+
+      sql = <<-END_SQL.gsub(/\n/, '')
+        INSERT INTO book_covers (firstname, lastname, shortID, title, pub_date, image, role, dept, dept2, dept3, active)
+        VALUES (#{firstname}, #{lastname}, #{shortID}, #{title}, #{pub_date}, #{image}, #{role}, #{dept}, #{dept2}, #{dept3}, #{active});
+      END_SQL
+    end
+
+    def self.str_value(val)
+      '"' + val.gsub('"', '""') + '"'
+    end
 end
