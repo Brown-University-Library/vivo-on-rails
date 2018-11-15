@@ -26,6 +26,10 @@ class HomeController < ApplicationController
     @presenter = DefaultPresenter.new()
   end
 
+  def help_viz
+    @presenter = DefaultPresenter.new()
+  end
+
   def history
     @presenter = DefaultPresenter.new()
   end

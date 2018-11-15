@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'brown' => 'home#brown', as: :home_brown
   get 'about' => 'home#about', as: :home_about
   get 'faq' => 'home#faq', as: :home_faq
+  get 'help/viz' => 'home#help_viz', as: :home_help_viz
   get 'help' => 'home#help', as: :home_help
   get 'history' => 'home#history', as: :home_history
   get 'publications' => 'home#publications', as: :home_publications

@@ -1,0 +1,71 @@
+<style>
+    .screenshot {
+        margin-left: 100px;
+        border-style: solid;
+        border-width: 1px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <h2><%= image_tag("viz_mini.png") %>Visualize it! </h2>
+        <p>Your Brown co-author and Brown collaborator networks are now available as visual
+        representations at the individual and departmental levels. This feature is
+        automatically enabled for BioMed and School of Public Health faculty and opt-in
+        for others. Opting in or out is done in the profile manager
+        (click "Manage your profile"). </p>
+
+        <h3>How does this work?</h3>
+        <ul>
+            <li>For the <b>co-author network</b> both Brown authors must have entered co-authored
+            publications in the “Publications” section of their profiles in order for the
+            connection to be made.
+
+            <li>For the <b>collaborator network</b> it is enough for one Brown researcher to indicate
+            the collaboration via the “Affiliations” section of their profiles.
+
+            <li>If there is insufficient data in your “Publications” or “Affiliations” sections a
+            visualization will not be available.  If you and your co-authors and collaborators
+            add data to your profiles, visualizations will be automatically generated.
+
+            <li>The co-author and collaborator networks are updated nightly. Changes to co-authors or
+            collaborators in your profile will be reflected the next day in the visualizations.
+
+            <li>The more complete your publication and collaboration data, the more robust your data
+            visualizations.
+
+            <li>All visualizations are interactive and downloadable.
+
+            <li>Visualizations showing collaborator networks and publication history are also available at the department level.
+
+            <li>At this time visualizations are limited to Brown networks but there is the possibility adding non-Brown co-authors and collaborators in the future.
+        </ul>
+
+        <h3>How do I opt in or out?</h3>
+        <p>Click “Manage your profile” and then “Settings” on the left hand navigation.
+        You will see the option to show or hide visualizations. See below.</p>
+
+            <%= image_tag("viz_manager.png", class: "screenshot") %>
+
+        <h3>What does this look like in my profile?</h3>
+        <p>A small "Visualize it" icon appears on the Publications and Affiliations tabs for profiles that
+    have visualizations.</p>
+
+            <%= image_tag("viz_profile.png", class: "screenshot") %>
+
+        <p><br/><br/>Below is an example of a collaborator network visualization</p>
+
+            <%= image_tag("viz_sample.png", class: "screenshot") %>
+
+        <h3>How Can I Re-use Visualizations?</h3>
+        <ul>
+            <li>Visualizations can be downloaded as images to use in grant applications,
+            presentations, social media posts and other formats.
+            <li>The data underlying visualizations can be downloaded as CSV or JSON.
+            <li>The code to embed visualizations in other web applications can be downloaded.
+        </ul>
+
+        <p>For questions or assistance please contact
+        <a href="mailto:researchers@brown.edu">researchers@brown.edu</a>.</p>
+    </div>
+</div>
