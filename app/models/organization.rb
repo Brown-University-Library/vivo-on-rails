@@ -45,7 +45,7 @@ class Organization
     o.item.overview = "Consortium for Research and Innovation in Suicide Prevention"
     o.item.people = []
 
-    ids = ["ma1", "jbarredo", "lbrick", "ac67", "echen13", "ddickste",
+    ids = ["sarias1", "ma1", "jbarredo", "lbrick", "ac67", "echen13", "ddickste",
     "yduartev", "mjfrank", "bgaudian", "rnjones", "kkemp",
     "rl11", "bm8", "imilleri", "nnugent", "jprimack", "mranney",
     "hschatte", "aspirito", "luebelac", "lweinsto", "jw33", "syenphd"]
