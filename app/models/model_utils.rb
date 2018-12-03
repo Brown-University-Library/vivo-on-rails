@@ -6,6 +6,9 @@ class ModelUtils
   end
 
   def self.type_for_id(id)
+    if id == "team-crisp"
+      return "TEAM"
+    end
     solr_url = ENV["SOLR_URL"]
     logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
     solr = SolrLite::Solr.new(solr_url, logger)

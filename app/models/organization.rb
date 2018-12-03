@@ -30,4 +30,37 @@ class Organization
     solr = SolrLite::Solr.new(solr_url, logger)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
   end
+
+  def self.for_team(id)
+    # For now we only recognize one team
+    if id != "team-crisp"
+      return nil
+    end
+    o = Organization.new()
+    o.item = OrganizationItem.new({})
+    o.item.record_type = "TEAM"
+    o.item.uri = "http://vivo.brown.edu/individual/#{id}"
+    o.item.id = id
+    o.item.name = "Consortium for Research and Innovation in Suicide Prevention"
+    o.item.overview = "Consortium for Research and Innovation in Suicide Prevention"
+    o.item.people = []
+
+    ids = ["ma1", "jbarredo", "lbrick", "ac67", "echen13", "ddickste",
+    "yduartev", "mjfrank", "bgaudian", "rnjones", "kkemp",
+    "rl11", "bm8", "imilleri", "nnugent", "jprimack", "mranney",
+    "hschatte", "aspirito", "luebelac", "lweinsto", "jw33", "syenphd"]
+    ids.each do |id|
+        member_info = {
+            id: id,
+            faculty_uri: "http://vivo.brown.edu/individual/#{id}",
+            label: id,
+            general_position: "general position",
+            specific_position: "specific position"
+        }
+        member = OrganizationMemberItem.new(member_info)
+        o.item.people << member
+    end
+
+    o
+  end
 end

@@ -1,5 +1,6 @@
 require "edge_graph"
 require "model_utils"
+require "collab_graph_custom"
 
 class CollabGraph
   # Fetches the collaboration graph from the data service for a given ID.
@@ -23,8 +24,15 @@ class CollabGraph
   #
   def self.get_data(id)
     type = ModelUtils.type_for_id(id)
-    if type != "PEOPLE" && type != "ORGANIZATION"
+    if type != "PEOPLE" && type != "ORGANIZATION" && type != "TEAM"
       return false, {status: 404, message: "Could not retrieve collaboration graph for #{id} (invalid type)"}
+    end
+
+    if type == "TEAM"
+      g = CollabGraphCustom.new()
+      yesterday = (Date.today-1).to_s
+      data = {graph: g.graph_for_team(id), rabid: id, updated: yesterday}
+      return true, data
     end
 
     url = "#{ENV['VIZ_SERVICE_URL']}/collaborators/#{id}"
@@ -44,9 +52,18 @@ class CollabGraph
     if !ok
       return false, data
     end
-    # Dump it to an EdgeGraph in order to produce the CSV output
-    # and reset the weight to 1 since is meaninless here.
-    graph = EdgeGraph.new_from_hash(data[:graph])
+
+    graph = nil
+    if data[:graph].is_a?(EdgeGraph)
+      # Special case for "teams", see get_data() above.
+      # Should refactor this when we fully implement teams.
+      graph = data[:graph]
+    else
+      # Dump it to an EdgeGraph in order to produce the CSV output
+      # and reset the weight to 1 since is meaninless here.
+      graph = EdgeGraph.new_from_hash(data[:graph])
+    end
+
     graph.links {|link| link.weight = 1}
     return true, graph.to_csv()
   end

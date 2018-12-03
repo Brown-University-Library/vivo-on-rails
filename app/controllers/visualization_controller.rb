@@ -103,6 +103,10 @@ class VisualizationController < ApplicationController
         org = Organization.load_from_solr(id)
         @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
         render "collab_org"
+      when "TEAM"
+        org = Organization.for_team(id)
+        @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
+        render "collab_org"
       else
         err_msg = "Individual ID (#{id}) was not found"
         Rails.logger.warn(err_msg)

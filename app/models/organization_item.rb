@@ -24,6 +24,10 @@ class OrganizationItem
     @web_pages = []
   end
 
+  def is_team?
+    vivo_id == "team-crisp"
+  end
+
   def self.from_hash(hash, thumbnail_url)
     org = OrganizationItem.new(nil)
     org.thumbnail = thumbnail_url
