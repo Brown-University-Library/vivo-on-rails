@@ -20,7 +20,12 @@ class OrganizationMemberItem
     (@general_position == "http://vivoweb.org/ontology/core#FacultyAdministrativePosition")
   end
 
+  def sort_label
+    (@label || "").upcase
+  end
+
   def self.from_hash_array(values)
-    values.map { |v| OrganizationMemberItem.new(v)}.sort_by {|v| v.label || ""}
+    members = values.map { |v| OrganizationMemberItem.new(v)}
+    members.sort_by {|v| v.sort_label }
   end
 end
