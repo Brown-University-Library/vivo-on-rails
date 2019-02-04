@@ -18,7 +18,13 @@ class SearchItem
   end
 
   def self.from_hash(hash, record_type, thumbnail_url, highlights = nil)
-    SearchItem.new(hash["id"], hash["name"], thumbnail_url, hash["title"],
+    name = hash["name"]
+    if hash["display_name_s"] != nil
+      # If we have a display name use that one.
+      name = hash["display_name_s"]
+    end
+
+    SearchItem.new(hash["id"], name, thumbnail_url, hash["title"],
       hash["email"], record_type, highlights)
   end
 

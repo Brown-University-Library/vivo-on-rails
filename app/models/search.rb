@@ -17,7 +17,7 @@ class Search
       fq = SolrLite::FilterQuery.new("record_type",["PEOPLE", "ORGANIZATION"])
       extra_fqs = [fq]
     end
-    params.fl = ["id", "record_type", "thumbnail_file_path_s", "json_txt"]
+    params.fl = ["id", "record_type", "thumbnail_file_path_s", "json_txt", "display_name_s"]
 
     # Query filter with custom boost values
     qf = "short_id_s^2500 email_s^2500 nameText^2000 " +
@@ -66,6 +66,11 @@ class Search
       hash = JsonUtils.safe_parse(json_txt)
       if hash == nil
         next
+      end
+
+      # If we have the display name in Solr (outside of json_txt) grab it.
+      if hash["display_name_s"] == nil && doc["display_name_s"] != nil
+        hash["display_name_s"] = doc["display_name_s"]
       end
 
       thumbnail_url = ModelUtils.thumbnail_url(thumbnail, @images_url)
