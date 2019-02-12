@@ -5,7 +5,7 @@
         <%= image_tag(@presenter.faculty.thumbnail || "person_placeholder.jpg", alt: "Faculty Picture", width: "175", class: "img-circle") %>
       </div>
       <h2 class="hidden-sm hidden-md hidden-lg">
-          <%= @presenter.faculty.name %>
+          <%= @presenter.faculty.display_name %>
       </h2>
 
       <!-- Contact Info -->
