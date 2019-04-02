@@ -34,5 +34,5 @@ gem "rb-readline"
 # See https://github.com/bkeepers/dotenv
 gem 'dotenv-rails'
 
-gem "solr_lite", '0.0.12'
+gem "solr_lite", '0.0.13'
 # gem "solr_lite", path: '/Users/hectorcorrea/dev/solr_lite'
