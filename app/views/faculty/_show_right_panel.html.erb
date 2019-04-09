@@ -247,6 +247,35 @@
       $(id2).addClass("hidden");
     });
 
+    $("#ontheweb_modal_save").on("click", function(el) {
+      var spanLink, link, buttonEdit, spanDelete, linkDelete, span;
+      var url = $("#ontheweb_modal_url").val();
+      var text = $("#ontheweb_modal_text").val();
+      var id = $("#ontheweb_modal_id").val();
+      if (id == "#new") {
+          // create a new link element
+          spanLink = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
+          link = '<a id="{id}_link" href="{url}" target="_blank">{text}</a>'
+          buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal">Edit</button>';
+          spanDelete = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+          linkDelete = '<a href="#" id="{id}_delete" class="delete_item_link" title="Remove this link">' + spanDelete + '</a>';
+          span = '<span id="{id}">' + spanLink + link + buttonEdit + linkDelete + '</span><br/>';
+          span = span.replace(/{id}/g, 'TODO_new_id');
+          span = span.replace('{text}', text);
+          span = span.replace('{url}', url);
+          $("#on-the-web-list").append(span);
+        } else {
+          // replace the existing URL
+          $(id).attr("href", url);
+          $(id).text(text);
+        }
+        $('#ontheweb_modal').modal('hide');
+    });
+
+    $("#ontheweb_modal_cancel").on("click", function(el) {
+      $('#ontheweb_modal').modal('hide');
+    });
+
     $("#ontheweb_modal").on("shown.bs.modal", function(el) {
 
       // Makes sure tabstops stay within the modal form.
@@ -282,35 +311,6 @@
       }
       $("#ontheweb_modal_text").focus();
     });
-
-    $("#ontheweb_modal").on("hide.bs.modal", function(el) {
-      var id, url, text;
-      var button, span, link;
-      var save = document.activeElement.id == "ontheweb_modal_save";
-      if (save) {
-        url = $("#ontheweb_modal_url").val();
-        text = $("#ontheweb_modal_text").val();
-        id = $("#ontheweb_modal_id").val();
-        if (id == "#new") {
-          // create a new link element
-          spanLink = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
-          link = '<a id="{id}_link" href="{url}" target="_blank">{text}</a>'
-          buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal">Edit</button>';
-          spanDelete = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
-          linkDelete = '<a href="#" id="{id}_delete" class="delete_item_link" title="Remove this link">' + spanDelete + '</a>';
-          span = '<span id="{id}">' + spanLink + link + buttonEdit + linkDelete + '</span>';
-          span = span.replace(/{id}/g, 'TODO_new_id');
-          span = span.replace('{text}', text);
-          span = span.replace('{url}', url);
-          $("#on-the-web-list").append(span);
-        } else {
-          // replace the existing URL
-          $(id).attr("href", url);
-          $(id).text(text);
-        }
-      }
-    });
-
   });
 </script>
 <% end %>
