@@ -2,7 +2,11 @@
     <div class="below-nav-links">
         <p>
           <span class="advanced-search"><a href="<%= search_advanced_path() + "?" + request.query_string %>">Advanced search&hellip;</a></span>
-          <span class="profile-login"><a href="<%= manager_url() %>">Manage your Profile</a></span>
+          <% if edit_allowed() %>
+            <span class="profile-login"><a id="edit-profile" href="#">Edit your Profile</a></span>
+          <% else %>
+            <span class="profile-login"><a href="<%= manager_url() %>">Manage your Profile</a></span>
+          <% end %>
         </p>
     </div>
 </div>

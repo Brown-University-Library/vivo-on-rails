@@ -1,6 +1,6 @@
 require "./app/models/model_utils.rb"
 class OnTheWebItem
-  attr_accessor :uri, :rank, :url, :text
+  attr_accessor :uri, :rank, :url, :text, :html_id
 
   def initialize(values)
     ModelUtils.set_values_from_hash(self, values)
@@ -8,6 +8,7 @@ class OnTheWebItem
     @rank = @rank.to_i
     @url = @url.strip               # link to the web page outside VIVO
     @text = (@text || @url).strip
+    @html_id = @uri.gsub(/[^a-zA-Z0-9]/,"_")
   end
 
   def vivo_id

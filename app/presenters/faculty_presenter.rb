@@ -3,9 +3,12 @@ class FacultyPresenter
   attr_accessor :faculty, :has_publications, :has_research, :has_background,
     :has_affiliations, :has_teaching, :has_details,
     :publication_filters,
-    :show_back_to_search, :show_visualizations, :has_coauthors, :has_collaborators
+    :show_back_to_search, :show_visualizations, :has_coauthors, :has_collaborators,
+    :edit_mode
 
-  def initialize(faculty, search_url, referer, force_show_viz)
+
+  def initialize(faculty, search_url, referer, force_show_viz, edit_mode = false)
+    @edit_mode = edit_mode
     @faculty = faculty
 
     # Show it only if we are coming to the faculty page from a search
@@ -64,5 +67,11 @@ class FacultyPresenter
       end
     end
     pub_types
+  end
+
+  # TODO: we should get the research area IDs from VIVO rather than trying to
+  # calculate them.
+  def research_area_id(research_area)
+    research_area.gsub(" ", "_")
   end
 end

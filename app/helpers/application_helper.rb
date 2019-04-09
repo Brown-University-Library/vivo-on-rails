@@ -1,6 +1,5 @@
 module ApplicationHelper
   def randomized_background_image
-    # TODO: Fetch this from a database
     images = ["20110620-PAUR-0004.jpg",
       "20130419_WICLACS_0004.jpg",
       "20131022-PAUR-Aerials-0033.jpg",
@@ -24,5 +23,9 @@ module ApplicationHelper
       link = ""
     end
     url.gsub("{LINK}", link)
+  end
+
+  def edit_allowed()
+    ENV["EDIT_ALLOWED"] == "true"
   end
 end

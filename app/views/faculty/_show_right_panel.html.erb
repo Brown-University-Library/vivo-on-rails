@@ -1,10 +1,79 @@
+<style>
+  .overview_textarea {
+    background-color:#F3F5B3;
+    width: 100%;
+  }
+  .delete_research_area:hover {
+    color: white;
+    background-color: red;
+    text-decoration: none;
+    border:0!important; /* needed for the underline to be hidden */
+  }
+  .delete_item_link:hover {
+    color: white;
+    background-color: red;
+    text-decoration: none;
+    border:0!important; /* needed for the underline to be hidden */
+  }
+
+  .modal_save_cancel_button:focus {
+    background-color:#5bc0de;
+    color: #fff;
+    border-color: #46b8da;
+    border: 1px solid transparent;
+    text-shadow: none;
+  }
+</style>
+
+<!-- On the web modal form -->
+<div id="ontheweb_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Website information</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <span>Text: </span>
+          <input id="ontheweb_modal_text" type="text" placeholder="Name of your site" style="width:90%;"></input>
+        </div>
+        <div>
+          <span>URL: </span>
+          <input id="ontheweb_modal_url" type="text" placeholder="http://yoursite" style="width:90%;"></input>
+          <input id="ontheweb_modal_id" type="text" class="hidden"></input>
+        </div>
+      </div> <!-- modal body -->
+      <div class="modal-footer">
+        <button id="ontheweb_modal_save" data-dismiss="modal"
+          class="btn btn-default pull-left modal_save_cancel_button"
+          title="Save your changes">Save</button>
+        <button id="ontheweb_modal_cancel" data-dismiss="modal"
+          class="btn btn-default pull-left modal_save_cancel_button"
+          title="Cancel (don't save) your changes))">Cancel</button>
+      </div>
+    </div> <!-- modal content -->
+  </div> <!-- modal-dialog -->
+</div> <!-- modal_form -->
+
 <div class="col-md-9 col-sm-8 col-xs-12" id="section_overview">
   <h2 class="vcard foaf-person individual_overview hidden-xs"><%= @presenter.faculty.display_name + (@presenter.faculty.hidden ? " [Inactive]" : "")%></h2>
   <h3 class="individual_overview"><%= @presenter.faculty.title %></h3>
 
   <div class="tabFinder" id="tabOverview">
     <h3>Overview</h3>
-    <p><%= @presenter.faculty.overview.html_safe %></p>
+    <% if @presenter.edit_mode %>
+      <button id="overviewEditButton" class="btn btn-info" title="Edit your overview">Edit</button>
+      <div id="overviewText"><%= @presenter.faculty.overview.html_safe %></div>
+      <div id="overviewEditBox" class="hidden">
+        <textarea id="overviewTextArea" rows="15" class="overview_textarea"></textarea>
+        <br/><br/>
+        <button id="overviewSave" class="btn btn-success">Save</button>
+        <button id="overviewCancel" class="btn btn-danger">Cancel</button>
+      </div>
+    <% else %>
+      <p><%= @presenter.faculty.overview.html_safe %></p>
+    <% end %>
 
     <% if @presenter.faculty.affiliations.count > 0 %>
       <h4 class="brown-affiliations panel-heading">Brown Affiliations</h4>
@@ -22,31 +91,59 @@
 
     <% if @presenter.faculty.research_areas.count > 0 %>
       <h4 class="research-areas panel-heading">Research Areas</h4>
-      <div class="brown-research-areas-list">
+      <div id="research-areas-list" class="brown-research-areas-list">
         <% @presenter.faculty.research_areas.each_with_index do |area, i| %>
           <% if i != 0 %>
             &nbsp;|&nbsp;
           <% end %>
           <% qs = "?fq=research_areas|#{CGI.escape(area)}" %>
-          <a href="<%= search_url() + qs %>">
+          <a href="<%= search_url() + qs %>" id="<%= @presenter.research_area_id(area) %>">
             <%= area %>
           </a>
+          <% if @presenter.edit_mode %>
+            <a href="#" id="<%= @presenter.research_area_id(area) %>_delete" class="delete_research_area" title="Remove this research area">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+          <% end %>
         <% end %>
       </div>
+      <% if @presenter.edit_mode %>
+        <div id="researchareaEditBox">
+            <input type="text" id="researchareaText" placeholder="Enter research area"></input>
+            <button id="researchareaAddButton" class="btn btn-info" title="Add to your profile">Add</button>
+        </div>
+      <% end %>
     <% end %>
 
     <% if @presenter.faculty.on_the_web.count > 0 %>
       <h4 class="research-areas panel-heading">On the Web</h4>
-      <div class="brown-research-areas-list">
+      <div id="on-the-web-list" class="brown-research-areas-list">
         <% @presenter.faculty.on_the_web.each do |web| %>
-          <% if web.icon != nil %>
-            <%= image_tag(web.icon, width: "17") %>
-          <% else %>
-            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-          <% end %>
-          <a href="<%= web.url %>" target="_blank"><%= web.text %></a><br/>
+          <span id="<%= web.html_id %>">
+            <% if web.icon != nil %>
+              <%= image_tag(web.icon, width: "17") %>
+            <% else %>
+              <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            <% end %>
+            <a id="<%= web.html_id %>_link" href="<%= web.url %>" target="_blank"><%= web.text %></a>
+            <% if @presenter.edit_mode %>
+              <button id="<%= web.html_id %>_edit" class="btn btn-xs btn-info ontheweb_edit_button"
+                data-toggle="modal" data-target="#ontheweb_modal">Edit</button>
+              <a href="#" id="<%= web.html_id %>_delete" class="delete_item_link" title="Remove this link">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </a>
+            <% end %>
+          </span>
+          <br/>
         <% end %>
       </div>
+      <% if @presenter.edit_mode %>
+        <div id="onthewebEditBox">
+            <button id="onthewebAddButton" class="btn btn-info"
+              title="Add a new website"
+              data-toggle="modal" data-target="#ontheweb_modal">Add</button>
+        </div>
+      <% end %>
     <% end %> <!-- on_the_web.count -->
     <br/><br/>
   </div> <!-- panel -->
@@ -57,3 +154,154 @@
   <%= render "faculty/show_tab_affiliations", locals: {add_tab: true }  %>
   <%= render "faculty/show_tab_teaching", locals: {add_tab: true }  %>
 </div> <!-- col-md-9 -->
+
+
+<% if @presenter.edit_mode %>
+<script>
+  $(function() {
+
+    $("#edit-profile").on("click", function() {
+      window.location = "<%= display_show_path(@presenter.faculty.vivo_id, {mode:'edit'}) %>";
+    });
+
+    $("#edit-profile").addClass("hidden");
+
+    //////////////////////////////////////////
+    // Overview
+    //////////////////////////////////////////
+    var turnEdit = function(value) {
+      if (value == true) {
+        $("#overviewText").addClass("hidden");
+        $("#overviewEditButton").addClass("hidden");
+        $("#overviewEditBox").removeClass("hidden");
+      } else {
+        $("#overviewText").removeClass("hidden");
+        $("#overviewEditButton").removeClass("hidden");
+        $("#overviewEditBox").addClass("hidden");
+      }
+    };
+
+    $("#overviewEditButton").on("click", function() {
+      // push the text content to the text area value
+      var oldContent = $("#overviewText").first().html();
+      // console.log("Edit, old content: " + oldContent);
+      $("#overviewTextArea").val(oldContent);
+      turnEdit(true);
+    });
+
+    $("#overviewSave").on("click", function() {
+      // push the text area value to the text control
+      var newContent = $("#overviewTextArea").val();
+      // console.log("Save, new content: " + newContent);
+      // Use `html()` instead of `text()` to preserve HTML formatting
+      $("#overviewText").first().html(newContent);
+      turnEdit(false);
+    });
+
+    $("#overviewCancel").on("click", function() {
+      turnEdit(false);
+    });
+
+    //////////////////////////////////////////
+    // Research Areas
+    //////////////////////////////////////////
+    $("#research-areas-list").on("click", ".delete_research_area", function(el) {
+      // source: https://stackoverflow.com/a/15420578/446681
+      var id1 = "#" + el.target.parentNode.id;
+      // console.log("click to delete: " + id1);
+      var id2 = id1.replace("_delete", "")
+      $(id1).addClass("hidden");
+      $(id2).addClass("hidden");
+    });
+
+    $("#researchareaAddButton").on("click", function(el) {
+      var text = $("#researchareaText").val();
+      var id = text.replace(" ", "_");
+      var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
+      var span = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+      var link1 = '<a href="' + href + '" id="' + id + '">' + text + '</a>';
+      var link2 = '<a href="#" class="delete_research_area" id="' + id + '_delete" >' + span + '</a>';
+      var html = '| ' + link1 + ' ' + link2;
+      // console.log(html);
+      $("#research-areas-list").append(html);
+      $("#researchareaText").val("");
+    });
+
+
+    //////////////////////////////////////////
+    // On the web
+    //////////////////////////////////////////
+    $("#on-the-web-list").on("click", ".delete_item_link", function(el) {
+      var id1 = "#" + el.target.parentNode.id;
+      var id2 = id1.replace("_delete", "")
+      $(id1).addClass("hidden");
+      $(id2).addClass("hidden");
+    });
+
+    $("#ontheweb_modal").on("shown.bs.modal", function(el) {
+
+      // Makes sure tabstops stay within the modal form.
+      // Source https://stackoverflow.com/a/21811463/446681
+      var firstInput = $("#ontheweb_modal_text");
+      var lastInput = $("#ontheweb_modal_cancel");
+      lastInput.on('keydown', function (e) {
+        if ((e.which === 9 && !e.shiftKey)) {
+          e.preventDefault();
+          firstInput.focus();
+        }
+      });
+      firstInput.on('keydown', function (e) {
+        if ((e.which === 9 && e.shiftKey)) {
+          e.preventDefault();
+          lastInput.focus();
+        }
+      });
+
+      var editId = el.relatedTarget.id;
+      if (editId == "onthewebAddButton") {
+        // Empty the values to let the form offer the placeholder values
+        $("#ontheweb_modal_text").val("");
+        $("#ontheweb_modal_url").val("");
+        $("#ontheweb_modal_id").val("#new");
+      } else {
+        var linkId = "#" + editId.replace("_edit", "_link");
+        var link = $(linkId);
+        $("#ontheweb_modal_text").val(link.first().text());
+        $("#ontheweb_modal_url").val(link.first().attr("href"));
+        $("#ontheweb_modal_id").val(linkId);
+
+      }
+      $("#ontheweb_modal_text").focus();
+    });
+
+    $("#ontheweb_modal").on("hide.bs.modal", function(el) {
+      var id, url, text;
+      var button, span, link;
+      var save = document.activeElement.id == "ontheweb_modal_save";
+      if (save) {
+        url = $("#ontheweb_modal_url").val();
+        text = $("#ontheweb_modal_text").val();
+        id = $("#ontheweb_modal_id").val();
+        if (id == "#new") {
+          // create a new link element
+          spanLink = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
+          link = '<a id="{id}_link" href="{url}" target="_blank">{text}</a>'
+          buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal">Edit</button>';
+          spanDelete = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+          linkDelete = '<a href="#" id="{id}_delete" class="delete_item_link" title="Remove this link">' + spanDelete + '</a>';
+          span = '<span id="{id}">' + spanLink + link + buttonEdit + linkDelete + '</span>';
+          span = span.replace(/{id}/g, 'TODO_new_id');
+          span = span.replace('{text}', text);
+          span = span.replace('{url}', url);
+          $("#on-the-web-list").append(span);
+        } else {
+          // replace the existing URL
+          $(id).attr("href", url);
+          $(id).text(text);
+        }
+      }
+    });
+
+  });
+</script>
+<% end %>
