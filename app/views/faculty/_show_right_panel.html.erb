@@ -155,9 +155,18 @@
   <%= render "faculty/show_tab_teaching", locals: {add_tab: true }  %>
 </div> <!-- col-md-9 -->
 
+<% if edit_allowed() %>
+<script type="text/javascript">
+  $(function() {
+    $("#edit-profile").on("click", function() {
+      window.location = "<%= display_show_path(@presenter.faculty.vivo_id, {mode:'edit'}) %>";
+    });
+  });
+</script>
+<% end %>
 
 <% if @presenter.edit_mode %>
-<script>
+<script type="text/javascript">
   $(function() {
 
     $("#edit-profile").on("click", function() {
