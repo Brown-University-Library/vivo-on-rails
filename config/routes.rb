@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'display/:id/viz/publications' => 'visualization#publications', as: :visualization_publications
   get 'display/:id/viz' => 'visualization#home', as: :visualization_home
 
+  # Reports by subject librarian
+  get 'reports/subject-lib/:librarian' => 'reports#subject_lib'
 
   # Search URLs
   get 'search_facets' => 'search#facets'

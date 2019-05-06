@@ -1,4 +1,5 @@
 require "./app/models/model_utils.rb"
+require "./app/models/faculty_export.rb"
 
 class DisplayController < ApplicationController
   def index
@@ -56,6 +57,12 @@ class DisplayController < ApplicationController
       if faculty == nil
         Rails.logger.error("Could not render faculty #{id}.")
         render "error", status: 500
+        return
+      end
+
+      if params["format"] == "csv"
+        export = FacultyExport.new([faculty])
+        render :text => export.to_csv()
         return
       end
 
