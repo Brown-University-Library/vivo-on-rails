@@ -2,15 +2,19 @@ require "./app/models/model_utils.rb"
 require "./app/models/faculty_export.rb"
 
 class ReportsController < ApplicationController
+  def subject_lib_list
+  end
+
   def subject_lib
     faculty_ids = []
-    if params["librarian"] == "eferrier"
+    format = params["format"]
+    librarian = params["librarian"]
+    if librarian == "eferrier"
         faculty_ids = eferrier_list()
     end
     Rails.logger.info("Exporting...")
     faculty_list = []
     faculty_ids.each do |id|
-        Rails.logger.info("Loading #{id}...")
         faculty = Faculty.load_from_solr(id)
         if faculty == nil
             Rails.logger.error("Could not render faculty #{id}.")
@@ -18,12 +22,17 @@ class ReportsController < ApplicationController
             faculty_list << faculty
         end
     end
-    Rails.logger.info("Generating CSV...")
     export = FacultyExport.new(faculty_list)
-    render :text => export.to_csv()
+    if format == "xml"
+      Rails.logger.info("Generating XML...")
+      send_data export.to_excel(), :type => "application/xml", :filename=>"#{librarian}.xml", :disposition => 'attachment'
+    else
+      Rails.logger.info("Generating CSV...")
+      send_data export.to_csv(), :type => "text/plain", :filename=>"#{librarian}.csv", :disposition => 'attachment'
+    end
   rescue => ex
     backtrace = ex.backtrace.join("\r\n")
-    Rails.logger.error("Could not render record #{id}, type #{type}. Exception: #{ex} \r\n #{backtrace}")
+    Rails.logger.error("Could not produce export file for #{librarian}, format #{params['format']}. Exception: #{ex} \r\n #{backtrace}")
     render "error", status: 500
   end
 

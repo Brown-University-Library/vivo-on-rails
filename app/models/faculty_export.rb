@@ -5,6 +5,7 @@ class FacultyExport
     @faculty_list = faculty_list
   end
 
+  # Exports the faculty data as a CSV string.
   def to_csv()
     all = general_info_csv() + "\r\n" +
       teacher_for_csv() + "\r\n" +
@@ -12,6 +13,54 @@ class FacultyExport
       published_in_csv() + "\r\n" +
       text_fields_csv()
     all
+  end
+
+  # Exports the faculty data as an XML string that Excel can render as
+  # a multi-tabbed file.
+  #
+  # References:
+  #   Excel XML format: https://docs.microsoft.com/en-us/previous-versions/technet-magazine/cc161037(v=msdn.10)
+  #   Nokogiri syntax: https://stackoverflow.com/a/34025875/446681
+  def to_excel()
+    builder = Nokogiri::XML::Builder.new do |xml|
+      xml['ss'].Workbook('xmlns:ss' => "urn:schemas-microsoft-com:office:spreadsheet") do
+        # General Info
+        xml['ss'].Worksheet("ss:Name" => "General Info") do
+          xml['ss'].Table do
+            matrix_to_excel(general_info(), xml)
+          end
+        end
+
+        # Teacher For
+        xml['ss'].Worksheet("ss:Name" => "Teacher For") do
+          xml['ss'].Table do
+            matrix_to_excel(teacher_for(), xml)
+          end
+        end
+
+        # Contributor To
+        xml['ss'].Worksheet("ss:Name" => "Contributor To") do
+          xml['ss'].Table do
+            matrix_to_excel(contributor_to(), xml)
+          end
+        end
+
+        # Published In
+        xml['ss'].Worksheet("ss:Name" => "Published In") do
+          xml['ss'].Table do
+            matrix_to_excel(published_in(), xml)
+          end
+        end
+
+        # Text Fields
+        xml['ss'].Worksheet("ss:Name" => "Text Fields") do
+          xml['ss'].Table do
+            matrix_to_excel(text_fields(), xml)
+          end
+        end
+      end
+    end
+    builder.to_xml
   end
 
   def contributor_to_csv()
@@ -40,6 +89,18 @@ class FacultyExport
       the_array.each { |row| csv << row }
     end
     str
+  end
+
+  def matrix_to_excel(matrix, xml)
+    matrix.each do |row|
+      xml['ss'].Row do
+        row.each do |col|
+          xml['ss'].Cell do
+            xml['ss'].Data("ss:Type" => "String") { xml.text col }
+          end
+        end
+      end
+    end
   end
 
   def contributor_to()
