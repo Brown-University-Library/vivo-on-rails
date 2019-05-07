@@ -60,19 +60,22 @@ class DisplayController < ApplicationController
         return
       end
 
-      if params["format"] == "csv"
-        export = FacultyExport.new([faculty])
-        render :text => export.to_csv()
-        return
-      end
-
-      if params["format"] == "json_txt"
-        render :json => faculty.json_txt.to_json
-        return
-      end
-
-      if params["format"] == "json"
-        render :json => faculty.item.to_json
+      if params["format"] != nil
+        case params["format"]
+        when "csv"
+          export = FacultyExport.new([faculty])
+          send_data export.to_csv(), :type => "application/xml", :filename=>"#{id}.csv", :disposition => 'attachment'
+        when "xml"
+          export = FacultyExport.new([faculty])
+          send_data export.to_excel(), :type => "application/xml", :filename=>"#{id}.xml", :disposition => 'attachment'
+        when "json_txt"
+          render :json => faculty.json_txt.to_json
+        when"json"
+          render :json => faculty.item.to_json
+        else
+          Rails.logger.error("Unknown format #{params['format']} received for faculty #{id}.")
+          render "error", status: 500
+        end
         return
       end
 
