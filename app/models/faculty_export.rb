@@ -108,7 +108,7 @@ class FacultyExport
     rows << ["Name", "Organization", "Title", "Type", "Volume", "Issue", "Date", "Authors", "Venue", "DOI", "Year", "Published In"]
     @faculty_list.each do |faculty|
       baseRow = [faculty.item.name, faculty.item.org_label, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
-      if faculty.item.research_areas.count == 0
+      if faculty.item.contributor_to.count == 0
           rows << baseRow
       else
           faculty.item.contributor_to.each do |pub|
