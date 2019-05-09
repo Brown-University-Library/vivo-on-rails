@@ -1,0 +1,203 @@
+<% if edit_allowed() %>
+<script type="text/javascript">
+  $(function() {
+    $("#edit-profile").on("click", function() {
+      window.location = "<%= display_show_path(@presenter.faculty.vivo_id, {mode:'edit'}) %>";
+    });
+  });
+</script>
+<% end %>
+
+<% if @presenter.edit_mode %>
+<script type="text/javascript">
+  $(function() {
+
+    // References:
+    //    http://cdn.ckeditor.com/
+    //    https://ckeditor.com/docs/ckeditor4/latest/guide/dev_installation.html
+    //    https://ckeditor.com/docs/ckeditor4/latest/examples/basicstyles.html
+    //    https://ckeditor.com/docs/ckeditor4/latest/examples/toolbar.html
+    var ckeditConfig = {
+      toolbar: [
+        { name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
+        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList'] },
+        { name: 'links', items: [ 'Link', 'Unlink' ] },
+        { name: 'about', items: [ 'About' ] }
+      ],
+      removePlugins: 'elementspath'
+    };
+    CKEDITOR.replace('overviewTextArea', ckeditConfig);
+
+    $("#edit-profile").on("click", function() {
+      window.location = "<%= display_show_path(@presenter.faculty.vivo_id, {mode:'edit'}) %>";
+    });
+
+    $("#edit-profile").addClass("hidden");
+
+    //////////////////////////////////////////
+    // Overview
+    //////////////////////////////////////////
+    var turnEdit = function(value) {
+      if (value == true) {
+        $("#overviewText").addClass("hidden");
+        $("#overviewEditButton").addClass("hidden");
+        $("#overviewEditBox").removeClass("hidden");
+      } else {
+        $("#overviewText").removeClass("hidden");
+        $("#overviewEditButton").removeClass("hidden");
+        $("#overviewEditBox").addClass("hidden");
+      }
+    };
+
+    $("#overviewEditButton").on("click", function() {
+      // push the text content to the text area value
+      var oldContent = $("#overviewText").first().html();
+      // console.log("Edit, old content: " + oldContent);
+      // $("#overviewTextArea").val(oldContent);
+      CKEDITOR.instances.overviewTextArea.setData(oldContent);
+      turnEdit(true);
+    });
+
+    $("#overviewSave").on("click", function() {
+      // push the text area value to the text control
+      // var newContent = $("#overviewTextArea").val();
+      var newContent = CKEDITOR.instances.overviewTextArea.getData()
+      // console.log("Save, new content: " + newContent);
+      // Use `html()` instead of `text()` to preserve HTML formatting
+      $("#overviewText").first().html(newContent);
+      turnEdit(false);
+
+      $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/edit/overview/amatzavi",
+          data: {text: newContent},
+          success: function(x,y) {
+            console.log(x);
+            console.log(y);
+            console.log("saved");
+          }
+      });
+
+    });
+
+    $("#overviewCancel").on("click", function() {
+      turnEdit(false);
+    });
+
+    //////////////////////////////////////////
+    // Research Areas
+    //////////////////////////////////////////
+    $("#research-areas-list").on("click", ".delete_research_area", function(el) {
+      // source: https://stackoverflow.com/a/15420578/446681
+      var id1 = "#" + el.target.parentNode.id;
+      // console.log("click to delete: " + id1);
+      var id2 = id1.replace("_delete", "")
+      $(id1).addClass("hidden");
+      $(id2).addClass("hidden");
+    });
+
+    $("#researchareaAddButton").on("click", function(el) {
+      var text = $("#researchareaText").val();
+      var id = text.replace(" ", "_");
+      var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
+      var span = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+      var link1 = '<a href="' + href + '" id="' + id + '">' + text + '</a>';
+      var link2 = '<a href="#" class="delete_research_area" id="' + id + '_delete" >' + span + '</a>';
+      var html = '| ' + link1 + ' ' + link2;
+      // console.log(html);
+      $("#research-areas-list").append(html);
+      $("#researchareaText").val("");
+    });
+
+
+    //////////////////////////////////////////
+    // On the web
+    //////////////////////////////////////////
+    $("#on-the-web-list").on("click", ".delete_item_link", function(el) {
+      var id1 = "#" + el.target.parentNode.id;
+      var id2 = id1.replace("_delete", "")
+      $(id1).addClass("hidden");
+      $(id2).addClass("hidden");
+    });
+
+    var onTheWebAddElement = function(id, text, url, icon) {
+      var img, link, buttonEdit, spanDelete, linkDelete, html;
+      if (icon == "") {
+        img = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
+      } else {
+        img = '<img src="' + icon + '" alt="hello" width="17" />';
+      }
+      link = '<a id="{id}_link" href="{url}" target="_blank">{text}</a>'
+      buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal">Edit</button>';
+      spanDelete = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+      linkDelete = '<a href="#" id="{id}_delete" class="delete_item_link" title="Remove this link">' + spanDelete + '</a>';
+      html = '<span id="{id}">' + img + link + buttonEdit + linkDelete + '</span><br/>';
+      html = html.replace(/{id}/g, id);
+      html = html.replace('{text}', text);
+      html = html.replace('{url}', url);
+      $("#on-the-web-list").append(html);
+    }
+
+    $("#ontheweb_modal_save").on("click", function(el) {
+      var url = $("#ontheweb_modal_url").val();
+      var text = $("#ontheweb_modal_text").val();
+      var id = $("#ontheweb_modal_id").val();
+      if (id == "#new") {
+        onTheWebAddElement("TODO_new_id", text, url, "");
+      } else {
+        // replace the values in the existing HTML A tag.
+        $(id).attr("href", url);
+        $(id).text(text);
+      }
+      $('#ontheweb_modal').modal('hide');
+    });
+
+    $("#ontheweb_modal_cancel").on("click", function(el) {
+      $('#ontheweb_modal').modal('hide');
+    });
+
+    $("#ontheweb_modal").on("shown.bs.modal", function(el) {
+
+      // Makes sure tabstops stay within the modal form.
+      // Source https://stackoverflow.com/a/21811463/446681
+      var firstInput = $("#ontheweb_modal_text");
+      var lastInput = $("#ontheweb_modal_cancel");
+      lastInput.on('keydown', function (e) {
+        if ((e.which === 9 && !e.shiftKey)) {
+          e.preventDefault();
+          firstInput.focus();
+        }
+      });
+      firstInput.on('keydown', function (e) {
+        if ((e.which === 9 && e.shiftKey)) {
+          e.preventDefault();
+          lastInput.focus();
+        }
+      });
+
+      var editId = el.relatedTarget.id;
+      if (editId == "onthewebAddButton") {
+        // Empty the values to let the form offer the placeholder values
+        $("#ontheweb_modal_text").val("");
+        $("#ontheweb_modal_url").val("");
+        $("#ontheweb_modal_id").val("#new");
+      } else {
+        var linkId = "#" + editId.replace("_edit", "_link");
+        var link = $(linkId);
+        $("#ontheweb_modal_text").val(link.first().text());
+        $("#ontheweb_modal_url").val(link.first().attr("href"));
+        $("#ontheweb_modal_id").val(linkId);
+
+      }
+      $("#ontheweb_modal_text").focus();
+    });
+
+    // Add the on the web links
+    // TODO: these should be encoded to prevent a quote from throwing off the JavaScript
+    <% @presenter.faculty.on_the_web.each do |web| %>
+      onTheWebAddElement("<%= web.html_id %>", "<%= web.text %>", "<%= web.url %>", "<%= asset_path(web.icon) %>");
+    <% end %>
+
+  });
+</script>
+<% end %>
