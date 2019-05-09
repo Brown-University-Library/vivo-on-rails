@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'display/:id' => 'display#show', as: :display_show
   get 'display/' => 'display#index'
 
+  # Editor
+  post 'edit/overview/:id' => 'edit#overview'
 
   # Visualizations for faculty (and organizations)
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor
