@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'display/:id/viz' => 'visualization#home', as: :visualization_home
 
   # Reports by subject librarian
-  get 'reports/subject-lib/:librarian' => 'reports#subject_lib', as: :reports_subject_lib
+  get 'reports/subject-lib/:list_id' => 'reports#subject_lib', as: :reports_subject_lib
   get 'reports/subject-lib' => 'reports#subject_lib_list'
 
   # Search URLs
