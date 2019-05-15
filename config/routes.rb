@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # Reports by subject librarian
   get 'reports/subject-lib/:list_id' => 'reports#subject_lib', as: :reports_subject_lib
   get 'reports/subject-lib' => 'reports#subject_lib_list'
+  get 'reports/hector' => 'reports#hector'
 
   # Search URLs
   get 'search_facets' => 'search#facets'

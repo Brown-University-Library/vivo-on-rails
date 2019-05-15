@@ -2,6 +2,19 @@ require "./app/models/model_utils.rb"
 require "./app/models/faculty_export.rb"
 
 class ReportsController < ApplicationController
+
+  def hector
+    byebug
+    data = ""
+    request.env.keys.each do |key|
+      if key >= "A" && key <= "Z"
+        data += "#{key}: #{request.env[key]}\r\n"
+      end
+    end
+    Rails.logger.info("HEADERS: #{data}")
+    render text: "hello world"
+  end
+
   def subject_lib_list
   end
 
