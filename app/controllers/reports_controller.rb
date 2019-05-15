@@ -4,15 +4,20 @@ require "./app/models/faculty_export.rb"
 class ReportsController < ApplicationController
 
   def hector
-    byebug
-    data = ""
-    request.env.keys.each do |key|
-      if key >= "A" && key <= "Z"
-        data += "#{key}: #{request.env[key]}\r\n"
-      end
+    if request.env["Shibboleth-eppn"] == nil
+      Rails.logger.info("HECTOR: nil hit the page, wtf?")
+      render text: "wtf?"
+      return
     end
-    Rails.logger.info("HEADERS: #{data}")
-    render text: "hello world"
+
+    if request.env["Shibboleth-eppn"] == "hcorrea@brown.edu"
+      Rails.logger.info("HECTOR: hector hit the page")
+      render text: "hello world"
+      return
+    end
+
+    Rails.logger.info("HECTOR: somebody else hit the page")
+    render text: "you are not hector"
   end
 
   def subject_lib_list
