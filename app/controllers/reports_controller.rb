@@ -2,28 +2,12 @@ require "./app/models/model_utils.rb"
 require "./app/models/faculty_export.rb"
 
 class ReportsController < ApplicationController
-
-  def hector
-    if request.env["Shibboleth-eppn"] == nil
-      Rails.logger.info("HECTOR: nil hit the page, wtf?")
-      render text: "wtf?"
-      return
-    end
-
-    if request.env["Shibboleth-eppn"] == "hcorrea@brown.edu"
-      Rails.logger.info("HECTOR: hector hit the page")
-      render text: "hello world"
-      return
-    end
-
-    Rails.logger.info("HECTOR: somebody else hit the page")
-    render text: "you are not hector"
-  end
-
   def subject_lib_list
+    must_be_authenticated() if Rails.env.production?
   end
 
   def subject_lib
+    must_be_authenticated() if Rails.env.production?
     faculty_ids = []
     format = params["format"]
     list_id = params["list_id"]
