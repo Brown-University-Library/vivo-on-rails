@@ -3,7 +3,7 @@ require "./app/models/faculty_export.rb"
 
 class ReportsController < ApplicationController
   def subject_lib_list
-    @presenter = DefaultPresenter.new(@self)
+    @presenter = DefaultPresenter.new(self)
     must_be_authenticated() if Rails.env.production?
   end
 
