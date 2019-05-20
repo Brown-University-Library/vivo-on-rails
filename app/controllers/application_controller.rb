@@ -13,21 +13,33 @@ class ApplicationController < ActionController::Base
   end
 
   def shibb_user?
-    if request.env["Shibboleth-eppn"] == nil || request.env["Shibboleth-eppn"].strip == ""
-      return false
+    if Rails.env.production?
+      (request.env["Shibboleth-eppn"] != nil && request.env["Shibboleth-eppn"].strip != "")
+    else
+      # fake it
+      true
     end
-    true
+  end
+
+  def current_user
+    return nil if !shibb_user?
+    # TODO: this will fail in development
+    User.find_by_eppn(shibb_eppn)
   end
 
   def shibb_eppn
-    request.env["Shibboleth-eppn"]
-  end
-
-  def shibb_firstname
-    request.env["Shibboleth-givenName"]
+    if Rails.env.production?
+      request.env["Shibboleth-eppn"]
+    else
+      "jane.carberry"
+    end
   end
 
   def shibb_fullname
-    request.env["Shibboleth-displayName"]
+    if Rails.env.production?
+      request.env["Shibboleth-displayName"]
+    else
+      "Jane Carberry"
+    end
   end
 end

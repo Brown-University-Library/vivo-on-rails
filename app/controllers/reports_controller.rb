@@ -3,41 +3,46 @@ require "./app/models/faculty_export.rb"
 
 class ReportsController < ApplicationController
   def subject_lib_list
-    @presenter = DefaultPresenter.new(self)
-    must_be_authenticated() if Rails.env.production?
+    must_be_authenticated()
+    user = User.user_for_session(shibb_eppn, shibb_fullname)
+    reports = Report.all()
+    @presenter = ReportsPresenter.new(user, reports)
   end
 
   def subject_lib
-    must_be_authenticated() if Rails.env.production?
-    faculty_ids = []
+    must_be_authenticated()
     format = params["format"]
     list_id = params["list_id"]
-    faculty_ids = FacultyExportList.faculty_list(list_id)
-    if faculty_ids.count == 0
+    id = (list_id || "").to_i
+
+    # Fetch the report definition
+    report = Report.find_by_id(id)
+    if report == nil
       @page_title = "Page not found"
-      err_msg = "List ID (#{list_id}) was not found"
+      err_msg = "Report ID (#{list_id}) was not found"
       Rails.logger.warn(err_msg)
       render "not_found", status: 404, formats: [:html]
       return
     end
 
-    Rails.logger.info("Exporting...")
-    faculty_list = []
-    faculty_ids.each do |id|
-        faculty = Faculty.load_from_solr(id)
-        if faculty == nil
-            Rails.logger.error("Could not render faculty #{id}.")
-        else
-            faculty_list << faculty
-        end
-    end
+    # Fetch the data
+    Rails.logger.info("Fetching faculty for #{list_id}...")
+    faculty_list = FacultyExportList.faculty(report.definition)
+
+    # Produce the export
     export = FacultyExport.new(faculty_list)
     if format == "xml"
       Rails.logger.info("Generating XML...")
-      send_data export.to_excel(), :type => "application/xml", :filename=>"#{list_id}.xml", :disposition => 'attachment'
+      send_data export.to_excel(),
+        :type => "application/xml",
+        :filename => report.download_name("xml"),
+        :disposition => 'attachment'
     else
       Rails.logger.info("Generating CSV...")
-      send_data export.to_csv(), :type => "text/plain", :filename=>"#{list_id}.csv", :disposition => 'attachment'
+      send_data export.to_csv(),
+        :type => "text/plain",
+        :filename=> report.download_name("csv"),
+        :disposition => 'attachment'
     end
   rescue => ex
     backtrace = ex.backtrace.join("\r\n")

@@ -1,14 +1,38 @@
-<div>
-    <h2>Subject Librarians</h2>
-    <h3>Hello: <%= @presenter.user_fullname %></h3>
-    <p>Download the data for the faculty associated with a subject librarian.</p>
-    <ul>
-        <li>Emily Ferrier - specific faculty list
-            (<a href="<%= reports_subject_lib_url('eferrier') %>.xml">Excel/XML</a>,
-            <a href="<%= reports_subject_lib_url('eferrier') %>.csv">CSV</a>)
+<style>
+    .col_name {
+        width: 30%
+    }
 
-        <li>Emily Ferrier - several departments
-            (<a href="<%= reports_subject_lib_url('eferrier_large') %>.xml">Excel/XML</a>,
-            <a href="<%= reports_subject_lib_url('eferrier_large') %>.csv">CSV</a>)
-        </ul>
-  </div>
+    .col_description {
+        width: 30%
+    }
+
+    .col_excel {
+        width: 30%
+    }
+
+    .col_csv {
+        width: 30%
+    }
+</style>
+
+<div>
+    <h2>Subject Librarian Reports</h2>
+    <p>Download the data for a specific report</p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Excel/XML</th>
+            <th>CSV</th>
+        </tr>
+        <% @presenter.reports.each do |report| %>
+            <tr>
+                <td class="col_name"><%= report.name %></td>
+                <td class="col_description"><%= report.description %></td>
+                <td class="col_excel"><a href="<%= reports_subject_lib_url(report.id) %>.xml">download</a></td>
+                <td class="col_csv"><a href="<%= reports_subject_lib_url(report.id) %>.csv">download</a></td>
+            </tr>
+        <% end %>
+    </table>
+ </div>

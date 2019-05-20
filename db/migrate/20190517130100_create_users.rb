@@ -1,0 +1,21 @@
+# -*- encoding : utf-8 -*-
+class CreateUsers < ActiveRecord::Migration
+  def self.up
+    options = nil
+    if Rails.env.production?
+      options = 'DEFAULT CHARSET=utf8'
+    end
+    create_table(:users, :options => options) do |t|
+      t.string :eppn, limit: 100
+      t.string :display_name, limit: 100
+      t.timestamps
+    end
+
+    add_index :users, :id
+    add_index :users, :eppn
+  end
+
+  def self.down
+    drop_table :users
+  end
+end
