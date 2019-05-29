@@ -21,12 +21,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_user
-    return nil if !shibb_user?
-    # TODO: this will fail in development
-    User.find_by_eppn(shibb_eppn)
-  end
-
   def shibb_eppn
     if Rails.env.production?
       request.env["Shibboleth-eppn"]
