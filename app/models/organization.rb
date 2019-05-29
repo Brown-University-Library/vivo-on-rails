@@ -63,4 +63,17 @@ class Organization
 
     o
   end
+
+  # Returns an array with all the faculty for this organization
+  # Notice that it removes duplicates (and therefore removes the fact that
+  # some faculty might hold more than one appointment in the department)
+  # and does not preserve the titles of the people in the department.
+  def faculty_list()
+    list = []
+    ids = item.people.map {|person| person.vivo_id}.uniq
+    ids.each do |vivo_id|
+      list << Faculty.load_from_solr(vivo_id)
+    end
+    list
+  end
 end

@@ -118,7 +118,7 @@ class FacultyExport
               row[4] = pub.volume
               row[5] = pub.issue
               row[6] = pub.date
-              row[7] = pub.authors
+              row[7] = truncate(pub.authors, 500)
               row[8] = pub.venue
               row[9] = pub.doi
               row[10] = pub.year
@@ -212,10 +212,14 @@ class FacultyExport
 
   def safe_text(text)
     clean_text = text.gsub('"', '')
-    if clean_text.length > 500
-      clean_text[0..500] + "(truncated)"
-    else
-      clean_text
+    truncate(clean_text, 500)
+  end
+
+  def truncate(text, length)
+    return nil if text == nil
+    if text.length <= length
+      return text
     end
+    text[0..length] + "(truncated)"
   end
 end
