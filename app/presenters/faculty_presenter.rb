@@ -1,5 +1,5 @@
 class FacultyPresenter
-  attr_accessor :query, :form_values
+  attr_accessor :query, :form_values, :user
   attr_accessor :faculty, :has_publications, :has_research, :has_background,
     :has_affiliations, :has_teaching, :has_details,
     :publication_filters,

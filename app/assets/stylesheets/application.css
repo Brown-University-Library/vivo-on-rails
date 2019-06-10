@@ -1824,3 +1824,7 @@ td.citation-data.pub-item {
 		max-width: 1600px;
 	}
 }
+
+.active-glyphicon {
+	color:#F9E262;
+}

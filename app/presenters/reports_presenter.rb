@@ -1,5 +1,6 @@
 class ReportsPresenter
-    attr_accessor :query, :form_values, :user, :reports
+    attr_accessor :query, :form_values, :user
+    attr_accessor :reports
 
     def initialize(user, reports)
       @query = ""

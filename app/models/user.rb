@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-    def self.user_for_session(eppn, display_name)
+    def self.for_session(eppn, display_name)
+        return nil if eppn == nil
         user = User.find_by_eppn(eppn)
         if user == nil
             Rails.logger.info("Created user for EPPN: #{eppn}")

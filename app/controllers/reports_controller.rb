@@ -4,9 +4,8 @@ require "./app/models/faculty_export.rb"
 class ReportsController < ApplicationController
   def subject_lib_list
     must_be_authenticated()
-    user = User.user_for_session(shibb_eppn, shibb_fullname)
     reports = Report.all()
-    @presenter = ReportsPresenter.new(user, reports)
+    @presenter = ReportsPresenter.new(current_user, reports)
   end
 
   def subject_lib

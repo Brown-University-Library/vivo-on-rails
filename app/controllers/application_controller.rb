@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user
+    User.for_session(shibb_eppn, shibb_fullname)
+  end
+
   def shibb_user?
     if Rails.env.production?
       (request.env["Shibboleth-eppn"] != nil && request.env["Shibboleth-eppn"].strip != "")

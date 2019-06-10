@@ -86,6 +86,7 @@ class DisplayController < ApplicationController
         referer = search_url()
       end
       @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz, edit_mode)
+      @presenter.user = current_user
       render "faculty/show"
     end
 
@@ -119,6 +120,7 @@ class DisplayController < ApplicationController
       show_viz = ENV["VIZ_ENABLED"] == "true" || params[:viz] == "true"
       referer = request.headers.env["HTTP_REFERER"]
       @presenter = OrganizationPresenter.new(organization.item, search_url(), referer, show_viz)
+      @presenter.user = current_user
       render "organization/show"
     end
 

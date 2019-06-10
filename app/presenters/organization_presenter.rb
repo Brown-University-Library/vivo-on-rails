@@ -1,5 +1,5 @@
 class OrganizationPresenter
-  attr_accessor :query, :form_values
+  attr_accessor :query, :form_values, :user
   attr_accessor :organization, :show_back_to_search,
     :faculty_positions, :admin_positions, :all_positions,
     :show_visualizations

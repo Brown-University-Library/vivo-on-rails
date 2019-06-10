@@ -5,7 +5,8 @@ class SearchResultsPresenter
   # needed for *_show_url methods
   include Rails.application.routes.url_helpers
 
-  attr_accessor :form_values, :fq, :facets, :query, :search_qs, :results,
+  attr_accessor :query, :form_values, :user
+  attr_accessor :fq, :facets, :query, :search_qs, :results,
     :page, :start, :end, :num_found, :num_pages, :page_start, :page_end,
     :previous_url, :next_url,
     :remove_q_url, :facetSearchBaseUrl,
@@ -77,6 +78,8 @@ class SearchResultsPresenter
 
     @explain_format = explain_format
     @explainer = results.explainer
+
+    @user = nil
   end
 
   def pages_urls()

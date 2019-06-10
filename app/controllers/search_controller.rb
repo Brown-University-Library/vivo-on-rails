@@ -8,6 +8,7 @@ class SearchController < ApplicationController
       redirect_to "#{search_url()}?q=#{q}"
     else
       @presenter = AdvancedSearchPresenter.new(params)
+      @presenter.user = current_user
       render "advanced"
     end
   rescue => ex
@@ -23,6 +24,7 @@ class SearchController < ApplicationController
       redirect_to "#{search_url()}?q=#{params["querytext"]}"
     else
       @presenter = execute_search()
+      @presenter.user = current_user
       if @presenter.num_found == 0
         Rails.logger.warn("No results were found. Search: #{@presenter.search_qs}")
       end
