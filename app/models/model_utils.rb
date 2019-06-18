@@ -6,15 +6,20 @@ class ModelUtils
   end
 
   def self.type_for_id(id)
-    if id == "team-crisp"
-      return "TEAM"
-    end
     solr_url = ENV["SOLR_URL"]
     logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
     solr = SolrLite::Solr.new(solr_url, logger)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
-    return nil if solr_doc == nil
-    (solr_doc["record_type"] || []).first
+    if solr_doc != nil
+      return (solr_doc["record_type"] || []).first
+    end
+
+    # Special logic for team since they are not stored in Solr at this point.
+    if Team.find_by_id(id) != nil
+      return "TEAM"
+    end
+
+    nil
   end
 
   # Generates the proper URL for a given file path in VIVO.

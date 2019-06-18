@@ -25,7 +25,7 @@ class OrganizationItem
   end
 
   def is_team?
-    vivo_id == "team-crisp"
+    @record_type == "TEAM"
   end
 
   def self.from_hash(hash, thumbnail_url)

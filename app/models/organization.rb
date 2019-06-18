@@ -32,24 +32,20 @@ class Organization
   end
 
   def self.for_team(id)
-    # For now we only recognize one team
-    if id != "team-crisp"
+    team = Team.find_by_id(id)
+    if team == nil
       return nil
     end
-    o = Organization.new()
-    o.item = OrganizationItem.new({})
-    o.item.record_type = "TEAM"
-    o.item.uri = "http://vivo.brown.edu/individual/#{id}"
-    o.item.id = id
-    o.item.name = "Consortium for Research and Innovation in Suicide Prevention"
-    o.item.overview = "Consortium for Research and Innovation in Suicide Prevention"
-    o.item.people = []
+    org = Organization.new()
+    org.item = OrganizationItem.new({})
+    org.item.record_type = "TEAM"
+    org.item.uri = "http://vivo.brown.edu/individual/#{team.id}"
+    org.item.id = team.id
+    org.item.name = team.name
+    org.item.overview = team.name
+    org.item.people = []
 
-    ids = ["sarias1", "ma1", "jbarredo", "lbrick", "ac67", "echen13", "ddickste",
-    "yduartev", "mjfrank", "bgaudian", "rnjones", "kkemp",
-    "rl11", "bm8", "imilleri", "nnugent", "jprimack", "mranney",
-    "hschatte", "aspirito", "luebelac", "lweinsto", "jw33", "syenphd"]
-    ids.each do |id|
+    team.member_ids.each do |id|
         member_info = {
             id: id,
             faculty_uri: "http://vivo.brown.edu/individual/#{id}",
@@ -58,10 +54,10 @@ class Organization
             specific_position: "specific position"
         }
         member = OrganizationMemberItem.new(member_info)
-        o.item.people << member
+        org.item.people << member
     end
 
-    o
+    org
   end
 
   # Returns an array with all the faculty for this organization
