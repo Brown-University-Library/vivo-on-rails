@@ -58,6 +58,15 @@ class FacultyItem
     @id.split("/").last
   end
 
+  def research_on(research_area)
+    @research_areas.each do |r|
+      if r.strip.downcase == research_area.strip.downcase
+        return true
+      end
+    end
+    false
+  end
+
   def self.from_hash(hash, display_name, thumbnail_url, fis_updated, profile_updated, show_viz)
     faculty = FacultyItem.new(nil)
     faculty.thumbnail = thumbnail_url

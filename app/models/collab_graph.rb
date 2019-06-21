@@ -22,7 +22,7 @@ class CollabGraph
   # ok is false we could not retrieve the data. In this case data is a
   # hash with the following structure: { staus: nnn, message: xxx}
   #
-  def self.get_data(id)
+  def self.get_data(id, research_area = nil)
     type = ModelUtils.type_for_id(id)
     if type != "PEOPLE" && type != "ORGANIZATION" && type != "TEAM"
       return false, {status: 404, message: "Could not retrieve collaboration graph for #{id} (invalid type)"}
@@ -31,7 +31,7 @@ class CollabGraph
     if type == "TEAM"
       g = CollabGraphCustom.new()
       yesterday = (Date.today-1).to_s
-      data = {graph: g.graph_for_team(id), rabid: id, updated: yesterday}
+      data = {graph: g.graph_for_team(id, research_area), rabid: id, updated: yesterday}
       return true, data
     end
 

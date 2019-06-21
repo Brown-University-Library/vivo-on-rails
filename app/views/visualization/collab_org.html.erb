@@ -28,6 +28,12 @@
       <div class="btn-group" role="group">
         <button id="showLevel0" type="button" class="btn btn-default" title="Shows collaboration with between department members only">Intradepartmental collaboration</button>
       </div>
+      <% if @presenter.organization.is_team? %>
+        <div class="btn-group" role="group">
+          <select id="research_areas_filter">
+          </select>
+        </div>
+      <% end %>
     </div>
     <div id="loadingMsg">
       <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
@@ -101,14 +107,26 @@
       $("#forceToFit").attr("checked", true);
     }
 
+    $("#research_areas_filter").on("change", function(x) {
+      var newUrl = "<%= visualization_collab_path(@presenter.organization.vivo_id) %>" + "/" + $(this).val();
+      window.location.assign(newUrl);
+    });
+
     // Set the variable based on the checkbox. This is required because
     // when reloading the page the checkbox might not be checked.
     showOrphans = $("#showOrphans").is(":checked");
 
     $.getJSON(jsonDataUrl, function(data, status) {
+      var filter, i, value;
       theData = data.graph; // save the data in our global variable
       lastUpdated = new Date(data.updated);
       drawGraph();
+
+      filter = $("#research_areas_filter");
+      for(i = 0; i < data.graph.research_areas.length; i++) {
+        value = data.graph.research_areas[i];
+        filter.append($('<option>', {value: value, text: value}));
+      }
     });
 
     $("#showLevel0").on("click", function() { showLevel = 0; drawGraph(); });

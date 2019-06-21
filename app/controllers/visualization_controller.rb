@@ -33,9 +33,10 @@ class VisualizationController < ApplicationController
 
   def collab
     id = params["id"]
+    research_area = params["research_area"]
     case params["format"]
     when "json"
-      collab_json(id)
+      collab_json(id, research_area)
     when "csv"
       collab_csv(id)
     else
@@ -118,8 +119,8 @@ class VisualizationController < ApplicationController
       render "error", status: 500
     end
 
-    def collab_json(id)
-      ok, data = CollabGraph.get_data(id)
+    def collab_json(id, research_area)
+      ok, data = CollabGraph.get_data(id, research_area)
       if ok
         render json: data, status: 200
       else
