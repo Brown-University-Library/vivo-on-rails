@@ -62,6 +62,32 @@ function groupsFromNodes(nodes) {
   return groups;
 }
 
+// Sorts the nodes by group alphabetically but forces the requested
+// group to be on top. This is done so that we get a nice color for
+// the group that we are more interested since d3 tends to pick a
+// brigher color for the first item(s).
+function groupsFromNodesFixedTop(nodes, topGroup) {
+  var i;
+  var topIndex = -1;
+  var groups = groupsFromNodes(nodes)
+
+  // Find the location of the topOne item in the sorted list of groups...
+  for(i = 0; i < groups.length; i++) {
+    if (groups[i] == topGroup) {
+      topIndex = i;
+      break;
+    }
+  }
+
+  // ...and force it to be at the top of the list.
+  if (topIndex != -1) {
+    groups.splice(topIndex, 1);
+    groups.splice(0, 0, topGroup);
+  }
+
+  return groups;
+}
+
 // Calculates the edges from the links in the data
 // Links point to nodes by ID where as edges points to them by index.
 function calculateEdges(nodes, links) {
@@ -166,6 +192,29 @@ function datasetByLevel(nodes, edges, links, showLevel) {
   // recalculate the edges
   edges = calculateEdges(visibleNodes, links)
   return {nodes: visibleNodes, edges: edges};
+}
+
+// Source: https://www.sitepoint.com/javascript-generate-lighter-darker-color/
+// Darkens or lightens a color:
+//    hex is the hex value of the color (e.g. #112233)
+//    lum is the luminance percent to apply (e.g. 0.2 means 20% lighter, -0.2 means 20% darker)
+function colorLuminance(hex, lum) {
+  // validate hex string
+  hex = String(hex).replace(/[^0-9a-f]/gi, '');
+  if (hex.length < 6) {
+    hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+  }
+  lum = lum || 0;
+
+  // convert to decimal and change luminosity
+  var rgb = "#", c, i;
+  for (i = 0; i < 3; i++) {
+    c = parseInt(hex.substr(i*2,2), 16);
+    c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+    rgb += ("00"+c).substr(c.length);
+  }
+
+  return rgb;
 }
 
 // Calculates the color for a specific group.

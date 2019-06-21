@@ -178,29 +178,56 @@
     var w = +svg.attr("width");
     var h = +svg.attr("height");
 
-    // TODO: give an option to show orphan nodes.
+    // Most departments names are stored without the word "Department of"
+    // (say "Anthropology") but the faculty affiliation with the department
+    // has the full name (e.g. "Department of Anthropology") which makes
+    // matching one to the other a bit tricky.
+    var department = "<%= @presenter.organization.name %>";
+
     var nodes = nodesWithLinks(data.nodes, data.links)
     var edges = calculateEdges(nodes, data.links);
-    var allGroups = groupsFromNodes(nodes);
+    var allGroups = groupsFromNodesFixedTop(nodes, department);
     var dataset = datasetByLevel(nodes, edges, data.links, showLevel);
     var colorScheme = d3.scaleOrdinal(d3.schemeCategory20);
     var colors = groupColors(allGroups, colorScheme);
-    var nodeColor = function (d) {
+
+    var nodeColor = function(d) {
       if (d.group == null) {
         // Currently leaf nodes don't have a group.
         return groupColor("N/A", colorScheme)
       }
-      return groupColor(d.group, colorScheme)
+
+      return groupColor(d.group, colorScheme);
     };
 
-    var department = "<%= @presenter.organization.name %>";
+    var fillColor = function(d) {
+      // If we customize the fill color we need to make sure that the legend
+      // also uses the same color. For now, we don't mess with it.
+      return nodeColor(d);
+    };
+
+    var borderColor = function(d) {
+      if (d.level == 0) {
+        // Darken the border color
+        return colorLuminance(nodeColor(d), -0.15);
+      }
+      return null;
+    }
+
+    var strokeWidth = function(d) {
+      if (d.level == 0) {
+          return 2;
+      }
+      return 0;
+    }
+
     var departmentColor = groupColor(department, colorScheme)
     $(".researcherName").css("border-left-color", departmentColor);
 
     var ul = $("#legendList");
     ul.empty();
     var groupName;
-    var groups = groupsFromNodes(dataset.nodes);
+    var groups = groupsFromNodesFixedTop(dataset.nodes, department);
     for(i = 0; i < groups.length; i++) {
       groupName = groups[i];
       ul.append('<li><span style="background-color: ' + groupColor(groupName, colorScheme) + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' + groupName);
@@ -261,7 +288,9 @@
         }
         return 6;
       })
-      .style("fill", nodeColor);
+      .style("stroke", borderColor )
+      .style("stroke-width", strokeWidth)
+      .style("fill", fillColor);
 
     nodes.on('mouseover', function(d){
       var showDetails = $("#showDetails").is(":checked");
@@ -295,7 +324,7 @@
           .style("font-weight", "normal")
           .style("font-size", "10px");
       }
-      d3.select(this).select('circle').style("fill", nodeColor(d));
+      d3.select(this).select('circle').style("fill", fillColor(d));
     });
 
     nodes.on('click', function(d){
@@ -309,8 +338,8 @@
     });
 
     nodes.append("text")
-      .style("font-size", function(d) { return d.level == -10 ? "12px" : "8px"; })
-      .style("font-weight", function(d) { return d.level == -10 ? "bold" : "normal"; })
+      .style("font-size", function(d) { return d.level == 0 ? "12px" : "8px"; })
+      // .style("font-weight", function(d) { return d.level == 0 ? "bold" : "normal"; })
       .attr("class", "node-text")
       .text(function(d) { return d.name; });
 
