@@ -40,7 +40,19 @@ class VisualizationController < ApplicationController
     when "csv"
       collab_csv(id)
     else
-      collab_view(id)
+      collab_view(id, research_area)
+    end
+  end
+
+  def research
+    id = params["id"]
+    case params["format"]
+    when "json"
+      research_json(id)
+    # when "csv"          pending
+    #   research_csv(id)
+    else
+      research_view(id)
     end
   end
 
@@ -93,7 +105,7 @@ class VisualizationController < ApplicationController
       end
     end
 
-    def collab_view(id)
+    def collab_view(id, research_area = nil)
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
@@ -107,6 +119,7 @@ class VisualizationController < ApplicationController
       when "TEAM"
         org = Organization.for_team(id)
         @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
+        @presenter.research_area = research_area
         render "collab_org"
       else
         err_msg = "Individual ID (#{id}) was not found"
@@ -145,6 +158,35 @@ class VisualizationController < ApplicationController
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not fetch collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
       render text: "error", status: 500
+    end
+
+    def research_json(id)
+      # TODO: validate if id represents team or organization
+      org = Organization.for_team(id)
+      if org == nil
+        render json: {}, status: 404
+        return
+      end
+      graph = AlluvialGraph.new(org.faculty_list)
+      render json: graph.data, status: 200
+    end
+
+    def research_view(id)
+      type = ModelUtils.type_for_id(id)
+      case type
+      when "TEAM"
+        org = Organization.for_team(id)
+        @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
+        render "research_org_v3"
+      else
+        err_msg = "Individual ID (#{id}) was not found"
+        Rails.logger.warn(err_msg)
+        render "not_found", status: 404, formats: [:html]
+      end
+    rescue => ex
+      backtrace = ex.backtrace.join("\r\n")
+      Rails.logger.error("Could not render research visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
+      render "error", status: 500
     end
 
     def publications_view(id)

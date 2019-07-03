@@ -6,24 +6,19 @@ class CollabGraphCustom
   end
 
   def graph_for_team(id, research_area = nil)
-    members = []
     org = Organization.for_team(id)
-    org.item.people.each do |faculty|
-      members << faculty.vivo_id
-    end
-    graph_for_org(members, org.item.name, research_area)
+    graph_for_list(org.faculty_list(), org.item.name, research_area)
   end
 
-  def graph_for_org(members, org_name, research_area = nil)
+  def graph_for_list(faculty_list, org_name, research_area = nil)
     # add the members of the organization as root nodes (level 0)
     root_nodes = []
-    members.each do |id|
-      faculty = Faculty.load_from_solr(id)
-      next if faculty == nil
-
+    faculty_list.each do |faculty|
       @graph.research_areas += faculty.item.research_areas.map {|r| r.strip.downcase }
       if research_area != nil
         if !faculty.item.research_on(research_area)
+          # skip if researcher is not involved in
+          # the research area that we are interested
           next
         end
       end
@@ -38,7 +33,7 @@ class CollabGraphCustom
         name: faculty.item.name,
         level: 0}
       @graph.add_node(node)
-      root_nodes << id
+      root_nodes << faculty.item.vivo_id
     end
 
     # calculate the collaboration graph for each of them

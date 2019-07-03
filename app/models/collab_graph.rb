@@ -29,9 +29,14 @@ class CollabGraph
     end
 
     if type == "TEAM"
-      g = CollabGraphCustom.new()
+      cache_key = "team_collab_" + id + "_" + (research_area || "nil")
+      graph = Rails.cache.fetch(cache_key, expires_in: 5.minute) do
+        Rails.logger.info "Caching #{cache_key}..."
+        g = CollabGraphCustom.new()
+        g.graph_for_team(id, research_area)
+      end
       yesterday = (Date.today-1).to_s
-      data = {graph: g.graph_for_team(id, research_area), rabid: id, updated: yesterday}
+      data = {graph: graph, rabid: id, updated: yesterday}
       return true, data
     end
 

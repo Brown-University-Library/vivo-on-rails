@@ -65,11 +65,20 @@ class Organization
   # some faculty might hold more than one appointment in the department)
   # and does not preserve the titles of the people in the department.
   def faculty_list()
-    list = []
-    ids = item.people.map {|person| person.vivo_id}.uniq
-    ids.each do |vivo_id|
-      list << Faculty.load_from_solr(vivo_id)
+    cache_key = "faculty_list_" + item.id
+    Rails.cache.fetch(cache_key, expires_in: 5.minute) do
+      begin
+        Rails.logger.info "Caching faculty for organization #{cache_key}."
+        list = []
+        ids = item.people.map {|person| person.vivo_id}.uniq
+        ids.each do |vivo_id|
+          list << Faculty.load_from_solr(vivo_id)
+        end
+        list
+      rescue Exception => e
+        Rails.logger.error "Could not cache faculty for organization #{cache_key}. #{e}"
+        nil
+      end
     end
-    list
   end
 end
