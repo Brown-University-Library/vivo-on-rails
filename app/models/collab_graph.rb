@@ -29,11 +29,16 @@ class CollabGraph
     end
 
     if type == "TEAM"
+      # Custom code to fetch the data since teams are hard-coded
+      # in the Rails app. Eventually teams will be defined in
+      # the VIVO and collaboration information will be served by
+      # the Visualization Service, but we are not there yet.
       cache_key = "team_collab_" + id + "_" + (research_area || "nil")
       graph = Rails.cache.fetch(cache_key, expires_in: 5.minute) do
         Rails.logger.info "Caching #{cache_key}..."
+        org = Organization.load(id)
         g = CollabGraphCustom.new()
-        g.graph_for_team(id, research_area)
+        g.graph_for_list(org.faculty_list(), org.item.name, research_area)
       end
       yesterday = (Date.today-1).to_s
       data = {graph: graph, rabid: id, updated: yesterday}

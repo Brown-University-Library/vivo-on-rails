@@ -31,11 +31,15 @@ class Organization
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
   end
 
-  def self.for_team(id)
+  def self.load(id)
     team = Team.find_by_id(id)
-    if team == nil
-      return nil
+    if team != nil
+      return from_team(team)
     end
+    return load_from_solr(id)
+  end
+
+  def self.from_team(team)
     org = Organization.new()
     org.item = OrganizationItem.new({})
     org.item.record_type = "TEAM"

@@ -5,11 +5,6 @@ class CollabGraphCustom
     @graph = EdgeGraph.new()
   end
 
-  def graph_for_team(id, research_area = nil)
-    org = Organization.for_team(id)
-    graph_for_list(org.faculty_list(), org.item.name, research_area)
-  end
-
   def graph_for_list(faculty_list, org_name, research_area = nil)
     # add the members of the organization as root nodes (level 0)
     root_nodes = []

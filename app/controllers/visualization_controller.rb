@@ -116,11 +116,11 @@ class VisualizationController < ApplicationController
         @presenter = FacultyPresenter.new(faculty.item, search_url(), nil, false)
         render "collab"
       when "ORGANIZATION"
-        org = Organization.load_from_solr(id)
+        org = Organization.load(id)
         @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
         render "collab_org"
       when "TEAM"
-        org = Organization.for_team(id)
+        org = Organization.load(id)
         @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
         @presenter.research_area = research_area
         render "collab_org"
@@ -164,8 +164,7 @@ class VisualizationController < ApplicationController
     end
 
     def research_json(id)
-      # TODO: validate if id represents team or organization
-      org = Organization.for_team(id)
+      org = Organization.load(id)
       if org == nil
         render json: {}, status: 404
         return
@@ -175,17 +174,15 @@ class VisualizationController < ApplicationController
     end
 
     def research_view(id)
-      type = ModelUtils.type_for_id(id)
-      case type
-      when "TEAM"
-        org = Organization.for_team(id)
-        @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
-        render "research_org_v3"
-      else
+      org = Organization.load(id)
+      if org == nil
         err_msg = "Individual ID (#{id}) was not found"
         Rails.logger.warn(err_msg)
         render "not_found", status: 404, formats: [:html]
       end
+      org = Organization.load(id)
+      @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
+      render "research_org_v3"
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not render research visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
