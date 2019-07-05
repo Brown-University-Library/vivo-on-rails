@@ -33,8 +33,9 @@ class AlluvialGraph
             node = {
                 id: local_id,
                 nodeName: faculty.item.vivo_id,
+                display: faculty.item.display_name,
                 incoming: [],
-                nodeValue: 20
+                nodeValue: 0, # calculated below
             }
             nodes1 << node
         end
@@ -52,8 +53,9 @@ class AlluvialGraph
             {
                 id: next_id + i,
                 nodeName: area[:key],
+                display: area[:key],
                 incoming: [],
-                nodeValue: area[:count] * 20,
+                nodeValue: 0, # calculated below
                 count: area[:count]
             }
         end
@@ -69,15 +71,31 @@ class AlluvialGraph
                     # ignore this research area since it's not shared with anyone else
                 else
                     # shared research area, add a link for it
-                    weight = node2[:count] * 4
                     link = {
                         source: node1[:id],     # researcher
                         target: node2[:id],     # research area
-                        value: weight
+                        value: 1
                     }
                     links << link
                 end
             end
+        end
+
+        # The value of each researcher node is based on how many
+        # links flow out of it (link source = researcher)
+        nodes1.each do |n|
+            n[:nodeValue] = links.select { |l| l[:source] == n[:id] }.count
+            if n[:nodeValue] == 0
+                # Force these researchers to show at the bottom with a smaller size
+                # TODO: This should be handled in the JavaScript.
+                n[:nodeValue] = 0.9
+            end
+        end
+
+        # The value of each research area node is based on how
+        # many links arrive to it (link target = research area)
+        nodes2.each do |n|
+            n[:nodeValue] = links.select { |l| l[:target] == n[:id] }.count
         end
 
         data = {nodes: [nodes1, nodes2], links: links}

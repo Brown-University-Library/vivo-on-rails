@@ -56,14 +56,6 @@
         via the <a target="_blank" href="<%= manager_url() %>">manager</a>.
       </p>
     </div>
-    <div class="btn-group btn-group" role="group" aria-label="...">
-      <div class="btn-group" role="group">
-        <button id="showLevel1" type="button" class="btn btn-info" title="Shows collaboration with anyone at Brown University">Collaboration at Brown</button>
-      </div>
-      <div class="btn-group" role="group">
-        <button id="showLevel0" type="button" class="btn btn-default" title="Shows collaboration with between department members only">Intradepartmental collaboration</button>
-      </div>
-    </div>
     <div id="loadingMsg">
       <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
     </div>
@@ -80,22 +72,18 @@
       <!-- added via JavaScript -->
     </ul>
     </div>
-    <p><b>Options</b></p>
-    <% if !@presenter.organization.is_team? %>
-      <p><a href="<%= display_show_path(@presenter.organization.vivo_id) %>">Go to Organization's Profile</a></p>
-    <% end %>
-    <p>Show labels&nbsp;<input id="showLabels" type="checkbox" checked/></p>
-    <p>Show details on mouse hover&nbsp;<input id="showDetails" type="checkbox" checked/></p>
-    <p>Force to fit&nbsp;<input id="forceToFit" type="checkbox" title="Forces the graph to fit on the screen (useful when some nodes fall outside the display area)"/></p>
     <p><b>Data</b></p>
-    <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :csv) %>"
+    <!-- <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :csv) %>"
       title="Format suitable for Excel and other tools."
-      target="_blank">Download data (CSV)</a></p>
+      target="_blank">Download data (CSV)</a></p> -->
     <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>"
       title="Format suitable for D3 and other visualization tools."
       target="_blank">Download data (JSON)</a></p>
     <p><a href="#" id="embedHtml" title="Shows HTML to embed the graph as an SVG element into your own page.">Embed SVG Code</a></p>
-    <p><a href="#" id="downloadPng" title="Downlods the graph as an image file in PNG format. This only works in Chrome and Firefox.">Download Image (PNG)</a></p>
+    <!-- The links render awful in the PNG, I think because the PNG does not capture
+        the transformations done on the page via CSS.
+        TODO: see if we can embed them on the SVG instead. -->
+    <!-- <p><a href="#" id="downloadPng" title="Downlods the graph as an image file in PNG format. This only works in Chrome and Firefox.">Download Image (PNG)</a></p> -->
   </div>
 </div>
 
@@ -197,6 +185,9 @@
         nodeMap[link.target].incoming.push(link);
     });
 
+    // The second time series [1] contains the research areas.
+    var firstResearchArea = data.times[1][0].id;
+
     // sort by value and calculate offsets
     data.times.forEach(function(nodes) {
         var cumValue = 0;
@@ -259,9 +250,6 @@
         line = d3.svg.line()
             .interpolate('basis');
 
-    debugger;
-    var firstResearchArea = data[1][0].id;
-
     var linkColor = function(l) {
         return colorScheme(l.target);
     }
@@ -270,7 +258,7 @@
         if (n.id >= firstResearchArea) {
             return colorScheme(n.id);
         }
-        return "gray";
+        return "lightgray";
     }
 
     var t = 0;
@@ -309,7 +297,7 @@
             .attr('y', function(n, i) {
                 return (y(n.offsetValue) + i * padding) + 15;
             })
-            .text(function(n) { return n.nodeName });
+            .text(function(n) { return n.display });
 
         var linkLine = function(start) {
             return function(l) {
