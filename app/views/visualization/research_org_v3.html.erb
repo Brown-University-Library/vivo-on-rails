@@ -40,10 +40,9 @@
 <div class="row">
   <div class="col-md-9">
     <div id="descriptionMsg">
-      The collaborator network for an organization is created with the information
-      provided by each researcher associated with this organization under the
-      Affiliations tab for their profile. The collaborator network for this
-      organization was calculated on <span id="txtLastUpdated"></span>.
+      This visualization shows research areas and how common they are among researchers
+      for an organization. Only those research areas indicated in more than one researcher
+      profile for this organization are shown.
     </div>
     <div id="errorMsg" class="alert alert-warning hidden" role="alert">
       <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -282,7 +281,15 @@
             .attr('height', function(n) { return y(n.nodeValue) });
 
         nodes.append('svg:title')
-            .text(function(n) { return n.nodeName });
+            .text(function(n) {
+              if (n.id >= firstResearchArea) {
+                return n.nodeName
+              }
+              if (n.areas == "") {
+                return "This researchas has not specified research areas."
+              }
+              return "Research areas: " + n.areas;
+            });
 
         nodes.append('svg:text')
             .style("class", "node-text")

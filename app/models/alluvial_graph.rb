@@ -36,6 +36,7 @@ class AlluvialGraph
                 display: faculty.item.display_name,
                 incoming: [],
                 nodeValue: 0, # calculated below
+                areas: faculty.item.research_areas.join(", ")
             }
             nodes1 << node
         end
@@ -56,7 +57,7 @@ class AlluvialGraph
                 display: area[:key],
                 incoming: [],
                 nodeValue: 0, # calculated below
-                count: area[:count]
+                areas: nil
             }
         end
 
