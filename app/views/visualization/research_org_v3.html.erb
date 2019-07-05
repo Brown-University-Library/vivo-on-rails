@@ -1,9 +1,10 @@
+<!-- This visualization requires d3 version 3 -->
 <script type="text/javascript" src="https://d3js.org/d3.v2.js"></script>
 
 <style type="text/css">
-    body {
+    /* body {
         margin: 1em;
-    }
+    } */
 
     .node {
       stroke: #fff;
@@ -22,6 +23,11 @@
 
     .node {
         stroke: none;
+    }
+
+    .thetext {
+        color:black;
+        background-color: white;
     }
 
 </style>
@@ -131,28 +137,11 @@
       $("#forceToFit").attr("checked", true);
     }
 
-    // Set the variable based on the checkbox. This is required because
-    // when reloading the page the checkbox might not be checked.
-    showOrphans = $("#showOrphans").is(":checked");
-
     $.getJSON(jsonDataUrl, function(data, status) {
       var filter, i, value;
       theData = data; // save the data in our global variable
       // lastUpdated = new Date(data.updated);
       drawGraph();
-    });
-
-    $("#showLevel0").on("click", function() { showLevel = 0; drawGraph(); });
-    $("#showLevel1").on("click", function() { showLevel = 1; drawGraph(); });
-
-    $("#showLabels").on("click", updateLabels);
-    $("#forceToFit").on("click", function() {
-      var checked = $("#forceToFit").is(":checked");
-      var newUrl = "<%= visualization_collab_path(@presenter.organization.vivo_id) %>";
-      if (checked) {
-        newUrl += "?fit=1";
-      }
-      window.location.assign(newUrl);
     });
 
     $("#embedHtml").on("click", function() {
@@ -187,196 +176,194 @@
 
     var colorScheme = d3.scale.category20();
 
-/* Process Data */
+    // make a node lookup map
+    var nodeMap = (function() {
+        var nm = {};
+        data.times.forEach(function(nodes) {
+            nodes.forEach(function(n) {
+                nm[n.id] = n;
+                // add links and assure node value
+                n.links = [];
+                n.incoming = [];
+                n.nodeValue = n.nodeValue || 0;
+            })
+        });
+        return nm;
+    })();
 
-// make a node lookup map
-var nodeMap = (function() {
-    var nm = {};
+    // attach links to nodes
+    data.links.forEach(function(link) {
+        nodeMap[link.source].links.push(link);
+        nodeMap[link.target].incoming.push(link);
+    });
+
+    // sort by value and calculate offsets
     data.times.forEach(function(nodes) {
-        nodes.forEach(function(n) {
-            nm[n.id] = n;
-            // add links and assure node value
-            n.links = [];
-            n.incoming = [];
-            n.nodeValue = n.nodeValue || 0;
+        var cumValue = 0;
+        nodes.sort(function(a,b) {
+            return d3.descending(a.nodeValue, b.nodeValue)
+        });
+        nodes.forEach(function(n, i) {
+            n.order = i;
+            n.offsetValue = cumValue;
+            cumValue += n.nodeValue;
+            // same for links
+            var lCumValue;
+            // outgoing
+            if (n.links) {
+                lCumValue = 0;
+                n.links.sort(function(a,b) {
+                    return d3.descending(a.value, b.value)
+                });
+                n.links.forEach(function(l) {
+                    l.outOffset = lCumValue;
+                    lCumValue += l.value;
+                });
+            }
+            // incoming
+            if (n.incoming) {
+                lCumValue = 0;
+                n.incoming.sort(function(a,b) {
+                    return d3.descending(a.value, b.value)
+                });
+                n.incoming.forEach(function(l) {
+                    l.inOffset = lCumValue;
+                    lCumValue += l.value;
+                });
+            }
         })
     });
-    return nm;
-})();
+    data = data.times;
 
-// attach links to nodes
-data.links.forEach(function(link) {
-    nodeMap[link.source].links.push(link);
-    nodeMap[link.target].incoming.push(link);
-});
+    // calculate maxes
+    var maxn = d3.max(data, function(t) { return t.length }),
+        maxv = d3.max(data, function(t) { return d3.sum(t, function(n) { return n.nodeValue }) });
 
-// sort by value and calculate offsets
-data.times.forEach(function(nodes) {
-    var cumValue = 0;
-    nodes.sort(function(a,b) {
-        return d3.descending(a.nodeValue, b.nodeValue)
-    });
-    nodes.forEach(function(n, i) {
-        n.order = i;
-        n.offsetValue = cumValue;
-        cumValue += n.nodeValue;
-        // same for links
-        var lCumValue;
-        // outgoing
-        if (n.links) {
-            lCumValue = 0;
-            n.links.sort(function(a,b) {
-                return d3.descending(a.value, b.value)
-            });
-            n.links.forEach(function(l) {
-                l.outOffset = lCumValue;
-                lCumValue += l.value;
-            });
+    /* Make Vis */
+    var svg = d3.select("svg");
+    svg.selectAll("*").remove();
+
+    var w = +svg.attr("width");
+    var h = +svg.attr("height");
+
+    // settings and scales
+    var gapratio = .7,
+        delay = 1500,
+        padding = 15,
+        x = d3.scale.ordinal()
+            .domain(d3.range(data.length))
+            .rangeBands([0, w + (w/(data.length-1))], gapratio),
+        y = d3.scale.linear()
+            .domain([0, maxv])
+            .range([0, h - padding * maxn]),
+        line = d3.svg.line()
+            .interpolate('basis');
+
+    debugger;
+    var firstResearchArea = data[1][0].id;
+
+    var linkColor = function(l) {
+        return colorScheme(l.target);
+    }
+
+    var nodeColor = function(n) {debugger;
+        if (n.id >= firstResearchArea) {
+            return colorScheme(n.id);
         }
-        // incoming
-        if (n.incoming) {
-            lCumValue = 0;
-            n.incoming.sort(function(a,b) {
-                return d3.descending(a.value, b.value)
-            });
-            n.incoming.forEach(function(l) {
-                l.inOffset = lCumValue;
-                lCumValue += l.value;
-            });
-        }
-    })
-});
-data = data.times;
+        return "gray";
+    }
 
-// calculate maxes
-var maxn = d3.max(data, function(t) { return t.length }),
-    maxv = d3.max(data, function(t) { return d3.sum(t, function(n) { return n.nodeValue }) });
+    var t = 0;
 
-/* Make Vis */
+    function update(first) {
+        // update data
+        var currentData = data.slice(0, ++t);
 
-var svg = d3.select("svg");
-svg.selectAll("*").remove();
+        // time slots
+        var times = svg.selectAll('g.time')
+            .data(currentData)
+        .enter().append('svg:g')
+            .attr('class', 'time')
+            .attr("transform", function(d, i) { return "translate(" + (x(i) - x(0)) + ",0)" });
 
-var vis = svg;
-var w = +svg.attr("width");
-var h = +svg.attr("height");
+        // node bars
+        var nodes = times.selectAll('g.node')
+            .data(function(d) { return d })
+        .enter().append('svg:g')
+            .attr('class', 'node');
 
-// settings and scales
-var gapratio = .7,
-    delay = 1500,
-    padding = 15,
-    x = d3.scale.ordinal()
-        .domain(d3.range(data.length))
-        .rangeBands([0, w + (w/(data.length-1))], gapratio),
-    y = d3.scale.linear()
-        .domain([0, maxv])
-        .range([0, h - padding * maxn]),
-    line = d3.svg.line()
-        .interpolate('basis');
-
-var t = 0;
-function update(first) {
-    // update data
-    var currentData = data.slice(0, ++t);
-
-    // time slots
-    var times = vis.selectAll('g.time')
-        .data(currentData)
-      .enter().append('svg:g')
-        .attr('class', 'time')
-        .attr("transform", function(d, i) { return "translate(" + (x(i) - x(0)) + ",0)" });
-
-    // node bars
-    var nodes = times.selectAll('g.node')
-        .data(function(d) { return d })
-      .enter().append('svg:g')
-        .attr('class', 'node');
-
-    setTimeout(function() {
         var x_rangeBand = x.rangeBand();
-        // var x_rangeBand = 20;
         nodes.append('svg:rect')
             .attr('fill', nodeColor)
             .attr('y', function(n, i) {
                 return y(n.offsetValue) + i * padding;
             })
             .attr('width', x_rangeBand)
-            .attr('height', function(n) { return y(n.nodeValue) })
-          .append('svg:title')
+            .attr('height', function(n) { return y(n.nodeValue) });
+
+        nodes.append('svg:title')
             .text(function(n) { return n.nodeName });
-    }, (first ? 0 : (delay-delay)));
 
-    var linkLine = function(start) {
-        return function(l) {
-            var x_rangeBand = x.rangeBand();
-            var x_0 = x(0);
-            // var x_rangeBand = 50;
-            // var x_0 = 1000;
-            var source = nodeMap[l.source],
-                target = nodeMap[l.target],
-                gapWidth = x_0,
-                bandWidth = x_rangeBand + gapWidth,
-                startx = x_rangeBand - bandWidth,
-                sourcey = y(source.offsetValue) +
-                    source.order * padding +
-                    y(l.outOffset) +
-                    y(l.value)/2,
-                targety = y(target.offsetValue) +
-                    target.order * padding +
-                    y(l.inOffset) +
-                    y(l.value)/2,
-                points = start ?
-                    [
-                        [ startx, sourcey ], [ startx, sourcey ], [ startx, sourcey ], [ startx, sourcey ]
-                    ] :
-                    [
-                        [ startx, sourcey ],
-                        [ startx + gapWidth/2, sourcey ],
-                        [ startx + gapWidth/2, targety ],
-                        [ 0, targety ]
-                    ];
-            return line(points);
+        nodes.append('svg:text')
+            .style("class", "thetext")
+            .attr('y', function(n, i) {
+                return (y(n.offsetValue) + i * padding) + 15;
+            })
+            .text(function(n) { return n.nodeName });
+
+        var linkLine = function(start) {
+            return function(l) {
+                var x_rangeBand = x.rangeBand();
+                var x_0 = x(0);
+                var source = nodeMap[l.source],
+                    target = nodeMap[l.target],
+                    gapWidth = x_0,
+                    bandWidth = x_rangeBand + gapWidth,
+                    startx = x_rangeBand - bandWidth,
+                    sourcey = y(source.offsetValue) +
+                        source.order * padding +
+                        y(l.outOffset) +
+                        y(l.value)/2,
+                    targety = y(target.offsetValue) +
+                        target.order * padding +
+                        y(l.inOffset) +
+                        y(l.value)/2,
+                    points = start ?
+                        [
+                            [ startx, sourcey ], [ startx, sourcey ], [ startx, sourcey ], [ startx, sourcey ]
+                        ] :
+                        [
+                            [ startx, sourcey ],
+                            [ startx + gapWidth/2, sourcey ],
+                            [ startx + gapWidth/2, targety ],
+                            [ 0, targety ]
+                        ];
+                return line(points);
+            }
         }
-    }
 
+        // links
+        var links = nodes.selectAll('path.link')
+            .data(function(n) { return n.incoming || [] })
+        .enter().append('svg:path')
+            .attr('class', 'link')
+            .style("stroke", linkColor)
+            .style('stroke-width', function(l) { return y(l.value) })
+            .attr('d', linkLine(true))
+            .on('mouseover', function() {
+                d3.select(this).attr('class', 'link on')
+            })
+            .on('mouseout', function() {
+                d3.select(this).attr('class', 'link')
+            })
+        .transition()
+            .duration(delay)
+            .attr('d', linkLine());
 
-    var linkColor = function(l) {
-        return colorScheme(l.target);
-    }
+    } // function update()
 
-    var nodeColor = function(n) {
-        return "gray";
-        // return colorScheme(n.nodeValue);
-    }
-
-    // links
-    var links = nodes.selectAll('path.link')
-        .data(function(n) { return n.incoming || [] })
-      .enter().append('svg:path')
-        .attr('class', 'link')
-        .style("stroke", linkColor)
-        .style('stroke-width', function(l) { return y(l.value) })
-        .attr('d', linkLine(true))
-        .on('mouseover', function() {
-            d3.select(this).attr('class', 'link on')
-        })
-        .on('mouseout', function() {
-            d3.select(this).attr('class', 'link')
-        })
-      .transition()
-        .duration(delay)
-        .attr('d', linkLine());
-
-}
-
-function updateNext() {
-    if (t < data.length) {
-        update();
-        window.setTimeout(updateNext, delay)
-    }
-}
-update(true);
-updateNext();
+    update(true);
+    update(false);
 
   } // function drawGraph() {
 
