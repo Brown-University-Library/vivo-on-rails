@@ -69,9 +69,12 @@ class FacultyPresenter
     pub_types
   end
 
-  # TODO: we should get the research area IDs from VIVO rather than trying to
-  # calculate them.
   def research_area_id(research_area)
-    research_area.gsub(" ", "_")
+    @faculty.research_areas_edit.each do |ra|
+      if ra.label == research_area
+        return ra.vivo_id
+      end
+    end
+    return nil
   end
 end

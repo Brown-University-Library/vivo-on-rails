@@ -89,11 +89,15 @@
     //////////////////////////////////////////
     $("#research-areas-list").on("click", ".delete_research_area", function(el) {
       // source: https://stackoverflow.com/a/15420578/446681
-      var id1 = "#" + el.target.parentNode.id;
-      // console.log("click to delete: " + id1);
-      var id2 = id1.replace("_delete", "")
-      $(id1).addClass("hidden");
-      $(id2).addClass("hidden");
+      var idDelete = "#" + el.target.parentNode.id;
+      var idLink = idDelete.replace("_delete", "");
+      var id = idLink.replace("#", "");
+      var url = "http://localhost:3000/edit/research_area/" + id + "/delete";
+      $.getJSON(url, {}, function(x) {
+        console.log("deleted " + id);
+        $(idDelete).addClass("hidden");
+        $(idLink).addClass("hidden");
+      })
     });
 
     $("#researchareaAddButton").on("click", function(el) {

@@ -48,6 +48,22 @@ class Faculty
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
   end
 
+  def load_edit_data()
+    url = ENV["EDIT_SERVICE"] + "/" + item.vivo_id + "/faculty/edit/overview/overview/update"
+    data = JsonUtils::http_get(url)
+    if data != nil
+      item.overview = data["overview"] || ""
+    end
+
+    url = ENV["EDIT_SERVICE"] + "/" + item.vivo_id + "/faculty/edit/research/areas/update"
+    data = JsonUtils::http_get(url)
+    if data != nil
+      # For now use a new property for the edit array in order to be able to
+      # handle label + id, the existing array only handles label.
+      item.research_areas_edit = ResearchAreaItem.from_hash_array(data["research_areas"] || [])
+    end
+  end
+
   def self.has_coauthors?(id)
     coauthors = self.coauthors_cache()
     if coauthors != nil

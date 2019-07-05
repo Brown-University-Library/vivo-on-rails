@@ -5,7 +5,8 @@ class FacultyItem
     :display_name, :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
-    :collaborators, :affiliations_text, :affiliations, :research_areas,
+    :collaborators, :affiliations_text, :affiliations,
+    :research_areas, :research_areas_edit,
     :on_the_web, :appointments, :published_in, :hidden,
     :cv_link, :credentials, :training,
     :fis_updated, :profile_updated, :show_visualizations,
@@ -40,6 +41,7 @@ class FacultyItem
     @title = ""
     @thumbnail = ""
     @research_areas = []
+    @research_areas_edit = []
     @on_the_web = []
     @appointments = []
     @hidden = false

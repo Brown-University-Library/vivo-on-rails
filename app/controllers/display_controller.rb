@@ -83,6 +83,7 @@ class DisplayController < ApplicationController
       referer = request.headers.env["HTTP_REFERER"]
       edit_mode = ENV["EDIT_ALLOWED"] == "true" && params[:mode] == "edit"
       if edit_mode
+        faculty.load_edit_data()
         referer = search_url()
       end
       @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz, edit_mode)
