@@ -14,7 +14,6 @@ class CollabGraphCustom
     # add the members of the organization as root nodes (level 0)
     root_nodes = []
     faculty_list.each do |faculty|
-      @graph.research_areas += faculty.item.research_areas.map {|r| r.strip.downcase }
       if research_area != nil
         if !faculty.item.research_on(research_area)
           # skip if researcher is not involved in
@@ -41,9 +40,23 @@ class CollabGraphCustom
       get_collabs(id, 1, research_area)
     end
 
-    # TODO: preserve the count of how many people have that research area
-    @graph.research_areas.uniq!
-    @graph.research_areas.sort!
+    # calculate the count for each research area
+    areas = {}
+    faculty_list.each do |faculty|
+      faculty.item.research_areas.each do |area|
+        key = area.strip.downcase
+        if areas[key] == nil
+          areas[key] = 1
+        else
+          areas[key] += 1
+        end
+      end
+    end
+
+    areas = areas.map { |k,v| {key: k, count: v} }
+    areas = areas.select { |a| a[:count] > 1}
+    areas = areas.sort { |a, b| a[:count] <=> b[:count] }
+    @graph.research_areas = areas.reverse
     @graph
   end
 

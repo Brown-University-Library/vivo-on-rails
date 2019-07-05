@@ -29,9 +29,10 @@
         <button id="showLevel0" type="button" class="btn btn-default" title="Shows collaboration with between department members only">Intradepartmental collaboration</button>
       </div>
       <% if @presenter.organization.is_team? %>
-        <div class="btn-group" role="group">
-          <select id="research_areas_filter">
-          </select>
+        <div>
+            <div class="btn-group" role="group">
+                Research area: <select id="research_areas_filter"></select>
+            </div>
         </div>
       <% end %>
     </div>
@@ -123,15 +124,28 @@
     showOrphans = $("#showOrphans").is(":checked");
 
     $.getJSON(jsonDataUrl, function(data, status) {
-      var filter, i, value;
+      var filter, i, value, count, text, option;
       theData = data.graph; // save the data in our global variable
       lastUpdated = new Date(data.updated);
       drawGraph();
 
       filter = $("#research_areas_filter");
+      filter.append($('<option>', {value: "", text: "(all)"}));
       for(i = 0; i < data.graph.research_areas.length; i++) {
-        value = data.graph.research_areas[i];
-        filter.append($('<option>', {value: value, text: value}));
+        value = data.graph.research_areas[i].key;
+        // Don't display the counts since they can be misleading.
+        // For example, it's possible that a researcher has a given
+        // research area listed but if none of his collaborators
+        // are on the list (i.e. there are no links for this researcher)
+        // the node will not be displayed and the counts might not
+        // match the number of nodes displayed on the visualization
+        // since we only display nodesWithLinks().
+        //
+        // count = data.graph.research_areas[i].count;
+        // text = value + " (" + count.toString(10) + ")";
+        text = value;
+        option = {value: value, text: text, selected: value == research_area};
+        filter.append($('<option>', option));
       }
     });
 

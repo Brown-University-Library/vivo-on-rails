@@ -34,6 +34,9 @@ class VisualizationController < ApplicationController
   def collab
     id = params["id"]
     research_area = params["research_area"]
+    if research_area == ""
+      research_area = nil
+    end
     case params["format"]
     when "json"
       collab_json(id, research_area)
