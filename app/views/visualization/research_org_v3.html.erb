@@ -2,10 +2,6 @@
 <script type="text/javascript" src="https://d3js.org/d3.v2.js"></script>
 
 <style type="text/css">
-    /* body {
-        margin: 1em;
-    } */
-
     .node {
       stroke: #fff;
       stroke-width: 2px;
@@ -14,22 +10,22 @@
     .link {
       fill: none;
       stroke: #000;
-      /* opacity: .3; */
     }
+
     .link.on {
-      stroke: #F00;
-      opacity: .7;
+      opacity: .9;
+      stroke-dasharray: 3px;
+      stroke-linecap: square;
     }
 
     .node {
         stroke: none;
     }
 
-    .thetext {
+    .node-text {
         color:black;
         background-color: white;
     }
-
 </style>
 
 
@@ -293,7 +289,7 @@
             .text(function(n) { return n.nodeName });
 
         nodes.append('svg:text')
-            .style("class", "thetext")
+            .style("class", "node-text")
             .attr('y', function(n, i) {
                 return (y(n.offsetValue) + i * padding) + 15;
             })
