@@ -1,0 +1,357 @@
+<!-- This visualization requires d3 version 3 -->
+<script type="text/javascript" src="https://d3js.org/d3.v2.js"></script>
+
+<style type="text/css">
+    .node {
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+
+    .link {
+      fill: none;
+      stroke: #000;
+    }
+
+    .link.on {
+      opacity: .9;
+      stroke-dasharray: 3px;
+      stroke-linecap: square;
+    }
+
+    .node {
+        stroke: none;
+    }
+
+    .node-text {
+        color:black;
+        background-color: white;
+    }
+</style>
+
+
+<% @page_title = (@presenter.organization.name || "") + " Collaborator network"%>
+
+<%= render "visualization/viz_style" %>
+<%= render "visualization/viz_javascript" %>
+<%= render "search_box" %>
+
+<h1 class="researcherName"><%= @presenter.organization.name %></h1>
+
+<div class="row">
+  <div class="col-md-9">
+    <div id="descriptionMsg">
+      This visualization shows research areas and how common they are among researchers
+      for an organization. Only those research areas indicated in more than one researcher
+      profile for this organization are shown.
+    </div>
+    <div id="errorMsg" class="alert alert-warning hidden" role="alert">
+      <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>No collaboration data is available for this organization.</p>
+      <p>If you are a member of this organization you can define your collaborators
+        via the <a target="_blank" href="<%= manager_url() %>">manager</a>.
+      </p>
+    </div>
+    <div id="loadingMsg">
+      <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
+    </div>
+    <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="col-md-3">
+    <% if !@presenter.organization.is_team? %>
+      <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" >Collaborator Network</a>
+      <a class="btn btn-default btn-lg" role="button" href="<%= visualization_publications_path(@presenter.organization.vivo_id) %>" >Publication History</a>
+    <% end %>
+    <div id="legend">
+    </div>
+    <p><b>Data</b></p>
+    <!-- <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :csv) %>"
+      title="Format suitable for Excel and other tools."
+      target="_blank">Download data (CSV)</a></p> -->
+    <p><a href="<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>"
+      title="Format suitable for D3 and other visualization tools."
+      target="_blank">Download data (JSON)</a></p>
+    <p><a href="#" id="embedHtml" title="Shows HTML to embed the graph as an SVG element into your own page.">Embed SVG Code</a></p>
+    <!-- The links render awful in the PNG, I think because the PNG does not capture
+        the transformations done on the page via CSS.
+        TODO: see if we can embed them on the SVG instead. -->
+    <!-- <p><a href="#" id="downloadPng" title="Downlods the graph as an image file in PNG format. This only works in Chrome and Firefox.">Download Image (PNG)</a></p> -->
+  </div>
+</div>
+
+<div class="row hidden" id="canvasDiv">
+  <canvas id="canvasElement"></canvas>
+  <a id="canvasImgLink" href="#" download="collaborators.png" target="_blank"></a>
+</div>
+
+<div class="row hidden" id="embedHtmlDiv">
+  <div class="col-md-12">
+    <p>Copy the following HTML to embed the SVG into your own page</p>
+    <textarea id="embedHtmlText" rows="15" class="htmlSnippet"></textarea>
+  </div>
+  <div><p>&nbsp;</p></div>
+</div>
+
+<div id="tooltip" class="hidden">
+  <p id="title" style="margin:0;"></p>
+  <p id="subtitle" style="margin:0;"></p>
+  <p id="subtitle2" style="margin:0;"></p>
+</div>
+
+<script>
+
+  var facultyId = "<%= @presenter.organization.id %>";     // http://vivo.brown.edu/jcarberry
+  var vivoId = "<%= @presenter.organization.vivo_id %>";   // jcarberry
+  var jsonDataUrl = "<%= visualization_research_path(@presenter.organization.vivo_id, format: :json) %>";
+
+  var researcherUrl = "<%= display_show_path('placeholder') %>";
+  var svgWidth = 960;
+  var svgHeight = 700;
+  var theData = null;
+  var showLevel = 1;
+  var lastUpdated = null;
+
+  $(document).ready(function() {
+    var forceToFit = window.location.href.indexOf("?fit") != -1;
+    if (forceToFit) {
+      $("#forceToFit").attr("checked", true);
+    }
+
+    $.getJSON(jsonDataUrl, function(data, status) {
+      var filter, i, value;
+      theData = data; // save the data in our global variable
+      // lastUpdated = new Date(data.updated);
+      drawGraph();
+    });
+
+    $("#embedHtml").on("click", function() {
+      showEmbedHtml("svgElement", svgWidth, svgHeight, "embedHtmlDiv", "embedHtmlText");
+    });
+
+    $("#downloadPng").on("click", function() {
+      downloadPng("svgElement", svgWidth, svgHeight,
+        "canvasElement", "canvasImgLink", "collabs_" + vivoId + ".png");
+    });
+  });
+
+  function updateLabels() {
+    var showLabels = $("#showLabels").is(":checked");
+    if (showLabels) {
+      d3.selectAll(".node-text").classed("hidden",false);
+    } else {
+      d3.selectAll(".node-text").classed("hidden",true);
+    }
+  }
+
+  function drawGraph() {
+    var data = {times: theData.nodes, links: theData.links};
+    $("#loadingMsg").addClass("hidden");
+
+    var i;
+    var svg = d3.select("svg");
+    svg.selectAll("*").remove();
+
+    var w = +svg.attr("width");
+    var h = +svg.attr("height");
+
+    var colorScheme = d3.scale.category20();
+
+    // make a node lookup map
+    var nodeMap = (function() {
+        var nm = {};
+        data.times.forEach(function(nodes) {
+            nodes.forEach(function(n) {
+                nm[n.id] = n;
+                // add links and assure node value
+                n.links = [];
+                n.incoming = [];
+                n.nodeValue = n.nodeValue || 0;
+            })
+        });
+        return nm;
+    })();
+
+    // attach links to nodes
+    data.links.forEach(function(link) {
+        nodeMap[link.source].links.push(link);
+        nodeMap[link.target].incoming.push(link);
+    });
+
+    // The second time series [1] contains the research areas.
+    var firstResearchArea = data.times[1][0].id;
+
+    // sort by value and calculate offsets
+    data.times.forEach(function(nodes) {
+        var cumValue = 0;
+        nodes.sort(function(a,b) {
+            return d3.descending(a.nodeValue, b.nodeValue)
+        });
+        nodes.forEach(function(n, i) {
+            n.order = i;
+            n.offsetValue = cumValue;
+            cumValue += n.nodeValue;
+            // same for links
+            var lCumValue;
+            // outgoing
+            if (n.links) {
+                lCumValue = 0;
+                n.links.sort(function(a,b) {
+                    return d3.descending(a.value, b.value)
+                });
+                n.links.forEach(function(l) {
+                    l.outOffset = lCumValue;
+                    lCumValue += l.value;
+                });
+            }
+            // incoming
+            if (n.incoming) {
+                lCumValue = 0;
+                n.incoming.sort(function(a,b) {
+                    return d3.descending(a.value, b.value)
+                });
+                n.incoming.forEach(function(l) {
+                    l.inOffset = lCumValue;
+                    lCumValue += l.value;
+                });
+            }
+        })
+    });
+    data = data.times;
+
+    // calculate maxes
+    var maxn = d3.max(data, function(t) { return t.length }),
+        maxv = d3.max(data, function(t) { return d3.sum(t, function(n) { return n.nodeValue }) });
+
+    /* Make Vis */
+    var svg = d3.select("svg");
+    svg.selectAll("*").remove();
+
+    var w = +svg.attr("width");
+    var h = +svg.attr("height");
+
+    // settings and scales
+    var gapratio = .7,
+        delay = 1500,
+        padding = 15,
+        x = d3.scale.ordinal()
+            .domain(d3.range(data.length))
+            .rangeBands([0, w + (w/(data.length-1))], gapratio),
+        y = d3.scale.linear()
+            .domain([0, maxv])
+            .range([0, h - padding * maxn]),
+        line = d3.svg.line()
+            .interpolate('basis');
+
+    var linkColor = function(l) {
+        return colorScheme(l.target);
+    }
+
+    var nodeColor = function(n) {debugger;
+        if (n.id >= firstResearchArea) {
+            return colorScheme(n.id);
+        }
+        return "lightgray";
+    }
+
+    var t = 0;
+
+    function update(first) {
+        // update data
+        var currentData = data.slice(0, ++t);
+
+        // time slots
+        var times = svg.selectAll('g.time')
+            .data(currentData)
+        .enter().append('svg:g')
+            .attr('class', 'time')
+            .attr("transform", function(d, i) { return "translate(" + (x(i) - x(0)) + ",0)" });
+
+        // node bars
+        var nodes = times.selectAll('g.node')
+            .data(function(d) { return d })
+        .enter().append('svg:g')
+            .attr('class', 'node');
+
+        var x_rangeBand = x.rangeBand();
+        nodes.append('svg:rect')
+            .attr('fill', nodeColor)
+            .attr('y', function(n, i) {
+                return y(n.offsetValue) + i * padding;
+            })
+            .attr('width', x_rangeBand)
+            .attr('height', function(n) { return y(n.nodeValue) });
+
+        nodes.append('svg:title')
+            .text(function(n) {
+              if (n.id >= firstResearchArea) {
+                return n.nodeName
+              }
+              if (n.areas == "") {
+                return "This researchas has not specified research areas."
+              }
+              return "Research areas: " + n.areas;
+            });
+
+        nodes.append('svg:text')
+            .style("class", "node-text")
+            .attr('y', function(n, i) {
+                return (y(n.offsetValue) + i * padding) + 15;
+            })
+            .text(function(n) { return n.display });
+
+        var linkLine = function(start) {
+            return function(l) {
+                var x_rangeBand = x.rangeBand();
+                var x_0 = x(0);
+                var source = nodeMap[l.source],
+                    target = nodeMap[l.target],
+                    gapWidth = x_0,
+                    bandWidth = x_rangeBand + gapWidth,
+                    startx = x_rangeBand - bandWidth,
+                    sourcey = y(source.offsetValue) +
+                        source.order * padding +
+                        y(l.outOffset) +
+                        y(l.value)/2,
+                    targety = y(target.offsetValue) +
+                        target.order * padding +
+                        y(l.inOffset) +
+                        y(l.value)/2,
+                    points = start ?
+                        [
+                            [ startx, sourcey ], [ startx, sourcey ], [ startx, sourcey ], [ startx, sourcey ]
+                        ] :
+                        [
+                            [ startx, sourcey ],
+                            [ startx + gapWidth/2, sourcey ],
+                            [ startx + gapWidth/2, targety ],
+                            [ 0, targety ]
+                        ];
+                return line(points);
+            }
+        }
+
+        // links
+        var links = nodes.selectAll('path.link')
+            .data(function(n) { return n.incoming || [] })
+        .enter().append('svg:path')
+            .attr('class', 'link')
+            .style("stroke", linkColor)
+            .style('stroke-width', function(l) { return y(l.value) })
+            .attr('d', linkLine(true))
+            .on('mouseover', function() {
+                d3.select(this).attr('class', 'link on')
+            })
+            .on('mouseout', function() {
+                d3.select(this).attr('class', 'link')
+            })
+        .transition()
+            .duration(delay)
+            .attr('d', linkLine());
+
+    } // function update()
+
+    update(true);
+    update(false);
+
+  } // function drawGraph() {
+
+</script>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'display/:id/viz/coauthor_treemap' => 'visualization#coauthor_treemap', as: :visualization_coauthor_treemap
   get 'display/:id/viz/collab' => 'visualization#collab', as: :visualization_collab
   get 'display/:id/viz/publications' => 'visualization#publications', as: :visualization_publications
+  get 'display/:id/viz/research' => 'visualization#research', as: :visualization_research
   get 'display/:id/viz' => 'visualization#home', as: :visualization_home
 
   # Reports by subject librarian

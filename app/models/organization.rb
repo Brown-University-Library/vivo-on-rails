@@ -31,11 +31,15 @@ class Organization
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
   end
 
-  def self.for_team(id)
+  def self.load(id)
     team = Team.find_by_id(id)
-    if team == nil
-      return nil
+    if team != nil
+      return from_team(team)
     end
+    return load_from_solr(id)
+  end
+
+  def self.from_team(team)
     org = Organization.new()
     org.item = OrganizationItem.new({})
     org.item.record_type = "TEAM"
@@ -65,11 +69,20 @@ class Organization
   # some faculty might hold more than one appointment in the department)
   # and does not preserve the titles of the people in the department.
   def faculty_list()
-    list = []
-    ids = item.people.map {|person| person.vivo_id}.uniq
-    ids.each do |vivo_id|
-      list << Faculty.load_from_solr(vivo_id)
+    cache_key = "faculty_list_" + item.id
+    Rails.cache.fetch(cache_key, expires_in: 5.minute) do
+      begin
+        Rails.logger.info "Caching faculty for organization #{cache_key}."
+        list = []
+        ids = item.people.map {|person| person.vivo_id}.uniq
+        ids.each do |vivo_id|
+          list << Faculty.load_from_solr(vivo_id)
+        end
+        list
+      rescue Exception => e
+        Rails.logger.error "Could not cache faculty for organization #{cache_key}. #{e}"
+        nil
+      end
     end
-    list
   end
 end

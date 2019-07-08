@@ -22,16 +22,26 @@ class CollabGraph
   # ok is false we could not retrieve the data. In this case data is a
   # hash with the following structure: { staus: nnn, message: xxx}
   #
-  def self.get_data(id)
+  def self.get_data(id, research_area = nil)
     type = ModelUtils.type_for_id(id)
     if type != "PEOPLE" && type != "ORGANIZATION" && type != "TEAM"
       return false, {status: 404, message: "Could not retrieve collaboration graph for #{id} (invalid type)"}
     end
 
     if type == "TEAM"
-      g = CollabGraphCustom.new()
+      # Custom code to fetch the data since teams are hard-coded
+      # in the Rails app. Eventually teams will be defined in
+      # the VIVO and collaboration information will be served by
+      # the Visualization Service, but we are not there yet.
+      cache_key = "team_collab_" + id + "_" + (research_area || "nil")
+      graph = Rails.cache.fetch(cache_key, expires_in: 5.minute) do
+        Rails.logger.info "Caching #{cache_key}..."
+        org = Organization.load(id)
+        g = CollabGraphCustom.new()
+        g.graph_for_list(org.faculty_list(), org.item.name, research_area)
+      end
       yesterday = (Date.today-1).to_s
-      data = {graph: g.graph_for_team(id), rabid: id, updated: yesterday}
+      data = {graph: graph, rabid: id, updated: yesterday}
       return true, data
     end
 
