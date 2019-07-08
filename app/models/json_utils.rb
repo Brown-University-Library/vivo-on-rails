@@ -1,7 +1,10 @@
 require "./app/models/model_utils.rb"
 class JsonUtils
 
-  def self.http_get(url)
+  def self.http_get(url, verbose = false)
+    if verbose
+      Rails.logger.error("HTTP GET: #{url}")
+    end
     ok, data = ModelUtils::http_get_body(url)
     if !ok
       Rails.logger.error("Error fetching: #{url}")

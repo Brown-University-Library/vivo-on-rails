@@ -6,10 +6,9 @@ Rails.application.routes.draw do
   get 'display/' => 'display#index'
 
   # Editor
-  # TODO: make them all POST/PUT
-  post 'edit/overview/:id/update' => 'edit#overview_update'
-  get 'edit/research_area/:id/update' => 'edit#research_area_update'
-  get 'edit/research_area/:id/delete' => 'edit#research_area_delete'
+  post 'edit/overview/:faculty_id/update' => 'edit#overview_update'
+  post 'edit/research_area/:faculty_id/add' => 'edit#research_area_add'
+  post 'edit/research_area/:faculty_id/delete' => 'edit#research_area_delete'
 
   # Visualizations for faculty (and organizations)
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor

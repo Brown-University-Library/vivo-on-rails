@@ -66,15 +66,14 @@
       // Use `html()` instead of `text()` to preserve HTML formatting
       $("#overviewText").first().html(newContent);
       turnEdit(false);
-
       $.ajax({
           type: "POST",
-          url: "http://localhost:3000/edit/overview/amatzavi",
+          url: "http://localhost:3000/edit/overview/" + vivoId + "/update",
           data: {text: newContent},
           success: function(x,y) {
             console.log(x);
             console.log(y);
-            console.log("saved");
+            console.log("updated overview for " + vivoId);
           }
       });
 
@@ -92,12 +91,15 @@
       var idDelete = "#" + el.target.parentNode.id;
       var idLink = idDelete.replace("_delete", "");
       var id = idLink.replace("#", "");
-      var url = "http://localhost:3000/edit/research_area/" + id + "/delete";
-      $.getJSON(url, {}, function(x) {
-        console.log("deleted " + id);
-        $(idDelete).addClass("hidden");
-        $(idLink).addClass("hidden");
-      })
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/edit/research_area/" + vivoId + "/delete?id=" + id,
+        success: function(x) {
+          console.log("deleted " + id + " for " + vivoId);
+          $(idDelete).addClass("hidden");
+          $(idLink).addClass("hidden");
+        }
+      });
     });
 
     $("#researchareaAddButton").on("click", function(el) {
