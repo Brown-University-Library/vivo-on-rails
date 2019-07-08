@@ -117,9 +117,15 @@
     }
 
     $.getJSON(jsonDataUrl, function(data, status) {
-      var filter, i, value;
+      var filter, i, value, tallVersion;
       theData = data; // save the data in our global variable
       // lastUpdated = new Date(data.updated);
+
+      tallVersion = theData.nodes[0].length > 20 || theData.nodes[1].length > 20;
+      if (tallVersion === true) {
+        $("#svgElement").attr("height", 1700)
+      }
+
       drawGraph();
     });
 
@@ -245,7 +251,7 @@
         return colorScheme(l.target);
     }
 
-    var nodeColor = function(n) {debugger;
+    var nodeColor = function(n) {
         if (n.id >= firstResearchArea) {
             return colorScheme(n.id);
         }
