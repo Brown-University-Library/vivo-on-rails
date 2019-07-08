@@ -121,7 +121,7 @@
       theData = data; // save the data in our global variable
       // lastUpdated = new Date(data.updated);
 
-      tallVersion = theData.nodes[0].length > 20 || theData.nodes[1].length > 20;
+      tallVersion = theData.nodes[0].length > 30 || theData.nodes[1].length > 30;
       if (tallVersion === true) {
         $("#svgElement").attr("height", 1700)
       }
