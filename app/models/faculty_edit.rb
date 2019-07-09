@@ -24,7 +24,7 @@ class FacultyEdit
         # TODO: call Steve's service to do the update
         url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/overview/overview/update"
         payload = {text: text}.to_json
-        Rails.logger.info("overview_update: PUT #{url} \r\n#{payload}")
+        Rails.logger.info("overview_update: POST #{url} \r\n#{payload}")
         return nil
     end
 
@@ -32,7 +32,7 @@ class FacultyEdit
         # TODO: call Steve's service to do the update
         url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/research/areas/update"
         payload = {id: rabid(id)}.to_json
-        Rails.logger.info("research_area_update: PUT #{url} \r\n#{payload}")
+        Rails.logger.info("research_area_update: POST #{url} \r\n#{payload}")
         return nil
     end
 

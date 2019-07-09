@@ -68,7 +68,7 @@
       turnEdit(false);
       $.ajax({
           type: "POST",
-          url: "http://localhost:3000/edit/overview/" + vivoId + "/update",
+          url: rootUrl + "/edit/overview/" + vivoId + "/update",
           data: {text: newContent},
           success: function(x,y) {
             console.log(x);
@@ -86,6 +86,25 @@
     //////////////////////////////////////////
     // Research Areas
     //////////////////////////////////////////
+
+    // Source for autocomplete code: https://jqueryui.com/autocomplete/#remote
+    $('#researchareaText').autocomplete({
+      source: function(request, response) {
+        $.ajax({
+          url: rootUrl + "/edit/fast/search?text=" + request.term,
+          success: function(payload) {
+            // payload.data must have the following structure:
+            // [{id: x, label: y, value: z}]
+            response(payload.data);
+          }
+        });
+      },
+      minLength: 3,
+			onSelect: function (suggestion) {
+				$('#selected_option').html(suggestion.value);
+			}
+		});
+
     $("#research-areas-list").on("click", ".delete_research_area", function(el) {
       // source: https://stackoverflow.com/a/15420578/446681
       var idDelete = "#" + el.target.parentNode.id;

@@ -1,6 +1,22 @@
+require "./app/models/fast_service.rb"
+
 class EditController < ApplicationController
   # TODO enable session protection once
   skip_before_filter :authenticate_user!
+
+  def fast_search
+    results = []
+    text = (params[:text] || "").strip
+    if (text.length >= 3)
+      results = FastService.search(text)
+    end
+
+    # if params["callback"]
+    #   return
+    # end
+
+    render :json => {status: 200, data: results}
+  end
 
   def overview_update
     return if ENV["EDIT_ALLOWED"] != "true"

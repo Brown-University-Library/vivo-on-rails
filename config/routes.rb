@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'display/' => 'display#index'
 
   # Editor
+  get 'edit/fast/search' => 'edit#fast_search'
   post 'edit/overview/:faculty_id/update' => 'edit#overview_update'
   post 'edit/research_area/:faculty_id/add' => 'edit#research_area_add'
   post 'edit/research_area/:faculty_id/delete' => 'edit#research_area_delete'

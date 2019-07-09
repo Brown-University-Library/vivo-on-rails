@@ -4,6 +4,7 @@
   var showViz = <%= @presenter.show_visualizations %>;
   var hasCoauthors = <%= @presenter.has_coauthors %>;
   var hasCollaborators = <%= @presenter.has_collaborators %>;
+  var rootUrl = "<%= root_url() %>";
 </script>
 
 <%= render "faculty/show_javascript" %>
