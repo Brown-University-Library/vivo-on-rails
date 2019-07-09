@@ -108,8 +108,10 @@ class ModelUtils
     http.open_timeout = 10
     http.read_timeout = 10
     http.ssl_timeout = 10
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    if uri.scheme == "https"
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
     request = Net::HTTP::Get.new(uri.request_uri)
     response = http.request(request)
     ok = (response.code >= "200" && response.code <= "299")

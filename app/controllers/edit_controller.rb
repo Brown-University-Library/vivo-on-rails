@@ -8,7 +8,7 @@ class EditController < ApplicationController
     results = []
     text = (params[:text] || "").strip
     if (text.length >= 3)
-      results = FastService.search(text)
+      results = FastService.search(text, true)
     end
 
     # if params["callback"]

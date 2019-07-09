@@ -1,3 +1,4 @@
+require 'uri'
 class FastService
     def self.search(text, oclc = false)
         if oclc
@@ -33,7 +34,7 @@ class FastService
     end
 
     def self.search_oclc(text)
-        url = "http://fast.oclc.org/searchfast/fastsuggest?query=#{text}&queryReturn=idroot,auth,type,suggestall&suggest=autoSubject"
+        url = "http://fast.oclc.org/searchfast/fastsuggest?&query=#{text}&queryIndex=suggestall&queryReturn=idroot,auth,type,suggestall&suggest=autoSubject"
         verbose = true
         data = JsonUtils::http_get(url, verbose)
         if data == nil
@@ -49,9 +50,10 @@ class FastService
         results = []
         data["response"]["docs"].each do |doc|
             id = doc["idroot"]
-            rec_type doc["type"]
+            rec_type = doc["type"]
             name = doc["auth"]
             # For alternate terms show the alternate label instead.
+            # Source: https://bitbucket.org/bul/vivo-manager/src/master/profile/services.py
             if rec_type != 'auth'
                 if (doc["suggestall"] || []).count == 0
                     next
