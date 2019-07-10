@@ -182,7 +182,7 @@ class VisualizationController < ApplicationController
       end
       org = Organization.load(id)
       @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
-      render "research_org_v3"
+      render "research_org"
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not render research visualization for #{id}. Exception: #{ex} \r\n #{backtrace}")
