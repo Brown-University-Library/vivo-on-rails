@@ -10,11 +10,6 @@ class EditController < ApplicationController
     if (text.length >= 3)
       results = FastService.search(text, true)
     end
-
-    # if params["callback"]
-    #   return
-    # end
-
     render :json => {status: 200, data: results}
   end
 
@@ -23,15 +18,15 @@ class EditController < ApplicationController
     faculty_id = params[:faculty_id]
     text = params[:text]
     error = FacultyEdit.overview_update(faculty_id, text)
-    render_output(error)
+    render_output(nil, error)
   end
 
   def research_area_add
     return if ENV["EDIT_ALLOWED"] != "true"
     faculty_id = params[:faculty_id]
-    id = params[:id]
-    error = FacultyEdit.research_area_add(faculty_id, id)
-    render_output(error)
+    text = params[:text]
+    id, error = FacultyEdit.research_area_add(faculty_id, text)
+    render_output({id: id}, error)
   end
 
   def research_area_delete
@@ -39,16 +34,16 @@ class EditController < ApplicationController
     faculty_id = params[:faculty_id]
     id = params[:id]
     error = FacultyEdit.research_area_delete(faculty_id, id)
-    render_output(error)
+    render_output(nil, error)
   end
 
   private
-    def render_output(error)
-      if error == nil
-        render :json => {status: 200, error: nil}
-      else
+    def render_output(data, error)
+      if error != nil
         Rails.logger.error(error)
-        render :json => {status: 400, error: error}
+        render :json => {error: error}, status: 400
+      else
+        render :json => data || {}, status: 200
       end
     end
 end

@@ -34,6 +34,11 @@
 
     $("#edit-profile").addClass("hidden");
 
+
+    var showError = function(section, message) {
+      alert(section + ": " + message);
+    }
+
     //////////////////////////////////////////
     // Overview
     //////////////////////////////////////////
@@ -70,10 +75,11 @@
           type: "POST",
           url: rootUrl + "/edit/overview/" + vivoId + "/update",
           data: {text: newContent},
-          success: function(x,y) {
-            console.log(x);
-            console.log(y);
+          success: function() {
             console.log("updated overview for " + vivoId);
+          },
+          error: function(xhr) {
+            showError("Error updating overview", xhr.responseJSON.error);
           }
       });
 
@@ -100,8 +106,9 @@
         });
       },
       minLength: 3,
-			onSelect: function (suggestion) {
-				$('#selected_option').html(suggestion.value);
+			select: function(event, ui) {
+				$('#researchareaText').val(ui.item.label);
+				$('#researchareaId').val(ui.item.id);
 			}
 		});
 
@@ -114,24 +121,38 @@
         type: "POST",
         url: "http://localhost:3000/edit/research_area/" + vivoId + "/delete?id=" + id,
         success: function(x) {
-          console.log("deleted " + id + " for " + vivoId);
           $(idDelete).addClass("hidden");
           $(idLink).addClass("hidden");
+        },
+        error: function(xhr) {
+          showError("Error adding research area", xhr.responseJSON.error);
         }
       });
     });
 
     $("#researchareaAddButton").on("click", function(el) {
-      var text = $("#researchareaText").val();
-      var id = text.replace(" ", "_");
-      var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
-      var span = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
-      var link1 = '<a href="' + href + '" id="' + id + '">' + text + '</a>';
-      var link2 = '<a href="#" class="delete_research_area" id="' + id + '_delete" >' + span + '</a>';
-      var html = '| ' + link1 + ' ' + link2;
-      // console.log(html);
-      $("#research-areas-list").append(html);
-      $("#researchareaText").val("");
+      var text = $('#researchareaText').val();
+      if (text.trim() == "") {
+        return;
+      }
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/edit/research_area/" + vivoId + "/add?text=" + text,
+        success: function(data) {
+          console.log("added " + data.id + " for " + vivoId);
+          var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
+          var span = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+          var link1 = '<a href="' + href + '" id="' + data.id + '">' + text + '</a>';
+          var link2 = '<a href="#" class="delete_research_area" id="' + data.id + '_delete" >' + span + '</a>';
+          var html = '| ' + link1 + ' ' + link2;
+          $("#research-areas-list").append(html);
+          $("#researchareaText").val("");
+          $("#researchareaId").val("");
+        },
+        error: function(xhr) {
+          showError("Error adding research area", xhr.responseJSON.error);
+        }
+      });
     });
 
 

@@ -28,19 +28,20 @@ class FacultyEdit
         return nil
     end
 
-    def self.research_area_add(faculty_id, id)
+    def self.research_area_add(faculty_id, text)
         # TODO: call Steve's service to do the update
         url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/research/areas/update"
-        payload = {id: rabid(id)}.to_json
+        payload = {text: text}.to_json
         Rails.logger.info("research_area_update: POST #{url} \r\n#{payload}")
-        return nil
+        # return nil, "oops, something went baaaaad"
+        return "new-id", nil
     end
 
     def self.research_area_delete(faculty_id, id)
         # TODO: call Steve's service to do the delete
         url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/research/areas/delete"
         payload = {id: rabid(id)}.to_json
-        Rails.logger.info("research_area_update: POST #{url} \r\n#{payload}")
+        Rails.logger.info("research_area_delete: POST #{url} \r\n#{payload}")
         return nil
     end
 
