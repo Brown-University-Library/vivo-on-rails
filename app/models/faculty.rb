@@ -1,12 +1,23 @@
 class Faculty
   attr_accessor :solr_doc, :json_txt, :item
-
   def self.load_from_solr(id)
     solr_doc = get_solr_doc(id)
     if solr_doc == nil
       return nil
     end
+    faculty_from_solr_doc(solr_doc)
+  end
 
+  def self.load_from_solr_many(ids)
+    faculty = []
+    solr_docs = get_solr_doc_many(ids)
+    solr_docs.each do |solr_doc|
+      faculty << faculty_from_solr_doc(solr_doc)
+    end
+    faculty
+  end
+
+  def self.faculty_from_solr_doc(solr_doc)
     f = Faculty.new()
     f.solr_doc = solr_doc
     json_txt = solr_doc["json_txt"].first
@@ -21,12 +32,13 @@ class Faculty
       thumbnail = f.solr_doc["thumbnail_file_path_s"]
       thumbnail_url = ModelUtils.thumbnail_url(thumbnail, images_url)
       if thumbnail != nil && thumbnail_url == nil
-        Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{id})"
+        Rails.logger.warn "Could not calculate thumbnail URL for #{thumbnail} (#{solr_doc['id']})"
       end
 
       f.item = FacultyItem.from_hash(f.json_txt, display_name, thumbnail_url,
         fis_updated, profile_updated, show_visualizations)
-      f.item.has_coauthors = self.has_coauthors?(id)
+
+      f.item.has_coauthors = self.has_coauthors?(f.item.vivo_id)
       if f.item.collaborators.count == 0
         f.item.has_collaborators = false
       else
@@ -35,7 +47,7 @@ class Faculty
         # an empty collaborator network. This should be very rare since
         # we are only making the call if the individual has explicitly
         # indicated collaborators on their profile.
-        f.item.has_collaborators = self.has_collaborators?(id)
+        f.item.has_collaborators = self.has_collaborators?(f.item.vivo_id)
       end
     end
     f
@@ -46,6 +58,15 @@ class Faculty
     logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
     solr = SolrLite::Solr.new(solr_url, logger)
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
+  end
+
+  def self.get_solr_doc_many(ids)
+    solr_url = ENV["SOLR_URL"]
+    logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
+    solr = SolrLite::Solr.new(solr_url, logger)
+    ids = ids.map {|id| CGI.escape("http://vivo.brown.edu/individual/#{id}")}
+    ids = ids.map {|id| '"' + id + '"'}
+    solr_docs = solr.get_many(ids)
   end
 
   # Replaces the data loaded with `load_from_solr` with data coming
