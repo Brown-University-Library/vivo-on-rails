@@ -96,12 +96,12 @@
           <% if i != 0 %>
             &nbsp;|&nbsp;
           <% end %>
-          <% qs = "?fq=research_areas|#{CGI.escape(area)}" %>
-          <a href="<%= search_url() + qs %>" id="<%= @presenter.research_area_id(area) %>">
-            <%= area %>
+          <% qs = "?fq=research_areas|#{CGI.escape(area.label)}" %>
+          <a href="<%= search_url() + qs %>" id="<%= area.id %>">
+            <%= area.label %>
           </a>
           <% if @presenter.edit_mode %>
-            <a href="#" id="<%= @presenter.research_area_id(area) %>_delete" class="delete_research_area" title="Remove this research area">
+            <a href="#" id="<%= area.id %>_delete" class="delete_research_area" title="Remove this research area">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
           <% end %>

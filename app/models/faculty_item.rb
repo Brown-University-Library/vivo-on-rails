@@ -5,8 +5,7 @@ class FacultyItem
     :display_name, :title, :contributor_to, :thumbnail, :education, :awards,
     :research_overview, :research_statement, :teacher_for,
     :teaching_overview, :scholarly_work, :funded_research,
-    :collaborators, :affiliations_text, :affiliations,
-    :research_areas, :research_areas_edit,
+    :collaborators, :affiliations_text, :affiliations, :research_areas,
     :on_the_web, :appointments, :published_in, :hidden,
     :cv_link, :credentials, :training,
     :fis_updated, :profile_updated, :show_visualizations,
@@ -41,7 +40,6 @@ class FacultyItem
     @title = ""
     @thumbnail = ""
     @research_areas = []
-    @research_areas_edit = []
     @on_the_web = []
     @appointments = []
     @hidden = false
@@ -67,6 +65,10 @@ class FacultyItem
       end
     end
     false
+  end
+
+  def research_areas_labels()
+    @research_areas.map {|r| r.label }
   end
 
   def self.from_hash(hash, display_name, thumbnail_url, fis_updated, profile_updated, show_viz)
@@ -101,8 +103,7 @@ class FacultyItem
           # string array, no special handling
           faculty.teacher_for = value.sort_by {|a| (a || "").downcase}
         when "research_areas"
-          # string array, no special handling
-          faculty.research_areas = value.sort_by {|a| (a || "").downcase}
+          faculty.research_areas = ResearchAreaItem.from_string_array(value)
         when "thumbnail"
           # Ignore this value, we use thumbnail_url parameter instead
         else

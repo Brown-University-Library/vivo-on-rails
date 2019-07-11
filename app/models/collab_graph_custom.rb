@@ -38,7 +38,7 @@ class CollabGraphCustom
     # calculate the count for each research area
     areas = {}
     faculty_list.each do |faculty|
-      faculty.item.research_areas.each do |area|
+      faculty.item.research_areas_labels.each do |area|
         key = area.strip.downcase
         if areas[key] == nil
           areas[key] = 1

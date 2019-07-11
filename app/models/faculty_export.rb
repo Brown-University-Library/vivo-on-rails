@@ -138,10 +138,10 @@ class FacultyExport
       faculty.item.org_label, faculty.item.title,
       faculty.item.fis_updated, faculty.item.profile_updated,
       faculty.item.cv_link, nil]
-      if faculty.item.research_areas.count == 0
+      if faculty.item.research_areas_labels.count == 0
           rows << baseRow
       else
-          faculty.item.research_areas.each do |research_area|
+          faculty.item.research_areas_labels.each do |research_area|
               row = baseRow.clone
               row[6] = research_area
               rows << row

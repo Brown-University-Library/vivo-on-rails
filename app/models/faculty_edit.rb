@@ -14,9 +14,7 @@ class FacultyEdit
         url = @base_url + "/faculty/edit/research/areas/update"
         data = JsonUtils::http_get(url, verbose)
         if data != nil
-            # For now use a new property for the edit array in order to be able to
-            # handle label + id, the existing array only handles label.
-            @item.research_areas_edit = ResearchAreaItem.from_hash_array(data["research_areas"] || [])
+            @item.research_areas = ResearchAreaItem.from_hash_array(data["research_areas"] || [])
         end
     end
 

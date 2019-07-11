@@ -68,13 +68,4 @@ class FacultyPresenter
     end
     pub_types
   end
-
-  def research_area_id(research_area)
-    @faculty.research_areas_edit.each do |ra|
-      if ra.label == research_area
-        return ra.vivo_id
-      end
-    end
-    return nil
-  end
 end

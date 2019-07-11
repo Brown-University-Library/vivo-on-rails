@@ -36,7 +36,7 @@ class AlluvialGraph
                 display: faculty.item.display_name,
                 incoming: [],
                 nodeValue: 0, # calculated below
-                areas: faculty.item.research_areas.join(", ")
+                areas: faculty.item.research_areas_labels.join(", ")
             }
             nodes1 << node
         end
@@ -44,7 +44,7 @@ class AlluvialGraph
         # Get the list of research areas for these faculty.
         areas_all = []
         faculty_list.each do |faculty|
-            areas_all += faculty.item.research_areas
+            areas_all += faculty.item.research_areas_labels
         end
         areas = areas_filtered(areas_all)
 
@@ -66,7 +66,7 @@ class AlluvialGraph
         links = []
         faculty_list.each do |faculty|
             node1 = nodes1.find {|n| n[:nodeName] == faculty.item.vivo_id}
-            faculty.item.research_areas.each do |ra|
+            faculty.item.research_areas_labels.each do |ra|
                 node2 = nodes2.find {|a| a[:nodeName] == ra}
                 if node2 == nil
                     # ignore this research area since it's not shared with anyone else
