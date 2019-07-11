@@ -120,13 +120,8 @@ class PublicationHistory
     }
 
     # Process each member of the organization...
-    processedFaculty = []
     organization = Organization.load_from_solr(org_id)
-    organization.item.people.each do |member|
-      next if processedFaculty.include?(member.vivo_id)
-      processedFaculty << member.vivo_id
-
-      faculty = Faculty.load_from_solr(member.vivo_id)
+    organization.faculty_list.each do |faculty|
       next if faculty == nil || faculty.item.contributor_to.count == 0
 
       # Calculate the number of publications by year for
