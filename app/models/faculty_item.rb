@@ -54,8 +54,7 @@ class FacultyItem
   end
 
   def vivo_id
-    return "" if @id == nil
-    @id.split("/").last
+    ModelUtils::vivo_id(@id)
   end
 
   def research_on(research_area)

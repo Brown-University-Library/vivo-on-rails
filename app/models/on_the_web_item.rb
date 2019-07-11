@@ -12,8 +12,7 @@ class OnTheWebItem
   end
 
   def vivo_id
-    return "" if @id == nil
-    @id.split("/").last
+    ModelUtils::vivo_id(@id)
   end
 
   def self.from_hash_array(values)

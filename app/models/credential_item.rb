@@ -60,8 +60,7 @@ class CredentialItem
   end
 
   def vivo_id
-    return "" if @id == nil
-    @id.split("/").last
+    ModelUtils::vivo_id(@id)
   end
 
   def year_range_str

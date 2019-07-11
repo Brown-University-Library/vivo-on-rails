@@ -10,8 +10,7 @@ class OrganizationItem
   end
 
   def vivo_id
-    return "" if @id == nil
-    @id.split("/").last
+    ModelUtils::vivo_id(@id)
   end
 
   def init_defaults()

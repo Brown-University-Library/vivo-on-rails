@@ -1,8 +1,12 @@
 class ModelUtils
 
-  def self.vivo_id(id)
-    return "" if id == nil
-    id.split("/").last
+  def self.vivo_id(rabid)
+    return "" if rabid == nil
+    rabid.split("/").last
+  end
+
+  def self.rabid(id)
+      "http://vivo.brown.edu/individual/#{id}"
   end
 
   def self.type_for_id(id)
