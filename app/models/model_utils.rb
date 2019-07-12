@@ -124,4 +124,25 @@ class ModelUtils
     Rails.logger.error("Fetching: #{url}. Exception: #{ex}")
     [false, ""]
   end
+
+  def self.http_post(url, payload, content_type)
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.open_timeout = 10
+    http.read_timeout = 10
+    http.ssl_timeout = 10
+    if uri.scheme == "https"
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+    header = {"Content-Type": content_type}
+    request = Net::HTTP::Post.new(uri.request_uri, header)
+    request.body = payload
+    response = http.request(request)
+    ok = (response.code >= "200" && response.code <= "299")
+    [ok, response.body]
+  rescue => ex
+    Rails.logger.error("Posting: #{url}. Exception: #{ex}")
+    [false, ""]
+  end
 end

@@ -8,7 +8,7 @@ class FacultyEdit
         @base_url = ENV["EDIT_SERVICE"] + "/" + @item.vivo_id
         verbose = true
 
-        url = @base_url + "/faculty/edit/overview/overview/update"
+        url = @base_url + "/faculty/edit/overview/overview"
         data = JsonUtils::http_get(url, verbose)
         if data != nil
             @item.overview = data["overview"] || ""
@@ -38,10 +38,13 @@ class FacultyEdit
     end
 
     def self.overview_update(faculty_id, text)
-        # TODO: call Steve's service to do the update
         url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/overview/overview/update"
-        payload = {text: text}.to_json
+        payload = {overview: text}.to_json
         Rails.logger.info("overview_update: POST #{url} \r\n#{payload}")
+        data = JsonUtils::http_post(url, payload)
+        if data == nil
+            return "Error updating overview"
+        end
         return nil
     end
 
