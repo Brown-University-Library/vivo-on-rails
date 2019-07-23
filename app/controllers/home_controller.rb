@@ -35,6 +35,13 @@ class HomeController < ApplicationController
   end
 
   def index
+    if params[:alias] != nil
+      # e.g. https://vivo.brown.edu/?alias=Nicole_Nugent
+      q = params[:alias].to_s.gsub("_", " ")
+      redirect_to "#{search_url()}?q=#{q}"
+      return
+    end
+
     page_size = 4
     base_author_url = display_show_url("")
     @bookCoversPaginated = BookCoverModel.get_all_paginated(base_author_url, page_size)
