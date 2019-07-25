@@ -135,7 +135,7 @@ class ModelUtils
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
-    header = {"Content-Type": content_type}
+    header = {"Content-Type" => content_type}
     request = Net::HTTP::Post.new(uri.request_uri, header)
     request.body = payload
     response = http.request(request)
