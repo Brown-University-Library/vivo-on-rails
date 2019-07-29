@@ -171,7 +171,7 @@
       if (icon == "") {
         img = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
       } else {
-        img = '<img src="' + icon + '" alt="hello" width="17" />';
+        img = '<img src="' + icon + '" alt="" width="17" />';
       }
       link = '<a id="{id}_link" href="{url}" target="_blank">{text}</a>'
       buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal">Edit</button>';
@@ -188,13 +188,26 @@
       var url = $("#ontheweb_modal_url").val();
       var text = $("#ontheweb_modal_text").val();
       var id = $("#ontheweb_modal_id").val();
-      if (id == "#new") {
-        onTheWebAddElement("TODO_new_id", text, url, "");
-      } else {
-        // replace the values in the existing HTML A tag.
-        $(id).attr("href", url);
-        $(id).text(text);
-      }
+      var payload = {text: text, url: url, rank: "0", id: id};
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/edit/web_link/" + vivoId + "/save",
+        dataType: "json",
+        data: payload,
+        success: function(data) {
+          console.log("save " + data.id + " for " + vivoId);
+          if ($(data.id).length == 1) {
+            $(id).attr("href", data.url);
+            $(id).text(data.text);
+          } else {
+            onTheWebAddElement(data.id, data.text, data.url, data.rank);
+          }
+        },
+        error: function(xhr) {
+          showError("Error updating research area", xhr.responseJSON.error);
+        }
+      });
+
       $('#ontheweb_modal').modal('hide');
     });
 
@@ -226,14 +239,13 @@
         // Empty the values to let the form offer the placeholder values
         $("#ontheweb_modal_text").val("");
         $("#ontheweb_modal_url").val("");
-        $("#ontheweb_modal_id").val("#new");
+        $("#ontheweb_modal_id").val("new-id");
       } else {
-        var linkId = "#" + editId.replace("_edit", "_link");
-        var link = $(linkId);
+        var id = editId.replace("_edit", "");
+        var link = $("#" + id + "_link");
         $("#ontheweb_modal_text").val(link.first().text());
         $("#ontheweb_modal_url").val(link.first().attr("href"));
-        $("#ontheweb_modal_id").val(linkId);
-
+        $("#ontheweb_modal_id").val(id);
       }
       $("#ontheweb_modal_text").focus();
     });
@@ -241,7 +253,7 @@
     // Add the on the web links
     // TODO: these should be encoded to prevent a quote from throwing off the JavaScript
     <% @presenter.faculty.on_the_web.each do |web| %>
-      onTheWebAddElement("<%= web.html_id %>", "<%= web.text %>", "<%= web.url %>", "<%= asset_path(web.icon) %>");
+      onTheWebAddElement("<%= web.vivo_id %>", "<%= web.text %>", "<%= web.url %>", "<%= asset_path(web.icon) %>");
     <% end %>
 
   });

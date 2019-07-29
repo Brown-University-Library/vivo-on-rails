@@ -88,6 +88,7 @@ class DisplayController < ApplicationController
       end
       @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz, edit_mode)
       @presenter.user = current_user
+      @presenter.edit_errors = faculty.errors
       render "faculty/show"
     end
 

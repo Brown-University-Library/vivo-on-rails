@@ -20,6 +20,9 @@
       <% if @presenter.show_back_to_search %>
         <div class="wrapper__back-to-search col-xs-12"><a href="javascript: history.go(-1)" class="back-to-search"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search</a></div>
       <% end %>
+      <% if !@presenter.can_edit? %>
+        <div><%= @presenter.edit_errors.join() %></div>
+      <% end %>
       <%= render "manage_profile_login" %>
       <%= render "faculty/show_left_panel" %>
       <%= render "faculty/show_right_panel" %>

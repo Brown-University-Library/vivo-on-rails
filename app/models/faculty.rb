@@ -1,5 +1,6 @@
 class Faculty
-  attr_accessor :solr_doc, :json_txt, :item
+  attr_accessor :solr_doc, :json_txt, :item, :errors
+
   def self.load_from_solr(id)
     solr_doc = get_solr_doc(id)
     if solr_doc == nil
@@ -19,6 +20,7 @@ class Faculty
 
   def self.faculty_from_solr_doc(solr_doc)
     f = Faculty.new()
+    f.errors = []
     f.solr_doc = solr_doc
     json_txt = solr_doc["json_txt"].first
     f.json_txt = JsonUtils.safe_parse(json_txt)
@@ -75,6 +77,18 @@ class Faculty
   # store if the user makes changes.
   def load_edit_data()
     FacultyEdit.reload(self)
+  end
+
+  def can_edit?
+    return errors.count == 0
+  end
+
+  def add_error(msg)
+    errors << msg
+  end
+
+  def error_msg(delimiter = "\r\n")
+    errors.join(delimiter)
   end
 
   def self.has_coauthors?(id)

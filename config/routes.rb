@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post 'edit/overview/:faculty_id/update' => 'edit#overview_update'
   post 'edit/research_area/:faculty_id/add' => 'edit#research_area_add'
   post 'edit/research_area/:faculty_id/delete' => 'edit#research_area_delete'
+  post 'edit/web_link/:faculty_id/save' => 'edit#web_link_save'
+  post 'edit/web_link/:faculty_id/delete' => 'edit#web_link_delete'
 
   # Visualizations for faculty (and organizations)
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor

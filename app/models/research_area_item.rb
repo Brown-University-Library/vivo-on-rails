@@ -9,7 +9,7 @@ class ResearchAreaItem
   end
 
   def self.from_hash_array(values)
-    values.map {|v| ResearchAreaItem.new(v["label"], v["rabid"])}
+    values.map {|v| ResearchAreaItem.new(v["name"], v["rabid"])}
   end
 
   # A string array only gives us labels, no ids.

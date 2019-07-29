@@ -4,12 +4,12 @@ class FacultyPresenter
     :has_affiliations, :has_teaching, :has_details,
     :publication_filters,
     :show_back_to_search, :show_visualizations, :has_coauthors, :has_collaborators,
-    :edit_mode
-
+    :edit_mode, :edit_errors
 
   def initialize(faculty, search_url, referer, force_show_viz, edit_mode = false)
     @edit_mode = edit_mode
     @faculty = faculty
+    @edit_errors = []
 
     # Show it only if we are coming to the faculty page from a search
     @show_back_to_search = referer && referer.start_with?(search_url)
@@ -54,6 +54,9 @@ class FacultyPresenter
       @has_background || @has_affiliations || @has_teaching
   end
 
+  def can_edit?
+    return @edit_errors.count == 0
+  end
 
   def get_publication_filters()
     pub_types = []

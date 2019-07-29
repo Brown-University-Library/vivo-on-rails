@@ -33,8 +33,28 @@ class EditController < ApplicationController
     return if ENV["EDIT_ALLOWED"] != "true"
     faculty_id = params[:faculty_id]
     id = params[:id]
-    error = FacultyEdit.research_area_delete(faculty_id, id)
+    _, error = FacultyEdit.research_area_delete(faculty_id, id)
     render_output(nil, error)
+  end
+
+  def web_link_save
+    return if ENV["EDIT_ALLOWED"] != "true"
+    faculty_id = params[:faculty_id]
+    text = params[:text]
+    url = params[:url]
+    rank = params[:rank]
+    id = params[:id]
+    saved_id, error = FacultyEdit.web_link_save(faculty_id, text, url, rank, id)
+    data = {
+      id: ModelUtils::vivo_id(saved_id),
+      text: text,
+      url: url,
+      rank: rank
+    }
+    render_output(data, error)
+  end
+
+  def web_link_delete
   end
 
   private
