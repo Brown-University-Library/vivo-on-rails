@@ -160,10 +160,23 @@
     // On the web
     //////////////////////////////////////////
     $("#on-the-web-list").on("click", ".delete_item_link", function(el) {
-      var id1 = "#" + el.target.parentNode.id;
-      var id2 = id1.replace("_delete", "")
-      $(id1).addClass("hidden");
-      $(id2).addClass("hidden");
+      var id1 = el.target.parentNode.id;
+      var id2 = id1.replace("_delete", "");
+      var payload = {id: id2};
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/edit/web_link/" + vivoId + "/delete",
+        dataType: "json",
+        data: payload,
+        success: function(data) {
+          console.log("delete " + id2 + " for " + vivoId);
+          $("#" + id1).addClass("hidden");
+          $("#" + id2).addClass("hidden");
+        },
+        error: function(xhr) {
+          showError("Error updating research area", xhr.responseJSON.error);
+        }
+      });
     });
 
     var onTheWebAddElement = function(id, text, url, icon) {

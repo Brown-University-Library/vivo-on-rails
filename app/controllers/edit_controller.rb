@@ -55,6 +55,11 @@ class EditController < ApplicationController
   end
 
   def web_link_delete
+    return if ENV["EDIT_ALLOWED"] != "true"
+    faculty_id = params[:faculty_id]
+    id = params[:id]
+    _, error = FacultyEdit.web_link_delete(faculty_id, id)
+    render_output(nil, error)
   end
 
   private

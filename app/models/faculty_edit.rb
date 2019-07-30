@@ -85,7 +85,7 @@ class FacultyEdit
                 url: link_url,
                 rank: rank
             }.to_json
-            Rails.logger.info("web_link_add: POST #{url} \r\n#{payload}")
+            Rails.logger.info("web_link_save (new): POST #{url} \r\n#{payload}")
             data = JsonUtils::http_post(url, payload)
             if data == nil || data["error"] != nil
                 return nil, "Error adding web link"
@@ -99,12 +99,23 @@ class FacultyEdit
                 url: link_url,
                 rank: rank
             }.to_json
-            Rails.logger.info("web_link_update: POST #{url} \r\n#{payload}")
+            Rails.logger.info("web_link_save (update): POST #{url} \r\n#{payload}")
             data = JsonUtils::http_post(url, payload)
             if data == nil || data["error"] != nil
-                return nil, "Error adding web link"
+                return nil, "Error updating web link"
             end
             return data["rabid"], nil
         end
+    end
+
+    def self.web_link_delete(faculty_id, id)
+        url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/overview/ontheweb/delete"
+        payload = {rabid: ModelUtils::rabid(id)}.to_json
+        Rails.logger.info("web_link_delete: POST #{url} \r\n#{payload}")
+        data = JsonUtils::http_post(url, payload)
+        if data == nil || data["error"] != nil
+            return nil, "Error deleting web link"
+        end
+        return data["deleted"], nil
     end
 end
