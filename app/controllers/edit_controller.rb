@@ -25,8 +25,8 @@ class EditController < ApplicationController
     return if ENV["EDIT_ALLOWED"] != "true"
     faculty_id = params[:faculty_id]
     text = params[:text]
-    id, error = FacultyEdit.research_area_add(faculty_id, text)
-    render_output({id: id}, error)
+    rab_id, error = FacultyEdit.research_area_add(faculty_id, text)
+    render_output({id: ModelUtils::vivo_id(rab_id)}, error)
   end
 
   def research_area_delete
@@ -44,9 +44,9 @@ class EditController < ApplicationController
     url = params[:url]
     rank = params[:rank]
     id = params[:id]
-    saved_id, error = FacultyEdit.web_link_save(faculty_id, text, url, rank, id)
+    rab_id, error = FacultyEdit.web_link_save(faculty_id, text, url, rank, id)
     data = {
-      id: ModelUtils::vivo_id(saved_id),
+      id: ModelUtils::vivo_id(rab_id),
       text: text,
       url: url,
       rank: rank

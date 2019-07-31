@@ -108,6 +108,12 @@
 			}
 		});
 
+    $('#researchareaText').on('keypress',function(e) {
+      if(e.which == 13) {
+        $("#researchareaAddButton").click();
+      }
+    });
+
     $("#research-areas-list").on("click", ".delete_research_area", function(el) {
       // source: https://stackoverflow.com/a/15420578/446681
       var idDelete = "#" + el.target.parentNode.id;
@@ -115,7 +121,7 @@
       var id = idLink.replace("#", "");
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/edit/research_area/" + vivoId + "/delete?id=" + id,
+        url: rootUrl + "/edit/research_area/" + vivoId + "/delete?id=" + id,
         success: function(x) {
           $(idDelete).addClass("hidden");
           $(idLink).addClass("hidden");
@@ -133,7 +139,7 @@
       }
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/edit/research_area/" + vivoId + "/add?text=" + text,
+        url: rootUrl + "/edit/research_area/" + vivoId + "/add?text=" + text,
         success: function(data) {
           console.log("added " + data.id + " for " + vivoId);
           var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
@@ -161,7 +167,7 @@
       var payload = {id: id2};
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/edit/web_link/" + vivoId + "/delete",
+        url: rootUrl + "/edit/web_link/" + vivoId + "/delete",
         dataType: "json",
         data: payload,
         success: function(data) {
@@ -200,7 +206,7 @@
       var payload = {text: text, url: url, rank: "0", id: id};
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/edit/web_link/" + vivoId + "/save",
+        url: rootUrl + "/edit/web_link/" + vivoId + "/save",
         dataType: "json",
         data: payload,
         success: function(data) {
