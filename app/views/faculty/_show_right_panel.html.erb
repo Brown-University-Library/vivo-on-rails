@@ -132,13 +132,13 @@
         <h4 class="research-areas panel-heading">On the Web</h4>
         <div id="on-the-web-list" class="brown-research-areas-list">
           <% @presenter.faculty.on_the_web.each do |web| %>
-            <span id="<%= web.html_id %>">
+            <span>
               <% if web.icon != nil %>
                 <%= image_tag(web.icon, width: "17") %>
               <% else %>
                 <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
               <% end %>
-              <a id="<%= web.html_id %>_link" href="<%= web.url %>" target="_blank"><%= web.text %></a>
+              <a href="<%= web.url %>" target="_blank"><%= web.text %></a>
             </span>
             <br/>
           <% end %>

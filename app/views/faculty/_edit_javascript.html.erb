@@ -208,12 +208,15 @@
         dataType: "json",
         data: payload,
         success: function(data) {
+          var elemId = "#" + data.id + "_link";
           console.log("save " + data.id + " for " + vivoId);
-          if ($(data.id).length == 1) {
-            $(id).attr("href", data.url);
-            $(id).text(data.text);
+          if ($(elemId).length == 1) {
+            // update the existing HTML elements for this id
+            $(elemId).attr("href", data.url);
+            $(elemId).text(data.text);
           } else {
-            onTheWebAddElement(data.id, data.text, data.url, data.rank);
+            // add a new set of HTML elements for this id
+            onTheWebAddElement(data.id, data.text, data.url, "");
           }
         },
         error: function(xhr) {
