@@ -1047,7 +1047,9 @@ h4.individual_overview {
 }
 .brown-research-areas-list {
 	padding: 0 1rem;
+	list-style-type: none;
 }
+
 /* table */
 #section_overview > .panel {
 	border: none;

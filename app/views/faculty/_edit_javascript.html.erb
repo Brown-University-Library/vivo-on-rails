@@ -190,7 +190,7 @@
       buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal">Edit</button>';
       spanDelete = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
       linkDelete = '<a href="#" id="{id}_delete" class="delete_item_link" title="Remove this link">' + spanDelete + '</a>';
-      html = '<span id="{id}">' + img + link + buttonEdit + linkDelete + '</span><br/>';
+      html = '<li id="{id}">' + img + link + buttonEdit + linkDelete + '</li>';
       html = html.replace(/{id}/g, id);
       html = html.replace('{text}', text);
       html = html.replace('{url}', url);

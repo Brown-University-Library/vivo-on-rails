@@ -119,9 +119,9 @@
     <!-- on the web -->
     <% if @presenter.edit_mode %>
       <h4 class="research-areas panel-heading">On the Web</h4>
-      <div id="on-the-web-list" class="brown-research-areas-list">
+      <ul id="on-the-web-list" class="brown-research-areas-list">
         <!-- HTML elements added via JavaScript -->
-      </div>
+      </ul>
       <div id="onthewebEditBox">
         <button id="onthewebAddButton" class="btn btn-info"
           title="Add a new website"
@@ -132,15 +132,14 @@
         <h4 class="research-areas panel-heading">On the Web</h4>
         <div id="on-the-web-list" class="brown-research-areas-list">
           <% @presenter.faculty.on_the_web.each do |web| %>
-            <span>
+            <li>
               <% if web.icon != nil %>
                 <%= image_tag(web.icon, width: "17") %>
               <% else %>
                 <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
               <% end %>
               <a href="<%= web.url %>" target="_blank"><%= web.text %></a>
-            </span>
-            <br/>
+            </li>
           <% end %>
         </div>
       <% end %> <!-- on_the_web.count -->
