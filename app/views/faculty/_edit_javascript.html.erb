@@ -132,6 +132,17 @@
       });
     });
 
+    var researchAreaAddElement = function(id, text) {
+      var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
+      var span = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+      var link1 = '<a href="' + href + '" id="' + id + '">' + text + '</a>';
+      var link2 = '<a href="#" class="delete_research_area" id="' + id + '_delete" >' + span + '</a>';
+      var html = '| ' + link1 + ' ' + link2;
+      $("#research-areas-list").append(html);
+      $("#researchareaText").val("");
+      $("#researchareaId").val("");
+    };
+
     $("#researchareaAddButton").on("click", function(el) {
       var text = $('#researchareaText').val();
       if (text.trim() == "") {
@@ -142,21 +153,13 @@
         url: rootUrl + "/edit/research_area/" + vivoId + "/add?text=" + text,
         success: function(data) {
           console.log("added " + data.id + " for " + vivoId);
-          var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
-          var span = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
-          var link1 = '<a href="' + href + '" id="' + data.id + '">' + text + '</a>';
-          var link2 = '<a href="#" class="delete_research_area" id="' + data.id + '_delete" >' + span + '</a>';
-          var html = '| ' + link1 + ' ' + link2;
-          $("#research-areas-list").append(html);
-          $("#researchareaText").val("");
-          $("#researchareaId").val("");
+          researchAreaAddElement(data.id, text);
         },
         error: function(xhr) {
           showError("Error adding research area", xhr.responseJSON.error);
         }
       });
     });
-
 
     //////////////////////////////////////////
     // On the web
@@ -197,7 +200,7 @@
       html = html.replace('{text}', text);
       html = html.replace('{url}', url);
       $("#on-the-web-list").append(html);
-    }
+    };
 
     $("#ontheweb_modal_save").on("click", function(el) {
       var url = $("#ontheweb_modal_url").val();
@@ -268,8 +271,14 @@
       $("#ontheweb_modal_text").focus();
     });
 
-    // Add the on the web links
-    // TODO: these should be encoded to prevent a quote from throwing off the JavaScript
+    // Add the Research Areas and Web Links to the page.
+    //
+    // No need to encode the values before passing them to the
+    // JavaScript functions, Rails takes care of that.
+    <% @presenter.faculty.research_areas.each do |area| %>
+      researchAreaAddElement("<%= area.id %>", "<%= area.label %>");
+    <% end %>
+
     <% @presenter.faculty.on_the_web.each do |web| %>
       onTheWebAddElement("<%= web.vivo_id %>", "<%= web.text %>", "<%= web.url %>", "<%= asset_path(web.icon) %>");
     <% end %>

@@ -89,29 +89,33 @@
       </div>
     <% end %>
 
-    <% if @presenter.faculty.research_areas.count > 0 %>
+    <% if @presenter.edit_mode %>
       <h4 class="research-areas panel-heading">Research Areas</h4>
       <div id="research-areas-list" class="brown-research-areas-list">
-        <% @presenter.faculty.research_areas.each_with_index do |area, i| %>
-          <% if i != 0 %>
-            &nbsp;|&nbsp;
-          <% end %>
-          <% qs = "?fq=research_areas|#{CGI.escape(area.label)}" %>
-          <a href="<%= search_url() + qs %>" id="<%= area.id %>">
-            <%= area.label %>
-          </a>
-          <% if @presenter.edit_mode %>
-            <a href="#" id="<%= area.id %>_delete" class="delete_research_area" title="Remove this research area">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </a>
-          <% end %>
-        <% end %>
+        <!-- HTML elements added via JavaScript -->
       </div>
-      <% if @presenter.edit_mode %>
-        <div id="researchareaEditBox">
-            <input type="text" id="researchareaText" placeholder="Enter research area"></input>
-            <!-- <input type="text" id="researchareaId" class="hidden"></input> -->
-            <button id="researchareaAddButton" class="btn btn-info" title="Add to your profile">Add</button>
+      <div id="researchareaEditBox">
+          <input type="text" id="researchareaText" placeholder="Enter research area"></input>
+          <button id="researchareaAddButton" class="btn btn-info" title="Add to your profile">Add</button>
+      </div>
+    <% else %>
+      <% if @presenter.faculty.research_areas.count > 0 %>
+        <h4 class="research-areas panel-heading">Research Areas</h4>
+        <div id="research-areas-list" class="brown-research-areas-list">
+          <% @presenter.faculty.research_areas.each_with_index do |area, i| %>
+            <% if i != 0 %>
+              &nbsp;|&nbsp;
+            <% end %>
+            <% qs = "?fq=research_areas|#{CGI.escape(area.label)}" %>
+            <a href="<%= search_url() + qs %>" id="<%= area.id %>">
+              <%= area.label %>
+            </a>
+            <% if @presenter.edit_mode %>
+              <a href="#" id="<%= area.id %>_delete" class="delete_research_area" title="Remove this research area">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </a>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
