@@ -283,6 +283,12 @@
       onTheWebAddElement("<%= web.vivo_id %>", "<%= web.text %>", "<%= web.url %>", "<%= asset_path(web.icon) %>");
     <% end %>
 
+    // Make sure the textboxes start empty. This is to prevent
+    // them from keeping previous values if the user refreshes
+    // the browser.
+    $('#researchareaText').val("");
+    $("#ontheweb_modal_url").val("");
+    $("#ontheweb_modal_text").val("");
   });
 </script>
 <% end %>
