@@ -45,13 +45,15 @@ class FacultyEdit
 
     def self.overview_update(faculty_id, text)
         url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/overview/overview/update"
+        text = ModelUtils::html_trim(text)
         payload = {overview: text}.to_json
         Rails.logger.info("overview_update: POST #{url} \r\n#{payload}")
         data = JsonUtils::http_post(url, payload)
-        if data == nil
-            return "Error updating overview"
+        if data == nil || data["error"] != nil
+            Rails.logger.error("Error updating overview (#{data['error']})")
+            return nil, "Error updating overview"
         end
-        return nil
+        return data["overview"], nil
     end
 
     def self.research_area_add(faculty_id, text)

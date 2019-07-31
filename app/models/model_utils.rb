@@ -1,4 +1,14 @@
 class ModelUtils
+  def self.html_trim(text)
+    return nil if text == nil
+    trimmed = text
+    while true
+        x = trimmed.chomp!
+        y = trimmed.chomp!("<p>&nbsp;</p>")
+        break if x == nil && y == nil
+    end
+    trimmed
+  end
 
   def self.vivo_id(rabid)
     return "" if rabid == nil

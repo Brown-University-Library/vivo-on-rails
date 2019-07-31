@@ -17,8 +17,8 @@ class EditController < ApplicationController
     return if ENV["EDIT_ALLOWED"] != "true"
     faculty_id = params[:faculty_id]
     text = params[:text]
-    error = FacultyEdit.overview_update(faculty_id, text)
-    render_output(nil, error)
+    text, error = FacultyEdit.overview_update(faculty_id, text)
+    render_output({text: text}, error)
   end
 
   def research_area_add
