@@ -81,6 +81,16 @@ class FacultyEdit
                 @item.scholarly_work = data["scholarly_work"]
             end
         end
+
+        if @item.awards != nil && @item.awards != ""
+            url = @base_url + "/faculty/edit/background/honors"
+            data = JsonUtils::http_get(url, verbose)
+            if data == nil
+                @faculty.add_error("Could not awards honors work data for edit")
+            else
+                @item.awards = data["awards_honors"]
+            end
+        end
     end
 
     def self.research_area_add(faculty_id, text)

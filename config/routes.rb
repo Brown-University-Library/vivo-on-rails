@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'edit/research/statement/:faculty_id/update' => 'edit#research_statement_update'
   post 'edit/research/funded/:faculty_id/update' => 'edit#research_funded_update'
   post 'edit/research/scholarly/:faculty_id/update' => 'edit#research_scholarly_update'
+  post 'edit/background/awards/:faculty_id/update' => 'edit#background_awards_update'
 
   # Visualizations for faculty (and organizations)
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor

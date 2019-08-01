@@ -38,14 +38,13 @@ class FacultyPresenter
       !faculty.scholarly_work.empty?
 
     @has_background = faculty.education.count > 0 ||
-      !faculty.awards.empty? ||
-      faculty.on_the_web.count > 0
+    faculty.training.count > 0 ||
+    !faculty.awards.empty?
 
     @has_affiliations = faculty.collaborators.count > 0 ||
       !faculty.affiliations_text.empty? ||
       faculty.appointments.count > 0 ||
-      faculty.credentials.count > 0 ||
-      faculty.training.count > 0
+      faculty.credentials.count > 0
 
     @has_teaching = !faculty.teaching_overview.empty? ||
       faculty.teacher_for.count > 0

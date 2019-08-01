@@ -28,7 +28,7 @@
               <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
               Overview
           </a>
-          <% if @presenter.has_publications %>
+          <% if @presenter.edit_mode || @presenter.has_publications %>
             <a id="tabPublicationsBtn"
               class="btn btn-default"
               href="#Publications"
@@ -39,7 +39,7 @@
             </a>
           <% end %>
 
-          <% if @presenter.has_research %>
+          <% if @presenter.edit_mode || @presenter.has_research %>
             <a id="tabResearchBtn"
               class="btn btn-default"
               href="#Research"
@@ -50,7 +50,7 @@
             </a>
           <% end %>
 
-          <% if @presenter.has_background %>
+          <% if @presenter.edit_mode || @presenter.has_background %>
             <a id="tabBackgroundBtn"
               class="btn btn-default"
               href="#Background"
@@ -61,7 +61,7 @@
             </a>
           <% end %>
 
-          <% if @presenter.has_affiliations %>
+          <% if @presenter.edit_mode || @presenter.has_affiliations %>
             <a id="tabAffiliationsBtn"
               class="btn btn-default"
               href="#Affiliations"
@@ -72,7 +72,7 @@
             </a>
           <% end %>
 
-          <% if @presenter.has_teaching %>
+          <% if @presenter.edit_mode || @presenter.has_teaching %>
             <a id="tabTeachingBtn"
               class="btn btn-default"
               href="#Teaching"
@@ -83,7 +83,7 @@
             </a>
           <% end %>
 
-          <% if @presenter.has_details %>
+          <% if @presenter.edit_mode || @presenter.has_details %>
             <a id="tabAllBtn"
               class="btn btn-default"
               href="#All"
@@ -94,7 +94,7 @@
             </a>
           <% end %>
 
-          <% if @presenter.faculty.cv_link %>
+          <% if @presenter.edit_mode || @presenter.faculty.cv_link %>
             <a class="btn btn-default"
               href="<%= @presenter.faculty.cv_link %>"
               target="_blank"
