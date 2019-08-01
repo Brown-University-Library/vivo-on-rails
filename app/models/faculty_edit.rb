@@ -86,9 +86,19 @@ class FacultyEdit
             url = @base_url + "/faculty/edit/background/honors"
             data = JsonUtils::http_get(url, verbose)
             if data == nil
-                @faculty.add_error("Could not awards honors work data for edit")
+                @faculty.add_error("Could not fetch awards_honors data for edit")
             else
                 @item.awards = data["awards_honors"]
+            end
+        end
+
+        if @item.affiliations_text != nil && @item.affiliations_text != ""
+            url = @base_url + "/faculty/edit/affiliations/affiliations"
+            data = JsonUtils::http_get(url, verbose)
+            if data == nil
+                @faculty.add_error("Could not fetch affiliations data for edit")
+            else
+                @item.affiliations_text = data["affiliations"]
             end
         end
     end

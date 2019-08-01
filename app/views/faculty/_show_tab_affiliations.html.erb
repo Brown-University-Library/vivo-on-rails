@@ -1,97 +1,95 @@
-<% if @presenter.has_affiliations %>
-  <div id="tabAffiliations" class="panel panel-default hidden">
-    <h3 style="padding-bottom: 21px;">Affiliations
-      <a id="viz_collab" class="btn btn-default hidden" style="float:right;"
-        href="<%= visualization_collab_path(@presenter.faculty.vivo_id) %>" target="_blank"
-        title="Visualize collaborators network">Visualize it&nbsp;
-        <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
-      </a>
-    </h3>
+<div id="tabAffiliations" class="panel panel-default hidden">
+  <h3 style="padding-bottom: 21px;">Affiliations
+    <a id="viz_collab" class="btn btn-default hidden" style="float:right;"
+      href="<%= visualization_collab_path(@presenter.faculty.vivo_id) %>" target="_blank"
+      title="Visualize collaborators network">Visualize it&nbsp;
+      <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+    </a>
+  </h3>
 
-      <% if @presenter.faculty.collaborators.count > 0 %>
-          <div class="panel-heading">
-            <h4 id="relatedBy-Authorship" class="panel-title">Collaborators</h4>
-          </div>
+  <% if @presenter.edit_mode || @presenter.faculty.collaborators.count > 0 %>
+    <div class="panel-heading">
+      <h4 id="relatedBy-Authorship" class="panel-title">Collaborators</h4>
+    </div>
 
-          <div class="panel-body panel-body-collaborators">
-            <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <th>Name</th>
-                  <th>Title</th>
-                </tr>
-                <% @presenter.faculty.collaborators.each do |c| %>
-                  <tr class="tableRow" role="listitem">
-                    <td>
-                      <span class="listDateTime">
-                        <a href="<%= display_show_url(c.short_id) %>"><%= c.name %></a>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="listDateTime"><%= c.title %></span>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-      <% end %>
+    <div class="panel-body panel-body-collaborators">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Title</th>
+          </tr>
+          <% @presenter.faculty.collaborators.each do |c| %>
+            <tr class="tableRow" role="listitem">
+              <td>
+                <span class="listDateTime">
+                  <a href="<%= display_show_url(c.short_id) %>"><%= c.name %></a>
+                </span>
+              </td>
+              <td>
+                <span class="listDateTime"><%= c.title %></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 
-      <%= render "faculty/show_text_tab", locals: {
-        divId: "affiliations",
-        title: "Affiliations",
-        text: @presenter.faculty.affiliations_text} %>
+  <%= render "faculty/show_text_tab", locals: {
+    edit: @presenter.edit_mode,
+    divId: "affiliations",
+    title: "Affiliations",
+    text: @presenter.faculty.affiliations_text} %>
 
-      <% if @presenter.faculty.credentials.count > 0 %>
-          <div class="panel-heading">
-            <h4 id="relatedBy-Authorship" title="" class="panel-title">Credentials/Licenses</h4>
-          </div>
+  <% if @presenter.edit_mode || @presenter.faculty.credentials.count > 0 %>
+      <div class="panel-heading">
+        <h4 id="relatedBy-Authorship" title="" class="panel-title">Credentials/Licenses</h4>
+      </div>
 
-          <div class="panel-body panel-body-credentials">
-            <table class="table table-hover">
-              <tbody>
-                <% @presenter.faculty.credentials.each do |c| %>
-                  <tr class="tableRow" role="listitem">
-                    <td><%= c.name %></td>
-                    <!-- TODO: should the grantor info be a hyperlink? -->
-                    <td><%= c.grantor_display %></td>
-                    <td><%= c.year_range_str %></td>
-                    <td><%= c.number_display %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-      <% end %>
+      <div class="panel-body panel-body-credentials">
+        <table class="table table-hover">
+          <tbody>
+            <% @presenter.faculty.credentials.each do |c| %>
+              <tr class="tableRow" role="listitem">
+                <td><%= c.name %></td>
+                <td><%= c.grantor_display %></td>
+                <td><%= c.year_range_str %></td>
+                <td><%= c.number_display %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
 
-      <% if @presenter.faculty.appointments.count > 0 %>
-          <div class="panel-heading">
-            <h4 id="relatedBy-Authorship" title="" class="panel-title">Appointments</h4>
-          </div>
+  <% if @presenter.edit_mode || @presenter.faculty.appointments.count > 0 %>
+      <div class="panel-heading">
+        <h4 id="relatedBy-Authorship" title="" class="panel-title">Appointments</h4>
+      </div>
 
-          <div class="panel-body">
-            <table class="table table-hover">
-              <tbody>
-                <% @presenter.faculty.appointments.each do |a| %>
-                  <tr class="tableRow" role="listitem">
-                    <td>
-                      <span><%= a.name %></span>.
-                      <% if a.has_org? %>
-                        <span>
-                          <% qs = '?q=appointment_at:"' + CGI.escape(a.org_name) + '"' %>
-                          <a href="<%= search_url() + qs %>"
-                            title="Find researchers that had appointments at this institution">
-                            <%= a.org_name %></a>,
-                        </span>
-                      <% end %>
-                      <span><%= a.department %></span>
-                      <span><%= a.year_range_str %></span>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-      <% end %>
-  </div> <!-- panel -->
-<% end %>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <tbody>
+            <% @presenter.faculty.appointments.each do |a| %>
+              <tr class="tableRow" role="listitem">
+                <td>
+                  <span><%= a.name %></span>.
+                  <% if a.has_org? %>
+                    <span>
+                      <% qs = '?q=appointment_at:"' + CGI.escape(a.org_name) + '"' %>
+                      <a href="<%= search_url() + qs %>"
+                        title="Find researchers that had appointments at this institution">
+                        <%= a.org_name %></a>,
+                    </span>
+                  <% end %>
+                  <span><%= a.department %></span>
+                  <span><%= a.year_range_str %></span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div> <!-- panel -->
