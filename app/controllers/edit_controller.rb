@@ -17,7 +17,7 @@ class EditController < ApplicationController
     return if ENV["EDIT_ALLOWED"] != "true"
     faculty_id = params[:faculty_id]
     text = params[:text]
-    text, error = FacultyEdit.overview_update(faculty_id, text)
+    text, error = FacultyEdit.simple_text_update("overview/overview/update", faculty_id, text, "overview")
     render_output({text: text}, error)
   end
 
@@ -60,6 +60,22 @@ class EditController < ApplicationController
     id = params[:id]
     _, error = FacultyEdit.web_link_delete(faculty_id, id)
     render_output(nil, error)
+  end
+
+  def research_overview_update
+    return if ENV["EDIT_ALLOWED"] != "true"
+    faculty_id = params[:faculty_id]
+    text = params[:text]
+    text, error = FacultyEdit.simple_text_update("research/overview/update", faculty_id, text, "research_overview")
+    render_output({text: text}, error)
+  end
+
+  def research_statement_update
+    return if ENV["EDIT_ALLOWED"] != "true"
+    faculty_id = params[:faculty_id]
+    text = params[:text]
+    text, error = FacultyEdit.simple_text_update("research/statement/update", faculty_id, text, "research_statement")
+    render_output({text: text}, error)
   end
 
   private

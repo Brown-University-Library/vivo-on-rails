@@ -12,78 +12,63 @@
 <script type="text/javascript">
   $(function() {
 
-    // References:
-    //    http://cdn.ckeditor.com/
-    //    https://ckeditor.com/docs/ckeditor4/latest/guide/dev_installation.html
-    //    https://ckeditor.com/docs/ckeditor4/latest/examples/basicstyles.html
-    //    https://ckeditor.com/docs/ckeditor4/latest/examples/toolbar.html
-    var ckeditConfig = {
-      toolbar: [
-        { name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
-        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList'] },
-        { name: 'links', items: [ 'Link', 'Unlink' ] },
-        { name: 'about', items: [ 'About' ] }
-      ],
-      removePlugins: 'elementspath'
-    };
-    CKEDITOR.replace('overviewTextArea', ckeditConfig);
-
-    $("#edit-profile").on("click", function() {
-      window.location = "<%= display_show_path(@presenter.faculty.vivo_id, {mode:'edit'}) %>";
-    });
-
-    $("#edit-profile").addClass("hidden");
-
+    //////////////////////////////////////////
+    // Common functions
+    //////////////////////////////////////////
 
     var showError = function(section, message) {
       alert(section + ": " + message);
     }
 
-    //////////////////////////////////////////
-    // Overview
-    //////////////////////////////////////////
-    var turnEdit = function(value) {
+    var turnTextArea = function(id, value) {
+      var id1 = "#" + id + "Text";
+      var id2 = "#" + id + "EditButton";
+      var id3 = "#" + id + "EditBox"
       if (value == true) {
-        $("#overviewText").addClass("hidden");
-        $("#overviewEditButton").addClass("hidden");
-        $("#overviewEditBox").removeClass("hidden");
+        $(id1).addClass("hidden");
+        $(id2).addClass("hidden");
+        $(id3).removeClass("hidden");
       } else {
-        $("#overviewText").removeClass("hidden");
-        $("#overviewEditButton").removeClass("hidden");
-        $("#overviewEditBox").addClass("hidden");
+        $(id1).removeClass("hidden");
+        $(id2).removeClass("hidden");
+        $(id3).addClass("hidden");
       }
-    };
+    }
 
-    $("#overviewEditButton").on("click", function() {
-      // push the text content to the text area value
-      var oldContent = $("#overviewText").first().html();
-      // console.log("Edit, old content: " + oldContent);
-      // $("#overviewTextArea").val(oldContent);
-      CKEDITOR.instances.overviewTextArea.setData(oldContent);
-      turnEdit(true);
-    });
+    var setupTextArea = function(id, url, editor) {
 
-    $("#overviewSave").on("click", function() {
-      var newContent = CKEDITOR.instances.overviewTextArea.getData()
-      turnEdit(false);
-      $.ajax({
-          type: "POST",
-          url: rootUrl + "/edit/overview/" + vivoId + "/update",
-          data: {text: newContent},
-          success: function(data) {
-            $("#overviewText").first().html(data.text);
-            console.log("updated overview for " + vivoId);
-          },
-          error: function(xhr) {
-            showError("Error updating overview", xhr.responseJSON.error);
-          }
+      // setup the edit button for this text area
+      $("#" + id + "EditButton").on("click", function() {
+          // push the text content to the text area value
+          var oldContent = $("#" + id + "Text").first().html();
+          editor.setData(oldContent);
+          turnTextArea(id, true);
       });
 
-    });
+      // setup the save button for this text area
+      $("#" + id + "Save").on("click", function() {
+        var newContent = editor.getData()
+        turnTextArea(id, false);
+        $.ajax({
+            type: "POST",
+            url: url.replace("{vivoId}", vivoId),
+            data: {text: newContent},
+            success: function(data) {
+              $("#" + id + "Text").first().html(data.text);
+              console.log("updated " + id + " for " + vivoId);
+            },
+            error: function(xhr) {
+              showError("Error updating " + id, xhr.responseJSON.error);
+            }
+          });
+      });
 
-    $("#overviewCancel").on("click", function() {
-      turnEdit(false);
-    });
+      // setup the cancel button for this text area
+      $("#" + id + "Cancel").on("click", function() {
+        turnTextArea(id, false);
+      });
+    };
+
 
     //////////////////////////////////////////
     // Research Areas
@@ -160,6 +145,7 @@
         }
       });
     });
+
 
     //////////////////////////////////////////
     // On the web
@@ -271,10 +257,38 @@
       $("#ontheweb_modal_text").focus();
     });
 
+    //////////////////////////////////////////
+    // Initialization
+    //////////////////////////////////////////
+
+    // References:
+    //    http://cdn.ckeditor.com/
+    //    https://ckeditor.com/docs/ckeditor4/latest/guide/dev_installation.html
+    //    https://ckeditor.com/docs/ckeditor4/latest/examples/basicstyles.html
+    //    https://ckeditor.com/docs/ckeditor4/latest/examples/toolbar.html
+    var ckeditConfig = {
+      toolbar: [
+        { name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
+        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList'] },
+        { name: 'links', items: [ 'Link', 'Unlink' ] },
+        { name: 'about', items: [ 'About' ] }
+      ],
+      removePlugins: 'elementspath'
+    };
+
+    // Setup the edit boxes to use the CKEditor
+    CKEDITOR.replace('overviewTextArea', ckeditConfig);
+    CKEDITOR.replace('researchOverviewTextArea', ckeditConfig);
+    CKEDITOR.replace('researchStatementTextArea', ckeditConfig);
+
+    // Setup the edit/save/cancel logic for the edit boxes
+    setupTextArea("overview", rootUrl + "/edit/overview/{vivoId}/update", CKEDITOR.instances.overviewTextArea);
+    setupTextArea("researchOverview", rootUrl + "/edit/research/overview/{vivoId}/update", CKEDITOR.instances.researchOverviewTextArea);
+    setupTextArea("researchStatement", rootUrl + "/edit/research/statement/{vivoId}/update", CKEDITOR.instances.researchStatementTextArea);
+
     // Add the Research Areas and Web Links to the page.
-    //
-    // No need to encode the values before passing them to the
-    // JavaScript functions, Rails takes care of that.
+    // (we don't  need to encode the values before passing them to the
+    // JavaScript functions, Rails takes care of that.)
     <% @presenter.faculty.research_areas.each do |area| %>
       researchAreaAddElement("<%= area.id %>", "<%= area.label %>");
     <% end %>
@@ -289,6 +303,12 @@
     $('#researchareaText').val("");
     $("#ontheweb_modal_url").val("");
     $("#ontheweb_modal_text").val("");
+
+    $("#edit-profile").on("click", function() {
+      window.location = "<%= display_show_path(@presenter.faculty.vivo_id, {mode:'edit'}) %>";
+    });
+
+    $("#edit-profile").addClass("hidden");
   });
 </script>
 <% end %>

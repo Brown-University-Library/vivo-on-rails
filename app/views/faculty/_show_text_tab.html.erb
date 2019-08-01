@@ -1,11 +1,35 @@
-<% if !locals[:text].empty? %>
+<% if locals[:edit] != true %>
+
+  <% if !locals[:text].empty? %>
+    <div class="panel-heading">
+      <h4 class="panel-title"><%= locals[:title] %></h4>
+    </div>
+
+    <div class="panel-body">
+      <div class="property-list" role="list" displaylimit="5">
+        <%= locals[:text].html_safe %>
+      </div>
+    </div>
+  <% end %>
+
+<% else %>
+
   <div class="panel-heading">
-    <h4 id="relatedBy-Authorship" title="" class="panel-title"><%= locals[:title] %></h4>
+    <h4 class="panel-title"><%= locals[:title] %></h4>
   </div>
 
-  <div class="panel-body">
-    <div class="property-list" role="list" id="relatedBy-Authorship-List" displaylimit="5">
-      <%= locals[:text].html_safe %>
-    </div>
+  <button id="<%= locals[:divId] %>EditButton" class="btn btn-info" title="Edit this section">Edit</button>
+  <div id="<%= locals[:divId] %>Text"><%= locals[:text].html_safe %></div>
+  <div id="<%= locals[:divId] %>EditBox" class="hidden">
+    <textarea id="<%= locals[:divId] %>TextArea" rows="15" class="overview_textarea"></textarea>
+    <br/><br/>
+    <button id="<%= locals[:divId] %>Save" class="btn btn-success">Save</button>
+    <button id="<%= locals[:divId] %>Cancel" class="btn btn-danger">Cancel</button>
   </div>
+
+  <!--
+        The JavaScript to enable the edit button is on _edit_javascript.html.erb,
+        see calls to setupTextArea()
+  -->
+
 <% end %>

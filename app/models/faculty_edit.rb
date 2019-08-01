@@ -41,19 +41,26 @@ class FacultyEdit
             end
             @item.on_the_web = OnTheWebItem.from_hash_array(links)
         end
-    end
 
-    def self.overview_update(faculty_id, text)
-        url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/overview/overview/update"
-        text = ModelUtils::html_trim(text)
-        payload = {overview: text}.to_json
-        Rails.logger.info("overview_update: POST #{url} \r\n#{payload}")
-        data = JsonUtils::http_post(url, payload)
-        if data == nil || data["error"] != nil
-            Rails.logger.error("Error updating overview (#{data['error']})")
-            return nil, "Error updating overview"
+        if @item.research_overview != nil && @item.research_overview != ""
+            url = @base_url + "/faculty/edit/research/overview"
+            data = JsonUtils::http_get(url, verbose)
+            if data == nil
+                @faculty.add_error("Could not fetch reseach overview data for edit")
+            else
+                @item.research_overview = data["research_overview"]
+            end
         end
-        return data["overview"], nil
+
+        if @item.research_statement != nil && @item.research_statement != ""
+            url = @base_url + "/faculty/edit/research/statement"
+            data = JsonUtils::http_get(url, verbose)
+            if data == nil
+                @faculty.add_error("Could not fetch reseach statement data for edit")
+            else
+                @item.research_overview = data["research_statement"]
+            end
+        end
     end
 
     def self.research_area_add(faculty_id, text)
@@ -119,5 +126,23 @@ class FacultyEdit
             return nil, "Error deleting web link"
         end
         return data["deleted"], nil
+    end
+
+    # Updates simple text data elements via the API.
+    # The data we pass to the API is in format:
+    #           {key: text}
+    # and the result is on the exact same format.
+    def self.simple_text_update(url_suffix, faculty_id, text, key)
+        url = ENV["EDIT_SERVICE"] + "/" + faculty_id + "/faculty/edit/" + url_suffix
+        data = {}
+        data[key] = ModelUtils::html_trim(text)
+        payload = data.to_json
+        Rails.logger.info("POST #{url} \r\n#{payload}")
+        data = JsonUtils::http_post(url, payload)
+        if data == nil || data["error"] != nil
+            Rails.logger.error("Error updating research overview (#{data['error']})")
+            return nil, "Error updating overview"
+        end
+        return data[key], nil
     end
 end
