@@ -94,7 +94,8 @@
             </a>
           <% end %>
 
-          <% if @presenter.edit_mode || @presenter.faculty.cv_link %>
+          <!-- make sure this is updated if the user adds a CV during edit -->
+          <% if @presenter.faculty.cv_link %>
             <a class="btn btn-default"
               href="<%= @presenter.faculty.cv_link %>"
               target="_blank"

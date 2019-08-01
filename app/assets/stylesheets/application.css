@@ -1044,6 +1044,7 @@ h4.individual_overview {
 }
 .brown-affiliations-list {
 	padding: 0 1rem;
+	list-style-type: none;
 }
 .brown-research-areas-list {
 	padding: 0 1rem;

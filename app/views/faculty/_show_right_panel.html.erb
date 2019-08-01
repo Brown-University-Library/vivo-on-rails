@@ -67,7 +67,6 @@
       <div id="overviewText"><%= @presenter.faculty.overview.html_safe %></div>
       <div id="overviewEditBox" class="hidden">
         <textarea id="overviewTextArea" rows="15" class="overview_textarea"></textarea>
-        <br/><br/>
         <button id="overviewSave" class="btn btn-success">Save</button>
         <button id="overviewCancel" class="btn btn-danger">Cancel</button>
       </div>
@@ -77,16 +76,17 @@
 
     <% if @presenter.faculty.affiliations.count > 0 %>
       <h4 class="brown-affiliations panel-heading">Brown Affiliations</h4>
-      <div class="brown-affiliations-list">
+      <ul class="brown-affiliations-list">
         <% @presenter.faculty.affiliations.each_with_index do |aff, i| %>
-          <p>
+          <li>
           <%= image_tag( aff.thumbnail, alt: aff.name + " logo", width: "36") %>
-          <a href="<%= display_show_url(aff.vivo_id) %>">
-            <%= aff.name %>
-          </a>
-          </p>
+          <% if @presenter.edit_mode %>
+            <span><%= aff.name %></span>
+          <% else %>
+            <a href="<%= display_show_url(aff.vivo_id) %>"><%= aff.name %></a>
+          <% end %>
         <% end %>
-      </div>
+      </ul>
     <% end %>
 
     <% if @presenter.edit_mode %>
