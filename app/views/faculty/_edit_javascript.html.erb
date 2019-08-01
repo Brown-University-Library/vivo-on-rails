@@ -119,10 +119,10 @@
 
     var researchAreaAddElement = function(id, text) {
       var href= "http://vivo.brown.edu/search?fq=research_areas|" + text;
-      var span = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
-      var link1 = '<a href="' + href + '" id="' + id + '">' + text + '</a>';
-      var link2 = '<a href="#" class="delete_research_area" id="' + id + '_delete" >' + span + '</a>';
-      var html = '| ' + link1 + ' ' + link2;
+      var span = '<span id="' + id + '">' + text + '</span>';
+      var iconDelete = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+      var linkDelete = '<a href="#" class="delete_research_area" id="' + id + '_delete" title="Remove this research area">' + iconDelete + '</a>';
+      var html = '| ' + span + ' ' + linkDelete;
       $("#research-areas-list").append(html);
       $("#researchareaText").val("");
       $("#researchareaId").val("");
@@ -177,11 +177,11 @@
       } else {
         img = '<img src="' + icon + '" alt="" width="17" />';
       }
-      link = '<a id="{id}_link" href="{url}" target="_blank">{text}</a>'
-      buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal">Edit</button>';
+      span = '<span id="{id}_link">{text}</span>'
+      buttonEdit = '<button id="{id}_edit" class="btn btn-xs btn-info ontheweb_edit_button" data-toggle="modal" data-target="#ontheweb_modal" title="Edit this link">Edit</button>';
       spanDelete = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
       linkDelete = '<a href="#" id="{id}_delete" class="delete_item_link" title="Remove this link">' + spanDelete + '</a>';
-      html = '<li id="{id}">' + img + link + buttonEdit + linkDelete + '</li>';
+      html = '<li id="{id}">' + img + span + buttonEdit + linkDelete + '</li>';
       html = html.replace(/{id}/g, id);
       html = html.replace('{text}', text);
       html = html.replace('{url}', url);
