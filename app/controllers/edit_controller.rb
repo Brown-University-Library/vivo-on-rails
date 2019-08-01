@@ -78,6 +78,22 @@ class EditController < ApplicationController
     render_output({text: text}, error)
   end
 
+  def research_funded_update
+    return if ENV["EDIT_ALLOWED"] != "true"
+    faculty_id = params[:faculty_id]
+    text = params[:text]
+    text, error = FacultyEdit.simple_text_update("research/funded/update", faculty_id, text, "funded_research")
+    render_output({text: text}, error)
+  end
+
+  def research_scholarly_update
+    return if ENV["EDIT_ALLOWED"] != "true"
+    faculty_id = params[:faculty_id]
+    text = params[:text]
+    text, error = FacultyEdit.simple_text_update("research/scholarly/update", faculty_id, text, "scholarly_work")
+    render_output({text: text}, error)
+  end
+
   private
     def render_output(data, error)
       if error != nil

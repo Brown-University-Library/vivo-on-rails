@@ -58,7 +58,27 @@ class FacultyEdit
             if data == nil
                 @faculty.add_error("Could not fetch reseach statement data for edit")
             else
-                @item.research_overview = data["research_statement"]
+                @item.research_statement = data["research_statement"]
+            end
+        end
+
+        if @item.funded_research != nil && @item.funded_research != ""
+            url = @base_url + "/faculty/edit/research/funded"
+            data = JsonUtils::http_get(url, verbose)
+            if data == nil
+                @faculty.add_error("Could not fetch funded research data for edit")
+            else
+                @item.funded_research = data["funded_research"]
+            end
+        end
+
+        if @item.scholarly_work != nil && @item.scholarly_work != ""
+            url = @base_url + "/faculty/edit/research/scholarly"
+            data = JsonUtils::http_get(url, verbose)
+            if data == nil
+                @faculty.add_error("Could not fetch scholarly work data for edit")
+            else
+                @item.scholarly_work = data["scholarly_work"]
             end
         end
     end

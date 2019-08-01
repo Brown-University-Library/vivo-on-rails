@@ -280,11 +280,15 @@
     CKEDITOR.replace('overviewTextArea', ckeditConfig);
     CKEDITOR.replace('researchOverviewTextArea', ckeditConfig);
     CKEDITOR.replace('researchStatementTextArea', ckeditConfig);
+    CKEDITOR.replace('researchFundedTextArea', ckeditConfig);
+    CKEDITOR.replace('researchScholarlyTextArea', ckeditConfig);
 
     // Setup the edit/save/cancel logic for the edit boxes
     setupTextArea("overview", rootUrl + "/edit/overview/{vivoId}/update", CKEDITOR.instances.overviewTextArea);
     setupTextArea("researchOverview", rootUrl + "/edit/research/overview/{vivoId}/update", CKEDITOR.instances.researchOverviewTextArea);
     setupTextArea("researchStatement", rootUrl + "/edit/research/statement/{vivoId}/update", CKEDITOR.instances.researchStatementTextArea);
+    setupTextArea("researchFunded", rootUrl + "/edit/research/funded/{vivoId}/update", CKEDITOR.instances.researchFundedTextArea);
+    setupTextArea("researchScholarly", rootUrl + "/edit/research/scholarly/{vivoId}/update", CKEDITOR.instances.researchScholarlyTextArea);
 
     // Add the Research Areas and Web Links to the page.
     // (we don't  need to encode the values before passing them to the

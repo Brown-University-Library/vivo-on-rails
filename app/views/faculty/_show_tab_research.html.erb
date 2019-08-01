@@ -15,12 +15,12 @@
       text: @presenter.faculty.research_statement || ""} %>
     <%= render "faculty/show_text_tab", locals: {
       edit: true,
-      divId: "fundedResearch",
+      divId: "researchFunded",
       title: "Funded Research",
       text: @presenter.faculty.funded_research || ""} %>
     <%= render "faculty/show_text_tab", locals: {
       edit: true,
-      divId: "scholarlyWork",
+      divId: "researchScholarly",
       title: "Scholarly Work",
       text: @presenter.faculty.scholarly_work || ""} %>
   </div>
@@ -40,11 +40,11 @@
           title: "Research Statement",
           text: @presenter.faculty.research_statement} %>
         <%= render "faculty/show_text_tab", locals: {
-          divId: "fundedResearch",
+          divId: "researchFunded",
           title: "Funded Research",
           text: @presenter.faculty.funded_research} %>
         <%= render "faculty/show_text_tab", locals: {
-          divId: "scholarlyWork",
+          divId: "researchScholarly",
           title: "Scholarly Work",
           text: @presenter.faculty.scholarly_work} %>
     </div>

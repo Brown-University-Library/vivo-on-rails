@@ -3,8 +3,8 @@ class FacultyItem
 
   attr_accessor :record_type, :id, :uri, :overview, :email, :org_label, :name,
     :display_name, :title, :contributor_to, :thumbnail, :education, :awards,
-    :research_overview, :research_statement, :teacher_for,
-    :teaching_overview, :scholarly_work, :funded_research,
+    :research_overview, :research_statement, :funded_research, :scholarly_work,
+    :teacher_for, :teaching_overview,
     :collaborators, :affiliations_text, :affiliations, :research_areas,
     :on_the_web, :appointments, :published_in, :hidden,
     :cv_link, :credentials, :training,
