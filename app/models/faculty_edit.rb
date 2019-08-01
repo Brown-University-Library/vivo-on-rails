@@ -101,6 +101,16 @@ class FacultyEdit
                 @item.affiliations_text = data["affiliations"]
             end
         end
+
+        if @item.teaching_overview != nil && @item.teaching_overview != ""
+            url = @base_url + "/faculty/edit/teaching/overview"
+            data = JsonUtils::http_get(url, verbose)
+            if data == nil
+                @faculty.add_error("Could not fetch teacing overview data for edit")
+            else
+                @item.teaching_overview = data["teaching_overview"]
+            end
+        end
     end
 
     def self.research_area_add(faculty_id, text)

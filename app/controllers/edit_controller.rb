@@ -110,6 +110,14 @@ class EditController < ApplicationController
     render_output({text: text}, error)
   end
 
+  def teaching_overview_update
+    return if ENV["EDIT_ALLOWED"] != "true"
+    faculty_id = params[:faculty_id]
+    text = params[:text]
+    text, error = FacultyEdit.simple_text_update("teaching/overview/update", faculty_id, text, "teaching_overview")
+    render_output({text: text}, error)
+  end
+
   private
     def render_output(data, error)
       if error != nil
