@@ -8,6 +8,7 @@ class ContributorToItem
 
   def initialize(values)
     ModelUtils.set_values_from_hash(self, values)
+    @title = @title || ""
     @year = nil
     year = date.to_i
     if year >= 1900 && year <= 2200
