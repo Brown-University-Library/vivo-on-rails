@@ -76,7 +76,9 @@ class Faculty
   # we need to updated and delete the information from the triple
   # store if the user makes changes.
   def load_edit_data()
-    FacultyEdit.reload(self)
+    verbose = true
+    edit = FacultyEdit.new(self, verbose)
+    edit.reload()
   end
 
   def can_edit?

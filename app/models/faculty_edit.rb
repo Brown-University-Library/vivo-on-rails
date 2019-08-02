@@ -1,34 +1,32 @@
 class FacultyEdit
+    def initialize(faculty, verbose = false)
+        @faculty = faculty
+        @item = @faculty.item
+        @base_url = ENV["EDIT_SERVICE"] + "/" + @item.vivo_id + "/faculty/edit"
+        @verbose = verbose
+    end
+
     # Reloads faculty information from the edit service. The new
     # information includes extra fields that are needed to edit
     # the faculty records (e.g. ids for research areas and web links)
-    def self.reload(faculty)
-        @faculty = faculty
-        @item = @faculty.item
-        @base_url = ENV["EDIT_SERVICE"] + "/" + @item.vivo_id
-        verbose = true
+    def reload()
+        @item.overview = simple_text_get(@item.overview, "/overview/overview", "overview") || ""
 
-        url = @base_url + "/faculty/edit/overview/overview"
-        data = JsonUtils::http_get(url, verbose)
-        if data == nil
-            @faculty.add_error("Could not fetch overview data for edit")
-        else
-            @item.overview = data["overview"] || ""
-        end
-
-        url = @base_url + "/faculty/edit/overview/research-areas"
-        data = JsonUtils::http_get(url, verbose)
+        url = @base_url + "/overview/research-areas"
+        data = JsonUtils::http_get(url, @verbose)
         if data == nil
             @faculty.add_error("Could not fetch research areas data for edit")
         else
+            # TODO: handle data["research_areas"] == nil || data["error"] != nil
             @item.research_areas = ResearchAreaItem.from_hash_array(data["research_areas"] || [])
         end
 
-        url = @base_url + "/faculty/edit/overview/ontheweb"
-        data = JsonUtils::http_get(url, verbose)
+        url = @base_url + "/overview/ontheweb"
+        data = JsonUtils::http_get(url, @verbose)
         if data == nil
             @faculty.add_error("Could not fetch on the web data for edit")
         else
+            # TODO: handle data["web_links"] == nil || data["error"] != nil
             # convert the links to the expected format
             links = data["web_links"] || []
             links = links.map do |link|
@@ -42,75 +40,41 @@ class FacultyEdit
             @item.on_the_web = OnTheWebItem.from_hash_array(links)
         end
 
-        if @item.research_overview != nil && @item.research_overview != ""
-            url = @base_url + "/faculty/edit/research/overview"
-            data = JsonUtils::http_get(url, verbose)
-            if data == nil
-                @faculty.add_error("Could not fetch reseach overview data for edit")
-            else
-                @item.research_overview = data["research_overview"]
-            end
+        @item.research_overview = simple_text_get(@item.research_overview, "/research/overview", "research_overview")
+        @item.research_statement = simple_text_get(@item.research_statement, "/research/statement", "research_statement")
+        @item.funded_research = simple_text_get(@item.funded_research, "/research/funded", "funded_research")
+        @item.scholarly_work = simple_text_get(@item.scholarly_work, "/research/scholarly", "scholarly_work")
+        @item.awards = simple_text_get(@item.awards,"/background/honors","awards_honors")
+        @item.affiliations_text = simple_text_get(@item.affiliations_text, "/affiliations/affiliations", "affiliations")
+        @item.teaching_overview = simple_text_get(@item.teaching_overview, "/teaching/overview", "teaching_overview")
+    end
+
+    def simple_text_get(value, url_suffix, key)
+        if value == nil || value == ""
+            # Just the value as-is, no need to fetch it.
+            return value
         end
 
-        if @item.research_statement != nil && @item.research_statement != ""
-            url = @base_url + "/faculty/edit/research/statement"
-            data = JsonUtils::http_get(url, verbose)
-            if data == nil
-                @faculty.add_error("Could not fetch reseach statement data for edit")
-            else
-                @item.research_statement = data["research_statement"]
-            end
+        # Fetch value from the Edit service.
+        # We probably could eliminate this call since the value is just text
+        # (i.e. no extra fields are needed).
+        url = @base_url + url_suffix
+        data = JsonUtils::http_get(url, @verbose)
+        if data == nil
+            Rails.logger.error("Error fetching #{key}. URL: #{url}.")
+            @faculty.add_error("Could not fetch #{key} data for edit")
+            return value
+        elsif data["error"] != nil
+            Rails.logger.error("Error fetching #{key}. URL: #{url}. Error: #{data['error']}")
+            @faculty.add_error("Could not fetch #{key} data for edit")
+            return value
+        elsif data[key] == nil
+            Rails.logger.error("Error fetching #{key}. URL: #{url}. No data.")
+            @faculty.add_error("Could not fetch #{key} data for edit")
+            return value
         end
 
-        if @item.funded_research != nil && @item.funded_research != ""
-            url = @base_url + "/faculty/edit/research/funded"
-            data = JsonUtils::http_get(url, verbose)
-            if data == nil
-                @faculty.add_error("Could not fetch funded research data for edit")
-            else
-                @item.funded_research = data["funded_research"]
-            end
-        end
-
-        if @item.scholarly_work != nil && @item.scholarly_work != ""
-            url = @base_url + "/faculty/edit/research/scholarly"
-            data = JsonUtils::http_get(url, verbose)
-            if data == nil
-                @faculty.add_error("Could not fetch scholarly work data for edit")
-            else
-                @item.scholarly_work = data["scholarly_work"]
-            end
-        end
-
-        if @item.awards != nil && @item.awards != ""
-            url = @base_url + "/faculty/edit/background/honors"
-            data = JsonUtils::http_get(url, verbose)
-            if data == nil
-                @faculty.add_error("Could not fetch awards_honors data for edit")
-            else
-                @item.awards = data["awards_honors"]
-            end
-        end
-
-        if @item.affiliations_text != nil && @item.affiliations_text != ""
-            url = @base_url + "/faculty/edit/affiliations/affiliations"
-            data = JsonUtils::http_get(url, verbose)
-            if data == nil
-                @faculty.add_error("Could not fetch affiliations data for edit")
-            else
-                @item.affiliations_text = data["affiliations"]
-            end
-        end
-
-        if @item.teaching_overview != nil && @item.teaching_overview != ""
-            url = @base_url + "/faculty/edit/teaching/overview"
-            data = JsonUtils::http_get(url, verbose)
-            if data == nil
-                @faculty.add_error("Could not fetch teacing overview data for edit")
-            else
-                @item.teaching_overview = data["teaching_overview"]
-            end
-        end
+        return data[key]
     end
 
     def self.research_area_add(faculty_id, text)
