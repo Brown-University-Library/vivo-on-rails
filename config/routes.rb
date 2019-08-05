@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post 'edit/background/awards/:faculty_id/update' => 'edit#background_awards_update'
   post 'edit/affiliations/text/:faculty_id/update' => 'edit#affiliations_text_update'
   post 'edit/teaching/overview/:faculty_id/update' => 'edit#teaching_overview_update'
-  get 'edit/:id' => 'display#edit', as: :display_edit
+  get 'edit/:id' => 'display#edit', as: :edit_profile
 
   # Visualizations for faculty (and organizations)
   get 'display/:id/viz/coauthor' => 'visualization#coauthor', as: :visualization_coauthor

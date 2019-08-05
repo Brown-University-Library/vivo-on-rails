@@ -36,15 +36,19 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <% if @presenter.can_edit? %>
+                            <% if @presenter.can_edit? && @vivo_id %>
                                 <% if @presenter.edit_mode %>
-                                    <li><a href="#">Switch to public view</a></li>
+                                    <li><a href="<%= display_show_url(id: @vivo_id ) %>">Switch to public view</a></li>
                                 <% else %>
-                                    <li><a href="#">Edit this profile</a></li>
+                                    <li><a href="<%= edit_profile_url(id: @vivo_id ) %>">Edit this profile</a></li>
                                 <% end %>
+                                <li role="separator" class="divider"></li>
                             <% end %>
-                            <li><a href="#">Download Data</a></li>
-                            <li role="separator" class="divider"></li>
+                            <% if @vivo_id %>
+                                <li><a href="<%= display_show_url(id: @vivo_id, format: 'xml' ) %>">Download Data (Excel)</a></li>
+                                <li><a href="<%= display_show_url(id: @vivo_id, format: 'csv' ) %>">Download Data (CSV)</a></li>
+                                <li role="separator" class="divider"></li>
+                            <% end %>
                             <li><a href="#">Reports</a></li>
                         </ul>
                     </div>
@@ -52,6 +56,9 @@
                     <button type="submit" class="btn btn-default sympl-search hidden-xs">
                         <span class="glyphicon glyphicon-user" role="submit" aria-hidden="true"></span>
                     </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Login to edit</a></li>
+                    </ul>
                 <% end %>
             <% end %>
 

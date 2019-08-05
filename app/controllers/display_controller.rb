@@ -86,6 +86,7 @@ class DisplayController < ApplicationController
       @presenter.edit_mode = true
       @presenter.edit_errors = faculty.errors
       @presenter.edit_allowed = faculty.errors.count == 0 && current_user.can_edit?(id)
+      @vivo_id = id
       render "faculty/show"
     end
 
@@ -122,6 +123,7 @@ class DisplayController < ApplicationController
       @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz)
       @presenter.user = current_user
       @presenter.edit_allowed = current_user.can_edit?(id)
+      @vivo_id = id
       render "faculty/show"
     end
 
