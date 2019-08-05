@@ -25,7 +25,7 @@ module ApplicationHelper
     url.gsub("{LINK}", link)
   end
 
-  def edit_allowed()
-    ENV["EDIT_ALLOWED"] == "true"
+  def new_editor()
+    ENV["NEW_EDITOR"] == "true"
   end
 end

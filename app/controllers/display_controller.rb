@@ -51,7 +51,7 @@ class DisplayController < ApplicationController
   end
 
   def edit
-    if ENV["EDIT_ALLOWED"] != "true"
+    if ENV["NEW_EDITOR"] != "true"
       raise "Edit not allowed"
     end
 
