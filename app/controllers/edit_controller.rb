@@ -4,6 +4,44 @@ class EditController < ApplicationController
   # TODO enable session protection once
   skip_before_filter :authenticate_user!
 
+  def edit
+    must_be_authenticated()
+
+    if ENV["NEW_EDITOR"] != "true"
+      raise "Edit not allowed"
+    end
+
+    id = params["id"]
+    type = ModelUtils.type_for_id(id)
+    if type != "PEOPLE"
+      raise "Cannot edit record type #{type}."
+    end
+
+    faculty = Faculty.load_from_solr(id)
+    if faculty == nil
+      Rails.logger.error("Could not load faculty #{id} for edit.")
+      render "error", status: 500
+      return
+    end
+
+    force_show_viz = params[:viz] == "true"
+    faculty.load_edit_data()
+    referer = search_url()
+
+    @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz)
+    @presenter.user = current_user
+    @presenter.edit_mode = true
+    @presenter.edit_errors = faculty.errors
+    @presenter.edit_allowed = faculty.errors.count == 0 && current_user.can_edit?(id)
+    @vivo_id = id
+    render "faculty/show"
+
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not edit record #{id}. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
+  end
+
   def fast_search
     results = []
     text = (params[:text] || "").strip
