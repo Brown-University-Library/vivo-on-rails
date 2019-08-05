@@ -1,5 +1,5 @@
 class OrganizationPresenter
-  attr_accessor :query, :form_values, :user
+  attr_accessor :query, :form_values, :user, :edit_mode
   attr_accessor :organization, :show_back_to_search,
     :faculty_positions, :admin_positions, :all_positions,
     :show_visualizations, :research_area
@@ -17,5 +17,9 @@ class OrganizationPresenter
     @faculty_positions = @organization.people.select {|x| x.admin_position? == false }
 
     @research_area = nil
+  end
+
+  def can_edit?
+    return false
   end
 end

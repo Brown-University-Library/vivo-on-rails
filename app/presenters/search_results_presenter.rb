@@ -5,7 +5,7 @@ class SearchResultsPresenter
   # needed for *_show_url methods
   include Rails.application.routes.url_helpers
 
-  attr_accessor :query, :form_values, :user
+  attr_accessor :query, :form_values, :user, :edit_mode
   attr_accessor :fq, :facets, :query, :search_qs, :results,
     :page, :start, :end, :num_found, :num_pages, :page_start, :page_end,
     :previous_url, :next_url,
@@ -95,6 +95,10 @@ class SearchResultsPresenter
   def page_url(page_number)
     qs = @search_qs.gsub(/page=[0-9]*/,"").chomp("&")
     "#{@base_url}?#{qs}&page=#{page_number}"
+  end
+
+  def can_edit?
+    return false
   end
 
   private

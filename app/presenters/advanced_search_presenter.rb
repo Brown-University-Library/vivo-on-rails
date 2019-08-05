@@ -1,5 +1,5 @@
 class AdvancedSearchPresenter
-  attr_accessor :query, :form_values, :user
+  attr_accessor :query, :form_values, :user, :edit_mode
   attr_accessor :q, :fq, :title, :department, :name
 
   def initialize(params)
@@ -11,5 +11,9 @@ class AdvancedSearchPresenter
     @department = params["department_t"] || ""
     @name = params["nameText"] || ""
     @user = nil
+  end
+
+  def can_edit?
+    return false
   end
 end

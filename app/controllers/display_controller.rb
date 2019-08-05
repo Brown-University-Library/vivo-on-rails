@@ -50,7 +50,45 @@ class DisplayController < ApplicationController
     render "error", status: 500
   end
 
+  def edit
+    if ENV["EDIT_ALLOWED"] != "true"
+      raise "Edit not allowed"
+    end
+
+    id = params["id"]
+    type = ModelUtils.type_for_id(id)
+    if type != "PEOPLE"
+      raise "Cannot edit record type #{type}."
+    end
+    edit_faculty(id)
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not edit record #{id}. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
+  end
+
   private
+    def edit_faculty(id)
+      id = params[:id]
+      faculty = Faculty.load_from_solr(id)
+      if faculty == nil
+        Rails.logger.error("Could not render faculty #{id}.")
+        render "error", status: 500
+        return
+      end
+
+      force_show_viz = params[:viz] == "true"
+      faculty.load_edit_data()
+      referer = search_url()
+
+      @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz)
+      @presenter.user = current_user
+      @presenter.edit_mode = true
+      @presenter.edit_errors = faculty.errors
+      @presenter.edit_allowed = faculty.errors.count == 0 && current_user.can_edit?(id)
+      render "faculty/show"
+    end
+
     def render_faculty(id)
       id = params[:id]
       faculty = Faculty.load_from_solr(id)
@@ -81,14 +119,9 @@ class DisplayController < ApplicationController
 
       force_show_viz = params[:viz] == "true"
       referer = request.headers.env["HTTP_REFERER"]
-      edit_mode = ENV["EDIT_ALLOWED"] == "true" && params[:mode] == "edit"
-      if edit_mode
-        faculty.load_edit_data()
-        referer = search_url()
-      end
-      @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz, edit_mode)
+      @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz)
       @presenter.user = current_user
-      @presenter.edit_errors = faculty.errors
+      @presenter.edit_allowed = current_user.can_edit?(id)
       render "faculty/show"
     end
 

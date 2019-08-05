@@ -9,4 +9,11 @@ class User < ActiveRecord::Base
         end
         user
     end
+
+    def can_edit?(vivo_id)
+        if Rails.env.production?
+            false
+        end
+        return vivo_id == "atyrka" || vivo_id == "pmonti"
+    end
 end

@@ -1,14 +1,15 @@
 class FacultyPresenter
-  attr_accessor :query, :form_values, :user
+  attr_accessor :query, :form_values, :user, :edit_mode
   attr_accessor :faculty, :has_publications, :has_research, :has_background,
     :has_affiliations, :has_teaching, :has_details,
     :publication_filters,
     :show_back_to_search, :show_visualizations, :has_coauthors, :has_collaborators,
-    :edit_mode, :edit_errors
+    :edit_errors, :edit_allowed
 
-  def initialize(faculty, search_url, referer, force_show_viz, edit_mode = false)
-    @edit_mode = edit_mode
+  def initialize(faculty, search_url, referer, force_show_viz)
     @faculty = faculty
+    @edit_mode = false
+    @edit_allowed = false
     @edit_errors = []
 
     # Show it only if we are coming to the faculty page from a search
@@ -54,7 +55,11 @@ class FacultyPresenter
   end
 
   def can_edit?
-    return @edit_errors.count == 0
+    @edit_allowed
+  end
+
+  def editing?
+    @edit_mode
   end
 
   def get_publication_filters()

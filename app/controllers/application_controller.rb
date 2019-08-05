@@ -16,12 +16,11 @@ class ApplicationController < ActionController::Base
     User.for_session(shibb_eppn, shibb_fullname)
   end
 
-  def shibb_user?
+  def shibb_email
     if Rails.env.production?
-      (request.env["Shibboleth-eppn"] != nil && request.env["Shibboleth-eppn"].strip != "")
+      request.env["Shibboleth-mail"]
     else
-      # fake it
-      true
+      "jane_carberry@brown.edu"
     end
   end
 
@@ -29,7 +28,7 @@ class ApplicationController < ActionController::Base
     if Rails.env.production?
       request.env["Shibboleth-eppn"]
     else
-      "jane.carberry"
+      "jcarberry@brown.edu"
     end
   end
 
@@ -38,6 +37,15 @@ class ApplicationController < ActionController::Base
       request.env["Shibboleth-displayName"]
     else
       "Jane Carberry"
+    end
+  end
+
+  def shibb_user?
+    if Rails.env.production?
+      (request.env["Shibboleth-eppn"] != nil && request.env["Shibboleth-eppn"].strip != "")
+    else
+      # fake it
+      true
     end
   end
 end

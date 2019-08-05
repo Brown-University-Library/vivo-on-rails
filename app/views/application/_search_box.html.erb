@@ -27,20 +27,26 @@
 
             <% if edit_allowed() %>
                 <% if @presenter.user != nil %>
-                    <!-- <button type="submit" class="btn btn-default sympl-search hidden-xs">
-                        <span class="glyphicon glyphicon-user active-glyphicon" role="submit" aria-hidden="true"></span>
-                    </button> -->
                     <div class="btn-group">
-                            <button type="button" class="btn btn-default sympl-search dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="glyphicon glyphicon-user active-glyphicon" role="submit" aria-hidden="true"></span>
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Edit your profile</a></li>
-                                <li><a href="#">Download </a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Reports</a></li>
-                            </ul>
+                        <button type="button"
+                            class="btn btn-default sympl-search dropdown-toggle"
+                            style="padding-bottom: 16px;margin-top: 0px;"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user active-glyphicon" role="submit" aria-hidden="true"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <% if @presenter.can_edit? %>
+                                <% if @presenter.edit_mode %>
+                                    <li><a href="#">Switch to public view</a></li>
+                                <% else %>
+                                    <li><a href="#">Edit this profile</a></li>
+                                <% end %>
+                            <% end %>
+                            <li><a href="#">Download Data</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Reports</a></li>
+                        </ul>
                     </div>
                 <% else %>
                     <button type="submit" class="btn btn-default sympl-search hidden-xs">
