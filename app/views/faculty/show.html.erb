@@ -17,13 +17,50 @@
 <div class="container profile">
   <div class="row person-content">
     <div class="container profile-page">
-      <% if @presenter.show_back_to_search %>
-        <div class="wrapper__back-to-search col-xs-12"><a href="javascript: history.go(-1)" class="back-to-search"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search</a></div>
+
+      <% if new_editor() %>
+
+        <% if @presenter.edit_mode %>
+          <div id="top-bar" class="top-bar-wrapper-edit col-xs-12">
+            <% if @presenter.can_edit? %>
+              <span style="margin-left: 10px;" >You are editing this profile,</span>
+              <a style="margin-left: 5px;" href="<%= display_show_url(id: @vivo_id ) %>">switch back to public view</a>
+            <% else %>
+              <span>You cannot edit this profile. <%= @presenter.edit_errors.join() %></span>
+              <a style="margin-left: 5px;" href="<%= display_show_url(id: @vivo_id ) %>">Go back to public view</a>
+            <% end %>
+          </div>
+        <% else %>
+          <div id="top-bar" class="top-bar-wrapper col-xs-12">
+            <% if @presenter.show_back_to_search %>
+              <a href="javascript: history.go(-1)" class="back-to-search">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search
+              </a>
+            <% else %>
+              <a href="<%= search_url() %>" class="back-to-search">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search
+              </a>
+            <% end %>
+          </div>
+        <% end %>
+
+      <% else %>
+
+        <div class="wrapper__back-to-search col-xs-12">
+          <% if @presenter.show_back_to_search %>
+            <a href="javascript: history.go(-1)" class="back-to-search">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search
+            </a>
+          <% else %>
+            <a href="<%= search_url() %>" class="back-to-search">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to search
+            </a>
+          <% end %>
+        </div>
+         <%= render "manage_profile_login" %>
+
       <% end %>
-      <% if !@presenter.can_edit? %>
-        <div><%= @presenter.edit_errors.join() %></div>
-      <% end %>
-      <%= render "manage_profile_login" %>
+
       <%= render "faculty/show_left_panel" %>
       <%= render "faculty/show_right_panel" %>
     </div>

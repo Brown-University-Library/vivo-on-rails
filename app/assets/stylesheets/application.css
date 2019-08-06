@@ -832,6 +832,76 @@ a.back-to-search:hover .glyphicon-chevron-left {
 	transition-duration: .3s;
 	transition-timing-function: ease;
 }
+
+.top-bar-wrapper {
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	height: 4.5rem;
+	margin: 1.5rem 0 1rem 0;
+}
+
+.top-bar-wrapper-edit {
+	background-color: #d4f6fb;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	height: 4.5rem;
+	margin: 1.5rem 0 1rem 0;
+}
+
+.top-bar-wrapper-left {
+	color: #333;
+	align-items: center;
+	height: 4rem;
+	margin-right: 2rem;
+	padding: 0 1rem;
+}
+
+.top-bar-wrapper-left:after {
+	background: #000;
+	content: "";
+	height: 90%;
+	width: 1px;
+	position: absolute;
+	top: 5%;
+	left: 15rem;
+}
+
+a.back-to-search {
+	color: #333;
+	display: flex;
+	align-items: center;
+	height: 4rem;
+	margin-right: 2rem;
+	padding: 0 1rem;
+}
+a.back-to-search:after {
+	background: #000;
+	content: "";
+	height: 90%;
+	width: 1px;
+	position: absolute;
+	top: 5%;
+	left: 15rem;
+}
+a.back-to-search .glyphicon-chevron-left {
+	color: #333;
+	margin-right: .5rem;
+	transform: scale(1.5);
+}
+a.back-to-search:hover .glyphicon-chevron-left {
+	color: #E8D98B;
+	transition-property: color;
+	transition-delay: 0s;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+
 .container.profile .subnavbar {
 	height: 0;
 }
