@@ -11,41 +11,54 @@ class FacultyEdit
     # the faculty records (e.g. ids for research areas and web links)
     def reload()
         @item.overview = simple_text_get(@item.overview, "/overview/overview", "overview") || ""
+        return if @faculty.has_errors?
 
         url = @base_url + "/overview/research-areas"
         data = JsonUtils::http_get(url, @verbose)
         if data == nil
             @faculty.add_error("Could not fetch research areas data for edit")
-        else
-            # TODO: handle data["research_areas"] == nil || data["error"] != nil
-            @item.research_areas = ResearchAreaItem.from_hash_array(data["research_areas"] || [])
+            return
+        elsif data["error"]
+            @faculty.add_error("Could not fetch research areas data for edit. Error: #{data['error']}.")
+            return
         end
+        @item.research_areas = ResearchAreaItem.from_hash_array(data["research_areas"] || [])
 
         url = @base_url + "/overview/ontheweb"
         data = JsonUtils::http_get(url, @verbose)
         if data == nil
             @faculty.add_error("Could not fetch on the web data for edit")
-        else
-            # TODO: handle data["web_links"] == nil || data["error"] != nil
-            # convert the links to the expected format
-            links = data["web_links"] || []
-            links = links.map do |link|
-                {
-                    uri: link["rabid"],
-                    rank: link["rank"],
-                    text: link["text"],
-                    url: link["url"]
-                }
-            end
-            @item.on_the_web = OnTheWebItem.from_hash_array(links)
+            return
+        elsif data["error"]
+            @faculty.add_error("Could not fetch on the web data for edit. Error: #{data['error']}.")
+            return
         end
 
+        # convert the links to the expected format
+        links = data["web_links"] || []
+        links = links.map do |link|
+            { uri: link["rabid"], rank: link["rank"], text: link["text"], url: link["url"] }
+        end
+        @item.on_the_web = OnTheWebItem.from_hash_array(links)
+
         @item.research_overview = simple_text_get(@item.research_overview, "/research/overview", "research_overview")
+        return if @faculty.has_errors?
+
         @item.research_statement = simple_text_get(@item.research_statement, "/research/statement", "research_statement")
+        return if @faculty.has_errors?
+
         @item.funded_research = simple_text_get(@item.funded_research, "/research/funded", "funded_research")
+        return if @faculty.has_errors?
+
         @item.scholarly_work = simple_text_get(@item.scholarly_work, "/research/scholarly", "scholarly_work")
+        return if @faculty.has_errors?
+
         @item.awards = simple_text_get(@item.awards,"/background/honors","awards_honors")
+        return if @faculty.has_errors?
+
         @item.affiliations_text = simple_text_get(@item.affiliations_text, "/affiliations/affiliations", "affiliations")
+        return if @faculty.has_errors?
+
         @item.teaching_overview = simple_text_get(@item.teaching_overview, "/teaching/overview", "teaching_overview")
     end
 
@@ -153,9 +166,12 @@ class FacultyEdit
         payload = data.to_json
         Rails.logger.info("POST #{url} \r\n#{payload}")
         data = JsonUtils::http_post(url, payload)
-        if data == nil || data["error"] != nil
-            Rails.logger.error("Error updating research overview (#{data['error']})")
-            return nil, "Error updating overview"
+        if data == nil
+            Rails.logger.error("Error updating #{key}.")
+            return nil, "Error updating #{key}."
+        elsif data["error"]
+            Rails.logger.error("Error updating #{key}. Error: #{data['error']}")
+            return nil, "Error updating #{key}."
         end
         return data[key], nil
     end

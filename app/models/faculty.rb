@@ -81,6 +81,10 @@ class Faculty
     edit.reload()
   end
 
+  def has_errors?
+    return errors.count > 0
+  end
+
   def can_edit?
     return errors.count == 0
   end
