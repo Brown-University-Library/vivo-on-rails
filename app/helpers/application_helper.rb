@@ -24,8 +24,4 @@ module ApplicationHelper
     end
     url.gsub("{LINK}", link)
   end
-
-  def new_editor()
-    ENV["NEW_EDITOR"] == "true"
-  end
 end

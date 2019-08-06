@@ -1,8 +1,8 @@
-<% if new_editor() %>
+<% if @new_editor %>
 <script type="text/javascript">
   $(function() {
     $("#edit-profile").on("click", function() {
-      window.location = "<%= display_show_path(@presenter.faculty.vivo_id, {mode:'edit'}) %>";
+      window.location = "<%= edit_profile_url(id: @presenter.faculty.vivo_id) %>";
     });
   });
 </script>
@@ -15,10 +15,9 @@
     //////////////////////////////////////////
     // Common functions
     //////////////////////////////////////////
-
     var showError = function(section, message) {
       alert(section + ": " + message);
-    }
+    };
 
     var turnTextArea = function(id, value) {
       var id1 = "#" + id + "Text";
@@ -33,9 +32,10 @@
         $(id2).removeClass("hidden");
         $(id3).addClass("hidden");
       }
-    }
+    };
 
     var setupTextArea = function(id, url, editor) {
+      url += "?NEW_EDITOR=" + newEditorToken;
 
       // setup the edit button for this text area
       $("#" + id + "EditButton").on("click", function() {
@@ -44,6 +44,7 @@
           editor.setData(oldContent);
           turnTextArea(id, true);
       });
+
 
       // setup the save button for this text area
       $("#" + id + "Save").on("click", function() {
@@ -106,7 +107,7 @@
       var id = idLink.replace("#", "");
       $.ajax({
         type: "POST",
-        url: rootUrl + "/edit/research_area/" + vivoId + "/delete?id=" + id,
+        url: rootUrl + "/edit/research_area/" + vivoId + "/delete?id=" + id + "&NEW_EDITOR=" + newEditorToken,
         success: function(x) {
           $(idDelete).addClass("hidden");
           $(idLink).addClass("hidden");
@@ -135,7 +136,7 @@
       }
       $.ajax({
         type: "POST",
-        url: rootUrl + "/edit/research_area/" + vivoId + "/add?text=" + text,
+        url: rootUrl + "/edit/research_area/" + vivoId + "/add?text=" + text + "&NEW_EDITOR=" + newEditorToken,
         success: function(data) {
           console.log("added " + data.id + " for " + vivoId);
           researchAreaAddElement(data.id, text);
@@ -156,7 +157,7 @@
       var payload = {id: id2};
       $.ajax({
         type: "POST",
-        url: rootUrl + "/edit/web_link/" + vivoId + "/delete",
+        url: rootUrl + "/edit/web_link/" + vivoId + "/delete?NEW_EDITOR=" + newEditorToken,
         dataType: "json",
         data: payload,
         success: function(data) {
@@ -195,7 +196,7 @@
       var payload = {text: text, url: url, rank: "0", id: id};
       $.ajax({
         type: "POST",
-        url: rootUrl + "/edit/web_link/" + vivoId + "/save",
+        url: rootUrl + "/edit/web_link/" + vivoId + "/save?NEW_EDITOR=" + newEditorToken,
         dataType: "json",
         data: payload,
         success: function(data) {
@@ -284,6 +285,19 @@
     CKEDITOR.replace('awardsTextArea', ckeditConfig);
     CKEDITOR.replace('affiliationsTextArea', ckeditConfig);
     CKEDITOR.replace('techingOverviewTextArea', ckeditConfig);
+
+    var newEditorToken = function() {
+      var url = window.location.search.substring(1);
+      var params = url.split('&');
+      var i, tokens;
+      for (var i = 0; i < params.length; i++) {
+        tokens = params[i].split('=');
+        if (tokens[0] == "NEW_EDITOR") {
+          return tokens[1];
+        }
+      }
+      return "";
+    }();
 
     // Setup the edit/save/cancel logic for the edit boxes
     setupTextArea("overview", rootUrl + "/edit/overview/{vivoId}/update", CKEDITOR.instances.overviewTextArea);

@@ -7,9 +7,9 @@ class EditController < ApplicationController
   def edit
     must_be_authenticated()
 
-    if ENV["NEW_EDITOR"] != "true"
-      raise "Edit not allowed"
-    end
+    @new_editor = new_editor_request()
+    # TODO: be more gentle on the error display
+    raise "Edit not allowed" if !@new_editor
 
     id = params["id"]
     type = ModelUtils.type_for_id(id)
@@ -52,7 +52,12 @@ class EditController < ApplicationController
   end
 
   def overview_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
+
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("overview/overview/update", faculty_id, text, "overview")
@@ -60,7 +65,11 @@ class EditController < ApplicationController
   end
 
   def research_area_add
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     text = params[:text]
     rab_id, error = FacultyEdit.research_area_add(faculty_id, text)
@@ -68,7 +77,11 @@ class EditController < ApplicationController
   end
 
   def research_area_delete
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     id = params[:id]
     _, error = FacultyEdit.research_area_delete(faculty_id, id)
@@ -76,7 +89,8 @@ class EditController < ApplicationController
   end
 
   def web_link_save
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    return if !new_editor_request()
     faculty_id = params[:faculty_id]
     text = params[:text]
     url = params[:url]
@@ -93,7 +107,8 @@ class EditController < ApplicationController
   end
 
   def web_link_delete
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    return if !new_editor_request()
     faculty_id = params[:faculty_id]
     id = params[:id]
     _, error = FacultyEdit.web_link_delete(faculty_id, id)
@@ -101,7 +116,8 @@ class EditController < ApplicationController
   end
 
   def research_overview_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    return if !new_editor_request()
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("research/overview/update", faculty_id, text, "research_overview")
@@ -109,7 +125,11 @@ class EditController < ApplicationController
   end
 
   def research_statement_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("research/statement/update", faculty_id, text, "research_statement")
@@ -117,7 +137,11 @@ class EditController < ApplicationController
   end
 
   def research_funded_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("research/funded/update", faculty_id, text, "funded_research")
@@ -125,7 +149,11 @@ class EditController < ApplicationController
   end
 
   def research_scholarly_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("research/scholarly/update", faculty_id, text, "scholarly_work")
@@ -133,7 +161,11 @@ class EditController < ApplicationController
   end
 
   def background_awards_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("background/honors/update", faculty_id, text, "awards_honors")
@@ -141,7 +173,11 @@ class EditController < ApplicationController
   end
 
   def affiliations_text_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("affiliations/affiliations/update", faculty_id, text, "affiliations")
@@ -149,7 +185,11 @@ class EditController < ApplicationController
   end
 
   def teaching_overview_update
-    return if ENV["NEW_EDITOR"] != "true"
+    must_be_authenticated("json")
+    if !new_editor_request()
+      render_not_authorized()
+      return
+    end
     faculty_id = params[:faculty_id]
     text = params[:text]
     text, error = FacultyEdit.simple_text_update("teaching/overview/update", faculty_id, text, "teaching_overview")
@@ -157,6 +197,10 @@ class EditController < ApplicationController
   end
 
   private
+    def render_not_authorized()
+      render :json => {}, status: 401
+    end
+
     def render_output(data, error)
       if error != nil
         Rails.logger.error(error)
