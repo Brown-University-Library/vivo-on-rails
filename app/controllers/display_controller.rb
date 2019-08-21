@@ -83,7 +83,9 @@ class DisplayController < ApplicationController
       referer = request.headers.env["HTTP_REFERER"]
       @presenter = FacultyPresenter.new(faculty.item, search_url(), referer, force_show_viz)
       @presenter.user = current_user
-      @presenter.edit_allowed = current_user.can_edit?(id)
+      if @presenter.user
+        @presenter.edit_allowed = current_user.can_edit?(id)
+      end
       @vivo_id = id
       render "faculty/show"
     end
