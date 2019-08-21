@@ -1,28 +1,28 @@
-<script>
-  $(function () {
-    // Enable tooltips
-    // https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-tooltips.php
-    var options = {
-      html: true,
-      placement: "bottom"
-    };
-    $("[data-toggle='tooltip']").tooltip(options);
-  });
-</script>
-
-
 <style>
 /* Override Bootstrap's default values*/
-.tooltip-inner {
+.ui-tooltip-content {
   max-width: 300px;
   text-align: left;
 }
 
-.tooltip strong {
+.ui-tooltip-content strong {
   color: blue;
   background-color: #F5F2EC;  /* light beige */
 }
 </style>
+
+<script>
+  $(function () {
+    // References:
+    //  Enable tooltips: https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-tooltips.php
+    //  jQuery plugin: https://api.jqueryui.com/tooltip/
+    var tooltips = $("[data-toggle='tooltip']");
+    var i;
+    for(i = 0; i < tooltips.length; i++) {
+      $(tooltips[i]).tooltip({content: tooltips[i].title});
+    }
+  });
+</script>
 
 <%= render "results_javascript" %>
 <%= render "search_box" %>
