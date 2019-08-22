@@ -21,6 +21,14 @@ class Organization
       end
       o.item = OrganizationItem.from_hash(o.json_txt, thumbnail_url)
     end
+
+    if id == "org-brown-univ-dept148"
+      members = swearer_center_members()
+      members.each do |member|
+        o.item.people << OrganizationMemberItem.new(member)
+      end
+    end
+
     o
   end
 
@@ -72,5 +80,76 @@ class Organization
     ids = item.people.map {|person| person.vivo_id}.uniq
     list = Faculty.load_from_solr_many(ids)
     list
+  end
+
+  def self.swearer_center_members()
+    solr_url = ENV["SOLR_URL"]
+    logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
+
+    # Get the members for the Swearer Center by fetching faculty that
+    # work on certain specific research areas.
+    solr = SolrLite::Solr.new(solr_url, logger)
+    params = params = SolrLite::SearchParams.new()
+    params.q = "*"
+    research_areas = []
+    research_areas << "community engagement"
+    research_areas << "engaged scholarship"
+    research_areas << "engaged teaching"
+    research_areas << "engaged research"
+    research_areas << "community-based participatory research"
+    research_areas << "community-based learning and research"
+    research_areas << "public service"
+    research_areas << "civic engagement"
+    research_areas << "service learning"
+    research_areas << "public scholarship"
+    research_areas << "publicly engaged scholarship"
+    research_areas << "scholarship of engagement"
+    research_areas << "community-based scholarship"
+    research_areas << "broader impact"
+
+    fq = SolrLite::FilterQuery.new("research_areas", research_areas)
+    results = solr.search(params, [fq], nil, nil, true)
+
+    members = []
+    results.solr_docs.each do |doc|
+      member_info = {
+        id: ModelUtils::vivo_id(doc["id"]),
+        faculty_uri: doc["id"],
+        label: doc["name_t"].first,
+        general_position: "general position",
+        specific_position: doc["title_t"].first
+      }
+      members << member_info
+    end
+
+    # Also add the following faculty regardless of their research areas
+    faculty_ids = []
+    faculty_ids << "iglasser"
+    faculty_ids << "llapierr"
+    faculty_ids << "rkcampbe"
+    faculty_ids << "yy37"
+    faculty_ids << "kschapir"
+    faculty_ids << "dmk3"
+    faculty_ids << "njacobs"
+    faculty_ids << "vkrause"
+    faculty_ids << "esikelia"
+    faculty_ids << "mdkenned"
+    faculty_docs = Faculty.load_from_solr_many(faculty_ids)
+    faculty_docs.each do |faculty|
+
+      # Skip this record if we already have it as a member
+      next if members.find {|x| x[:faculty_uri] == faculty.item.id }
+
+      member_info = {
+        id: ModelUtils::vivo_id(faculty.item.id),
+        faculty_uri: faculty.item.id,
+        label: faculty.item.name,
+        general_position: "general position",
+        specific_position: faculty.item.title
+      }
+      members << member_info
+    end
+
+    members.sort_by {|x| x[:label]}
   end
 end

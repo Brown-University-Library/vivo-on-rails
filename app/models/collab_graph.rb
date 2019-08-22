@@ -45,6 +45,23 @@ class CollabGraph
       return true, data
     end
 
+    if id == "org-brown-univ-dept148"
+      # Custom code to fetch the data for the Swearer Center since
+      # membership to this organization is not (yet) stored in the
+      # triplestore and therefore we must calculate the graph
+      # on the fly.
+      cache_key = "team_collab_" + id + "_" + (research_area || "nil")
+      graph = Rails.cache.fetch(cache_key, expires_in: 5.minute) do
+        Rails.logger.info "Caching #{cache_key}..."
+        org = Organization.load(id)
+        g = CollabGraphCustom.new()
+        g.graph_for_list(org.faculty_list(), org.item.name, research_area)
+      end
+      yesterday = (Date.today-1).to_s
+      data = {graph: graph, rabid: id, updated: yesterday}
+      return true, data
+    end
+
     url = "#{ENV['VIZ_SERVICE_URL']}/collaborators/#{id}"
     ok, str = ModelUtils.http_get_body(url)
     if !ok
