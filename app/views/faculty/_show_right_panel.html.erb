@@ -66,6 +66,10 @@
       <button id="overviewEditButton" class="btn btn-info" title="Edit your overview">Edit</button>
       <div id="overviewText"><%= @presenter.faculty.overview.html_safe %></div>
       <div id="overviewEditBox" class="hidden">
+        <!--
+          See https://codepen.io/jensimmons/pen/dybXYOp?editors=1100 for ideas on how
+          to lock the width of the text area.
+          -->
         <textarea id="overviewTextArea" rows="15" class="overview_textarea"></textarea>
         <button id="overviewSave" class="btn btn-success">Save</button>
         <button id="overviewCancel" class="btn btn-danger">Cancel</button>
