@@ -7,3 +7,14 @@
     </section>
   </section>
 </div>
+<div class="decorative-bar"></div>
+<div class="organization-title">
+  <h2><%= @presenter.organization.name %></h2>
+  <p>
+    <ul>
+      <% @presenter.organization.web_pages.each do |page| %>
+        <li><a href="<%= page.url %>"><%= page.text %></a>
+      <% end %>
+    </ul>
+  </p>
+</div>

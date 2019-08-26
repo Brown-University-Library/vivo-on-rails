@@ -154,4 +154,28 @@ class Faculty
       end
     end
   end
+
+  # Returns the thumbnail_url for a given faculty ID.
+  #
+  # This is used to fetch the thumbnails of faculty when loading the members
+  # of an organization. The reason for this is because we don't store (yet)
+  # in the Solr document for the organization the thumbnail URL for each
+  # faculty that belongs to it.
+  def self.thumbnail_url_for(id)
+    cache_key = "thumbnail_url_#{id}"
+    Rails.cache.fetch(cache_key, expires_in: 2.minute) do
+      begin
+        solr_doc = get_solr_doc(id)
+        if solr_doc == nil
+          return nil
+        end
+        images_url = ENV["IMAGES_URL"]
+        thumbnail = solr_doc["thumbnail_file_path_s"]
+        ModelUtils.thumbnail_url(thumbnail, images_url)
+      rescue Exception => e
+        Rails.logger.error "Could not calculate thumbnail for: #{id}"
+        nil
+      end
+    end
+  end
 end

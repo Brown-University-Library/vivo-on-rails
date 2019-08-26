@@ -9,6 +9,7 @@ class OrganizationMemberItem
   def initialize(values = nil)
     ModelUtils.set_values_from_hash(self, values)
     @id = @faculty_uri
+    @thumbnail_url = nil
   end
 
   def vivo_id
@@ -26,5 +27,15 @@ class OrganizationMemberItem
   def self.from_hash_array(values)
     members = values.map { |v| OrganizationMemberItem.new(v)}
     members.sort_by {|v| v.sort_label }
+  end
+
+  def thumbnail_url=(value)
+    @thumbnail_url = value || "person_placeholder.jpg"
+  end
+
+  def thumbnail_url
+    @thumbnail_url ||= begin
+      Faculty.thumbnail_url_for(vivo_id) || "person_placeholder.jpg"
+    end
   end
 end

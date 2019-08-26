@@ -13,7 +13,6 @@ class Organization
     o.json_txt = JsonUtils.safe_parse(json_txt)
     if o.json_txt != nil
       images_url = ENV["IMAGES_URL"]
-      # display_name = f.solr_doc["display_name_s"]
       thumbnail = o.solr_doc["thumbnail_file_path_s"]
       thumbnail_url = ModelUtils.thumbnail_url(thumbnail, images_url)
       if thumbnail != nil && thumbnail_url == nil
@@ -23,9 +22,21 @@ class Organization
     end
 
     if id == "org-brown-univ-dept148"
+      o.item.name = "Community-Engaged Faculty"
       members = swearer_center_members()
       members.each do |member|
         o.item.people << OrganizationMemberItem.new(member)
+      end
+    end
+
+    # Set the picture of each member
+    # (we could remove this once we have the thumbnail stored in Solr)
+    member_ids = o.item.people.map { |f| f.vivo_id }
+    faculties = Faculty.load_from_solr_many(member_ids)
+    o.item.people.each do |member|
+      faculty = faculties.find {|x| x.item.vivo_id == member.vivo_id }
+      if faculty != nil
+        member.thumbnail_url = faculty.item.thumbnail
       end
     end
 
