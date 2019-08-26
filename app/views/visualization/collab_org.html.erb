@@ -42,11 +42,11 @@
     <svg id="svgElement" width="960" height="700" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="col-md-3">
-    <% if !@presenter.organization.is_team? %>
       <a class="btn btn-primary btn-lg" role="button" href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" >Collaborator Network</a>
-      <a class="btn btn-default btn-lg" role="button" href="<%= visualization_publications_path(@presenter.organization.vivo_id) %>" >Publication History</a>
+      <% if !@presenter.organization.is_team? %>
+        <a class="btn btn-default btn-lg" role="button" href="<%= visualization_publications_path(@presenter.organization.vivo_id) %>" >Publication History</a>
+      <% end %>
       <a class="btn btn-default btn-lg" role="button" href="<%= visualization_research_path(@presenter.organization.vivo_id) %>" >Research Areas</a>
-    <% end %>
     <div id="legend">
     <p><b>Legend</b></p>
     <ul id="legendList" class="legend">
