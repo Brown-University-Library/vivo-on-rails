@@ -29,6 +29,10 @@ class OrganizationMemberItem
     members.sort_by {|v| v.sort_label }
   end
 
+  def thumbnail_url=(value)
+    @thumbnail_url = value || "person_placeholder.jpg"
+  end
+
   def thumbnail_url
     @thumbnail_url ||= begin
       Faculty.thumbnail_url_for(vivo_id) || "person_placeholder.jpg"

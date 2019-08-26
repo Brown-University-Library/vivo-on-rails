@@ -1,4 +1,4 @@
-<div class="col-md-8 col-sm-12 col-xs-12" id="section_overview">
+<div class="col-md-8 col-sm-12 col-xs-12" id="section_overview" style="margin-top: 0px;">
   <div class="organization-overview"><p><%= @presenter.organization.overview.html_safe %></p></div>
   <% if @presenter.show_visualizations && @presenter.all_positions.count > 0 %>
     <div class="viz_collab-wrapper">
@@ -9,7 +9,9 @@
       </div>
       <a id="viz_collab" class="btn btn-default"
         href="<%= visualization_collab_path(@presenter.organization.vivo_id) %>" target="_blank"
-                title="Visualize collaborators network">Visualize it&nbsp;</a>
+        title="Visualize collaboration for members of this organization">Visualize it&nbsp;
+        <i style="color:rgb(232, 217, 139);" class="glyphicon glyphicon-signal"></i>
+      </a>
     </div>
   <% end %>
 

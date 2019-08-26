@@ -1426,7 +1426,7 @@ td.citation-data.pub-item {
 	grid-area: 2 / 6 / 3 / 8;
 	height: auto;
 	min-height: 40vh;
-	width: 8rem;
+	width: 3rem;
 }
 .organization-page .organization-title {
 	display: flex;
@@ -1481,25 +1481,19 @@ td.citation-data.pub-item {
 	width: 100%;
 	max-width: 16rem;
 }
+
 .organization-page #viz_collab.btn {
-/*	grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row: auto;*/
-	background-color: hsla(56, 88%, 63%, 1);
-	border: none;
 	font-size: 1.8rem;
 	font-weight: 600;
 	text-shadow: none;
 	width: 16rem;
 	z-index: 1;
 }
-.organization-page #viz_collab.btn:hover {
+/* .organization-page #viz_collab.btn:hover {
 	background-color: hsla(56, 88%, 73%, 1);
-}
+} */
+
 .organization-page #section_overview .organization-overview {
-/*	grid-column-start: 4;
-	grid-column-end: 13;
-	grid-row: auto;*/
 	grid-area: 1 / 4 / 2 / 13;
 	font-size: 2.1rem;
 	line-height: 3.2rem;
@@ -1540,14 +1534,14 @@ td.citation-data.pub-item {
 	background-color: hsla(56, 88%, 63%, 1);
 	grid-column-start: 1;
 	grid-column-end: 4;
-	grid-row: auto;
-	height: auto;
-	min-height: 18rem;
+	grid-row: 50px;
+	height: 50px;
+	/* min-height: 18rem; */
 /*	max-height: 20rem;*/
 	object-fit: cover;
 	object-position: 50% 0%;
-	width: 100%;
-	min-width: 100%;
+	/* width: 100%; */
+	/* min-width: 100%; */
 }
 .organization-page #section_overview .brown-affiliate p {
 /*	display: flex;*/
@@ -1555,14 +1549,15 @@ td.citation-data.pub-item {
 	grid-column-start: 4;
 	grid-column-end: 13;
 	grid-row: auto;
-	margin-top: 2rem;
-
+	/* margin-top: 2rem; */
+	margin-top: 0px
 }
 .organization-page #section_overview .brown-affiliate a {
 	color: #333;
 	font-size: 2rem;
 	line-height: 2.4rem;
 	margin-bottom: .3rem;
+	margin-left: 0px;
 	display: inline-block;
 }
 .organization-page #section_overview .brown-affiliate a:hover {
