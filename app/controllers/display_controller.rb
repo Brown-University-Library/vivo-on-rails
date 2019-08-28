@@ -91,7 +91,7 @@ class DisplayController < ApplicationController
     end
 
     def render_org(id)
-      organization = Organization.load_from_solr(id)
+      organization = Organization.load_from_solr(id, true)
       if organization == nil
         Rails.logger.error("Could not render organization #{id}.")
         render "error", status: 500

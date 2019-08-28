@@ -1,7 +1,7 @@
 class Organization
   attr_accessor :solr_doc, :json_txt, :item
 
-  def self.load_from_solr(id)
+  def self.load_from_solr(id, load_thumbnails = false)
     solr_doc = get_solr_doc(id)
     if solr_doc == nil
       return nil
@@ -31,15 +31,16 @@ class Organization
 
     # Set the picture of each member
     # (we could remove this once we have the thumbnail stored in Solr)
-    member_ids = o.item.people.map { |f| f.vivo_id }
-    faculties = Faculty.load_from_solr_many(member_ids)
-    o.item.people.each do |member|
-      faculty = faculties.find {|x| x.item.vivo_id == member.vivo_id }
-      if faculty != nil
-        member.thumbnail_url = faculty.item.thumbnail
+    if load_thumbnails
+      member_ids = o.item.people.map { |f| f.vivo_id }
+      faculties = Faculty.load_from_solr_many(member_ids)
+      o.item.people.each do |member|
+        faculty = faculties.find {|x| x.item.vivo_id == member.vivo_id }
+        if faculty != nil
+          member.thumbnail_url = faculty.item.thumbnail
+        end
       end
     end
-
     o
   end
 
