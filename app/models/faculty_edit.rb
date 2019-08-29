@@ -4,6 +4,9 @@ class FacultyEdit
         @item = @faculty.item
         @base_url = ENV["EDIT_SERVICE"] + "/" + @item.vivo_id + "/faculty/edit"
         @verbose = verbose
+        if ENV["EDIT_SERVICE"].start_with?("mock://")
+            JsonUtils::mock_request_on()
+        end
     end
 
     # Reloads faculty information from the edit service. The new

@@ -1,4 +1,6 @@
 class ModelUtils
+  @@recording = false
+
   def self.html_trim(text)
     return nil if text == nil
     trimmed = text
@@ -116,6 +118,19 @@ class ModelUtils
     end
   end
 
+  def self.mock_file_name(verb, url)
+    if url.start_with?("mock://")
+      return verb + "_" + url.gsub("mock://","https_").gsub("/","_") + ".json"
+    end
+    verb + "_" + url.gsub("://","_").gsub("/","_") + ".json"
+  end
+
+  def self.mock_get_body(url)
+    file_name = mock_file_name("GET", url)
+    body = File.read(file_name)
+    [true, body]
+  end
+
   def self.http_get_body(url)
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
@@ -129,7 +144,16 @@ class ModelUtils
     request = Net::HTTP::Get.new(uri.request_uri)
     response = http.request(request)
     ok = (response.code >= "200" && response.code <= "299")
-    [ok, response.body]
+    body = response.body
+
+    if @@recording
+      file_name = mock_file_name("GET", url)
+      f = File.new(file_name, "w+")
+      f.write(body)
+      f.close()
+    end
+
+    [ok, body]
   rescue => ex
     Rails.logger.error("Fetching: #{url}. Exception: #{ex}")
     [false, ""]
