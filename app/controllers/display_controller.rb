@@ -38,6 +38,8 @@ class DisplayController < ApplicationController
       render_faculty(id)
     when "ORGANIZATION"
       render_org(id)
+    when "TEAM"
+      render_org(id)
     else
       # Render the JSON-LD representation in case somebody relies on the
       # original `/display/id` URL for other VIVO types that are neither
@@ -91,7 +93,7 @@ class DisplayController < ApplicationController
     end
 
     def render_org(id)
-      organization = Organization.load_from_solr(id, true)
+      organization = Organization.load(id, true)
       if organization == nil
         Rails.logger.error("Could not render organization #{id}.")
         render "error", status: 500

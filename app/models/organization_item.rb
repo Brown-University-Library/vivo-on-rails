@@ -1,7 +1,7 @@
 require "./app/models/model_utils.rb"
 class OrganizationItem
   attr_accessor :id, :record_type, :uri, :name, :overview,
-    :thumbnail, :people, :web_pages
+    :thumbnail, :people, :web_pages, :faculty
 
   def initialize(values)
     init_defaults()
@@ -19,7 +19,8 @@ class OrganizationItem
     @name = ""
     @overview = ""
     @thumbnail = ""
-    @people = []
+    @people = []      # Array of OrganizationMemberItem
+    @faculty = []     # Array of Faculty
     @web_pages = []
   end
 

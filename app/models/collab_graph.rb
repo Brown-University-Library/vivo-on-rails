@@ -22,7 +22,7 @@ class CollabGraph
   # ok is false we could not retrieve the data. In this case data is a
   # hash with the following structure: { staus: nnn, message: xxx}
   #
-  def self.get_data(id, research_area = nil)
+  def self.get_data(id)
     type = ModelUtils.type_for_id(id)
     if type != "PEOPLE" && type != "ORGANIZATION" && type != "TEAM"
       return false, {status: 404, message: "Could not retrieve collaboration graph for #{id} (invalid type)"}
@@ -33,13 +33,15 @@ class CollabGraph
       # in the Rails app. Eventually teams will be defined in
       # the VIVO and collaboration information will be served by
       # the Visualization Service, but we are not there yet.
-      cache_key = "team_collab_" + id + "_" + (research_area || "nil")
+      cache_key = "team_collab_" + id
       graph = Rails.cache.fetch(cache_key, expires_in: 5.minute) do
         Rails.logger.info "Caching #{cache_key}..."
         org = Organization.load(id)
         g = CollabGraphCustom.new()
-        g.graph_for_list(org.faculty_list(), org.item.name, research_area)
+        label = (id == "team-advctr") ? nil : org.item.name
+        g.graph_for_list(org.faculty_list(), label)
       end
+
       yesterday = (Date.today-1).to_s
       data = {graph: graph, rabid: id, updated: yesterday}
       return true, data
@@ -50,12 +52,12 @@ class CollabGraph
       # membership to this organization is not (yet) stored in the
       # triplestore and therefore we must calculate the graph
       # on the fly.
-      cache_key = "team_collab_" + id + "_" + (research_area || "nil")
+      cache_key = "team_collab_" + id
       graph = Rails.cache.fetch(cache_key, expires_in: 5.minute) do
         Rails.logger.info "Caching #{cache_key}..."
         org = Organization.load(id)
         g = CollabGraphCustom.new()
-        g.graph_for_list(org.faculty_list(), org.item.name, research_area)
+        g.graph_for_list(org.faculty_list(), org.item.name)
       end
       yesterday = (Date.today-1).to_s
       data = {graph: graph, rabid: id, updated: yesterday}

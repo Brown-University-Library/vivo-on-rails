@@ -2,7 +2,7 @@ class OrganizationPresenter
   attr_accessor :query, :form_values, :user, :edit_mode
   attr_accessor :organization, :show_back_to_search,
     :faculty_positions, :admin_positions, :all_positions,
-    :show_visualizations, :research_area
+    :show_visualizations
 
   def initialize(organization, search_url, referer, show_viz)
     @organization = organization
@@ -15,8 +15,6 @@ class OrganizationPresenter
     @all_positions = @organization.people
     @admin_positions = @organization.people.select {|x| x.admin_position? }
     @faculty_positions = @organization.people.select {|x| x.admin_position? == false }
-
-    @research_area = nil
   end
 
   def can_edit?

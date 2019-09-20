@@ -21,6 +21,8 @@ class Organization
       o.item = OrganizationItem.from_hash(o.json_txt, thumbnail_url)
     end
 
+    # TODO: We should handle this as a team rather than overwriting
+    # the organization record.
     if id == "org-brown-univ-dept148"
       o.item.name = "Community-Engaged Faculty"
       o.item.overview = <<~OVERVIEW
@@ -68,12 +70,12 @@ class Organization
     solr_doc = solr.get(CGI.escape("http://vivo.brown.edu/individual/#{id}"))
   end
 
-  def self.load(id)
-    team = Team.find_by_id(id)
+  def self.load(id, load_thumbnails = false)
+    team = Team.find_by_id(id, true)
     if team != nil
       return from_team(team)
     end
-    return load_from_solr(id)
+    return load_from_solr(id, load_thumbnails)
   end
 
   def self.from_team(team)
@@ -85,17 +87,18 @@ class Organization
     org.item.name = team.name
     org.item.overview = team.name
     org.item.people = []
+    org.item.faculty = []
 
-    team.member_ids.each do |id|
-        member_info = {
-            id: id,
-            faculty_uri: "http://vivo.brown.edu/individual/#{id}",
-            label: id,
-            general_position: "general position",
-            specific_position: "specific position"
-        }
-        member = OrganizationMemberItem.new(member_info)
-        org.item.people << member
+    team.members.each do |faculty|
+      member_info = {
+          id: faculty.item.vivo_id,
+          faculty_uri: faculty.item.id,
+          label: faculty.item.display_name,
+          general_position: "TBD",
+          specific_position: faculty.item.title
+      }
+      org.item.people << OrganizationMemberItem.new(member_info)
+      org.item.faculty << faculty
     end
 
     org
@@ -106,6 +109,15 @@ class Organization
   # some faculty might hold more than one appointment in the department)
   # and does not preserve the titles of the people in the department.
   def faculty_list()
+    # If we have loaded the faculty list, use it
+    # (usually the case for teams)...
+    if item.faculty.count > 0
+      return item.faculty
+    end
+
+    # ...otherwise build it from the list of people (array of OrgMemberItem)
+    # This is needed because we don't store the entire faculty info
+    # for organizations in Solr.
     ids = item.people.map {|person| person.vivo_id}.uniq
     list = Faculty.load_from_solr_many(ids)
     list

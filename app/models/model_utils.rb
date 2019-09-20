@@ -10,6 +10,15 @@ class ModelUtils
     trimmed
   end
 
+  def self.brown_vivo?(rabid)
+    return false if rabid == nil
+    return true if rabid.start_with?("http://vivo.brown.edu/individual/")
+    return true if rabid.start_with?("http://vivo.brown.edu/display/")
+    return true if rabid.start_with?("http://localhost:3000/individual/")
+    return true if rabid.start_with?("http://localhost:3000/display/")
+    false
+  end
+
   def self.vivo_id(rabid)
     return "" if rabid == nil
     rabid.split("/").last

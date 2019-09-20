@@ -33,17 +33,13 @@ class VisualizationController < ApplicationController
 
   def collab
     id = params["id"]
-    research_area = params["research_area"]
-    if research_area == ""
-      research_area = nil
-    end
     case params["format"]
     when "json"
-      collab_json(id, research_area)
+      collab_json(id)
     when "csv"
       collab_csv(id)
     else
-      collab_view(id, research_area)
+      collab_view(id)
     end
   end
 
@@ -108,7 +104,7 @@ class VisualizationController < ApplicationController
       end
     end
 
-    def collab_view(id, research_area = nil)
+    def collab_view(id)
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
@@ -122,7 +118,6 @@ class VisualizationController < ApplicationController
       when "TEAM"
         org = Organization.load(id)
         @presenter = OrganizationPresenter.new(org.item, search_url(), nil, false)
-        @presenter.research_area = research_area
         render "collab_org"
       else
         err_msg = "Individual ID (#{id}) was not found"
@@ -135,8 +130,8 @@ class VisualizationController < ApplicationController
       render "error", status: 500
     end
 
-    def collab_json(id, research_area)
-      ok, data = CollabGraph.get_data(id, research_area)
+    def collab_json(id)
+      ok, data = CollabGraph.get_data(id)
       if ok
         render json: data, status: 200
       else

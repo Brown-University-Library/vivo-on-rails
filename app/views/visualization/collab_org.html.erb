@@ -30,11 +30,6 @@
       <div class="btn-group" role="group">
         <button id="showLevel0" type="button" class="btn btn-default" title="Shows collaboration with between department members only">Intradepartmental collaboration</button>
       </div>
-      <div id="research_area_div" class="hidden">
-        <div class="btn-group" role="group">
-            Research area: <select id="research_areas_filter"></select>
-        </div>
-      </div>
     </div>
     <div id="loadingMsg">
       <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading visualization...</button>
@@ -96,11 +91,6 @@
   var facultyId = "<%= @presenter.organization.id %>";     // http://vivo.brown.edu/jcarberry
   var vivoId = "<%= @presenter.organization.vivo_id %>";   // jcarberry
   var jsonDataUrl = "<%= visualization_collab_path(@presenter.organization.vivo_id, format: :json) %>";
-  var research_area = null;
-  if (<%= @presenter.research_area != nil %>) {
-    research_area = "<%= @presenter.research_area %>";
-    jsonDataUrl += "?research_area=" + research_area;
-  }
 
   var researcherUrl = "<%= display_show_path('placeholder') %>";
   var svgWidth = 960;
@@ -115,44 +105,14 @@
       $("#forceToFit").attr("checked", true);
     }
 
-    var showResearchArea = window.location.href.indexOf("research_area=") != -1;
-    if (showResearchArea) {
-      $("#research_area_div").removeClass("hidden");
-    }
-
-    $("#research_areas_filter").on("change", function(x) {
-      var newUrl = "<%= visualization_collab_path(@presenter.organization.vivo_id) %>" + "?research_area=" + $(this).val();
-      window.location.assign(newUrl);
-    });
-
     // Set the variable based on the checkbox. This is required because
     // when reloading the page the checkbox might not be checked.
     showOrphans = $("#showOrphans").is(":checked");
 
     $.getJSON(jsonDataUrl, function(data, status) {
-      var filter, i, value, count, text, option;
       theData = data.graph; // save the data in our global variable
       lastUpdated = new Date(data.updated);
       drawGraph();
-
-      filter = $("#research_areas_filter");
-      filter.append($('<option>', {value: "", text: "(all)"}));
-      for(i = 0; i < data.graph.research_areas.length; i++) {
-        value = data.graph.research_areas[i].key;
-        // Don't display the counts since they can be misleading.
-        // For example, it's possible that a researcher has a given
-        // research area listed but if none of his collaborators
-        // are on the list (i.e. there are no links for this researcher)
-        // the node will not be displayed and the counts might not
-        // match the number of nodes displayed on the visualization
-        // since we only display nodesWithLinks().
-        //
-        // count = data.graph.research_areas[i].count;
-        // text = value + " (" + count.toString(10) + ")";
-        text = value;
-        option = {value: value, text: text, selected: value == research_area};
-        filter.append($('<option>', option));
-      }
     });
 
     $("#showLevel0").on("click", function() { showLevel = 0; drawGraph(); });

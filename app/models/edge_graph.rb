@@ -7,14 +7,12 @@ class EdgeGraph
   # links is an array of {source: s, target: t, weight: w}
   # nodes is an array of {group: g, id: i, name: n}
   attr_reader :directed, :graph, :links, :nodes
-  attr_accessor :research_areas
 
   def initialize
     @directed = "false"
     @graph = {}
     @links = []
     @nodes = []
-    @research_areas = []
   end
 
   # Creates and initializes a new EdgeGraph with the data in Hash
