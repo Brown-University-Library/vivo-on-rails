@@ -175,6 +175,7 @@ class Organization
     faculty_ids << "vkrause"
     faculty_ids << "esikelia"
     faculty_ids << "mdkenned"
+    faculty_ids << "rcarter1"
     faculty_docs = Faculty.load_from_solr_many(faculty_ids)
     faculty_docs.each do |faculty|
 
