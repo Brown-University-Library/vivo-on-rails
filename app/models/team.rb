@@ -53,17 +53,26 @@ class Team
         filename = ENV["ADVANCECTR_DATA"]
         flat_data = []
         CSV.foreach(filename, {headers: :first_row, col_sep: "\t"}) do |row|
-            next if row["name"] == nil
+
+            inv = row["investigator"]
+            inst = row["institution"]
+            id = "http://#{id_from_name(inst)}/#{id_from_name(inv)}"
+
+            collab = row["collaborator"]
+            collab_inst = row["collaborator_institution"]
+            collab_id = "http://#{id_from_name(collab_inst)}/#{id_from_name(collab)}"
+
+            next if inv == nil
             flat_item = {
-                id: "http://uri/" + id_from_name(row["name"]),
-                email: row["email"],
-                name: row["name"],
-                department: row["department"],
-                institution_name: row["institution_name"],
-                collab_id: "http://uri/" + id_from_name(row["Collaborator_Name"]),
-                collab_name: row["Collaborator_Name"],
-                collab_dept: row["Collaborator_dept"],
-                sponsor_id: row["SponsorID_link"]
+                id: id,
+                email: "EMAIL",
+                name: inv,
+                department: inst,
+                institution_name: inst,
+                collab_id: collab_id,
+                collab_name: collab,
+                collab_dept: collab_inst,
+                sponsor_id: ""
             }
             flat_data << flat_item
         end
