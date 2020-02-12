@@ -21,28 +21,10 @@ class Organization
       o.item = OrganizationItem.from_hash(o.json_txt, thumbnail_url)
     end
 
-    # TODO: We should handle this as a team rather than overwriting
-    # the organization record.
+    # This used to be the Swearer Center but now we are using it for the
+    # Community-Engaged Faculty directory created by the Swearer Center.
     if id == "org-brown-univ-dept148"
-      o.item.name = "Community-Engaged Faculty"
-      o.item.overview = <<~OVERVIEW
-      The Swearer Center is a hub of community, scholarship, and
-      action at Brown University, connecting faculty, students,
-      and staff with people and organizations across Rhode Island
-      and around the globe to co-create knowledge and positive
-      social change.<br/><br/>
-      This directory, created by the Swearer Center
-      in collaboration with Researchers@Brown,
-      includes the profiles of faculty teaching CBLR-designated
-      courses as well as those whose research areas include relevant
-      terms (e.g., engaged scholarship, community engagement).<br/><br/>
-      We recognize that not all faculty included here have a direct
-      affiliation with the Swearer Center and that not all
-      community-engaged faculty on campus are represented within
-      these parameters. With any questions or comments about this
-      page, please email <a href="mailto:julie_plaut@brown.edu">julie_plaut@brown.edu</a>.
-      OVERVIEW
-      members = swearer_center_members()
+      members = cblr_members()
       members.each do |member|
         o.item.people << OrganizationMemberItem.new(member)
       end
@@ -123,12 +105,12 @@ class Organization
     list
   end
 
-  def self.swearer_center_members()
+  def self.cblr_members()
     solr_url = ENV["SOLR_URL"]
     logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
 
-    # Get the members for the Swearer Center by fetching faculty that
-    # work on certain specific research areas.
+    # Get the members for the Community-Based Learning and Research
+    # by fetching faculty that work on certain specific research areas...
     solr = SolrLite::Solr.new(solr_url, logger)
     params = params = SolrLite::SearchParams.new()
     params.q = "*"
@@ -163,7 +145,7 @@ class Organization
       members << member_info
     end
 
-    # Also add the following faculty regardless of their research areas
+    # ...plus these specific faculty (regardless of their research areas)
     faculty_ids = []
     faculty_ids << "iglasser"
     faculty_ids << "llapierr"
