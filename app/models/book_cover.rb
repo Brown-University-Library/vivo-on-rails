@@ -197,6 +197,15 @@ class BookCoverModel
     puts "#{count} rows were inserted to the book covers cache."
   end
 
+  def self.add_one()
+    sql = <<-END_SQL.gsub(/\n/, '')
+      INSERT INTO `book_covers` (`firstname`, `lastname`, `shortID`, `title`, `pub_date`, `image`, `role`, `dept`, `active`) VALUES
+        ('Faiz', 'Ahmed', 'fa8', 'Afghanistan Rising Islamic Law and Statecraft between the Ottoman and British Empires', 2017, 'ahmed_afghanistan_rising.jpg', 'author', 'History', 'y');
+    END_SQL
+    ActiveRecord::Base.connection.execute(sql)
+    puts "Added new hard-coded book cover."
+  end
+
   def self.book_covers_cache_count()
     rows = ActiveRecord::Base.connection.exec_query('SELECT count(*) AS count FROM book_covers;')
     rows.first["count"]
