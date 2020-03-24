@@ -42,6 +42,10 @@ class HomeController < ApplicationController
       return
     end
 
+    if ENV["NOTICE_BANNER"]
+        flash[:notice] = ENV["NOTICE_BANNER"]
+    end
+
     page_size = 4
     base_author_url = display_show_url("")
     @bookCoversPaginated = BookCoverModel.get_all_paginated(base_author_url, page_size)

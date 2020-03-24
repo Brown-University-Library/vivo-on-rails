@@ -2251,3 +2251,13 @@ td.citation-data.pub-item {
 .active-glyphicon {
 	color:#F9E262;
 }
+
+.notice {
+	background-color:#e1e195;
+	padding: 10px;
+}
+
+.alert {
+	background-color: #f2a2a2;
+	padding: 10px;
+}

@@ -32,6 +32,11 @@ class SearchController < ApplicationController
         render :json => @presenter.results.to_json
         return
       end
+
+      if ENV["NOTICE_BANNER"]
+        flash[:notice] = ENV["NOTICE_BANNER"]
+      end
+
       render "results"
     end
   rescue => ex

@@ -89,6 +89,11 @@ class DisplayController < ApplicationController
         @presenter.edit_allowed = current_user.can_edit?(id)
       end
       @vivo_id = id
+
+      if ENV["NOTICE_BANNER"]
+        flash[:notice] = ENV["NOTICE_BANNER"]
+      end
+
       render "faculty/show"
     end
 
@@ -123,6 +128,11 @@ class DisplayController < ApplicationController
       referer = request.headers.env["HTTP_REFERER"]
       @presenter = OrganizationPresenter.new(organization.item, search_url(), referer, show_viz)
       @presenter.user = current_user
+
+      if ENV["NOTICE_BANNER"]
+        flash[:notice] = ENV["NOTICE_BANNER"]
+      end
+
       render "organization/show"
     end
 
