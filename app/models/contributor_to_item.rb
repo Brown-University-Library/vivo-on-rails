@@ -50,34 +50,73 @@ class ContributorToItem
     has_book = !@book.blank?
     case
     when has_title && has_book
-      info += "#{@title} in <i>#{@book}</i>, "
+      info += "#{quote_title(@title)} in <i>#{@book}</i>, "
     when has_title && !has_book
-      info += "#{@title}, "
+      info += "#{quote_title(@title)}, "
     when !has_title && has_book
       info += "<i>#{@book}</i>, "
     end
 
     if !@editors.blank?
-      info += "edited by #{@editors}, "
+      info = concat(info, "edited by #{@editors}", ",")
     end
 
     if !@location_label.blank?
-      info += "#{@location_label}: "
+      info = concat(info, "#{@location_label}", ":")
     end
 
     if !@publisher_label.blank?
-      info += "#{@publisher_label}. "
+      info = concat(info, @publisher_label, ".")
     end
 
     if @year
-      info += "#{@year}, "
+      info = concat(info, @year.to_s, ",")
     end
 
     if @pages
-      info += "#{@pages} "
+      info = concat(info, @pages, ".")
     end
 
     info.strip
+  end
+
+  def concat(value, value2, delimiter)
+    value2 = (value2 || "").strip
+    if value2.blank?
+      return value
+    end
+
+    new_value = "#{value} #{value2}"
+    if !new_value.end_with?(delimiter)
+      new_value += delimiter
+    end
+    new_value
+  end
+
+  def quote_title(value)
+    value = (value || "").strip
+
+    # Drop fancy quotes (if present)
+    if value.start_with?("“")
+      value = value[1..-1]
+    end
+    if value.end_with?("”")
+      value = value[0..-1]
+    end
+
+    # Add normal quotes (if not present)
+    if value[0] != '"'
+      value = '"' + value
+    end
+    if value[-1] != '"'
+      value = value + '"'
+    end
+
+    # Make sure the text ends in a period e.g. "hello."
+    if value[-2] != '.'
+      value = value[0..-2] + '."'
+    end
+    value
   end
 
   def doi_url
