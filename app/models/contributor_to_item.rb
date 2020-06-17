@@ -2,7 +2,8 @@ require "./app/models/model_utils.rb"
 class ContributorToItem
   attr_accessor :uri, :authors, :title, :volume, :issue,
     :date, :pages, :published_in, :venue, :type, :doi, :pub_med_id,
-    :external_url
+    :external_url,
+    :book, :location_label, :publisher_label, :editors
 
   attr_reader :year
 
@@ -36,6 +37,47 @@ class ContributorToItem
       info += ": #{@pages}. "
     end
     info
+  end
+
+  def pub_info_book_section
+    # Use MLA for book sections
+    #
+    # Last, First M. “Chapter Title.” Book/Anthology Title,
+    # edited by First M. Last, Publisher, Year Published, page numbers
+    # Website Title, URL.
+    info = ""
+    has_title = !@title.blank?
+    has_book = !@book.blank?
+    case
+    when has_title && has_book
+      info += "#{@title} in <i>#{@book}</i>, "
+    when has_title && !has_book
+      info += "#{@title}, "
+    when !has_title && has_book
+      info += "<i>#{@book}</i>, "
+    end
+
+    if !@editors.blank?
+      info += "edited by #{@editors}, "
+    end
+
+    if !@location_label.blank?
+      info += "#{@location_label}: "
+    end
+
+    if !@publisher_label.blank?
+      info += "#{@publisher_label}. "
+    end
+
+    if @year
+      info += "#{@year}, "
+    end
+
+    if @pages
+      info += "#{@pages} "
+    end
+
+    info.strip
   end
 
   def doi_url
