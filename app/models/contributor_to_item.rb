@@ -74,7 +74,7 @@ class ContributorToItem
     end
 
     if @pages
-      info = concat(info, @pages, ".")
+      info = concat(info, "pp. #{@pages}", ".")
     end
 
     info.strip
