@@ -62,7 +62,7 @@ class ContributorToItem
     end
 
     if !@location_label.blank?
-      info = concat(info, "#{@location_label}", ":")
+      info = concat(info, "#{@location_label}", ",")
     end
 
     if !@publisher_label.blank?
