@@ -37,6 +37,10 @@
 
                 <% if c.pub_type_id == "_book_section" %>
                   <%= c.pub_info_book_section.html_safe %>
+                <% elsif c.pub_type_id == "_book" %>
+                  <%= c.pub_info_book.html_safe %>
+                <% elsif c.pub_type_id == "_article" %>
+                  <%= c.pub_info_article.html_safe %>
                 <% else %>
                   <i><%= c.title.html_safe %>.</i>
                   <%= c.pub_info %>

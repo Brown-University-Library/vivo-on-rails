@@ -50,7 +50,7 @@ class ContributorToItem
     has_book = !@book.blank?
     case
     when has_title && has_book
-      info += "#{quote_title(@title)} in <i>#{@book}</i>, "
+      info += "#{quote_title(@title)} <i>#{@book}</i>, "
     when has_title && !has_book
       info += "#{quote_title(@title)}, "
     when !has_title && has_book
@@ -66,18 +66,82 @@ class ContributorToItem
     end
 
     if !@publisher_label.blank?
-      info = concat(info, @publisher_label, ".")
+      info = concat(info, @publisher_label, ",")
     end
 
-    if @year
+    if !@year.blank?
       info = concat(info, @year.to_s, ",")
     end
 
-    if @pages
+    if !@pages.blank?
       info = concat(info, "pp. #{@pages}", ".")
     end
 
-    info.strip
+    add_period(info)
+  end
+
+  def pub_info_book
+    # Use MLA for books
+    info = ""
+    has_title = !@title.blank?
+    has_book = !@book.blank?
+    case
+    when has_title && has_book
+      info += "<i>#{@title} #{@book}</i>."
+    when has_title && !has_book
+      info += "<i>#{@title}</i>."
+    when !has_title && has_book
+      info += "<i>#{@book}</i>."
+    end
+
+    if !@editors.blank?
+      info = concat(info, "edited by #{@editors}", ",")
+    end
+
+    if !@location_label.blank?
+      info = concat(info, "#{@location_label}", ",")
+    end
+
+    if !@publisher_label.blank?
+      info = concat(info, @publisher_label, ",")
+    end
+
+    if !@year.blank?
+      info = concat(info, @year.to_s, ".")
+    end
+
+    add_period(info)
+  end
+
+  def pub_info_article
+    info = ""
+    has_title = !@title.blank?
+    has_book = !@book.blank?
+    if !@title.blank?
+      info += "#{quote_title(@title)} "
+    end
+
+    if !@venue.blank?
+      info = concat(info, "<i>#{@venue}</i>", ",")
+    end
+
+    if @volume != nil
+      info = concat(info, "vol. #{@volume}", ",")
+    end
+
+    if @issue != nil
+      info = concat(info, "no. #{@issue}", ",")
+    end
+
+    if !@year.blank?
+      info = concat(info, @year.to_s, ",")
+    end
+
+    if !@pages.blank?
+      info = concat(info, "pp. #{@pages}", ".")
+    end
+
+    add_period(info)
   end
 
   def concat(value, value2, delimiter)
@@ -117,6 +181,16 @@ class ContributorToItem
       value = value[0..-2] + '."'
     end
     value
+  end
+
+  def add_period(text)
+    value = text.strip
+    if value.end_with?(".")
+      return value
+    elsif value.end_with?(",")
+      return value[0..-2] + "."
+    end
+    return value + "."
   end
 
   def doi_url
