@@ -32,18 +32,15 @@
               <td class="citation-data pub-item pub-type_<%= c.pub_type_id %>">
 
                 <% if !c.authors.blank? %>
-                  <span class="listDateTime"><%= c.authors.strip %>. </span>
+                  <span class="listDateTime"><%= c.add_period(c.authors) %> </span>
                 <% end %>
 
                 <% if c.pub_type_id == "_book_section" %>
                   <%= c.pub_info_book_section.html_safe %>
                 <% elsif c.pub_type_id == "_book" %>
                   <%= c.pub_info_book.html_safe %>
-                <% elsif c.pub_type_id == "_article" %>
-                  <%= c.pub_info_article.html_safe %>
                 <% else %>
-                  <i><%= c.title.html_safe %>.</i>
-                  <%= c.pub_info %>
+                  <%= c.pub_info.html_safe %>
                 <% end %>
 
                 <div class="no-orphans">

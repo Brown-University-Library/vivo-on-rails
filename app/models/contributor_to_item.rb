@@ -18,25 +18,49 @@ class ContributorToItem
     @external_url = values["url"]
   end
 
+  def add_period(text)
+    value = text.strip
+    if value.end_with?(".")
+      return value
+    elsif value.end_with?(",")
+      return value[0..-2] + "."
+    end
+    return value + "."
+  end
+
   def pub_info
     info = ""
-    publisher_info = publisher()
-    if publisher_info != nil
-      info += "#{publisher_info}. "
+    if !@title.blank?
+      info += "#{quote_title(@title)} "
     end
-    if @year != nil
-      info += "#{@year}; "
+
+    # Give preference to the published_in field over the venue field.
+    # They usually have similar information but published_in tends to
+    # be more complete. For data samples see the publications for
+    # https://vivo.brown.edu/display/atyrka.json_txt
+    if !@published_in.blank?
+      info = concat(info, "<i>#{@published_in}</i>", ",")
+    elsif !@venue.blank?
+      info = concat(info, "<i>#{@venue}</i>", ",")
     end
+
     if @volume != nil
-      info += "#{@volume} "
+      info = concat(info, "vol. #{@volume}", ",")
     end
+
     if @issue != nil
-      info += "(#{@issue}) "
+      info = concat(info, "no. #{@issue}", ",")
     end
-    if @pages != nil
-      info += ": #{@pages}. "
+
+    if !@year.blank?
+      info = concat(info, @year.to_s, ",")
     end
-    info
+
+    if !@pages.blank?
+      info = concat(info, "pp. #{@pages}", ".")
+    end
+
+    add_period(info)
   end
 
   def pub_info_book_section
@@ -82,6 +106,7 @@ class ContributorToItem
 
   def pub_info_book
     # Use MLA for books
+    # https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_works_cited_page_books.html
     info = ""
     has_title = !@title.blank?
     has_book = !@book.blank?
@@ -111,86 +136,6 @@ class ContributorToItem
     end
 
     add_period(info)
-  end
-
-  def pub_info_article
-    info = ""
-    has_title = !@title.blank?
-    has_book = !@book.blank?
-    if !@title.blank?
-      info += "#{quote_title(@title)} "
-    end
-
-    if !@venue.blank?
-      info = concat(info, "<i>#{@venue}</i>", ",")
-    end
-
-    if @volume != nil
-      info = concat(info, "vol. #{@volume}", ",")
-    end
-
-    if @issue != nil
-      info = concat(info, "no. #{@issue}", ",")
-    end
-
-    if !@year.blank?
-      info = concat(info, @year.to_s, ",")
-    end
-
-    if !@pages.blank?
-      info = concat(info, "pp. #{@pages}", ".")
-    end
-
-    add_period(info)
-  end
-
-  def concat(value, value2, delimiter)
-    value2 = (value2 || "").strip
-    if value2.blank?
-      return value
-    end
-
-    new_value = "#{value} #{value2}"
-    if !new_value.end_with?(delimiter)
-      new_value += delimiter
-    end
-    new_value
-  end
-
-  def quote_title(value)
-    value = (value || "").strip
-
-    # Drop fancy quotes (if present)
-    if value.start_with?("“")
-      value = value[1..-1]
-    end
-    if value.end_with?("”")
-      value = value[0..-1]
-    end
-
-    # Add normal quotes (if not present)
-    if value[0] != '"'
-      value = '"' + value
-    end
-    if value[-1] != '"'
-      value = value + '"'
-    end
-
-    # Make sure the text ends in a period e.g. "hello."
-    if value[-2] != '.'
-      value = value[0..-2] + '."'
-    end
-    value
-  end
-
-  def add_period(text)
-    value = text.strip
-    if value.end_with?(".")
-      return value
-    elsif value.end_with?(",")
-      return value[0..-2] + "."
-    end
-    return value + "."
   end
 
   def doi_url
@@ -293,16 +238,44 @@ class ContributorToItem
   end
 
   private
-    def publisher
-      case
-      when @published_in == nil && @venue == nil
-        nil
-      when @published_in == nil && @venue != nil
-        @venue
-      when @published_in != nil && @venue == nil
-        @published_in
-      else
-        @published_in + "/" +  @venue
+    def concat(value, value2, delimiter)
+      value2 = (value2 || "").strip
+      if value2.blank?
+        return value
       end
+
+      new_value = "#{value} #{value2}"
+      if !new_value.end_with?(delimiter)
+        new_value += delimiter
+      end
+      new_value
     end
+
+    def quote_title(value)
+      value = (value || "").strip
+
+      # Drop fancy quotes (if present)
+      if value.start_with?("“")
+        value = value[1..-1]
+      end
+      if value.end_with?("”")
+        value = value[0..-1]
+      end
+
+      # Add normal quotes (if not present)
+      if value[0] != '"'
+        value = '"' + value
+      end
+      if value[-1] != '"'
+        value = value + '"'
+      end
+
+      # Make sure the text ends in a period e.g. "hello."
+      if value[-2] != '.'
+        value = value[0..-2] + '."'
+      end
+      value
+    end
+
+
 end
