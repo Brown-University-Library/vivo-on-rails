@@ -22,3 +22,6 @@
 # Our Apache/Passenger config in production
 /http
 refresh.sh
+
+# Local vendor/bundle gems
+/vendor/bundle/
