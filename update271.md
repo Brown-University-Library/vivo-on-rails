@@ -80,3 +80,92 @@ Removed development/tests gems since we are really not using them. This will for
 No more warnings or errors needed to be addressed.
 
 
+## MySQL error in dev server
+I had to reset the mysql gem to '< 0.5' in Gemfile because our servers
+don't have installed the required components for the latest version (0.5.3).
+
+```
+gem 'mysql2', '< 0.5'
+```
+
+...and run `bundle install` to update Gemfile.lock
+
+The exact error that I got in dev was:
+
+```
+Fetching mysql2 0.5.3
+Installing mysql2 0.5.3 with native extensions
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    current directory: /opt/local/vivo-on-rails/vendor/bundle/ruby/2.7.0/gems/mysql2-0.5.3/ext/mysql2
+/opt/local/rubies/ruby-2.7.1/bin/ruby -I /opt/local/rubies/ruby-2.7.1/lib/ruby/2.7.0 -r ./siteconf20200708-8555-sqc15a.rb extconf.rb
+checking for rb_absint_size()... yes
+checking for rb_absint_singlebit_p()... yes
+checking for rb_wait_for_single_fd()... yes
+-----
+Using mysql_config at /usr/bin/mysql_config
+-----
+checking for mysql.h... yes
+checking for errmsg.h... yes
+checking for SSL_MODE_DISABLED in mysql.h... no
+checking for MYSQL_OPT_SSL_ENFORCE in mysql.h... no
+checking for MYSQL.net.vio in mysql.h... yes
+checking for MYSQL.net.pvio in mysql.h... no
+checking for MYSQL_ENABLE_CLEARTEXT_PLUGIN in mysql.h... no
+checking for SERVER_QUERY_NO_GOOD_INDEX_USED in mysql.h... yes
+checking for SERVER_QUERY_NO_INDEX_USED in mysql.h... yes
+checking for SERVER_QUERY_WAS_SLOW in mysql.h... no
+checking for MYSQL_OPTION_MULTI_STATEMENTS_ON in mysql.h... yes
+checking for MYSQL_OPTION_MULTI_STATEMENTS_OFF in mysql.h... yes
+checking for my_bool in mysql.h... yes
+-----
+Setting libpath to /usr/lib64/mysql
+-----
+creating Makefile
+
+current directory: /opt/local/vivo-on-rails/vendor/bundle/ruby/2.7.0/gems/mysql2-0.5.3/ext/mysql2
+make "DESTDIR=" clean
+
+current directory: /opt/local/vivo-on-rails/vendor/bundle/ruby/2.7.0/gems/mysql2-0.5.3/ext/mysql2
+make "DESTDIR="
+compiling client.c
+client.c: In function ‘rb_mysql_query’:
+client.c:787: warning: passing argument 1 of ‘rb_rescue2’ from incompatible pointer type
+/opt/local/rubies/ruby-2.7.1/include/ruby-2.7.0/ruby/ruby.h:1988: note: expected ‘VALUE (*)(VALUE)’ but argument is of type ‘VALUE (*)(void *)’
+client.c:795: warning: passing argument 1 of ‘rb_rescue2’ from incompatible pointer type
+/opt/local/rubies/ruby-2.7.1/include/ruby-2.7.0/ruby/ruby.h:1988: note: expected ‘VALUE (*)(VALUE)’ but argument is of type ‘VALUE (*)(void *)’
+client.c: In function ‘_mysql_client_options’:
+client.c:911: error: ‘MYSQL_DEFAULT_AUTH’ undeclared (first use in this function)
+client.c:911: error: (Each undeclared identifier is reported only once
+client.c:911: error: for each function it appears in.)
+client.c: In function ‘set_default_auth’:
+client.c:1350: error: ‘MYSQL_DEFAULT_AUTH’ undeclared (first use in this function)
+At top level:
+cc1: warning: unrecognized command line option "-Wno-used-but-marked-unused"
+cc1: warning: unrecognized command line option "-Wno-static-in-inline"
+cc1: warning: unrecognized command line option "-Wno-reserved-id-macro"
+cc1: warning: unrecognized command line option "-Wno-missing-variable-declarations"
+cc1: warning: unrecognized command line option "-Wno-documentation-unknown-command"
+cc1: warning: unrecognized command line option "-Wno-disabled-macro-expansion"
+cc1: warning: unrecognized command line option "-Wno-covered-switch-default"
+cc1: warning: unrecognized command line option "-Wno-conditional-uninitialized"
+cc1: warning: unrecognized command line option "-Wno-tautological-compare"
+cc1: warning: unrecognized command line option "-Wno-self-assign"
+cc1: warning: unrecognized command line option "-Wno-parentheses-equality"
+cc1: warning: unrecognized command line option "-Wno-constant-logical-operand"
+cc1: warning: unrecognized command line option "-Wno-cast-function-type"
+make: *** [client.o] Error 1
+
+make failed, exit code 2
+
+Gem files will remain installed in /opt/local/vivo-on-rails/vendor/bundle/ruby/2.7.0/gems/mysql2-0.5.3 for inspection.
+Results logged to /opt/local/vivo-on-rails/vendor/bundle/ruby/2.7.0/extensions/x86_64-linux/2.7.0-static/mysql2-0.5.3/gem_make.out
+
+An error occurred while installing mysql2 (0.5.3), and Bundler cannot continue.
+Make sure that `gem install mysql2 -v '0.5.3' --source 'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  mysql2
+```
+
+
