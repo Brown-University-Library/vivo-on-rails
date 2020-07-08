@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 6.0.2'
-gem 'mysql2'
+
+# Note: we can technically upgrade to a new version of this
+# gem but we need to make sure the server will support it.
+#
+# As of 7/8/2020 our servers support '< 0.5' (what we used with Rails 4.x)
+# but not '0.5.3' (the latest)
+gem 'mysql2', '< 0.5'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
