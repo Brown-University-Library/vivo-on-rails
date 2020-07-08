@@ -176,10 +176,24 @@ In the dev server `bundle exec rake db:migrate` complains that our MySQL is too 
 Your version of MySQL (5.1.73) is too old. Active Record supports MySQL >= 5.5.8.
 ```
 
+I tried switching to SQLite so that we can run the development server but
+then we got a similar error:
+
+```
+Your version of SQLite (3.6.20) is too old. Active Record supports SQLite >= 3.8.
+```
+
+So I set the Gemfile to use the latest mysql gem (0.5.3) again since we cannot
+fallback to SQLite in the dev server.
+
+This means that **we cannot run VIVO in the development environment** at this time
+because that server does not have the minimum MySQL or SQLite required to run
+a Rail 6.x application. We'll fix next week when Joe is back.
 
 RAILS_ENV=production bundle config set path 'vendor/bundle'
 RAILS_ENV=production bundle install
-RAILS_ENV=production bundle exec rake db:create
+#RAILS_ENV=production bundle exec rake db:create
 RAILS_ENV=production bundle exec rake db:migrate
+#RAILS_ENV=production bundle exec rake vivo:book_covers_cache_init
 RAILS_ENV=production bundle exec rake assets:precompile
 RAILS_ENV=production bundle exec rails server
