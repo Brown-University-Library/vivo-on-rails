@@ -47,7 +47,8 @@ Updated the setting in `./config/environments/production.rb` to use the recommen
 Set the values in the .env file to define the database and the secrets key, then:
 
 ```
-RAILS_ENV=production bundle install --path vendor/bundle --without development test
+RAILS_ENV=production bundle config set path 'vendor/bundle'
+RAILS_ENV=production bundle install
 RAILS_ENV=production bundle exec rake db:create
 RAILS_ENV=production bundle exec rake db:migrate
 RAILS_ENV=production bundle exec rake assets:precompile
@@ -68,4 +69,14 @@ chruby 2.7.1
 # gem install bundler:1.17.1
 sudo /etc/init.d/httpd restart
 ```
+
+# Upgrading to Rails 6.0.3
+
+Like before, upgraded version of Rails in Gemfile `gem 'rails', '~> 6.0.2'` and `bundle install` gave error about conflicting versions. I had to comment `gem 'jquery-rails'` and `gem 'dotenv-rails'`, run `bundle install` again which gave no conflicts, restore these gems in Gemfile, and run `bundle install` once more.
+```
+
+Removed development/tests gems since we are really not using them. This will force development to use MySQL rather than SQLite but that's OK. Less variations between environments.
+
+No more warnings or errors needed to be addressed.
+
 
