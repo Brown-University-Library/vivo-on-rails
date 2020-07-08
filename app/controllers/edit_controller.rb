@@ -1,9 +1,18 @@
 require "./app/models/fast_service.rb"
 
 class EditController < ApplicationController
-  # TODO enable session protection once
-  skip_before_filter :authenticate_user!
-
+  # =====================================================
+  # In Rails 5.x skip_before_filter has been removed,
+  # it should be replaced with skip_before_action but
+  # then we run into the problem that authenticate_user!
+  # has not been defined.
+  #
+  # Since this controller is currently not being used we
+  # comment the line altogether.
+  #
+  # # TODO enable session protection once
+  # skip_before_filter :authenticate_user!
+  # =====================================================
   def edit
     must_be_authenticated()
 
