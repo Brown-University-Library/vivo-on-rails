@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.11'
+gem 'rails', '~> 5.2.4'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -17,9 +17,9 @@ end
 group :development, :test do
   gem "sqlite3"
   gem "byebug"                # debugger
-  gem "better_errors"         # web page for errors
-  gem "binding_of_caller"     # allows inspecting values in web error page
-  gem 'web-console', '~> 2.0' # Access an IRB console on exception pages or by using <%= console %> in views
+  # gem "better_errors"         # web page for errors
+  # gem "binding_of_caller"     # allows inspecting values in web error page
+  # gem 'web-console', '~> 2.0' # Access an IRB console on exception pages or by using <%= console %> in views
 end
 
 # Needed on RedHat

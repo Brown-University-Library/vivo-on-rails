@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateUsers < ActiveRecord::Migration
+class CreateUsers < ActiveRecord::Migration[4.2]
   def self.up
     options = nil
     if Rails.env.production?
