@@ -7,7 +7,11 @@ gem 'rails', '~> 6.0.2'
 #
 # As of 7/8/2020 our servers support '< 0.5' (what we used with Rails 4.x)
 # but not '0.5.3' (the latest)
-gem 'mysql2', '< 0.5'
+# gem 'mysql2', '< 0.5'
+#
+# Temporary set to SQLite until we get a newer version of MySQL
+# in our test server.
+gem 'sqlite3'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

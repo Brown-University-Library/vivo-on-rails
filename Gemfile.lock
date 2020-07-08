@@ -86,7 +86,6 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
-    mysql2 (0.4.10)
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -130,6 +129,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -150,10 +150,10 @@ PLATFORMS
 DEPENDENCIES
   dotenv-rails
   jquery-rails
-  mysql2 (< 0.5)
   rails (~> 6.0.2)
   rb-readline
   solr_lite (= 0.0.16)
+  sqlite3
   therubyracer
   uglifier (>= 1.3.0)
 

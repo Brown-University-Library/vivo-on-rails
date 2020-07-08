@@ -73,14 +73,13 @@ sudo /etc/init.d/httpd restart
 # Upgrading to Rails 6.0.3
 
 Like before, upgraded version of Rails in Gemfile `gem 'rails', '~> 6.0.2'` and `bundle install` gave error about conflicting versions. I had to comment `gem 'jquery-rails'` and `gem 'dotenv-rails'`, run `bundle install` again which gave no conflicts, restore these gems in Gemfile, and run `bundle install` once more.
-```
 
 Removed development/tests gems since we are really not using them. This will force development to use MySQL rather than SQLite but that's OK. Less variations between environments.
 
 No more warnings or errors needed to be addressed.
 
 
-## MySQL error in dev server
+## MySQL gem error in dev server
 I had to reset the mysql gem to '< 0.5' in Gemfile because our servers
 don't have installed the required components for the latest version (0.5.3).
 
@@ -169,3 +168,18 @@ In Gemfile:
 ```
 
 
+## MySQL error in dev
+
+In the dev server `bundle exec rake db:migrate` complains that our MySQL is too old:
+
+```
+Your version of MySQL (5.1.73) is too old. Active Record supports MySQL >= 5.5.8.
+```
+
+
+RAILS_ENV=production bundle config set path 'vendor/bundle'
+RAILS_ENV=production bundle install
+RAILS_ENV=production bundle exec rake db:create
+RAILS_ENV=production bundle exec rake db:migrate
+RAILS_ENV=production bundle exec rake assets:precompile
+RAILS_ENV=production bundle exec rails server
