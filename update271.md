@@ -197,3 +197,16 @@ RAILS_ENV=production bundle exec rake db:migrate
 #RAILS_ENV=production bundle exec rake vivo:book_covers_cache_init
 RAILS_ENV=production bundle exec rake assets:precompile
 RAILS_ENV=production bundle exec rails server
+
+
+## Current status with MySQL in dev
+
+Using `gem 'mysql2'` gives an error while running `bundle install` because we don't have the pre-requisits to build the gem with native extensions:
+
+```
+Fetching mysql2 0.5.3
+Installing mysql2 0.5.3 with native extensions
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+```
+
+Using `gem 'mysql2', '< 0.5'` allows `bundle install` to work but then the application will fail at runtime because our version of MySQL is too old. This is OK because we can point to a newer version of MySQL that we already have as soon as the database has been created by CIS.
