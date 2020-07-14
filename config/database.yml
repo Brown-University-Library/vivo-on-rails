@@ -1,8 +1,11 @@
 development:
   adapter: <%= ENV['DATABASE_ADAPTER'] %>
-  pool: 5
-  timeout: 5000
   database: <%= ENV['DATABASE'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  encoding: utf8
+  pool: 5
 
 test:
   adapter: sqlite3
