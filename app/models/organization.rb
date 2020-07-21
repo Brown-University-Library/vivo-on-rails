@@ -21,13 +21,16 @@ class Organization
       o.item = OrganizationItem.from_hash(o.json_txt, thumbnail_url)
     end
 
-    # This used to be the Swearer Center but now we are using it for the
-    # Community-Engaged Faculty directory created by the Swearer Center.
-    if id == "org-brown-univ-dept148"
-      members = cblr_members()
-      members.each do |member|
-        o.item.people << OrganizationMemberItem.new(member)
-      end
+    case
+      # This used to be the Swearer Center but now we are using it for the
+      # Community-Engaged Faculty directory created by the Swearer Center.
+      when id == "org-brown-univ-dept148"
+        faculty_ids = cblr_faculty_ids()
+        o.item.add_custom_members(faculty_ids)
+      # Cogut Institute for the Humanities
+      when id == "org-brown-univ-dept124"
+        faculty_ids = ["tcampt", "lgandhi", "pguyer", "alaird", "pszendy"]
+        o.item.add_custom_members(faculty_ids)
     end
 
     # Set the picture of each member
@@ -70,6 +73,7 @@ class Organization
     org.item.overview = team.name
     org.item.people = []
     org.item.faculty = []
+    org.item.thumbnail = nil  # use the default organization image
 
     team.members.each do |faculty|
       member_info = {
@@ -105,7 +109,9 @@ class Organization
     list
   end
 
-  def self.cblr_members()
+  def self.cblr_faculty_ids()
+    faculty_ids = []
+
     solr_url = ENV["SOLR_URL"]
     logger = ENV["SOLR_VERBOSE"] == "true" ? Rails.logger : nil
 
@@ -129,24 +135,14 @@ class Organization
     research_areas << "scholarship of engagement"
     research_areas << "community-based scholarship"
     research_areas << "broader impact"
-
     fq = SolrLite::FilterQuery.new("research_areas", research_areas)
-    results = solr.search(params, [fq], nil, nil, true)
 
-    members = []
+    results = solr.search(params, [fq], nil, nil, true)
     results.solr_docs.each do |doc|
-      member_info = {
-        id: ModelUtils::vivo_id(doc["id"]),
-        faculty_uri: doc["id"],
-        label: doc["name_t"].first,
-        general_position: "general position",
-        specific_position: doc["title_t"].first
-      }
-      members << member_info
+      faculty_ids << ModelUtils::vivo_id(doc["id"])
     end
 
     # ...plus these specific faculty (regardless of their research areas)
-    faculty_ids = []
     faculty_ids << "iglasser"
     faculty_ids << "llapierr"
     faculty_ids << "rkcampbe"
@@ -177,22 +173,7 @@ class Organization
     faculty_ids << "amy"
     faculty_ids << "dritchie"
     faculty_ids << "oprilipk"
-    faculty_docs = Faculty.load_from_solr_many(faculty_ids)
-    faculty_docs.each do |faculty|
 
-      # Skip this record if we already have it as a member
-      next if members.find {|x| x[:faculty_uri] == faculty.item.id }
-
-      member_info = {
-        id: ModelUtils::vivo_id(faculty.item.id),
-        faculty_uri: faculty.item.id,
-        label: faculty.item.name,
-        general_position: "general position",
-        specific_position: faculty.item.title
-      }
-      members << member_info
-    end
-
-    members.sort_by {|x| x[:label]}
+    faculty_ids.uniq
   end
 end

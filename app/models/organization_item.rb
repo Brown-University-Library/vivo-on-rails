@@ -58,4 +58,23 @@ class OrganizationItem
     org
   end
 
+  def add_custom_members(faculty_ids)
+    members = []
+
+    faculty_docs = Faculty.load_from_solr_many(faculty_ids)
+    faculty_docs.each do |faculty|
+      member = {
+        id: ModelUtils::vivo_id(faculty.item.id),
+        faculty_uri: faculty.item.id,
+        label: faculty.item.name,
+        general_position: "general position",
+        specific_position: faculty.item.title
+      }
+      if @people.find {|x| x.vivo_id == member[:id]} == nil
+        @people << OrganizationMemberItem.new(member)
+      end
+    end
+
+    @people.sort_by! {|x| x.label}
+  end
 end
