@@ -21,6 +21,10 @@ class Organization
       o.item = OrganizationItem.from_hash(o.json_txt, thumbnail_url)
     end
 
+    # Remember to update collab_graph.rb to fetch data for these
+    # client-side customized organizations since the server would
+    # have calculated the collaboration network without using the
+    # faculty manually added here.
     case
       # This used to be the Swearer Center but now we are using it for the
       # Community-Engaged Faculty directory created by the Swearer Center.
