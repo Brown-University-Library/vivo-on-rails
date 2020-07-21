@@ -47,11 +47,11 @@ class CollabGraph
       return true, data
     end
 
-    if id == "org-brown-univ-dept148"
-      # Custom code to fetch the data for the Swearer Center since
-      # membership to this organization is not (yet) stored in the
-      # triplestore and therefore we must calculate the graph
-      # on the fly.
+    if id == "org-brown-univ-dept148" || id == "org-brown-univ-dept124"
+      # Custom code to fetch the data for the Swearer Center
+      # and the Cogut Institute since membership to these organizations
+      # is not (yet) stored in the triplestore and therefore we must
+      # calculate the graph on the fly.
       cache_key = "team_collab_" + id
       graph = Rails.cache.fetch(cache_key, expires_in: 5.minute) do
         Rails.logger.info "Caching #{cache_key}..."
