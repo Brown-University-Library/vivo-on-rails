@@ -77,9 +77,9 @@
                   <span><%= a.name %></span>.
                   <% if a.has_org? %>
                     <span>
-                      <% qs = '?q=appointment_at:"' + CGI.escape(a.org_name) + '"' %>
+                      <% qs = '?q="' + CGI.escape(a.org_name) + '"' %>
                       <a href="<%= search_url() + qs %>"
-                        title="Find researchers that had appointments at this institution">
+                        title="Find other researchers at Brown with a relationship to this institution">
                         <%= a.org_name %></a>,
                     </span>
                   <% end %>

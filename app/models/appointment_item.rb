@@ -15,7 +15,10 @@ class AppointmentItem
     @id = @uri
     @start_date = DateUtils.str_to_date(@start_date)
     @end_date = DateUtils.str_to_date(@end_date)
-    @org_name = values["hospital_name"] || ""
+    # Hospital name is the original value used for Hospital Doctors,
+    # we give preference to that value to preserve compatibility with
+    # previous version.
+    @org_name = values["hospital_name"] || values["org_name"] || ""
   end
 
   def init_defaults()

@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
-class CreateReports < ActiveRecord::Migration
+class CreateReports < ActiveRecord::Migration[4.2]
   def self.up
     options = nil
-    if Rails.env.production?
+    if ENV['DATABASE_ADAPTER'] == "mysql2"
       options = 'DEFAULT CHARSET=utf8'
     end
     create_table(:reports, :options => options) do |t|

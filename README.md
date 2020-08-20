@@ -1,6 +1,5 @@
 # VIVO on Rails
-This is the code for the new VIVO front-end for [Researchers@Brown](https://vivo.brown.edu). This is a
-Ruby on Rails application that searches directly against the VIVO's Solr
+This is the code for the new VIVO front-end for [Researchers@Brown](https://vivo.brown.edu). This is a Ruby on Rails application that searches directly against the VIVO's Solr
 index. See the General Architecture information below for more details.
 
 
@@ -9,14 +8,14 @@ You need to have [Solr](http://lucene.apache.org/solr/) running. We use the
 Solr index that VIVO provides out of the box but we have added several fields
 needed by this project. See **Solr Index** section below.
 
-We are currently using Ruby 2.3.5, Rails 4.2.7, and MySQL.
+We are currently using Ruby 2.7.1, Rails 6.0.3, and MySQL.
 
 ```
 brew install ruby-install
 brew install chruby
-ruby-install ruby 2.3.5
+ruby-install ruby 2.7.1
 source /usr/local/opt/chruby/share/chruby/chruby.sh
-chruby 2.3.5
+chruby 2.7.1
 brew install mysql
 gem install bundle
 ```
@@ -25,8 +24,10 @@ gem install bundle
 ```
 git https://github.com/Brown-University-Library/vivo-on-rails.git
 cd vivo-on-rails
-bundle install
 source .env_sample
+bundle config set path 'vendor/bundle'
+bundle install
+bundle exec rake db:create
 bundle exec rake db:migrate
 bundle exec rails server
 ```
@@ -165,11 +166,3 @@ at Brown and might not work on your particular VIVO database.
 The unit tests (`bundle exec rake vivo:tests`) are hard-coded to find very
 specific people/departments so they will very likely fail on your installation.
 
-
-# Sidenote
-*An older version of this project* included code to create a Solr index by querying
-VIVO's Fuseki endpoint. We have moved away from this approach. In the current
-version we use the native Solr index with a few extra fields that we have added
-to support the functionality that we need. If you are interested in the code
-that we used back then you can still find the models under
-`./app/models/fuseki` and the rake tasks under `./lib/tasks/fuseki_solrize.rake`.
