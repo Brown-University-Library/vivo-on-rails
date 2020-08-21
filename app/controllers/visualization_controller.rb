@@ -90,17 +90,17 @@ class VisualizationController < ApplicationController
         render json: data, status: 200
       else
         Rails.logger.error("#{data[:message]}")
-        render text: data[:message], status: data[:status]
+        render plain: data[:message], status: data[:status]
       end
     end
 
     def coauthor_csv(id)
       ok, data = CoauthorGraph.get_data_csv(id)
       if ok
-        render text: data
+        render plain: data
       else
         Rails.logger.error("#{data[:message]}")
-        render text: data[:message], status: data[:status]
+        render plain: data[:message], status: data[:status]
       end
     end
 
@@ -136,7 +136,7 @@ class VisualizationController < ApplicationController
         render json: data, status: 200
       else
         Rails.logger.error("#{data[:message]}")
-        render text: data[:message], status: data[:status]
+        render plain: data[:message], status: data[:status]
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
@@ -147,15 +147,15 @@ class VisualizationController < ApplicationController
     def collab_csv(id)
       ok, data = CollabGraph.get_data_csv(id)
       if ok
-        render text: data
+        render plain: data
       else
         Rails.logger.error("#{data[:message]}")
-        render text: data[:message], status: data[:status]
+        render plain: data[:message], status: data[:status]
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not fetch collaboration data for #{id}. Exception: #{ex} \r\n #{backtrace}")
-      render text: "error", status: 500
+      render plain: "error", status: 500
     end
 
     def research_json(id)
@@ -224,19 +224,19 @@ class VisualizationController < ApplicationController
       type = ModelUtils.type_for_id(id)
       case type
       when "PEOPLE"
-        render text: "Invalid request for this ID", status: 400
+        render plain: "Invalid request for this ID", status: 400
       when "ORGANIZATION"
         id = params[:id]
         csv = PublicationHistory.treemap_csv(id)
-        render text: csv
+        send_data csv, :type => "text/csv", :filename=>"#{id}.csv", :disposition => 'attachment'
       else
         err_msg = "Individual ID (#{id}) was not found"
         Rails.logger.warn(err_msg)
-        render text: "", status: 404
+        render plain: "", status: 404
       end
     rescue => ex
       backtrace = ex.backtrace.join("\r\n")
       Rails.logger.error("Could not fetch publication data for #{id}. Exception: #{ex} \r\n #{backtrace}")
-      render text: "error", status: 500
+      render plain: "error", status: 500
     end
 end
