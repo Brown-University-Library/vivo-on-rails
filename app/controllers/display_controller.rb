@@ -52,6 +52,42 @@ class DisplayController < ApplicationController
     render "error", status: 500
   end
 
+  def show_publications
+    if params["format"] != "tsv"
+      raise "Format not supported"
+    end
+    id = params["id"]
+    type = ModelUtils.type_for_id(id)
+    case type
+    when nil
+      render_not_found(id)
+    when "ORGANIZATION"
+      details = PublicationHistory.details(id)
+      tsv = "Id\tFaculty\tTitle\tAuthors\tYear\tType\tCitation\n"
+      details.each do |data|
+        row = ""
+        row += "#{data[:id]}\t"
+        # row += "#{data[:vivo_id]}\t"
+        row += "#{data[:faculty_name]}\t"
+        row += "#{data[:title]}\t"
+        row += "#{data[:authors]}\t"
+        row += "#{data[:year]}\t"
+        row += "#{data[:type]}\t"
+        row += "#{data[:citation]}\n"
+        tsv += row
+      end
+      send_data tsv, :type => "text/csv", :filename=>"#{id}.tsv", :disposition => 'attachment'
+    when "TEAM"
+      raise "Team not supported"
+    else
+      raise "ID type supported"
+    end
+  rescue => ex
+    backtrace = ex.backtrace.join("\r\n")
+    Rails.logger.error("Could not render record #{id}, type #{type}. Exception: #{ex} \r\n #{backtrace}")
+    render "error", status: 500
+  end
+
   private
     def render_faculty(id)
       id = params[:id]

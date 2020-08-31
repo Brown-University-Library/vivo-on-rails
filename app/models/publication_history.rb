@@ -93,6 +93,28 @@ class PublicationHistory
     text.join("\n")
   end
 
+  def self.details(id)
+    data = []
+    organization = Organization.load_from_solr(id)
+    organization.faculty_list.each do |faculty|
+      next if faculty == nil
+      faculty.item.contributor_to.each do |pub|
+        pub_record = {
+          id: faculty.item.id,
+          vivo_id: faculty.item.vivo_id,
+          faculty_name: faculty.item.name,
+          title: pub.title,
+          authors: pub.authors,
+          year: pub.year,
+          type: (pub.pub_type || "").strip,
+          citation: pub.pub_info
+        }
+        data << pub_record
+      end
+    end
+    data
+  end
+
   # Returns a hash with the publication history for a given organization.
   # The hash has the following structure:
   #
