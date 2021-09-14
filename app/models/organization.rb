@@ -139,6 +139,7 @@ class Organization
     research_areas << "scholarship of engagement"
     research_areas << "community-based scholarship"
     research_areas << "broader impact"
+    research_areas << "community-based"
     fq = SolrLite::FilterQuery.new("research_areas", research_areas)
 
     results = solr.search(params, [fq], nil, nil, true)
