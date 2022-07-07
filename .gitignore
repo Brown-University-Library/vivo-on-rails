@@ -14,6 +14,7 @@
 
 # General development configuration files and settings
 .env
+.env*
 .byebug_history
 .DS_Store
 /public/assets
@@ -25,3 +26,7 @@ refresh.sh
 
 # Local vendor/bundle gems
 /vendor/bundle/
+.bundle
+
+# To look into for possible removal
+uri.tsv
