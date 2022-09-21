@@ -195,6 +195,21 @@ class Organization
     faculty_ids << "laasnyde"
     faculty_ids << "marnold"
     faculty_ids << "mblennon"
+    #added 2022-09
+    faculty_ids << "sfrickel"
+    faculty_ids << "mhasting"
+    faculty_ids << "jpalella"
+    faculty_ids << "akeene"
+    faculty_ids << "rpotvin"
+    faculty_ids << "emuelle3"
+    faculty_ids << "eqazilba"
+    faculty_ids << "ssaad5"
+    faculty_ids << "aabdurra"
+    faculty_ids << "imontero"
+    faculty_ids << "nschuhma"
+    faculty_ids << "tkelly7"
+    faculty_ids << "edwalker"
+    faculty_ids << "atovar"
 
     faculty_ids.uniq
   end
