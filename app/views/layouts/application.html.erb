@@ -10,6 +10,19 @@
 <% # Carry referrer when using HTTPS (http://markpercival.tumblr.com/post/51560498133/hacking-https-http-referrers) %>
 <meta name="referrer" content="always">
 
+<% if ENV["GOOGLE_ANALYTICS_KEY"] %>
+	<!-- Google tag (gtag.js) --> 
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-H0J617NYFZ"></script>
+	<script> 
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		} 
+		gtag('js', new Date()); 
+		gtag('config', '<%= ENV["GOOGLE_ANALYTICS_KEY"] %>');
+	</script>
+<% end %>
+
 <title><%= @page_title || "Researchers @ Brown" %></title>
 
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
@@ -112,16 +125,6 @@
 	</div>
 </footer>
 
-<% if ENV["GOOGLE_ANALYTICS_KEY"] %>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV["GOOGLE_ANALYTICS_KEY"] %>"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', '<%= ENV["GOOGLE_ANALYTICS_KEY"] %>');
-	</script>
-<% end %>
 </body>
 
 </html>
