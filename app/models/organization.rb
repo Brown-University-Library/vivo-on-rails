@@ -210,6 +210,17 @@ class Organization
     faculty_ids << "tkelly7"
     faculty_ids << "edwalker"
     faculty_ids << "atovar"
+    #added 2023-09
+    faculty_ids << "lacton1"
+    faculty_ids << "sanderbo"
+    faculty_ids << "lbiggs"
+    faculty_ids << "jeason2"
+    faculty_ids << "lf7"
+    faculty_ids << "mfreilic"
+    faculty_ids << "sfriedho"
+    faculty_ids << "dgrigsby"
+    faculty_ids << "khaberst"
+    faculty_ids << "ahoffma9"
 
     faculty_ids.uniq
   end
