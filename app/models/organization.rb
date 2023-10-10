@@ -221,6 +221,16 @@ class Organization
     faculty_ids << "dgrigsby"
     faculty_ids << "khaberst"
     faculty_ids << "ahoffma9"
+    #added 2023-10
+    faculty_ids << "elumumba"
+    faculty_ids << "bm8"
+    faculty_ids << "rmartinm"
+    faculty_ids << "emccreed"
+    faculty_ids << "dsilvapi"
+    faculty_ids << "mschne16"
+    faculty_ids << "jyedinak"
+
+    
 
     faculty_ids.uniq
   end
