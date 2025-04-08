@@ -38,7 +38,7 @@
       }
   
       result = await response.json();
-      if (result["success"] == true) {
+      if (result["redirect_for_challenge"] == true) {
         const dest = new URLSearchParams(window.location.search).get("dest");
         // For security make sure it only has path and on
         if (!dest.startsWith("/") || dest.startsWith("//")) {
