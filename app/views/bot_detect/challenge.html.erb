@@ -36,6 +36,8 @@
       if (!response.ok) {
         throw new Error('bad response: ' + response.status + ": " + response.url);
       }
+
+      console.error("Testing")
   
       result = await response.json();
       if (result["redirect_for_challenge"] == true) {
