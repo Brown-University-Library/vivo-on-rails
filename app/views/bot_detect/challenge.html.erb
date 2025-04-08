@@ -44,6 +44,9 @@
         if (!dest.startsWith("/") || dest.startsWith("//")) {
           throw new Error("illegal non-local redirect: " + dest);
         }
+
+        console.log('Hello Connor')
+
         // replace the challenge page in history
         window.location.replace(dest);
       } else {
