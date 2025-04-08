@@ -39,13 +39,14 @@
   
       result = await response.json();
       if (result["redirect_for_challenge"] == true) {
+        console.error("Hello Connor")
         const dest = new URLSearchParams(window.location.search).get("dest");
         // For security make sure it only has path and on
         if (!dest.startsWith("/") || dest.startsWith("//")) {
           throw new Error("illegal non-local redirect: " + dest);
         }
 
-        console.log('Hello Connor')
+        console.error("before window.location.replace")
 
         // replace the challenge page in history
         window.location.replace(dest);
