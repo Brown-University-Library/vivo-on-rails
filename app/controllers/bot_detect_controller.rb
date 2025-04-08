@@ -26,7 +26,7 @@ class BotDetectController < ApplicationController
     # class_attribute :rate_limit_count, default: 10
   
     # how long is a challenge pass good for before re-challenge?
-    # class_attribute :session_passed_good_for, default: 24.hours
+    class_attribute :session_passed_good_for, default: 24.hours
   
     # An array, can be:
     #   * a string, path prefix
@@ -83,7 +83,7 @@ class BotDetectController < ApplicationController
     helper_method :cf_turnstile_js_url, :cf_turnstile_sitekey
   
     # key stored in Rails session object with channge passed confirmed
-    # class_attribute :session_passed_key, default: "bot_detection-passed"
+    class_attribute :session_passed_key, default: "bot_detection-passed"
   
     # key in rack env that says challenge is required
     # class_attribute :env_challenge_trigger_key, default: "bot_detect.should_challenge"
@@ -146,12 +146,13 @@ class BotDetectController < ApplicationController
       if self.enabled &&
         #   controller.request.env[self.env_challenge_trigger_key] &&
         #   !controller.session[self.session_passed_key].try { |date| Time.now - Time.new(date) < self.session_passed_good_for } &&
-          !controller.kind_of?(self) && # don't ever guard ourself, that'd be a mess!
-          ! self.allow_exempt.call(controller)
+        !controller.kind_of?(self) && # don't ever guard ourself, that'd be a mess!
+        ! self._bot_detect_passed_good?(controller.request) &&
+        ! self.allow_exempt.call(controller)
   
         # we can only do GET requests right now
         if !controller.request.get?
-          Rails.logger.warn("#{self}: Asked to protect request we could not, unprotected: #{controller.requet.method} #{controller.request.url}, (#{controller.request.remote_ip}, #{controller.request.user_agent})")
+          Rails.logger.warn("#{self}: Asked to protect request we could not, unprotected: #{controller.request.method} #{controller.request.url}, (#{controller.request.remote_ip}, #{controller.request.user_agent})")
           return
         end
   
@@ -204,6 +205,11 @@ class BotDetectController < ApplicationController
         # mark it as succesful in session, and record time. They do need a session/cookies
         # to get through the challenge.
         # session[self.session_passed_key] = Time.now.utc.iso8601
+        Rails.logger.info("#{self.class.name}: Cloudflare Turnstile validation passed api (#{request.remote_ip}, #{request.user_agent}): #{params["dest"]}")
+        session[self.session_passed_key] = {
+          SESSION_DATETIME_KEY => Time.now.utc.iso8601,
+          SESSION_IP_KEY   => request.remote_ip
+        }
       else
         Rails.logger.warn("#{self.class.name}: Cloudflare Turnstile validation failed (#{request.remote_ip}, #{request.user_agent}): #{result}")
       end
@@ -219,3 +225,16 @@ class BotDetectController < ApplicationController
       }
     end
   end
+
+# Does the session already contain a bot detect pass that is good for this request
+# Tie to IP address to prevent session replay shared among IPs
+def _bot_detect_passed_good?(request)
+  session_data = request.session[self.session_passed_key]
+
+  return false unless session_data && session_data.kind_of?(Hash)
+
+  datetime = session_data[SESSION_DATETIME_KEY]
+  ip   = session_data[SESSION_IP_KEY]
+
+  (ip == request.remote_ip) && (Time.now - Time.iso8601(datetime) < self.session_passed_good_for )
+end
