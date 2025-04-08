@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   get 'search/advanced' => 'search#advanced', as: :search_advanced
   get 'search' => 'search#index', as: :search
 
+  # bot detection challenge
+  get "/challenge", to: "bot_detect#challenge", as: :bot_detect_challenge
+  post "/challenge", to: "bot_detect#verify_challenge"
 
   # VIVO original URLs
   get 'people' => 'home#people'

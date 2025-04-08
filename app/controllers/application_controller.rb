@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action { |controller| BotDetectController.bot_detection_enforce_filter(controller) }
+
   def must_be_authenticated(format = nil)
     if !shibb_user?
       if format == "json"
