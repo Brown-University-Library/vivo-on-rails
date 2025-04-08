@@ -213,6 +213,8 @@ class BotDetectController < ApplicationController
       else
         Rails.logger.warn("#{self.class.name}: Cloudflare Turnstile validation failed (#{request.remote_ip}, #{request.user_agent}): #{result}")
       end
+
+      result["redirect_for_challenge"] = self.redirect_for_challenge
   
       # let's just return the whole thing to client? Is there anything confidential there?
       render json: result
