@@ -20,13 +20,9 @@
   
 <script type="text/javascript">
   async function turnstileCallback(token) {
-    console.error('First line in the function')
     try {
-      console.error('Inside the try block')
       // I don't know if we should be disabling CSRF for this one, but we'll just use it
       const csrfToken = document.querySelector("[name='csrf-token']");
-
-      console.error('Before making call to /challenge')
   
       const response = await fetch('<%= bot_detect_challenge_path %>', {
         method: 'POST',
@@ -36,26 +32,18 @@
         },
         body: JSON.stringify({ cf_turnstile_response: token }),
       });
-
-      console.error('After making call to /challenge')
   
       if (!response.ok) {
-        console.error('Response was not okay')
         throw new Error('bad response: ' + response.status + ": " + response.url);
       }
 
-      console.error("Testing")
-  
       result = await response.json();
       if (result["redirect_for_challenge"] == true) {
-        console.error("Hello Connor")
         const dest = new URLSearchParams(window.location.search).get("dest");
         // For security make sure it only has path and on
         if (!dest.startsWith("/") || dest.startsWith("//")) {
           throw new Error("illegal non-local redirect: " + dest);
         }
-
-        console.error("before window.location.replace")
 
         // replace the challenge page in history
         window.location.replace(dest);
