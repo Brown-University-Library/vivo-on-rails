@@ -252,11 +252,11 @@ class BotDetectController < ApplicationController
 
     return false unless session_data && session_data.kind_of?(Hash)
 
-    datetime = session_data[SESSION_DATETIME_KEY]
-    ip   = session_data[SESSION_IP_KEY]
+    # datetime = session_data[SESSION_DATETIME_KEY]
+    # ip   = session_data[SESSION_IP_KEY]
 
-    # datetime = session_data[self.session_passed_key][SESSION_DATETIME_KEY]
-    # datetime = session_data[self.session_passed_key][SESSION_IP_KEY]
+    datetime = session_data[self.session_passed_key][SESSION_DATETIME_KEY]
+    datetime = session_data[self.session_passed_key][SESSION_IP_KEY]
 
     (ip == request.remote_ip) && (Time.now - Time.iso8601(datetime) < self.session_passed_good_for )
   end
