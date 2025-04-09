@@ -229,7 +229,7 @@ class BotDetectController < ApplicationController
       # let's just return the whole thing to client? Is there anything confidential there?
       Rails.logger.info("#{self.class.name}: Returning response to frontend")
       render json: result
-    rescue HTTP::Error, JSON::ParserError => e
+    rescue Exception => e
       # probably an http timeout? or something weird.
       Rails.logger.info("#{self.class.name}: Some random problem")
       Rails.logger.warn("#{self.class.name}: Cloudflare turnstile validation error (#{request.remote_ip}, #{request.user_agent}): #{e}: #{response&.body}")
