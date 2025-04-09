@@ -20,8 +20,8 @@ class BotDetectController < ApplicationController
 
   class_attribute :enabled, default: true # Must set to true to turn on at all
 
-  class_attribute :cf_turnstile_sitekey, default: "1x00000000000000000000AA" # a testing key that always passes
-  class_attribute :cf_turnstile_secret_key, default: "1x0000000000000000000000000000000AA" # a testing key always passes
+  class_attribute :cf_turnstile_sitekey, default: ENV["CF_TURNSTILE_SITEKEY"] # default: "1x00000000000000000000AA" # a testing key that always passes
+  class_attribute :cf_turnstile_secret_key, default: ENV["CF_TURNSTILE_SECRET_KEY"] # default: "1x0000000000000000000000000000000AA" # a testing key always passes
   # Turnstile testing keys: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
 
   # up to rate_limit_count requests in rate_limit_period before challenged
