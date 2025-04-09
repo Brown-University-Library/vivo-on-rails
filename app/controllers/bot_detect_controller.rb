@@ -87,6 +87,7 @@ class BotDetectController < ApplicationController
   
     # key stored in Rails session object with channge passed confirmed
     class_attribute :session_passed_key, default: "bot_detection-passed"
+    class_attribute :redirect_for_challenge, default: true
   
     # key in rack env that says challenge is required
     # class_attribute :env_challenge_trigger_key, default: "bot_detect.should_challenge"
