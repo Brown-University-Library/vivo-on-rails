@@ -245,15 +245,18 @@ class BotDetectController < ApplicationController
     end
   end
 
-# Does the session already contain a bot detect pass that is good for this request
-# Tie to IP address to prevent session replay shared among IPs
-def _bot_detect_passed_good?(request)
-  session_data = request.session[self.session_passed_key]
+  # Does the session already contain a bot detect pass that is good for this request
+  # Tie to IP address to prevent session replay shared among IPs
+  def _bot_detect_passed_good?(request)
+    session_data = request.session[self.session_passed_key]
 
-  return false unless session_data && session_data.kind_of?(Hash)
+    return false unless session_data && session_data.kind_of?(Hash)
 
-  datetime = session_data[SESSION_DATETIME_KEY]
-  ip   = session_data[SESSION_IP_KEY]
+    datetime = session_data[SESSION_DATETIME_KEY]
+    ip   = session_data[SESSION_IP_KEY]
 
-  (ip == request.remote_ip) && (Time.now - Time.iso8601(datetime) < self.session_passed_good_for )
-end
+    # datetime = session_data[self.session_passed_key][SESSION_DATETIME_KEY]
+    # datetime = session_data[self.session_passed_key][SESSION_IP_KEY]
+
+    (ip == request.remote_ip) && (Time.now - Time.iso8601(datetime) < self.session_passed_good_for )
+  end
