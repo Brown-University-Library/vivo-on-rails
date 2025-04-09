@@ -29,7 +29,7 @@ class BotDetectController < ApplicationController
   # class_attribute :rate_limit_count, default: 10
 
   # how long is a challenge pass good for before re-challenge?
-  class_attribute :session_passed_good_for, default: 1.minutes
+  class_attribute :session_passed_good_for, default: 24.hours
 
   # An array, can be:
   #   * a string, path prefix
