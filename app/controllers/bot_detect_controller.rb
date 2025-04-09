@@ -10,6 +10,9 @@
 #
 class BotDetectController < ApplicationController
 
+    SESSION_DATETIME_KEY = "t"
+    SESSION_IP_KEY = "i"
+
     # Config for bot detection is held here in class_attributes, kind of wonky, but it works
     #
     # These are defaults ready for extraction to a gem, in general here at Sci Hist if we want
@@ -182,6 +185,7 @@ class BotDetectController < ApplicationController
       require 'uri'
       require 'json'
       require 'time'
+
       Rails.logger.info("#{self.class.name}: Beginning of verify challenge")
 
       uri = URI('https://challenges.cloudflare.com/turnstile/v0/siteverify')
