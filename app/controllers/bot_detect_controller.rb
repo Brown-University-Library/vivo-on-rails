@@ -256,7 +256,7 @@ def _bot_detect_passed_good?(request)
   # ip   = session_data[SESSION_IP_KEY]
 
   datetime = session_data[BotDetectController::SESSION_DATETIME_KEY]
-  datetime = session_data[BotDetectController::SESSION_IP_KEY]
+  ip = session_data[BotDetectController::SESSION_IP_KEY]
 
   (ip == request.remote_ip) && (Time.now - Time.iso8601(datetime) < self.session_passed_good_for )
 end
