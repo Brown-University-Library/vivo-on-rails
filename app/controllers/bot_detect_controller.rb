@@ -216,6 +216,9 @@ class BotDetectController < ApplicationController
           SESSION_DATETIME_KEY => Time.now.utc.iso8601,
           SESSION_IP_KEY   => request.remote_ip
         }
+
+        Rails.logger.info("#{self.class.name}: Session datetime key: #{session[self.session_passed_key][SESSION_DATETIME_KEY]} Session IP Key: #{session[self.session_passed_key][SESSION_IP_KEY]}")
+
       else
         Rails.logger.info("#{self.class.name}: Result[success] is false")
         Rails.logger.warn("#{self.class.name}: Cloudflare Turnstile validation failed (#{request.remote_ip}, #{request.user_agent}): #{result}")
