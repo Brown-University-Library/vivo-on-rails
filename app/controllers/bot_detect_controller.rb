@@ -182,6 +182,7 @@ class BotDetectController < ApplicationController
       require 'uri'
       require 'json'
       require 'time'
+      Rails.logger.info("#{self.class.name}: Beginning of verify challenge")
 
       uri = URI('https://challenges.cloudflare.com/turnstile/v0/siteverify')
       req = Net::HTTP::Post.new(uri)
@@ -191,9 +192,13 @@ class BotDetectController < ApplicationController
         'remoteip' => request.remote_ip
       })
 
+      Rails.logger.info("#{self.class.name}: Before making cloudflare call")
+
       res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
         http.request(req)
       end
+
+      Rails.logger.info("#{self.class.name}: After making cloudlfare call: #{res.code}")
     
       result = JSON.parse(res.body)
     
@@ -205,21 +210,25 @@ class BotDetectController < ApplicationController
         # mark it as succesful in session, and record time. They do need a session/cookies
         # to get through the challenge.
         # session[self.session_passed_key] = Time.now.utc.iso8601
+        Rails.logger.info("#{self.class.name}: Result[success] is true")
         Rails.logger.info("#{self.class.name}: Cloudflare Turnstile validation passed api (#{request.remote_ip}, #{request.user_agent}): #{params["dest"]}")
         session[self.session_passed_key] = {
           SESSION_DATETIME_KEY => Time.now.utc.iso8601,
           SESSION_IP_KEY   => request.remote_ip
         }
       else
+        Rails.logger.info("#{self.class.name}: Result[success] is false")
         Rails.logger.warn("#{self.class.name}: Cloudflare Turnstile validation failed (#{request.remote_ip}, #{request.user_agent}): #{result}")
       end
 
       result["redirect_for_challenge"] = self.redirect_for_challenge
   
       # let's just return the whole thing to client? Is there anything confidential there?
+      Rails.logger.info("#{self.class.name}: Returning response to frontend")
       render json: result
     rescue HTTP::Error, JSON::ParserError => e
       # probably an http timeout? or something weird.
+      Rails.logger.info("#{self.class.name}: Some random problem")
       Rails.logger.warn("#{self.class.name}: Cloudflare turnstile validation error (#{request.remote_ip}, #{request.user_agent}): #{e}: #{response&.body}")
       render json: {
         success: false,
