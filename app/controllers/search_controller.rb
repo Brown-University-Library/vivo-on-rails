@@ -2,6 +2,9 @@
 
 class SearchController < ApplicationController
   # Advanced search.
+
+  before_action { |controller| BotDetectController.bot_detection_enforce_filter(controller) }
+
   def advanced
     q = build_q_from_params()
     if params["search"] == "true" && q != ""

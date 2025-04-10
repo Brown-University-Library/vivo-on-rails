@@ -32,6 +32,7 @@
 <%= javascript_include_tag 'application' %>
 <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 <%= csrf_meta_tags %>
+<%= yield :head %>
 <%= favicon_link_tag 'favicon.ico' %>
 
 <% if @link_alternate %>
