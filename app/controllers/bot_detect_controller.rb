@@ -24,6 +24,9 @@ class BotDetectController < ApplicationController
   class_attribute :cf_turnstile_secret_key, default: ENV["CF_TURNSTILE_SECRET_KEY"] # default: "1x0000000000000000000000000000000AA" # a testing key always passes
   # Turnstile testing keys: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
 
+  # allowlist
+  class_attribute :allowed_ip_ranges, default: ENV["ALLOWED_IP_RANGES"]
+
   # up to rate_limit_count requests in rate_limit_period before challenged
   # class_attribute :rate_limit_period, default: 12.hour
   # class_attribute :rate_limit_count, default: 10
@@ -152,7 +155,8 @@ class BotDetectController < ApplicationController
       #   !controller.session[self.session_passed_key].try { |date| Time.now - Time.new(date) < self.session_passed_good_for } &&
       !controller.kind_of?(self) && # don't ever guard ourself, that'd be a mess!
       ! self._bot_detect_passed_good?(controller.request) &&
-      ! self.allow_exempt.call(controller)
+      ! self.allow_exempt.call(controller) &&
+      ! self._ip_allowed(request)
 
       # we can only do GET requests right now
       if !controller.request.get?
@@ -250,3 +254,14 @@ def _bot_detect_passed_good?(request)
 
   (ip == request.remote_ip) && (Time.now - Time.iso8601(datetime) < self.session_passed_good_for )
 end
+
+def _ip_allowed?(request)
+  cidrs = []
+  self.allowed_ip_ranges.each {|range| cidrs.append IPAddr.new(range)}
+  allowed = false
+  ip = request.remote_ip
+  cidrs.each { |cidr|
+      if cidr.include? ip
+          allowed=true
+      end
+  }
