@@ -25,7 +25,7 @@ class BotDetectController < ApplicationController
   # Turnstile testing keys: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
 
   # allowlist
-  class_attribute :allowed_ip_ranges, default: ENV["ALLOWED_IP_RANGES"]
+  class_attribute :allowed_ip_ranges, default: ENV["ALLOWED_IP_RANGES"].split(',')
 
   # up to rate_limit_count requests in rate_limit_period before challenged
   # class_attribute :rate_limit_period, default: 12.hour
@@ -154,9 +154,9 @@ class BotDetectController < ApplicationController
       #   controller.request.env[self.env_challenge_trigger_key] &&
       #   !controller.session[self.session_passed_key].try { |date| Time.now - Time.new(date) < self.session_passed_good_for } &&
       !controller.kind_of?(self) && # don't ever guard ourself, that'd be a mess!
+      ! self._ip_allowed?(controller.request) &&
       ! self._bot_detect_passed_good?(controller.request) &&
-      ! self.allow_exempt.call(controller) &&
-      ! self._ip_allowed(request)
+      ! self.allow_exempt.call(controller)
 
       # we can only do GET requests right now
       if !controller.request.get?
@@ -263,5 +263,8 @@ def _ip_allowed?(request)
   cidrs.each { |cidr|
       if cidr.include? ip
           allowed=true
+          Rails.logger.info("ip allowed: #{ip}")
       end
   }
+  allowed
+end
