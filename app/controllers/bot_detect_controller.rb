@@ -154,8 +154,8 @@ class BotDetectController < ApplicationController
       #   controller.request.env[self.env_challenge_trigger_key] &&
       #   !controller.session[self.session_passed_key].try { |date| Time.now - Time.new(date) < self.session_passed_good_for } &&
       !controller.kind_of?(self) && # don't ever guard ourself, that'd be a mess!
-      ! self._ip_allowed?(controller.request) &&
-      ! self._bot_detect_passed_good?(controller.request.remote_ip) &&
+      ! self._ip_allowed?(controller.request.remote_ip) &&
+      ! self._bot_detect_passed_good?(controller.request) &&
       ! self.allow_exempt.call(controller)
 
       # we can only do GET requests right now
